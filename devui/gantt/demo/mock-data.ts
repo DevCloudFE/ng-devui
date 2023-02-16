@@ -1,4 +1,4 @@
-import { GanttRailStatus } from '../gantt.model';
+import { GanttRailStatus } from 'ng-devui/gantt';
 
 export const curYear = new Date().getFullYear();
 

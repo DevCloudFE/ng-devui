@@ -28,6 +28,10 @@ export class DashboardLibraryWidgetDirective implements OnChanges, AfterViewInit
 
   @HostBinding('class.grid-stack-new-item')
   hostBinding = true;
+
+  @HostBinding('class.grid-stack-item-content')
+  hostBindingHandler = true;
+
   @HostBinding('attr.gs-instance')
   gridStackId;
 

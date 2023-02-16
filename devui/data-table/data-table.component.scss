@@ -462,6 +462,14 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       }
     }
   }
+
+  thead tr th:last-of-type {
+    &.resizeable .resize-handle {
+      &::after {
+        display: none !important;
+      }
+    }
+  }
 }
 
 .devui-no-result-wrapper {

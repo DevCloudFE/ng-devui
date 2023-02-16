@@ -17,7 +17,7 @@ In the page:
 | :----------------: | :------------: | :------: | :--: | :-------------------------------------------------------- | -------------------------------------------------------- |
 | data |  [`TimeAxisData`](#data)   |  --  | Optional. Configuring Timeline and Time Point Data.           | [Setting Direction Parameters](demo#direction)           |
 |  contentTemplate  | `TemplateRef` |  --  | Optional. Content template. This parameter is left empty by default. This parameter is mandatory when model is set to `template`. | [Customizing Content Using a Template](demo#content-with-template) |
-| mode |  `'normal'\|'alternative'`   |  `'normal'`  | Optional. In `normal` mode, content is arranged in the default direction. In `alternative` mode, content is arranged alternately.      | [Customizing the Content Direction of a Time Node](demo#content-with-alternative-mode)  |
+| mode |  [`TimeAxisMode`](#timeaxismode)   |  `'normal'`  | Optional. `normal` is arranged by default, `alternative` is arranged alternately, and `top` \| `bottom` \| `left` \| `right` content is arranged at the specified position.    | [Customizing the Content Direction of a Time Node](demo#content-with-alternative-mode)  |
 
 ## data
 
@@ -39,7 +39,7 @@ In the page:
 |  type  | `'primary' \| 'success' \| 'danger' \| 'warning'` |  `primary`  | Optional. Time Point Type.     | [Setting Time Position](demo#basic-usage)           |
 | ~~status~~ |         `'runned'\|'running'\|''`      |  --  | Optional. Status.(`Deprecated. You are advised to use lineStyle.`) | [Setting Time Position](demo#basic-usage)           |
 |  data  |                   `array`                   |  --  | Optional. Template data. This parameter is valid only when model is set to template.             | [Customizing Content Using a Template](demo#content-with-template) |
-|  position  | `'up'\|'bottom'\|'left'\|'right'` |  --  | Optional. Indicates the position of text or data. If time exists, the time is in the reverse position.   | [Customizing the Content Direction of a Time Node](demo#content-with-alternative-mode) |
+|  position  | `'top'\|'bottom'\|'left'\|'right'` |  --  | Optional. Indicates the position of text or data. If time exists, the time is in the reverse position.   | [Customizing the Content Direction of a Time Node](demo#content-with-alternative-mode) |
 |  dotColor  | `string` |  --  | Optional. Custom Time Circle Color.   | [Customizing Content Using a Template](demo#content-with-template) |
 |  lineStyle  | `{style: 'solid' \| 'dashed' \| 'dotted' \| 'none', color: string}` |  `{style: 'solid'}`  | Optional. Setting the Timeline Line Style.   | [Time Point Customization](demo#custom-dot) |
 |  dotColor  | `string` |  --  | Optional. Custom Time Circle Color.   | [Customizing Content Using a Template](demo#content-with-template) |
@@ -71,13 +71,19 @@ interface TimeAxisData {
   }>;
 }
 ```
+
+## TimeAxisMode
+```
+export type TimeAxisMode = 'normal' | 'alternative' | 'top' | 'bottom' | 'left' | 'right';
+```
+
 # The time node is used as an HTML tag.
 
 ## d-time-axis parameter
 | Parameter | Type | Default value | Description | Jump to Demo |
 | :----: | :-----------------------------------------: | :--: | :------------------------------------------------------- | ------------------------------------------------------ |
 |  direction  | `'vertical'\|'horizontal'` |  --  | Required. Sets the time axis direction. | [The time node is used independently](demo#seperate-way) |
-| mode |  `'normal'\|'alternative'`   |  `'normal'`  | Optional. In `normal` mode, content is arranged in the default direction. In `alternative` mode, content is arranged alternately.      | [The time node is used independently](demo#seperate-way)  |
+| mode |  [`TimeAxisMode`](#timeaxismode)   |  `'normal'`  | Optional. `normal` is arranged by default, `alternative` is arranged alternately, and `top` \| `bottom` \| `left` \| `right` content is arranged at the specified position.      | [The time node is used independently](demo#seperate-way)  |
 | widthMode  |     `'fitContent'\|'fitWidth'`      |  `'fitContent'`  | Optional. Only when the direction is `horizontal`, `widthMode='fitContent'` The timeline width is adaptive to the content width, and `widthMode='fitWidth'` The timeline width fills the container. | [The time node is used independently](demo#seperate-way)           |
 
 ## d-time-axis-item parameters
@@ -95,7 +101,7 @@ interface TimeAxisData {
 |  dotColor  | `string` |  --  | Optional. Custom Time Circle Color.   | [The time node is used independently](demo#seperate-way) |
 |  customDot  | `string\|HTMLElement\|TemplateRef` |  --  | Optional. User-defined time point.   | [The time node is used independently](demo#seperate-way) |
 |  extraElement  | `string\|HTMLElement\|TemplateRef` |  --  | Optional. Customizing Additional Elements Between Two Points in Time.   | [The time node is used independently](demo#seperate-way) |
-|  position  | `'up'\|'bottom'\|'left'\|'right'` |  --  | Optional. Indicates the position of text or data. If time exists, the time is in the reverse position.   | [The time node is used independently](demo#seperate-way) |
+|  position  | `'top'\|'bottom'\|'left'\|'right'` |  --  | Optional. Indicates the position of text or data. If time exists, the time is in the reverse position.   | [The time node is used independently](demo#seperate-way) |
 |  timePosition  | `'left'\|'bottom'` |  --  | Optional. Defines the time parameter position only when direction is `vertical`.  | [The time node is used independently](demo#seperate-way) |
 |  iconClass  | `string` |  --  | Optional. Point-in-time additional style name.   | [Setting Direction Parameters](demo#direction) |
 | horizontalAlign  |     `'center'\|'left'`      |  `'center'`  | Optional. Only when the direction is `horizontal`, Set Content Alignment. | [Setting Direction Parameters](demo#direction)        |

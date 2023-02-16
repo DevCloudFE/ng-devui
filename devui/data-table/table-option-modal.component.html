@@ -5,9 +5,23 @@
       <d-search style="width: 100%" [isKeyupSearch]="true" (searchFn)="onSearch($event)"></d-search>
 
       <p class="devui-option-subtitle" style="margin-top: 16px">{{ data.i18nText?.colCanSelect }}</p>
-
+      <d-checkbox
+        [label]="'All Check'"
+        [isShowTitle]="true"
+        [ngModel]="allChecked"
+        [halfchecked]="halfCheck"
+        (ngModelChange)="onAllCheckChanges($event)"
+      >
+      </d-checkbox>
       <ng-container *ngFor="let data of columnsCache">
-        <d-checkbox *ngIf="judgeNameFIlter(data.header)" [label]="data.header" [isShowTitle]="true" [(ngModel)]="data.checked">
+        <d-checkbox
+          *ngIf="judgeNameFIlter(data.header)"
+          [label]="data.header"
+          [isShowTitle]="true"
+          [(ngModel)]="data.checked"
+          [disabled]="data.disabled"
+          (ngModelChange)="onCheckedChanges()"
+        >
         </d-checkbox>
       </ng-container>
     </div>
@@ -134,7 +148,9 @@
             <div
               *ngFor="let data of selectedCols"
               class="devui-option-drag-item"
+              [ngClass]="{ disabled: data.disabled }"
               dDraggable
+              [disabled]="data.disabled"
               [dragScope]="'drag-place'"
               [dragHandleClass]="'devui-option-drag-handle'"
               [dragData]="data"

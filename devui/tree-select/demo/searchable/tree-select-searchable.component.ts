@@ -216,7 +216,7 @@ export class TreeSelectSearchableComponent {
   }
 
   customSearchFn = (treeData: TreeNode[], keyword: string): boolean | TreeNode[] => {
-    // custom search only in the tree root
+    /* custom search only in the tree root */
     return treeData.map((treeNode) => {
       treeNode.data.isHide = treeNode.data.title.indexOf(keyword) === -1;
       return !treeNode.data.isHide && treeNode;

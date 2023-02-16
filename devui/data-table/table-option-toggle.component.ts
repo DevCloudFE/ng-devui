@@ -9,6 +9,7 @@ export interface ColData {
   header: string;
   checked: boolean;
   category?: string;
+  disabled?: boolean;
   [prop: string]: any;
 }
 
@@ -82,6 +83,9 @@ export class TableOptionToggleComponent implements OnInit, OnDestroy{
   }
 
   toggleActive(item) {
+    if (item.disabled) {
+      return;
+    }
     item.checked = !item.checked;
     this.emitData();
   }

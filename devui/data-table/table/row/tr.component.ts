@@ -16,6 +16,9 @@ export class TableTrComponent implements OnInit, AfterContentInit {
   headerCheckDisabled: boolean;
   headerRowspan = 1;
   headerCheckOptions: TableCheckOptions[];
+  curLabel = '';
+  showTip = false;
+  selectOptionOnCheckbox = false;
 
   headerChecked: boolean;
   headerHalfChecked: boolean;

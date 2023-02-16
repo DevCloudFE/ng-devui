@@ -58,6 +58,7 @@ openStandardDialog(dialogtype?: string) {
 |      bodyScrollable      |            `boolean`            |  true    | 可选，modal 打开后，body是否可滚动，默认可滚动，false时隐藏滚动条,隐藏滚动条可能会产生抖动，可以通过设置外层fixed来同时避免滚动与抖动 | [通过外层fixed同时避免滚动和抖动](demo#template-fixed)  |
 |     contentTemplate      |       `TemplateRef<any>`        |    --    | 可选，弹出框内容模板，与component不兼容        | [自定义弹出框内容模板](demo#template-content) |
 |        escapable         |            `boolean`            |   true   | 可选，是否支持esc键关闭弹窗                    |
+|  cssClass   |                 `string`                 |   --   | 可选，Modal最外层容器自定义 class 名                     |
 
 # dialog 说明
 

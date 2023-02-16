@@ -17,6 +17,7 @@ import { GanttModule } from 'ng-devui/gantt';
 |            height             |      `number`      |  --   | 可选，高度                              |
 |           startDate           |       `Date`       |  --   | 可选，开始时间                           |
 |            endDate            |       `Date`       |  --   | 可选，结束时间                           |
+|            showDaySplitLine            |       `boolean`       |     `false`   | 可选，是否显示每日分隔线                   |
 
 ### d-gantt-scale 事件
 

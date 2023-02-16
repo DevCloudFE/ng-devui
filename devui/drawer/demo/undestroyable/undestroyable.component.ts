@@ -26,10 +26,10 @@ export class UndestroyableComponent {
     } else {
       this.results = this.drawerService.open({
         drawerContentComponent: DrawerContentComponent,
-        width: '500px',
+        width: '1000px',
         clickDoms: this.doms,
         destroyOnHide: false,
-        position: 'left',
+        position: 'right',
         onClose: () => {
           console.log('on drawer closed');
         },

@@ -1,24 +1,20 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
-.col-md-5 {
-  width: 50%;
-}
-
 .col-md-3 {
   width: 30%;
 }
 
 .custom-wrapper {
-  padding: 5px;
+  padding: 4px;
 }
 
 .custom-title {
-  padding: 5px;
+  padding: 4px;
   color: $devui-line;
 }
 
 .custom-list {
-  padding: 5px;
+  padding: 4px;
 }
 
 .custom-single {
@@ -32,8 +28,4 @@
 
 .custom-list:hover .custom-single {
   background: $devui-brand-hover;
-}
-
-.total {
-  padding: 10px;
 }

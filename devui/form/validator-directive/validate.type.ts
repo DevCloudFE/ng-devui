@@ -119,5 +119,6 @@ export const dDefaultValidators = {
 
 export interface DPopConfig {
   popMaxWidth?: number;
+  scrollElement?: Element;
   zIndex?: number;
 }

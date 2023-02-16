@@ -19,18 +19,13 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { DevConfigService, expandCollapseForDomDestroy, WithConfig } from 'ng-devui/utils';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import {
-  Dictionary,
-  ITreeItem,
-  TreeFactory,
-  TreeNode
-} from './tree-factory.class';
+import { Dictionary, ITreeItem, TreeFactory, TreeNode } from './tree-factory.class';
 @Component({
   selector: 'd-tree',
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.scss'],
   preserveWhitespaces: false,
-  animations: [expandCollapseForDomDestroy]
+  animations: [expandCollapseForDomDestroy],
 })
 export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   treeFactory: TreeFactory;
@@ -52,6 +47,12 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   @Input() minBufferPx = 600;
   @Input() maxBufferPx = 900;
   @Input() itemSize = 30;
+  @Input() indent = '16px';
+  /**
+   * 默认不需要判断parentId是否undefined，有业务使用了空字符串作为非根目录的id，导致必须判断来区分，当业务整改后移除该判断
+   * @deprecated
+   */
+  @Input() canIdEmpty = true;
   @Output() nodeSelected = new EventEmitter<TreeNode>();
   @Output() nodeDblClicked = new EventEmitter<TreeNode>();
   @Output() nodeRightClicked = new EventEmitter<{ node: TreeNode; event: MouseEvent }>();
@@ -64,9 +65,8 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   treeNodes = [];
   destroy$ = new Subject<void>();
   afterInitAnimate = true;
-  constructor(private i18n: I18nService, private devConfigService: DevConfigService) {
 
-  }
+  constructor(private i18n: I18nService, private devConfigService: DevConfigService) {}
 
   ngOnInit() {
     this.initTree();
@@ -91,10 +91,11 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
       treeNodeTitleKey: this.treeNodeTitleKey,
       checkboxDisabledKey: this.checkboxDisabledKey,
       selectDisabledKey: this.selectDisabledKey,
-      toggleDisabledKey: this.toggleDisabledKey
+      toggleDisabledKey: this.toggleDisabledKey,
     });
+    this.treeFactory.canIdEmpty = this.canIdEmpty;
     if (this.virtualScroll) {
-      this.treeFactory.flattenNodes.pipe(takeUntil(this.destroy$)).subscribe(data => {
+      this.treeFactory.flattenNodes.pipe(takeUntil(this.destroy$)).subscribe((data) => {
         this.treeNodes = data;
       });
       this.treeFactory.getFlattenNodes();
@@ -147,7 +148,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
       treeNodeTitleKey: this.treeNodeTitleKey,
       checkboxDisabledKey: this.checkboxDisabledKey,
       selectDisabledKey: this.selectDisabledKey,
-      toggleDisabledKey: this.toggleDisabledKey
+      toggleDisabledKey: this.toggleDisabledKey,
     });
   }
   public nodeDblClick(event, node) {
@@ -169,7 +170,6 @@ export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   ngOnDestroy() {
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
-
     }
     this.destroy$.next();
     this.destroy$.complete();

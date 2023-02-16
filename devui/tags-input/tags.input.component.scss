@@ -13,6 +13,7 @@
     position: relative;
     height: 100%;
     outline: none;
+    background-color: $devui-base-bg;
 
     &:active {
       outline: 0;
@@ -21,17 +22,45 @@
 
   ::ng-deep {
     .devui-tags-host {
+      .devui-toggle-menu-container {
+        flex-wrap: wrap;
+        align-content: flex-start;
+
+        d-toggle-menu-search .devui-toggle-menu-search > input {
+          height: 26px;
+        }
+
+        &.disabled {
+          d-toggle-menu-search .devui-toggle-menu-search input {
+            cursor: not-allowed;
+          }
+        }
+
+        d-toggle-menu-list ul d-toggle-menu-list-item .devui-dropdown-item:not(.disabled) {
+          &:active,
+          &:active:hover {
+            color: $devui-list-item-hover-text;
+            background-color: $devui-list-item-hover-bg;
+          }
+        }
+      }
+
       &.init-inline {
-        height: 30px;
+        height: 28px;
         border-radius: $devui-border-radius;
         border: solid 1px $devui-form-control-line;
 
         div.devui-toggle-menu-container {
           justify-content: flex-start;
           flex-wrap: nowrap;
-          overflow-x: auto;
-          overflow-y: hidden;
+          overflow: hidden;
           border: none;
+          padding-bottom: 12px;
+
+          &:hover {
+            overflow-x: auto;
+            overflow-x: overlay;
+          }
 
           d-toggle-menu-label {
             width: auto;
@@ -49,7 +78,7 @@
         }
       }
 
-      &:not(.init-inline) {
+      &.multi-inline {
         d-toggle-menu-label {
           width: 100%;
           border-radius: $devui-border-radius;
@@ -57,23 +86,35 @@
         }
       }
 
-      .devui-toggle-menu-container {
-        flex-wrap: wrap;
-        align-content: flex-start;
+      &:not(.devui-gray-style.multi-inline) .devui-toggle-menu-container {
+        background-color: transparent !important;
+      }
 
-        d-toggle-menu-search .devui-toggle-menu-search > input {
-          height: 26px;
+      &.devui-gray-style {
+        d-toggle-menu-label,
+        .devui-toggle-menu-search > input[class*='devui-']:not([disabled]) {
+          background-color: transparent !important;
         }
 
-        &.disabled d-toggle-menu-search .devui-toggle-menu-search input {
-          cursor: not-allowed;
-        }
+        &.init-inline,
+        &.multi-inline .devui-toggle-menu-container {
+          background-color: $devui-gray-form-control-bg;
+          border-color: transparent;
+          transition: all $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
 
-        d-toggle-menu-list ul d-toggle-menu-list-item .devui-dropdown-item:not(.disabled) {
-          &:active,
-          &:active:hover {
-            color: $devui-list-item-hover-text;
-            background-color: $devui-list-item-hover-bg;
+          &.disabled {
+            background-color: $devui-disabled-bg;
+          }
+
+          &:not(.disabled) {
+            &:hover {
+              background-color: $devui-gray-form-control-hover-bg;
+            }
+
+            &:focus-within {
+              background-color: $devui-base-bg;
+              border-color: $devui-brand;
+            }
           }
         }
       }

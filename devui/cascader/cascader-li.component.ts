@@ -35,7 +35,7 @@ export class CascaderLiComponent implements OnInit, OnDestroy {
 
   @HostListener('mouseenter', ['$event'])
   onMouseEnter(event) {
-    if (this.trigger === 'hover' && this.option.children && this.option.children.length) {
+    if (this.trigger === 'hover') {
       this.cascaderSrv.openColumn(this.option, this.colIndex, false);
     }
   }

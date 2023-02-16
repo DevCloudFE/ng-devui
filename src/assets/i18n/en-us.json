@@ -49,8 +49,6 @@
     "showCode": "Show Code",
     "hideCode": "Hide Code",
     "copyCode": "Copy Code",
-    "codesandbox": "Edit On CodeSandbox",
-    "stackblitz": "Edit On StackBlitz",
     "success": "Success"
   },
   "components": {
@@ -883,13 +881,7 @@
         "p2": "Scroll monitoring uses other elements, such as window."
       },
       "pipeDemo": {
-        "dDatePipe": {
-          "title": "DatePipe"
-        },
-        "dSafeNullPipe": {
-          "title": "SafeNullPipe",
-          "description": "When the data is '', null, undefined can be specified any character placeholder display, the default is: '--'"
-        }
+        "title": "DatePipe"
       },
       "browserDemo": {
         "title": "Current browser name and version"
@@ -981,6 +973,7 @@
           },
           "colorSource": {
             "devui-global-bg": "Global background with background color",
+            "devui-glass-morphism-bg":"Glass morphism background color",
             "devui-global-bg-normal": "Global white background",
             "devui-base-bg": "Base block background white",
             "devui-base-bg-dark": "Base Block Background Dark (Fixed)",
@@ -1015,12 +1008,18 @@
             "devui-unavailable": "Unavailable or Disabled",
             "devui-shadow": "shadow color",
             "devui-light-shadow": "Weak shadow color",
+            "devui-icon-fill-weak":"Weakened icon fill color",
+            "devui-shape-icon-fill":"Shape type svg icon fill color",
+            "devui-shape-icon-fill-hover":"Shape type svg icon hover color",
+            "devui-shape-icon-fill-active":"Shape type svg icon active color",
+            "devui-shape-icon-fill-disabled":"Shape type svg icon disabled color",
             "devui-icon-text": "Text icon color, which is the same as the text color.",
             "devui-icon-bg": "svg Icon Background Color",
             "devui-icon-fill": "Grey fill color of the svg icon",
             "devui-icon-fill-hover": "svg Icon Gray Fill Color Hover Feedback Color",
             "devui-icon-fill-active": "svg Icon Highlight Fill Color (Active)",
             "devui-icon-fill-active-hover": "svg Icon Highlight Fill Color Hover Feedback Color",
+            "devui-form-control-bg":"Form control background color",
             "devui-form-control-line": "Form control border color, which is the same as the border divider.",
             "devui-form-control-line-hover": "Form Control Border Hover Feedback Color",
             "devui-form-control-line-active": "Form Control Border Activation Color for Focus",
@@ -1064,7 +1063,9 @@
             "devui-primary-line": "primary border",
             "devui-primary-bg": "Primary background color",
             "devui-default-line": "Default border",
-            "devui-default-bg": "Default background color"
+            "devui-default-bg": "Default background color",
+            "devui-connected-overlay-shadow":"Drop-down-menu shadow color",
+            "devui-feedback-overlay-shadow":"Information feedback block shadow color"
           },
           "catalogs": {
             "basic": "Basic variable",
@@ -1980,30 +1981,30 @@
       "name": "Fullscreen",
       "type": "General",
       "path": "fullscreen",
-      "description": "Fullscreen.",
-      "tmw": "When users want to display an area with fullscreen mode.",
+      "description": "Full screen.",
+      "tmw": "When users want to display an area with full screen mode.",
       "immersiveDemo": {
         "title": "Immersive full screen",
         "description": "Immersive full screen display.",
         "fullscreen": "Full screen",
-        "exitFullscreen": "Exit Full Screen"
+        "exitFullscreen": "Exit full screen"
       },
       "normalDemo": {
         "title": "Common full screen",
         "description": "Full screen of the current browser window.",
         "fullscreen": "Full screen",
-        "exitFullscreen": "Exit Full Screen"
+        "exitFullscreen": "Exit full screen"
       },
       "customDemo": {
-        "title": "Function Invoking",
-        "description": "Create a full screen by calling a function.",
+        "title": "Custom full screen",
+        "description": "Call the function method to trigger full screen in the specified container.",
         "fullscreen": "Full screen",
-        "exitFullscreen": "Exit Full Screen"
+        "exitFullscreen": "Exit full screen"
       },
       "anchorLinkValues": {
         "immersive-full-screen": "Immersive full screen",
         "general-full-screen": "Common full screen",
-        "custom-full-screen": "Function Invoking"
+        "custom-full-screen": "Custom full screen"
       }
     },
     "transfer": {
@@ -2896,7 +2897,7 @@
       },
       "AllowClearValueDemo": {
         "title": "Allow clearing values",
-        "description": "",
+        "description": "Clear the selected value by modifying the ngModel variable.",
         "test": "Option"
       },
       "CustomAreaDemo": {
@@ -3273,15 +3274,16 @@
       "asyncDemo": {
         "title": "Asynchronous data source"
       },
-      "ngmodelDemo": {
-        "title": "NgModel"
+      "customizeDemo": {
+        "title": "Customize",
+        "description": "The tag can be entered only when it contains 'item'."
       },
       "virtualScrollDemo": {
         "title": "Virtual scrolling"
       },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
-        "ng-model": "NgModel",
+        "customize": "Customize",
         "async-input": "Asynchronous data source",
         "virtual-scroll": "Virtual scrolling"
       }
@@ -3320,6 +3322,10 @@
       "customDotDemo": {
         "title": "Time Point Customization"
       },
+      "singleDemo": {
+        "title": "Unilateral Mode",
+        "description": "Set mode to top|bottom|left|right to set the time axis to the one-sided mode for displaying content in a specified position."
+      },
       "anchorLinkValues": {
         "basic-usage": "Setting Time Position",
         "direction": "Setting Direction Parameters",
@@ -3327,7 +3333,8 @@
         "content-with-html": "Content Use HTML",
         "content-with-template": "Customizing Content Using a Template",
         "content-with-alternative-mode": "Customizing the Content Direction of a Time Node",
-        "seperate-way": "The time node is used independently"
+        "seperate-way": "The time node is used independently",
+        "single": "Unilateral Mode"
       }
     },
     "toast": {
@@ -3440,7 +3447,7 @@
         "async-usage": "Async Usage",
         "custom-prefix": "Custom Prefix",
         "custom-template": "Custom Template",
-        "toggle-divider": "Use Separators"
+        "use-separator": "Use Separators"
       }
     },
     "toggle": {
@@ -3615,11 +3622,16 @@
         "multiRowNotWebkitTitle": "Multiline Text by calculation",
         "multiRowExpandTitle": "Multiline Text Using collapse"
       },
+      "adaptiveInputDemo":{
+        "title": "Adaptive Input",
+        "description": "During editing, expands the input to textarea, then restored. This feature enables users to easily input and read a large amount of text when using input."
+      },
       "anchorLinkValues": {
         "title-usage": "Title Usage",
         "text-usage": "Text Usage",
         "editable-usage": "Editable Usage",
-        "text-overflow": "Text Overflow"
+        "text-overflow": "Text Overflow",
+        "adaptive-input": "Adaptive Input"
       }
     },
     "upload": {
@@ -4171,9 +4183,14 @@
         "title": "Large-scale data display optimization",
         "description": ""
       },
+      "extendDemo": {
+        "title": "Customize extend buttons",
+        "description": "Add options to disable the save button by entering, then use the customize button reset them"
+      },
       "anchorLinkValues": {
         "basicDemo": "Basic Usage",
         "customDemo": "Customize drop-down list box",
+        "extendDemo": "Customize extend buttons",
         "autoScrollDemo": "Large-scale data display optimization"
       }
     },

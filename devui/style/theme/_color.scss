@@ -15,7 +15,7 @@ $devui-contrast: var(--devui-contrast, #c7000b); // 品牌色撞色、对比色�
 $devui-text: var(--devui-text, $devui-slate-100); // 正文文本
 $devui-text-weak: var(--devui-text-weak, $devui-slate-80); // 弱化的正文信息（手风琴子项，表头）
 $devui-aide-text: var(--devui-aide-text, $devui-slate-70); // 辅助文本、帮助信息（面包屑）
-$devui-aide-text-hover: var(--devui-aide-text-hover, $devui-slate-100);       // 辅助文本悬浮色，用于标签文本悬浮等场景
+$devui-aide-text-hover: var(--devui-aide-text-hover, $devui-slate-100); // 辅助文本悬浮色，用于标签文本悬浮等场景
 $devui-aide-text-stress: var(--devui-aide-text-stress, $devui-slate-80); // 辅助文本、帮助信息里的强调色
 $devui-placeholder: var(--devui-placeholder, $devui-slate-50); // 占位符
 $devui-light-text: var(--devui-light-text, $devui-white-5); // 有色深色背景下字体颜色（固定）
@@ -44,11 +44,11 @@ $devui-feedback-overlay-shadow: var(--devui-feedback-overlay-shadow, rgba(37, 43
 $devui-icon-text: var(--devui-icon-text, $devui-slate-70); // 文字图标颜色
 $devui-icon-bg: var(--devui-icon-bg, $devui-white-5); // svg图标 背景色
 $devui-icon-fill: var(--devui-icon-fill, $devui-slate-70); // svg图标 灰色填充色
-$devui-icon-fill-weak:var(--devui-icon-fill-weak, $devui-slate-50);// svg弱化图标 灰色填充色
+$devui-icon-fill-weak: var(--devui-icon-fill-weak, $devui-slate-50); // svg弱化图标 灰色填充色
 $devui-icon-fill-hover: var(--devui-icon-fill-hover, $devui-slate-100); // svg图标 灰色填充色悬停反馈色
 $devui-icon-fill-active: var(--devui-icon-fill-active, $devui-slate-100); // svg图标 高亮填充色（激活状态）
 $devui-icon-fill-active-hover: var(--devui-icon-fill-active-hover, $devui-slate-100); // svg图标 高亮填充色悬停反馈色
-$devui-shape-icon-fill: var(--devui-shape-icon-fill, $devui-slate-30);   // svg图标 面型图标颜色
+$devui-shape-icon-fill: var(--devui-shape-icon-fill, $devui-slate-30); // svg图标 面型图标颜色
 $devui-shape-icon-fill-hover: var(--devui-shape-icon-fill-hover, $devui-slate-50); // svg图标 面型图标悬浮色
 $devui-shape-icon-fill-active: var(--devui-shape-icon-fill-active, $devui-slate-50); // svg图标 面型图标激活色
 $devui-shape-icon-fill-disabled: var(--devui-shape-icon-fill-disabled, $devui-gray-5); // svg图标 面型图标激活色
@@ -84,6 +84,9 @@ $devui-embed-search-bg-hover: var(--devui-embed-search-bg-hover, $devui-slate-10
 $devui-float-block-shadow: var(--devui-float-block-shadow, rgba(94, 124, 224, 0.3)); // 特殊浮层背景色（待修正）
 $devui-highlight-overlay: var(--devui-highlight-overlay, rgba(255, 255, 255, 0.8)); // 局部半透明全局浮层背景色（比如底部）
 $devui-range-item-hover-bg: var(--devui-range-item-hover-bg, $devui-blue-10); // datepicker范围中的日期hover的反馈背景色
+$devui-gray-form-control-bg: var(--devui-gray-form-control-bg, $devui-gray-5); // 灰色模式输入框默认背景色
+$devui-gray-form-control-hover-bg: var(--devui-gray-form-control-hover-bg, $devui-gray-10); // 灰色模式输入框hover背景色
+$devui-nav-expand-bg: var(--devui-nav-expand-bg, #fbfbfc); //菜单展开区域背景色
 
 // 按钮
 $devui-primary: var(--devui-primary, $devui-blue-50); // 主要按钮，同品牌色

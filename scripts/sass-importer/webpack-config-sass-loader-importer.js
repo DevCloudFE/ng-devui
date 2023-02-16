@@ -23,9 +23,18 @@ function webpackConfigSassImporterAlias(config) {
         var insertPosition = styleRule.rules[1].use.findIndex(loaderUse => loaderUse.loader === loaderName
           || loaderUse.loader === require.resolve(loaderName));
         if (insertPosition > -1) {
-          styleRule.rules[1].use[insertPosition].options.sassOptions.importer = [
-            getTsConfigAlias(tsconfigPath)
-          ];
+          styleRule.rules[1].use[insertPosition].options = {
+            sourceMap: true,
+            api: 'legacy',
+            sassOptions: {
+              importer: [
+                getTsConfigAlias(tsconfigPath)
+              ],
+              fiber: false,
+              precision: 8,
+              outputStyle: 'expanded',
+            },
+          };
         }
 
       }

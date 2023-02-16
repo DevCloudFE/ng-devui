@@ -10,7 +10,7 @@
       </g>
     </svg>
   </button>
-  <img class="devui-image-preview-main-image" [class.devui-optimal-proportion]="isOptimal" [attr.src]="targetImageSrc | safe: 'url'" />
+  <img class="devui-image-preview-main-image" [class.devui-optimal-proportion]="isOptimal" [attr.src]="targetImageSrc | safe : 'url'" />
 
   <!-- TODO: button参数化重构 -->
   <button class="devui-fixed-arrow-left" (click)="pre()" dTooltip [position]="'right'" [content]="i18nText.pre">
@@ -123,6 +123,24 @@
     </button>
     <button (click)="setScaleOriginal()" dTooltip [position]="'top'" [content]="i18nText.originScale">
       <span>1:1</span>
+    </button>
+    <button (click)="getOriginalImage()" dTooltip [position]="'top'" [content]="i18nText.origin">
+      <svg width="16px" height="16px" viewBox="0 0 16 16">
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g transform="translate(-1196.000000, -96.000000)" fill="#293040" fill-rule="nonzero">
+            <g transform="translate(407.000000, 93.000000)">
+              <path
+                d="M804,4 L790,4 L790,11.940983 L794.058237,9.91186456 L798.536534,13.3949845 L801.014076,11.908459
+                    L804,13.8990748 L804,4 Z M803.72265,14.9160251 L800.985924,13.091541 L798.463466,14.6050155 L793.941763,11.0881354
+                    L790.223607,12.9472136 C790.151699,12.9831673 790.07527,13.000168 790,13.0001094 L790,18 L804,18 L804,15.0000529
+                    C803.90455,15.0001406 803.80803,14.9729453 803.72265,14.9160251 Z M789,19 L789,3 L805,3 L805,19 L789,19 Z M801,9
+                    C800.447715,9 800,8.55228475 800,8 C800,7.44771525 800.447715,7 801,7 C801.552285,7 802,7.44771525 802,8 C802,8.55228475
+                    801.552285,9 801,9 Z"
+              ></path>
+            </g>
+          </g>
+        </g>
+      </svg>
     </button>
   </div>
 </div>

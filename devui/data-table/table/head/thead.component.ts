@@ -15,6 +15,7 @@ export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy,
   @Input() checkable: boolean;
   @Input() checkDisabled: boolean;
   @Input() checkOptions: TableCheckOptions[];
+  @Input() selectOptionOnCheckbox = false;
   @ContentChildren(TableTrComponent) headerRowList: QueryList<TableTrComponent>;
   @ContentChildren(TableThComponent, { descendants: true }) thList: QueryList<TableThComponent>;
 
@@ -37,6 +38,7 @@ export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy,
         this.headerFirstRow.headerCheckable = this.checkable;
         this.headerFirstRow.headerCheckDisabled = this.checkDisabled;
         this.headerFirstRow.headerCheckOptions = this.checkOptions;
+        this.headerFirstRow.selectOptionOnCheckbox = this.selectOptionOnCheckbox;
 
         this.checkStatusSubscription = this.headerFirstRow.headerCheckStatusEvent.subscribe((status) => {
           this.headerCheckStatusEvent.emit(status);
@@ -62,6 +64,7 @@ export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy,
         this.headerFirstRow.headerCheckable = this.checkable;
         this.headerFirstRow.headerCheckDisabled = this.checkDisabled;
         this.headerFirstRow.headerCheckOptions = this.checkOptions;
+        this.headerFirstRow.selectOptionOnCheckbox = this.selectOptionOnCheckbox;
       }
     }
   }

@@ -1,0 +1,9 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.btn-wrapper {
+  display: flex;
+}
+// 为兼容老版本common类型button无边框
+:host ::ng-deep d-button-group .devui-btn.d-btn-icon {
+  border: 1px solid var(--devui-btn-common-border-color, #adb0b8);
+}

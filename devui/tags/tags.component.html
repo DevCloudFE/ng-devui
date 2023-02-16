@@ -10,7 +10,9 @@
     [customColor]="tag['customColor']"
     [titleContent]="titleProperty ? tag[titleProperty] : displayProperty ? tag[displayProperty] : tag"
     [customViewTemplate]="customViewTemplate"
+    [beforeDelete]="beforeDelete"
     (tagDelete)="removeTag($event, tag, index)"
+    (checkedChange)="tagChecked($event, tag, index)"
   >
   </d-tag>
   <d-tag
@@ -38,7 +40,9 @@
       [customColor]="tag['customColor']"
       [titleContent]="titleProperty ? tag[titleProperty] : displayProperty ? tag[displayProperty] : tag"
       [customViewTemplate]="customViewTemplate"
+      [beforeDelete]="beforeDelete"
       (tagDelete)="removeTag($event, tag, index)"
+      (checkedChange)="tagChecked($event, tag, index)"
     >
     </d-tag>
   </div>

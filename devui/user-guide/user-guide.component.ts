@@ -99,6 +99,8 @@ export class UserGuideComponent implements OnInit, AfterViewInit, OnDestroy {
     );
     this.modalRef.instance.showDots = this.steps[index]?.showDots;
     this.modalRef.instance.maxContentWidth = this.steps[index]?.maxContentWidth ? this.steps[index]?.maxContentWidth : 320;
+    this.modalRef.instance.isCover = this.steps[index]?.isCover === undefined ? true: this.steps[index]?.isCover;
+    this.modalRef.instance.extraConfig = this.steps[index]?.extraConfig;
     this.modalRef.instance.close = () => {
       if (this.modalRef) {
         this.modalRef.hostView.destroy();

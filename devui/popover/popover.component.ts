@@ -11,7 +11,7 @@ import {
   OnInit,
   Renderer2,
   SimpleChanges,
-  TemplateRef
+  TemplateRef,
 } from '@angular/core';
 import { PositionService } from 'ng-devui/position';
 import { directionFadeInOut } from 'ng-devui/utils';

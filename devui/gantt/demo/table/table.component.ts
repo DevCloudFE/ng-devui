@@ -175,6 +175,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.unit = unit;
     this.ganttService.setScaleConfig({ unit });
     this.ganttScaleWidth = this.ganttService.getDurationWidth(this.ganttStartDate, this.ganttEndDate) + 'px';
+    const len = this.tableWidthConfig.length;
+    this.tableWidthConfig[len - 1].width = this.ganttScaleWidth;
   }
 
   launchFullscreen({ isFullscreen }) {

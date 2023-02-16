@@ -3,53 +3,78 @@ import { ITreeItem, OperableTreeComponent, TreeNode } from 'ng-devui/tree';
 
 @Component({
   selector: 'd-operate-btn',
-  templateUrl: './operate-btn.component.html'
+  templateUrl: './operate-btn.component.html',
 })
 export class OperateBtnComponent {
   currentSelectedNode;
   @ViewChild('operableTree', { static: true }) operableTree: OperableTreeComponent;
-  data = [{
-    'title': 'parent node 1',
-    'disableAdd':true
-  }, {
-    'title': 'parent node 2',
-    'items': [{
-      'title': 'leaf node 2-1',
-      'items': [{
-        'title': 'leaf node 2-1-1'
-      }, {
-        'title': 'leaf node 2-1-2'
-      }]
-    }, {
-      'title': 'leaf node 2-2',
-      'items': [{
-        'title': 'leaf node 2-2-1'
-      }, {
-        'title': 'leaf node 2-2-2'
-      }]
-    }]
-  }, {
-    'title': 'parent node 3',
-    'items': [{
-      'title': 'leaf node 3-1',
-    }, {
-      'title': 'leaf node 3-2',
-    }],
-  }, {
-    'title': 'parent node 4',
-    'items': [{
-      'title': 'leaf node 4-1'
-    }, {
-      'title': 'leaf node 4-2'
-    }]
-  }, {
-    'title': 'parent node 5',
-    'items': [{
-      'title': 'leaf node 5-1'
-    }, {
-      'title': 'leaf node 5-2'
-    }]
-  }];
+  data = [
+    {
+      title: 'parent node 1',
+      disableAdd: true,
+    },
+    {
+      title: 'parent node 2',
+      items: [
+        {
+          title: 'leaf node 2-1',
+          items: [
+            {
+              title: 'leaf node 2-1-1',
+            },
+            {
+              title: 'leaf node 2-1-2',
+            },
+          ],
+        },
+        {
+          title: 'leaf node 2-2',
+          items: [
+            {
+              title: 'leaf node 2-2-1',
+            },
+            {
+              title: 'leaf node 2-2-2',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'parent node 3',
+      items: [
+        {
+          title: 'leaf node 3-1',
+        },
+        {
+          title: 'leaf node 3-2',
+        },
+      ],
+    },
+    {
+      title: 'parent node 4',
+      items: [
+        {
+          title: 'leaf node 4-1',
+        },
+        {
+          title: 'leaf node 4-2',
+        },
+      ],
+    },
+    {
+      title: 'parent node 5',
+      items: [
+        {
+          title: 'leaf node 5-1',
+        },
+        {
+          title: 'leaf node 5-2',
+        },
+      ],
+    },
+  ];
+
   onOperableNodeDeleted(treeNode: TreeNode) {
     console.log('deleted: ', treeNode);
   }
@@ -95,28 +120,35 @@ export class OperateBtnComponent {
     console.log('beforeAddNode', node);
     return new Promise((resolve, reject) => {
       resolve({ title: 'new  node ', index: 0 });
-    }).catch(err => console.error(err));
+    }).catch((err) => console.error(err));
   }
 
   beforeDeleteNode = (node) => {
     console.log('beforeDeleteNode', node);
     return new Promise((resolve, reject) => {
-      resolve(node);
-    }).catch(err => console.error(err));
+      resolve(true);
+    }).catch((err) => console.error(err));
   };
 
   beforeEditNode = (node) => {
     console.log('beforeEditNode', node);
     return new Promise((resolve, reject) => {
-      resolve(node);
-    }).catch(err => console.error(err));
+      resolve(true);
+    }).catch((err) => console.error(err));
+  };
+
+  beforeSelectNode = (node) => {
+    console.log('beforeSelectNode', node);
+    return new Promise((resolve, reject) => {
+      resolve(true);
+    }).catch((err) => console.error(err));
   };
 
   postAddNode = (node) => {
     console.log('postAddNode', node);
     return new Promise((resolve, reject) => {
       resolve(node);
-    }).catch(err => console.error(err));
+    }).catch((err) => console.error(err));
   };
 
   editValueChange(event) {
@@ -125,7 +157,7 @@ export class OperateBtnComponent {
     if (event.value === '') {
       event.callback({
         errTips: 'The node name cannot be null!',
-        errTipsPosition: 'right'
+        errTipsPosition: 'right',
       });
     } else {
       // 校验通过后调用callback,取消报错显示

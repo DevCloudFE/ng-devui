@@ -1,31 +1,51 @@
-<h4>Normal</h4>
+<h4>Single line</h4>
 <d-tags-input
-  [(ngModel)]="tagList"
   [displayProperty]="taskTagConfig.displayProperty"
   [placeholder]="taskTagConfig.placeholder"
-  [minLength]="taskTagConfig.minLength"
-  [maxLength]="taskTagConfig.maxLength"
-  [maxTags]="taskTagConfig.maxTags"
+  [multiline]="taskTagConfig.multiline"
   [suggestionList]="suggestionList"
+  [(ngModel)]="tagList"
+  (valueChange)="getTagValue($event)"
+>
+</d-tags-input>
+<br />
+<h4>Multiple line</h4>
+<d-tags-input
+  [displayProperty]="taskTagConfig.displayProperty"
+  [placeholder]="taskTagConfig.placeholder"
+  [maxLength]="taskTagConfig.maxLength"
+  [minLength]="taskTagConfig.minLength"
+  [maxTags]="taskTagConfig.maxTags"
+  [maxHeight]="taskTagConfig.maxHeight"
   [spellcheck]="taskTagConfig.spellcheck"
   [caseSensitivity]="taskTagConfig.caseSensitivity"
   [isAddBySpace]="taskTagConfig.isAddBySpace"
+  [suggestionList]="suggestionList"
+  [(ngModel)]="tagList"
   (valueChange)="getTagValue($event)"
-  [checkBeforeAdd]="customCheck"
 >
 </d-tags-input>
-<pre style="margin: 8px 0">{{ tagList | json }}</pre>
+<h4>No suggestion</h4>
+<d-tags-input
+  [displayProperty]="taskTagConfig.displayProperty"
+  [placeholder]="taskTagConfig.placeholder"
+  [maxTags]="taskTagConfig.maxTags"
+  [multiline]="taskTagConfig.multiline"
+  [spellcheck]="taskTagConfig.spellcheck"
+  [caseSensitivity]="taskTagConfig.caseSensitivity"
+  [isAddBySpace]="taskTagConfig.isAddBySpace"
+  [showSuggestion]="false"
+  [(ngModel)]="tagList"
+  (valueChange)="getTagValue($event)"
+>
+</d-tags-input>
 <h4>Disabled</h4>
 <d-tags-input
   [tags]="tagList"
+  [disabled]="true"
   [displayProperty]="taskTagConfig.displayProperty"
   [placeholder]="taskTagConfig.placeholder"
-  [minLength]="taskTagConfig.minLength"
-  [maxLength]="taskTagConfig.maxLength"
-  [maxTags]="taskTagConfig.maxTags"
   [suggestionList]="suggestionList"
-  (valueChange)="getTagValue($event)"
-  [checkBeforeAdd]="customCheck"
-  [disabled]="true"
 >
 </d-tags-input>
+<pre>{{ tagList | json }}</pre>

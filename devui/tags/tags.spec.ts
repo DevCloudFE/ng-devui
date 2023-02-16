@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { TagsModule } from './tags.module';
 
@@ -56,11 +56,12 @@ describe('tag', () => {
       expect(labelStyle.classList).toContain('blue-w98');
     });
 
-    it('should can be deleted', () => {
+    it('should can be deleted', fakeAsync(() => {
       const removeButton = <HTMLElement>tags[0].nativeElement.querySelector('.remove-button');
       removeButton.click();
+      tick();
       fixture.detectChanges();
       expect(testComponent.deleteTag).toHaveBeenCalledTimes(1);
-    });
+    }));
   });
 });

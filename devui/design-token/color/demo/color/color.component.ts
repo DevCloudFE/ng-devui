@@ -56,6 +56,7 @@ export class ColorComponent implements OnInit, OnDestroy {
   }
 
   changeValueInTable = () => {
+    this.colorList = [];
     const theme = this.themeService.currentTheme;
     for (const key in theme.data) {
       if (!(theme.data[key].startsWith('#') || theme.data[key].startsWith('rgba'))) {
@@ -127,6 +128,7 @@ export class ColorComponent implements OnInit, OnDestroy {
   }
 
   transferDataSource() {
+    this.dataSource = new Map();
     this.colorList.forEach((item) => {
       if (this.dataSource.has(item.type)) {
         this.dataSource.get(item.type).push(item);

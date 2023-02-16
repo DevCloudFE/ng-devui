@@ -1,24 +1,35 @@
-<div [class.show-overlay]="showMaskLayer" class="user-guide-mask-layer"></div>
-<div [class.show-overlay]="showNormalOverlay" class="user-guide-normal-overlay"></div>
+<div [class.show-overlay]="showMaskLayer && isCover" class="user-guide-mask-layer"></div>
+<div [class.show-overlay]="showNormalOverlay && isCover" class="user-guide-normal-overlay"></div>
 
-<div [class.show-overlay]="showTopOverlay" class="user-guide-top-overlay" (click)="disableClick($event)"></div>
-<div [class.show-overlay]="showBottomOverlay" class="user-guide-bottom-overlay" (click)="disableClick($event)"></div>
-<div [class.show-overlay]="showLeftOverlay" class="user-guide-left-overlay" (click)="disableClick($event)"></div>
-<div [class.show-overlay]="showRightOverlay" class="user-guide-right-overlay" (click)="disableClick($event)"></div>
+<div [class.show-overlay]="showTopOverlay && isCover" class="user-guide-top-overlay" (click)="disableClick($event)"></div>
+<div [class.show-overlay]="showBottomOverlay && isCover" class="user-guide-bottom-overlay" (click)="disableClick($event)"></div>
+<div [class.show-overlay]="showLeftOverlay && isCover" class="user-guide-left-overlay" (click)="disableClick($event)"></div>
+<div [class.show-overlay]="showRightOverlay && isCover" class="user-guide-right-overlay" (click)="disableClick($event)"></div>
 
-<div [class.show-overlay]="showBorder" class="user-guide-top-border" (click)="disableClick($event)"></div>
-<div [class.show-overlay]="showBorder" class="user-guide-bottom-border" (click)="disableClick($event)"></div>
-<div [class.show-overlay]="showBorder" class="user-guide-left-border" (click)="disableClick($event)"></div>
-<div [class.show-overlay]="showBorder" class="user-guide-right-border" (click)="disableClick($event)"></div>
+<div [class.show-overlay]="showBorder && isCover" class="user-guide-top-border" (click)="disableClick($event)"></div>
+<div [class.show-overlay]="showBorder && isCover" class="user-guide-bottom-border" (click)="disableClick($event)"></div>
+<div [class.show-overlay]="showBorder && isCover" class="user-guide-left-border" (click)="disableClick($event)"></div>
+<div [class.show-overlay]="showBorder && isCover" class="user-guide-right-border" (click)="disableClick($event)"></div>
 
 <div class="user-guide-panel">
-  <div *ngIf="stepsLength !== 1" id="devui-user-guide" class="user-guide-panel-multiple">
+  <div
+    *ngIf="!isCover && (stepsLength !== 1 || curStepType !== 'tip') && curStepType !== 'display'"
+    class="devui-user-guide-panel-arrow"
+    [style.background-color]="extraConfig?.panelBackground"
+  ></div>
+  <div
+    *ngIf="stepsLength !== 1 || curStepType !== 'tip'"
+    id="devui-user-guide"
+    class="user-guide-panel-multiple"
+    [style.background]="extraConfig?.panelBackground"
+  >
     <div class="user-guide-panel-multiple-header">
       <button type="button" class="user-guide-panel-close" aria-label="Close" (click)="exit()">
         <svg class="svg-icon-close" xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" viewBox="0 0 12 12" version="1.1">
           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g transform="translate(-2.000000, -2.000000)" fill-rule="nonzero">
               <polygon
+                [style.fill]="extraConfig?.operationColor"
                 points="8 6.58578644 12.2426407 2.34314575 13.6568542 3.75735931 9.41421356 8 13.6568542 12.2426407 12.2426407 13.6568542 8 9.41421356 3.75735931 13.6568542 2.34314575 12.2426407 6.58578644 8 2.34314575 3.75735931 3.75735931 2.34314575"
               />
             </g>
@@ -27,9 +38,9 @@
       </button>
     </div>
     <div class="user-guide-panel-multiple-body" [style.maxWidth.px]="maxContentWidth">
-      <div class="user-guide-panel-title">{{ title }}</div>
-      <div *ngIf="content" class="user-guide-panel-content">
-        <div *ngIf="!isTemplateContent()" [innerHTML]="content | safe: 'html'"></div>
+      <div class="user-guide-panel-title" [style.color]="extraConfig?.infoColor">{{ title }}</div>
+      <div *ngIf="content" class="user-guide-panel-content" [style.color]="extraConfig?.infoColor">
+        <div *ngIf="!isTemplateContent()" [innerHTML]="content | safe : 'html'"></div>
         <ng-container *ngIf="isTemplateContent()">
           <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
         </ng-container>
@@ -44,6 +55,7 @@
           <li
             class="dot-item"
             [ngClass]="{ active: currentStep === index }"
+            [style.background]="currentStep === index ? extraConfig?.operationColor : extraConfig?.dotColor"
             *ngFor="let item of items; let index = index"
             (click)="switchStep(index)"
           ></li>
@@ -51,19 +63,25 @@
       </div>
       <div *ngIf="showButtons" class="user-guide-panel-multiple-footer-right">
         <d-button bsStyle="common" [disabled]="!canPrev" *ngIf="showPrevButton" (btnClick)="prev()">{{ i18nCommonText.prev }}</d-button>
-        <d-button *ngIf="!canFinish" [disabled]="!canNext" (btnClick)="next()">{{ i18nCommonText.next }}</d-button>
-        <d-button *ngIf="currentStep === stepsLength - 1 && canFinish" [disabled]="!canFinish" (btnClick)="exit()">{{
-          i18nCommonText.finish
+        <d-button *ngIf="!canFinish" [disabled]="!canNext" [bsStyle]="nextButtonType" (btnClick)="next()">{{
+          i18nCommonText.next
         }}</d-button>
+        <d-button
+          *ngIf="currentStep === stepsLength - 1 && canFinish"
+          [bsStyle]="nextButtonType"
+          [disabled]="!canFinish"
+          (btnClick)="exit()"
+          >{{ i18nCommonText.finish }}</d-button
+        >
       </div>
     </div>
   </div>
 
-  <div *ngIf="stepsLength === 1">
-    <div *ngIf="curStepType === 'tip'" class="user-guide-panel-arrow"></div>
+  <div *ngIf="stepsLength === 1 && curStepType === 'tip'">
+    <div *ngIf="curStepType === 'tip'" class="devui-user-guide-panel-arrow"></div>
     <div [class.user-guide-panel-tip]="curStepType === 'tip'" [class.user-guide-panel-single]="curStepType !== 'tip'">
       {{ title }}
-      <div *ngIf="content" class="user-guide-panel-content" [innerHTML]="content | safe: 'html'"></div>
+      <div *ngIf="content" class="user-guide-panel-content" [innerHTML]="content | safe : 'html'"></div>
       <button type="button" class="close" aria-label="Close" (click)="exit()">
         <svg class="svg-icon-close" xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" viewBox="0 0 12 12" version="1.1">
           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

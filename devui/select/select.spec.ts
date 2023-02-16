@@ -959,6 +959,7 @@ describe('Select', () => {
             const secondLabelElement = debugEl.queryAll(By.css('.devui-select-tag-list .devui-tag-item'))[1];
             const removeButton = secondLabelElement.query(By.css('.remove-button'));
             removeButton.nativeElement.click();
+            tick();
             fixture.detectChanges();
             expect(component.option).toEqual(component.options.filter((item, index) => index !== 1));
           }));

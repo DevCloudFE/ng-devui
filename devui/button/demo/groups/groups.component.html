@@ -1,6 +1,21 @@
-<div class="btn-group">
+<div class="btn-wrapper">
   <d-button-group>
     <d-button bsStyle="primary">按钮名称</d-button>
     <d-button icon="icon-select-arrow" bsStyle="primary"></d-button>
   </d-button-group>
+
+  <div dDropDown [style.margin-left.px]="8">
+    <d-button-group>
+      <d-button bsStyle="common" dDropDownToggle>近期发布 <span class="icon-select-arrow"></span></d-button>
+      <d-button icon="icon icon-setting" bsStyle="common"></d-button>
+    </d-button-group>
+    <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
+      <li role="menuitem">
+        <a dDropDownMenuItem>JavaScript</a>
+      </li>
+      <li role="menuitem">
+        <a dDropDownMenuItem>C++</a>
+      </li>
+    </ul>
+  </div>
 </div>

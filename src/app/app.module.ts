@@ -41,7 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         path: '**',
         redirectTo: 'components/zh-cn'
     }
-], { relativeLinkResolution: 'legacy' }),
+], {}),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

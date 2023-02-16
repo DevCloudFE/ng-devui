@@ -13,6 +13,7 @@
     .devui-option-modal-selected-col {
       flex: 1;
       padding: 20px;
+      overflow-y: auto;
 
       d-checkbox {
         display: inline-block;
@@ -77,5 +78,9 @@
         overflow-y: overlay;
       }
     }
+  }
+
+  .disabled {
+    color: $devui-disabled-text;
   }
 }

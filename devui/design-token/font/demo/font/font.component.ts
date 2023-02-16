@@ -33,6 +33,7 @@ export class FontComponent implements OnInit, OnDestroy {
   }
 
   changeValueInTable = () => {
+    this.fonts = [];
     const theme = this.themeService.currentTheme;
     for (const key in theme.data) {
       if (this.fontKey.some(item => key.includes(item))) {

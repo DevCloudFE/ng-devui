@@ -38,6 +38,47 @@ extraData: 主题的额外数据，用于做三方库兼容，key 值为主题�
 
 ieSupport：是否打开 ie 支持，目前使用 css-var-ponyfill 方案支持 ie 切换主题。
 
+## 开启扩展主题
+1. 在main.ts中引入主题初始化服务和4套扩展主题
+```
+import { ThemeServiceInit } from 'ng-devui/theme';
+import {
+  infinityTheme,
+  sweetTheme,
+  provenceTheme,
+  deepTheme,
+} from 'ng-devui/theme-collection';
+```
+2. 在main.ts中初始化4套主题服务，并将默认主题置为无限主题
+```
+ThemeServiceInit({
+  'infinity-theme': infinityTheme,
+  'provence-theme': provenceTheme,
+  'sweet-theme': sweetTheme,
+  'deep-theme': deepTheme,
+}, 'infinity-theme');
+```
+~~至此完成扩展主题的切换
+
+------------
+3. （可选，若想自制主题切换器）在项目的公共页面区域(ex: 公共头)插入一个简易主题切换器，进行主题切换及验证
+- ts中
+```
+themeOptions = [`
+    'infinity-theme',
+    'provence-theme',
+    'sweet-theme',
+    'deep-theme'
+  ];`
+  changeTheme(theme: string) {
+     window['devuiThemeService'].applyTheme(window['devuiThemes'][theme]);
+  }
+```
+- html中
+```
+<d-select [placeholder]="'ChooseTheme'" [options]="themeOptions" (valueChange)="changeTheme($event)"></d-select>
+```
+
 ## 制作主题切换器
 
 请参考 [ThemePickerComponent](https://github.com/DevCloudFE/ng-devui/blob/master/devui-commons/src/header/theme-picker/theme-picker.component.ts)

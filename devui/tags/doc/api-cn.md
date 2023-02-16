@@ -23,6 +23,7 @@ import { TagsModule } from 'ng-devui/tags';
 |      checked       |   `boolean`   |   false   | 可选，标签选中的初始状态                                                                                                                                            | [单个标签](demo#single-tag) |
 |    customColor     |   `string`    |    ''     | 可选，传入颜色字符串（如'#f50'），自定义彩色标签的颜色                                                                                                              | [单个标签](demo#single-tag) |
 |    maxWidth     |   `string`    |    --     | 可选，标签最大宽度，超出文字会省略并出现省略号       | [单个标签](demo#single-tag) |
+|       beforeDelete       | `(tag?: string)=>boolean\|Promise<boolean>\|Observable<boolean>` |    --    | 可选，删除之前的回调                       |
 
 ## d-tag 事件
 
@@ -41,9 +42,11 @@ import { TagsModule } from 'ng-devui/tags';
 |    deletable    | `boolean`  |   false   | 可选，设置标签是否可删除                                   | [标签组](demo#tags-group) |
 |  titleProperty  |  `string`  |    ''     | 可选，设置属性名，鼠标悬浮时 title 显示的值                | [标签组](demo#tags-group) |
 |    hideBeyondTags    | `boolean`  |   false   | 可选，标签组总宽度超过父级宽度是否隐藏超出标签  | [多标签超出隐藏](demo#hide-tags) |
+|       beforeDelete       | `(tag?: string)=>boolean\|Promise<boolean>\|Observable<boolean>` |    --    | 可选，删除之前的回调                       |
 
 ## d-tags 事件
 
 | 事件名称  |                           类型                           | 描述                          | 跳转 Demo                                  |
 | :-------: | :------------------------------------------------------: | :---------------------------- | ------------------------------------------ |
 | tagDelete | `EventEmitter<{ tag: tag, index: index, event: event }>` | 删除某个 tag 的时候触发的事件 | [标签组](demo#tags-group) |
+| checkedChange | `EventEmitter<{ tag: tag, index: index, checked: event }>` | tag 的 check 状态改变时触发的事件 |  |

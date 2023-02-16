@@ -5,7 +5,8 @@
         [options]="options"
         [isSearch]="true"
         [filterKey]="'name'"
-        [ngModel]="currentOption | parseFrom: 'value':options"
+        [appendToBody]="true"
+        [ngModel]="currentOption | parseFrom : 'value' : options"
         (ngModelChange)="modelChange($event)"
         [placeholder]="'Search'"
       ></d-select>

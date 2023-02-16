@@ -1,4 +1,5 @@
 import { TemplateRef } from '@angular/core';
+import { OperableTreeComponent } from 'ng-devui/tree';
 
 export type CategorySearchTagType = 'radio' | 'checkbox' | 'dateRange' | 'label' | 'textInput' | 'numberRange' | 'treeSelect' | 'keyword';
 
@@ -42,11 +43,15 @@ export interface ICategorySearchTagItem {
   /**
    * 用于显示的label类型中色值的键值，如未设置默认取color
    */
-  colorKey?: 'color';
+  colorKey?: string | 'color';
   /**
-   * 自定义下拉模板的展示内容
+   * 自定义下拉模板
    */
   customTemplate?: TemplateRef<any>;
+  /**
+   * 自定义已选标签内容模板
+   */
+  tagCustomTemplate?: TemplateRef<any>;
   /**
    * 已选中值
    */
@@ -56,6 +61,49 @@ export interface ICategorySearchTagItem {
     cache?: string | ITagOption | Array<ITagOption | number | string | Date>;
     [propName: string]: any;
   };
+  /**
+   * dateRange 类型是否显示时分秒
+   */
+  showTime?: boolean;
+  /**
+   * dateRange 类型默认激活开始或者结束日期
+   */
+  activeRangeType?: 'start' | 'end';
+  /**
+   * textInput 类型设置最大长度
+   */
+  maxLength?: number;
+  /**
+   * textInput | numberRange 类型设置占位符，numberRange需传入对象分别设置左右
+   */
+  placeholder?: string | { left: string; right: string };
+  /**
+   * treeSelect 类型是否为多选，并显示已选择列表
+   */
+  multiple?: boolean;
+  /**
+   * treeSelect 类型是否显示搜索框
+   */
+  searchable?: boolean;
+  /**
+   * treeSelect 类型设置搜索框占位符
+   */
+  searchPlaceholder?: string;
+  /**
+   * treeSelect 类型自定义搜索方法，参数为搜索关键字和d-operable-tree组件实例
+   */
+  searchFn?: (value: string, treeInstance: OperableTreeComponent) => boolean | Array<any>;
+  /**
+   * treeSelect 类型相关配置，请参考treeSelect组件API中同名配置
+   */
+  treeNodeIdKey?: string;
+  treeNodeChildrenKey?: string;
+  treeNodeTitleKey?: string;
+  disabledKey?: string;
+  leafOnly?: boolean;
+  iconParentOpen?: string;
+  iconParentClose?: string;
+  iconLeaf?: string;
   [propName: string]: any;
 }
 
@@ -83,6 +131,33 @@ export interface SearchConfig {
   fieldDescription?: (label: string) => string;
   category?: boolean;
   categoryDescription?: string;
+}
+
+export interface TextConfig {
+  keywordName?: string;
+  createFilter?: string;
+  filterTitle?: string;
+  labelConnector?: string;
+}
+
+export interface ExtendedConfig {
+  show?: boolean;
+  clear?: {
+    show?: boolean;
+    disabled?: boolean;
+    template?: TemplateRef<any>;
+  };
+  save?: {
+    show?: boolean;
+    disabled?: boolean;
+    template?: TemplateRef<any>;
+  };
+  more?: {
+    show?: boolean;
+    disabled?: boolean;
+    template?: TemplateRef<any>;
+  };
+  customTemplate?: TemplateRef<any>;
 }
 
 export const ALLOWED_SEARCH_FIELD_TYPES = ['radio', 'checkbox', 'label'];

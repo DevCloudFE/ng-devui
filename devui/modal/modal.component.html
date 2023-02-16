@@ -1,6 +1,7 @@
 <div class="modal-backdrop" [ngStyle]="{ 'z-index': backDropZIndex }" [@backdropAnimation]="animateState"></div>
 <div
   class="modal in"
+  [ngClass]="cssClass"
   [ngStyle]="{ 'z-index': zIndex }"
   [attr.id]="id"
   (mousedown)="modalMouseDown($event)"

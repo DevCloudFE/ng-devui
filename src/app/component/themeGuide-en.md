@@ -38,6 +38,47 @@ extraData: Extra data of the topic, which is used for third-party library compat
 
 ieSupport: Indicates whether to enable the IE support. Currently, the css-var-ponyfill solution is used to support the IE theme switching.
 
+## Open Extended Theme
+1. Introduce the topic initialization service and four sets of extended topics in main.ts.
+```
+import { ThemeServiceInit } from 'ng-devui/theme';
+import {
+  infinityTheme,
+  sweetTheme,
+  provenceTheme,
+  deepTheme,
+} from 'ng-devui/theme-collection';
+```
+2. Initialize the four theme services in main.ts and set the default theme to unlimited theme.
+```
+ThemeServiceInit({
+  'infinity-theme': infinityTheme,
+  'provence-theme': provenceTheme,
+  'sweet-theme': sweetTheme,
+  'deep-theme': deepTheme,
+}, 'infinity-theme');
+```
+~~The switchover of the extended theme is complete.
+
+------------
+3. (Optional, if you want to make a theme switcher) Insert a simple theme switcher in the public page area of the project (ex: public header) to switch and verify the theme.
+- In ts
+```
+themeOptions = [`
+    'infinity-theme',
+    'provence-theme',
+    'sweet-theme',
+    'deep-theme'
+  ];`
+  changeTheme(theme: string) {
+     window['devuiThemeService'].applyTheme(window['devuiThemes'][theme]);
+  }
+```
+- In html
+```
+<d-select [placeholder]="'ChooseTheme'" [options]="themeOptions" (valueChange)="changeTheme($event)"></d-select>
+```
+
 ## Making a Theme Switcher
 
 For details, please see [ThemePickerComponent](https://github.com/DevCloudFE/ng-devui/blob/master/devui-commons/src/header/theme-picker/theme-picker.component.ts).

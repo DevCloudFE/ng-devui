@@ -47,7 +47,8 @@ export class ModalService {
     offsetY,
     bodyScrollable = true,
     contentTemplate,
-    escapable = true
+    escapable = true,
+    cssClass
   }: IModalOptions) {
     const finalComponentFactoryResolver = componentFactoryResolver || this.componentFactoryResolver;
 
@@ -86,7 +87,8 @@ export class ModalService {
       offsetY,
       bodyScrollable,
       contentTemplate,
-      escapable
+      escapable,
+      cssClass
     });
 
     let modalContentInstance;

@@ -58,6 +58,7 @@ openStandardDialog(dialogtype?: string) {
 | bodyScrollable | `boolean` | true |Optional. Specifies whether the body can scroll after modal is enabled. The default value is false. The scroll bar is hidden. Hiding the scroll bar may cause jitter. You can set the outer fixed to avoid scrolling and jitter.  |[The outer layer is fixed to solve the jitter and scrolling problem](demo#template-fixed) |
 | contentTemplate | `TemplateRef<any>` | -- | Optional. It is a dialog box content template, which is incompatible with the component. | [Customizing a pop-up box content template](demo#template-content) |
 | escapable | `boolean` | true | Optional. Specifies whether to support pop-up window closure by pressing the Esc key. |
+|  cssClass   |                 `string`                 |   --   | Optional. Customized class name of the outermost container of Modal.                     |
 
 ## Dialog Description
 

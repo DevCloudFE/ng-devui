@@ -1,8 +1,18 @@
 import { AnimationEvent } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
 import {
-  Component, Directive, ElementRef, HostListener, Inject, Input, OnDestroy,
-  OnInit, Renderer2, TemplateRef, ViewChild, ViewContainerRef
+  Component,
+  Directive,
+  ElementRef,
+  HostListener,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef
 } from '@angular/core';
 import { backdropFadeInOut, flyInOut } from 'ng-devui/utils';
 import { isNumber, parseInt, trim } from 'lodash-es';
@@ -13,18 +23,14 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   selector: '[dDrawerContentHost]',
 })
 export class DrawerContentDirective {
-  constructor(public viewContainerRef: ViewContainerRef) {
-  }
+  constructor(public viewContainerRef: ViewContainerRef) {}
 }
 
 @Component({
   selector: 'd-drawer',
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss'],
-  animations: [
-    backdropFadeInOut,
-    flyInOut
-  ],
+  animations: [backdropFadeInOut, flyInOut],
   preserveWhitespaces: false,
 })
 export class DrawerComponent implements OnInit, OnDestroy {
@@ -63,6 +69,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
   document: Document;
 
   contentTemplate: TemplateRef<any>;
+  _right: string;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2, @Inject(DOCUMENT) private doc: any) {
     this.document = this.doc;
@@ -73,11 +80,15 @@ export class DrawerComponent implements OnInit, OnDestroy {
     this._isCover = this.isCover === undefined ? true : this.isCover;
 
     // some browsers(ie11 & edge) fire the animation done event twice
-    this.animationDoneSub = this.animationDone.pipe(distinctUntilChanged((x, y) => {
-      return x.fromState === y.fromState && x.toState === y.toState;
-    })).subscribe(event => {
-      this.onAnimationEnd(event);
-    });
+    this.animationDoneSub = this.animationDone
+      .pipe(
+        distinctUntilChanged((x, y) => {
+          return x.fromState === y.fromState && x.toState === y.toState;
+        })
+      )
+      .subscribe((event) => {
+        this.onAnimationEnd(event);
+      });
   }
   setWidth(width: string) {
     if (typeof window === 'undefined') {
@@ -86,10 +97,11 @@ export class DrawerComponent implements OnInit, OnDestroy {
     if (width.indexOf('%') >= 0) {
       const widthStr = trim(width, '%');
       const widthNum = parseInt(widthStr, 10);
-      this._width = isNumber(widthNum) ? (widthNum * window.innerWidth / 100 + 'px') : '0px';
+      this._width = isNumber(widthNum) ? (widthNum * window.innerWidth) / 100 + 'px' : '0px';
     } else {
       this._width = width;
     }
+    this._right = parseInt(this._width) > window.innerWidth ? -(parseInt(this._width) - (window.innerWidth - 100)) + 'px' : '0px';
     this.oldWidth = this._width;
   }
 
@@ -119,9 +131,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
   }
 
   // Will overwrite by drawer service
-  onHidden() {
-
-  }
+  onHidden() {}
 
   show() {
     if (this.document.documentElement.scrollHeight > this.document.documentElement.clientHeight) {
@@ -137,7 +147,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
     }
     this.animateState = 'in';
     const activeElement = this.document.activeElement;
-    if (activeElement && typeof (activeElement['blur']) === 'function') {
+    if (activeElement && typeof activeElement['blur'] === 'function') {
       activeElement['blur']();
     }
     this.isCover = this.isCover === undefined ? true : this.isCover;
@@ -148,7 +158,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.subscription = documentClick.subscribe((event: Event) => {
         if (this.clickDoms && this.clickDoms.length > 0) {
-          this.clickDoms.forEach(dom => {
+          this.clickDoms.forEach((dom) => {
             if (dom !== null && dom.contains(event.target)) {
               this.hide();
               return;
@@ -157,8 +167,12 @@ export class DrawerComponent implements OnInit, OnDestroy {
         } else {
           const target: any = event.target;
           // 一定要document.contains(event.target)，因为event.target可能已经不在document里了，这个时候就不能进hide了
-          if (this.animateState === 'in' && (!this.elementRef.nativeElement.contains(target) && this.document.body.contains(target))
-            && !this.isHaveDialogOrUpload()) {
+          if (
+            this.animateState === 'in' &&
+            !this.elementRef.nativeElement.contains(target) &&
+            this.document.body.contains(target) &&
+            !this.isHaveDialogOrUpload()
+          ) {
             this.hide();
           }
         }
@@ -198,7 +212,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
   }
 
   // Will overwrite by drawer service
-  destroy() { }
+  destroy() {}
 
   isHaveDialogOrUpload() {
     const dialog: any = this.document.getElementsByClassName('modal-dialog');
@@ -233,12 +247,15 @@ export class DrawerComponent implements OnInit, OnDestroy {
     if (this._width === this.oldWidth) {
       if (fullScreen === true || fullScreen === undefined) {
         this._width = this._isCover ? '100%' : window.innerWidth + 'px';
-        this.renderer.setStyle(drawerContainerEle, 'transition',
-          this.showAnimation ? `width .3s cubic-bezier(0.5, 0.05, 0.5, 0.95)` : 'none');
+        this.renderer.setStyle(
+          drawerContainerEle,
+          'transition',
+          this.showAnimation ? `width .3s cubic-bezier(0.5, 0.05, 0.5, 0.95)` : 'none'
+        );
         if (!this._isCover) {
           const resizeEv = fromEvent(window, 'resize');
           const result = resizeEv.pipe(debounceTime(100));
-          this.resizeSub = result.subscribe(ev => {
+          this.resizeSub = result.subscribe((ev) => {
             this._width = window.innerWidth + 'px';
           });
         }

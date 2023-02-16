@@ -31,25 +31,26 @@ export class BasicComponent {
   ];
 
   searchEvent(event) {
-    console.log('search items', event);
-    this.finalSearchItems = event ? event.selectedTags : {};
-    this.finalSearchKey = event ? event.searchKey : '';
+    console.log('search items:', event);
+    const { selectedTags, searchKey } = event;
+    this.finalSearchItems = selectedTags || {};
+    this.finalSearchKey = searchKey || '';
   }
 
   createFilter(event) {
-    console.log('create filter', event);
+    console.log('create filter:', event);
   }
 
-  searchKeyChange($event) {
-    console.log('search key change', $event);
+  searchKeyChange(event) {
+    console.log('search key change:', event);
   }
 
   selectedTagsChange(event) {
-    console.log('selectedTagsChange', event);
+    console.log('selected tags Change:', event);
   }
 
   clearAllEvent(event) {
-    console.log('clear all', event);
+    console.log('clear all:', event);
   }
 
   toggleEvent = (dropdown, tag, currentSelectTag) => {

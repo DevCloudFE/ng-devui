@@ -13,12 +13,12 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AutoCompleteDirective } from 'ng-devui/auto-complete';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { AppendToBodyDirection, DevConfigService, WithConfig } from 'ng-devui/utils';
+import { AppendToBodyDirection, AppendToBodyScrollStrategyType, DevConfigService, WithConfig } from 'ng-devui/utils';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -38,6 +38,7 @@ import { Observable, Subscription } from 'rxjs';
 export class EditableSelectComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
   @Input() appendToBody = false;
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
+  @Input() appendToBodyScrollStrategy: AppendToBodyScrollStrategyType;
   @Input() disabled = false;
   @Input() placeholder = '';
   @Input() source: any[] = [];
@@ -54,6 +55,7 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   @Input() valueParser = (item) => item;
   @Input() searchFn: (term: string) => Observable<any[]>;
   @Input() @WithConfig() showAnimation = true;
+  @Input() @WithConfig() styleType = 'default';
   @Output() loadMore = new EventEmitter<any>();
   @Output() toggleChange = new EventEmitter<any>();
   @Output() hoverItem: EventEmitter<any> = new EventEmitter();
@@ -81,20 +83,18 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
     return this._dropDownOpen;
   }
 
+  private ANIMATION_DELAY = 300;
+  private blurTimer: any;
   private _dropDownOpen = false;
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
   @HostListener('document:click', ['$event'])
-  onDocumentClick(event: Event): void {
-    if (!this.dropDownOpen) {
-      return;
+  onDocumentClick(event: MouseEvent): void {
+    if (this.blurTimer) {
+      clearTimeout(this.blurTimer);
     }
-
-    const targetEl = event.target as HTMLElement;
-    if (!this.editableSelectBox.nativeElement.contains(targetEl)) {
-      this.dropDownOpen = false;
-    }
+    this.closeDropdownMenu(event);
   }
 
   constructor(private cdr: ChangeDetectorRef, private i18n: I18nService, private devConfigService: DevConfigService) {}
@@ -163,10 +163,28 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   }
 
   toggleChangeHandler(value: boolean): void {
+    this._dropDownOpen = value;
     this.toggleChange.emit(value);
   }
 
   onHoverItem(event: any): void {
     this.hoverItem.emit(event);
+  }
+
+  closeDropdownMenu(event: FocusEvent | MouseEvent, isBlur = false) {
+    if (this.dropDownOpen) {
+      const target = isBlur ? event.relatedTarget : event.target;
+      const targetEl = target as HTMLElement;
+      if (!this.editableSelectBox.nativeElement.contains(targetEl)) {
+        this.dropDownOpen = false;
+      }
+    }
+  }
+
+  blurEventHandle(event: FocusEvent) {
+    if (this.blurTimer) {
+      clearTimeout(this.blurTimer);
+    }
+    this.blurTimer = setTimeout(() => this.closeDropdownMenu(event, true), this.ANIMATION_DELAY);
   }
 }

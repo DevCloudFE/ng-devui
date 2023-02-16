@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TableWidthConfig, TableStyleData } from 'ng-devui/data-table';
+import { TableStyleData, TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
@@ -14,7 +14,8 @@ export class DynamicColsDemoComponent implements OnInit {
       header: 'id',
       fieldType: 'text',
       width: '50px',
-      checked: true
+      checked: true,
+      disabled: true
     },
     {
       field: 'firstName',
@@ -113,7 +114,6 @@ export class DynamicColsDemoComponent implements OnInit {
       width: '150px'
     }
   ];
-
 
   styleSetting: TableStyleData = {
     size: 'sm',

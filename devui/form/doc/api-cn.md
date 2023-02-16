@@ -348,6 +348,7 @@ export const dDefaultValidators = {
 ```TS
 export type DPopConfig = {
   popMaxWidth?: number,
+  scrollElement?: Element;
   zIndex?: number,
 }
 ```

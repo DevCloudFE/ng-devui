@@ -86,6 +86,7 @@ export class CheckOptionsColumnComponent implements OnInit {
   };
 
   totalDataChecked = false;
+  allCheckedStatus = false;
 
   checkTotalData() {
     this.datatable.setTableCheckStatus(
@@ -94,6 +95,11 @@ export class CheckOptionsColumnComponent implements OnInit {
       }
     );
     this.totalDataChecked = true;
+    this.allCheckedStatus = true;
+  }
+
+  checkAllChange(checked: boolean) {
+    this.allCheckedStatus = checked;
   }
 
   checkPageData() {
@@ -103,6 +109,7 @@ export class CheckOptionsColumnComponent implements OnInit {
       }
     );
     this.totalDataChecked = false;
+    this.allCheckedStatus = false;
   }
 
   onRowCheckChange(checked, rowIndex, nestedIndex, rowItem) {
@@ -122,7 +129,7 @@ export class CheckOptionsColumnComponent implements OnInit {
   onPageIndexChange(pageIndex) {
     this.basicDataSource = JSON.parse(JSON.stringify(originSource.slice(pageIndex - 1, pageIndex + 5)));
     setTimeout(() => {
-      if (this.totalDataChecked) {
+      if (this.totalDataChecked  && this.allCheckedStatus) {
         this.datatable.setTableCheckStatus(
           {
             pageAllChecked: true

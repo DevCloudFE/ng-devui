@@ -63,11 +63,18 @@
     .devui-btn-danger:not(:disabled)::before {
       content: '';
       position: absolute;
-      top: 0;
-      bottom: 0;
+      top: 1px;
+      bottom: 1px;
       left: 0;
       width: 1px;
+    }
+
+    .devui-btn-primary:not(:disabled)::before {
       background-color: rgba($color: $devui-white-5, $alpha: 0.2);
+    }
+
+    .devui-btn-common:not(:disabled)::before {
+      background-color: var(--devui-btn-common-bg-hover, $devui-base-bg);
     }
 
     .devui-btn:disabled {

@@ -14,3 +14,7 @@
 ::ng-deep .devui-fullscreen {
   overflow: hidden;
 }
+
+::ng-deep .devui-container-fullscreen {
+  transform: translateZ(0);
+}

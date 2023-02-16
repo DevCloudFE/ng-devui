@@ -2,6 +2,8 @@ import { Component, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core'
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 import { UserGuideCoreService } from './user-guide-core.service';
+import { IUserGuideExtraConfig } from './user-guide.types';
+import { IButtonStyle } from 'ng-devui/button';
 
 @Component({
   selector: 'd-user-guide-ui',
@@ -13,6 +15,8 @@ export class UserGuideUIComponent implements OnInit, OnDestroy {
   i18nSubscription: Subscription;
   @Input() showDots = false;
   @Input() maxContentWidth = 320;
+  @Input() isCover = true;
+  @Input() extraConfig: IUserGuideExtraConfig;
   stepsLength: number;
   currentStep: number;
   curStepType: string;
@@ -41,6 +45,10 @@ export class UserGuideUIComponent implements OnInit, OnDestroy {
   items = [];
   get contentTemplate(): TemplateRef<any> {
     return this.content as TemplateRef<any>;
+  }
+
+  get nextButtonType(): IButtonStyle {
+    return (this.extraConfig?.nextButtonType || 'primary') as IButtonStyle;
   }
 
   constructor(private userGuideCoreService: UserGuideCoreService, private i18n: I18nService) { }

@@ -93,6 +93,16 @@
   }
 }
 
+.devui-day-split-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  z-index: 1;
+  background: $devui-gray-5;
+  opacity: 1;
+}
+
 .devui-mark-line {
   position: absolute;
   top: 0;
@@ -107,7 +117,7 @@
     background: #ff790e;
 
     &.day {
-      margin-left: 24px;
+      width: 40px;
     }
 
     &.week {
@@ -142,22 +152,11 @@
   top: 0;
   bottom: 0;
   z-index: 1;
-  background:
-    linear-gradient(
-      45deg,
-      rgba(202, 207, 216, 0.2) 0,
-      rgba(202, 207, 216, 0.2) 10%,
-      transparent 10%,
-      transparent 50%,
-      rgba(202, 207, 216, 0.2) 50%,
-      rgba(202, 207, 216, 0.2) 60%,
-      transparent 60%,
-      transparent
-    );
+  background: $devui-gray-5;
   background-size: 6px 6px;
 
   &.day {
-    width: 100px;
+    width: 80px;
   }
 
   &.week {

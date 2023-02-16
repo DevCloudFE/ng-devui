@@ -21,8 +21,8 @@
 }
 
 ::ng-deep {
-  @import '~gridstack/dist/gridstack';
-  @import '~gridstack/dist/gridstack-extra';
+  @import 'gridstack/dist/gridstack';
+  @import 'gridstack/dist/gridstack-extra';
 
   .grid-stack .grid-stack-placeholder > .placeholder-content {
     border: 1px dashed $devui-brand;

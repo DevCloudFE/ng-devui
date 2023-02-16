@@ -74,6 +74,7 @@ export class TreeFactory {
   searchItem: string;
   flattenNodes = new BehaviorSubject<TreeNode[]>([]);
   virtualScroll: boolean;
+  canIdEmpty = true;
   static create(isVirtualScroll) {
     return new TreeFactory(isVirtualScroll);
   }
@@ -576,12 +577,11 @@ export class TreeFactory {
     const flattenTree = [];
     const flatTree = (nodes) => {
       for (let i = 0; i < nodes.length; i++) {
-        nodes[i].data.depth = nodes[i].parentId ? this.nodes[nodes[i].parentId].data.depth + 1 : 0;
+        const hasParentId = this.canIdEmpty ? nodes[i].parentId : nodes[i].parentId !== undefined;
+        nodes[i].data.depth = hasParentId ? this.nodes[nodes[i].parentId].data.depth + 1 : 0;
         nodes[i].data.hideInVirtualScroll =
           nodes[i].data.isHide ||
-          (nodes[i].parentId
-            ? this.nodes[nodes[i].parentId].data.hideInVirtualScroll || !this.nodes[nodes[i].parentId].data.isOpen
-            : false);
+          (hasParentId ? this.nodes[nodes[i].parentId].data.hideInVirtualScroll || !this.nodes[nodes[i].parentId].data.isOpen : false);
         nodes[i].data.isLast = i === nodes.length - 1;
         flattenTree.push(nodes[i]);
         if (nodes[i].data.children) {
@@ -598,7 +598,9 @@ export class TreeFactory {
       if (node.data.children?.length === 1 && node.data.children[0]?.data?.children?.length !== 0) {
         node.data.title = node.data.title + ' / ' + node.data.children[0]?.data?.title;
         node.data.children = node.data.children[0]?.data?.children;
-        node.data.children.forEach(child => { child.parentId = node.id; });
+        node.data.children.forEach((child) => {
+          child.parentId = node.id;
+        });
         mergeToNode(node);
       }
       if (node.data.children?.length > 1) {

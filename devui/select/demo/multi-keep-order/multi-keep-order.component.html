@@ -5,7 +5,7 @@
         [options]="options"
         [isSearch]="true"
         [multiple]="true"
-        [(ngModel)]="select2"
+        [(ngModel)]="select"
         [isSelectAll]="true"
         [keepMultipleOrder]="'origin'"
       ></d-select>
@@ -13,7 +13,7 @@
   </div>
   <div class="row">
     <div class="col-md-5">
-      <pre>Current Select: {{ select2 | json }}</pre>
+      <pre>Current Select: {{ select | json }}</pre>
     </div>
   </div>
 </section>

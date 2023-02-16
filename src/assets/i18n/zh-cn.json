@@ -49,8 +49,6 @@
     "showCode": "展开代码",
     "hideCode": "收起代码",
     "copyCode": "复制代码",
-    "codesandbox": "在 CodeSandbox 上打开",
-    "stackblitz": "在 StackBlitz 上打开",
     "success": "复制成功"
   },
   "components": {
@@ -869,13 +867,7 @@
         "p2": "滚动监听使用其他元素,比如window·"
       },
       "pipeDemo": {
-        "dDatePipe": {
-          "title": "日期解析器"
-        },
-        "dSafeNullPipe": {
-          "title": "空值占位管道",
-          "description": "当数据为 ''、null、undefined时可指定任意字符进行占位展示，默认为：'--'"
-        }
+        "title": "日期解析器"
       },
       "browserDemo": {
         "title": "当前浏览器名和版本"
@@ -959,6 +951,7 @@
           },
           "colorSource": {
             "devui-global-bg": "全局带底色背景",
+            "devui-glass-morphism-bg":"毛玻璃样式背景色",
             "devui-global-bg-normal": "全局白色背景",
             "devui-base-bg": "基础区块背景白色",
             "devui-base-bg-dark": "基础区块背景深色(固定)",
@@ -994,11 +987,17 @@
             "devui-shadow": "阴影色",
             "devui-light-shadow": "弱化阴影色",
             "devui-icon-text": "文字图标颜色，同 正文颜色",
+            "devui-icon-fill-weak":"弱化型图标填充色",
+            "devui-shape-icon-fill":"面型svg图标填充色",
+            "devui-shape-icon-fill-hover":"面型svg图标悬停反馈色",
+            "devui-shape-icon-fill-active":"面型svg图标高亮填充色（激活状态）",
+            "devui-shape-icon-fill-disabled":"面型svg图标禁用色",
             "devui-icon-bg": " svg图标 背景色",
             "devui-icon-fill": " svg图标 灰色填充色",
             "devui-icon-fill-hover": "svg图标 灰色填充色悬停反馈色",
             "devui-icon-fill-active": "svg图标 高亮填充色（激活状态）",
             "devui-icon-fill-active-hover": "svg图标 高亮填充色悬停反馈色",
+            "devui-form-control-bg":"表单控件背景色",
             "devui-form-control-line": "表单控件边框色，同 边框分割线",
             "devui-form-control-line-hover": "表单控件边框悬停反馈色",
             "devui-form-control-line-active": "表单控件边框激活色，用于获得焦点",
@@ -1042,7 +1041,9 @@
             "devui-primary-line": "主要边框",
             "devui-primary-bg": "主要底色",
             "devui-default-line": "默认边框",
-            "devui-default-bg": "默认底色"
+            "devui-default-bg": "默认底色",
+            "devui-connected-overlay-shadow":"下拉菜单类阴影",
+            "devui-feedback-overlay-shadow":"信息提示类阴影"
           },
           "catalogs": {
             "basic": "基本变量",
@@ -1972,15 +1973,15 @@
         "exitFullscreen": "退出全屏"
       },
       "customDemo": {
-        "title": "函数方式调用",
-        "description": "调用方法触发全屏。",
+        "title": "自定义全屏",
+        "description": "通过调用函数方法在指定容器中触发全屏。",
         "fullscreen": "全屏",
         "exitFullscreen": "退出全屏"
       },
       "anchorLinkValues": {
         "immersive-full-screen": "沉浸式全屏",
         "general-full-screen": "普通全屏",
-        "custom-full-screen": "函数方式调用"
+        "custom-full-screen": "自定义全屏"
       }
     },
     "transfer": {
@@ -2688,7 +2689,7 @@
         "title": "环形进度条",
         "description": "可配置在环形中间显示文字或自定义模板。"
       },
-      "multipleDemo":{
+      "multipleDemo": {
         "title": "自定义多色进度条",
         "description": "可配置多段不同色值或渐变色。"
       },
@@ -2873,7 +2874,7 @@
       },
       "AllowClearValueDemo": {
         "title": "允许清空值",
-        "description": "",
+        "description": "通过修改ngModel变量清空选中值",
         "test": "选项"
       },
       "CustomAreaDemo": {
@@ -3254,15 +3255,16 @@
       "asyncDemo": {
         "title": "异步数据源"
       },
-      "ngmodelDemo": {
-        "title": "双向绑定"
+      "customizeDemo": {
+        "title": "自定义",
+        "description": "标签中包含 'item' 才能输入"
       },
       "virtualScrollDemo": {
         "title": "虚拟滚动"
       },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
-        "ng-model": "双向绑定",
+        "customize": "自定义",
         "async-input": "异步数据源",
         "virtual-scroll": "虚拟滚动"
       }
@@ -3301,6 +3303,10 @@
       "customDotDemo": {
         "title": "时间点自定义"
       },
+      "singleDemo": {
+        "title": "单边模式",
+        "description": "通过设置mode为 top|bottom|left|right 将时间轴设置为指定位置展示内容的单边模式"
+      },
       "anchorLinkValues": {
         "basic-usage": "设置时间位置",
         "direction": "设置方向",
@@ -3308,7 +3314,8 @@
         "content-with-html": "内容使用html",
         "content-with-template": "内容使用模板自定义",
         "content-with-alternative-mode": "时间节点内容方向自定义",
-        "seperate-way": "时间节点单独使用"
+        "seperate-way": "时间节点单独使用",
+        "single": "单边模式"
       }
     },
     "toast": {
@@ -3421,7 +3428,7 @@
         "async-usage": "异步用法",
         "custom-prefix": "自定义前缀",
         "custom-template": "自定义模板",
-        "toggle-divider": "是否使用间隔符"
+        "use-separator": "是否使用间隔符"
       }
     },
     "toggle": {
@@ -3585,7 +3592,7 @@
       },
       "textOverflowDemo": {
         "title": "文本溢出缩略",
-        "description": "支持单行和多行场景，优先使用样式方式处理",
+        "description": "支持单行和多行场景，优先使用样式方式处理。",
         "singleLineContent": "DevUI组件库源自于华为内部大量业务的多年沉淀，支持灵活配置的组件才能满足不同诉求。",
         "multiRowContent": "DevUI是面向企业中后台产品的开源前端解决方案，其设计价值观基于\"至简\"、\"沉浸\"、\"灵活\"三种自然与人文相结合的理念，旨在为设计师、前端开发者提供标准的设计体系，并满足各类落地场景，是一款企业级开箱即用的产品。",
         "singleLineTitle": "使用样式处理单行文本",
@@ -3593,11 +3600,16 @@
         "multiRowNotWebkitTitle": "使用计算方式处理多行文本",
         "multiRowExpandTitle": "设置展开收起显示多行文本"
       },
+      "adaptiveInputDemo":{
+        "title": "自适应内容输入框",
+        "description": "编辑时将单行input扩展为textarea，结束后恢复。使用户在使用单行input时更方便的输入和阅读大量文本内容。"
+      },
       "anchorLinkValues": {
         "title-usage": "标题用法",
         "text-usage": "文本用法",
         "editable-usage": "可编辑用法",
-        "text-overflow": "文本溢出缩略"
+        "text-overflow": "文本溢出缩略",
+        "adaptive-input": "自适应内容输入框"
       }
     },
     "upload": {
@@ -4142,7 +4154,11 @@
       },
       "customDemo": {
         "title": "自定义展示模板",
-        "description": "自定义类型及下拉列表展示内容模板"
+        "description": "自定义分类下拉展示模板"
+      },
+      "extendDemo": {
+        "title": "自定义扩展按钮",
+        "description": "通过输入添加选项并禁用扩展按钮，使用自定义扩展按钮重置选项"
       },
       "autoScrollDemo": {
         "title": "大数据量优化展示",
@@ -4150,7 +4166,8 @@
       },
       "anchorLinkValues": {
         "basicDemo": "基本用法",
-        "customDemo": "自定义类型",
+        "customDemo": "自定义展示模板",
+        "extendDemo": "自定义扩展按钮",
         "autoScrollDemo": "大数据量优化展示"
       }
     },

@@ -3,7 +3,8 @@
   class="devui-form-group devui-has-feedback"
   [ngClass]="{
     'devui-select-open': dropDownOpen,
-    'allow-clear': (inputValue || inputValue === 0) && allowClear
+    'allow-clear': (inputValue || inputValue === 0) && allowClear,
+    'devui-gray-style': styleType === 'gray'
   }"
 >
   <input
@@ -22,6 +23,7 @@
     [noResultItemTemplate]="noResultItemTemplate || noResultDefaultTemplate"
     [appendToBody]="appendToBody"
     [appendToBodyDirections]="appendToBodyDirections"
+    [appendToBodyScrollStrategy]="appendToBodyScrollStrategy"
     [maxHeight]="maxHeight"
     [sceneType]="'select'"
     [dAutoCompleteWidth]="width"
@@ -36,6 +38,7 @@
     (loadMore)="loadMoreEvent($event)"
     (selectValue)="selectValue()"
     (hoverItem)="onHoverItem($event)"
+    (blur)="blurEventHandle($event)"
   />
   <span class="devui-form-control-feedback">
     <span class="devui-select-clear-icon" (click)="valueClear($event)">

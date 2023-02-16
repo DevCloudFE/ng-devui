@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,54 +9,60 @@ import { DropDownDirective } from './dropdown.directive';
 import { DropDownModule } from './dropdown.module';
 @Component({
   template: `
-<div class="height-expand" *ngIf="expand"></div>
-<div dDropDown
-  [trigger]="trigger"
-  (toggleEvent)="onToggle($event)"
-  [disabled]="disabled"
-  [isOpen]="defaultOpen"
-  [closeScope]="closeScope"
-  [closeOnMouseLeaveMenu] = "closeOnMouseLeaveMenu"
-  #dropdown="d-dropdown">
-  <a dDropDownToggle class="devui-dropdown-default devui-dropdown-origin">
-    更多操作
-    <span class="icon icon-chevron-down"></span>
-  </a>
-  <ul dDropDownMenu>
-    <li role="menuitem">
-      <a dDropDownMenuItem>菜单一</a>
-    </li>
-    <li class="disabled" role="menuitem">
-      <a dDropDownMenuItem class="disabled">菜单二(禁用)</a>
-    </li>
-    <li role="menuitem">
-      <a dDropDownMenuItem>菜单三</a>
-    </li>
-    <li role="menuitem">
-      <a dDropDownMenuItem>菜单四</a>
-    </li>
-    <li role="menuitem">
-      <input type="text" class="devui-input devui-input-sm devui-search-in-dropdown" placeholder="输入框" />
-      <div class="icon-in-search">
-        <i class="icon icon-search"></i>
-      </div>
-    </li>
-    <li role="menuitem">
-      <textarea class="devui-input devui-input-sm devui-search-in-dropdown" placeholder="输入框"></textarea>
-    </li>
-    <li role="menuitem">
-      <a id="close" dDropDownMenuItem (click)="dropdown.toggle()">关闭</a>
-    </li>
-  </ul>
-</div>
-<div class="toggle" (click)="dropdown.toggle()">打开/关闭</div>
-`,
-  styles: [`
- .height-expand { height: calc( 100vh - 100px)}
-`]
+    <div class="height-expand" *ngIf="expand"></div>
+    <div
+      dDropDown
+      [trigger]="trigger"
+      (toggleEvent)="onToggle($event)"
+      [disabled]="disabled"
+      [isOpen]="defaultOpen"
+      [closeScope]="closeScope"
+      [closeOnMouseLeaveMenu]="closeOnMouseLeaveMenu"
+      #dropdown="d-dropdown"
+    >
+      <a dDropDownToggle class="devui-dropdown-default devui-dropdown-origin">
+        更多操作
+        <span class="icon icon-chevron-down"></span>
+      </a>
+      <ul dDropDownMenu>
+        <li role="menuitem">
+          <a dDropDownMenuItem>菜单一</a>
+        </li>
+        <li class="disabled" role="menuitem">
+          <a dDropDownMenuItem class="disabled">菜单二(禁用)</a>
+        </li>
+        <li role="menuitem">
+          <a dDropDownMenuItem>菜单三</a>
+        </li>
+        <li role="menuitem">
+          <a dDropDownMenuItem>菜单四</a>
+        </li>
+        <li role="menuitem">
+          <input type="text" class="devui-input devui-input-sm devui-search-in-dropdown" placeholder="输入框" />
+          <div class="icon-in-search">
+            <i class="icon icon-search"></i>
+          </div>
+        </li>
+        <li role="menuitem">
+          <textarea class="devui-input devui-input-sm devui-search-in-dropdown" placeholder="输入框"></textarea>
+        </li>
+        <li role="menuitem">
+          <a id="close" dDropDownMenuItem (click)="dropdown.toggle()">关闭</a>
+        </li>
+      </ul>
+    </div>
+    <div class="toggle" (click)="dropdown.toggle()">打开/关闭</div>
+  `,
+  styles: [
+    `
+      .height-expand {
+        height: calc(100vh - 100px);
+      }
+    `,
+  ],
 })
 class TestDropdownComponent {
-  trigger: 'hover'| 'click'| 'manually' = 'click';
+  trigger: 'hover' | 'click' | 'manually' = 'click';
   count = 0;
   isOpen: boolean;
   disabled: boolean;
@@ -72,42 +78,48 @@ class TestDropdownComponent {
 
 @Component({
   template: `
-<div class="area" #area [ngClass]="{'devui-dropdown-origin': alignOriginFlag}">
-  <div dDropDown appendToBody
-    [trigger]="trigger"
-    [appendToBodyDirections]="directions"
-    [alignOrigin]="alignOriginFlag ? area : undefined"
-    [closeOnMouseLeaveMenu]="closeOnMouseLeaveMenu">
-    <a dDropDownToggle class="devui-dropdown-default" [ngClass]="{'devui-dropdown-origin': !alignOriginFlag}">
-      更多操作
-      <span class="icon icon-chevron-down"></span>
-    </a>
-    <ul dDropDownMenu>
-      <li role="menuitem">
-        <a dDropDownMenuItem>菜单一</a>
-      </li>
-      <li class="disabled" role="menuitem">
-        <a dDropDownMenuItem class="disabled">菜单二(禁用)</a>
-      </li>
-      <li role="menuitem">
-        <a dDropDownMenuItem>菜单三</a>
-      </li>
-      <li role="menuitem">
-        <a dDropDownMenuItem>菜单四</a>
-      </li>
-    </ul>
-  </div>
-</div>
-`,
-  styles: [`
-.area {
-  width: 500px;
-  height: 600px;
-}
- `]
+    <div class="area" #areaItem [ngClass]="{ 'devui-dropdown-origin': alignOriginFlag }">
+      <div
+        dDropDown
+        appendToBody
+        [trigger]="trigger"
+        [appendToBodyDirections]="directions"
+        [alignOrigin]="alignOriginFlag ? area : undefined"
+        [closeOnMouseLeaveMenu]="closeOnMouseLeaveMenu"
+      >
+        <a dDropDownToggle class="devui-dropdown-default" [ngClass]="{ 'devui-dropdown-origin': !alignOriginFlag }">
+          更多操作
+          <span class="icon icon-chevron-down"></span>
+        </a>
+        <ul dDropDownMenu>
+          <li role="menuitem">
+            <a dDropDownMenuItem>菜单一</a>
+          </li>
+          <li class="disabled" role="menuitem">
+            <a dDropDownMenuItem class="disabled">菜单二(禁用)</a>
+          </li>
+          <li role="menuitem">
+            <a dDropDownMenuItem>菜单三</a>
+          </li>
+          <li role="menuitem">
+            <a dDropDownMenuItem>菜单四</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  `,
+  styles: [
+    `
+      .area {
+        width: 500px;
+        height: 600px;
+      }
+    `,
+  ],
 })
 class TestDropdownAppendToBodyComponent {
-  trigger: 'hover'| 'click' | 'manually' = 'click';
+  @ViewChild('areaItem', { static: true }) area: ElementRef;
+  trigger: 'hover' | 'click' | 'manually' = 'click';
   alignOriginFlag = false;
   directions = ['rightDown'];
   closeOnMouseLeaveMenu;
@@ -115,29 +127,29 @@ class TestDropdownAppendToBodyComponent {
 
 @Component({
   template: `
-<div class="area" *ngIf="init">
-  <div dDropDown>
-    <a dDropDownToggle class="devui-dropdown-default devui-dropdown-origin" [autoFocus]="autoFocus" [toggleOnFocus]="toggleOnFocus">
-      更多操作
-      <span class="icon icon-chevron-down"></span>
-    </a>
-    <ul dDropDownMenu>
-      <li role="menuitem">
-        <a dDropDownMenuItem>菜单一</a>
-      </li>
-      <li class="disabled" role="menuitem">
-        <a dDropDownMenuItem class="disabled">菜单二(禁用)</a>
-      </li>
-      <li role="menuitem">
-        <a dDropDownMenuItem>菜单三</a>
-      </li>
-      <li role="menuitem">
-        <a dDropDownMenuItem>菜单四</a>
-      </li>
-    </ul>
-  </div>
-</div>
-`,
+    <div class="area" *ngIf="init">
+      <div dDropDown>
+        <a dDropDownToggle class="devui-dropdown-default devui-dropdown-origin" [autoFocus]="autoFocus" [toggleOnFocus]="toggleOnFocus">
+          更多操作
+          <span class="icon icon-chevron-down"></span>
+        </a>
+        <ul dDropDownMenu>
+          <li role="menuitem">
+            <a dDropDownMenuItem>菜单一</a>
+          </li>
+          <li class="disabled" role="menuitem">
+            <a dDropDownMenuItem class="disabled">菜单二(禁用)</a>
+          </li>
+          <li role="menuitem">
+            <a dDropDownMenuItem>菜单三</a>
+          </li>
+          <li role="menuitem">
+            <a dDropDownMenuItem>菜单四</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  `,
 })
 class TestDropdownToggleComponent {
   autoFocus = false;
@@ -147,103 +159,98 @@ class TestDropdownToggleComponent {
 
 @Component({
   template: `<section>
-  <div class="btn-group g-dropdown" dDropDown appendToBody [trigger]="trigger1" [closeOnMouseLeaveMenu]="closeOnMouseLeaveMenu">
-    <a id="item-0" dDropDownToggle class="devui-dropdown-default devui-dropdown-origin">
-      更多选择
-      <span class="icon icon-chevron-down"></span>
-    </a>
+    <div class="btn-group g-dropdown" dDropDown appendToBody [trigger]="trigger1" [closeOnMouseLeaveMenu]="closeOnMouseLeaveMenu">
+      <a id="item-0" dDropDownToggle class="devui-dropdown-default devui-dropdown-origin">
+        更多选择
+        <span class="icon icon-chevron-down"></span>
+      </a>
 
-    <ul id="menu1" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
-      <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
-        <a dDropDownMenuItem dDropDownToggle id="item-1">内容1 <span class="icon icon-chevron-right"></span></a>
-        <ul id="menu2" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
-          <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
-            <a dDropDownMenuItem dDropDownToggle id="item-11">内容1-1 <span class="icon icon-chevron-right"></span></a>
-            <ul id="menu3" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
-              <li role="menuitem">
-                <a dDropDownMenuItem id="item-111">内容1-1-1</a>
-              </li>
-              <li role="menuitem">
-                <a dDropDownMenuItem id="item-112">内容1-1-2</a>
-              </li>
-              <li role="menuitem">
-                <a dDropDownMenuItem id="item-113">内容1-1-3</a>
-              </li>
-            </ul>
-          </li>
-          <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
-            <a dDropDownMenuItem dDropDownToggle id="item-12">内容1-2 <span class="icon icon-chevron-right"></span></a>
-            <ul id="menu5" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
-              <li role="menuitem">
-                <a dDropDownMenuItem id="item-121">内容1-2-1</a>
-              </li>
-            </ul>
-          </li>
-          <li role="menuitem">
-            <a dDropDownMenuItem id="item-13">内容1-3</a>
-          </li>
-        </ul>
-      </li>
-      <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
-        <a dDropDownMenuItem dDropDownToggle id="item-2">内容2 <span class="icon icon-chevron-right"></span></a>
-        <ul id="menu4" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
-          <li role="menuitem">
-            <a dDropDownMenuItem id="item-21">内容2-1</a>
-          </li>
-        </ul>
-      </li>
-      <li role="menuitem">
-        <a dDropDownMenuItem id="item-3">内容2</a>
-      </li>
-    </ul>
-  </div>
-</section>
-  `
+      <ul id="menu1" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+        <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
+          <a dDropDownMenuItem dDropDownToggle id="item-1">内容1 <span class="icon icon-chevron-right"></span></a>
+          <ul id="menu2" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+            <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
+              <a dDropDownMenuItem dDropDownToggle id="item-11">内容1-1 <span class="icon icon-chevron-right"></span></a>
+              <ul id="menu3" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+                <li role="menuitem">
+                  <a dDropDownMenuItem id="item-111">内容1-1-1</a>
+                </li>
+                <li role="menuitem">
+                  <a dDropDownMenuItem id="item-112">内容1-1-2</a>
+                </li>
+                <li role="menuitem">
+                  <a dDropDownMenuItem id="item-113">内容1-1-3</a>
+                </li>
+              </ul>
+            </li>
+            <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
+              <a dDropDownMenuItem dDropDownToggle id="item-12">内容1-2 <span class="icon icon-chevron-right"></span></a>
+              <ul id="menu5" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+                <li role="menuitem">
+                  <a dDropDownMenuItem id="item-121">内容1-2-1</a>
+                </li>
+              </ul>
+            </li>
+            <li role="menuitem">
+              <a dDropDownMenuItem id="item-13">内容1-3</a>
+            </li>
+          </ul>
+        </li>
+        <li role="menuitem" dDropDown appendToBody [trigger]="trigger2" [appendToBodyDirections]="subMenuDirections">
+          <a dDropDownMenuItem dDropDownToggle id="item-2">内容2 <span class="icon icon-chevron-right"></span></a>
+          <ul id="menu4" dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
+            <li role="menuitem">
+              <a dDropDownMenuItem id="item-21">内容2-1</a>
+            </li>
+          </ul>
+        </li>
+        <li role="menuitem">
+          <a dDropDownMenuItem id="item-3">内容2</a>
+        </li>
+      </ul>
+    </div>
+  </section> `,
 })
 class TestMultiLevelComponent {
   trigger1 = 'click';
   trigger2 = 'click';
   closeOnMouseLeaveMenu = false;
-  subMenuDirections = [{
-    originX: 'end',
-    originY: 'top',
-    overlayX: 'start',
-    overlayY: 'top',
-  }, {
-    originX: 'end',
-    originY: 'bottom',
-    overlayX: 'start',
-    overlayY: 'bottom',
-    offsetY: 5, // 菜单底部有个padding: 5px，刚好让菜单对齐父菜单
-  }, {
-    originX: 'start',
-    originY: 'top',
-    overlayX: 'end',
-    overlayY: 'top',
-  }, {
-    originX: 'start',
-    originY: 'bottom',
-    overlayX: 'end',
-    overlayY: 'bottom',
-    offsetY: 5,
-  }];
+  subMenuDirections = [
+    {
+      originX: 'end',
+      originY: 'top',
+      overlayX: 'start',
+      overlayY: 'top',
+    },
+    {
+      originX: 'end',
+      originY: 'bottom',
+      overlayX: 'start',
+      overlayY: 'bottom',
+      offsetY: 5, // 菜单底部有个padding: 5px，刚好让菜单对齐父菜单
+    },
+    {
+      originX: 'start',
+      originY: 'top',
+      overlayX: 'end',
+      overlayY: 'top',
+    },
+    {
+      originX: 'start',
+      originY: 'bottom',
+      overlayX: 'end',
+      overlayY: 'bottom',
+      offsetY: 5,
+    },
+  ];
 }
 
 describe('dropdown', () => {
   let fixture: ComponentFixture<any>;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        CommonModule,
-        DropDownModule,
-        NoopAnimationsModule
-      ],
-      declarations: [
-        TestDropdownComponent,
-        TestDropdownAppendToBodyComponent,
-        TestDropdownToggleComponent,
-        TestMultiLevelComponent
-      ]
+      imports: [CommonModule, DropDownModule, NoopAnimationsModule],
+      declarations: [TestDropdownComponent, TestDropdownAppendToBodyComponent, TestDropdownToggleComponent, TestMultiLevelComponent],
     });
   });
 
@@ -270,38 +277,38 @@ describe('dropdown', () => {
       expect(dropdownMenuElement).toBeTruthy();
     });
     describe('dropdown static style', () => {
-      it ('dropdown directives should exist', () => {
+      it('dropdown directives should exist', () => {
         expect(dropdownElement.classes['devui-dropdown']).toBe(true);
       });
-      it ('dropdown toggle directive should exist', () => {
+      it('dropdown toggle directive should exist', () => {
         expect(dropdownToggleElement.classes['devui-dropdown-toggle']).toBe(true);
       });
-      it ('dropdown menu directive should ', () => {
+      it('dropdown menu directive should ', () => {
         expect(dropdownMenuElement.classes['devui-dropdown-menu']).toBe(true);
       });
     });
     describe('dropdown trigger', () => {
       it('click show menu', fakeAsync(() => {
         expect(dropdownMenuElement.styles['display']).toBe('none');
-        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time, NOTICE：NoopAnimation animation squash to 0 million second
         expect(dropdownMenuElement.styles['display']).toBe('block');
       }));
       describe('after click show menu', () => {
         beforeEach(fakeAsync(() => {
-          dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
         }));
         it('click menu hide', fakeAsync(() => {
-          dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
           expect(dropdownMenuElement.styles['display']).toBe('none');
         }));
         it('click outside hide', fakeAsync(() => {
-          document.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          document.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
           expect(dropdownMenuElement.styles['display']).toBe('none');
@@ -311,7 +318,7 @@ describe('dropdown', () => {
         component.trigger = 'hover';
         fixture.detectChanges();
         expect(dropdownMenuElement.styles['display']).toBe('none');
-        dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', {'bubbles': false, 'cancelable': false}));
+        dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', { bubbles: false, cancelable: false }));
         fixture.detectChanges();
         tick(250); // debounce time
         fixture.detectChanges();
@@ -323,7 +330,7 @@ describe('dropdown', () => {
         beforeEach(fakeAsync(() => {
           component.trigger = 'hover';
           fixture.detectChanges();
-          dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', {'bubbles': false, 'cancelable': false}));
+          dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', { bubbles: false, cancelable: false }));
           fixture.detectChanges();
           tick(250); // debounce time
           fixture.detectChanges();
@@ -331,11 +338,13 @@ describe('dropdown', () => {
           fixture.detectChanges();
         }));
         it('mouseleave dropdown to others hide', fakeAsync(() => {
-          dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseleave', {
-            'relatedTarget': document,
-            'bubbles': false,
-            'cancelable': false
-          }));
+          dropdownElement.nativeElement.dispatchEvent(
+            new MouseEvent('mouseleave', {
+              relatedTarget: document,
+              bubbles: false,
+              cancelable: false,
+            })
+          );
           fixture.detectChanges();
           tick(250); // debounce time
           fixture.detectChanges();
@@ -351,7 +360,7 @@ describe('dropdown', () => {
         }));
         it('click should not show menu', fakeAsync(() => {
           expect(dropdownMenuElement.styles['display']).toBe('none');
-          dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
           expect(dropdownMenuElement.styles['display']).toBe('none');
@@ -400,7 +409,7 @@ describe('dropdown', () => {
         const count = component.count;
         component.disabled = true;
         fixture.detectChanges();
-        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
@@ -409,7 +418,7 @@ describe('dropdown', () => {
 
         component.disabled = false;
         fixture.detectChanges();
-        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
@@ -420,7 +429,7 @@ describe('dropdown', () => {
     });
     describe('dropdown closeScope', () => {
       const clickToggle = () => {
-        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
       };
@@ -429,14 +438,14 @@ describe('dropdown', () => {
         it('click input textarea not close', fakeAsync(() => {
           clickToggle();
           const input = dropdownMenuElement.nativeElement.querySelector('input');
-          input.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          input.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
           fixture.detectChanges();
           expect(dropdownMenuElement.styles['display']).toBe('block');
 
           const textarea = dropdownMenuElement.nativeElement.querySelector('textarea');
-          textarea.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          textarea.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
           fixture.detectChanges();
@@ -449,14 +458,14 @@ describe('dropdown', () => {
           fixture.detectChanges();
           clickToggle();
           const input = dropdownMenuElement.nativeElement.querySelector('input');
-          input.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          input.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
           fixture.detectChanges();
           expect(dropdownMenuElement.styles['display']).toBe('block');
 
           const textarea = dropdownMenuElement.nativeElement.querySelector('textarea');
-          textarea.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          textarea.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
           fixture.detectChanges();
@@ -471,13 +480,13 @@ describe('dropdown', () => {
         }));
 
         it('click inside not to close', fakeAsync(() => {
-          dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
           expect(dropdownMenuElement.styles['display']).toBe('block');
         }));
         it('click outside to close', fakeAsync(() => {
-          document.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          document.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
           expect(dropdownMenuElement.styles['display']).toBe('none');
@@ -490,20 +499,20 @@ describe('dropdown', () => {
           clickToggle();
         }));
         it('click inside not to close', fakeAsync(() => {
-          dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
           expect(dropdownMenuElement.styles['display']).toBe('block');
         }));
         it('click outside not to close', fakeAsync(() => {
-          document.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          document.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
           expect(dropdownMenuElement.styles['display']).toBe('block');
         }));
         it('manually handle close', fakeAsync(() => {
           const closeBtn = dropdownMenuElement.nativeElement.querySelector('#close');
-          closeBtn.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          closeBtn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
           expect(dropdownMenuElement.styles['display']).toBe('none');
@@ -512,7 +521,7 @@ describe('dropdown', () => {
     });
     describe('dropdown closeOnMouseLeaveMenu', () => {
       const clickToggle = () => {
-        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
       };
@@ -524,11 +533,13 @@ describe('dropdown', () => {
       }));
       it('trigger = click && closeOnMouseLeaveMenu = true, menu should close after leaving menu', fakeAsync(() => {
         expect(dropdownMenuElement.styles['display']).toBe('block');
-        dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('mouseleave', {
-          'relatedTarget': document,
-          'bubbles': false,
-          'cancelable': false
-        }));
+        dropdownMenuElement.nativeElement.dispatchEvent(
+          new MouseEvent('mouseleave', {
+            relatedTarget: document,
+            bubbles: false,
+            cancelable: false,
+          })
+        );
         fixture.detectChanges();
         tick(250); // debounce time
         fixture.detectChanges();
@@ -540,13 +551,13 @@ describe('dropdown', () => {
     describe('dropdown toggleEvent', () => {
       it('toggle should trigger count++', fakeAsync(() => {
         const count = component.count;
-        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
         expect(component.count).toBe(count + 1);
         expect(component.isOpen).toBe(true);
-        dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
@@ -559,13 +570,13 @@ describe('dropdown', () => {
         expect(dropdownMenuElement.styles['display']).toBe('none');
         const toggleElement = debugEl.nativeElement.querySelector('.toggle');
 
-        toggleElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        toggleElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
         expect(dropdownMenuElement.styles['display']).toBe('block');
 
-        toggleElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        toggleElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
@@ -576,14 +587,13 @@ describe('dropdown', () => {
         component.disabled = true;
         fixture.detectChanges();
         const toggleElement = debugEl.nativeElement.querySelector('.toggle');
-        toggleElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        toggleElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
         expect(dropdownMenuElement.styles['display']).toBe('none');
       }));
     });
-
   });
   describe('dropdownToggle', () => {
     let debugEl: DebugElement;
@@ -601,7 +611,7 @@ describe('dropdown', () => {
         component.toggleOnFocus = true;
         fixture.detectChanges();
         dropdownToggleElement = debugEl.query(By.directive(DropDownToggleDirective));
-        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('focus', {'bubbles': false, 'cancelable': false}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('focus', { bubbles: false, cancelable: false }));
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
@@ -630,7 +640,6 @@ describe('dropdown', () => {
         component.init = false;
         fixture.detectChanges();
         tick(); // wait dropdown destroy
-        // window.focus(); // need window to be in the front , otherwise not working
         component.autoFocus = true;
         component.toggleOnFocus = true;
         fixture.detectChanges();
@@ -665,7 +674,7 @@ describe('dropdown', () => {
       it('click show menu', fakeAsync(() => {
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         expect(dropdownMenuElement).toBeNull();
-        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick();
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
@@ -674,20 +683,20 @@ describe('dropdown', () => {
       }));
       describe('after click show menu', () => {
         beforeEach(fakeAsync(() => {
-          dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick();
         }));
         it('click menu hide', fakeAsync(() => {
           dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
-          dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick();
           dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
           expect(dropdownMenuElement).toBe(null);
         }));
         it('click outside hide', fakeAsync(() => {
-          document.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+          document.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick();
           dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
@@ -699,7 +708,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         expect(dropdownMenuElement).toBeNull();
-        dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', {'bubbles': false, 'cancelable': false}));
+        dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', { bubbles: false, cancelable: false }));
         fixture.detectChanges();
         tick(250); // hoverDebounceTimetime
         fixture.detectChanges();
@@ -714,7 +723,7 @@ describe('dropdown', () => {
         beforeEach(fakeAsync(() => {
           component.trigger = 'hover';
           fixture.detectChanges();
-          dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', {'bubbles': false, 'cancelable': false}));
+          dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', { bubbles: false, cancelable: false }));
           fixture.detectChanges();
           tick(250);
           fixture.detectChanges();
@@ -722,11 +731,13 @@ describe('dropdown', () => {
           fixture.detectChanges();
         }));
         it('mouseleave dropdown to others hide', fakeAsync(() => {
-          dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseleave', {
-            'relatedTarget': document,
-            'bubbles': false,
-            'cancelable': false
-          }));
+          dropdownElement.nativeElement.dispatchEvent(
+            new MouseEvent('mouseleave', {
+              relatedTarget: document,
+              bubbles: false,
+              cancelable: false,
+            })
+          );
           fixture.detectChanges();
           tick(250); // hoverDebounceTimetime
           fixture.detectChanges();
@@ -737,11 +748,13 @@ describe('dropdown', () => {
         }));
         it('mouseleave toggle to menu show', fakeAsync(() => {
           dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
-          dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseleave', {
-            'relatedTarget': dropdownMenuElement.nativeElement,
-            'bubbles': false,
-            'cancelable': false
-          }));
+          dropdownElement.nativeElement.dispatchEvent(
+            new MouseEvent('mouseleave', {
+              relatedTarget: dropdownMenuElement.nativeElement,
+              bubbles: false,
+              cancelable: false,
+            })
+          );
           fixture.detectChanges();
           tick(250); // hoverDebounceTimetime
           fixture.detectChanges();
@@ -755,11 +768,13 @@ describe('dropdown', () => {
         describe('after mouseleave toggle to menu show', () => {
           beforeEach(fakeAsync(() => {
             dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
-            dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseleave', {
-              'relatedTarget': dropdownMenuElement.nativeElement,
-              'bubbles': false,
-              'cancelable': false
-            }));
+            dropdownElement.nativeElement.dispatchEvent(
+              new MouseEvent('mouseleave', {
+                relatedTarget: dropdownMenuElement.nativeElement,
+                bubbles: false,
+                cancelable: false,
+              })
+            );
             fixture.detectChanges();
             tick(250); // hoverDebounceTimetime
             fixture.detectChanges();
@@ -767,11 +782,13 @@ describe('dropdown', () => {
             fixture.detectChanges();
           }));
           it('mouseleave menu to others hide', fakeAsync(() => {
-            dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('mouseleave', {
-              'relatedTarget': document,
-              'bubbles': false,
-              'cancelable': false
-            }));
+            dropdownMenuElement.nativeElement.dispatchEvent(
+              new MouseEvent('mouseleave', {
+                relatedTarget: document,
+                bubbles: false,
+                cancelable: false,
+              })
+            );
             fixture.detectChanges();
             tick(250); // hoverDebounceTimetime
             fixture.detectChanges();
@@ -782,11 +799,13 @@ describe('dropdown', () => {
           }));
           it('mouseleave menu to toggle show', fakeAsync(() => {
             dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
-            dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('mouseleave', {
-              'relatedTarget': dropdownToggleElement.nativeElement,
-              'bubbles': false,
-              'cancelable': false
-            }));
+            dropdownMenuElement.nativeElement.dispatchEvent(
+              new MouseEvent('mouseleave', {
+                relatedTarget: dropdownToggleElement.nativeElement,
+                bubbles: false,
+                cancelable: false,
+              })
+            );
             fixture.detectChanges();
             tick(250); // hoverDebounceTimetime
             fixture.detectChanges();
@@ -802,7 +821,7 @@ describe('dropdown', () => {
     });
     describe('dropdown basic closeOnMouseLeaveMenu', () => {
       const clickToggle = () => {
-        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
       };
@@ -818,11 +837,13 @@ describe('dropdown', () => {
         expect(dropdownMenuElement.styles['display']).toBe('block');
         expect(document.contains(dropdownMenuElement.nativeElement)).toBe(true);
         // appendToBody的 需要mouseleave dropdown menu
-        dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('mouseleave', {
-          'relatedTarget': document,
-          'bubbles': false,
-          'cancelable': false
-        }));
+        dropdownMenuElement.nativeElement.dispatchEvent(
+          new MouseEvent('mouseleave', {
+            relatedTarget: document,
+            bubbles: false,
+            cancelable: false,
+          })
+        );
         fixture.detectChanges();
         tick(250); // debounce time
         fixture.detectChanges();
@@ -835,11 +856,13 @@ describe('dropdown', () => {
         expect(dropdownMenuElement).toBeTruthy();
         expect(dropdownMenuElement.styles['display']).toBe('block');
         expect(document.contains(dropdownMenuElement.nativeElement)).toBe(true);
-        dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('mouseleave', {
-          'relatedTarget': dropdownToggleElement.nativeElement,
-          'bubbles': false,
-          'cancelable': false
-        }));
+        dropdownMenuElement.nativeElement.dispatchEvent(
+          new MouseEvent('mouseleave', {
+            relatedTarget: dropdownToggleElement.nativeElement,
+            bubbles: false,
+            cancelable: false,
+          })
+        );
         fixture.detectChanges();
         tick(250); // debounce time
         fixture.detectChanges();
@@ -847,11 +870,10 @@ describe('dropdown', () => {
         fixture.detectChanges();
         expect(document.contains(dropdownMenuElement.nativeElement)).toBe(true);
       }));
-
     });
     describe('dropdown alignOrigin', () => {
       const clickToggle = () => {
-        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
       };
@@ -860,7 +882,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
-        const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
+        const menuRect = dropdownMenuElement.nativeElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x === menuRect.x).toBe(true);
         expect(originRect.y + originRect.height + verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
@@ -872,7 +894,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = debugEl.nativeElement.querySelector('.area').getBoundingClientRect();
-        const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
+        const menuRect = dropdownMenuElement.nativeElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x === menuRect.x).toBe(true);
         expect(originRect.y + originRect.height + verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
@@ -880,7 +902,7 @@ describe('dropdown', () => {
     });
     describe('dropdown appendToBodyDirections', () => {
       const clickToggle = () => {
-        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
       };
@@ -891,7 +913,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
-        const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
+        const menuRect = dropdownMenuElement.nativeElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x === menuRect.x).toBe(true);
         expect(originRect.y + originRect.height + verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
@@ -903,7 +925,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
-        const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
+        const menuRect = dropdownMenuElement.nativeElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x + originRect.width).toBeCloseTo(menuRect.x + menuRect.width, 0);
         expect(originRect.y + originRect.height + verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
@@ -915,9 +937,9 @@ describe('dropdown', () => {
         fixture.detectChanges();
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
-        const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
+        const menuRect = dropdownMenuElement.nativeElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 4; // 有个间距
-        expect((originRect.x + (originRect.width / 2)) - ((menuRect.x + menuRect.width / 2))).toBeLessThan(1);
+        expect(originRect.x + originRect.width / 2 - (menuRect.x + menuRect.width / 2)).toBeLessThan(1);
         expect(originRect.y + originRect.height + verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
       }));
       it('rightUp should in the right place', fakeAsync(() => {
@@ -927,7 +949,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
-        const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
+        const menuRect = dropdownMenuElement.nativeElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x === menuRect.x).toBe(true);
         expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height + verticalBorderOverlayWidth);
@@ -939,7 +961,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
-        const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
+        const menuRect = dropdownMenuElement.nativeElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x + originRect.width).toBeCloseTo(menuRect.x + menuRect.width, 0);
         expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height + verticalBorderOverlayWidth, 0);
@@ -951,9 +973,9 @@ describe('dropdown', () => {
         fixture.detectChanges();
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
-        const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
+        const menuRect = dropdownMenuElement.nativeElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 4; // 有个间距
-        expect((originRect.x + (originRect.width / 2)) - ((menuRect.x + menuRect.width / 2))).toBeLessThan(1);
+        expect(originRect.x + originRect.width / 2 - (menuRect.x + menuRect.width / 2)).toBeLessThan(1);
         expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height + verticalBorderOverlayWidth);
       }));
     });
@@ -971,14 +993,14 @@ describe('dropdown', () => {
       }));
       const clickToggle = (id) => {
         const clickElement = document.querySelector(`#${id}`);
-        clickElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        clickElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick();
         return clickElement;
       };
       const hoverToggle = (id) => {
         const mouseenterElement = document.querySelector(`#${id}`).parentElement;
-        mouseenterElement.dispatchEvent(new MouseEvent('mouseenter', {'bubbles': false, 'cancelable': false}));
+        mouseenterElement.dispatchEvent(new MouseEvent('mouseenter', { bubbles: false, cancelable: false }));
         fixture.detectChanges();
         tick(250);
         fixture.detectChanges();
@@ -987,11 +1009,13 @@ describe('dropdown', () => {
       };
       const leaveToggle = (id, relatedTarget?) => {
         const toggleElement = document.querySelector(`#${id}`).parentElement;
-        toggleElement.dispatchEvent(new MouseEvent('mouseleave', {
-          'relatedTarget': relatedTarget,
-          'bubbles': false,
-          'cancelable': false
-        }));
+        toggleElement.dispatchEvent(
+          new MouseEvent('mouseleave', {
+            relatedTarget: relatedTarget,
+            bubbles: false,
+            cancelable: false,
+          })
+        );
         fixture.detectChanges();
         tick(250);
         fixture.detectChanges();
@@ -1000,11 +1024,13 @@ describe('dropdown', () => {
       };
       const leaveMenu = (id, relatedTarget?) => {
         const menuElement = document.querySelector(`#${id}`);
-        menuElement.dispatchEvent(new MouseEvent('mouseleave', {
-          'relatedTarget': relatedTarget,
-          'bubbles': false,
-          'cancelable': false
-        }));
+        menuElement.dispatchEvent(
+          new MouseEvent('mouseleave', {
+            relatedTarget: relatedTarget,
+            bubbles: false,
+            cancelable: false,
+          })
+        );
         fixture.detectChanges();
         tick(250);
         fixture.detectChanges();
@@ -1054,7 +1080,7 @@ describe('dropdown', () => {
           }));
           it('click outside should hide all', fakeAsync(() => {
             // 单击外部全部隐藏
-            document.body.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+            document.body.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
             fixture.detectChanges();
             tick();
             fixture.detectChanges();
@@ -1317,7 +1343,7 @@ describe('dropdown', () => {
       let dropdownToggleElement: DebugElement;
       let dropdownMenuElement: DebugElement;
       const clickToggle = () => {
-        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
       };
@@ -1335,7 +1361,7 @@ describe('dropdown', () => {
         clickToggle();
         fixture.detectChanges();
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
-        const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
+        const menuRect = dropdownMenuElement.nativeElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x === menuRect.x).toBe(true);
         expect(originRect.y + originRect.height + verticalBorderOverlayWidth === menuRect.y).toBe(true);
@@ -1348,7 +1374,7 @@ describe('dropdown', () => {
         clickToggle();
         fixture.detectChanges();
         const originRect = dropdownToggleElement.nativeElement.getBoundingClientRect();
-        const menuRect =  dropdownMenuElement.nativeElement.getBoundingClientRect();
+        const menuRect = dropdownMenuElement.nativeElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 4; // 有个间距
         expect(originRect.x === menuRect.x).toBe(true);
         expect(originRect.y === menuRect.y + menuRect.height + verticalBorderOverlayWidth).toBe(true);
@@ -1361,7 +1387,7 @@ describe('dropdown', () => {
       let dropdownToggleElement: DebugElement;
       let dropdownMenuElement: DebugElement;
       const clickToggle = () => {
-        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
       };
@@ -1374,14 +1400,14 @@ describe('dropdown', () => {
       });
       it('toggle Element focus，press enter toggle menu open', fakeAsync(() => {
         expect(dropdownMenuElement.styles['display']).toBe('none');
-        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('focus', {'bubbles': false, 'cancelable': false}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('focus', { bubbles: false, cancelable: false }));
         fixture.detectChanges();
-        dropdownToggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
         fixture.detectChanges();
         tick();
         fixture.detectChanges();
         expect(dropdownMenuElement.styles['display']).toBe('block');
-        dropdownToggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
+        dropdownToggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
         fixture.detectChanges();
         tick();
         fixture.detectChanges();
@@ -1391,7 +1417,7 @@ describe('dropdown', () => {
         clickToggle();
         fixture.detectChanges();
         expect(dropdownMenuElement.styles['display']).toBe('block');
-        document.body.dispatchEvent(new KeyboardEvent('keydown', {key: 'Escape'}));
+        document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
@@ -1411,10 +1437,10 @@ describe('dropdown', () => {
         fixture.detectChanges();
       });
       it('menu open， press escape close menu', fakeAsync(() => {
-        dropdownElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(100); // gap time
-        dropdownElement.nativeElement.dispatchEvent(new MouseEvent('click', {'bubbles': true, 'cancelable': true}));
+        dropdownElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(100);
         fixture.detectChanges();

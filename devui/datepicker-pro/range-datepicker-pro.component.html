@@ -9,7 +9,7 @@
   (toggleEvent)="onToggle($event)"
   (click)="openDropdown($event)"
   [closeScope]="'blank'"
-  [ngStyle]="{ width: width || (showTime ? '400px' : '300px') }"
+  [ngStyle]="{ width: width || (showTime ? '380px' : '300px') }"
 >
   <div dDropDownToggle>
     <ng-template [ngTemplateOutlet]="hostTemplate || default" [ngTemplateOutletContext]="{ values: dateValue }"></ng-template>
@@ -37,7 +37,7 @@
     (toggleEvent)="onToggle($event)"
     (click)="openDropdown($event)"
     [closeScope]="'blank'"
-    [ngStyle]="{ width: width || (showTime ? '400px' : '300px') }"
+    [ngStyle]="{ width: width || (showTime ? '380px' : '300px') }"
   >
     <div dDropDownToggle>
       <ng-template [ngTemplateOutlet]="hostTemplate || default" [ngTemplateOutletContext]="{ values: dateValue }"></ng-template>

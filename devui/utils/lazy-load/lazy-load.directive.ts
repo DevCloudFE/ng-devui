@@ -4,7 +4,6 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Directive({ selector: '[dLazyLoad]' })
 export class LazyLoadDirective implements OnDestroy, OnChanges, AfterViewInit {
-
   // 启用懒加载，默认不启用
   @Input() enableLazyLoad = false;
   // 懒加载模式，默认列表模式
@@ -13,6 +12,8 @@ export class LazyLoadDirective implements OnDestroy, OnChanges, AfterViewInit {
   @Input() target: HTMLElement | Window;
   // 图片懒加载模式的图片地址
   @Input() imgLoadSrc: string;
+  // 懒加载滚动方向
+  @Input() direction: 'vertical' | 'horizontal' = 'vertical';
   // 加载更多
   @Output() loadMore = new EventEmitter<any>();
 
@@ -21,7 +22,7 @@ export class LazyLoadDirective implements OnDestroy, OnChanges, AfterViewInit {
   // 触发懒加载的距离
   loadFactor = 5;
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     const element = this.target ? this.target : this.el.nativeElement;
@@ -30,12 +31,9 @@ export class LazyLoadDirective implements OnDestroy, OnChanges, AfterViewInit {
         const scrollEvent = fromEvent(element, 'scroll');
         let scrollEventFormat = scrollEvent;
         if (this.contentMode === 'list') {
-          scrollEventFormat = scrollEvent.pipe(
-            debounceTime(300),
-            distinctUntilChanged()
-          );
+          scrollEventFormat = scrollEvent.pipe(debounceTime(300), distinctUntilChanged());
         }
-        this.scrollSubscription = scrollEventFormat.subscribe(event => this.scrollList(event));
+        this.scrollSubscription = scrollEventFormat.subscribe((event) => this.scrollList(event));
       } else if (this.scrollSubscription) {
         this.scrollSubscription.unsubscribe();
       } else {
@@ -48,7 +46,7 @@ export class LazyLoadDirective implements OnDestroy, OnChanges, AfterViewInit {
     if (this.contentMode === 'img') {
       setTimeout(() => {
         const target = this.target ? this.target : this.el.nativeElement;
-        const mockEvent = {target};
+        const mockEvent = { target };
         this.scrollList(mockEvent);
       });
     }
@@ -62,11 +60,14 @@ export class LazyLoadDirective implements OnDestroy, OnChanges, AfterViewInit {
 
   scrollList(event) {
     const targetEl = event.target.scrollingElement ? event.target.scrollingElement : event.target;
-    const clientHeight = targetEl.clientHeight;
-    const scrollTop = targetEl.scrollTop;
+    const { clientWidth, clientHeight, scrollLeft, scrollTop, scrollWidth, scrollHeight } = targetEl;
     if (this.contentMode === 'img') {
       const rect = this.el.nativeElement.getBoundingClientRect();
-      if (rect.top >= 0 && (clientHeight >= rect.top + this.loadFactor)) {
+      const imgCondition =
+        this.direction === 'vertical'
+          ? rect.top >= 0 && clientHeight >= rect.top + this.loadFactor
+          : rect.left >= 0 && clientWidth >= rect.left + this.loadFactor;
+      if (imgCondition) {
         if (this.imgLoadSrc) {
           this.el.nativeElement.src = this.imgLoadSrc;
         }
@@ -74,8 +75,11 @@ export class LazyLoadDirective implements OnDestroy, OnChanges, AfterViewInit {
         this.scrollSubscription.unsubscribe();
       }
     } else {
-      const scrollHeight = targetEl.scrollHeight;
-      if (scrollTop !== 0 && (scrollTop + clientHeight + this.loadFactor >= scrollHeight)) {
+      const etcCondition =
+        this.direction === 'vertical'
+          ? scrollTop !== 0 && scrollTop + clientHeight + this.loadFactor >= scrollHeight
+          : scrollLeft !== 0 && scrollLeft + clientWidth + this.loadFactor >= scrollWidth;
+      if (etcCondition) {
         this.loadMore.emit(event);
       }
     }

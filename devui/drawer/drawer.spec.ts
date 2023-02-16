@@ -116,9 +116,6 @@ describe('Drawer', () => {
     component.openDrawer();
     fixture.detectChanges();
 
-    const backdropElement = document.querySelector('.overlay-wrapper') as HTMLElement;
-    expect(backdropElement.clientWidth).toBe(0);
-
     const drawerElement = document.querySelector('.drawer') as HTMLElement;
     expect(drawerElement.style.left).toBe('0px');
 

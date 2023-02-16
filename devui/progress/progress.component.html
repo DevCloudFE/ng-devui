@@ -6,11 +6,15 @@
       [class.devui-progress-bar-default-bg]="!bar.color"
       [style.background]="bar.color"
       [style.width]="bar.width + '%'"
-      [title]="setBarInnerText(bar)"
+      [title]="bar.percentageText ? bar.percentageText : bar.percentage + '%'"
     >
-      <span *ngIf="showContentConfig.showInnerContent" [style.line-height]="strokeWidth + 'px'">{{ bar.content }}</span>
+      <span *ngIf="showContentConfig.showInnerContent" [style.line-height]="strokeWidth + 'px'">
+        {{ bar.percentageText ? bar.percentageText : bar.percentage + '%' }}
+      </span>
     </div>
-    <span *ngIf="showContentConfig.showCenterContent" [style.line-height]="strokeWidth + 'px'">{{ content }}</span>
+    <span *ngIf="showContentConfig.showCenterContent" [style.line-height]="strokeWidth + 'px'">
+      {{ content }}
+    </span>
   </div>
   <ng-container *ngIf="showContentConfig.showOuterContent">
     <ng-template
@@ -26,7 +30,7 @@
     <svg viewBox="0 0 100 100">
       <defs *ngIf="isGradient">
         <linearGradient id="devui-progress-gradient-{{ id }}" x1="100%" y1="0%" x2="0%" y2="0%">
-          <stop *ngFor="let color of arrayStrokeColor" [attr.offset]="color.percentage" [attr.stop-color]="color.color"></stop>
+          <stop *ngFor="let color of gradientColor" [attr.offset]="color.percentage" [attr.stop-color]="color.color"></stop>
         </linearGradient>
       </defs>
       <path
@@ -60,5 +64,5 @@
 </ng-container>
 
 <ng-template #defaultPercentageText>
-  <div class="devui-progress-default-text">{{ content }}</div>
+  <div class="devui-progress-default-text" [title]="content">{{ content }}</div>
 </ng-template>

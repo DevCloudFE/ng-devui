@@ -1,4 +1,4 @@
-import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
+import { CdkOverlayOrigin, ConnectedPosition, ScrollStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import {
   ChangeDetectorRef,
   ComponentFactoryResolver,
@@ -18,7 +18,7 @@ import {
   Renderer2,
   SimpleChanges,
   TemplateRef,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
@@ -27,9 +27,10 @@ import {
   addClassToOrigin,
   AppendToBodyDirection,
   AppendToBodyDirectionsConfig,
+  AppendToBodyScrollStrategyType,
   DevConfigService,
   removeClassFromOrigin,
-  WithConfig
+  WithConfig,
 } from 'ng-devui/utils';
 import { fromEvent, Observable, of, Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -77,6 +78,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
 
   @Input() appendToBody = false;
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
+  @Input() appendToBodyScrollStrategy: AppendToBodyScrollStrategyType;
   @Input() cdkOverlayOffsetY = 0; // 内部使用不开放
   @Input() dAutoCompleteWidth: number;
   @Input() formatter: (item: any) => string;
@@ -115,13 +117,13 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   @Output() hoverItem: EventEmitter<any> = new EventEmitter();
   KEYBOARD_EVENT_NOT_REFRESH = ['escape', 'enter', 'arrowup', 'arrowdown', /* ie 10 edge */ 'esc', 'up', 'down'];
   popupRef: ComponentRef<AutoCompletePopupComponent>;
-
-  private destroy$ = new Subject<void>();
   i18nText: I18nInterface['autoComplete'];
   popTipsText = '';
   position: any;
   focus = false;
+  scrollStrategy: ScrollStrategy;
 
+  private destroy$ = new Subject<void>();
   private valueChanges: Observable<any[]>;
   private value: any;
   private subscription: Subscription;
@@ -138,8 +140,11 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     private positionService: PositionService,
     private changeDetectorRef: ChangeDetectorRef,
     private i18n: I18nService,
-    private devConfigService: DevConfigService
-  ) {}
+    private devConfigService: DevConfigService,
+    private scrollStrategyOption: ScrollStrategyOptions
+  ) {
+    this.scrollStrategy = this.scrollStrategyOption.reposition();
+  }
 
   ngOnInit() {
     this.init();
@@ -183,11 +188,19 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes && this.popupRef && changes.source) {
+    const { appendToBodyDirections, appendToBodyScrollStrategy, source } = changes;
+    if (source && this.popupRef) {
       this.fillPopup(this.source);
     }
-    if (changes['appendToBodyDirections']) {
+    if (appendToBodyDirections) {
       this.setPositions();
+    }
+    if (appendToBodyScrollStrategy && this.appendToBodyScrollStrategy) {
+      const func = this.scrollStrategyOption[this.appendToBodyScrollStrategy];
+      this.scrollStrategy = func();
+      if (this.popupRef) {
+        this.popupRef.instance.scrollStrategy = this.scrollStrategy;
+      }
     }
   }
 
@@ -218,13 +231,11 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
 
   setI18nText() {
     this.i18nText = this.i18n.getI18nText().autoComplete;
-    // this.i18nLang = this.i18n.getI18nText().locale; // 如果需要获取当前语言
     this.i18n
       .langChange()
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.i18nText = data.autoComplete;
-        // this.i18nLang = data.locale; // 如果需要获取当前语言
       });
   }
 
@@ -351,7 +362,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     });
     const isOpen = this.sceneType !== 'select';
     if (this.sceneType === 'select') {
-      this.searchFn('').subscribe((source) => {
+      this.searchFn(this.value ?? '').subscribe((source) => {
         this.showSource(source, isOpen, false);
       });
     }
@@ -360,7 +371,6 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   @HostListener('blur', ['$event'])
   onBlur($event) {
     this.focus = false;
-    // this.hidePopup();    // TODO: 直接做失焦关闭，与点击操作将有冲突，存在click未完成已经blur，这个改动需要考虑
     this.onTouched();
   }
 
@@ -371,7 +381,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
 
   @HostListener('keydown.Enter', ['$event'])
   onEnterKeyDown($event) {
-    if (!this.popupRef.instance.source || !this.popupRef.instance.isOpen) {
+    if (!this.popupRef.instance.source?.length || !this.popupRef.instance.isOpen) {
       return;
     }
     if (this.popupRef) {
@@ -429,14 +439,14 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     }
   }
 
-  public hidePopup() {
+  public hidePopup = () => {
     if (this.popupRef) {
       this.popupRef.instance.isOpen = false;
       removeClassFromOrigin(this.elementRef);
       this.changeDropDownStatus.emit(false);
       this.toggleChange.emit(false);
     }
-  }
+  };
 
   private fillPopup(source?, term?: string) {
     this.position = this.positionService.position(this.elementRef.nativeElement);
@@ -447,6 +457,8 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     pop.disabledKey = this.disabledKey;
     pop.enableLazyLoad = this.enableLazyLoad;
     pop.disabled = this.disabled;
+    pop.scrollStrategy = this.scrollStrategy;
+    pop.hidePopup = this.hidePopup;
     if (this.appendToBody) {
       pop.appendToBody = true;
       pop.origin = new CdkOverlayOrigin(this.elementRef);

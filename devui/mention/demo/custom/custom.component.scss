@@ -1,0 +1,17 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+d-avatar {
+  text-align: right;
+}
+
+span {
+  margin-left: 8px;
+}
+
+p {
+  color: $devui-aide-text;
+  font-size: $devui-font-size-sm;
+  white-space: nowrap;
+  line-height: 24px;
+  padding: 4px 8px;
+}

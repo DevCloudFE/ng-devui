@@ -14,9 +14,9 @@ import { TagsDemoComponent } from './tags-demo.component';
 
 @NgModule({
   imports: [
+    TagsModule,
     TranslateModule,
     CommonModule,
-    TagsModule,
     DevUICodeboxModule,
     DevUIApiModule,
     DDemoNavModule,
@@ -35,6 +35,5 @@ import { TagsDemoComponent } from './tags-demo.component';
   ],
   exports: [TagsDemoComponent],
   declarations: [TagsDemoComponent, BasicComponent, CustomComponent, HideComponent],
-
 })
 export class TagsDemoModule {}

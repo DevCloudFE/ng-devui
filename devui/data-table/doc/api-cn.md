@@ -360,6 +360,7 @@ export interface ColData {
   header: string;
   checked: boolean;
   category?: string;
+  disabled?: boolean;
   [prop: string]: any;
 }
 ```

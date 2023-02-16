@@ -8,32 +8,6 @@ body[ui-theme='galaxy-theme'] {
   @import './overwrite-style.scss';
 }
 
-body[ui-theme='deep-theme'] {
-  .devui-tree-node__content.active {
-    .devui-tree-node__title {
-      color: #ffffff;
-    }
-
-    svg.svg-icon rect {
-      stroke: #ffffff !important;
-    }
-
-    svg.svg-icon rect:last-child {
-      fill: #ffffff !important;
-    }
-  }
-
-  .table-row-selected {
-    td {
-      color: #ffffff !important;
-    }
-  }
-
-  .devui-canlender-panel-year-list {
-    --devui-list-item-selected-bg: var(--devui-deep-theme-list-item-selected-bg, #dfe1e6);
-  }
-}
-
 body[ui-theme='sweet-theme'] {
   .devui-datepicker-pro-panel {
     --devui-list-item-active-bg: var(--devui-brand, #ec66ab);
@@ -41,15 +15,16 @@ body[ui-theme='sweet-theme'] {
   }
 }
 
+body[ui-theme='deep-theme'] {
+  .devui-table {
+    --devui-dividing-line: var(--devui-zinc-30, #d5d5db);
+  }
+}
+
 body[ui-theme='infinity-theme'] {
   d-tabs .devui-nav-container {
     --devui-brand: #252b3a;
     --devui-brand-active: #252b3a;
-    --devui-tab-options-bg: #f2f2f3;
-
-    .devui-nav-options > li.active > a {
-      color: #252b3a !important;
-    }
   }
 
   .devui-datepicker-pro-panel {

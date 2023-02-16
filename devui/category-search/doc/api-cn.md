@@ -20,9 +20,10 @@ import { CategorySearchModule } from 'ng-devui/category-search';
 | defaultSearchField      | `String[]`                                                                          | []    | 可选，配置输入关键字时可在哪些分类中筛选                                                    | [基本用法](demo#basic-usage)            |
 | selectedTags            | `ICategorySearchTagItem`                                                            | --    | 可选，传入需要默认选中的分类数据                                                            | [基本用法](demo#basic-usage)            |
 | placeholderText         | `string`                                                                            | --    | 可选， 自定义搜索输入框占位文字                                                             | [基本用法](demo#basic-usage)            |
-| allowSave               | `boolean`                                                                           | true  | 可选，是否显示保存当前过滤的按钮                                                            | [基本用法](demo#basic-usage)            |
-| allowClear              | `boolean`                                                                           | true  | 可选，是否显示清除当前过滤的按钮                                                            | [基本用法](demo#basic-usage)            |
-| allowShowMore           | `boolean`                                                                           | false | 可选，是否显示当前过滤条件下拉列表的按钮                                                    | [大数据量优化展示](demo#auto-scroll)    |
+| ~~allowSave~~           | `boolean`                                                                           | true  | 可选，是否显示保存当前过滤的按钮                                                            | [基本用法](demo#basic-usage)            |
+| ~~allowClear~~          | `boolean`                                                                           | true  | 可选，是否显示清除当前过滤的按钮                                                            | [基本用法](demo#basic-usage)            |
+| ~~allowShowMore~~       | `boolean`                                                                           | false | 可选，是否显示当前过滤条件下拉列表的按钮                                                    | [大数据量优化展示](demo#auto-scroll)    |
+| extendedConfig          | `ExtendedConfig`                                                                    | --    | 可选，配置右侧扩展按钮功能                                                                  | [自定义展示模板](demo#custom-template)  |
 | showSearchCategory      | `boolean \| SearchConfig`                                                           | true  | 可选，是否显示搜索关键字下拉菜单                                                            | [自定义展示模板](demo##custom-template) |
 | searchKey               | `string`                                                                            | ''    | 可选，搜索框内的默认展示值                                                                  | [基本用法](demo#basic-usage)            |
 | beforeTagChange         | `(tag, searchKey, operation) => boolean \| Promise<boolean> \| Observable<boolean>` | --    | 可选，改变标签前调用的方法，返回 boolean 类型，返回 false 可以阻止分类值改变                |                                         |
@@ -63,7 +64,7 @@ export interface ICategorySearchTagItem {
   /**
    * 配置项可生产的tag类型,目前支持七种类型，不设置类型时只能使用自定义模板，参见自定义示例'访问来源'
    */
-  type: CategorySearchTagType;
+  type?: CategorySearchTagType;
   /**
    * 配置项所属的分组
    */
@@ -71,15 +72,15 @@ export interface ICategorySearchTagItem {
   /**
    * tag 值的选择项数据
    */
-  options: Array<ITagOption>;
+  options?: Array<ITagOption>;
   /**
    * 用于显示的 tag 值的键值，如未设置默认取label
    */
-  filterKey?: 'label';
+  filterKey?: string | 'label';
   /**
    * 用于显示的label类型中色值的键值，如未设置默认取color
    */
-  colorKey?: 'color';
+  colorKey?: string | 'color';
   /**
    * 自定义下拉模板的展示内容
    */
@@ -96,6 +97,45 @@ export interface ICategorySearchTagItem {
    * dateRange 类型是否显示时分秒
    */
   showTime?: boolean;
+  /**
+   * dateRange 类型默认激活开始或者结束日期
+   */
+  activeRangeType?: 'start' | 'end';
+  /**
+   * textInput 类型设置最大长度
+   */
+  maxLength?: number;
+  /**
+   * textInput | numberRange 类型设置占位符，numberRange需传入对象分别设置左右
+   */
+  placeholder?: string | { left: string; right: string };
+  /**
+   * treeSelect 类型是否为多选，并显示已选择列表
+   */
+  multiple?: boolean;
+  /**
+   * treeSelect 类型是否显示搜索框
+   */
+  searchable?: boolean;
+  /**
+   * treeSelect 类型设置搜索框占位符
+   */
+  searchPlaceholder?: string;
+  /**
+   * treeSelect 类型自定义搜索方法，参数为搜索关键字和d-operable-tree组件实例
+   */
+  searchFn?: (value: string, treeInstance: OperableTreeComponent) => boolean | Array<any>;
+  /**
+   * treeSelect 类型相关配置，请参考treeSelect组件API中同名配置
+   */
+  treeNodeIdKey?: string;
+  treeNodeChildrenKey?: string;
+  treeNodeTitleKey?: string;
+  disabledKey?: string;
+  leafOnly?: boolean;
+  iconParentOpen?: string;
+  iconParentClose?: string;
+  iconLeaf?: string;
   [propName: string]: any;
 }
 
@@ -132,6 +172,33 @@ export interface SearchConfig {
   fieldDescription?: ((label: string) => string);
   category?: boolean;
   categoryDescription?: string;
+}
+
+export interface TextConfig {
+  keywordName?: string;
+  createFilter?: string;
+  filterTitle?: string;
+  labelConnector?: string;
+}
+
+export interface ExtendedConfig {
+  show?: boolean;
+  clear?: {
+    show?: boolean;
+    disabled?: boolean;
+    template?: TemplateRef<any>;
+  };
+  save?: {
+    show?: boolean;
+    disabled?: boolean;
+    template?: TemplateRef<any>;
+  };
+  more?: {
+    show?: boolean;
+    disabled?: boolean;
+    template?: TemplateRef<any>;
+  };
+  customTemplate?: TemplateRef<any>;
 }
 
 export type DValidateRules =

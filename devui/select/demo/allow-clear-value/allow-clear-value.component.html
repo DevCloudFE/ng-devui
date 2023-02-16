@@ -1,17 +1,10 @@
 <section>
-  <h4>
-    single selection, allow clear value
-    <!--单选框开启清除选项功能-->
-  </h4>
   <div class="row">
     <div class="col-md-5">
       <d-select [placeholder]="'Input'" [options]="options" [allowClear]="true" [(ngModel)]="value"></d-select>
     </div>
     <div class="col-md-1">
-      <d-button bsStyle="common" (btnClick)="value = null"
-        >reset value by reset ngModel value
-        <!--通过ngModel清空值--></d-button
-      >
+      <d-button bsStyle="common" (btnClick)="value = null">reset value by reset ngModel value</d-button>
     </div>
   </div>
 </section>

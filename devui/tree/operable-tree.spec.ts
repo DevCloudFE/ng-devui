@@ -1,14 +1,5 @@
-import {
-  Component,
-  DebugElement,
-  ViewChild
-} from '@angular/core';
-import {
-  ComponentFixture,
-  fakeAsync,
-  TestBed,
-  tick
-} from '@angular/core/testing';
+import { Component, DebugElement, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -17,10 +8,7 @@ import { PopoverDirective } from '../popover';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { createDragEvent } from '../utils/testing/event-helper';
 import { OperableTreeComponent } from './operable-tree.component';
-import {
-  ITreeItem,
-  TreeNode
-} from './tree-factory.class';
+import { ITreeItem, TreeNode } from './tree-factory.class';
 import { TreeModule } from './tree.module';
 
 @Component({
@@ -47,7 +35,7 @@ import { TreeModule } from './tree.module';
       (editValueChange)="editValueChange($event)"
     >
     </d-operable-tree>
-  `
+  `,
 })
 class TestOperableTreeComponent {
   @ViewChild('operableTree') operableTree: OperableTreeComponent;
@@ -55,7 +43,7 @@ class TestOperableTreeComponent {
   treeItems: Array<ITreeItem> = [
     {
       id: 'test',
-      title: '父节点1'
+      title: '父节点1',
     },
     {
       title: '父节点2',
@@ -66,15 +54,15 @@ class TestOperableTreeComponent {
           id: 'child1',
           children: [
             {
-              title: '子节点2-1-1'
+              title: '子节点2-1-1',
             },
             {
-              title: '子节点2-1-2'
-            }
-          ]
-        }
-      ]
-    }
+              title: '子节点2-1-2',
+            },
+          ],
+        },
+      ],
+    },
   ];
 
   activeNode = true;
@@ -94,7 +82,7 @@ class TestOperableTreeComponent {
     if (event.value === '') {
       event.callback({
         errTips: '节点名不能为空!',
-        errTipsPosition: 'right'
+        errTipsPosition: 'right',
       });
     } else {
       event.callback();
@@ -104,46 +92,39 @@ class TestOperableTreeComponent {
 
 @Component({
   template: `
-    <d-operable-tree
-      #operableTree
-      [tree]="treeItems"
-      [treeNodeIdKey]="'id'"
-      [treeNodeChildrenKey]="'children'"
-      [virtualScroll]="true"
-    >
+    <d-operable-tree #operableTree [tree]="treeItems" [treeNodeIdKey]="'id'" [treeNodeChildrenKey]="'children'" [virtualScroll]="true">
     </d-operable-tree>
-  `
+  `,
 })
 class TestVirtualScrollTreeComponent {
   @ViewChild('operableTree') operableTree: OperableTreeComponent;
   virtualScroll = false;
   treeItems = [
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
-    { 'title': '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
+    { title: '节点加载-1' },
   ];
-
 }
 
 @Component({
@@ -161,13 +142,13 @@ class TestVirtualScrollTreeComponent {
     >
     </d-operable-tree>
     <pre>transferData:{{ transferData }}</pre>
-  `
+  `,
 })
 class TestDragDropTreeComponent {
   @ViewChild('comp') comp: OperableTreeComponent;
   data = [
     {
-      title: '父节点1'
+      title: '父节点1',
     },
     {
       title: '父节点2',
@@ -178,38 +159,37 @@ class TestDragDropTreeComponent {
           open: true,
           children: [
             {
-              title: '子节点2-1-1'
+              title: '子节点2-1-1',
             },
             {
-              title: '子节点2-1-2'
-            }
-          ]
+              title: '子节点2-1-2',
+            },
+          ],
         },
         {
           title: '子节点2-2',
           children: [
             {
-              title: '子节点2-2-1'
+              title: '子节点2-2-1',
             },
             {
-              title: '子节点2-2-2'
-            }
-          ]
-        }
-      ]
-    }
+              title: '子节点2-2-2',
+            },
+          ],
+        },
+      ],
+    },
   ];
 
   draggable = true;
   onNodeToggle = jasmine.createSpy('show node');
   onDrop = jasmine.createSpy('node toggled');
 
-  beforeNodeDrop = _ => {
-    return new Promise(resolve => {
+  beforeNodeDrop = (_) => {
+    return new Promise((resolve) => {
       resolve(undefined);
     });
   };
-
 }
 
 describe('virtualScroll Tree', () => {
@@ -222,7 +202,7 @@ describe('virtualScroll Tree', () => {
     TestBed.configureTestingModule({
       imports: [TreeModule, NoopAnimationsModule],
       providers: [PopoverDirective, OverlayContainerRef],
-      declarations: [TestVirtualScrollTreeComponent]
+      declarations: [TestVirtualScrollTreeComponent],
     });
   });
 
@@ -252,7 +232,7 @@ describe('operable tree', () => {
     TestBed.configureTestingModule({
       imports: [TreeModule, NoopAnimationsModule],
       providers: [PopoverDirective, OverlayContainerRef],
-      declarations: [TestOperableTreeComponent]
+      declarations: [TestOperableTreeComponent],
     });
   });
 
@@ -268,27 +248,27 @@ describe('operable tree', () => {
     it('should be created correctly', () => {
       expect(component).toBeTruthy();
       expect(component.operableTree.nodes).not.toBeNull();
-
     });
 
-    it('shuold have correct style classes', () => {
+    it('should have correct style classes', () => {
       const classList = [
         '.devui-tree-node',
         '.devui-operable-tree-node',
         '.devui-tree-node__content',
         '.devui-tree-node__content--value-wrapper',
         '.devui-tree-node__folder',
-        '.devui-tree-node__leaf'
+        '.devui-tree-node__leaf',
       ];
       expect(domHelper.judgeStyleClasses(classList)).toBeTruthy();
     });
 
-    it('should click apply selectNode function', () => {
+    it('should click apply selectNode function', fakeAsync(() => {
       const treeEl: HTMLElement = debugEl.query(By.css('.devui-tree-node__content')).nativeElement;
 
       treeEl.dispatchEvent(new Event('click'));
+      tick();
       expect(component.onOperableNodeSelected).toHaveBeenCalled();
-    });
+    }));
 
     it('should double click apply nodeDblClick', () => {
       const treeEl: HTMLElement = debugEl.query(By.css('.devui-tree-node__title')).nativeElement;
@@ -308,26 +288,26 @@ describe('operable tree', () => {
       expect(tree2Node.query(By.css('.devui-tree-node__children'))).toBeTruthy();
     });
 
-    it('should canActiveNode false work', () => {
+    it('should canActiveNode false work', fakeAsync(() => {
       component.activeNode = false;
       fixture.detectChanges();
 
       const treeEl: HTMLElement = debugEl.query(By.css('.devui-tree-node__content')).nativeElement;
       treeEl.dispatchEvent(new Event('click'));
-
+      tick();
       expect(component.onOperableNodeChecked).toHaveBeenCalled();
-    });
+    }));
 
-    it('should canActivateParentNode false work', () => {
+    it('should canActivateParentNode false work', fakeAsync(() => {
       component.activeParentNode = false;
       fixture.detectChanges();
 
       const treeDebugEls: Array<DebugElement> = debugEl.queryAll(By.css('.devui-tree-node__content'));
       const parentTreeNode = treeDebugEls[1].nativeElement;
       parentTreeNode.dispatchEvent(new Event('click'));
-
+      tick();
       expect(component.onOperableNodeToggled).toHaveBeenCalled();
-    });
+    }));
   });
 
   describe('operate', () => {
@@ -521,7 +501,7 @@ describe('operable tree drag & drop', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [TreeModule, NoopAnimationsModule],
-      declarations: [TestDragDropTreeComponent]
+      declarations: [TestDragDropTreeComponent],
     });
   });
 
@@ -544,7 +524,7 @@ describe('operable tree drag & drop', () => {
       clientX: dragElRect.left,
       clientY: dragElRect.top,
       screenX: window.screenX + dragElRect.left,
-      screenY: window.screenY + dragElRect.top
+      screenY: window.screenY + dragElRect.top,
     });
     draggableEl.dispatchEvent(dragstartEvent);
     fixture.detectChanges();
@@ -553,7 +533,7 @@ describe('operable tree drag & drop', () => {
       clientX: dropElRect.left,
       clientY: dropElRect.top,
       screenX: window.screenX + dropElRect.left,
-      screenY: window.screenY + dropElRect.top
+      screenY: window.screenY + dropElRect.top,
     });
 
     draggableEl.dispatchEvent(dragoverEvent);
@@ -564,7 +544,7 @@ describe('operable tree drag & drop', () => {
       clientX: dropElRect.left,
       clientY: dropElRect.top,
       screenX: window.screenX + dropElRect.left,
-      screenY: window.screenY + dropElRect.top
+      screenY: window.screenY + dropElRect.top,
     });
 
     draggableEl.dispatchEvent(dragleaveEvent);
@@ -574,7 +554,7 @@ describe('operable tree drag & drop', () => {
       clientX: dropElRect.left,
       clientY: dropElRect.top,
       screenX: window.screenX + dropElRect.left,
-      screenY: window.screenY + dropElRect.top
+      screenY: window.screenY + dropElRect.top,
     });
 
     dropEvent.dataTransfer.setData('Text', dragstartEvent.dataTransfer.getData('Text'));
@@ -606,7 +586,7 @@ describe('operable tree drag & drop', () => {
       clientX: dragElRect.left,
       clientY: dragElRect.top,
       screenX: window.screenX + dragElRect.left,
-      screenY: window.screenY + dragElRect.top
+      screenY: window.screenY + dragElRect.top,
     });
     draggableEl.dispatchEvent(dragstartEvent);
     fixture.detectChanges();
@@ -615,7 +595,7 @@ describe('operable tree drag & drop', () => {
       clientX: dropElRect.left,
       clientY: dropElRect.top,
       screenX: window.screenX + dropElRect.left,
-      screenY: window.screenY + dropElRect.top
+      screenY: window.screenY + dropElRect.top,
     });
 
     dropEvent.dataTransfer.setData('Text', dragstartEvent.dataTransfer.getData('Text'));
@@ -627,5 +607,4 @@ describe('operable tree drag & drop', () => {
 
     expect(component.onDrop).toHaveBeenCalledTimes(0); // drop
   }));
-
 });

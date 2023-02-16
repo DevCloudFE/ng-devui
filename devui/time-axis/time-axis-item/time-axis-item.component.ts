@@ -1,4 +1,5 @@
 import { Component, EventEmitter, HostBinding, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { TimeAxisMode } from '../time-axis.type';
 
 @Component({
   selector: 'd-time-axis-item',
@@ -20,6 +21,7 @@ export class TimeAxisItemComponent implements OnInit {
   @Input() contentTemplate: TemplateRef<any>;
   @Input() data;
   @Input() horizontalAlign = 'center';
+  @Input() mode: TimeAxisMode = 'normal';
   @Output() statusChanged = new EventEmitter<string>();
   _type;
   dotText: string;

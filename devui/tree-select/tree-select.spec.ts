@@ -315,7 +315,10 @@ describe('TreeSelect', () => {
         .nativeElement;
       treeNodeEl.dispatchEvent(new Event('click'));
       fixture.detectChanges();
+      tick();
+      fixture.detectChanges();
       tick(200);
+      fixture.detectChanges();
       expect(debugEl.query(By.css('body .popper-container  d-operable-tree > div > d-tree > d-tree-nodes > div:nth-child(1)'))
         .nativeElement.classList).toContain('selected');
     }));

@@ -26,26 +26,26 @@ const regConfig = {
 
 @Injectable({
   providedIn: 'root',
-})
+  })
 export class DevuiOnlineIdeService {
   document: Document;
   dependencies = {
-    '@angular/animations': '^14.0.0',
-    '@angular/cdk': '^14.0.0',
-    '@angular/common': '^14.0.0',
-    '@angular/compiler': '^14.0.0',
-    '@angular/core': '^14.0.0',
-    '@angular/forms': '^14.0.0',
-    '@angular/platform-browser': '^14.0.0',
-    '@angular/platform-browser-dynamic': '^14.0.0',
-    '@angular/router': '^14.0.0',
+    '@angular/animations': '^15.0.0',
+    '@angular/cdk': '^15.0.0',
+    '@angular/common': '^15.0.0',
+    '@angular/compiler': '^15.0.0',
+    '@angular/core': '^15.0.0',
+    '@angular/forms': '^15.0.0',
+    '@angular/platform-browser': '^15.0.0',
+    '@angular/platform-browser-dynamic': '^15.0.0',
+    '@angular/router': '^15.0.0',
     "@ngx-translate/core": "^14.0.0",
     "lodash-es": "^4.17.15",
     '@devui-design/icons': '^1.2.0',
     'core-js': '^3.18.3',
     'date-fns': '^2.23.0',
     'ng-devui': `^14.0.0`,
-    rxjs: '~6.6.2',
+    rxjs: '~7.5.5',
     tslib: '^2.0.0',
     'zone.js': '~0.11.4',
   };

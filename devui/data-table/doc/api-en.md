@@ -355,10 +355,11 @@ Dynamic column and style configurator, which is data-driven and returns the data
 
 ```ts
 export interface ColData {
-header: string;
-checked: boolean;
-category?: string;
-[prop: string]: any;
+  header: string;
+  checked: boolean;
+  category?: string;
+  disabled?: boolean;
+  [prop: string]: any;
 }
 ```
 

@@ -1,5 +1,6 @@
 import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnDestroy } from '@angular/core';
 import { ReplaySubject, Subscription } from 'rxjs';
+import { AnchorService } from './anchor.service';
 import { AnchorActiveChangeSource, IAnchorBox } from './anchor.type';
 
 @Directive({
@@ -12,6 +13,11 @@ export class AnchorDirective implements AfterViewInit, OnDestroy {
   set isActive(active: boolean) {
     this._isActive = active;
     this.activeChangeSubject.next(active);
+    if (active) {
+      this.anchorService.setCurrentActive(this.anchor);
+    } else if (this.anchorService.currentActiveAnchor === this.anchor) {
+      this.anchorService.setCurrentActive('');
+    }
   }
   get isActive() {
     return this._isActive;
@@ -39,7 +45,7 @@ export class AnchorDirective implements AfterViewInit, OnDestroy {
   private scrollPreStart;
   private scrollTimer;
 
-  constructor(private el: ElementRef) {
+  constructor(private el: ElementRef, private anchorService: AnchorService) {
     this.element = this.el.nativeElement;
   }
 
@@ -51,16 +57,12 @@ export class AnchorDirective implements AfterViewInit, OnDestroy {
       if (active) {
         this.element.classList.add(this.anchorActive);
         this.lastActiveBy = 'anchor-active-by-' + this.activeChangeBy;
-        // setTimeout是为了this.lastActiveBy每次都能被再次触发
         setTimeout(() => {
           this.element.classList.add(this.lastActiveBy);
         }, 0);
       } else {
         this.element.classList.remove(this.anchorActive);
       }
-    });
-    setTimeout(() => {
-      this.checkActiveStatus('initial');
     });
   }
 
@@ -103,17 +105,18 @@ export class AnchorDirective implements AfterViewInit, OnDestroy {
     if (this.boxElement.isScrollingToTarget) {
       return;
     }
-    const top = this.element.getBoundingClientRect().top - ((this.boxElement.view && this.boxElement.view.top) || 0);
-    const bottom = this.element.getBoundingClientRect().bottom - ((this.boxElement.view && this.boxElement.view.top) || 0);
+    const dom = this.boxElement.scrollTarget;
+    const fix = dom && dom instanceof Element ? dom.getBoundingClientRect().top : 0;
+    const top = this.element.getBoundingClientRect().top - fix - ((this.boxElement.view && this.boxElement.view.top) || 0);
+    const bottom = this.element.getBoundingClientRect().bottom - fix - ((this.boxElement.view && this.boxElement.view.top) || 0);
+    const currentActiveAnchor = this.anchorService.currentActiveAnchor;
 
-    // 首个个特殊处理
-    if (this.anchor === this.boxElement.defaultAnchor) {
+    if (this.anchor === this.boxElement.defaultAnchor && (!currentActiveAnchor || currentActiveAnchor === this.boxElement.defaultAnchor)) {
       this.activeChangeBy = activeChangeBy || 'scroll';
       this.isActive = bottom > this.REACH_TOP_VISION_OFFSET;
       return;
     }
 
-    // 默认处理
     this.activeChangeBy = activeChangeBy || 'scroll';
     this.isActive = bottom > this.REACH_TOP_VISION_OFFSET && top < this.REACH_TOP_VISION_OFFSET;
   };

@@ -53,6 +53,7 @@ export class TabsComponent implements OnChanges, AfterViewInit {
    * class设置无需内层，外层即可
    */
   @Input() cssClass: string;
+  @Input() isHidden = false;
   @Input() beforeChange: (currentValue, previousValue) => boolean | Promise<boolean> | Observable<boolean>;
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
   @Output() activeTabChange = new EventEmitter<number | string>();
@@ -77,6 +78,12 @@ export class TabsComponent implements OnChanges, AfterViewInit {
     const { activeTab, scrollMode } = changes;
     if (activeTab) {
       this.changeActiveSlidingBlock();
+      if (this.scrollMode && this.tabsEle && this.tabs) {
+        const tabs = this.tabsEle.nativeElement.querySelectorAll('li.devui-nav-tab-item');
+        const index = Array.from(this.tabs).findIndex((item) => item.id === this.activeTab);
+        this.offsetIndex = index;
+        this.scrollIntoView(tabs[index]);
+      }
     }
     if (scrollMode) {
       this.getTabsWidth();

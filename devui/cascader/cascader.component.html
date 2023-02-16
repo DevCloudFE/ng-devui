@@ -10,7 +10,7 @@
   [showAnimation]="showAnimation"
   [appendToBodyDirections]="subMenuDirections"
 >
-  <div dDropDownToggle (focus)="showSearchInput = true">
+  <div dDropDownToggle (focus)="showSearchInput = true" [class.devui-gray-style]="styleType === 'gray'">
     <ng-template
       [ngTemplateOutlet]="hostTemplate || default"
       [ngTemplateOutletContext]="{ value: showTextValue || multipleValueList }"

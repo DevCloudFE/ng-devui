@@ -31,7 +31,7 @@ import { CategorySearchDemoComponent } from "./category-search-demo.component";
       {
         path: "",
         redirectTo: "demo",
-        pathMatch: 'full'
+        pathMatch: "full"
       },
       {
         path: "demo",

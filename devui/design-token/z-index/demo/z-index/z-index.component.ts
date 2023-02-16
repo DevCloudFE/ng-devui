@@ -42,6 +42,7 @@ export class ZIndexComponent implements OnInit, OnDestroy {
     );
   }
   changeValueInTable = () => {
+    this.zIndex = [];
     const theme = this.themeService.currentTheme;
     for (const key in theme.data) {
       if (key.includes('devui-z-index')) {

@@ -27,9 +27,12 @@ import {
 import {
   addClassToOrigin,
   AppendToBodyDirection,
-  AppendToBodyDirectionsConfig, DevConfigService, fadeInOut,
+  AppendToBodyDirectionsConfig,
+  DevConfigService,
+  fadeInOut,
   formWithDropDown,
-  removeClassFromOrigin, WithConfig
+  removeClassFromOrigin,
+  WithConfig
 } from 'ng-devui/utils';
 import { WindowRef } from 'ng-devui/window-ref';
 import { ToggleMenuListComponent } from './toggle-menu-list.component';
@@ -87,6 +90,10 @@ export class ToggleMenuContainerComponent implements OnInit, OnChanges {
    * 【可选】是否禁用下拉框
    */
   @Input() disabled = false;
+  /**
+   * 【可选】暂停使用下拉功能，不添加禁用效果
+   */
+  @Input() paused = false;
   /**
    * 【可选】是否展示动效
    */
@@ -182,7 +189,7 @@ export class ToggleMenuContainerComponent implements OnInit, OnChanges {
   }
 
   setPassEvent(event, type) {
-    if (this.isOpen) {
+    if (this.isOpen || this.paused) {
       this.passEvent.emit({ event, type });
     }
   }
@@ -222,13 +229,13 @@ export class ToggleMenuContainerComponent implements OnInit, OnChanges {
   autoToggle(event) {
     event.preventDefault();
     event.stopPropagation();
-    if (this.toggleOnFocus && !this.disabled && !this.isOpen && !this.isMouseEvent) {
+    if (this.toggleOnFocus && !this.disabled && !this.paused && !this.isOpen && !this.isMouseEvent) {
       this.toggle();
     }
   }
 
   toggle(event?: Event) {
-    if (this.disabled) {
+    if (this.disabled || this.paused) {
       this.isOpen = false;
       return;
     }

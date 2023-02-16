@@ -4,6 +4,14 @@ import { Observable } from 'rxjs';
 export type GuidePositionType =  'left' | 'right' | 'top' | 'bottom' | 'bottom-left'| 'bottom-right'| 'top-left'| 'top-right'|
 'left-top'| 'left-bottom'| 'right-top'| 'right-bottom';
 
+export interface IUserGuideExtraConfig {
+  panelBackground?: string;
+  nextButtonType?: string;
+  infoColor?: string;
+  operationColor?: string;
+  dotColor?: string;
+}
+
 export interface IStepElement {
   element?: string;
   title: string;
@@ -23,6 +31,8 @@ export interface IStep {
   defaultStart?: boolean;
   showDots?: boolean;
   maxContentWidth?: number;
+  isCover?: boolean;
+  extraConfig?: IUserGuideExtraConfig;
   onExit?: Function;
   detail: Array<IStepElement>;
 }

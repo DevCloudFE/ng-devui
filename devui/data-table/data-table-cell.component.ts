@@ -40,7 +40,7 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
   @Input() tableLevel: number;
 
   @HostBinding('class.editable-cell') get isEditable() {
-    return this.column.editable && !this.isCellEdit && this.column.extraOptions?.editableTip !== 'btn';
+    return this.column.editable && !this.isCellEdit && this.column.extraOptions?.editableTip !== 'btn' && !this.fieldEditDenied;
   }
   isCellEdit: boolean;
   forceUpdateSubscription: Subscription;

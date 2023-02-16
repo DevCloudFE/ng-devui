@@ -205,6 +205,7 @@ export default {
     originScale: 'Original Ratio',
     pre: 'Previous',
     next: 'Next',
+    origin: 'View the original image',
   },
   colorPicker: {
     recentlyUsed: 'Recently Used',

@@ -13,11 +13,13 @@
     color: isColorfulTag ? (checked ? '#fff' : customColor) : '',
     cursor: this.mode === 'checkable' ? 'pointer' : ''
   }"
-  title="{{ titleContent ? titleContent : tag }}"
+  title="{{ titleContent ? titleContent : currentTag }}"
   (click)="tagClick()"
 >
   <div class="content-wrapper" [ngStyle]="{ 'background-color': colorMap[labelStyle] || customColor }"></div>
-  <span *ngIf="!customViewTemplate" [class.devui-max-width-tag]="maxWidth" [style.maxWidth]="maxWidth ? maxWidth : ''">{{ tag }}</span>
+  <span *ngIf="!customViewTemplate" [class.devui-max-width-tag]="maxWidth" [style.maxWidth]="maxWidth ? maxWidth : ''">{{
+    currentTag
+  }}</span>
   <ng-template *ngIf="customViewTemplate" [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ tag: tag }"></ng-template>
   <a
     class="remove-button"

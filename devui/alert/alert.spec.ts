@@ -6,7 +6,7 @@ import { AlertModule } from './alert.module';
 @Component({
   template: `
   <d-alert [type]="type" [showIcon]= "showIcon" (closeEvent)="handleClose($event)" [cssClass]="cssClass">
-    <span>成功。devcloud一站式云端DevOps平台。</span>
+    <span>成功。消息提示成功。</span>
   </d-alert>
   `
 })
@@ -58,7 +58,7 @@ describe('alert', () => {
       });
 
       it('Alert should have content', () => {
-        expect(alertElement.querySelector('.devui-alert').textContent).toBe('成功。devcloud一站式云端DevOps平台。');
+        expect(alertElement.querySelector('.devui-alert').textContent).toBe('成功。消息提示成功。');
       });
     });
     describe('alert type', () => {

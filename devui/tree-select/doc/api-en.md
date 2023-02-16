@@ -3,7 +3,7 @@
 Import into module:
 
 ```ts
-import { TreeSelectModule } from 'ng-devui/treeSelect';
+import { TreeSelectModule } from 'ng-devui/tree-select';
 ```
 
 In the page:

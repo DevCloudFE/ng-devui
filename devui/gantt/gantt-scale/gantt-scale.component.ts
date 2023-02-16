@@ -42,6 +42,7 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
   @Input() ganttScaleContainerOffsetLeft: number;
   @Input() milestoneList: GanttMilestone[];
   @Input() scrollElement: HTMLElement;
+  @Input() showDaySplitLine = false;
   @Output() addMilestoneEvent = new EventEmitter<GanttScaleDateInfo>();
 
   private scrollHandler: Subscription;
@@ -77,6 +78,9 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
         this.getViewScaleData();
       }
       if (config.unit) {
+        if(this.unit === GanttScaleUnit.day && (config.unit === GanttScaleUnit.month || config.unit === GanttScaleUnit.week)) {
+          this.clearDaySplitLine();
+        }
         this.unit = config.unit;
         this.getViewScaleData();
       }
@@ -247,6 +251,16 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
 
   addMilestone(info: GanttScaleDateInfo) {
     this.addMilestoneEvent.emit(info);
+  }
+
+  clearDaySplitLine() {
+    if(this.showDaySplitLine && this.ganttBarContainerElement) {
+      const dayLines = this.ganttBarContainerElement.querySelectorAll('.devui-day-split-line');
+      dayLines.forEach(item => {
+        const parent = item.parentElement;
+        parent.removeChild(item);
+      });
+    }
   }
 
   ngOnDestroy() {
