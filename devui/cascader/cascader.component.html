@@ -19,6 +19,7 @@
 
   <ng-template #default>
     <input
+      #outerInput
       *ngIf="!multiple"
       [placeholder]="placeholder"
       type="text"
@@ -194,6 +195,7 @@
   </div>
   <ng-template #default>
     <input
+      #outerInput
       *ngIf="!multiple"
       [placeholder]="placeholder"
       type="text"
