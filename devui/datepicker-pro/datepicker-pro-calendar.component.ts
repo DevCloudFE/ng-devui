@@ -82,12 +82,14 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
 
   @Input() set minDate(value: Date) {
     if (!value) {
+      this.pickerSrv.resetMin();
       return;
     }
     this.pickerSrv.minDate = value;
   }
   @Input() set maxDate(value: Date) {
     if (!value) {
+      this.pickerSrv.resetMax();
       return;
     }
     this.pickerSrv.maxDate = value;

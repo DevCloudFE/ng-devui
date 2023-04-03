@@ -3,6 +3,9 @@ import { PrefersColorSchemeMediaQuery } from './media-query';
 import { Theme } from './theme';
 import { ContextService, EventBus, IContextService, IEventBus, IStorageService, StorageService } from './utils/index';
 
+const THEME_CHANGE_TIME = 400;
+const THEME_CHANGE_DELAY = 100;
+
 /**
  * 负责CSS变量主题的装卸，主题元数据转换成主题数据
  */
@@ -13,6 +16,8 @@ export class ThemeService {
   currentTheme: Theme;
   contentElement: HTMLStyleElement;
   colorTransitionElement: HTMLStyleElement;
+  darkChangeHiddenElement: HTMLStyleElement;
+  darkChangeShowElement: HTMLStyleElement;
   extraData: {
     [themeId: string]: {
       cssVariables?: {
@@ -59,10 +64,12 @@ export class ThemeService {
     this.currentTheme = theme || {
       id: 'empty-theme',
       name: '',
-      data: {}
+      data: {},
+      isDark: false
     };
     this.createColorTransition();
     if (!theme && allowDynamicTheme) {
+      document.body.setAttribute(THEME_KEY.uiThemeAttributeName, 'empty-theme');
       return;
     }
     this.applyTheme(this.currentTheme);
@@ -75,7 +82,31 @@ export class ThemeService {
   }
 
   applyTheme(theme: Theme) {
-    this.addColorTransition();
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
+    if (theme.isDark === this.currentTheme.isDark) {
+      this.addColorTransition();
+      this.renderTheme(theme);
+      // 通知外部主题变更
+      this.notify(theme, 'themeChanged');
+      setTimeout(() => {this.removeColorTransition(); }, THEME_CHANGE_TIME + THEME_CHANGE_DELAY);
+    } else {
+      this.themeHidden();
+      setTimeout(() => {
+        this.removeColorTransition();
+        this.renderTheme(theme);
+
+        // 通知外部主题变更
+        this.notify(theme, 'themeChanged');
+        this.themeShow();
+        setTimeout(() => {this.removeColorTransition(); }, THEME_CHANGE_TIME + THEME_CHANGE_DELAY);
+      }, THEME_CHANGE_TIME);
+    }
+
+  }
+
+  renderTheme(theme: Theme) {
     this.currentTheme = theme;
     if (!this.contentElement) {
       const styleElement = document.getElementById(THEME_KEY.styleElementId);
@@ -95,10 +126,6 @@ export class ThemeService {
     // 用于挂载额外变量和类名
     this.applyExtraData();
     this.saveCustomTheme(this.currentTheme);
-
-    // 通知外部主题变更
-    this.notify(theme, 'themeChanged');
-    setTimeout(() => {this.removeColorTransition(); }, 500);
   }
 
   saveCustomTheme(customTheme: Theme) {
@@ -117,10 +144,16 @@ export class ThemeService {
   }
 
   private addAppendClass(classNames: Array<string>) {
+    if (typeof document === 'undefined') {
+      return;
+    }
     document.body.classList.add(...classNames);
   }
 
   private removeAppendedClass(classNames: Array<string>) {
+    if (typeof document === 'undefined') {
+      return;
+    }
     document.body.classList.remove(...classNames);
   }
 
@@ -146,6 +179,9 @@ export class ThemeService {
   }
 
   public unloadTheme() {
+    if (typeof document === 'undefined') {
+      return null;
+    }
     if (this.contentElement && document.contains(this.contentElement)) {
       this.contentElement.parentElement.removeChild(this.contentElement);
     }
@@ -170,20 +206,93 @@ export class ThemeService {
   }
 
   private createColorTransition() {
+    if (typeof document === 'undefined') {
+      return;
+    }
     this.colorTransitionElement = document.createElement('style');
+    this.darkChangeHiddenElement = document.createElement('style');
+    this.darkChangeShowElement = document.createElement('style');;
     this.colorTransitionElement.id = THEME_KEY.transitionStyleElementId;
+    this.darkChangeHiddenElement.id = THEME_KEY.transitionStyleElementId;
+    this.darkChangeShowElement.id = THEME_KEY.transitionStyleElementId;
     this.colorTransitionElement.innerText = `
       * { transition: background .3s ease-out, background-color .3s ease-out,
                     border .3s ease-out, border-color .3s ease-out,
                     box-shadow .3s ease-out, box-shadow-color .3s ease-out}
     `;
+
+    this.darkChangeHiddenElement.innerText = `
+      * {
+        transition: background .3s ease-out, background-color .3s ease-out,
+        border .3s ease-out, border-color .3s ease-out,
+        box-shadow .3s ease-out, box-shadow-color .3s ease-out
+      }
+      body {
+        animation-duration: 400ms;
+        animation-name: hidden;
+        animation-iteration-count: 1;
+      }
+      @keyframes hidden {
+        from {
+          opacity: 1;
+        }
+      
+        to {
+          opacity: 0.1;
+        }
+      }
+    `;
+
+    this.darkChangeShowElement.innerText = `
+      body {
+        animation-duration: 400ms;
+        animation-name: show;
+        animation-iteration-count: 1;
+      }
+      @keyframes show {
+        from {
+          opacity: 0.1;
+        }
+      
+        to {
+          opacity: 1;
+        }
+      }
+    `;
+  }
+
+  private themeHidden() {
+    if (typeof document === 'undefined') {
+      return;
+    }
+    document.head.appendChild(this.darkChangeHiddenElement);
+  }
+
+  private themeShow() {
+    if (typeof document === 'undefined') {
+      return;
+    }
+    document.head.appendChild(this.darkChangeShowElement);
   }
 
   private addColorTransition() {
+    if (typeof document === 'undefined') {
+      return;
+    }
     document.head.appendChild(this.colorTransitionElement);
   }
   private removeColorTransition() {
-    if (!this.colorTransitionElement.parentElement) {return; }
-    this.colorTransitionElement.parentElement.removeChild(this.colorTransitionElement);
+    if (this.colorTransitionElement.parentElement) {
+      this.colorTransitionElement.parentElement.removeChild(this.colorTransitionElement);
+    }
+
+    if (this.darkChangeShowElement.parentElement) {
+      this.darkChangeShowElement.parentElement.removeChild(this.darkChangeShowElement);
+    }
+
+    if (this.darkChangeHiddenElement.parentElement) {
+      this.darkChangeHiddenElement.parentElement.removeChild(this.darkChangeHiddenElement);
+    }
+
   }
 }

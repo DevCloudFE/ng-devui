@@ -132,7 +132,7 @@
       height: 16px;
 
       path {
-        fill: $devui-text-weak;
+        fill: $devui-icon-fill;
       }
     }
   }
@@ -183,7 +183,7 @@
     vertical-align: middle;
 
     &.devui-parent-list {
-      background-color: transparent;
+      border: transparent;
     }
   }
 
@@ -195,7 +195,7 @@
     border-left: 2px solid $devui-form-control-line-active;
     position: absolute;
     top: 11px;
-    left: 0;
+    left: -2px;
     opacity: 0;
   }
 

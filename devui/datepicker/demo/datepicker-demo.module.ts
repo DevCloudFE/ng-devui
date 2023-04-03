@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'ng-devui/button';
 import { DatepickerModule } from 'ng-devui/datepicker';
+import { FormModule } from 'ng-devui/form';
 import { SelectModule } from 'ng-devui/select';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
@@ -16,6 +17,7 @@ import { DatepickerButtonComponent } from './button/button.component';
 import { DatepickerClearButtonComponent } from './clear-button/clear-button.component';
 import { CustomViewTemplateComponent } from './custom-view-template/custom-view-template.component';
 import { DatepickerDemoComponent } from './datepicker-demo.component';
+import { DatepickerDesignComponent } from './datepicker-design.component';
 import { DatepickerFormatComponent } from './format/datepicker-format.component';
 import { DatepickerDemoMinMaxComponent } from './min-max/min-max.component';
 import { RangeClearButtonComponent } from './range-clear-button/range-clear-button.component';
@@ -38,10 +40,15 @@ import { TwoDatepickerFormatComponent } from './two-datepicker-format/two-datepi
     DevUICodeboxModule,
     SelectModule,
     ButtonModule,
+    FormModule,
     DevUIApiModule,
     DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: DatepickerDesignComponent,
+      },
       { path: 'demo', component: DatepickerDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -53,6 +60,7 @@ import { TwoDatepickerFormatComponent } from './two-datepicker-format/two-datepi
   declarations: [
     DatepickerDemoComponent,
     DatepickerDemoBasicComponent,
+    DatepickerDesignComponent,
     SetModeComponent,
     DatepickerRangeComponent,
     DatepickerFormatComponent,

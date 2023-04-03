@@ -35,6 +35,7 @@ export interface I18nInterface {
     min: string;
     second: string;
     getYearMonthStr(year, month): string;
+    yearDisplay(year): string;
   };
   form: {
     required(val): string;
@@ -120,6 +121,7 @@ export interface I18nInterface {
     pre: string;
     next: string;
     origin: string;
+    download: string;
   };
   colorPicker: {
     recentlyUsed: string;

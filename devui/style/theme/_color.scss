@@ -1,8 +1,8 @@
 @import './basic';
 // need to run `node scripts/themeable/transfer-sass-var-to-theme-data.js ` when modified
 // 基础变量
-$devui-global-bg: var(--devui-global-bg, $devui-zinc-5); // 全局带底色背景
-$devui-glass-morphism-bg: var(--devui-glass-morphism-bg, rgba(247, 247, 249, 0.9)); // 毛玻璃样式背景色
+$devui-global-bg: var(--devui-global-bg, #f6f6f8); // 全局带底色背景
+$devui-glass-morphism-bg: var(--devui-glass-morphism-bg, rgba(245, 246, 248, 0.9)); // 毛玻璃样式背景色
 $devui-global-bg-normal: var(--devui-global-bg-normal, $devui-white-5); // 全局白色背景
 $devui-base-bg: var(--devui-base-bg, $devui-white-5); // 基础区块背景白色
 $devui-base-bg-dark: var(--devui-base-bg-dark, $devui-slate-100); // 基础区块背景深色(固定)
@@ -35,10 +35,10 @@ $devui-success: var(--devui-success, $devui-green-50); // 成功、正确
 $devui-info: var(--devui-info, $devui-blue-50); // 通知、一般提示、执行中
 $devui-initial: var(--devui-initial, $devui-blue-10); // 初始化、未执行
 $devui-unavailable: var(--devui-unavailable, $devui-gray-5); // 不可用、禁用状态
-$devui-shadow: var(--devui-shadow, rgba(37, 43, 58, 0.2)); // 阴影色
-$devui-light-shadow: var(--devui-light-shadow, rgba(37, 43, 58, 0.1)); // 弱化阴影色
-$devui-connected-overlay-shadow: var(--devui-connected-overlay-shadow, rgba(37, 43, 58, 0.12)); // 下拉菜单类阴影色
-$devui-feedback-overlay-shadow: var(--devui-feedback-overlay-shadow, rgba(37, 43, 58, 0.16)); // 信息展示类阴影色
+$devui-shadow: var(--devui-shadow, rgba(37, 43, 58, 0.24)); // 阴影色
+$devui-light-shadow: var(--devui-light-shadow, rgba(37, 43, 58, 0.12)); // 弱化阴影色
+$devui-connected-overlay-shadow: var(--devui-connected-overlay-shadow, rgba(37, 43, 58, 0.16)); // 下拉菜单类阴影色
+$devui-feedback-overlay-shadow: var(--devui-feedback-overlay-shadow, rgba(37, 43, 58, 0.2)); // 信息展示类阴影色
 
 // 图标
 $devui-icon-text: var(--devui-icon-text, $devui-slate-70); // 文字图标颜色
@@ -57,6 +57,7 @@ $devui-form-control-line: var(--devui-form-control-line, $devui-slate-30); // �
 $devui-form-control-bg: var(--devui-form-control-bg, $devui-white-5); // 表单控件背景色
 $devui-form-control-line-hover: var(--devui-form-control-line-hover, $devui-slate-60); // 表单控件边框悬停反馈色
 $devui-form-control-line-active: var(--devui-form-control-line-active, $devui-blue-50); // 表单控件边框激活色，用于获得焦点
+$devui-form-control-interactive-outline: var(--devui-form-control-interactive-outline, rgba(94, 124, 224, 0.08));      // 表单控件边框激活色的外框阴影色
 $devui-form-control-line-active-hover: var(--devui-form-control-line-active-hover, $devui-blue-90); // 表单控件边框激活色，用于获得焦点且悬停
 // 列表
 $devui-list-item-active-bg: var(--devui-list-item-active-bg, $devui-blue-5); // 列表类型单选选中背景

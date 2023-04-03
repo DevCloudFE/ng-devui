@@ -17,6 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { ClipboardDemoComponent } from './clipboard/clipboard.component';
 import { CommonDemoComponent } from './common-demo.component';
+import { CommonDesignComponent } from './common-design.component';
 import { HelperBrowserComponent } from './helper-browser/helper-browser.component';
 import { HelperDownloadDemoComponent } from './helper-download/helper-download.component';
 import { HelperJumpDemoComponent } from './helper-jump/helper-jump.component';
@@ -44,6 +45,10 @@ import { SafeNullPipeComponent } from './pipe/safe-null-pipe/safe-null-pipe.comp
     TextInputModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: CommonDesignComponent,
+      },
       { path: 'demo', component: CommonDemoComponent },
       {
         path: 'api',
@@ -59,6 +64,7 @@ import { SafeNullPipeComponent } from './pipe/safe-null-pipe/safe-null-pipe.comp
   declarations: [
     DatePipeDemoComponent,
     CommonDemoComponent,
+    CommonDesignComponent,
     HelperBrowserComponent,
     HelperJumpDemoComponent,
     HelperDownloadDemoComponent,

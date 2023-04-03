@@ -11,6 +11,7 @@
       [deletable]="!(disabled || (optionDisabledKey && item.option[optionDisabledKey]))"
       [maxWidth]="'100%'"
       [tag]="valueParser(item.option)"
+      [customViewTemplate]="customViewTemplate"
       (tagDelete)="removeItem(item, $event?.event, index)"
     ></d-tag>
   </li>

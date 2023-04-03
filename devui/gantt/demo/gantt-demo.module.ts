@@ -13,6 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { GanttDemoComponent } from './gantt-demo.component';
+import { GanttDesignComponent } from './gantt-design.component';
 import { ResetPositionComponent } from './table/reset-position/reset-position.component';
 import { TableComponent } from './table/table.component';
 @NgModule({
@@ -30,6 +31,10 @@ import { TableComponent } from './table/table.component';
     FullscreenModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: GanttDesignComponent,
+      },
       { path: 'demo', component: GanttDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

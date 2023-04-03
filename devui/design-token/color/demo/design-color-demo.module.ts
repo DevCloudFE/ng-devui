@@ -8,6 +8,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TabsModule } from 'ng-devui/tabs';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
+import { ColorDesignComponent } from './color-design.component';
 import { ColorComponent } from './color/color.component';
 import { DesignColorDemoComponent } from './design-color-demo.component';
 @NgModule({
@@ -22,6 +23,10 @@ import { DesignColorDemoComponent } from './design-color-demo.component';
     TabsModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: ColorDesignComponent,
+      },
       { path: 'demo', component: DesignColorDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

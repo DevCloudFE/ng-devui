@@ -25,7 +25,7 @@ class CommonFunctions {
   static flushEvent(el, event, fixture): void {
     el.dispatchEvent(event);
     fixture.detectChanges();
-    flush();
+    tick();
     fixture.detectChanges();
   }
 
@@ -237,6 +237,7 @@ describe('timePicker', () => {
       // 测试用户输入
       const time = '00:00:00';
       TestFunctions.inputValue(time, component.inputEle, fixture);
+      flush();
     }));
   });
 

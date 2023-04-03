@@ -12,7 +12,7 @@
   <div class="devui-month-list-wrapper">
     <cdk-virtual-scroll-viewport #scrollBody [itemSize]="calenderItemSize" class="devui-month-list" minBufferPx="400" maxBufferPx="600">
       <div *cdkVirtualFor="let year of yearList; let index = index">
-        <p class="devui-table-year-title">{{ year.year + '年' }}</p>
+        <p class="devui-table-year-title">{{ i18nText?.yearDisplay(year.year) }}</p>
         <table
           class="devui-month-table"
           [ngClass]="{ 'devui-active-month': index === currentBodyIndex }"

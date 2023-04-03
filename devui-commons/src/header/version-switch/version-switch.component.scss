@@ -3,14 +3,6 @@
     margin: 0 12px;
 }
 
-@media (max-width: 1450px) {
-    .header-version-switch {
-        width: 60px;
-    }
-}
-
-@media (max-width: 1360px) {
-    .header-version-switch {
-        width: 70px;
-    }
+:host ::ng-deep .devui-dropdown-origin-wrapper{
+    border: none;
 }

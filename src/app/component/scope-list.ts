@@ -10,19 +10,16 @@ export const suggestScopeList: Array<string> = [
 export const newScopeList: Array<string> | string = [
   'tags',
   'userguide',
-  'cascader',
+  'button',
   'category-search',
   'data-table',
   'datepicker-pro',
-  'anchor',
+  'editorx',
   'upload',
   'tabs',
-  'time-axis',
+  'tree-select',
   'editable-select',
   'typography',
-  'progress',
-  'mention',
-  'dashboard'
 ];
 
 export const sunsetScopeList: Array<string> | string = [

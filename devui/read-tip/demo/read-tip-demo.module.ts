@@ -13,6 +13,7 @@ import { ReadtipAsyncComponent } from './async-readtip/readtip-async.component';
 import { BasicComponent } from './basic/basic.component';
 import { MultiReadtipComponent } from './multi-readtip/multi-readtip.component';
 import { ReadTipDemoComponent } from './read-tip-demo.component';
+import { ReadTipDesignComponent } from './read-tip-design.component';
 import { ReadtipTemplateComponent } from './readtip-template/readtip-template.component';
 
 @NgModule({
@@ -27,6 +28,10 @@ import { ReadtipTemplateComponent } from './readtip-template/readtip-template.co
     ReadTipModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: ReadTipDesignComponent,
+      },
       { path: 'demo', component: ReadTipDemoComponent },
       {
         path: 'api',
@@ -39,7 +44,13 @@ import { ReadtipTemplateComponent } from './readtip-template/readtip-template.co
     ]),
   ],
   exports: [ReadTipDemoComponent],
-  declarations: [ReadTipDemoComponent, BasicComponent, MultiReadtipComponent, ReadtipTemplateComponent, ReadtipAsyncComponent],
-
+  declarations: [
+    ReadTipDemoComponent,
+    ReadTipDesignComponent,
+    BasicComponent,
+    MultiReadtipComponent,
+    ReadtipTemplateComponent,
+    ReadtipAsyncComponent,
+  ],
 })
 export class ReadTipDemoModule {}

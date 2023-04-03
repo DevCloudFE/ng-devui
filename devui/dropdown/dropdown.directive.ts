@@ -16,7 +16,8 @@ import {
   Output,
   QueryList,
   SimpleChanges,
-  SkipSelf
+  SkipSelf,
+  forwardRef
 } from '@angular/core';
 import { addClassToOrigin, DevConfigService, formWithDropDown, removeClassFromOrigin, WithConfig } from 'ng-devui/utils';
 import { fromEvent, merge, Observable, ReplaySubject, Subscription } from 'rxjs';
@@ -27,9 +28,9 @@ import { DropDownService } from './dropdown.service';
   selector: '[dDropDown]',
   exportAs: 'd-dropdown',
   providers: [DropDownService],
-})
+  })
 export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit {
-  @ContentChildren(DropDownDirective, { descendants: true }) dropdownChildren: QueryList<DropDownDirective>;
+  @ContentChildren(forwardRef(() => DropDownDirective), { descendants: true }) dropdownChildren: QueryList<DropDownDirective>;
   private hoverSubscription: Subscription;
   /**
    * 控制是否打开dropdown，绑定一个devui-dropdown-open class

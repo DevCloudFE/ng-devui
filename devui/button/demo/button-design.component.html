@@ -1,0 +1,66 @@
+<div>
+  <p class="devui-design-h2-title devui-design-mt-64 devui-design-mb-16">{{ 'components.button.design.structure.name' | translate }}</p>
+  <img [src]="structureImgSrc" alt="" class="devui-design-image-1 devui-design-mb-16" />
+  <div class="desc-list-container">
+    <div *ngFor="let desc of structureList" class="desc-list-container desc-item">
+      <div class="desc-item-id">{{ desc.id }}</div>
+      <div class="desc-item-name">{{ desc.name }}</div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <p class="devui-design-h2-title devui-design-mt-64">{{ 'components.button.design.how-to-use.name' | translate }}</p>
+  <div>
+    <div class="devui-design-h3-title devui-design-mt-20">{{ 'components.button.design.how-to-use.sub-name' | translate }}</div>
+    <p class="devui-design-desc devui-design-mt-8 devui-design-mb-16">{{ 'components.button.design.how-to-use.desc' | translate }}</p>
+    <img [src]="useImgSrc" alt="" class="devui-design-image-1 devui-design-mb-16" />
+    <div class="devui-design-image-container">
+      <div class="devui-design-image-3" *ngFor="let item of sizeList">
+        <img [src]="getImgSrc(item.image)" alt="" />
+        <div class="devui-design-h4-title">{{ item.name }}</div>
+        <div class="devui-design-desc">{{ item['font-desc'] }}</div>
+        <div class="devui-design-desc">{{ item['height-desc'] }}</div>
+        <div class="devui-design-desc">{{ item['width-desc'] }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let button of buttonList">
+  <div class="devui-design-h3-title devui-design-mt-64">{{ button.name }}</div>
+  <p class="devui-design-desc devui-design-mt-8 devui-design-mb-16">{{ button.desc }}</p>
+  <img [src]="getImgSrc(button.image)" alt="" class="devui-design-image-1" />
+</div>
+
+<div class="devui-design-mb-40">
+  <div class="devui-design-h3-title devui-design-mt-64">{{ 'components.button.design.layout.name' | translate }}</div>
+  <p class="devui-design-desc devui-design-mt-8">{{ 'components.button.design.layout.desc' | translate }}</p>
+  <div class="devui-design-image-container">
+    <div *ngFor="let item of layoutList; let index = index" class="devui-design-image-2 devui-design-mt-24">
+      <p class="devui-design-h4-title">{{ item.title }}</p>
+      <p class="devui-design-mt-8 devui-design-mb-16">{{ item.describe }}</p>
+      <img [src]="getImgSrc(item.img)" alt="" class="" />
+    </div>
+  </div>
+  <span class="devui-design-desc devui-design-desc-border devui-design-mt-48">{{
+    'components.button.design.layout.description1' | translate
+  }}</span>
+  <div class="devui-design-image-container">
+    <div *ngFor="let item of primaryLeft; let index = index" class="devui-design-image-2 devui-design-mt-24">
+      <p class="devui-design-h4-title">{{ item.title }}</p>
+      <p class="devui-design-mt-8 devui-design-mb-16">{{ item.describe }}</p>
+      <img [src]="getImgSrc(item.img)" alt="" class="" />
+    </div>
+  </div>
+  <span class="devui-design-desc devui-design-desc-border long devui-design-mt-48">{{
+    'components.button.design.layout.description2' | translate
+  }}</span>
+  <div class="devui-design-image-container">
+    <div *ngFor="let item of primaryRight; let index = index" class="devui-design-image-2 devui-design-mt-24">
+      <p class="devui-design-h4-title">{{ item.title }}</p>
+      <p class="devui-design-mt-8 devui-design-mb-16">{{ item.describe }}</p>
+      <img [src]="getImgSrc(item.img)" alt="" class="" />
+    </div>
+  </div>
+</div>

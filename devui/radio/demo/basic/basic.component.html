@@ -1,10 +1,10 @@
 <d-radio
-  [name]="'independent-city'"
-  [(ngModel)]="choose2"
-  *ngFor="let value of values2"
-  [value]="value"
-  (ngModelChange)="valueChange($event)"
-  [ngStyle]="{ marginBottom: '20px' }"
+  *ngFor="let item of items"
+  [style.margin-bottom]="'8px'"
+  [name]="'basic-radio'"
+  [value]="item"
+  [(ngModel)]="chosenItem"
+  (change)="valueChange($event)"
 >
-  The Radio value is: {{ value }}
+  <span>The Radio item is: {{ item }}</span>
 </d-radio>

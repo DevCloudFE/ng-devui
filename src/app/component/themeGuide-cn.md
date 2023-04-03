@@ -58,10 +58,16 @@ ThemeServiceInit({
   'deep-theme': deepTheme,
 }, 'infinity-theme');
 ```
+
+3. 全局引入扩展样式
+```
+@import 'ng-devui/theme-collection/extend-theme.css';
+```
+
 ~~至此完成扩展主题的切换
 
 ------------
-3. （可选，若想自制主题切换器）在项目的公共页面区域(ex: 公共头)插入一个简易主题切换器，进行主题切换及验证
+4. （可选，若想自制主题切换器）在项目的公共页面区域(ex: 公共头)插入一个简易主题切换器，进行主题切换及验证
 - ts中
 ```
 themeOptions = [`

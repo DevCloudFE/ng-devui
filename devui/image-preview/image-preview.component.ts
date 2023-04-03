@@ -136,11 +136,11 @@ export class DImagePreviewComponent implements OnInit, OnDestroy {
     this.isOptimal = false;
   }
 
-  getOriginalImage() {
+  getOriginalImage(isDownload = false) {
     if (!this.targetImageSrc) {
       return;
     }
-    if (this.targetImageSrc.startsWith('data:image')) {
+    if (!isDownload && this.targetImageSrc.startsWith('data:image')) {
       const img = this.images[this.targetImageIndex] as HTMLImageElement;
       const win = window.open();
       const content = `
@@ -160,7 +160,11 @@ export class DImagePreviewComponent implements OnInit, OnDestroy {
       const event = new MouseEvent('click');
       a.href = this.targetImageSrc;
       a.rel = 'noopener';
-      a.target = '_blank';
+      if (isDownload) {
+        a.download = '';
+      } else {
+        a.target = '_blank';
+      }
       a.dispatchEvent(event);
       a.remove();
     }

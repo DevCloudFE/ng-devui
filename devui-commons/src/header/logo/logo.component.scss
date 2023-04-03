@@ -1,39 +1,26 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 .header-logo {
-  margin-left: 24px;
   align-self: flex-start;
   a {
-    font-weight: 700;
+    font-weight: 600;
     color: $devui-text;
-    font-size: 20px;
+    font-size: $devui-font-size;
     svg {
       vertical-align: middle;
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
     }
   }
   .text {
-    margin-left: 8px;
-    font-size: $devui-font-size-price;
-  }
-  margin-right: 40px;
-}
-
-@media (max-width: 1420px) {
-  .header-logo {
-    margin-left: 12px !important;
-    margin-right: 0 !important;
-
-    .text {
-      margin-left: 0 !important;
-    }
+    font-size: $devui-font-size;
+    text-align: center;
   }
 }
 
-@media (max-width: 360px) {
-  .header-logo {
-    .text {
-      display: none;
-    }
-  }
+.header-logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 16px;
+  margin-bottom: 24px;
 }

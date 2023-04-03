@@ -9,9 +9,9 @@ import { I18nUtil } from '../../i18n/i18n.util';
   styleUrls: ['./language-switch.component.scss']
 })
 export class LanguageSwitchComponent implements OnInit {
-  @Input() languageArr: string[] = ['中文', 'English'];
+  @Input() languageArr: string[] = ['CN', 'EN'];
   @Output() languageEvent = new EventEmitter<string>();
-  currentLang: string;
+  currentLang!: string;
 
   constructor(
     private commonsService: DevuiCommonsService,

@@ -9,6 +9,7 @@ import { TabsModule } from 'ng-devui/tabs';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { DesignShadowDemoComponent } from './design-shadow-demo.component';
+import { ShadowDesignComponent } from './shadow-design.component';
 import { ShadowComponent } from './shadow/shadow.component';
 @NgModule({
   declarations: [DesignShadowDemoComponent, ShadowComponent],
@@ -22,6 +23,10 @@ import { ShadowComponent } from './shadow/shadow.component';
     TabsModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: ShadowDesignComponent,
+      },
       { path: 'demo', component: DesignShadowDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

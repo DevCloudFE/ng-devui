@@ -12,6 +12,7 @@ import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { TagsInputDemoAsyncComponent } from './async/async.component';
 import { TagsInputDemoBasicComponent } from './basic/basic.component';
 import { TagsInputDemoCustomizeComponent } from './customize/customize.component';
+import { TagsInputDesignComponent } from './tags-input-design.component';
 import { TagsInputDemoComponent } from './tags.input-demo.component';
 import { TagsInputDemoVirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 
@@ -27,6 +28,10 @@ import { TagsInputDemoVirtualScrollComponent } from './virtual-scroll/virtual-sc
     ButtonModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: TagsInputDesignComponent,
+      },
       { path: 'demo', component: TagsInputDemoComponent },
       {
         path: 'api',
@@ -41,6 +46,7 @@ import { TagsInputDemoVirtualScrollComponent } from './virtual-scroll/virtual-sc
   exports: [],
   declarations: [
     TagsInputDemoComponent,
+    TagsInputDesignComponent,
     TagsInputDemoBasicComponent,
     TagsInputDemoCustomizeComponent,
     TagsInputDemoAsyncComponent,

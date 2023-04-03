@@ -26,6 +26,7 @@ import { GridSpaceComponent } from './grid/grid-space/grid-space.component';
 import { ResposiveDemoComponent } from './grid/resposive-demo/resposive-demo.component';
 import { StyleDemoComponent } from './grid/style-demo/style-demo.component';
 import { LayoutDemoComponent } from './layout-demo.component';
+import { LayoutDesignComponent } from './layout-design.component';
 import { LayoutTopAsideComponent } from './top-aside/top-aside.component';
 import { LayoutTopComponent } from './top/top.component';
 
@@ -41,6 +42,10 @@ import { LayoutTopComponent } from './top/top.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: LayoutDesignComponent,
+      },
       { path: 'demo', component: LayoutDemoComponent },
       {
         path: 'api',
@@ -54,6 +59,7 @@ import { LayoutTopComponent } from './top/top.component';
   ],
   declarations: [
     LayoutDemoComponent,
+    LayoutDesignComponent,
     LayoutBasicComponent,
     LayoutTopComponent,
     LayoutTopAsideComponent,

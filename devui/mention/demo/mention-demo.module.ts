@@ -15,6 +15,7 @@ import { AsyncComponent } from './async/async.component';
 import { BasicComponent } from './basic/basic.component';
 import { CustomComponent } from './custom/custom.component';
 import { MentionDemoComponent } from './mention-demo.component';
+import { MentionDesignComponent } from './mention-design.component';
 import { PrefixComponent } from './prefix/prefix.component';
 import { TargetComponent } from './target/target.component';
 import { ToggleComponent } from './toggle/toggle.component';
@@ -33,6 +34,10 @@ import { ToggleComponent } from './toggle/toggle.component';
     ButtonModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: MentionDesignComponent,
+      },
       { path: 'demo', component: MentionDemoComponent },
       {
         path: 'api',
@@ -44,7 +49,16 @@ import { ToggleComponent } from './toggle/toggle.component';
       },
     ]),
   ],
-  declarations: [MentionDemoComponent, BasicComponent, AsyncComponent, CustomComponent, TargetComponent, PrefixComponent, ToggleComponent],
+  declarations: [
+    MentionDemoComponent,
+    MentionDesignComponent,
+    BasicComponent,
+    AsyncComponent,
+    CustomComponent,
+    TargetComponent,
+    PrefixComponent,
+    ToggleComponent,
+  ],
   exports: [MentionDemoComponent],
 })
 export class MentionDemoModule {}

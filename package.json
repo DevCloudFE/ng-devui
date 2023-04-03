@@ -16,7 +16,7 @@
     "test:lib": "ng test devui-lib --no-watch --no-progress --browsers=ChromeHeadlessCI",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "patch-package && ngcc --tsconfig tsconfig.json",
+    "postinstall": "ngcc --tsconfig tsconfig.json",
     "lint:devui": "eslint --ext .js,.ts \"{devui,src}/**/*.{ts,js}\"",
     "lint:devui:fix": "eslint --ext .js,.ts --fix \"{devui,src}/**/*.{ts,js}\"",
     "prettier": "prettier --config ./.prettierrc --write \"{devui,src}/**/*.html\"",

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { ToggleMenuListItem } from './toggle-menu.type';
 
 @Component({
@@ -13,6 +13,7 @@ export class ToggleMenuLabelComponent {
   @Input() maxWidth: string;
   @Input() maxHeight: string;
   @Input() optionDisabledKey = '';
+  @Input() customViewTemplate: TemplateRef<any>;
   @Input() valueParser: (item: any) => any;
   @Output() removeChange = new EventEmitter<any>();
 

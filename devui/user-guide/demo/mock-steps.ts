@@ -12,9 +12,9 @@ export const mockSteps: Array<IStep> = [
       },
       {
         element: '.header-logo',
-        title: '此为一般指引模式，定位到元素并视觉突出当前步骤进行展示，页面及元素不可点击',
+        content: '此为一般指引模式，定位到元素并视觉突出当前步骤进行展示，页面及元素不可点击',
         type: 'normal',
-        highlightOffset: [0,0,0,0],
+        highlightOffset: [4,4,4,4],
         beforeChange: () => {
           console.log('beforeChange');
           return new Promise((resolve) => {
@@ -29,18 +29,21 @@ export const mockSteps: Array<IStep> = [
         title: '请输入内容',
         type: 'interactable',
         eventType: 'inputable',
-        inputData: 'master'
+        inputData: 'master',
+        highlightOffset: [4,4,4,4],
       },
       {
         element: '.clickable-event',
-        title: '当前步骤为可交互模式中的可点击事件，点击试一下！',
+        content: '当前步骤为可交互模式中的可点击事件，点击试一下！',
         type: 'interactable',
-        eventType: 'clickable'
+        eventType: 'clickable',
+        highlightOffset: [4,4,4,4],
       },
       {
         element: '.modal-content',
         title: '点击完成退出教程',
-        showPrevButton: false
+        showPrevButton: false,
+        highlightOffset: [4,4,4,4],
       },
     ]
   },
@@ -52,13 +55,15 @@ export const mockSteps: Array<IStep> = [
         element: '.theme-toggle',
         title: '点击按钮打开主题面板',
         type: 'interactable',
-        eventType: 'clickable'
+        eventType: 'clickable',
+        highlightOffset: [4,4,4,4],
       },
       {
         element: '.theme-menu',
         title: '点击一个主题试一下',
         type: 'interactable',
-        eventType: 'exit'
+        eventType: 'exit',
+        highlightOffset: [4,4,4,4],
       }
     ]
   },

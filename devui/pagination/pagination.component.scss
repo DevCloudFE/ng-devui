@@ -87,12 +87,11 @@
       }
 
       &.active a {
-        background-color: $devui-list-item-active-bg;
         color: $devui-list-item-active-text;
         cursor: pointer;
 
         &:hover {
-          background-color: $devui-list-item-active-hover-bg;
+          background-color: transparent;
           color: $devui-list-item-active-text;
         }
       }
@@ -383,4 +382,28 @@
 
 .devui-pagination-dropdown-menu {
   min-width: 60px;
+}
+
+.devui-pagination-list > li > .devui-pagination-active-block {
+  height: 24px;
+  margin-bottom: -24px;
+}
+
+.devui-pagination-sm > li > .devui-pagination-active-block {
+  height: 22px;
+  margin-bottom: -22px;
+}
+
+.devui-pagination-lg > li > .devui-pagination-active-block {
+  height: 38px;
+  margin-bottom: -38px;
+}
+
+.devui-pagination-active-block {
+  width: calc(100% - 4px);
+  margin-bottom: -24px;
+  margin-left: 4px;
+  background: $devui-primary;
+  z-index: 0;
+  border-radius: $devui-border-radius;
 }

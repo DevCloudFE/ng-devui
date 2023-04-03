@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 @Component({
   selector: 'd-type-slider',
-  templateUrl: './type-slider.component.html',
+  templateUrl: './type-slider.component.html'
 })
 export class TypeSliderComponent {
   tabActiveId: string | number = 'tab1';

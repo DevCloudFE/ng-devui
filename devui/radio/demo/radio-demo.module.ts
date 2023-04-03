@@ -15,6 +15,7 @@ import { CustomComponent } from './custom/custom.component';
 import { DisabledComponent } from './disabled/disabled.component';
 import { HorizontalComponent } from './horizontal/horizontal.component';
 import { RadioDemoComponent } from './radio-demo.component';
+import { RadioDesignComponent } from './radio-design.component';
 import { VerticalComponent } from './vertical/vertical.component';
 
 @NgModule({
@@ -28,17 +29,26 @@ import { VerticalComponent } from './vertical/vertical.component';
     DDemoNavModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
-      { path: 'demo', component: RadioDemoComponent},
-      { path: 'api', component: DevUIApiComponent, data: {
-        'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
-        'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
-      }}
-    ])
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      { path: 'demo', component: RadioDemoComponent },
+      {
+        path: 'design',
+        component: RadioDesignComponent,
+      },
+      {
+        path: 'api',
+        component: DevUIApiComponent,
+        data: {
+          'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md'),
+        },
+      },
+    ]),
   ],
   exports: [RadioDemoComponent],
   declarations: [
     RadioDemoComponent,
+    RadioDesignComponent,
     BasicComponent,
     ConditionChangeComponent,
     ConditionRadioGroupComponent,
@@ -47,7 +57,5 @@ import { VerticalComponent } from './vertical/vertical.component';
     VerticalComponent,
     CustomComponent,
   ],
-
 })
-export class RadioDemoModule {
-}
+export class RadioDemoModule {}

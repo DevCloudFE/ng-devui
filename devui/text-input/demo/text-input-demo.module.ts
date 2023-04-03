@@ -12,6 +12,7 @@ import { BasicComponent } from './basic/basic.component';
 import { PasswordVisibleComponent } from './password-visible/password-visible.component';
 import { TextInputSizeComponent } from './size/text-input-size.component';
 import { TextInputDemoComponent } from './text-input-demo.component';
+import { TextInputDesignComponent } from './text-input-design.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,10 @@ import { TextInputDemoComponent } from './text-input-demo.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: TextInputDesignComponent,
+      },
       { path: 'demo', component: TextInputDemoComponent },
       {
         path: 'api',
@@ -36,7 +41,7 @@ import { TextInputDemoComponent } from './text-input-demo.component';
     FormModule,
   ],
   exports: [TextInputDemoComponent],
-  declarations: [TextInputDemoComponent, BasicComponent, PasswordVisibleComponent, TextInputSizeComponent],
+  declarations: [TextInputDemoComponent, TextInputDesignComponent, BasicComponent, PasswordVisibleComponent, TextInputSizeComponent],
 
 })
 export class TextInputDemoModule {}

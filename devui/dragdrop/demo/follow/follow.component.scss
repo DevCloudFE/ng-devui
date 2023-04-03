@@ -16,6 +16,7 @@
 
 .list-group .list-group-item {
   padding: 0 16px;
+  border-radius: 4px;
 }
 
 .box-shadow {
@@ -67,10 +68,10 @@
 .list-group > li {
   height: 30px;
   border: 1px solid $devui-brand;
-  color: $devui-light-text;
+  color: $devui-text;
   margin-bottom: 5px;
   line-height: 1.5;
-  background-color: $devui-brand;
+  background-color: $devui-base-bg;
   display: flex;
   align-items: center;
 }

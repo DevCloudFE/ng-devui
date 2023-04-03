@@ -93,6 +93,14 @@ export class DatepickerProService implements OnDestroy {
       date.toDateString() === this.minDate.toDateString() || date.toDateString() === this.maxDate.toDateString();
   }
 
+  resetMin() {
+    this.minDate = new Date(this.calendarRange[0], 0, 1);
+  }
+
+  resetMax() {
+    this.maxDate = new Date(this.calendarRange[1], 11, 31);
+  }
+
   // 对范围模式下一些非法的选择进行修正
   fixRangeDate() {
     const start = this.curRangeDate[0]?.getTime();

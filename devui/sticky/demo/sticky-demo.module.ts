@@ -12,6 +12,7 @@ import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { ScrollTargetComponent } from './scroll-target/scroll-target.component';
 import { StickyDemoComponent } from './sticky-demo.component';
+import { StickyDesignComponent } from './sticky-design.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,10 @@ import { StickyDemoComponent } from './sticky-demo.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: StickyDesignComponent,
+      },
       { path: 'demo', component: StickyDemoComponent },
       {
         path: 'api',
@@ -37,7 +42,7 @@ import { StickyDemoComponent } from './sticky-demo.component';
     ]),
   ],
   exports: [StickyDemoComponent],
-  declarations: [StickyDemoComponent, BasicComponent, ScrollTargetComponent],
+  declarations: [StickyDemoComponent, StickyDesignComponent, BasicComponent, ScrollTargetComponent],
 
 })
 export class StickyDemoModule {}

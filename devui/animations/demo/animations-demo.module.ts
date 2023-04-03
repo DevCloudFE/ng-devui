@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { AnimationIconComponent } from './animation-icon/animation-icon.component';
 import { AnimationsDemoComponent } from './animations-demo.component';
+import { AnimationsDesignComponent } from './animations-design.component';
 import { CollapseComponent } from './collapse/collapse.component';
 import { FadeInOutComponent } from './fade-in-out/fade-in-out.component';
 import { FlyInOutComponent } from './fly-in-out/fly-in-out.component';
@@ -34,6 +35,10 @@ import { WipeInOutComponent } from './wipe-in-out/wipe-in-out.component';
     TranslateModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: AnimationsDesignComponent,
+      },
       { path: 'demo', component: AnimationsDemoComponent },
       {
         path: 'api',

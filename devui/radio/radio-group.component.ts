@@ -49,11 +49,12 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
   onTouched: () => null;
   @HostListener('click', ['$event'])
   onRadioChange(event) {
-    if (event.target.tagName.toLowerCase() === 'input') {
+    const target = event.target;
+    if (target.tagName.toLowerCase() === 'input') {
       if (this.disabled) {
         event.preventDefault();
       }
-      this.canChange().then((change) => {
+      this.canChange(target.value).then((change) => {
         if (!change) {
           event.preventDefault();
         }
@@ -105,10 +106,10 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     });
   }
 
-  canChange() {
+  canChange(value: any) {
     let changeResult = Promise.resolve(true);
     if (this.beforeChange) {
-      const result: any = this.beforeChange(this.values);
+      const result: any = this.beforeChange(value);
       if (typeof result !== 'undefined') {
         if (result.then) {
           changeResult = result;

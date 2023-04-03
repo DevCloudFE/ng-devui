@@ -1,190 +1,82 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
-@mixin menu() {
+.header-container {
   position: fixed;
-  display: block;
-  font-size: $devui-font-size;
-  z-index: 5;
-  width: 4em;
-  height: 4em;
-  padding: 1em;
-  transition: all 0.2s ease-out;
-
-  span {
-    position: relative;
-    display: block;
-
-    &::before,
-    &::after {
-      position: absolute;
-      top: -0.55em;
-      content: ' ';
-    }
-
-    &::after {
-      top: 0.55em;
-    }
-
-    &,
-    &::before,
-    &::after {
-      background-color: $devui-text;
-      width: 100%;
-      height: 0.2em;
-      transition: all 0.4s;
-    }
-  }
-
-  &.active span {
-    background: transparent;
-
-    &::before {
-      transform: rotate(45deg) translate(0.5em, 0.4em);
-    }
-
-    &::after {
-      transform: rotate(-45deg) translate(0.4em, -0.3em);
-    }
-  }
-}
-
-.fixed-wapper {
-  width: 100%;
-  z-index: 1;
-  position: absolute;
-  top: 0;
-}
-
-.header-wapper {
-  height: 60px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  background-color: $devui-base-bg;
-  position: relative;
-
-  .header-left {
-    display: flex;
-    align-items: center;
-
-    .slide-menu-link {
-      border-right: 1px solid $devui-dividing-line;
-
-      span {
-        line-height: 40px;
-        display: block;
-        width: 18px;
-        height: 40px;
-        margin: 0 10px;
-        cursor: pointer;
-
-        #slide-button-inner {
-          fill: $devui-text;
-        }
-      }
-    }
-  }
-
-  .header-right {
-    display: flex;
-    align-items: center;
-
-    .header-gitStar {
-      vertical-align: text-bottom;
-      border: 0;
-      height: 20px;
-      width: 100px;
-      margin: 0 12px;
-    }
-  }
-
-  .header-avatar {
-    margin: 0 12px;
-  }
-
-  .header-collapse-menu {
-    right: 5px;
-    @include menu();
-
-    display: none;
-
-    span {
-      &,
-      &::before,
-      &::after {
-        background: $devui-text;
-      }
-    }
-  }
-}
-
-.header-fixed {
-  position: fixed;
+  width: 64px;
+  background-image: linear-gradient(179deg, #E9FBFF 0%, #F3F5FF 100%);
+  height: 100%;
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.header-shadow {
-  box-shadow: $devui-shadow-length-connected-overlay $devui-light-shadow;
-}
-
-.header-maxwidth {
-  max-width: 1256px;
-}
-
-@media (max-width: 1360px) {
-  .header-wapper {
+.header-bottom-menu {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 16px;
+  .menu-item {
+    height: 36px;
+    width: 36px;
+    margin-bottom: 8px;
+    border-radius: $devui-border-radius-card;
+    transition: all $devui-animation-duration-base $devui-animation-ease-in-out-smooth;
+    display: flex;
     flex-direction: column;
-    height: 60px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    &:hover {
+      background: $devui-base-bg;
+      box-shadow: $devui-shadow-length-base $devui-light-shadow;
 
-    .header-collapse-menu {
-      top: 16px;
-      display: block;
+      svg path{
+        fill: $devui-icon-fill-hover;
+        stroke: none;
+      }
     }
-
-    .header-left {
-      height: 60px;
-    }
-
-    .header-right {
-      display: none;
-      position: absolute;
-      top: 60px;
-    }
-
-    .header-right.active {
-      background-color: $devui-global-bg-normal;
-      box-shadow: $devui-shadow-length-connected-overlay $devui-light-shadow;
-      height: 520px;
-      z-index: 3;
-
+    a {
       display: flex;
-      flex-direction: column;
-      width: 100%;
-      ::ng-deep .header-ecosystem {
-        margin-bottom: 12px;
-      }
-      ::ng-deep .header-version-switch {
-        margin-bottom: 12px;
-      }
-      ::ng-deep .header-theme-switch {
-        margin-bottom: 12px;
-      }
-      ::ng-deep .header-language-switch {
-        margin-bottom: 12px;
-      }
-      .header-gitStar {
-        margin-bottom: 12px;
-      }
+      align-items: center;
     }
   }
 }
 
-@media (max-width: 380px) {
-  d-search {
-    width: 180px;
+:host ::ng-deep .menu-item:hover .header-language-switch,
+:host ::ng-deep .header-top-menu .header-menu-container .header-menu-item .logo:hover,
+:host ::ng-deep .header-top-menu .header-menu-container .menu-selected-item .logo{
+  svg path{
+    fill: $devui-icon-fill-hover;
+    stroke: none;
   }
 }
 
-:host d-search ::ng-deep input {
-  border-width: 0;
+:host ::ng-deep .header-top-menu .header-menu-container .menu-selected-item .text,
+:host ::ng-deep .header-top-menu .header-menu-container .header-menu-item .logo:hover + .text{
+  color: $devui-text !important;
+}
+
+
+.expand-sidebar {
+  width: 32px;
+  height: 32px;
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: $devui-border-radius-card;
+  transition: all $devui-animation-duration-base $devui-animation-ease-in-out-smooth;
+  cursor: pointer;
+
+  &:hover {
+    background: $devui-base-bg;
+    box-shadow: $devui-shadow-length-base $devui-light-shadow;
+
+    svg path{
+      fill: $devui-icon-fill-hover;
+      stroke: none;
+    }
+  }
 }

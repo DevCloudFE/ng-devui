@@ -1,0 +1,77 @@
+<div>
+  <p class="devui-design-h2-title devui-design-mt-64 devui-design-mb-16">{{ 'components.text-input.design.structure.name' | translate }}</p>
+  <p class="devui-design-desc">{{ 'components.text-input.design.structure.desc' | translate }}</p>
+  <img [src]="getImgSrc(designObj.structure.image)" alt="" class="devui-design-image-1 devui-design-mt-8" />
+  <div *ngFor="let desc of designObj.structure.descList; let index = index" class="devui-design-mt-16 devui-design-li-container">
+    <div class="devui-design-mr-8">{{ index + 1 }}.</div>
+    <div>
+      <span class="devui-design-h4-title">{{ desc.title }}</span>
+      <span class="devui-design-desc">{{ desc.content }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="devui-design-mb-40">
+  <p class="devui-design-h2-title devui-design-mt-64 devui-design-mb-24">
+    {{ 'components.text-input.design.how-to-use.name' | translate }}
+  </p>
+
+  <p class="devui-design-h3-title">{{ 'components.text-input.design.how-to-use.layout.name' | translate }}</p>
+  <div class="devui-design-image-container">
+    <div *ngFor="let item of designObj['how-to-use'].layout.layoutList" class="devui-design-mt-16 devui-design-image-2">
+      <img [src]="getImgSrc(item.image)" alt="" />
+      <p class="devui-design-mt-12 devui-design-desc devui-design-mb-8">{{ item.desc }}</p>
+      <p *ngFor="let desc of item.descList" class="devui-design-desc">{{ desc }}</p>
+    </div>
+  </div>
+
+  <div>
+    <p class="devui-design-h3-title devui-design-mt-64 devui-design-mb-8">
+      {{ 'components.text-input.design.how-to-use.when-to-use.name' | translate }}
+    </p>
+    <p class="devui-design-desc">{{ 'components.text-input.design.how-to-use.when-to-use.desc1' | translate }}</p>
+    <p class="devui-design-desc devui-design-mb-24">{{ 'components.text-input.design.how-to-use.when-to-use.desc2' | translate }}</p>
+  </div>
+
+  <div>
+    <p class="devui-design-h3-title devui-design-mb-12">{{ 'components.text-input.design.how-to-use.sceneName' | translate }}</p>
+    <div *ngFor="let item of designObj['how-to-use'].sceneList" class="devui-design-mb-64">
+      <p class="devui-design-h4-title devui-design-mb-8">{{ item.name }}</p>
+      <p *ngIf="item.desc" class="devui-design-desc">{{ item.desc }}</p>
+      <ng-container *ngIf="item.descList">
+        <p *ngFor="let desc of item.descList" class="devui-design-desc">{{ desc }}</p>
+      </ng-container>
+      <img [src]="getImgSrc(item.image)" alt="" class="devui-design-image-1 devui-design-mt-16" />
+      <p *ngIf="item.desc2" class="devui-design-desc devui-design-mt-8 devui-design-mb-16">{{ item.desc2 }}</p>
+      <img *ngIf="item.image2" [src]="getImgSrc(item.image2)" alt="" class="devui-design-image-1" />
+    </div>
+  </div>
+
+  <div>
+    <p class="devui-design-h3-title">{{ 'components.text-input.design.how-to-use.status.name' | translate }}</p>
+    <p class="devui-design-desc devui-design-mt-8 devui-design-mb-16">
+      {{ 'components.text-input.design.how-to-use.status.desc' | translate }}
+    </p>
+    <img [src]="getImgSrc(designObj['how-to-use'].status.image)" alt="" class="devui-design-image-1" />
+  </div>
+
+  <div>
+    <p class="devui-design-h3-title devui-design-mt-64">{{ 'components.text-input.design.how-to-use.size.name' | translate }}</p>
+    <p class="devui-design-desc devui-design-mt-8 devui-design-mb-16">
+      {{ 'components.text-input.design.how-to-use.size.desc' | translate }}
+    </p>
+    <img [src]="getImgSrc(designObj['how-to-use'].size.image)" alt="" class="devui-design-image-1" />
+  </div>
+
+  <div>
+    <p class="devui-design-h3-title devui-design-mt-64">{{ 'components.text-input.design.how-to-use.rules.name' | translate }}</p>
+    <p class="devui-design-desc devui-design-mt-8 devui-design-mb-12">
+      {{ 'components.text-input.design.how-to-use.rules.desc' | translate }}
+    </p>
+    <p class="devui-design-h4-title">{{ 'components.text-input.design.how-to-use.rules.sub-name' | translate }}</p>
+    <p class="devui-design-desc devui-design-mt-8 devui-design-mb-16">
+      {{ 'components.text-input.design.how-to-use.rules.sub-desc' | translate }}
+    </p>
+    <img [src]="getImgSrc(designObj['how-to-use'].rules.image)" alt="" class="devui-design-image-1" />
+  </div>
+</div>

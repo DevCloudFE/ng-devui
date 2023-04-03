@@ -20,7 +20,12 @@
         width: 30%;
         height: 36px;
         margin-right: 8px;
-        overflow: hidden;
+
+        &::ng-deep label {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
       }
     }
 

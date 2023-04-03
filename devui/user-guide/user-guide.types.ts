@@ -14,7 +14,7 @@ export interface IUserGuideExtraConfig {
 
 export interface IStepElement {
   element?: string;
-  title: string;
+  title?: string;
   content?: string | TemplateRef<any>;
   position?: GuidePositionType;
   type?: 'normal' | 'interactable' | 'tip';

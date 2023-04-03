@@ -28,6 +28,7 @@ import { MultiKeepOrderComponent } from './multi-keep-order/multi-keep-order.com
 import { ObjectFilterComponent } from './object-filter/object-filter.component';
 import { SelectAllComponent } from './select-all/select-all.component';
 import { SelectDemoComponent } from './select-demo.component';
+import { SelectDesignComponent } from './select-design.component';
 import { UserLimitSelectedNumberComponent } from './user-limit-selected-number/user-limit-selected-number.component';
 import { UserMailSearchComponent } from './user-mail-search/user-mail-search.component';
 import { UserSearchNLazyLoadComponent } from './user-search-n-lazyload/user-search-n-lazyload.component';
@@ -45,6 +46,10 @@ import { UserSearchNLazyLoadComponent } from './user-search-n-lazyload/user-sear
     DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: SelectDesignComponent,
+      },
       { path: 'demo', component: SelectDemoComponent },
       {
         path: 'api',
@@ -59,6 +64,7 @@ import { UserSearchNLazyLoadComponent } from './user-search-n-lazyload/user-sear
   exports: [SelectDemoComponent],
   declarations: [
     SelectDemoComponent,
+    SelectDesignComponent,
     SelectBasicComponent,
     CustomSearchComponent,
     SelectAllComponent,

@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BasicComponent } from './basic/basic.component';
 import { CustomTimeComponent } from './custom-time/custom-time.component';
 import { DemoComponent } from './demo.component';
+import { RelativeTimeDesignComponent } from './relative-time-design.component';
 
 @NgModule({
   declarations: [DemoComponent, BasicComponent, CustomTimeComponent],
@@ -24,6 +25,10 @@ import { DemoComponent } from './demo.component';
     DevUIApiModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: RelativeTimeDesignComponent,
+      },
       { path: 'demo', component: DemoComponent },
 
       {

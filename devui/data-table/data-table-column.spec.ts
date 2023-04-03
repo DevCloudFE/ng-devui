@@ -135,7 +135,7 @@ class TestDataTableColumnBasicComponent {
         header="Date of birth"
         [fieldType]="'date'"
         [extraOptions]="{ dateFormat: 'MM/dd/yyyy' }"
-        [width]="'2000px'"
+        [width]="'20000px'"
       ></d-column>
       <d-column field="hidden" header="hidden" [width]="'100px'">hidden</d-column>
     </d-data-table>

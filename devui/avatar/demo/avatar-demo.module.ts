@@ -9,6 +9,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { AvatarDemoComponent } from './avatar-demo.component';
+import { AvatarDesignComponent } from './avatar-design.component';
 import { BasicComponent } from './basic/basic.component';
 import { ConfigComponent } from './config/config.component';
 import { SpecialComponent } from './special/special.component';
@@ -24,6 +25,10 @@ import { SpecialComponent } from './special/special.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: AvatarDesignComponent,
+      },
       { path: 'demo', component: AvatarDemoComponent },
       {
         path: 'api', component: DevUIApiComponent, data: {
@@ -40,7 +45,8 @@ import { SpecialComponent } from './special/special.component';
     BasicComponent,
     SpecialComponent,
     ConfigComponent,
-    AvatarDemoComponent
+    AvatarDemoComponent,
+    AvatarDesignComponent,
   ]
 })
 export class AvatarDemoModule { }

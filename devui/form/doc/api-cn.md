@@ -146,6 +146,10 @@ import { FormsModule } from '@angular/forms';
 | :--------------: | :------: | :--: | :-----------------------------------------------------------------------------------------------------------: | :-------------------------------------: |
 | dValidateSyncKey | `string` |  --  | 必选，配置唯一标识 key，相同 key 表单元素将在其中一个元素值发生变更时，同时触发校验，支持响应式与模板驱动表单 | [表单协同验证](demo#demo-validate-sync) |
 
+# dActiveFormControl
+
+给业务的自定义容器添加该directive，可以获得与其他组件表单（如text-input, select, cascader）同样的点击交互效果。
+
 ## 封装的校验规则
 
 ### 使用方法
@@ -249,7 +253,7 @@ export type DValidateRules =
 
       errorStrategy?: DValidationErrorStrategy; // error更新策略，默认为'dirty'
 
-      message?: string | { [key: string]: string }; // 统一配置的message，如果你的某一条校验规则未配置message，将取统一message
+      message?: string | { [key: string]: string } | templateRef<any>; // 统一配置的message，如果你的某一条校验规则未配置message，将取统一message, message模板仅在popover下生效
 
       messageShowType?: 'popover' | 'text' | 'none'; // 消息自动显示策略（当前仅单个表单组件下生效），(popover | d-form-item容器内部显示 | 不显示)
 
@@ -268,7 +272,7 @@ export interface DValidateRule { // 定义同步校验规则
 
   validator ?: DValidatorFn | ValidatorFn; // 校验器，兼容Angular原生校验器（需要设置isNgValidator为true）
 
-  message ?: string | { [key: string]: string };  // 校验不通过时返回的提示消息，可返回国际化词条对象，key为对应语言key，默认key为'default'
+  message ?: string | { [key: string]: string }  | templateRef<any>;  // 校验不通过时返回的提示消息，可返回国际化词条对象，key为对应语言key，默认key为'default'，message模板仅在popover下生效
 
   errorStrategy ?: DValidationErrorStrategy;  // 当前规则的error更新策略，默认为'dirty'
 

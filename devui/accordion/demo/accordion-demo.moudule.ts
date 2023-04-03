@@ -9,6 +9,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { ToggleModule } from 'ng-devui/toggle';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
+import { AccordionDesignComponent } from './according-design.component';
 import { AccordionDemoComponent } from './accordion-demo.component';
 import { BasicComponent } from './basic/basic.component';
 import { ChangeKeyComponent } from './change-key/change-key.component';
@@ -29,6 +30,10 @@ import { TemplateComponent } from './template/template.component';
     DevUIApiModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: AccordionDesignComponent,
+      },
       { path: 'demo', component: AccordionDemoComponent },
       {
         path: 'api',
@@ -43,6 +48,7 @@ import { TemplateComponent } from './template/template.component';
   exports: [],
   declarations: [
     AccordionDemoComponent,
+    AccordionDesignComponent,
     BasicComponent,
     LinkComponent,
     TemplateComponent,

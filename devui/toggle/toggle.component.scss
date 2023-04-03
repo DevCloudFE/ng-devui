@@ -65,11 +65,19 @@
     position: absolute;
     top: 1px;
     left: 1px;
-    transition: $devui-animation-duration-slow $devui-animation-ease-in-out-smooth all;
+    transition: $devui-animation-duration-base $devui-animation-ease-in-out-smooth all;
+
+    &.mouseDown {
+      width: 20px;
+    }
   }
 
   &.devui-checked small {
     left: 19px;
+
+    &.mouseDown {
+      left: 15px;
+    }
   }
 
   &.devui-toggle-lg {
@@ -91,11 +99,19 @@
       height: 28px;
       top: 1px;
       left: 1px;
+
+      &.mouseDown {
+        width: 32px;
+      }
     }
 
     &.devui-checked small {
       background: $devui-light-text;
       left: 29px;
+
+      &.mouseDown {
+        left: 25px;
+      }
     }
   }
 
@@ -117,10 +133,18 @@
       width: 12px;
       height: 12px;
       position: absolute;
+
+      &.mouseDown {
+        width: 14px;
+      }
     }
 
     &.devui-checked small {
       left: 17px;
+
+      &.mouseDown {
+        left: 15px;
+      }
     }
   }
 

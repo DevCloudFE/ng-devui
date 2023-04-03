@@ -12,8 +12,8 @@ import { AdditionalComponent } from './additional/additional.component';
 import { BasicComponent } from './basic/basic.component';
 import { LiteComponent } from './lite/lite.component';
 import { PaginationDemoComponent } from './pagination-demo.component';
+import { PaginationDesignComponent } from './pagination-design.component';
 import { WidgetsComponent } from './widgets/widgets.component';
-
 
 @NgModule({
   imports: [
@@ -26,6 +26,10 @@ import { WidgetsComponent } from './widgets/widgets.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: PaginationDesignComponent,
+      },
       { path: 'demo', component: PaginationDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -36,6 +40,7 @@ import { WidgetsComponent } from './widgets/widgets.component';
   exports: [PaginationDemoComponent],
   declarations: [
     PaginationDemoComponent,
+    PaginationDesignComponent,
     BasicComponent,
     AdditionalComponent,
     LiteComponent,

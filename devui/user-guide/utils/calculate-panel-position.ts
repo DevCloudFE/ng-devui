@@ -63,24 +63,25 @@ export class PanelPostion {
   }
 
   calculateTopBottomAlign(curStepRect, panelRect) {
-    if (
-      panelRect.width < curStepRect.width ||
-        (curStepRect.left + curStepRect.width / 2 - panelRect.width / 2 > 0 &&
-          curStepRect.left + curStepRect.width / 2 + panelRect.width / 2 < this.document.documentElement.clientWidth)
-    ) {
-      this.alignDirection = 'middle';
-    } else if (curStepRect.left + panelRect.width < this.document.documentElement.clientWidth) {
+    if (curStepRect.left + panelRect.width < this.document.documentElement.clientWidth) {
       this.alignDirection = 'left';
     } else if (curStepRect.right - panelRect.width > 0) {
       this.alignDirection = 'right';
+    }
+    if (
+      panelRect.width < curStepRect.width ||
+      (curStepRect.left + curStepRect.width / 2 - panelRect.width / 2 > 0 &&
+        curStepRect.left + curStepRect.width / 2 + panelRect.width / 2 < this.document.documentElement.clientWidth)
+    ) {
+      this.alignDirection = 'middle';
     }
   }
 
   calculateLeftRightAlign(curStepRect, panelRect) {
     if (
       panelRect.height < curStepRect.height ||
-        (curStepRect.top + curStepRect.height / 2 - panelRect.height / 2 > 0 &&
-          curStepRect.top + curStepRect.height / 2 + panelRect.height / 2 < this.document.documentElement.clientHeight)
+      (curStepRect.top + curStepRect.height / 2 - panelRect.height / 2 > 0 &&
+        curStepRect.top + curStepRect.height / 2 + panelRect.height / 2 < this.document.documentElement.clientHeight)
     ) {
       this.alignDirection = 'middle';
     } else if (curStepRect.top + panelRect.height < this.document.documentElement.clientWidth) {
@@ -151,8 +152,8 @@ export class PanelPostion {
 
     const panelArrow = this.document.querySelector('.devui-user-guide-panel-arrow') as HTMLElement;
     if (panelArrow) {
-      panelArrow.style.top =`${this.arrowTopBias}px`;
-      panelArrow.style.left =`${this.arrowLeftBias}px`;
+      panelArrow.style.top = `${this.arrowTopBias}px`;
+      panelArrow.style.left = `${this.arrowLeftBias}px`;
     }
 
     panel.style.cssText = `

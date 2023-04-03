@@ -9,17 +9,17 @@ export class TagsInputDemoCustomizeComponent implements OnInit {
   suggestionList = [];
 
   ngOnInit() {
-    this.tagList = [{ name: 'item1' }];
     this.suggestionList = [
-      { name: 'item1' },
-      { name: 'item2' },
-      { name: 'item3' },
-      { name: 'item4' },
-      { name: 'item5' },
-      { name: 'item6' },
-      { name: 'item7' },
-      { name: 'item8' },
+      { name: 'item1', isOption: true },
+      { name: 'item2', isOption: true },
+      { name: 'item3', isOption: true },
+      { name: 'item4', isOption: true },
+      { name: 'item5', isOption: true },
+      { name: 'item6', isOption: true },
+      { name: 'item7', isOption: true },
+      { name: 'item8', isOption: true },
     ];
+    this.tagList = this.suggestionList.slice(0, 1);
   }
 
   customCheck = (tag: string | { name: string }) => {

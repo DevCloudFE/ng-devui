@@ -14,6 +14,7 @@ import { BasicComponent } from './basic/basic.component';
 import { BatchDragComponent } from './batch-drag/batch-drag.component';
 import { CrossDimensionComponent } from './cross-dimension/cross-dimension.component';
 import { DragDropDemoComponent } from './dragdrop-demo.component';
+import { DragdropDesignComponent } from './dragdrop-design.component';
 import { DropScrollComponent } from './drop-scroll/drop-scroll.component';
 import { FollowComponent } from './follow/follow.component';
 import { OriginPlaceholderComponent } from './origin-placeholder/origin-placeholder.component';
@@ -34,6 +35,10 @@ import { TreeComponent } from './tree/tree.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: DragdropDesignComponent,
+      },
       { path: 'demo', component: DragDropDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -44,6 +49,7 @@ import { TreeComponent } from './tree/tree.component';
   exports: [DragDropDemoComponent],
   declarations: [
     DragDropDemoComponent,
+    DragdropDesignComponent,
     BasicComponent,
     TreeComponent,
     FollowComponent,

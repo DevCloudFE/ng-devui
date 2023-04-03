@@ -9,6 +9,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { AlertDemoComponent } from './alert-demo.component';
+import { AlertDesignComponent } from './alert-design.component';
 import { BasicComponent } from './basic/basic.component';
 import { CloseComponent } from './close/close.component';
 import { WithoutIconComponent } from './withoutIcon/withoutIcon.component';
@@ -24,6 +25,10 @@ import { WithoutIconComponent } from './withoutIcon/withoutIcon.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: AlertDesignComponent,
+      },
       { path: 'demo', component: AlertDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -34,6 +39,7 @@ import { WithoutIconComponent } from './withoutIcon/withoutIcon.component';
   exports: [AlertDemoComponent],
   declarations: [
     AlertDemoComponent,
+    AlertDesignComponent,
     BasicComponent,
     CloseComponent,
     WithoutIconComponent

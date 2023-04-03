@@ -3,6 +3,7 @@ import {
   Output, TemplateRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AnimationNumberDuration } from 'ng-devui/utils';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -59,6 +60,7 @@ export class ToggleComponent implements ControlValueAccessor {
 
   private onTouchedCallback = () => {};
   private onChangeCallback = (v: any) => {};
+  isMousedown = false;
 
   @HostListener('click')
   onToggle() {
@@ -74,6 +76,18 @@ export class ToggleComponent implements ControlValueAccessor {
       this.onChangeCallback(this.checked);
       this.onTouchedCallback();
     });
+  }
+
+  @HostListener('mousedown')
+  onMousedown() {
+    this.isMousedown = true;
+  }
+
+  @HostListener('mouseup')
+  onMouseup() {
+    setTimeout(() => {
+      this.isMousedown = false;
+    }, AnimationNumberDuration.SLOW / 2);
   }
 
   canChange() {

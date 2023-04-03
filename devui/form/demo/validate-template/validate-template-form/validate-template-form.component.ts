@@ -5,7 +5,8 @@ import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'd-form-demo-validate-template-form',
-  templateUrl: './validate-template-form.component.html'
+  templateUrl: './validate-template-form.component.html',
+  styleUrls: ['./validate-template-form.component.scss']
 })
 export class ValidateTemplateFormComponent {
   layoutDirection: FormLayout = FormLayout.Vertical;
@@ -14,6 +15,7 @@ export class ValidateTemplateFormComponent {
     planDescription: '',
     planExerciseDate: [{ 'id': '1', 'label': 'Mon'}],
     planVerifier: null,
+    password: '',
   };
 
   existPlanNames = ['123', '123456', 'DevUI'];
@@ -36,9 +38,21 @@ export class ValidateTemplateFormComponent {
     { 'id': '6', 'name': 'Administrator6'},
   ];
 
+  nameValid = {
+    same: true,
+    length: true
+  };
+
   checkName(value) {
     let res = true;
-    if (this.existPlanNames.indexOf(value) !== -1) {
+    this.nameValid.same = this.existPlanNames.indexOf(value) === -1;
+    if (!this.nameValid.same) {
+      res = false;
+    }
+
+    this.nameValid.length = (value.length > 3 && value.length < 10);
+
+    if (!this.nameValid.length) {
       res = false;
     }
     return of(res).pipe(delay(500));

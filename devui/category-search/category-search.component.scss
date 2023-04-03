@@ -7,12 +7,13 @@
   d-tag > .devui-tag-item {
     display: block !important;
 
+    .devui-category-search-multi-tag > span,
     & > span {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       display: inline-block;
-      vertical-align: bottom;
+      vertical-align: middle;
       margin: 0 4px;
     }
   }
@@ -32,8 +33,6 @@
   border: 1px solid $devui-line;
 
   &.container-hover {
-    border: 1px solid $devui-form-control-line-hover;
-
     & > .devui-category-search-icon svg g path {
       fill: $devui-icon-fill-hover;
     }
@@ -320,6 +319,10 @@ d-tag {
   max-width: 300px;
   max-height: 352px;
   overflow: auto;
+
+  &:empty {
+    display: none;
+  }
 
   .devui-category-search-group {
     font-size: $devui-font-size;

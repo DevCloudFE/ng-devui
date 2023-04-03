@@ -1,7 +1,8 @@
 @import '../theme/color.scss';
 @import '../theme/shadow';
 @import '../theme/corner';
-@import '../core/animation';
+@import '../theme/font';
+@import '../theme/animation';
 @import '../../style/theme/z-index';
 
 @mixin devui-no-data-tip() {

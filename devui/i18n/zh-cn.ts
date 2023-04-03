@@ -78,7 +78,10 @@ export default {
     },
     hour: '时',
     min: '分',
-    second: '秒'
+    second: '秒',
+    yearDisplay(year) {
+      return `${year}年`;
+    },
   },
   form: {
     required(val): string {
@@ -206,6 +209,7 @@ export default {
     pre: '上一张',
     next: '下一张',
     origin: '查看原图',
+    download: '下载'
   },
   colorPicker: {
     recentlyUsed: '最近使用',

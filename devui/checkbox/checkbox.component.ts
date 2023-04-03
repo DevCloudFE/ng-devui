@@ -1,7 +1,9 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   forwardRef,
   Input,
@@ -28,7 +30,7 @@ import { Observable } from 'rxjs';
   ],
   preserveWhitespaces: false,
 })
-export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
+export class CheckBoxComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
   static ID_SEED = 0;
   @Input() name: string;
   @Input() label: string;
@@ -48,11 +50,17 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges {
   private onChange = (_: any) => null;
   private onTouch = () => null;
 
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private devConfigService: DevConfigService
-  ) {
+  constructor(private changeDetectorRef: ChangeDetectorRef, private devConfigService: DevConfigService, private el: ElementRef) {
     this.id = CheckBoxComponent.ID_SEED++;
+  }
+
+  ngAfterViewInit(): void {
+    const glowBox = this.el.nativeElement.querySelector('.devui-checkbox > .devui-checkbox-glow-box');
+    const labelDom = this.el.nativeElement.querySelector('.devui-checkbox > label');
+    const labelHeight = labelDom && getComputedStyle(labelDom).height;
+    if (glowBox && labelHeight && labelHeight !== '16px') {
+      glowBox.style.height = labelHeight;
+    }
   }
 
   writeValue(checked: any): void {

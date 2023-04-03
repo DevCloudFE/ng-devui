@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { AutofocusComponent } from './autofocus/autofocus.component';
 import { ButtonDemoComponent } from './button-demo.component';
+import { ButtonDesignComponent } from './button-design.component';
 import { CombinationComponent } from './combination/combination.component';
 import { CommonComponent } from './common/common.component';
 import { DangerComponent } from './danger/danger.component';
@@ -32,17 +33,26 @@ import { TextComponent } from './text/text.component';
     DDemoNavModule,
     DropDownModule,
     RouterModule.forChild([
-      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
-      { path: 'demo', component: ButtonDemoComponent},
-      { path: 'api', component: DevUIApiComponent, data: {
-        'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
-        'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
-      }}
-    ])
+      { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: ButtonDesignComponent,
+      },
+      { path: 'demo', component: ButtonDemoComponent },
+      {
+        path: 'api',
+        component: DevUIApiComponent,
+        data: {
+          'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md'),
+        },
+      },
+    ]),
   ],
   exports: [ButtonDemoComponent],
   declarations: [
     ButtonDemoComponent,
+    ButtonDesignComponent,
     CommonComponent,
     IconComponent,
     LoadingComponent,
@@ -54,7 +64,5 @@ import { TextComponent } from './text/text.component';
     SizeComponent,
     GroupsComponent,
   ],
-
 })
-export class ButtonDemoModule {
-}
+export class ButtonDemoModule {}

@@ -6,7 +6,7 @@ import { FormControlComponent } from './form-control.component';
 import { FormItemComponent } from './form-item.component';
 import { FormLabelComponent } from './form-label.component';
 import { DFormResetDirective, DFormSubmitDirective, FormOperationComponent } from './form-operation.component';
-import { FormDirective } from './form.directive';
+import { ActiveFormControlDirective, FormDirective } from './form.directive';
 import { DValidateSyncDirective } from './validator-directive/d-validate-sync.directive';
 import { DFormControlRuleDirective, DFormGroupRuleDirective } from './validator-directive/form-control-rules.directive';
 
@@ -22,7 +22,8 @@ import { DFormControlRuleDirective, DFormGroupRuleDirective } from './validator-
     DFormControlRuleDirective,
     DFormSubmitDirective,
     DFormResetDirective,
-    DValidateSyncDirective
+    DValidateSyncDirective,
+    ActiveFormControlDirective
   ],
   declarations: [
     FormItemComponent,
@@ -34,7 +35,8 @@ import { DFormControlRuleDirective, DFormGroupRuleDirective } from './validator-
     DFormControlRuleDirective,
     DFormSubmitDirective,
     DFormResetDirective,
-    DValidateSyncDirective
+    DValidateSyncDirective,
+    ActiveFormControlDirective
   ],
   providers: [],
 })

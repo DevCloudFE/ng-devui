@@ -13,6 +13,7 @@ import { BasicComponent } from './basic/basic.component';
 import { CallbackComponent } from './callback/callback.component';
 import { CustomComponent } from './custom/custom.component';
 import { ToggleDemoComponent } from './toggle-demo.component';
+import { ToggleDesignComponent } from './toggle-design.component';
 import { TwoBindingComponent } from './two-binding/two-binding.component';
 
 @NgModule({
@@ -27,6 +28,10 @@ import { TwoBindingComponent } from './two-binding/two-binding.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: ToggleDesignComponent,
+      },
       { path: 'demo', component: ToggleDemoComponent },
       {
         path: 'api',
@@ -41,6 +46,7 @@ import { TwoBindingComponent } from './two-binding/two-binding.component';
   exports: [ToggleDemoComponent],
   declarations: [
     ToggleDemoComponent,
+    ToggleDesignComponent,
     BasicComponent,
     TwoBindingComponent,
     CallbackComponent,

@@ -1,19 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-vertical',
-  templateUrl: './vertical.component.html'
+  templateUrl: './vertical.component.html',
 })
-export class VerticalComponent implements OnInit {
-  values = ['Spring', 'Summer', 'Autumn', 'Winter'];
-  choose = 'Summer';
-  constructor() { }
+export class VerticalComponent {
+  weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+  chosenItem = 'Wednesday';
 
-  ngOnInit() {
+  valueChange(value: string): void {
+    console.log(value);
   }
-
-  log($event) {
-    console.log($event);
-  }
-
 }

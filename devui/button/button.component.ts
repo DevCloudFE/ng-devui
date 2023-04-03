@@ -11,6 +11,7 @@ import {
   TemplateRef,
   ViewChild
 } from '@angular/core';
+import { AnimationNumberDuration } from 'ng-devui/utils';
 export type IButtonType = 'button' | 'submit' | 'reset';
 /**
  * 类型中text-dark参数废弃
@@ -55,6 +56,11 @@ export class ButtonComponent implements AfterContentChecked {
     }
   }
 
+  waveLeft = 0;
+  waveTop = 0;
+  showWave = false;
+  isMouseDown = false;
+
   constructor(private cd: ChangeDetectorRef) {
   }
 
@@ -63,6 +69,17 @@ export class ButtonComponent implements AfterContentChecked {
     if (!this.showLoading) {
       this.btnClick.emit(event);
     }
+    this.showClickWave(event);
+  }
+
+  showClickWave(event) {
+    this.waveLeft = event.offsetX;
+    this.waveTop = event.offsetY;
+    this.showWave = true;
+
+    setTimeout(() => {
+      this.showWave = false;
+    }, AnimationNumberDuration.SLOW);
   }
 
   ngAfterContentChecked(): void {

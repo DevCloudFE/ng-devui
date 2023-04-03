@@ -7,7 +7,7 @@ import { AnchorActiveChangeSource, IAnchorBox } from './anchor.type';
 
 @Directive({
   selector: '[dAnchorBox]',
-  })
+})
 export class AnchorBoxDirective implements IAnchorBox, OnChanges, OnDestroy {
   public isScrollingToTarget = false;
   private activeChangeSubject = new Subject();

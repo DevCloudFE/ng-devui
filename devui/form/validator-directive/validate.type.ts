@@ -1,3 +1,4 @@
+import { TemplateRef } from '@angular/core';
 import { AsyncValidatorFn, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DValidators } from './validators';
@@ -25,22 +26,22 @@ export type DAsyncValidatorFn = (value: any) => Observable<boolean | string | { 
 export interface DValidateRule {
   id?: string;
   validator?: DValidatorFn | ValidatorFn;
-  message?: string | { [key: string]: string };
+  message?: string | { [key: string]: string } | TemplateRef<any>;
   errorStrategy?: DValidationErrorStrategy;
   priority?: number;
   isNgValidator?: boolean;
   validateLevel?: 'error' | 'warning'; // 校验级别
-  [id: string]: boolean | number | string | { [key: string]: string } | RegExp | DValidatorFn | ValidatorFn | undefined; // 万能key
+  [id: string]: boolean | number | string | { [key: string]: string } | RegExp | DValidatorFn | ValidatorFn | undefined | TemplateRef<any>; // 万能key
 }
 export interface DAsyncValidateRule {
   id?: string;
   validator?: DAsyncValidatorFn | AsyncValidatorFn;
-  message?: string | { [key: string]: string };
+  message?: string | { [key: string]: string } | TemplateRef<any>;
   errorStrategy?: DValidationErrorStrategy;
   priority?: number;
   isNgValidator?: boolean;
   validateLevel?: 'error' | 'warning'; // 校验级别
-  [id: string]: boolean | number | string | { [key: string]: string } | RegExp | DAsyncValidatorFn | AsyncValidatorFn | undefined; // 万能key
+  [id: string]: boolean | number | string | { [key: string]: string } | RegExp | DAsyncValidatorFn | AsyncValidatorFn | undefined | TemplateRef<any>; // 万能key
 }
 
 // TODO: 还需提供一个debounceTime
@@ -50,7 +51,7 @@ export type DValidateRules =
     asyncValidators?: DAsyncValidateRule[];
     asyncDebounceTime?: number; // 异步校验器debounceTime
     errorStrategy?: DValidationErrorStrategy; // error更新策略
-    message?: string | { [key: string]: string }; // 统一配置的message
+    message?: string | { [key: string]: string } | TemplateRef<any>; // 统一配置的message
     updateOn?: 'change' | 'blur' | 'submit'; // model更新策略
     messageShowType?: 'popover' | 'text' | 'none'; // 消息自动显示策略（当前仅单个表单组件下生效），自身附着popover | form-control下显示 | 不显示，
     popPosition?:

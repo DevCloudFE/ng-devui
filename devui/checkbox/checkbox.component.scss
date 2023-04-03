@@ -1,7 +1,7 @@
-
+@import '../style/core/animation';
 @import '../style/theme/color';
 @import '../style/theme/corner';
-@import '../style/core/animation';
+@import '../style/core/font';
 
 .devui-checkbox {
   position: relative;
@@ -16,12 +16,16 @@
     position: absolute;
 
     .devui-tick {
-      fill: $devui-light-text;
-      stroke-dashoffset: 50;
+      stroke: $devui-light-text;
+      stroke-dasharray: 13 13;
+      stroke-dashoffset: 13;
       opacity: 0;
       transform: scale(0);
       transform-origin: 50% 50%;
-      transition: stroke-dashoffset $devui-animation-duration-base $devui-animation-ease-in-out, opacity $devui-animation-duration-base $devui-animation-ease-in-out, transform $devui-animation-duration-base $devui-animation-ease-in-out;
+      transition:
+        stroke-dashoffset $devui-animation-duration-base $devui-animation-ease-in-out,
+        opacity $devui-animation-duration-base $devui-animation-ease-in-out,
+        transform $devui-animation-duration-base $devui-animation-ease-in-out;
     }
   }
 
@@ -29,7 +33,7 @@
     opacity: 1;
     stroke-dashoffset: 0;
     transform: scale(1);
-    transition: stroke-dashoffset $devui-animation-duration-slow $devui-animation-ease-in-out, opacity $devui-animation-duration-base $devui-animation-ease-in-out;
+    transition: stroke-dashoffset $devui-animation-duration-slow $devui-animation-ease-in, opacity $devui-animation-duration-base $devui-animation-ease-in-out;
   }
 
   &.active,
@@ -42,7 +46,7 @@
   &.active:not(.disabled) {
     .devui-checkbox-material {
       background-size: 100% 100%;
-      transition: background-size$devui-animation-duration-base $devui-animation-ease-in-out, border-color $devui-animation-duration-base $devui-animation-ease-in-out;
+      transition: border-color $devui-animation-duration-base $devui-animation-ease-in-out;
     }
   }
 
@@ -52,7 +56,7 @@
       transition: background-size $devui-animation-duration-base $devui-animation-ease-in-out, border-color $devui-animation-duration-base $devui-animation-ease-in-out;
 
       &:hover {
-        border-color: $devui-icon-fill-active;
+        border-color: $devui-brand;
       }
     }
   }
@@ -60,7 +64,7 @@
   &.unchecked:not(.disabled) {
     .devui-checkbox-material.custom-color {
       background-size: 0% 0%;
-      transition: background-size $devui-animation-duration-base $devui-animation-ease-in-out, border-color $devui-animation-duration-base $devui-animation-ease-in-out;
+      transition: border-color $devui-animation-duration-base $devui-animation-ease-in-out;
     }
   }
 
@@ -132,7 +136,7 @@
       &:focus,
       &:active,
       &:hover {
-        background-color: $devui-icon-fill-active;
+        background-color: $devui-brand;
       }
 
       // 激活状态深色
@@ -140,7 +144,7 @@
       &:focus,
       &:hover:active,
       &:hover:focus {
-        background-color: $devui-brand-active-focus;
+        background-color: $devui-brand-active;
       }
     }
   }
@@ -159,6 +163,7 @@
 
   & label {
     position: relative;
+    font-size: $devui-font-size;
     font-weight: normal;
     height: 16px;
     line-height: 16px;
@@ -195,13 +200,7 @@
 
     &.halfchecked {
       .devui-checkbox-material {
-        background-color: $devui-disabled-bg;
-
-        .devui-checkbox-halfchecked-bg {
-          transform: scale(0.4288);
-          background-color: $devui-disabled-text;
-          opacity: 1;
-        }
+        background-color: $devui-icon-fill-active-disabled;
       }
     }
 
@@ -210,6 +209,26 @@
         fill: $devui-light-text;
       }
     }
+  }
+
+  .devui-checkbox-glow-box {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+
+    .devui-checkbox-glow-bg {
+      display: block;
+      width: 16px;
+      height: 16px;
+      user-select: none;
+      border-radius: $devui-border-radius;
+      box-shadow: none;
+      transition: box-shadow $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+    }
+  }
+
+  &:not(.disabled):hover .devui-checkbox-glow-bg {
+    box-shadow: 0 0 0 6px $devui-range-item-hover-bg;
   }
 }
 

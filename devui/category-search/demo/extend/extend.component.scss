@@ -1,0 +1,29 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+section > div {
+  margin-top: 16px;
+}
+
+:host ::ng-deep .devui-category-search-icon {
+  &.reset {
+    cursor: pointer;
+  }
+
+  svg g path {
+    outline: none;
+    fill: $devui-icon-fill;
+    transition: all $devui-animation-ease-in-out-smooth $devui-animation-duration-slow;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    svg g path {
+      fill: $devui-disabled-text;
+    }
+  }
+
+  &:not(.disabled):hover svg g path {
+    fill: $devui-icon-fill-hover;
+  }
+}

@@ -71,7 +71,7 @@
 }
 
 .list-group-child > li > .name {
-  background-color: $devui-brand;
+  background-color: $devui-base-bg;
 }
 
 .list-group > li > .name {
@@ -82,11 +82,12 @@
   padding: 0 10px;
   height: 30px;
   border: 1px solid $devui-brand;
-  color: $devui-light-text;
+  color: $devui-text;
   line-height: 1.5;
-  background-color: $devui-brand;
+  background-color: $devui-base-bg;
   display: flex;
   align-items: center;
+  border-radius: 4px;
 }
 
 .list-group > li.dragover-item > .name {

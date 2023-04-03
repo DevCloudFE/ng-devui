@@ -53,9 +53,6 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
 
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
 
-
-  constructor() {}
-
   _value: any;
   handleChange: (event: any, value: any) => void;
 
@@ -99,21 +96,19 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
   }
 
   canChange() {
-    let changeResult = Promise.resolve(true);
-
+    let changeResult: Promise<boolean> | Observable<boolean> = Promise.resolve(true);
     if (this.beforeChange) {
-      const result: any = this.beforeChange(this.value);
+      const result = this.beforeChange(this.value);
       if (typeof result !== 'undefined') {
-        if (result.then) {
-          changeResult = result;
-        } else if (result.subscribe) {
+        if ((result as Promise<boolean>).then) {
+          changeResult = result as Promise<boolean>;
+        } else if ((result as Observable<boolean>).subscribe) {
           changeResult = (result as Observable<boolean>).toPromise();
         } else {
-          changeResult = Promise.resolve(result);
+          changeResult = Promise.resolve(result as boolean);
         }
       }
     }
-
     return changeResult;
   }
 }

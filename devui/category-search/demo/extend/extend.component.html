@@ -1,0 +1,37 @@
+<section>
+  <d-category-search
+    #dCategorySearch
+    [category]="category"
+    [selectedTags]="selectedTags"
+    [defaultSearchField]="defaultSearchField"
+    [extendedConfig]="extendedConfig"
+    [textConfig]="textConfig"
+    [showSearchCategory]="showSearchCategory"
+    (searchEvent)="searchEvent($event)"
+    (selectedTagsChange)="selectedTagsChange($event)"
+  >
+  </d-category-search>
+  <div *ngIf="finalSearchItems && finalSearchItems.length">
+    <p>The categories of the current search:</p>
+    <div *ngFor="let item of finalSearchItems">
+      <div>{{ item?.label }}: {{ (item?.value)[item.filterKey] || item?.value?.label }}</div>
+    </div>
+  </div>
+  <div *ngIf="finalSearchKey && finalSearchKey.length">
+    <p>The current search keyword: {{ finalSearchKey }}</p>
+  </div>
+</section>
+
+<ng-template #extendTemplate let-tag="tagOption">
+  <div class="devui-category-search-icon reset" [class.disabled]="!extendedConfig.save.disabled" (click)="reset()">
+    <svg width="14px" height="14px" viewBox="0 0 16 16">
+      <title>reset status</title>
+      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path
+          d="M2.21674752,9.5653401 C3.07840863,12.7589841 6.38381399,14.6542343 9.59957703,13.7985 C11.2074586,13.3706328 12.4884935,12.3360318 13.2598504,11.0091921 L15,12.0069575 C13.9715241,13.7760771 12.2634775,15.1555451 10.1196355,15.7260346 C5.83195146,16.8670137 1.42474431,14.3400134 0.275862827,10.0818215 C-0.0982576084,8.69518874 -0.0807292122,7.29596891 0.261105679,6 L5.12807455,8.79061807 L2.21674752,9.5653401 L2.21674752,9.5653401 Z M15.7241372,5.91817855 C16.0982576,7.30481126 16.0807292,8.70403109 15.7388943,10 L10.8719255,7.20938193 L13.7832525,6.4346599 C12.9215914,3.24101592 9.61618601,1.34576568 6.40042297,2.20150001 C4.79254145,2.62936717 3.51150652,3.66396818 2.74014961,4.99080789 L1,3.99304254 C2.02847588,2.22392292 3.73652245,0.844454904 5.88036448,0.273965353 C10.1680485,-0.867013747 14.5752557,1.65998658 15.7241372,5.91817855 L15.7241372,5.91817855 Z"
+          fill-rule="nonzero"
+        ></path>
+      </g>
+    </svg>
+  </div>
+</ng-template>

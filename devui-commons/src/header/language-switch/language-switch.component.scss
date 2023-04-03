@@ -1,10 +1,11 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
 .header-language-switch {
-    font-size: $devui-font-size-page-title;
+    font-size: $devui-font-size;
+    color: $devui-aide-text;
     margin: 0 12px;
     cursor: pointer;
     &:hover {
-        color: $devui-list-item-hover-text;
+      color: $devui-text;
     }
-}
+  }

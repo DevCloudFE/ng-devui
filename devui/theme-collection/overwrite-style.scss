@@ -420,12 +420,10 @@ d-pagination {
     }
 
     &.active a {
-      background-color: $devui-primary !important;
       color: $devui-light-text !important;
       cursor: pointer !important;
 
       &:hover {
-        background-color: $devui-primary !important;
         color: $devui-light-text !important;
         border: 1px solid transparent !important;
         box-shadow: none !important;
@@ -449,14 +447,29 @@ d-pagination {
     border: 1px solid transparent !important;
   }
 
+  ul.devui-pagination-list > li > .devui-pagination-active-block {
+    height: 28px !important;
+    margin-bottom: -28px !important;
+  }
+
   ul.devui-pagination-sm > li > a {
     height: 24px !important;
     min-width: 24px !important;
   }
 
+  ul.devui-pagination-sm > li > .devui-pagination-active-block {
+    height: 24px !important;
+    margin-bottom: -24px !important;
+  }
+
   ul.devui-pagination-lg > li > a {
     height: 40px !important;
     min-width: 40px !important;
+  }
+
+  ul.devui-pagination-lg > li > .devui-pagination-active-block {
+    height: 40px !important;
+    margin-bottom: -40px !important;
   }
 
   .devui-pagination-list > li:first-child > a,

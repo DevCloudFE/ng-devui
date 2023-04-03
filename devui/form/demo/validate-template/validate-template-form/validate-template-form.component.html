@@ -20,7 +20,10 @@
               [(ngModel)]="planFormData.planName"
               [dValidateRules]="{
                 validators: [{ required: true }],
-                asyncValidators: [{ sameName: this.checkName.bind(this), message: 'Duplicate name.' }]
+                asyncValidators: [{ nameCheck: this.checkName.bind(this), message: temp }]
+              }"
+              [dValidatePopConfig]="{
+                popMaxWidth: 400
               }"
             />
           </d-form-control>
@@ -89,3 +92,18 @@
     <span>Choose your execution cycle, it is recommended to choose Monday, Wednesday, Friday.</span>
   </ng-template>
 </section>
+
+<ng-template #temp>
+  <div class="custom-tip">
+    <p class="tip-item" [ngClass]="{ 'is-error': !nameValid.same }">
+      <i class="icon-error" *ngIf="!nameValid.same"></i>
+      <i class="icon-right" *ngIf="nameValid.same"></i>
+      <span> No duplicate Name </span>
+    </p>
+    <p class="tip-item" [ngClass]="{ 'is-error': !nameValid.length }">
+      <i class="icon-error" *ngIf="!nameValid.length"></i>
+      <i class="icon-right" *ngIf="nameValid.length"></i>
+      <span> Name should has 4-9 characters </span>
+    </p>
+  </div>
+</ng-template>

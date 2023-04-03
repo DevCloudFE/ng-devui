@@ -12,6 +12,7 @@ import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { ConditionChangeComponent } from './condition-change/condition-change.component';
 import { PanelDemoComponent } from './panel-demo.component';
+import { PanelDesignComponent } from './panel-design.component';
 import { TypeComponent } from './type/type.component';
 
 @NgModule({
@@ -26,6 +27,10 @@ import { TypeComponent } from './type/type.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: PanelDesignComponent,
+      },
       { path: 'demo', component: PanelDemoComponent },
       {
         path: 'api',
@@ -38,7 +43,7 @@ import { TypeComponent } from './type/type.component';
     ]),
   ],
   exports: [PanelDemoComponent],
-  declarations: [PanelDemoComponent, BasicComponent, ConditionChangeComponent, TypeComponent, PanelDemoComponent],
+  declarations: [PanelDemoComponent, PanelDesignComponent, BasicComponent, ConditionChangeComponent, TypeComponent, PanelDemoComponent],
 
 })
 export class PanelDemoModule {}

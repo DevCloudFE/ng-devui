@@ -4,6 +4,7 @@
 @import '../devui-commons/src/devui-commons.scss';
 @import '~ng-devui/theme-collection/extend-theme';
 @import '../devui/style/devui-for-mobile';
+@import '../node_modules/highlight.js/scss/atom-one-dark.scss';
 
 .highlight {
   line-height: 1.5;
@@ -26,33 +27,6 @@ pre code {
     monospace;
 }
 
-pre {
-  display: block;
-  margin: 0 0 10px;
-  line-height: 1.42857143;
-  color: $devui-text;
-  word-break: break-all;
-  word-wrap: break-word;
-  border: 1px solid $devui-dividing-line;
-  border-radius: $devui-border-radius;
-}
-
-.hljs {
-  background: $devui-area;
-  color: $devui-text;
-  font-size: $devui-font-size;
-}
-
-pre code {
-  display: block;
-  color: $devui-text;
-  background: $devui-base-bg;
-  line-height: 1.5;
-  padding: 10px 15px;
-  border-radius: 4px;
-  overflow-x: auto;
-}
-
 code,
 kbd,
 pre,
@@ -70,6 +44,12 @@ section {
 
   .devui-api-table-wrapper {
     overflow-x: auto;
+    table {
+      overflow-wrap: anywhere;
+      tr th:first-child {
+        min-width: 136px;
+      }
+    }
   }
 
   table {

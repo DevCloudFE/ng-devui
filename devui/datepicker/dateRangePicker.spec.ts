@@ -1,5 +1,5 @@
 import { Component, DebugElement, ElementRef, TemplateRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -183,14 +183,17 @@ describe('dateRangePicker', () => {
       expect(component.getValue).toHaveBeenCalled();
       dateRangePicker = document.querySelector('.devui-date-range-wrapper');
       expect(dateRangePicker).toBeFalsy();
+      flush();
     }));
 
     it('should ngModel works, should change year and month works', fakeAsync(() => {
       testNgModelAndYearMonth(fixture, document, component);
+      flush();
     }));
 
     it('should @Input works', fakeAsync(() => {
       testInputParam(fixture, document, component);
+      flush();
     }));
   });
 
@@ -211,6 +214,7 @@ describe('dateRangePicker', () => {
 
       it('should showTime works', fakeAsync(() => {
         testTimePicker(fixture, document, component);
+        flush();
       }));
     });
 
@@ -232,6 +236,7 @@ describe('dateRangePicker', () => {
 
       it('should dateConfig works', fakeAsync(() => {
         testDateConfig(fixture, document, component);
+        flush();
       }));
     });
 
@@ -251,6 +256,7 @@ describe('dateRangePicker', () => {
         tickEvent(rightCurrentDayInListEle, new Event('click'), fixture);
         expect(component.getValue).not.toHaveBeenCalled();
         closeDatePicker(fixture);
+        flush();
       }));
     });
 
@@ -266,6 +272,7 @@ describe('dateRangePicker', () => {
         openDatePicker(fixture);
         expect(document.querySelector('.devui-time')).toBeFalsy();
         closeDatePicker(fixture);
+        flush();
       }));
     });
   });

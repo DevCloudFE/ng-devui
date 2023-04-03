@@ -11,10 +11,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { CheckboxBasicComponent } from './basic/checkbox-basic.component';
 import { CheckBoxDemoComponent } from './checkbox-demo.component';
+import { CheckboxDesignComponent } from './checkbox-design.component';
 import { CheckboxConditionChangeComponent } from './condition-change/condition-change.component';
 import { CheckboxConditionGroupComponent } from './condition-group/condition-group.component';
 import { CheckboxGroupBasicComponent } from './group/checkbox-group-basic.component';
-
 
 @NgModule({
   imports: [
@@ -28,6 +28,10 @@ import { CheckboxGroupBasicComponent } from './group/checkbox-group-basic.compon
     DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: CheckboxDesignComponent,
+      },
       { path: 'demo', component: CheckBoxDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -38,6 +42,7 @@ import { CheckboxGroupBasicComponent } from './group/checkbox-group-basic.compon
   exports: [CheckBoxDemoComponent],
   declarations: [
     CheckBoxDemoComponent,
+    CheckboxDesignComponent,
     CheckboxBasicComponent,
     CheckboxGroupBasicComponent,
     CheckboxConditionChangeComponent,

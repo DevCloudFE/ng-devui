@@ -35,7 +35,8 @@ export class MultipleCascaderComponent {
         {
           label: 'option1-2',
           value : 41,
-          isLeaf: true
+          isLeaf: true,
+          disabled: true
         },
         {
           label: 'option1-3',

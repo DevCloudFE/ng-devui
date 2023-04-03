@@ -1,7 +1,7 @@
 <section style="width: 100%">
   <h5>Hide on selected:</h5>
   <div class="two-date-wrapper" dTwoDatePicker (selectedRangeChange)="selectRange($event)">
-    <div class="devui-input-group devui-dropdown-origin">
+    <div class="devui-input-group devui-dropdown-origin" dActiveFormControl>
       <input
         class="devui-input devui-form-control"
         placeholder="y/MM/dd"
@@ -18,7 +18,7 @@
         <i class="icon icon-calendar"></i>
       </div>
     </div>
-    <div class="devui-input-group devui-dropdown-origin">
+    <div class="devui-input-group devui-dropdown-origin" dActiveFormControl>
       <input
         class="devui-input devui-form-control"
         placeholder="y/MM/dd"
@@ -44,7 +44,7 @@
     [cssClass]="'custom-css-class'"
     (selectedRangeChange)="selectRange($event)"
   >
-    <div class="devui-input-group devui-dropdown-origin">
+    <div class="devui-input-group devui-dropdown-origin" dActiveFormControl>
       <input
         class="devui-input devui-form-control"
         placeholder="y/MM/dd"
@@ -61,7 +61,7 @@
         <i class="icon icon-calendar"></i>
       </div>
     </div>
-    <div class="devui-input-group devui-dropdown-origin">
+    <div class="devui-input-group devui-dropdown-origin" dActiveFormControl>
       <input
         class="devui-input devui-form-control"
         placeholder="y/MM/dd"
@@ -81,7 +81,7 @@
   </div>
   <h5>Disabled:</h5>
   <div class="two-date-wrapper" dTwoDatePicker [disabled]="true" (selectedRangeChange)="selectRange($event)">
-    <div class="devui-input-group devui-dropdown-origin">
+    <div class="devui-input-group devui-dropdown-origin" dActiveFormControl>
       <input
         class="devui-input devui-form-control"
         placeholder="y/MM/dd"
@@ -98,7 +98,7 @@
         <i class="icon icon-calendar"></i>
       </div>
     </div>
-    <div class="devui-input-group devui-dropdown-origin">
+    <div class="devui-input-group devui-dropdown-origin" dActiveFormControl>
       <input
         class="devui-input devui-form-control"
         placeholder="y/MM/dd"

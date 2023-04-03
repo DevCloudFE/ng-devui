@@ -9,6 +9,7 @@ import { TabsModule } from 'ng-devui/tabs';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { DesignZIndexDemoComponent } from './design-z-index-demo.component';
+import { ZIndexDesignComponent } from './z-index-design.component';
 import { ZIndexComponent } from './z-index/z-index.component';
 @NgModule({
   declarations: [DesignZIndexDemoComponent, ZIndexComponent],
@@ -22,6 +23,10 @@ import { ZIndexComponent } from './z-index/z-index.component';
     TabsModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: ZIndexDesignComponent,
+      },
       { path: 'demo', component: DesignZIndexDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

@@ -14,6 +14,7 @@ import { CustomizeTmpComponent } from './customize/customize.component';
 import { HoverDelayTimeComponent } from './hover-delay-time/hover-delay-time.component';
 import { ManualComponent } from './manual/manual.component';
 import { PopoverDemoComponent } from './popover-demo.component';
+import { PopoverDesignComponent } from './popover-design.component';
 import { PositionComponent } from './position/position.component';
 import { ScrollElementComponent } from './scroll-element/scroll-element.component';
 
@@ -29,6 +30,10 @@ import { ScrollElementComponent } from './scroll-element/scroll-element.componen
     DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: PopoverDesignComponent,
+      },
       { path: 'demo', component: PopoverDemoComponent },
       {
         path: 'api',
@@ -43,6 +48,7 @@ import { ScrollElementComponent } from './scroll-element/scroll-element.componen
   exports: [PopoverDemoComponent],
   declarations: [
     PopoverDemoComponent,
+    PopoverDesignComponent,
     BasicComponent,
     ManualComponent,
     PositionComponent,

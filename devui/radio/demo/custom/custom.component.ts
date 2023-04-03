@@ -1,30 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'd-custom',
-  templateUrl: './custom.component.html'
+  templateUrl: './custom.component.html',
 })
-export class CustomComponent implements OnInit {
-  values2 = ['Item1', 'Item2', 'Item3'];
-  choose2 = 'Item3';
+export class CustomComponent {
+  items = ['Item1', 'Item2', 'Item3'];
+  itemControl = new UntypedFormControl('Item1');
+  objects = [{ name: 'Item1' }, { name: 'Item2' }, { name: 'Item3' }];
+  chosenObject = this.objects[2].name;
 
-  valueControl = new UntypedFormControl('Item1');
-
-  values3 = [
-    {name: 'Item1'},
-    {name: 'Item2'},
-    {name: 'Item3'}
-  ];
-
-  choose3 = this.values3[2].name;
-  constructor() { }
-
-  ngOnInit() {
+  valueChange(value: any): void {
+    console.log(value);
   }
-
-  log($event) {
-    console.log($event);
-  }
-
 }

@@ -8,6 +8,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox';
 import { TabsModule } from 'ng-devui/tabs';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
+import { BorderRadiusDesignComponent } from './border-radius-design.component';
 import { BorderRadiusComponent } from './border-radius/border-radius.component';
 import { DesignBorderRadiusDemoComponent } from './design-border-radius-demo.component';
 @NgModule({
@@ -22,6 +23,10 @@ import { DesignBorderRadiusDemoComponent } from './design-border-radius-demo.com
     TabsModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: BorderRadiusDesignComponent,
+      },
       { path: 'demo', component: DesignBorderRadiusDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

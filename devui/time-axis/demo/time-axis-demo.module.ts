@@ -17,6 +17,7 @@ import { SeperateWayComponent } from './seperate-way/seperate-way.component';
 import { TimeAxisSingleComponent } from './single/single.component';
 import { TimeAxisTemplateContentComponent } from './template-content/time-axis-template-content.component';
 import { TimeAxisDemoComponent } from './time-axis-demo.component';
+import { TimeAxisDesignComponent } from './time-axis-design.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,10 @@ import { TimeAxisDemoComponent } from './time-axis-demo.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: TimeAxisDesignComponent,
+      },
       { path: 'demo', component: TimeAxisDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -39,6 +44,7 @@ import { TimeAxisDemoComponent } from './time-axis-demo.component';
   exports: [TimeAxisDemoComponent],
   declarations: [
     TimeAxisDemoComponent,
+    TimeAxisDesignComponent,
     TimeAxisAllStatesComponent,
     TimeAxisDirectionComponent,
     TimeAxisHtmlContentComponent,

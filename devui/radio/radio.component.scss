@@ -1,6 +1,7 @@
-@import '../style/theme/color';
-@import '../style/core/_font';
 @import '../style/core/animation';
+@import '../style/theme/color';
+@import '../style/theme/corner';
+@import '../style/core/font';
 
 :host {
   padding-right: 20px;
@@ -9,126 +10,33 @@
 }
 
 .devui-radio {
-  &.disabled {
-    cursor: not-allowed;
-
-    .devui-radio-label {
-      color: $devui-disabled-text;
-    }
-  }
-
-  font-size: $devui-font-size;
-  line-height: 1.5;
-  font-weight: normal;
   cursor: pointer;
   color: $devui-text;
+  font-size: $devui-font-size;
+  font-weight: normal;
+  line-height: 1.5;
   margin: 0 auto;
 
-  svg {
-    .devui-outer {
-      stroke: $devui-line;
-      fill: transparent;
-
-      &.disabled {
-        stroke: $devui-disabled-line;
-        fill: $devui-disabled-bg;
-      }
-    }
-
-    .devui-inner {
-      fill: $devui-brand;
-    }
-  }
-
-  &:hover:not(.disabled) {
-    svg .devui-outer {
-      stroke: $devui-form-control-line-active;
-    }
-
-    .devui-radio-label {
-      color: $devui-primary-hover;
-    }
-  }
-
-  &:active:not(.disabled),
-  &:focus:not(.disabled) {
-    svg .devui-outer {
-      stroke: $devui-form-control-line-active;
-    }
-  }
-
-  &.active {
-    svg {
-      .devui-outer {
-        opacity: 1;
-        stroke: $devui-form-control-line-active;
-        transition: stroke 50ms $devui-animation-ease-in-out;
-
-        &.disabled {
-          stroke: $devui-icon-fill-active-disabled;
-          fill: transparent;
-        }
-      }
-
-      .devui-inner {
-        opacity: 1;
-
-        &.disabled {
-          fill: $devui-icon-fill-active-disabled;
-        }
-
-        transform: scale(1);
-        transition: transform $devui-animation-duration-base $devui-animation-ease-in-out, opacity $devui-animation-duration-base $devui-animation-ease-in-out;
-      }
-    }
-
-    &:not(.disabled) {
-      &:active,
-      &:focus,
-      &:hover {
-        .devui-radio-material {
-          svg {
-            .devui-outer {
-              stroke: $devui-form-control-line-active-hover;
-            }
-
-            .devui-inner {
-              fill: $devui-brand;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .devui-outer {
-    opacity: 1;
-    transition: stroke 50ms $devui-animation-ease-in-out;
-  }
-
-  .devui-inner {
-    opacity: 0;
-    transform: scale(0);
-    transform-origin: 50% 50%;
-    transition: transform $devui-animation-duration-base $devui-animation-ease-in-out, opacity $devui-animation-duration-base $devui-animation-ease-in-out;
-  }
-
   .devui-radio-material {
-    vertical-align: middle;
-    position: relative;
+    width: 16px;
+    height: 16px;
     display: inline-block;
     overflow: hidden;
-    height: 16px;
-    width: 16px;
     user-select: none;
+    vertical-align: middle;
+    border: solid 1px $devui-shape-icon-fill;
+    border-radius: $devui-border-radius-full;
+    box-shadow: 0 transparent;
     transform: translateY(-1px);
+    transition:
+      box-shadow $devui-animation-duration-slow $devui-animation-ease-in-out-smooth,
+      border $devui-animation-duration-base $devui-animation-ease-in-out;
   }
 
   .devui-radio-label {
     color: $devui-text;
-    margin-left: 8px;
     font-size: $devui-font-size;
-    transition: color $devui-animation-duration-slow $devui-animation-ease-in-out;
+    margin-left: 8px;
   }
 
   .devui-radio-input {
@@ -139,5 +47,37 @@
     display: none;
     overflow: hidden;
     pointer-events: none;
+  }
+
+  &.active .devui-radio-material {
+    border-width: 4px;
+    border-color: $devui-brand;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    .devui-radio-label {
+      color: $devui-disabled-text;
+    }
+
+    .devui-radio-material {
+      border-color: $devui-shape-icon-fill;
+      background-color: $devui-shape-icon-fill-disabled;
+    }
+
+    &.active .devui-radio-material {
+      border-color: $devui-icon-fill-active-disabled;
+    }
+  }
+
+  &:not(.disabled) {
+    &:hover,
+    &:active {
+      .devui-radio-material {
+        box-shadow: 0 0 0 6px $devui-range-item-hover-bg;
+        border-color: $devui-brand;
+      }
+    }
   }
 }

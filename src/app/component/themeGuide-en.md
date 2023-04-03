@@ -58,10 +58,15 @@ ThemeServiceInit({
   'deep-theme': deepTheme,
 }, 'infinity-theme');
 ```
+3. Introduce extended styles globally.
+```
+@import 'ng-devui/theme-collection/extend-theme.css';
+```
+
 ~~The switchover of the extended theme is complete.
 
 ------------
-3. (Optional, if you want to make a theme switcher) Insert a simple theme switcher in the public page area of the project (ex: public header) to switch and verify the theme.
+4. (Optional, if you want to make a theme switcher) Insert a simple theme switcher in the public page area of the project (ex: public header) to switch and verify the theme.
 - In ts
 ```
 themeOptions = [`

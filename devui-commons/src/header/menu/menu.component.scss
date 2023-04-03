@@ -1,94 +1,159 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
-.header-menu {
-    display: flex;
-    align-items: center;
+.menu-list-wrapper.devui-scrollbar {
+  margin: 0 !important;
+  border-radius: $devui-border-radius-card;
 
-    .menu-item {
-        margin: 12px;
-        font-size: $devui-font-size-page-title;
-        .menu-link {
-            color: $devui-text;
-            cursor: pointer;
-            &:hover {
-                color: $devui-list-item-hover-text;
-            }
-
-            .devui-header-open-icon {
-              display: inline-block;
-              text-indent: 0;
-              pointer-events: none; /* 让鼠标穿透 */
-              width: 16px;
-              height: 16px;
-              line-height: 16px;
-              transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-              transform-origin: center;
-              vertical-align: text-top;
-
-              & > svg {
-                width: 16px;
-                height: 16px;
-          
-                polygon {
-                  fill: $devui-text-weak;
-                }
-              }
-            }
-
-            &:not(.devui-dropdown-open) {
-              .devui-header-open-icon {
-                transform: rotate(-180deg);
-              }
-            }
-        }
-    }
-
-    .menu-selected-item {
-        margin: 12px;
-        font-weight: 600;
-        .menu-link {
-            color: $devui-brand;
-        }
-    }
-}
-
-.menu-list-wrapper {
-    display: flex !important;
-    padding: 12px 12px;
+  .menu-lists {
+    background: $devui-base-bg;
+    padding: 12px 20px;
 
     .menu-list {
-        .menu-list-title,
+      .menu-list-title {
+        line-height: 36px;
+      }
+
+      .menu-sublist-item:not(:last-child) {
+        // padding: 0 10px;
+        margin-bottom: 8px;
+      }
+
+      .menu-list-title {
+        font-size: $devui-font-size;
+        font-weight: $devui-font-title-weight;
+      }
+
+      .menu-sublist {
+        line-height: 36px;
         .menu-sublist-item {
-            height: 36px;
-            line-height: 36px;
-            padding: 0 10px;
-        }
+          border-radius: 20px;
+          padding: 8px 12px;
+          margin-left: -12px;
+          a {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
 
-        .menu-list-title {
-            font-size: $devui-font-size-card-title;
-            font-weight: $devui-font-title-weight;
-        }
-
-        .menu-sublist-item {
-            font-size: $devui-font-size;
-        }
-
-        .menu-sublist {
-            .menu-sublist-item {
-                a {
-                    color: $devui-text;
-                    transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-                    &:hover {
-                        color: $devui-list-item-hover-text;
-                    }
-                }
+            .menu-sublist-title,
+            .menu-sublist-description {
+              width: 100%;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
             }
+
+            .menu-sublist-title {
+              font-size: $devui-font-size;
+              font-weight: $devui-font-title-weight;
+              line-height: 22px;
+              color: $devui-text;
+              transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+              margin-bottom: 4px;
+            }
+
+            .menu-sublist-description {
+              font-size: $devui-font-size;
+              color: $devui-aide-text;
+              line-height: 20px;
+            }
+          }
+          &:hover {
+            background-color: $devui-list-item-hover-bg;
+          }
         }
+      }
     }
+  }
+  .menu-lists.menu-lists-specifications {
+    padding: 20px;
+    padding-top: 0;
+    .menu-list {
+      .menu-list-title {
+        font-size: $devui-font-size-sm;
+        line-height: 20px;
+        margin-bottom: 8px;
+        margin-top: 20px;
+      }
+      .menu-sublist {
+        .menu-sublist-item {
+          a {
+            .menu-sublist-title {
+              font-size: $devui-font-size;
+              font-weight: $devui-font-content-weight;
+              margin-bottom: 0;
+            }
+          }
+        }
+        .menu-sublist-item:not(:last-child) {
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
 }
 
-@media (max-width: 1360px) {
-    .header-menu {
-        flex-direction: column;
+.header-menu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .header-menu-item {
+    margin-bottom: 16px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      margin-bottom: 2px;
+      border-radius: $devui-border-radius-card;
+      transition: all $devui-animation-duration-base $devui-animation-ease-in-out-smooth;
+
+      &:hover {
+        background: $devui-base-bg;
+        box-shadow: $devui-shadow-length-base $devui-light-shadow;
+      }
     }
+
+    &.menu-selected-item .logo {
+      background: $devui-base-bg;
+      box-shadow: $devui-shadow-length-base $devui-light-shadow;
+    }
+
+    .text {
+      color: $devui-aide-text;
+      font-size: $devui-font-size-sm;
+      line-height: 20px;
+      width: 60px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: center;
+    }
+    a,
+    & > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}
+
+.menu-ecology-container {
+  display: flex;
+}
+.ecology-icon-container {
+  display: flex;
+  align-items: center;
+}
+.ecology-desc-container {
+  margin-left: 8px;
 }

@@ -8,6 +8,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BadgeDemoComponent } from './badge-demo.component';
+import { BadgeDesignComponent } from './badge-design.component';
 import { BasicComponent } from './basic/basic.component';
 import { CountComponent } from './count/count.component';
 import { CustomComponent } from './custom/custom.component';
@@ -25,6 +26,10 @@ import { StatusComponent } from './status/status.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: BadgeDesignComponent,
+      },
       { path: 'demo', component: BadgeDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -34,6 +39,7 @@ import { StatusComponent } from './status/status.component';
   ],
   declarations: [
     BadgeDemoComponent,
+    BadgeDesignComponent,
     BasicComponent,
     DotComponent,
     CountComponent,

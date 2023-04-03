@@ -3,7 +3,9 @@
     [appendToBody]="true"
     [checkBeforeAdd]="customCheck"
     [itemTemplate]="customizeItemTemplate"
+    [tagTemplate]="customizeTagTemplate"
     [suggestionList]="suggestionList"
+    [placeholder]="'Add a tag containing \'item\' '"
     [(ngModel)]="tagList"
     (valueChange)="getTagValue($event)"
   >
@@ -13,4 +15,8 @@
 
 <ng-template #customizeItemTemplate let-item="option" let-filterKey="filterKey" let-$index="$index">
   <span>This is custom content: {{ item[filterKey] }}</span>
+</ng-template>
+
+<ng-template #customizeTagTemplate let-tag="tag">
+  <span>{{ tag.isOption ? 'Option' : 'Input' }}: {{ tag.name }}</span>
 </ng-template>

@@ -10,6 +10,7 @@ import { TooltipModule } from "ng-devui/tooltip";
 import { TranslateModule } from "@ngx-translate/core";
 import { DDemoNavModule } from "devui-commons/src/demo-nav/d-demo-nav.module";
 import { FullscreenDemoComponent } from "./fullscreen-demo.component";
+import { FullscreenDesignComponent } from "./fullscreen-design.component";
 import { FullscreenDemoImmersiveComponent } from "./immersive/immersive.component";
 import { FullscreenDemoNormalComponent } from "./normal/normal.component";
 @NgModule({
@@ -26,7 +27,11 @@ import { FullscreenDemoNormalComponent } from "./normal/normal.component";
       {
         path: "",
         redirectTo: "demo",
-        pathMatch: "full"
+        pathMatch: "full",
+      },
+      {
+        path: "design",
+        component: FullscreenDesignComponent,
       },
       {
         path: "demo",
@@ -45,6 +50,7 @@ import { FullscreenDemoNormalComponent } from "./normal/normal.component";
   exports: [FullscreenDemoComponent],
   declarations: [
     FullscreenDemoComponent,
+    FullscreenDesignComponent,
     FullscreenDemoImmersiveComponent,
     FullscreenDemoNormalComponent,
   ],

@@ -219,8 +219,8 @@ export class AutoScrollComponent {
     },
     {
       field: 'creatTime',
-      label: 'creat time',
-      title: 'creat time: 2021/01/01 - 2021/02/03',
+      label: 'create time',
+      title: 'create time: 2021/01/01 - 2021/02/03',
       type: 'dateRange',
       group: 'Time-related',
       value: {

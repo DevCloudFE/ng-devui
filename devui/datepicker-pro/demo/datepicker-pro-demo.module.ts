@@ -17,6 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicDatepickerProComponent } from './basic/basic-datepicker-pro.component';
 import { DatepickerProDemoComponent } from './datepicker-pro-demo.component';
+import { DatepickerProDesignComponent } from './datepicker-pro-design.component';
 import { DatepickerProHostComponent } from './host-template/datepicker-host-template.component';
 import { MarkedTypeDemoComponent } from './marked-type/marked-type.component';
 import { MonthYearDatepickerProComponent } from './month-year-picker/month-year-picker.component';
@@ -46,6 +47,10 @@ import { DatepickerProTemplateComponent } from './template/datepicker-template.c
     DatepickerProModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: DatepickerProDesignComponent,
+      },
       { path: 'demo', component: DatepickerProDemoComponent },
       {
         path: 'api',
@@ -60,6 +65,7 @@ import { DatepickerProTemplateComponent } from './template/datepicker-template.c
   exports: [DatepickerProDemoComponent],
   declarations: [
     DatepickerProDemoComponent,
+    DatepickerProDesignComponent,
     BasicDatepickerProComponent,
     ShowTimeDatepickerProComponent,
     DatepickerProTemplateComponent,

@@ -27,7 +27,8 @@ export function resolveRoutesConfig(lang, routesConfig) {
             name: item.data.name,
             lowerName: item.data.name.replace(/\W/g, '').toLocaleLowerCase(),
             folderName: enType.replace(/\W/g, '-').toLocaleLowerCase(),
-            nodisplay: item.data.nodisplay || false
+            nodisplay: item.data.nodisplay || false,
+            banner: item.data.bannerName,
           };
           if (lang === 'en-us') {
             res.title = item.data.name;

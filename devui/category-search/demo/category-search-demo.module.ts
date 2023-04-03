@@ -12,10 +12,13 @@ import { DDemoNavModule } from "devui-commons/src/demo-nav/d-demo-nav.module";
 import { AutoScrollComponent } from "./auto-scroll/auto-scroll.component";
 import { BasicComponent } from "./basic/basic.component";
 import { CategorySearchDemoComponent } from "./category-search-demo.component";
+import { CategorySearchDesignComponent } from "./category-search-design.component";
+import { ExtendComponent } from "./extend/extend.component";
 @NgModule({
   declarations: [
     CategorySearchDemoComponent,
     BasicComponent,
+    ExtendComponent,
     AutoScrollComponent,
   ],
   imports: [
@@ -31,7 +34,11 @@ import { CategorySearchDemoComponent } from "./category-search-demo.component";
       {
         path: "",
         redirectTo: "demo",
-        pathMatch: "full"
+        pathMatch: "full",
+      },
+      {
+        path: "design",
+        component: CategorySearchDesignComponent,
       },
       {
         path: "demo",

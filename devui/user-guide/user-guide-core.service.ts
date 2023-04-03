@@ -1,15 +1,8 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  Inject,
-  Injectable,
-  OnDestroy,
-  Renderer2,
-  RendererFactory2
-} from '@angular/core';
+import { Inject, Injectable, OnDestroy, Renderer2, RendererFactory2 } from '@angular/core';
 import { BehaviorSubject, fromEventPattern, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PanelPostion } from './utils/calculate-panel-position';
-import { addBorderAnimation, removeBorderAnimation } from './utils/handles';
 import { disableClick, documentRealHeight } from './utils/help-functions';
 
 @Injectable()
@@ -23,9 +16,9 @@ export class UserGuideCoreService implements OnDestroy {
   private _destory = new Subject<void>();
   private onExit;
   private interactableEvent = {
-    eventType : null,
+    eventType: null,
     element: null,
-    eventFunction: null
+    eventFunction: null,
   };
 
   private _showOverlayState = {
@@ -35,7 +28,7 @@ export class UserGuideCoreService implements OnDestroy {
     showBottomOverlay: false,
     showLeftOverlay: false,
     showRightOverlay: false,
-    showBorder: false
+    showBorder: false,
   };
 
   private currentType; // 当前指引步骤的展现形式
@@ -72,7 +65,7 @@ export class UserGuideCoreService implements OnDestroy {
       }
     });
 
-    this.curStep.subscribe(index => {
+    this.curStep.subscribe((index) => {
       if (index !== -1) {
         this.canChange(index).then((canChange) => {
           if (canChange) {
@@ -143,7 +136,7 @@ export class UserGuideCoreService implements OnDestroy {
           content: item.content,
           type: 'display',
           beforeChange: item?.beforeChange,
-          showPrevButton: item?.showPrevButton === undefined ? true : item.showPrevButton
+          showPrevButton: item?.showPrevButton === undefined ? true : item.showPrevButton,
         });
       } else {
         const rect = (this.document.getElementById(item.element) || this.document.querySelector(item.element))?.getBoundingClientRect();
@@ -162,7 +155,7 @@ export class UserGuideCoreService implements OnDestroy {
           inputData: item?.inputData,
           waitingTime: item?.waitingTime,
           beforeChange: item?.beforeChange,
-          showPrevButton: item?.showPrevButton === undefined ? true : item.showPrevButton
+          showPrevButton: item?.showPrevButton === undefined ? true : item.showPrevButton,
         });
       }
     });
@@ -188,8 +181,8 @@ export class UserGuideCoreService implements OnDestroy {
   updateNextStepElement() {
     for (let i = this.nextStep; i < this.steps.length; i++) {
       if (this.stepsDetails[i].type !== 'display') {
-        this.stepsDetails[i].element = this.document.getElementById(this.steps[i].element)
-            || this.document.querySelector(this.steps[i].element);
+        this.stepsDetails[i].element =
+          this.document.getElementById(this.steps[i].element) || this.document.querySelector(this.steps[i].element);
 
         const rect = this.stepsDetails[i]?.element?.getBoundingClientRect();
         this.stepsDetails[i].top = rect?.top;
@@ -202,9 +195,9 @@ export class UserGuideCoreService implements OnDestroy {
 
   updateCurrentStepElement() {
     const cur = this.currentStep;
-    this.stepsDetails[cur].element = this.document.getElementById(this.steps[cur].element)
-          || this.document.querySelector(this.steps[cur].element);
-    if(this.stepsDetails[cur].element) {
+    this.stepsDetails[cur].element =
+      this.document.getElementById(this.steps[cur].element) || this.document.querySelector(this.steps[cur].element);
+    if (this.stepsDetails[cur].element) {
       const rect = this.stepsDetails[cur].element.getBoundingClientRect();
       const hasHighlightOffset = this.stepsDetails[cur].highlightOffset;
       this.stepsDetails[cur].top = rect?.top - (hasHighlightOffset ? this.stepsDetails[cur].highlightOffset[0] : 0);
@@ -312,8 +305,6 @@ export class UserGuideCoreService implements OnDestroy {
       this.showButtons.next(true);
       this.showOperateZone.next(false);
       this.canPrev.next(false);
-
-      removeBorderAnimation(this.document);
     }
   }
 
@@ -326,9 +317,7 @@ export class UserGuideCoreService implements OnDestroy {
 
     this.showButtons.next(false);
 
-    addBorderAnimation(this.document);
-
-    clickElement.addEventListener('click', this.interactableEvent.eventFunction[0], {once: true});
+    clickElement.addEventListener('click', this.interactableEvent.eventFunction[0], { once: true });
   }
 
   private clickEventHandle() {
@@ -355,10 +344,8 @@ export class UserGuideCoreService implements OnDestroy {
 
       this.showButtons.next(false);
 
-      addBorderAnimation(this.document);
-
-      this.stepsDetails[this.currentStep].element.addEventListener('input', this.interactableEvent.eventFunction[0], {once: true});
-      inputElement.addEventListener('click', this.interactableEvent.eventFunction[1], {once: true});
+      this.stepsDetails[this.currentStep].element.addEventListener('input', this.interactableEvent.eventFunction[0], { once: true });
+      inputElement.addEventListener('click', this.interactableEvent.eventFunction[1], { once: true });
     });
   }
 
@@ -382,11 +369,9 @@ export class UserGuideCoreService implements OnDestroy {
     this.interactableEvent.element = [clickElement];
     this.interactableEvent.eventFunction = [this.ExitEventHandle.bind(this)];
 
-    addBorderAnimation(this.document);
-
     this.showButtons.next(false);
 
-    clickElement.addEventListener('click', this.interactableEvent.eventFunction[0], {once: true});
+    clickElement.addEventListener('click', this.interactableEvent.eventFunction[0], { once: true });
   }
 
   private ExitEventHandle() {
@@ -403,7 +388,7 @@ export class UserGuideCoreService implements OnDestroy {
     closeButton.style.display = 'none';
 
     const carouselDots = this.document.querySelector('.devui-carousel-dots') as HTMLElement;
-    if(carouselDots) {
+    if (carouselDots) {
       carouselDots.style.display = 'none';
     }
 
@@ -522,7 +507,7 @@ export class UserGuideCoreService implements OnDestroy {
       showBottomOverlay: true,
       showLeftOverlay: true,
       showRightOverlay: true,
-      showBorder: false
+      showBorder: false,
     };
 
     this.showOverlayState.next(this._showOverlayState);
@@ -540,7 +525,7 @@ export class UserGuideCoreService implements OnDestroy {
       showBottomOverlay: true,
       showLeftOverlay: true,
       showRightOverlay: true,
-      showBorder: true
+      showBorder: true,
     };
 
     this.showOverlayState.next(this._showOverlayState);
@@ -573,34 +558,13 @@ export class UserGuideCoreService implements OnDestroy {
       height: ${this.stepsDetails[index].height}px;
       `;
 
-    const topBorder = this.document.querySelector('.user-guide-top-border') as HTMLElement;
-    topBorder.style.cssText = `
+    const activeShadow = this.document.querySelector('.user-guide-active-shadow') as HTMLElement;
+    activeShadow.style.cssText = `
       top: ${this.stepsDetails[index].top}px;
       left: ${this.stepsDetails[index].left}px;
       width: ${this.stepsDetails[index].width}px;
-      `;
-
-    const bottomBorder = this.document.querySelector('.user-guide-bottom-border') as HTMLElement;
-    bottomBorder.style.cssText = `
-      top: ${this.stepsDetails[index].top + this.stepsDetails[index].height}px;
-      left: ${this.stepsDetails[index].left}px;
-      width: ${this.stepsDetails[index].width}px;
-      `;
-
-    const leftBorder = this.document.querySelector('.user-guide-left-border') as HTMLElement;
-    leftBorder.style.cssText = `
-      top: ${this.stepsDetails[index].top}px;
-      left: ${this.stepsDetails[index].left}px;
       height: ${this.stepsDetails[index].height}px;
       `;
-
-    const rightBorder = this.document.querySelector('.user-guide-right-border') as HTMLElement;
-    rightBorder.style.cssText = `
-      top: ${this.stepsDetails[index].top}px;
-      left: ${this.stepsDetails[index].left + this.stepsDetails[index].width}px;
-      height: ${this.stepsDetails[index].height + 2}px;
-      `;
-
     setTimeout(() => {
       this.panelPostion.calculatePosition(this.stepsDetails[this.currentStep]);
     }, 0);
@@ -618,7 +582,7 @@ export class UserGuideCoreService implements OnDestroy {
       showBottomOverlay: false,
       showLeftOverlay: false,
       showRightOverlay: false,
-      showBorder: false
+      showBorder: false,
     };
 
     this.showOverlayState.next(this._showOverlayState);
@@ -644,7 +608,7 @@ export class UserGuideCoreService implements OnDestroy {
       showBottomOverlay: false,
       showLeftOverlay: false,
       showRightOverlay: false,
-      showBorder: false
+      showBorder: false,
     };
 
     this.showOverlayState.next(this._showOverlayState);
@@ -656,14 +620,10 @@ export class UserGuideCoreService implements OnDestroy {
 
   private createOnResizeObservable(renderer: Renderer2) {
     let removeResizeEventListener: () => void;
-    const createResizeEventListener = (
-      handler: (e: Event) => boolean | void
-    ) => {
+    const createResizeEventListener = (handler: (e: Event) => boolean | void) => {
       removeResizeEventListener = renderer.listen('window', 'resize', handler);
     };
 
-    this.onResize = fromEventPattern<Event>(createResizeEventListener, () =>
-      removeResizeEventListener()
-    ).pipe(takeUntil(this._destory));
+    this.onResize = fromEventPattern<Event>(createResizeEventListener, () => removeResizeEventListener()).pipe(takeUntil(this._destory));
   }
 }

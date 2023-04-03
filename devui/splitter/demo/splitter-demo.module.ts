@@ -15,6 +15,7 @@ import { SplitterDemoDirectionComponent } from './direction/splitter-demo-direct
 import { SplitterDemoMultiComponent } from './multi/splitter-demo-multi.component';
 import { SplitterDemoMenuFoldComponent } from './shrink/shrink.component';
 import { SplitterDemoComponent } from './splitter-demo.component';
+import { SplitterDesignComponent } from './splitter-design.component';
 import { SplitterDemoVerticalComponent } from './vertical/splitter-demo-vertical.component';
 
 @NgModule({
@@ -30,6 +31,10 @@ import { SplitterDemoVerticalComponent } from './vertical/splitter-demo-vertical
     DDemoNavModule,
     RouterModule.forChild([
       {path: '', redirectTo: 'demo', pathMatch: 'full'},
+      {
+        path: 'design',
+        component: SplitterDesignComponent,
+      },
       {path: 'demo', component: SplitterDemoComponent},
       {
         path: 'api', component: DevUIApiComponent, data: {
@@ -42,6 +47,7 @@ import { SplitterDemoVerticalComponent } from './vertical/splitter-demo-vertical
   exports: [SplitterDemoComponent],
   declarations: [
     SplitterDemoComponent,
+    SplitterDesignComponent,
     SplitterDemoBasicComponent,
     SplitterDemoVerticalComponent,
     SplitterDemoMultiComponent,

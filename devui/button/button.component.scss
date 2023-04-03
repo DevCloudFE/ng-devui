@@ -90,10 +90,6 @@ $devui-btn-pseudo-config: (
       background-color: transparent,
       color: $devui-brand-active-focus,
     ),
-    focus: (
-      background-color: transparent,
-      color: $devui-brand-active-focus,
-    ),
     active: (
       background-color: transparent,
       color: $devui-brand-active-focus,
@@ -101,10 +97,6 @@ $devui-btn-pseudo-config: (
   ),
   text-dark: (
     hover: (
-      background-color: transparent,
-      color: $devui-brand-active-focus,
-    ),
-    focus: (
       background-color: transparent,
       color: $devui-brand-active-focus,
     ),
@@ -119,11 +111,6 @@ $devui-btn-pseudo-config: (
       color: var(--devui-btn-common-color-hover, $devui-brand-active),
       background-color: var(--devui-btn-common-bg-hover, $devui-base-bg),
     ),
-    focus: (
-      border-color: var(--devui-btn-common-border-color-active, $devui-form-control-line-active),
-      color: var(--devui-btn-common-color-active, $devui-brand-active),
-      background-color: var(--devui-btn-common-bg-active, $devui-base-bg),
-    ),
     active: (
       border-color: var(--devui-btn-common-border-color-active, $devui-form-control-line-active),
       color: var(--devui-btn-common-color-active, $devui-brand-active),
@@ -134,9 +121,6 @@ $devui-btn-pseudo-config: (
     hover: (
       background-color: $devui-primary-hover,
     ),
-    focus: (
-      background-color: $devui-primary-hover,
-    ),
     active: (
       background-color: $devui-primary-active,
     ),
@@ -145,18 +129,12 @@ $devui-btn-pseudo-config: (
     hover: (
       background-color: $devui-primary-hover,
     ),
-    focus: (
-      background-color: $devui-primary-hover,
-    ),
     active: (
       background-color: $devui-primary-active,
     ),
   ),
   danger: (
     hover: (
-      background-color: $devui-contrast-hover,
-    ),
-    focus: (
       background-color: $devui-contrast-hover,
     ),
     active: (
@@ -174,6 +152,9 @@ $devui-btn-pseudo-config: (
   border-width: 1px;
   border-color: transparent;
   background-color: transparent;
+  position: relative;
+  overflow: hidden;
+  transform: scale(1);
   @each $type in common, stress, primary, danger, left, right, xs, sm, lg, text, text-dark {
     &.devui-btn-#{$type} {
       @each $key, $value in map-get($devui-btn-normal-config, $type) {
@@ -302,6 +283,10 @@ $devui-btn-pseudo-config: (
       }
     }
   }
+
+  &.mouseDown:not(:disabled) {
+    transform: scale(0.95);
+  }
 }
 
 .devui-loading {
@@ -374,6 +359,7 @@ $devui-btn-pseudo-config: (
 .devui-icon-fix {
   position: relative;
   font-size: $devui-font-size;
+  pointer-events: none;
 
   &::before {
     transition: color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
@@ -397,6 +383,7 @@ $devui-btn-pseudo-config: (
 .button-content {
   display: inline-block;
   position: relative;
+  pointer-events: none;
 }
 
 .clear-right-4 {
@@ -411,4 +398,29 @@ $devui-btn-pseudo-config: (
 
 .devui-btn-circle {
   border-radius: 100%;
+}
+
+.devui-button-water-wave {
+  position: absolute;
+  background-color: $devui-base-bg;
+  border-radius: 50%;
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  animation: waterWave $devui-animation-duration-slow $devui-animation-linear;
+}
+
+@keyframes waterWave {
+  0% {
+    opacity: 0.2;
+    width: 30px;
+    height: 30px;
+  }
+
+  100% {
+    opacity: 0;
+    width: 200px;
+    height: 200px;
+  }
 }

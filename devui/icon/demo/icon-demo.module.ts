@@ -12,6 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { IconDemoComponent } from './icon-demo.component';
+import { IconDesignComponent } from './icon-design.component';
 import { IconGroupDemoComponent } from './icon-group/icon-group.component';
 
 @NgModule({
@@ -27,6 +28,10 @@ import { IconGroupDemoComponent } from './icon-group/icon-group.component';
     DropDownModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: IconDesignComponent,
+      },
       { path: 'demo', component: IconDemoComponent },
       {
         path: 'api', component: DevUIApiComponent, data: {

@@ -116,6 +116,7 @@ describe('pagination basic', () => {
           .toContain('active');
         expect(debugEl.nativeElement.querySelector('.devui-pagination-list.devui-pagination-sm li:nth-child(7)').classList)
           .toContain('disabled');
+        flush();
       }));
 
       it('should jump correctly when click ellipsis', fakeAsync(() => {
@@ -132,6 +133,7 @@ describe('pagination basic', () => {
         nextEllipsis.dispatchEvent(new Event('click'));
         fixture.detectChanges();
         expect(component.pager.pageIndex).toBe(5);
+        flush();
       }));
 
       it('should total to be 0 when not set total value', fakeAsync(() => {
@@ -139,6 +141,7 @@ describe('pagination basic', () => {
         tick(300);
         fixture.detectChanges();
         expect(component.pagination.total).toEqual(0);
+        flush();
       }));
 
       it('should change input to jump', fakeAsync(() => {
@@ -162,6 +165,7 @@ describe('pagination basic', () => {
         fixture.detectChanges();
         expect(debugEl.nativeElement.querySelector('.devui-pagination-list.devui-pagination-sm li:nth-child(2)').classList)
           .toContain('active');
+        flush();
       }));
     });
   });
