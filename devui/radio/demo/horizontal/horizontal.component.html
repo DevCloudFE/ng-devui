@@ -1,1 +1,7 @@
-<d-radio-group [name]="'city'" [values]="values2" [direction]="'row'" [(ngModel)]="choose2_1" (change)="log($event)"> </d-radio-group>
+<d-radio-group
+  [name]="'weekday-group'"
+  [values]="weekdays"
+  [direction]="'row'"
+  [(ngModel)]="chosenItem"
+  (change)="valueChange($event)"
+></d-radio-group>

@@ -1,0 +1,36 @@
+<div>
+  <p class="devui-design-h2-title devui-design-mt-64">{{ 'components.select.design.structure.name' | translate }}</p>
+  <div class="devui-design-mt-24">
+    <p class="devui-design-h3-title devui-design-mb-16">{{ 'components.select.design.structure.basic.name' | translate }}</p>
+    <img [src]="getImgSrc(designObj.structure.basic.img)" alt="" class="devui-design-image-1" />
+    <div *ngFor="let desc of designObj.structure.basic.descList; let index = index" class="devui-design-mt-16 devui-design-li-container">
+      <div class="devui-design-mr-8">{{ index + 1 }}.</div>
+      <div>
+        <span class="devui-design-h4-title">{{ desc.title }}</span>
+        <span class="devui-design-desc">{{ desc.content }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="devui-design-mt-64">
+    <p class="devui-design-h3-title devui-design-mb-16">{{ 'components.select.design.structure.muti.name' | translate }}</p>
+    <img [src]="getImgSrc(designObj.structure.muti.img)" alt="" class="devui-design-image-1" />
+    <div *ngFor="let desc of designObj.structure.muti.descList; let index = index" class="devui-design-mt-16 devui-design-li-container">
+      <div class="devui-design-mr-8">{{ index + 1 }}.</div>
+      <div>
+        <span class="devui-design-h4-title">{{ desc.title }}</span>
+        <span class="devui-design-desc">{{ desc.content }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="devui-design-mb-40">
+  <p class="devui-design-h2-title devui-design-mt-64 devui-design-mb-16">{{ 'components.select.design.how-to-use.name' | translate }}</p>
+  <p *ngFor="let desc of designObj['how-to-use'].descList" class="devui-design-desc">{{ desc }}</p>
+  <div *ngFor="let item of designObj.selectList" class="devui-design-mt-64">
+    <p class="devui-design-h3-title">{{ item.name }}</p>
+    <p class="devui-design-desc devui-design-mt-8" *ngIf="item.desc">{{ item.desc }}</p>
+    <img [src]="getImgSrc(item.image)" alt="" class="devui-design-mt-16 devui-design-image-1" />
+    <img *ngIf="item.image2" [src]="getImgSrc(item.image2)" alt="" class="devui-design-mt-16 devui-design-image-1" />
+  </div>
+</div>

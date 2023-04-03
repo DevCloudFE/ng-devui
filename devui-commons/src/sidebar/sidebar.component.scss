@@ -1,44 +1,97 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
+@mixin tag-custom {
+  box-sizing: border-box;
+  font-size: $devui-font-size;
+  font-weight: 800;
+  border-radius: 14px;
+  letter-spacing: 0.6px;
+  text-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px;
+}
+
+:host ::ng-deep .devui-tag-item.update-custom {
+  background-color: $devui-purple-10;
+  color: $devui-purple-60;
+  @include tag-custom;
+}
+
+:host ::ng-deep .devui-tag-item.sunset-custom {
+  background-color: $devui-orange-10;
+  color: $devui-orange-60;
+  @include tag-custom;
+}
+
 .sidebar-wrapper {
   position: fixed;
-  top: 60px;
+  padding: 0 8px 38px 8px;
+  // top: 60px;
+  left: 64px;
   width: 320px;
-  max-width: 320px;
+  // max-width: 320px;
   height: 100%;
   overflow-y: hidden;
+  overflow-x: hidden;
   scroll-behavior: smooth;
   z-index: 1000;
   border-right: 1px solid $devui-dividing-line;
   background-color: $devui-base-bg;
 
   &:hover {
-    overflow-y: auto;
+    overflow-y: overlay;
   }
 
   transition: all 0.3s;
+
+  d-tag {
+    margin-left: 4px;
+  }
+}
+
+.sidebar-search-container {
+  position: fixed;
+  background: $devui-base-bg;
+  max-width: 304px;
+  height: 72px;
+  padding: 16px 0;
+  z-index: 1001;
+  width: 100%;
+  transition: all 0.3s;
+  &::ng-deep {
+    input.devui-input {
+      border-radius: $devui-border-radius-full;
+      height: 40px !important;
+    }
+    .devui-search .devui-search-clear.devui-clear-exit {
+      line-height: 40px !important;
+    }
+  }
 }
 
 .sidebar-nav {
   width: 100%;
-  padding-bottom: 80px;
 }
 
 .sidebar-menu {
-  width: 320px;
-
   outline: none;
   margin-bottom: 0;
   list-style: none;
   background: $devui-base-bg;
+  margin-top: 72px;
+
+  &.sidebar-menu-design {
+    margin-bottom: 0;
+  }
 
   &-item {
     text-overflow: ellipsis;
     overflow: hidden;
-    padding-left: 20px;
+    padding-left: 12px;
     height: 40px;
     display: flex;
     align-items: center;
+    border-radius: $devui-border-radius-full;
+    font-weight: bold;
+    margin-bottom: 8px;
 
     a {
       display: block;
@@ -53,9 +106,9 @@
     }
 
     &-selected {
-      color: $devui-brand-active;
-      font-weight: 700;
-      border-right: 2px solid $devui-brand;
+      color: $devui-list-item-active-text;
+      background-color: $devui-list-item-active-bg;
+      font-weight: 600;
       a {
         color: inherit;
       }
@@ -63,24 +116,136 @@
   }
 }
 
-@media (max-width: 1024px) {
-  .sidebar-wrapper {
-    max-width: 0;
-  }
-}
-
 :host ::ng-deep .devui-accordion-menu-item > .devui-accordion-item-title {
   font-weight: 600;
+}
+
+:host ::ng-deep .devui-accordion-menu > .devui-accordion-list {
+  padding-top: 0 !important;
 }
 
 d-accordion ::ng-deep .devui-accordion-menu {
   box-shadow: none !important;
 }
 
+::ng-deep .sidebar-nav d-tag .devui-tag-item {
+  cursor: pointer;
+}
+
 d-tag {
   text-indent: 0;
-  
+
   & + d-tag {
-  margin-left: 4px;
+    margin-left: 4px;
   }
+}
+
+:host ::ng-deep .devui-accordion-item-title .devui-accordion-splitter {
+  border-left: none !important;
+  &::before {
+    display: none !important;
+  }
+}
+
+:host ::ng-deep .devui-accordion-item-title {
+  padding-left: 12px !important;
+  border-radius: $devui-border-radius-full;
+}
+
+:host ::ng-deep .devui-accordion-item-title:not(.disabled).devui-router-active {
+  background: $devui-list-item-active-bg;
+  a {
+    color: $devui-list-item-active-text !important;
+  }
+}
+
+:host ::ng-deep .devui-accordion-item-title:not(.disabled):hover {
+  background: $devui-list-item-hover-bg;
+}
+
+:host ::ng-deep d-accordion-item-routerlink.devui-accordion-item-title > a {
+  padding: 0 12px 0 0 !important;
+}
+
+:host ::ng-deep .devui-accordion-item:not(:first-child) {
+  margin-top: 8px;
+}
+
+:host ::ng-deep .devui-accordion-submenu {
+  margin-top: 8px;
+}
+
+.sidebar-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  position: fixed;
+  width: 100%;
+  max-width: 319px; // 1px为右边框线
+  bottom: 0;
+  margin: 0 -8px;
+  border-top: 1px solid $devui-dividing-line;
+  background-color: $devui-base-bg;
+  color: $devui-aide-text;
+  transition: all 0.3s;
+  a {
+    color: $devui-aide-text;
+  }
+
+  & > div {
+    display: flex;
+  }
+}
+
+.version-link {
+  color: $devui-aide-text;
+}
+
+@media (max-width: 1279px) {
+  .sidebar-wrapper {
+    width: 250px;
+    max-width: 0;
+    padding: 0;
+    border: none;
+  }
+  .sidebar-search-container {
+    display: none;
+  }
+  .sidebar-footer {
+    display: none;
+  }
+}
+
+@media (max-width: 1580px) and (min-width: 1279px) {
+  .sidebar-wrapper {
+    width: 250px;
+  }
+  .sidebar-search-container {
+    max-width: 230px;
+    display: block !important;
+  }
+
+  .sidebar-footer {
+    max-width: 249px;
+    display: flex !important;
+  }
+}
+
+@media (min-width: 1580px) {
+  .sidebar-wrapper {
+    width: 320px;
+  }
+  .sidebar-search-container {
+    max-width: 304px !important;
+    display: block;
+  }
+  .sidebar-footer {
+    max-width: 319px !important;
+    display: flex;
+  }
+}
+
+::ng-deep d-accordion-item-routerlink.devui-accordion-item-title:has(.devui-parent-list) {
+  font-weight: bold !important;
 }

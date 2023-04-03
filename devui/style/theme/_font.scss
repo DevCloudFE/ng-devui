@@ -7,15 +7,17 @@ $devui-font-size-modal-title: var(--devui-font-size-modal-title, 18px); //弹窗
 $devui-font-size-price: var(--devui-font-size-price, 20px); //购买价格
 $devui-font-size-data-overview: var(--devui-font-size-data-overview, 24px); //数据总览
 
-$devui-font-size-icon: var(--devui-font-size-icon, 16px);     //图标大小
-$devui-font-size-sm: var(--devui-font-size-sm, 12px);  //当组件size为'sm'时使用此字号大小
-$devui-font-size-md: var(--devui-font-size-md, 12px);  //当组件size为''时使用此字号大小
-$devui-font-size-lg: var(--devui-font-size-lg, 14px);  //当组件size为'lg'时使用此字号大小
+$devui-font-size-h1-title: var(--devui-font-size-h1-title, 28px);
+$devui-font-size-h2-title: var(--devui-font-size-h2-title, 24px);
+$devui-font-size-h3-title: var(--devui-font-size-h3-title, 20px);
+$devui-font-size-h4-title: var(--devui-font-size-h4-title, 18px);
+$devui-font-size-h5-title: var(--devui-font-size-h5-title, 16px);
 
-$devui-font-title-weight: bold; //标题文字粗细
-$devui-font-content-weight: normal; //内容文字粗细
-$devui-line-height-base: 1.5; //规范行高
+$devui-font-size-icon: var(--devui-font-size-icon, 16px); //图标大小
+$devui-font-size-sm: var(--devui-font-size-sm, 12px); //当组件size为'sm'时使用此字号大小
+$devui-font-size-md: var(--devui-font-size-md, 12px); //当组件size为''时使用此字号大小
+$devui-font-size-lg: var(--devui-font-size-lg, 14px); //当组件size为'lg'时使用此字号大小
 
-$font-title-weight: bold;
-$font-content-weight: normal;
-$line-height-base: 1.5;
+$devui-font-title-weight: var(--devui-font-title-weight, bold); //标题文字粗细
+$devui-font-content-weight: var(--devui-font-content-weight, normal); //内容文字粗细
+$devui-line-height-base: var(--devui-line-height-base, 1.5); //规范行高

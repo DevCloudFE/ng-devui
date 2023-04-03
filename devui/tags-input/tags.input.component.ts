@@ -109,6 +109,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
    */
   @Input() caseSensitivity = false;
   @Input() itemTemplate: TemplateRef<any>;
+  @Input() tagTemplate: TemplateRef<any>;
   @Input() checkBeforeAdd: (newTag: string) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() @WithConfig() showAnimation = true;
   @Input() @WithConfig() styleType = 'default';
@@ -163,9 +164,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   private onChange = (_: any) => null;
   private onTouch = () => null;
 
-  constructor(private i18n: I18nService, private devConfigService: DevConfigService) {
-    this.valueParser = (item) => (typeof item === 'object' ? item[this.displayProperty] || '' : String(item) ? item.toString() : '');
-  }
+  constructor(private i18n: I18nService, private devConfigService: DevConfigService) { }
 
   private setI18nText() {
     this.i18nCommonText = this.i18n.getI18nText().common;
@@ -195,6 +194,8 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
 
   ngOnInit() {
     this.setI18nText();
+    this.valueParser = (item) =>
+      this.tagTemplate ? item : typeof item === 'object' ? item[this.displayProperty] || '' : String(item) ? item.toString() : '';
     this.newTag = '';
     this._suggestionList = [...this.suggestionList];
     this.searchFn = (term: any) => {

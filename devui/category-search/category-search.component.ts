@@ -29,7 +29,6 @@ import { cloneDeep, isEqual, merge, mergeWith } from 'lodash-es';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { debounceTime, takeUntil, tap } from 'rxjs/operators';
 import {
-  ALLOWED_SEARCH_FIELD_TYPES,
   COLORS,
   CreateFilterEvent,
   ExtendedConfig,
@@ -50,7 +49,7 @@ import { DefaultTemplateDirective } from './default-template.directive';
 })
 export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewInit, AfterContentInit {
   static ID_SEED = 0;
-  @Input() category: ICategorySearchTagItem[];
+  @Input() category: ICategorySearchTagItem[] = [];
   @Input() defaultSearchField = [];
   @Input() selectedTags: ICategorySearchTagItem[] = [];
   /**
@@ -130,9 +129,9 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   templates = {}; // 所有类型默认模板
   customTemplates = {}; // 按field标记的自定义模板集合
   joinLabelTypes = ['checkbox', 'label'];
-  valueIsArrayTypes = ['numberRange', 'treeSelect'];
+  valueIsArrayTypes = ['dateRange', 'numberRange', 'treeSelect'];
   document: Document;
-  _extendedConfig: ExtendedConfig = {
+  operationConfig: ExtendedConfig = {
     clear: { show: true },
     save: { show: true },
     more: { show: false },
@@ -143,8 +142,11 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   }
 
   get showExtendedConfig() {
-    return this._extendedConfig.show ?? Boolean(this.selectedTags.length || this.searchKey);
+    return this.operationConfig.show ?? Boolean(this.selectedTags.length || this.searchKey);
   }
+
+  private categoryOrder = [];
+  private categoryDictionary = {};
 
   constructor(private devConfigService: DevConfigService, @Inject(DOCUMENT) private doc: any, private i18n: I18nService) {
     this.document = this.doc;
@@ -158,7 +160,19 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const { defaultSearchField, category, extendedConfig, selectedTags, searchKey, showSearchCategory, tagMaxWidth, textConfig } = changes;
+    const {
+      allowClear,
+      allowSave,
+      allowShowMore,
+      defaultSearchField,
+      category,
+      extendedConfig,
+      selectedTags,
+      searchKey,
+      showSearchCategory,
+      textConfig,
+    } = changes;
+    const hasExtendChanged = [allowClear, allowSave, allowShowMore, extendedConfig].some((change) => change);
     if (defaultSearchField || category || selectedTags) {
       this.init();
     }
@@ -168,13 +182,10 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     if (showSearchCategory) {
       this.setSearchShow();
     }
-    if (tagMaxWidth) {
-      this.setTagsMaxWidth();
-    }
     if (textConfig) {
       this.setI18nAndFilterText(this.i18n.getI18nText());
     }
-    if (extendedConfig) {
+    if (hasExtendChanged) {
       this.setExtendedConfig();
     }
   }
@@ -252,16 +263,6 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     }
   }
 
-  // 插入tag max-width 样式控制是否显示省略号
-  setTagsMaxWidth() {
-    if (this.tagMaxWidth) {
-      const rule = `.devui-category-search-id-${this.id} .devui-tag-container d-tag>.devui-tag-item>span{max-width:${this.tagMaxWidth}px}`;
-      const style = this.document.createElement('style');
-      style.innerText = rule;
-      this.document.head.appendChild(style);
-    }
-  }
-
   setSearchShow() {
     const customConfig =
       typeof this.showSearchCategory === 'boolean'
@@ -319,16 +320,16 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       more: { show: this.allowShowMore },
     };
     merge(oldConfig, this.extendedConfig);
-    merge(this._extendedConfig, oldConfig);
+    merge(this.operationConfig, oldConfig);
   }
 
   init() {
     this.setValue(this.category);
     this.setValue(this.selectedTags, true);
-    this.initCategoryDisplay();
-    if (this.defaultSearchField && this.defaultSearchField.length) {
+    this.initCategoryDisplay(true);
+    if (this.defaultSearchField?.length && this.category?.length) {
       this.searchField = this.category.filter(
-        (item) => this.defaultSearchField.includes(item.field) && ALLOWED_SEARCH_FIELD_TYPES.includes(item.type)
+        (item) => this.defaultSearchField.includes(item.field) && !this.valueIsArrayTypes.includes(item.type)
       );
     }
     // 初始化时判断已选中分类中最后一项是否赋值，未赋值则识别为正在处理的分类，优先显示赋值下拉列表
@@ -373,10 +374,10 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     }
   }
 
-  setValue(data, isSelectedTags = false) {
+  setValue(data: any, isSelectedTags = false) {
     if (Array.isArray(data) && data.length) {
       data.forEach((item) => {
-        if (isSelectedTags) {
+        if (isSelectedTags && this.category) {
           let result = '';
           const originItem = this.category.find((categoryItem) => categoryItem.field === item.field);
           mergeWith(item, originItem, this.mergeCheck);
@@ -401,30 +402,67 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       : `${tag.label}: ${result || (tag.value && tag.value[tag.filterKey || 'label']) || ''}`;
   }
 
-  initCategoryDisplay() {
+  initCategoryDisplay(isInit = false) {
     const selectedTagsField = this.selectedTags.map((item) => item.field);
-    if (this.categoryInGroup) {
-      const groupObj = {};
-      this.category.forEach((item) => this.insertCategoryToGroup(item.group, groupObj, item, selectedTagsField.indexOf(item.field) === -1));
-      const keys = this.groupOrderConfig || Object.keys(groupObj);
-      this.categoryDisplay = [];
-      keys.forEach((key) => {
-        if (groupObj[key]) {
-          const groupItem = <ICategorySearchTagItem>{};
-          groupItem.groupName = key;
-          groupItem.groupLength = groupObj[key].length;
-          this.categoryDisplay.push(groupItem, ...groupObj[key]);
+    if (isInit) {
+      this.category = this.category || [];
+      this.categoryOrder = [];
+      this.categoryDictionary = {};
+      this.initGroupAndDictionary();
+      this.initCategoryOrder();
+    }
+    this.categoryDisplay = this.categoryOrder.map((item) => {
+      item.isSelected = selectedTagsField.includes(item.field);
+      this.handleGroupLength(item, item.isSelected, isInit);
+      return item;
+    });
+    this.showNoDataTips = this.categoryDisplay.every((item) => item.isSelected);
+  }
+
+  initGroupAndDictionary() {
+    this.category.forEach((item) => {
+      if (this.categoryInGroup && item.group) {
+        if (this.categoryDictionary[item.group]) {
+          this.categoryDictionary[item.group].groupLength++;
+        } else {
+          this.categoryDictionary[item.group] = { groupName: item.group, groupLength: 1, children: [] };
         }
-      });
-    } else {
-      this.categoryDisplay =
-        selectedTagsField && selectedTagsField.length
-          ? this.category.filter((item) => selectedTagsField.indexOf(item.field) === -1)
-          : this.category;
+        this.categoryDictionary[item.group].children.push(item);
+      }
+      this.categoryDictionary[item.field] = item;
+    });
+  }
+
+  initCategoryOrder() {
+    const keys = this.groupOrderConfig || Object.keys(this.categoryDictionary);
+    keys.forEach((key) => {
+      const item = this.categoryDictionary[key];
+      if (item) {
+        if (item) {
+          if (this.categoryInGroup) {
+            if (item.groupName) {
+              this.categoryOrder.push(item, ...item.children);
+            } else if (!item.group) {
+              this.categoryOrder.push(item);
+            }
+          } else {
+            this.categoryOrder.push(item);
+          }
+        }
+      }
+    });
+  }
+
+  handleGroupLength(tag: ICategorySearchTagItem, isSelected: boolean, isInit = false) {
+    if (this.categoryInGroup && tag.group) {
+      const group = this.categoryDictionary[tag.group];
+      const len = group.groupLength;
+      group.groupLength = isSelected ? len - 1 : isInit ? len : len + 1;
+      group.isSelected = group.groupLength === 0;
     }
   }
 
-  insertCategoryToGroup(groupName, groupObj, item, isInsert) {
+  insertCategoryToGroup(groupName: string, groupObj: object, item: ICategorySearchTagItem, isInsert: boolean) {
     if (!groupName) {
       return;
     }
@@ -443,9 +481,11 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   }
 
   searchCategory(item: ICategorySearchTagItem, value?: string) {
-    const validField = item;
-    this.updateFieldValue(validField, value || this.searchKey);
-    this.updateSelectedTags(validField);
+    if (this.valueIsArrayTypes.includes(item.type)) {
+      return;
+    }
+    this.updateFieldValue(item, value || this.searchKey);
+    this.updateSelectedTags(item);
     this.searchKey = '';
     this.enterSearch = false;
     this.finishChoose();
@@ -470,6 +510,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       if (this.currentSelectTag.type === 'label') {
         this.currentSelectTag = this.mergeToLabel(this.currentSelectTag);
       }
+      this.currentSelectTag.title = this.setTitle(this.currentSelectTag, this.currentSelectTag.type, '');
       inputDropdown.isOpen = true;
     }, this.DROPDOWN_ANIMATION_TIMEOUT);
     this.updateSelectedTags(item, false);
@@ -496,7 +537,6 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       } else {
         this.selectedTags.push(tag);
       }
-      this.resolveCategoryDisplay(tag, 'delete');
       if (valueChanged) {
         // 只在新增标签时位移滚动条
         if (this.scrollToTailFlag) {
@@ -508,6 +548,8 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
           operation: 'add',
         });
         this.isSearchCategory = false;
+      } else {
+        this.resolveCategoryDisplay(tag, 'delete');
       }
     });
   }
@@ -552,7 +594,9 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     result[filterKey] = value;
     if (field.type === 'radio') {
       field.value.value = { [filterKey]: value };
-      field.title = this.setTitle(field, 'radio', value);
+    }
+    if (field.type === 'textInput') {
+      field.value.value = value;
     }
     if (field.type === 'label') {
       if (field.options[0] && !field.options[0].$label) {
@@ -561,13 +605,12 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       result[colorKey] = COLORS[Math.floor(COLORS.length * Math.random())];
       result['$label'] = `${value}_${result[colorKey]}`;
     }
-    if (['label', 'checkbox'].includes(field.type)) {
+    if (this.joinLabelTypes.includes(field.type)) {
       field.value.value = [result];
-      // setTitle中checkbox与label同样处理，不需要针对label修改类型参数
-      field.title = this.setTitle(field, 'checkbox', value);
     }
     field.value[filterKey] = value;
     field.value.cache = cloneDeep(field.value.value);
+    field.title = this.setTitle(field, field.type, value);
   }
 
   removeTag(tag: ICategorySearchTagItem, event?: Event) {
@@ -696,27 +739,11 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   }
 
   resolveCategoryDisplay(tag: ICategorySearchTagItem, type: string) {
-    if (tag && type === 'add') {
-      if (this.categoryInGroup) {
-        const groupIndex = this.categoryDisplay.findIndex((item) => item.groupName === tag.group);
-        this.categoryDisplay[groupIndex].groupLength++;
-        this.categoryDisplay.splice(groupIndex + 1, 0, tag);
-      } else {
-        this.categoryDisplay.push(tag);
-      }
+    if (tag.field === 'devuiCategorySearchKeyword' || !this.categoryDictionary[tag.field]) {
+      return;
     }
-    if (type === 'delete') {
-      if (this.categoryInGroup) {
-        const tagIndex = this.categoryDisplay.findIndex((item) => item.field === tag.field);
-        if (tagIndex >= 0) {
-          const groupIndex = this.categoryDisplay.findIndex((item) => item.groupName === tag.group);
-          this.categoryDisplay[groupIndex].groupLength--;
-          this.categoryDisplay.splice(tagIndex, 1);
-        }
-      } else {
-        this.categoryDisplay = this.categoryDisplay.filter((item) => item.field !== tag.field);
-      }
-    }
+    this.handleGroupLength(tag, type === 'delete');
+    this.categoryDictionary[tag.field].isSelected = type === 'delete';
   }
 
   createFilterFn() {
@@ -849,7 +876,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       this.handleAccordingType(this.currentSelectTag.type, this.currentSelectTag.options);
       this.scrollToTailFlag = true;
     }
-    this.showNoDataTips = this.categoryDisplay.length === 0 || !this.categoryDisplay.some((item) => item && item.groupLength === undefined);
+    this.showNoDataTips = this.categoryDisplay.every((item) => item.isSelected);
   }
 
   resetTreeRender(dropdown: DropDownDirective, tag: any, flag: boolean, isCurrentSelectTag?: boolean) {

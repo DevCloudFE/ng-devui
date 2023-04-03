@@ -21,6 +21,7 @@ import { DynamicUploadOptionsComponent } from './dynamic-upload-options/dynamic-
 import { MultiComponent } from './multi/multi.component';
 import { UploadSliceComponent } from './slice/upload-slice.component';
 import { UploadDemoComponent } from './upload-demo.component';
+import { UploadDesignComponent } from './upload-design.component';
 
 @NgModule({
   imports: [
@@ -38,6 +39,10 @@ import { UploadDemoComponent } from './upload-demo.component';
     ProgressModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: UploadDesignComponent,
+      },
       { path: 'demo', component: UploadDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -48,6 +53,7 @@ import { UploadDemoComponent } from './upload-demo.component';
   exports: [UploadDemoComponent],
   declarations: [
     UploadDemoComponent,
+    UploadDesignComponent,
     BasicComponent,
     MultiComponent,
     CustomizeComponent,

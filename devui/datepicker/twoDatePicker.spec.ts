@@ -1,5 +1,5 @@
 import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -616,14 +616,17 @@ describe('twoDatePicker', () => {
       CommonFunctions.closeDatePicker(fixture);
       twoDatePicker = document.querySelector('.devui-two-date-wrapper');
       expect(twoDatePicker).toBeFalsy();
+      flush();
     }));
 
     it('should ngModel works, should change year and month works', fakeAsync(() => {
       TestFunctions.testNgModelAndYearMonth(fixture, document, component);
+      flush();
     }));
 
     it('should basic @Input works', fakeAsync(() => {
       TestFunctions.testInputParam(fixture, document, component);
+      flush();
     }));
 
     it('should @Input disabled works', fakeAsync(() => {
@@ -649,6 +652,7 @@ describe('twoDatePicker', () => {
       expect(component.rangeEnd).toBeFalsy();
 
       CommonFunctions.closeDatePicker(fixture);
+      flush();
     }));
 
     it('should default buttons works', fakeAsync(() => {
@@ -683,6 +687,7 @@ describe('twoDatePicker', () => {
       CommonFunctions.tickEvent(rightClearBtn, new Event('click'), fixture);
       expect(component.rightInputEle.nativeElement.value).toBe('');
       CommonFunctions.closeDatePicker(fixture);
+      flush();
     }));
   });
 
@@ -714,6 +719,7 @@ describe('twoDatePicker', () => {
       it('should dateConfig works', fakeAsync(() => {
         fixture.detectChanges();
         TestFunctions.testDateConfig(fixture, document, component, year);
+        flush();
       }));
     });
 
@@ -734,6 +740,7 @@ describe('twoDatePicker', () => {
       it('dateConfig should not work', fakeAsync(() => {
         fixture.detectChanges();
         TestFunctions.testDateConfig(fixture, document, component, year, false);
+        flush();
       }));
     });
   });
@@ -774,10 +781,12 @@ describe('twoDatePickerDiv', () => {
       CommonFunctions.closeDatePicker(fixture);
       twoDatePicker = document.querySelector('.devui-two-date-wrapper');
       expect(twoDatePicker).toBeFalsy();
+      flush();
     }));
 
     it('test ngModel', fakeAsync(() => {
       TestFunctions.testNgModelAndYearMonth(fixture, document, component, false);
+      flush();
     }));
   });
 });

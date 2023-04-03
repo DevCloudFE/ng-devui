@@ -1,25 +1,48 @@
 <div class="sidebar-wrapper">
-  <ul class="sidebar-menu">
+  <d-search
+    class="sidebar-search-container"
+    [iconPosition]="'left'"
+    [styleType]="'gray'"
+    [isKeyupSearch]="true"
+    [placeholder]="searchPlaceholder"
+    (searchFn)="onSearch($event)"
+  ></d-search>
+  <ul class="sidebar-menu" [ngClass]="{'sidebar-menu-design': !sideMenuList.length}">
     <li *ngFor="let item of sideMenuList" class="sidebar-menu-item" routerLinkActive="sidebar-menu-item-selected">
-      <a
-        *ngIf="item.linkType === 'routerLink'"
-        [routerLink]="item.path">
+      <a *ngIf="item.linkType === 'routerLink'" [routerLink]="item.path">
         {{ item.name }}
       </a>
-      <a
-        *ngIf="item.linkType === 'href'"
-        [href]="item.path">
+      <a *ngIf="item.linkType === 'href'" [href]="item.path" [target]="'_blank'">
         {{ item.name }}
       </a>
     </li>
   </ul>
   <nav class="sidebar-nav">
-    <d-accordion [data]="componentsDataDisplay" [linkType]="linkType" [itemTemplate]="itemtemplate"></d-accordion>
-
+    <d-accordion [data]="componentsDataDisplay" [linkType]="linkType" [itemTemplate]="itemtemplate" (itemClick)="handleResetPage()" [linkDefaultTarget]="linkDefaultTarget"></d-accordion>
     <ng-template #itemtemplate let-item="item">
       {{ item.title }}
-      <d-tag *ngIf="item.newChange" [tag]="text.new" [labelStyle]="'orange-w98'"></d-tag>
-      <d-tag *ngIf="item.sunset" [tag]="text.sunset" [labelStyle]="'yellow-w98'"></d-tag>
+      <d-tag *ngIf="item.newChange" [tag]="text.new" [labelStyle]="'update-custom'"></d-tag>
+      <d-tag *ngIf="item.sunset" [tag]="text.sunset" [labelStyle]="'sunset-custom'"></d-tag>
     </ng-template>
   </nav>
+  <div class="sidebar-footer">
+    <div *ngIf="showVersions">
+      <span>{{ curLanguage === 'zh-cn' ? '版本' : 'Version' }}：</span>
+      <span dDropDown (toggleEvent)="onToggle($event)" appendToBody [appendToBodyDirections]="['centerUp']">
+        <d-icon style="cursor: pointer" dDropDownToggle [icon]="'icon-select-arrow'" [rotate]="rotateDegrees">
+          <span iconPrefix>{{ currentOption?.name }}</span>
+        </d-icon>
+        <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
+          <li role="menuitem" *ngFor="let item of versionOptions">
+            <a class="version-link" dDropDownMenuItem [href]="item.link" [target]="item.target">{{ item.name }}</a>
+          </li>
+        </ul>
+      </span>
+    </div>
+    <div *ngIf="showChangelog">
+      <a [href]="changelogLink" rel="noopener noreferrer" [target]="'_blank'">
+        {{ curLanguage === 'zh-cn' ? '版本历程' : 'Changelog' }}
+      </a>
+    </div>
+  </div>
 </div>

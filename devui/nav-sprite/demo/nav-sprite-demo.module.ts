@@ -8,6 +8,7 @@ import { DevUICodeboxModule } from "ng-devui/shared/devui-codebox";
 import { TranslateModule } from "@ngx-translate/core";
 import { DDemoNavModule } from "devui-commons/src/demo-nav/d-demo-nav.module";
 import { BasicComponent } from "./basic/basic.component";
+import { NavSpriteDesignComponent } from "./nav-sprite-design.component";
 import { ScrollContainerComponent } from "./scroll-container/scroll-container.component";
 import { NavSpriteDemoComponent } from "./nav-sprite-demo.component";
 @NgModule({
@@ -22,7 +23,11 @@ import { NavSpriteDemoComponent } from "./nav-sprite-demo.component";
       {
         path: "",
         redirectTo: "demo",
-        pathMatch: "full"
+        pathMatch: "full",
+      },
+      {
+        path: "design",
+        component: NavSpriteDesignComponent,
       },
       {
         path: "demo",
@@ -40,6 +45,7 @@ import { NavSpriteDemoComponent } from "./nav-sprite-demo.component";
   ],
   declarations: [
     NavSpriteDemoComponent,
+    NavSpriteDesignComponent,
     BasicComponent,
     ScrollContainerComponent,
   ],

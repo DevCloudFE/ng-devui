@@ -1,6 +1,6 @@
 {
   "name": "ng-devui",
-  "version": "15.0.0",
+  "version": "15.1.0",
   "license": "MIT",
   "description": "DevUI components based on Angular",
   "keywords": [
@@ -15,6 +15,20 @@
   },
   "bugs": {
     "url": "https://github.com/DevCloudFE/ng-devui/issues"
+  },
+  "dependencies": {
+    "@angular/cdk": "^15.0.0",
+    "date-fns": "^2.20.0",
+    "lodash-es": "^4.17.11",
+    "@popperjs/core": "^2.5.4",
+    "css-vars-ponyfill": "^2.3.2",
+    "tslib": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@angular/animations": "^15.0.0",
+    "@angular/common": "^15.0.0",
+    "@angular/core": "^15.0.0",
+    "@angular/forms": "^15.0.0"
   },
   "exports": {
     "./devui-for-mobile.css": {
@@ -32,19 +46,5 @@
     "./styles-var/devui-var.less": {
       "style": "./styles-var/devui-var.less"
     }
-  },
-  "dependencies": {
-    "@angular/cdk": "^15.0.0",
-    "date-fns": "^2.20.0",
-    "lodash-es": "^4.17.11",
-    "@popperjs/core": "^2.5.4",
-    "css-vars-ponyfill": "^2.3.2",
-    "tslib": "^2.0.0"
-  },
-  "peerDependencies": {
-    "@angular/animations": "^15.0.0",
-    "@angular/common": "^15.0.0",
-    "@angular/core": "^15.0.0",
-    "@angular/forms": "^15.0.0"
   }
 }

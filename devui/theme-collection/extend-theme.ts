@@ -1,6 +1,7 @@
 import { devuiDarkTheme, Theme } from 'ng-devui/theme';
 import {
-  devuiCustomComponentsDarkThemeData, devuiCustomComponentsDeepThemeData,
+  devuiCustomComponentsDarkThemeData,
+  devuiCustomComponentsDeepThemeData,
   devuiCustomComponentsThemeData
 } from './theme-custom-components-data';
 import { devuiInitialThemeData } from './theme-initial-data';
@@ -23,7 +24,7 @@ export const provenceTheme: Theme = new Theme({
     'devui-primary-active': '#7B69EE',
     'devui-brand-hover': '#7B69EE',
     'devui-global-bg': '#f9fafb',
-    'devui-glass-morphism-bg': 'rgba(249,250,251,0.9)',
+    'devui-glass-morphism-bg': 'rgba(245, 246, 248,0.9)',
     'devui-base-bg': '#ffffff',
     'devui-text': '#070036',
     'devui-aide-text': '#717087',
@@ -44,6 +45,7 @@ export const provenceTheme: Theme = new Theme({
     'devui-primary': '#7B69EE',
     'devui-primary-hover': '#7B69EE',
     'devui-form-control-line-active': '#7B69EE',
+    'devui-form-control-interactive-outline': 'rgba(123,105,238,0.08)',
     'devui-form-control-line-active-hover': '#7B69EE',
     'devui-icon-fill-active': '#7B69EE',
     'devui-icon-fill-active-hover': '#7B69EE',
@@ -71,7 +73,7 @@ export const sweetTheme: Theme = new Theme({
     'devui-primary-active': '#ec66ab',
     'devui-brand-hover': '#ec66ab',
     'devui-global-bg': '#f9fafb',
-    'devui-glass-morphism-bg': 'rgba(249,250,251,0.9)',
+    'devui-glass-morphism-bg': 'rgba(245, 246, 248,0.9)',
     'devui-base-bg': '#ffffff',
     'devui-text': '#2f272f',
     'devui-aide-text': '#827d82',
@@ -92,6 +94,7 @@ export const sweetTheme: Theme = new Theme({
     'devui-primary': '#ec66ab',
     'devui-primary-hover': '#ec66ab',
     'devui-form-control-line-active': '#ec66ab',
+    'devui-form-control-interactive-outline': 'rgba(236,102,171,0.08)',
     'devui-form-control-line-active-hover': '#ec66ab',
     'devui-icon-fill-active': '#ec66ab',
     'devui-icon-fill-active-hover': '#ec66ab',
@@ -150,6 +153,7 @@ export const deepTheme: Theme = new Theme({
     'devui-shape-icon-fill-active': '#AEAEBD',
     'devui-shape-icon-fill-disabled': '#E0E0E0',
     'devui-form-control-line-active': '#252b3a',
+    'devui-form-control-interactive-outline': 'rgba(37,43,58,0.08)',
     'devui-form-control-line-active-hover': '#252b3a',
     'devui-connected-overlay-line': '#252b3a',
     'devui-primary-disabled': '#babbc0',
@@ -197,6 +201,7 @@ export const galaxyTheme: Theme = new Theme({
     'devui-form-control-bg': '#292A2E',
     'devui-form-control-line-hover': '#696c75',
     'devui-form-control-line-active': '#526ECC',
+    'devui-form-control-interactive-outline': 'rgba(82,110,204,0.08)',
     'devui-icon-text': '#868A99',
     'devui-connected-overlay-bg': '#2E2F33',
     'devui-fullscreen-overlay-bg': '#2E2F33',

@@ -14,12 +14,10 @@
 
   &:hover {
     .input-box:not(.disabled) {
-      border: 1px solid $devui-form-control-line-hover;
       padding-right: 24px;
     }
 
     .input-control-buttons:not(.disabled) {
-      border-color: $devui-form-control-line-hover;
       display: flex;
     }
   }

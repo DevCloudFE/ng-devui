@@ -12,6 +12,7 @@ import { SliderBasicComponent } from './basic/slider-basic.component';
 import { SliderCustomFormatterComponent } from './custom-formatter/slider-custom-formatter.component';
 import { SliderDisabledComponent } from './disabled/slider-disabled.component';
 import { SliderDemoComponent } from './slider-demo.component';
+import { SliderDesignComponent } from './slider-design.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,10 @@ import { SliderDemoComponent } from './slider-demo.component';
     DDemoNavModule,
     RouterModule.forChild([
       {path: '', redirectTo: 'demo', pathMatch: 'full'},
+      {
+        path: 'design',
+        component: SliderDesignComponent,
+      },
       {path: 'demo', component: SliderDemoComponent},
       {
         path: 'api', component: DevUIApiComponent, data: {
@@ -36,6 +41,7 @@ import { SliderDemoComponent } from './slider-demo.component';
   exports: [SliderDemoComponent],
   declarations: [
     SliderDemoComponent,
+    SliderDesignComponent,
     SliderBasicComponent,
     SliderDisabledComponent,
     SliderCustomFormatterComponent

@@ -30,7 +30,7 @@
       "title": "组件总览",
       "description": "DevUI 为 Web 应用提供了丰富的基础 UI 组件，我们还将持续探索企业级应用的最佳 UI 实践，欢迎尝试使用 DevUI。",
       "placeholder": "请输入你想查找的组件",
-      "newChange": "有更新",
+      "newChange": "UPDATED",
       "sunset": "日落",
       "lookingCmp": "您要找的组件是不是？",
       "suggestCmp": "推荐组件",
@@ -324,6 +324,103 @@
         "auto-disable": "设置禁用",
         "auto-latest": "最近输入",
         "auto-lazy-load": "启用懒加载"
+      },
+      "design": {
+        "structure": {
+          "name": "结构",
+          "desc": "不同类型的输入框，其结构也有所不同，具体如下所示：",
+          "image": "assets/design/auto-complete/structure.png",
+          "descList": [
+            {
+              "title": "1.  标签：",
+              "content": "默认状态：按需显示，内容标题，告知用户当前输入的内容。"
+            },
+            {
+              "title": "2.  输入框：",
+              "content": "默认状态：圆角，4px；承载用户的具体输入。"
+            },
+            {
+              "title": "3.  输入的内容：",
+              "content": "默认状态：颜色，#252B3A;用户输入的内容。"
+            },
+            {
+              "title": "4.  输入的结果：",
+              "content": "默认状态：联想，输入的内容; 首个结果为输入的内容。"
+            },
+            {
+              "title": "5.  自动补全的结果：",
+              "content": "默认状态：按需显示，根据输入的内容匹配到的选项; 根据输入的内容匹配包含输入内容字段的选项。"
+            }
+          ]
+        },
+        "how-to-use": {
+          "name": "如何使用",
+          "sub-name": "何时使用",
+          "descList": [
+            "需要对输入框而不是选择器提供输入建议/辅助提示，进行自动补全的操作",
+            "与搜索框Select组件的区别：",
+            "1.AutoComplete本质上是一个带提示的、增强型的提供输入建议文本输入框，而Select是一个选择器",
+            "2.AutoComplete用户可以自由输入，关键词是辅助输入，而Select则是在限定的可选项中进行选择，关键词是选择",
+            "3.AutoComplete只允许为字符串，而Select的已选项渲染可定制化程度更高，可以为任意类型"
+          ]
+        },
+        "scene": {
+          "name": "场景",
+          "sceneList": [
+            {
+              "name": "基本用法",
+              "desc": "根据当前输入以下拉选择的形式展示输入建议。",
+              "img": "assets/design/auto-complete/basic.png"
+            },
+            {
+              "name": "自定义选项",
+              "desc": "需要自定义渲染选项时，可以传入对象数组、特定后缀如邮箱等。",
+              "img": "assets/design/auto-complete/custom.png"
+            },
+            {
+              "name": "自定义输入组件",
+              "desc": "支持自定义输入组件，例如多行文本。",
+              "img": "assets/design/auto-complete/input.png"
+            },
+            {
+              "name": "是否区分大小写",
+              "desc": "区分大小写时则严格按照输入字符串的大小写进行匹配，比如：输入“Please”，含有“Please”的选项会被匹配，而“please”则不会被匹配。",
+              "img": "assets/design/auto-complete/classify.png"
+            },
+            {
+              "name": "类目划分",
+              "desc": "匹配的结果以类目进行分组。",
+              "img": "assets/design/auto-complete/group.png"
+            },
+            {
+              "name": "下拉框的位置",
+              "desc": "根据文本框的位置，可以自定义下拉框的位置，比如：文本框在页面最下方，激活输入后，下拉框可以出现在文本框的上方。",
+              "img": "assets/design/auto-complete/position.png"
+            },
+            {
+              "name": "输入值受限",
+              "desc": "只能选择匹配的下拉框选项，如果输入的值，下拉框里的选项不存在，则输入框失去焦点后，内容清空。",
+              "img": "assets/design/auto-complete/limited.png"
+            }
+          ]
+        },
+        "status": {
+          "name": "状态",
+          "desc": "输入框自动补全状态可分为：正常、禁用、异常（带文本提示）、Toast提示。",
+          "img": "assets/design/auto-complete/status.png"
+        },
+        "size": {
+          "name": "大小",
+          "desc": "有28px、32px、40px三种大小三种不同高度的输入框，以适应不同尺寸布局，通常情况下为32*32px；",
+          "img": "assets/design/auto-complete/size.png"
+        },
+        "rules": {
+          "name": "交互规则",
+          "desc": "文本输入框使用户可以与之交互并输入内容和数据，是表单中的常用控件。*32px；",
+          "sub-name": "单击（Click）",
+          "sub-desc": "文本输入框类组件可用时，激活文本框，光标出现，输入内容后，光标在内容之后。获取焦点后，水印文字不消失，输入字符才消失。",
+          "img": "assets/design/auto-complete/rules.png"
+        }
       }
     },
     "editormd": {
@@ -692,6 +789,168 @@
         "button-icon": "图标按钮",
         "button-size": "按钮尺寸",
         "button-groups": "按钮组"
+      },
+      "design": {
+        "structure": {
+          "name": "结构",
+          "descList": [
+            {
+              "id": 1,
+              "name": "容器"
+            },
+            {
+              "id": 2,
+              "name": "图标"
+            },
+            {
+              "id": 3,
+              "name": "文字"
+            },
+            {
+              "id": 4,
+              "name": "按钮组"
+            }
+          ]
+        },
+        "how-to-use": {
+          "name": "如何使用",
+          "sub-name": "使用说明",
+          "desc": "根据业务需求，定义按钮的功能逻辑，用不同的颜色表达按钮的主次，并在按钮文案中明确描述其业务功能。结合业务场景，选择对应尺寸，如大、中、小尺寸按钮。",
+          "size-list": [
+            {
+              "name": "大号",
+              "font-desc": "字体：14px",
+              "height-desc": "容器高度：40px",
+              "width-desc": "最小宽：96px",
+              "image": "assets/design/button/lg.png"
+            },
+            {
+              "name": "中号",
+              "font-desc": "字体：14px",
+              "height-desc": "容器高度：32px",
+              "width-desc": "最小宽：80px",
+              "image": "assets/design/button/md.png"
+            },
+            {
+              "name": "小号",
+              "font-desc": "字体：12px",
+              "height-desc": "容器高度：28px",
+              "width-desc": "最小宽：64px",
+              "image": "assets/design/button/sm.png"
+            }
+          ]
+        },
+        "button-list": [
+          {
+            "name": "主要按钮",
+            "anchor": "button-primary",
+            "desc": "界面中需要强调某个操作时，需要使用强调型按钮。在界面上很突出，用于强调当前操作、正面引导。典型场景：弹框、主界面按钮。",
+            "image": "assets/design/button/primary.png"
+          },
+          {
+            "name": "次要按钮",
+            "anchor": "button-common",
+            "desc": "常规按钮，用于非主要动作。如果不确定选择哪种按钮，次按钮永远是最安全的选择。",
+            "image": "assets/design/button/common.png"
+          },
+          {
+            "name": "状态按钮",
+            "anchor": "button-danger",
+            "desc": "删除/移动/修改权限等危险操作，一般需要二次确认，指定为警示色，引起用户警惕。",
+            "image": "assets/design/button/danger.png"
+          },
+          {
+            "name": "文字按钮",
+            "anchor": "button-text",
+            "desc": "文本按钮为纯文本按钮，点击执行操作，可最大限度减少按钮对内容的干扰。",
+            "image": "assets/design/button/text.png"
+          },
+          {
+            "name": "图标按钮",
+            "anchor": "button-icon",
+            "desc": "仅图标为按钮。",
+            "image": "assets/design/button/icon.png"
+          },
+          {
+            "name": "包含图标的按钮",
+            "anchor": "button-icon-contain",
+            "desc": "按钮可以嵌入Icon，默认情况下Icon尺寸自动跟随按钮的尺寸变化。",
+            "image": "assets/design/button/icon-contain.png"
+          },
+          {
+            "name": "按钮组",
+            "anchor": "button-group",
+            "desc": "同级多项操作，以按钮组合方式展现。",
+            "image": "assets/design/button/group.png"
+          }
+        ],
+        "layout": {
+          "name": "主、次按钮相对位置",
+          "desc": "面向复杂的工具系统，主、次按钮的相对位置应有灵活的规则。灵活的布局策略通常会考虑到：",
+          "description1": "默认而言，主按钮都在次要按钮的 ⬅️左侧 ",
+          "description2": "特别的，目前主按钮适合放在在次要按钮➡️右侧 的3种已知场景有",
+          "layoutStrategies": [
+            {
+              "title": "操作维度",
+              "describe": "费茨法则（简而言之：屏幕边角可以兜住鼠标，靠边按钮可更轻易被选中）",
+              "img": "assets/design/button/layoutStrategies1.png"
+            },
+            {
+              "title": "认知心理学维度",
+              "describe": "人眼视线的关注规律（简而言之：左上>右上>左下>右下）",
+              "img": "assets/design/button/layoutStrategies2.png"
+            },
+            {
+              "title": "视觉重心维度",
+              "describe": "避免凌空垂吊一个主要按钮等",
+              "img": "assets/design/button/layoutStrategies3.png"
+            }
+          ],
+          "primaryLeft": [
+            {
+              "title": "弹窗",
+              "describe": "按钮大小：32px（大号）",
+              "img": "assets/design/button/primaryLeft1.png"
+            },
+            {
+              "title": "内容区操作",
+              "describe": "按钮大小：32px（中号）",
+              "img": "assets/design/button/primaryLeft2.png"
+            },
+            {
+              "title": "底部操作栏",
+              "describe": "按钮大小：40px（大号）",
+              "img": "assets/design/button/primaryLeft3.png"
+            }
+          ],
+          "primaryRight": [
+            {
+              "title": "服务头（按钮组整体在右侧）",
+              "describe": "按钮大小：28px（小号）",
+              "img": "assets/design/button/primaryRight1.png"
+            },
+            {
+              "title": "一些和标题同一行的再容器中靠右按钮区（和服务header逻辑类似）",
+              "describe": "按钮大小：32px（中号）",
+              "img": "assets/design/button/primaryRight2.png"
+            },
+            {
+              "title": "当按钮是“下一步”时。最后一步的顺序也是“上一步、取消、确定（主按钮）”",
+              "describe": "按钮大小：40px（大号）",
+              "img": "assets/design/button/primaryRight3.png"
+            },
+            {
+              "title": "独立编辑页",
+              "describe": "按钮大小：28px（小号）",
+              "img": "assets/design/button/primaryRight4.png"
+            },
+            {
+              "title": "侧边栏（仅侧边栏可用圆形添加按钮）",
+              "describe": "按钮大小：24px（圆形按钮）",
+              "img": "assets/design/button/primaryRight5.png"
+            }
+          ]
+        }
       }
     },
     "badge": {
@@ -867,7 +1126,13 @@
         "p2": "滚动监听使用其他元素,比如window·"
       },
       "pipeDemo": {
-        "title": "日期解析器"
+        "dDatePipe": {
+          "title": "日期解析器"
+        },
+        "dSafeNullPipe": {
+          "title": "空值占位管道",
+          "description": "当数据为 ''、null、undefined时可指定任意字符进行占位展示，默认为：'--'"
+        }
       },
       "browserDemo": {
         "title": "当前浏览器名和版本"
@@ -887,6 +1152,7 @@
       },
       "anchorLinkValues": {
         "lazy-load": "懒加载指令",
+        "safe-null-pipe": "空值占位管道",
         "browser-version": "当前浏览器名和版本",
         "date-pipe": "日期解析器",
         "open-url": "新标签页打开网页",
@@ -2997,6 +3263,112 @@
         "user-search-n-lazyload": "用户场景：自定义搜索的懒加载",
         "user-mail-search": "用户场景：自定义搜索和模板结合 —— 邮箱搜索",
         "model-value": "ngModel值处理"
+      },
+      "design": {
+        "structure": {
+          "name": "结构",
+          "basic": {
+            "name": "基础选择",
+            "img": "assets/design/select/structure.png",
+            "descList": [
+              {
+                "title": "标签：",
+                "content": "默认状态：按需显示，内容标题，告知用户当前下拉选择的内容。"
+              },
+              {
+                "title": "触发器：",
+                "content": "整个框的区域都可点击触发：点击触发展开选项列表，三角形朝上；再次点击收起选项列表，三角线朝下。"
+              },
+              {
+                "title": "内容录入区：",
+                "content": "默认状态：显示占位文字，格式为“请选择“（具体文案不做规定）;显示已选结果时：单选项若文案过长显示不下，则显示'...'"
+              },
+              {
+                "title": "选项列表区：",
+                "content": "展开选择列表; 列表内容可分组。"
+              }
+            ]
+          },
+          "muti": {
+            "name": "多项选择",
+            "img": "assets/design/select/structure2.png",
+            "descList": [
+              {
+                "title": "已选标签：",
+                "content": "不限制特定字符长度，无论所选选项字符数量多少，均保持右侧距选项清除图标安全距离4px。超出可显示数量；也可设置自适应拓展内容录入区高度。"
+              },
+              {
+                "title": "清空：",
+                "content": "当已有选项，鼠标移到输入框中时，点击则可删除全部已选选项。可按需选择是否使用。"
+              },
+              {
+                "title": "滚动条：",
+                "content": "内容录入区：当选项数量展示超出三行时，显示竖向滚动条，滚动条最低高度32px；选项列表区：当选项数量超出当前高度时，允许显示竖向滚动条，滚动条最低高度80px。"
+              },
+              {
+                "title": "复选框：",
+                "content": "当选项被选中后，会按照列表排列顺序依次展现在上方选择框中；当全选状态下时，选框只单独显示“全选”选项。"
+              },
+              {
+                "title": "选项文字：",
+                "content": "选项字体默认使用常规体积；“全选”选项字体均使用中黑体。"
+              },
+              {
+                "title": "已选选项：",
+                "content": "不限制特定字符长度，字符右侧距离背景已选选框安全距离16px。"
+              },
+              {
+                "title": "选项背景：",
+                "content": "选项背景整体宽度和高度由业务根据具体场景自行确定，若不定义，高度默认支持显示到12项，超出则显示滚动条；默认与下拉框宽度保持一致，可选择比下拉宽更框，但不可更窄，背景距离滚动条保持左侧安全距离4px，选项选中背景右侧距滚动条保持安全距离8px。"
+              }
+            ]
+          }
+        },
+        "how-to-use": {
+          "name": "如何使用",
+          "descList": [
+            "适用于用户可以快速做出选择的场景；",
+            "常规下拉菜可根据业务具体场景自行调整高度或宽度，若不定义，高度默认支持显示到12项，超出则右侧显示滚动条下拉，若下拉框存在多级，取最大级的宽度做为宽度标准。"
+          ]
+        },
+        "selectList": [
+          {
+            "name": "基础选择",
+            "desc": "",
+            "image": "assets/design/select/basic.png"
+          },
+          {
+            "name": "多级菜单",
+            "desc": "下拉框存在多级状态下，取最大级的宽度做为宽度标准，当选择完成后，单选下拉框内可同时展示父级/子级内容，选项层级建议不超过 3 层。",
+            "image": "assets/design/select/muti.png"
+          },
+          {
+            "name": "选择即改变",
+            "desc": "选框内实时更新已选选项",
+            "image": "assets/design/select/change.png"
+          },
+          {
+            "name": "带标题下拉",
+            "desc": "当选择操作完成后，单选下拉框内仅单独展示所选选项文字内容（标题不做同步展示）",
+            "image": "assets/design/select/title.png"
+          },
+          {
+            "name": "带图标下拉",
+            "desc": "当选择操作完成后，常规状态下，下拉框内选项文案及所搭配图标同步展示；多级状态下，只展示子级文案及所搭配图标",
+            "image": "assets/design/select/icon.png"
+          },
+          {
+            "name": "多项选择",
+            "desc": "以Tag形式展示已选择项；点击标签后的“x”号则移除该标签。触发器后面的“x”号则清除全部选项。  ",
+            "image": "assets/design/select/options.png",
+            "image2": "assets/design/select/options2.png"
+          },
+          {
+            "name": "可输入搜索",
+            "desc": "当选项超过25个时，建议开启可输入搜索功能，帮助用户快速找到指定相关内容。",
+            "image": "assets/design/select/input.png"
+          }
+        ]
       }
     },
     "cascader": {
@@ -4010,6 +4382,159 @@
         "basic-usage": "基本用法",
         "size": "尺寸",
         "password-input": "密码框"
+      },
+      "design": {
+        "structure": {
+          "name": "结构",
+          "desc": "不同类型的输入框，其结构也有所不同，具体如下所示：",
+          "image": "assets/design/text-input/structure.png",
+          "descList": [
+            {
+              "title": "标签：",
+              "content": "默认状态：按需显示，内容标题，告知用户当前输入的内容。"
+            },
+            {
+              "title": "输入框：",
+              "content": "默认状态：圆角，4px；承载用户的具体输入。"
+            },
+            {
+              "title": "占位符：",
+              "content": "默认状态：按需显示，内容提示说明;可利用占位符告知用户填写格式，或邀请用户进行输入。"
+            },
+            {
+              "title": "前置标签：",
+              "content": "默认状态：按需显示，前置标签名或图标; 告知用户输入文本的类型。"
+            },
+            {
+              "title": "后置标签：",
+              "content": "默认状态：按需显示，后置标签名或图标; 一般为单位，和前置的类型相关联。"
+            },
+            {
+              "title": "类型：",
+              "content": "默认状态：按需显示，类型名称; 用户可选择输入内容的类型。"
+            },
+            {
+              "title": "分隔符：",
+              "content": "默认状态：圆点，4px; 固定符号，不需要用户输入。"
+            },
+            {
+              "title": "可见/隐藏图标：",
+              "content": "默认状态：图标，默认为不可见图标; 可以切换密码可见性，每次点击均切换是否可见性。"
+            },
+            {
+              "title": "字数提示：",
+              "content": "字数提示：默认状态：分数形式，默认分子为0，分母按需显示; 对输入的内容进行字数统计，一般用于有字数限制的输入框内。"
+            },
+            {
+              "title": "连接符：",
+              "content": "默认状态：横线，默认分子为0，分母按需显示; 连接前后两个输入框，视情况而定，可有可无。"
+            }
+          ]
+        },
+        "how-to-use": {
+          "name": "如何使用",
+          "layout": {
+            "name": "布局",
+            "layoutList": [
+              {
+                "image": "assets/design/text-input/layout1.png",
+                "desc": "推荐",
+                "descList": [
+                  "1、更好的阅读路径 ",
+                  "2、更好的标题字长兼容性",
+                  "3、更整齐的排版",
+                  "4、更好的拓展挂件兼容性"
+                ]
+              },
+              {
+                "image": "assets/design/text-input/layout2.png",
+                "desc": "慎用",
+                "descList": [
+                  "仅在空间有限的可折叠区域使用左右排版，比如高级搜索组件中"
+                ]
+              }
+            ]
+          },
+          "when-to-use": {
+            "name": "何时使用",
+            "desc1": "当需要用户输入文本内容时，可带前缀或后缀。",
+            "desc2": "可与其它组件组合使用，如组合成一个分类输入框，还可以进行大小选择。"
+          },
+          "sceneName": "场景",
+          "sceneList": [
+            {
+              "name": "基本用法",
+              "desc": "最基础的单行文本输入框，按状态可分为正常、禁用、错误等。通常在需要输入少量内容的场景下使用。",
+              "image": "assets/design/text-input/basic.png"
+            },
+            {
+              "name": "前、后预置文本输入框",
+              "desc": "在输入框前后加入一些特定的纯展示标签或图标，通常在需要提高辨识效率时使用，且前后置标签或图标不允许编辑和删除。",
+              "image": "assets/design/text-input/input.png"
+            },
+            {
+              "name": "分类输入框",
+              "desc": "当用户需要输入的表单域内容有多种类型时，应该使用分类输入文本框，先通过下拉菜单选择类型，根据不同类型输入不同的内容。",
+              "image": "assets/design/text-input/classify.png"
+            },
+            {
+              "name": "IP输入框",
+              "desc": "当用户需要分区输入表单域内容时，应该使用分区输入框，用户可以自定义分隔符，比如设置为“·”、“-”、“｜”或“/”等符号。例如输入IP地址，IPv4共32位，用“·”分为4段，每段地址的取值范围位0-255，如不在该区域内不允许上屏，直接强转为最大值。",
+              "image": "assets/design/button/structure.png",
+              "desc2": "例如：IPv6共128位，用“：”分成8段，每段地址的取值范围为0000-ffff。IPv6地址不区分大小写，如果有一组或连续几组都是0，可简写成“::”，只能有一个“::”。",
+              "image2": "assets/design/text-input/ip.png"
+            },
+            {
+              "name": "密码输入框",
+              "desc": "当需要输入密码等账号信息时，用“·”来显示密码，并可通过显示/隐藏图标来控制密码可见性。用于强安全信息输入的场景。",
+              "image": "assets/design/text-input/password.png"
+            },
+            {
+              "name": "组合输入框",
+              "desc": "多个输入框相组合，或与其他控件（如下拉）组合，可通过“-”连接，也可不通过任何符号连接。用于一些固定组合或者固定格式输入的场景，以方便识别，如输入电话号码。",
+              "image": "assets/design/text-input/combine.png"
+            },
+            {
+              "name": "字数限制",
+              "descList": [
+                "设置输入框最大输入字数，在最右侧显示字数统计，多用于有字数限制的场景，如名称；超过最大字数时会展示错误状态；如果右侧配置了字数统计，那么输入框则不可再配置其他类型内容。",
+                "一个中文汉字表示两个字符长度，一个英文字符或数字表示一个字符长度。"
+              ],
+              "image": "assets/design/text-input/limited.png"
+            },
+            {
+              "name": "可清空内容输入框",
+              "desc": "带清空操作的输入框，当用户需要清空输入框里的内容时，点击图标可快捷清空输入的所有内容。",
+              "image": "assets/design/text-input/clear.png"
+            },
+            {
+              "name": "辅助信息",
+              "descList": [
+                "当使用占位符文本不能满足合理地提示用户要求，或者在用户输入时需要强调一些关键信息时，可以使用辅助信息。",
+                "辅助信息区分两种形式：图标Tips 和 帮助文本。对于需要在用户填写时特别强调的，建议使用帮助文本显示在文本框下方；其他情况建议图标Tips的方式，以免给用户带来过大的信息负荷。",
+                "文本框下方的帮助文本和图标Tips只能选其一，不可同时出现在同一个输入框文本上。"
+              ],
+              "image": "assets/design/text-input/support.png"
+            }
+          ],
+          "status": {
+            "name": "状态及校验",
+            "desc": "输入框状态可分为：正常、禁用、异常（带文本提示）、Toast提示。",
+            "image": "assets/design/text-input/status.png"
+          },
+          "size": {
+            "name": "大小",
+            "desc": "有28px、32px、40px三种大小三种不同高度的输入框，以适应不同尺寸布局，通常情况下为32*32px；",
+            "image": "assets/design/text-input/size.png"
+          },
+          "rules": {
+            "name": "交互规则",
+            "desc": "文本输入框使用户可以与之交互并输入内容和数据，是表单中的常用控件。",
+            "sub-name": "单击（Click）",
+            "sub-desc": "文本输入框类组件可用时，激活文本框，光标出现，输入内容后，光标在内容之后。获取焦点后，水印文字不消失，输入字符才消失。",
+            "image": "assets/design/text-input/rules.png"
+          }
+        }
       }
     },
     "textarea": {
@@ -4482,5 +5007,13 @@
         "custom-theme": "局部主题化"
       }
     }
+  },
+  "footer": {
+    "desc": "找到我们",
+    "github": "Github",
+    "team": "DevUI团队",
+    "design": "DevUI Design",
+    "group": "官方交流群",
+    "tabDesign": "设计"
   }
 }

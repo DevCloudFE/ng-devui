@@ -21,6 +21,7 @@ import { TreeSelectLeafOnlyComponent } from '../demo/leaf-only/tree-select-leaf-
 import { TreeSelectSearchableComponent } from '../demo/searchable/tree-select-searchable.component';
 import { TreeSelectCustomTemplateComponent } from './custom-template/custom-template.component';
 import { TreeSelectDemoComponent } from './tree-select-demo.component';
+import { TreeSelectDesignComponent } from './tree-select-design.component';
 import { TreeSelectVirtualScrollComponent } from './virtual-scroll/tree-select-virtual-scroll.component';
 
 @NgModule({
@@ -40,6 +41,10 @@ import { TreeSelectVirtualScrollComponent } from './virtual-scroll/tree-select-v
         redirectTo: 'demo',
       },
       {
+        path: 'design',
+        component: TreeSelectDesignComponent,
+      },
+      {
         path: 'demo',
         component: TreeSelectDemoComponent,
       },
@@ -57,6 +62,7 @@ import { TreeSelectVirtualScrollComponent } from './virtual-scroll/tree-select-v
   exports: [TreeSelectDemoComponent],
   declarations: [
     TreeSelectDemoComponent,
+    TreeSelectDesignComponent,
     TreeSelectBasicComponent,
     TreeSelectLeafOnlyComponent,
     TreeSelectHooksComponent,

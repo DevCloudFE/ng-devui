@@ -1,5 +1,5 @@
 @import '~@angular/cdk/overlay-prebuilt';
-@import '../../style/theme/z-index';
+@import '../theme/z-index';
 
 .cdk-overlay-container {
   z-index: $devui-z-index-dropdown;

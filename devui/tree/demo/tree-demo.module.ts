@@ -25,6 +25,7 @@ import { MergeNodeComponent } from './merge-node/merge-node.component';
 import { OperateBtnComponent } from './operate-btn/operate-btn.component';
 import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { TreeDemoComponent } from './tree-demo.component';
+import { TreeDesignComponent } from './tree-design.component';
 import { OperationForAllNodesComponent } from './tree-factory/tree-factory.component';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 
@@ -46,6 +47,10 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     SearchModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: TreeDesignComponent,
+      },
       { path: 'demo', component: TreeDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -56,6 +61,7 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
   exports: [TreeDemoComponent],
   declarations: [
     TreeDemoComponent,
+    TreeDesignComponent,
     BasicComponent,
     CustomKeyComponent,
     OperateBtnComponent,

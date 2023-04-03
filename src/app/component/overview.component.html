@@ -2,9 +2,7 @@
   <div class="d-overview-introduce">
     <h1>
       {{ overviewText.title }}
-      <span class="d-overview-total-components">
-        {{ totalNumComponents }}
-      </span>
+      <d-badge [count]="totalNumComponents" status="common" class="d-overview-total-components"></d-badge>
     </h1>
     <p class="d-overview-introduce-description">
       {{ overviewText.description }}
@@ -30,16 +28,14 @@
           <h2>
             {{ components.title }}
           </h2>
-          <span class="d-overview-component-count">
-            {{ components.children.length }}
-          </span>
+          <d-badge [count]="components.children.length" status="common" class="d-overview-total-components"></d-badge>
         </div>
         <div class="d-overview-component-wrapper">
           <ng-container *ngFor="let component of components.children">
             <d-card *ngIf="!component.nodisplay" (click)="jumpToComponent(component.link)">
               <div class="d-overview-card-wrapper">
-                <d-tag *ngIf="component.newChange" [tag]="overviewText.newChange" [labelStyle]="'orange-w98'"></d-tag>
-                <d-tag *ngIf="component.sunset" [tag]="overviewText.sunset" [labelStyle]="'yellow-w98'"></d-tag>
+                <d-tag *ngIf="component.newChange" [tag]="overviewText.newChange" [labelStyle]="'update-custom'"></d-tag>
+                <d-tag *ngIf="component.sunset" [tag]="overviewText.sunset" [labelStyle]="'sunset-custom'"></d-tag>
                 <div class="d-overview-card-icon">
                   <img
                     [alt]="component.name"

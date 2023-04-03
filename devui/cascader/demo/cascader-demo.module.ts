@@ -12,6 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { CascaderDemoComponent } from './cascader-demo.component';
+import { CascaderDesignComponent } from './cascader-design.component';
 import { CascaderHeaderTemplateComponent } from './header-template/cascader-header-template.component';
 import { LazyloadCascaderComponent } from './lazyload-cascader/lazyload-cascader.component';
 import { MultipleCascaderComponent } from './multiple-cascader/multiple-cascader.component';
@@ -32,6 +33,10 @@ import { TemplateCascaderComponent } from './template-cascader/template-cascader
     TabsModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: CascaderDesignComponent,
+      },
       { path: 'demo', component: CascaderDemoComponent },
       {
         path: 'api',
@@ -47,6 +52,7 @@ import { TemplateCascaderComponent } from './template-cascader/template-cascader
   declarations: [
     BasicComponent,
     CascaderDemoComponent,
+    CascaderDesignComponent,
     MultipleCascaderComponent,
     SearchCascaderComponent,
     TemplateCascaderComponent,

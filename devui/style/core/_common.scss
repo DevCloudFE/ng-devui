@@ -4,6 +4,14 @@
   text-overflow: ellipsis;
 }
 
+.over-flow-ellipsis-multi-row {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
 .clear-fix {
   zoom: 1;
 }
@@ -101,9 +109,24 @@ a:hover {
     font-weight: bold;
   }
 
-  .devui-table-link:hover {
-    text-decoration: underline;
-    cursor: pointer;
-    color: $devui-link;
+  .devui-table-link {
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+      color: $devui-link;
+    }
+
+    a {
+      color: inherit;
+    }
   }
+}
+
+.devui-design-no-data {
+  display: flex;
+  height: calc(100vh - 523px);
+  margin-top: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

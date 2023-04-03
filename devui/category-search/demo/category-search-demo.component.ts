@@ -24,6 +24,28 @@ export class CategorySearchDemoComponent implements OnInit, OnDestroy {
       code: require("./demo-data.ts?raw"),
     },
   ];
+  extendSource: Array<DevuiSourceData> = [
+    {
+      title: "HTML",
+      language: "xml",
+      code: require("./extend/extend.component.html?raw"),
+    },
+    {
+      title: "TS",
+      language: "typescript",
+      code: require("./extend/extend.component.ts?raw"),
+    },
+    {
+      title: "DATA",
+      language: "typescript",
+      code: require("./demo-data.ts?raw"),
+    },
+    {
+      title: "SCSS",
+      language: "css",
+      code: require("./extend/extend.component.scss?raw"),
+    },
+  ];
   autoScrollSource: Array<DevuiSourceData> = [
     {
       title: "HTML",
@@ -43,9 +65,7 @@ export class CategorySearchDemoComponent implements OnInit, OnDestroy {
   ];
   navItems = [];
   subs: Subscription = new Subscription();
-
   constructor(private translate: TranslateService) {}
-
   ngOnInit() {
     this.subs.add(
       this.translate
@@ -63,18 +83,20 @@ export class CategorySearchDemoComponent implements OnInit, OnDestroy {
       })
     );
   }
-
   ngOnDestroy() {
     if (this.subs) {
       this.subs.unsubscribe();
     }
   }
-
   setNavValues(values) {
     this.navItems = [
       {
         dAnchorLink: "basic-usage",
         value: values["basicDemo"],
+      },
+      {
+        dAnchorLink: "extend-template",
+        value: values["extendDemo"],
       },
       {
         dAnchorLink: "auto-scroll",

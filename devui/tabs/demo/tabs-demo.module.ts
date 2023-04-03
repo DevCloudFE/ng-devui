@@ -21,6 +21,7 @@ import { TabsTransferComponent } from './configurable-tabs/tabs-transfer/tabs-tr
 import { CustomComponent } from './custom/custom.component';
 import { SizeComponent } from './size/size.component';
 import { TabsDemoComponent } from './tabs-demo.component';
+import { TabsDesignComponent } from './tabs-design.component';
 import { TypeOptionsComponent } from './type-options/type-options.component';
 import { TypePillsComponent } from './type-pills/type-pills.component';
 import { TypeSliderComponent } from './type-slider/type-slider.component';
@@ -42,6 +43,10 @@ import { WithoutContentComponent } from './without-content/without-content.compo
     TranslateModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: TabsDesignComponent,
+      },
       { path: 'demo', component: TabsDemoComponent },
       {
         path: 'api',
@@ -69,6 +74,7 @@ import { WithoutContentComponent } from './without-content/without-content.compo
     TypeSliderComponent,
     TypeWrappedComponent,
     WithoutContentComponent,
+    TabsDesignComponent,
   ],
 })
 export class TabsDemoModule {}

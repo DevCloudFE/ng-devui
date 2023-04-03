@@ -1,8 +1,6 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
+  AfterViewInit, ApplicationRef, ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -122,12 +120,14 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   showConfig = false;
   @ViewChild('litePaginator') litePaginator: ElementRef;
   @ViewChild('dropDownElement') dropDownElement: DropDownAppendToBodyComponent;
+  @ViewChild('activeBlock') activeBlock: ElementRef;
   private configButtonLoseFocusHandler: Subscription | null = null;
   private loseFocusListener: any = null;
   i18nText: I18nInterface['pagination'];
   i18nLocale: I18nInterface['locale'];
   i18nSubscription: Subscription;
-  constructor(private ref: ChangeDetectorRef, private i18n: I18nService) {}
+  activeBlockInfo;
+  constructor(private ref: ChangeDetectorRef, private i18n: I18nService, private appRef: ApplicationRef) {}
 
   ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().pagination;
@@ -251,6 +251,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.activeBlockInfo = this.activeBlock?.nativeElement.getBoundingClientRect();
     const shouldUpdateRanges = PaginationComponent.EFFECT_PAGE_RANGE_KEYS.some((key) => !!changes[key]);
     if (shouldUpdateRanges) {
       this.minPageSizeOptions = Math.min(...this.pageSizeOptions);
@@ -264,11 +265,29 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
         this.constructLitePaginatorOptions();
       }
       this.adjustPaginatorWidth();
+      if (this.activeBlockInfo) {
+        this.setActiveAnimation();
+      }
     }
   }
 
   ngAfterViewInit() {
     this.adjustPaginatorWidth();
+  }
+
+  setActiveAnimation() {
+    new Promise((resolve, reject) => {
+      resolve(true);
+    }).then(() => {
+      const curInfo = this.activeBlock.nativeElement.getBoundingClientRect();
+      const element = this.activeBlock.nativeElement;
+      this.activeBlock.nativeElement.style.opacity = 1;
+      element.style.transform = `translate(${this.activeBlockInfo.left - curInfo.left}px, ${this.activeBlockInfo.top - curInfo.top}px)`;
+      setTimeout(() => {
+        element.style.transition = 'transform .25s ease-in-out';
+        element.style.transform = 'translate(0, 0)';
+      });
+    });
   }
 
   private updateShowPageRange() {

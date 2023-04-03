@@ -1,46 +1,42 @@
-<div class="fixed-wapper"
-  [ngClass]="{
-  'header-fixed': isFixed
-}">
-  <div class="header-wapper"
-    [ngClass]="{
-      'header-shadow': showShadow,
-      'header-maxwidth': hasMaxWidth
-    }">
-      <div class="header-left">
-        <div *ngIf="showSlideButton" class="slide-menu-link" (click)="clickSlideMenu()">
-          <span>
-            <svg width="18px" height="14px" viewBox="0 0 18 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <g id="slide-button-outer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                  <g id="slide-button-inner">
-                      <path d="M18,6 L18,8 L0,8 L0,6 L18,6 Z M18,0 L18,2 L0,2 L0,0 L18,0 Z M14,12 L14,14 L0,14 L0,12 L14,12 Z"></path>
-                  </g>
-              </g>
-            </svg>
-          </span>
-        </div>
-        <ng-content select="d-header-logo"></ng-content>
-        <d-search *ngIf="showSearch" [isKeyupSearch]="true" [placeholder]="searchPlaceholder" (searchFn)="onSearch($event)"></d-search>
-      </div>
-      <div class="header-right" [ngClass]="{'active': collapseMenuActive}">
-        <ng-content select="d-header-menu"></ng-content>
-        <ng-content select="d-ecosystem"></ng-content>
-        <ng-content select="d-header-version-switch"></ng-content>
-        <ng-content select="d-header-theme-switch"></ng-content>
-        <ng-content select="d-header-language-switch"></ng-content>
-        <div *ngIf="showGitStar">
-          <iframe class="header-gitStar"
-            [attr.src]="repoLink"
-          ></iframe>
-        </div>  
-        <div *ngIf="showAvatar" class="header-avatar">
-          <d-avatar
-            [width]="40"
-            [height]="40"
-            [imgSrc]="userAvatar"
-          ></d-avatar>
-        </div>
-      </div>
-      <div id="headerCollapseMenu" class="header-collapse-menu" [ngClass]="{'active': collapseMenuActive}" (click)="toggleMenu($event)"><span></span></div>
+<div class="header-container">
+  <div class="header-top-menu">
+    <ng-content select="d-header-logo"></ng-content>
+    <ng-content select="d-header-menu"></ng-content>
   </div>
+  <div class="header-bottom-menu">
+    <div class="menu-item">
+      <ng-content select="d-header-theme-switch"></ng-content>
+    </div>
+    <div class="menu-item">
+      <ng-content select="d-header-language-switch"></ng-content>
+    </div>
+    <div class="menu-item">
+      <a href="https://github.com/DevCloudFE/ng-devui" rel="noopener noreferrer" target="blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+          <path
+            fill="#71757f"
+            d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 01-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 010 8c0-4.42 3.58-8 8-8z"
+          />
+        </svg>
+      </a>
+    </div>
+    <div class="expand-sidebar" (click)="clickSlideMenu(true)" *ngIf="showExpandButton">
+      <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>收起</title>
+        <g id="收起" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path d="M9.4141965,1.48235598 C9.59170754,1.65979691 9.60784491,1.937463 9.4626086,2.13312669 L9.4141965,2.1891835 L3.71630048,7.88482928 C3.662061,7.93904734 3.65302108,8.02133773 3.68918074,8.08491324 L3.71630048,8.12043846 L9.4141965,13.8160842 C9.60945864,14.0112693 9.60945864,14.3277267 9.4141965,14.5229118 C9.23668545,14.7003527 8.95890967,14.7164837 8.76316867,14.5713047 L8.70708972,14.5229118 L3.0091937,8.82726598 C2.58038271,8.39862434 2.55515854,7.71932504 2.93352117,7.26119426 L3.0091937,7.17800175 L8.70708972,1.48235598 C8.90235186,1.28717094 9.21893435,1.28717094 9.4141965,1.48235598 Z M13.1867116,1.48235598 C13.3642226,1.65979691 13.38036,1.937463 13.2351237,2.13312669 L13.1867116,2.1891835 L7.48881554,7.88482928 C7.43457605,7.93904734 7.42553614,8.02133773 7.46169579,8.08491324 L7.48881554,8.12043846 L13.1867116,13.8160842 C13.3819737,14.0112693 13.3819737,14.3277267 13.1867116,14.5229118 C13.0092005,14.7003527 12.7314247,14.7164837 12.5356837,14.5713047 L12.4796048,14.5229118 L6.78170876,8.82726598 C6.35289777,8.39862434 6.32767359,7.71932504 6.70603623,7.26119426 L6.78170876,7.17800175 L12.4796048,1.48235598 C12.6748669,1.28717094 12.9914494,1.28717094 13.1867116,1.48235598 Z" id="形状结合" fill="#71757F" transform="translate(8.000322, 8.002634) rotate(-180.000000) translate(-8.000322, -8.002634) "></path>
+        </g>
+      </svg>
+    </div>
+    <div class="expand-sidebar" (click)="clickSlideMenu(false)" *ngIf="showCollapseButton">
+      <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>展开</title>
+        <g id="展开" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path d="M9.41355339,1.47708824 C9.59106443,1.65452918 9.6072018,1.93219527 9.46196549,2.12785896 L9.41355339,2.18391577 L3.71565738,7.87956154 C3.66141789,7.93377961 3.65237798,8.01607 3.68853763,8.0796455 L3.71565738,8.11517072 L9.41355339,13.8108165 C9.60881554,14.0060015 9.60881554,14.322459 9.41355339,14.517644 C9.23604235,14.695085 8.95826656,14.711216 8.76252556,14.566037 L8.70644661,14.517644 L3.0085506,8.82199825 C2.57973961,8.39335661 2.55451543,7.7140573 2.93287807,7.25592653 L3.0085506,7.17273402 L8.70644661,1.47708824 C8.90170876,1.28190321 9.21829124,1.28190321 9.41355339,1.47708824 Z M13.1860684,1.47708824 C13.3635795,1.65452918 13.3797169,1.93219527 13.2344805,2.12785896 L13.1860684,2.18391577 L7.48817243,7.87956154 C7.43393295,7.93377961 7.42489303,8.01607 7.46105269,8.0796455 L7.48817243,8.11517072 L13.1860684,13.8108165 C13.3813306,14.0060015 13.3813306,14.322459 13.1860684,14.517644 C13.0085574,14.695085 12.7307816,14.711216 12.5350406,14.566037 L12.4789617,14.517644 L6.78106565,8.82199825 C6.35225466,8.39335661 6.32703049,7.7140573 6.70539312,7.25592653 L6.78106565,7.17273402 L12.4789617,1.47708824 C12.6742238,1.28190321 12.9908063,1.28190321 13.1860684,1.47708824 Z" id="形状结合" fill="#71757F" transform="translate(7.999678, 7.997366) scale(-1, -1) rotate(-180.000000) translate(-7.999678, -7.997366) "></path>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  
 </div>

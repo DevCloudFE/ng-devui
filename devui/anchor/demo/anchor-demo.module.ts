@@ -12,6 +12,7 @@ import { ToggleModule } from 'ng-devui/toggle';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { AnchorDemoComponent } from './anchor-demo.component';
+import { AnchorDesignComponent } from './anchor-design.component';
 import { AsyncComponent } from './async/async.component';
 import { BasicComponent } from './basic/basic.component';
 import { HashComponent } from './hash/hash.component';
@@ -31,6 +32,10 @@ import { ScrollTargetComponent } from './scroll-target/scroll-target.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: AnchorDesignComponent,
+      },
       { path: 'demo', component: AnchorDemoComponent },
       {
         path: 'api',
@@ -43,7 +48,7 @@ import { ScrollTargetComponent } from './scroll-target/scroll-target.component';
     ]),
   ],
   exports: [AnchorDemoComponent],
-  declarations: [AnchorDemoComponent, BasicComponent, AsyncComponent, HashComponent, ScrollTargetComponent],
+  declarations: [AnchorDemoComponent, AnchorDesignComponent, BasicComponent, AsyncComponent, HashComponent, ScrollTargetComponent],
 
 })
 export class AnchorDemoModule {}

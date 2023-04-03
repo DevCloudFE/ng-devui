@@ -10,6 +10,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.
 import { TranslateModule } from '@ngx-translate/core';
 import { BasicComponent } from './basic/basic.component';
 import { DemoComponent } from './demo.component';
+import { NumberTranslatorDesignComponent } from './number-translator-design.component';
 
 @NgModule({
   declarations: [DemoComponent, BasicComponent],
@@ -23,6 +24,10 @@ import { DemoComponent } from './demo.component';
     DevUIApiModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: NumberTranslatorDesignComponent,
+      },
       { path: 'demo', component: DemoComponent },
 
       {

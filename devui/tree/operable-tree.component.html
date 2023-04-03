@@ -82,14 +82,14 @@
             [ngStyle]="{
               display: iconParentClose && !treeNode.data.isOpen ? 'inline-block' : 'none'
             }"
-            [innerHTML]="iconParentClose | safe : 'html'"
+            [innerHTML]="iconParentClose | safe: 'html'"
           ></span>
           <span
             class="devui-tree-node__folder--icon"
             [ngStyle]="{
               display: iconParentOpen && treeNode.data.isOpen ? 'inline-block' : 'none'
             }"
-            [innerHTML]="iconParentOpen | safe : 'html'"
+            [innerHTML]="iconParentOpen | safe: 'html'"
           ></span>
           <span
             class="devui-tree-node__folder--icon"
@@ -138,7 +138,7 @@
         </span>
         <span class="devui-tree-node__leaf" *ngIf="(treeNode.data.children || []).length === 0 && !treeNode.data.isParent">
           <span *ngIf="!iconLeaf" class="devui-leaf-icon-none" [ngStyle]="{ width: indent }"></span>
-          <span *ngIf="iconLeaf" [innerHTML]="iconLeaf | safe : 'html'"></span>
+          <span *ngIf="iconLeaf" [innerHTML]="iconLeaf | safe: 'html'"></span>
         </span>
         <ng-container *ngIf="iconTemplate && iconTemplatePosition === 'before-checkbox'">
           <ng-template [ngTemplateOutlet]="iconTemplate" [ngTemplateOutletContext]="{ node: treeNode.data, completeNode: treeNode }">
@@ -329,14 +329,14 @@
             [ngStyle]="{
               display: iconParentClose && !treeNode.data.isOpen ? 'inline-block' : 'none'
             }"
-            [innerHTML]="iconParentClose | safe : 'html'"
+            [innerHTML]="iconParentClose | safe: 'html'"
           ></span>
           <span
             class="devui-tree-node__folder--icon"
             [ngStyle]="{
               display: iconParentOpen && treeNode.data.isOpen ? 'inline-block' : 'none'
             }"
-            [innerHTML]="iconParentOpen | safe : 'html'"
+            [innerHTML]="iconParentOpen | safe: 'html'"
           ></span>
           <span
             class="devui-tree-node__folder--icon"
@@ -385,7 +385,7 @@
         </span>
         <span class="devui-tree-node__leaf" *ngIf="(treeNode.data.children || []).length === 0 && !treeNode.data.isParent">
           <span *ngIf="!iconLeaf" class="devui-leaf-icon-none" [ngStyle]="{ width: indent }"></span>
-          <span *ngIf="iconLeaf" [innerHTML]="iconLeaf | safe : 'html'"></span>
+          <span *ngIf="iconLeaf" [innerHTML]="iconLeaf | safe: 'html'"></span>
         </span>
         <ng-container *ngIf="iconTemplate && iconTemplatePosition === 'before-checkbox'">
           <ng-template [ngTemplateOutlet]="iconTemplate" [ngTemplateOutletContext]="{ node: treeNode.data, completeNode: treeNode }">

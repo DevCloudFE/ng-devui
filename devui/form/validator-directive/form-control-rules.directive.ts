@@ -14,6 +14,7 @@ import {
   Self,
   SimpleChanges,
   SkipSelf,
+  TemplateRef
 } from '@angular/core';
 import {
   AbstractControl,
@@ -22,7 +23,7 @@ import {
   ControlContainer,
   NgControl,
   ValidationErrors,
-  ValidatorFn,
+  ValidatorFn
 } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
@@ -39,7 +40,7 @@ import {
   DValidateRule,
   DValidateRules,
   DValidationErrorStrategy,
-  ruleReservedWords,
+  ruleReservedWords
 } from './validate.type';
 
 @Directive()
@@ -512,7 +513,7 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
 
   popoverComponentRef: ComponentRef<PopoverComponent>;
   private destroy$ = new Subject<void>();
-  popMessage: string; // 最终显示的message
+  popMessage: string | TemplateRef<any>; // 最终显示的message
 
   get showType() {
     return (this.fullRules as { messageShowType: string }).messageShowType || 'popover';
@@ -588,7 +589,7 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
 
     /* 国际化适配 */
     if (message && typeof message === 'object') {
-      message = message[this.locale] || message['default'] || null;
+      message = message[this.locale] || message['default'] || message;
     }
 
     if (this.showType === 'popover') {

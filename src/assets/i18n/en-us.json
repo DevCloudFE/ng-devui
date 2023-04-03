@@ -30,7 +30,7 @@
       "title": "Components Overview",
       "description": "DevUI provides rich basic UI components for web applications. We will continue to explore the best UI practices of enterprise-level applications. Welcome to DevUI.",
       "placeholder": "Enter the component",
-      "newChange": "New",
+      "newChange": "UPDATED",
       "sunset": "Sunset",
       "lookingCmp": "Is the components you're looking for?",
       "suggestCmp": "Recommended Components",
@@ -49,6 +49,8 @@
     "showCode": "Show Code",
     "hideCode": "Hide Code",
     "copyCode": "Copy Code",
+    "codesandbox": "Edit On CodeSandbox",
+    "stackblitz": "Edit On StackBlitz",
     "success": "Success"
   },
   "components": {
@@ -881,7 +883,13 @@
         "p2": "Scroll monitoring uses other elements, such as window."
       },
       "pipeDemo": {
-        "title": "DatePipe"
+        "dDatePipe": {
+          "title": "DatePipe"
+        },
+        "dSafeNullPipe": {
+          "title": "SafeNullPipe",
+          "description": "When the data is '', null, undefined can be specified any character placeholder display, the default is: '--'"
+        }
       },
       "browserDemo": {
         "title": "Current browser name and version"
@@ -901,6 +909,7 @@
       },
       "anchorLinkValues": {
         "lazy-load": "Lazyload Directive",
+        "safe-null-pipe": "Safe Null Pipe",
         "browser-version": "Current browser name and version",
         "date-pipe": "Datepipe",
         "open-url": "Open URL in A New Tag",
@@ -4478,5 +4487,13 @@
         "custom-theme": "Partial Theme"
       }
     }
+  },
+  "footer": {
+    "desc": "Find Us",
+    "github": "Github",
+    "team": "DevUI Team",
+    "design": "DevUI Design",
+    "group": "Wechat Group",
+    "tabDesign": "Design"
   }
 }

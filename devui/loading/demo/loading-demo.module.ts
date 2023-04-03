@@ -13,6 +13,7 @@ import { BasicComponent } from './basic/basic.component';
 import { CustomComponent } from './custom/custom.component';
 import { FullScreenComponent } from './full-screen/full-screen.component';
 import { LoadingDemoComponent } from './loading-demo.component';
+import { LoadingDesignComponent } from './loading-design.component';
 import { PromiseComponent } from './promise/promise.component';
 import { ShowLoadingComponent } from './show-loading/show-loading.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
@@ -29,6 +30,10 @@ import { SubscriptionComponent } from './subscription/subscription.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: LoadingDesignComponent,
+      },
       { path: 'demo', component: LoadingDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -39,6 +44,7 @@ import { SubscriptionComponent } from './subscription/subscription.component';
   exports: [LoadingDemoComponent],
   declarations: [
     LoadingDemoComponent,
+    LoadingDesignComponent,
     BasicComponent,
     CustomComponent,
     PromiseComponent,

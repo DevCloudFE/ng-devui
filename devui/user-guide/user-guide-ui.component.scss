@@ -3,6 +3,7 @@
 @import '../style/core/_font';
 @import '../style/core/z-index';
 @import '../style/core/animation';
+@import '../style/theme/shadow';
 
 .user-guide-mask-layer {
   position: fixed;
@@ -12,9 +13,7 @@
   right: 0;
   z-index: calc(#{$devui-z-index-full-page-overlay} - 1);
   inset: 0;
-  // background: #293040;
-  // opacity: 0.2;
-  background: #000000;
+  background: #252b3a;
   opacity: 0.28;
   display: none;
 }
@@ -39,11 +38,8 @@
   left: 0;
   position: absolute;
   width: 100%;
-  z-index: 10000;
-  // background: #293040;
-  // opacity: 0.2;
-  background: #000000;
-  opacity: 0.28;
+  z-index: $devui-z-index-full-page-overlay;
+  background: rgba(#252b3a, 0.3);
   display: none;
   transition: all 0.3s ease-out;
 }
@@ -53,10 +49,7 @@
   position: absolute;
   width: 100%;
   z-index: $devui-z-index-full-page-overlay;
-  // background: #293040;
-  // opacity: 0.2;
-  background: #000000;
-  opacity: 0.28;
+  background: rgba(#252b3a, 0.3);
   display: none;
   transition: all 0.3s ease-out;
 }
@@ -65,59 +58,87 @@
   left: 0;
   position: absolute;
   z-index: $devui-z-index-full-page-overlay;
-  // background: #293040;
-  // opacity: 0.2;
-  background: #000000;
-  opacity: 0.28;
+  background: rgba(#252b3a, 0.3);
   display: none;
   transition: all 0.3s ease-out;
+
+  &::after,
+  &::before {
+    content: '';
+    display: block;
+    height: 4px;
+    width: 4px;
+    position: absolute;
+    bottom: 0;
+    background: radial-gradient(4px at 4px 0, transparent 4px, rgba(#252b3a, 0.3) 4px);
+  }
+
+  &::after {
+    // top: -8px;
+    transform: rotate(0deg);
+    right: 0;
+    margin-right: -4px;
+  }
+
+  &::before {
+    transform: rotate(90deg);
+    right: 0;
+    top: 0;
+    margin-right: -4px;
+  }
 }
 
 .user-guide-right-overlay {
   position: absolute;
   z-index: $devui-z-index-full-page-overlay;
-  // background: #293040;
-  // opacity: 0.2;
-  background: #000000;
-  opacity: 0.28;
+  background: rgba(#252b3a, 0.3);
   display: none;
   transition: all 0.3s ease-out;
+
+  &::after,
+  &::before {
+    content: '';
+    display: block;
+    height: 4px;
+    width: 4px;
+    position: absolute;
+    bottom: 0;
+    background: radial-gradient(4px at 4px 0, transparent 4px, rgba(#252b3a, 0.3) 4px);
+  }
+
+  &::after {
+    top: -4px;
+    transform: rotate(180deg);
+    margin-left: -4px;
+    margin-top: 4px;
+  }
+
+  &::before {
+    bottom: -4px;
+    transform: rotate(270deg);
+    margin-left: -4px;
+    margin-bottom: 4px;
+  }
 }
 
-.user-guide-top-border {
+.user-guide-active-shadow {
   position: absolute;
   z-index: calc(#{$devui-z-index-full-page-overlay} + 1);
-  background-color: $devui-brand;
-  border: 1px solid $devui-base-bg;
-  transition: all 0.3s ease-out;
+  pointer-events: none;
+  border-radius: $devui-border-radius;
+  animation: breath 2s linear;
+  animation-iteration-count: infinite;
   display: none;
 }
 
-.user-guide-bottom-border {
-  position: absolute;
-  z-index: calc(#{$devui-z-index-full-page-overlay} + 1);
-  background-color: $devui-brand;
-  border: 1px solid $devui-base-bg;
-  transition: all 0.3s ease-out;
-  display: none;
-}
+@keyframes breath {
+  0% {
+    outline: rgba(#ffffff, 1) solid 0;
+  }
 
-.user-guide-left-border {
-  position: absolute;
-  z-index: calc(#{$devui-z-index-full-page-overlay} + 1);
-  background-color: $devui-brand;
-  border: 1px solid $devui-base-bg;
-  transition: all 0.3s ease-out;
-  display: none;
-}
-
-.user-guide-right-border {
-  position: absolute;
-  z-index: calc(#{$devui-z-index-full-page-overlay} + 1);
-  background-color: $devui-brand;
-  border: 1px solid $devui-base-bg;
-  transition: all 0.3s ease-out;
-  display: none;
+  100% {
+    outline: rgba(#ffffff, 0) solid 10px;
+  }
 }
 
 .user-guide-dot {
@@ -137,10 +158,10 @@
 
 .user-guide-panel-multiple {
   min-width: 400px;
-  padding: 12px 20px;
+  padding: 20px;
   background-color: $devui-connected-overlay-bg;
   transition: all 0.3s ease-out;
-  border-radius: $devui-border-radius;
+  border-radius: $devui-border-radius-card;
   box-shadow: 0 4px 16px 0 rgb(0 0 0 / 28%);
 
   &-header {
@@ -148,7 +169,7 @@
   }
 
   &-body {
-    max-width: 320px;
+    max-width: 400px;
     font-size: $devui-font-size-card-title;
 
     .finish-icon {
@@ -170,8 +191,7 @@
   }
 
   &-footer-only-dot {
-    margin-top: 8px;
-    justify-content: flex-end;
+    margin-top: 16px;
   }
 }
 
@@ -227,7 +247,7 @@
 .user-guide-panel-close {
   position: absolute;
   right: 16px;
-  top: 16px;
+  top: 24px;
   font-size: $devui-font-size-icon;
   font-weight: bold;
   line-height: 1;
@@ -249,14 +269,30 @@
 }
 
 .user-guide-panel-title {
-  font-size: $devui-font-size-card-title;
+  font-size: $devui-font-size-modal-title;
   color: $devui-text;
+  font-weight: bold;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+
+  .user-guide-panel-title-index {
+    display: inline-flex;
+    margin-right: 8px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+}
+
+.user-guide-panel-title + .user-guide-panel-content {
+  margin-left: 32px;
 }
 
 .user-guide-panel-content {
-  margin-top: 8px;
+  // margin-top: 20px;
   font-size: $devui-font-size;
-  color: $devui-aide-text;
+  color: $devui-text;
 }
 
 .devui-carousel-dots {
@@ -264,20 +300,20 @@
   flex-wrap: wrap;
 
   .dot-item {
-    width: 6px;
-    height: 6px;
-    border-radius: calc(6px / 2);
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
     margin-right: 8px;
     margin-bottom: 4px;
-    background: $devui-icon-fill;
+    background: $devui-icon-fill-weak;
 
     &:hover {
       cursor: pointer;
-      background: $devui-brand;
+      background: $devui-icon-fill-hover;
     }
 
     &.active {
-      background: $devui-brand;
+      background: $devui-icon-fill-active;
       transition: all 0.5s ease;
     }
   }
@@ -307,7 +343,7 @@
 }
 
 .operate-zone {
-  margin-top: 8px;
+  margin-top: 20px;
   padding: 8px 0;
   border: 2px dashed $devui-line;
   text-align: center;
@@ -318,22 +354,6 @@
   animation: 1s ease 0s infinite normal both ops-animation;
 }
 
-.emphasize-top-animation {
-  animation: 1.5s $devui-animation-ease-in-smooth 0s infinite normal both breath-top-animation;
-}
-
-.emphasize-bottom-animation {
-  animation: 1.5s $devui-animation-ease-in-smooth 0s infinite normal both breath-bottom-animation;
-}
-
-.emphasize-left-animation {
-  animation: 1.5s $devui-animation-ease-in-smooth 0s infinite normal both breath-left-animation;
-}
-
-.emphasize-right-animation {
-  animation: 1.5s $devui-animation-ease-in-smooth 0s infinite normal both breath-right-animation;
-}
-
 @keyframes ops-animation {
   0% {
     box-shadow: 0 0 0 $devui-brand;
@@ -341,62 +361,6 @@
 
   60% {
     box-shadow: 0 1px 4px $devui-brand;
-  }
-
-  to {
-    box-shadow: 0 0 0 $devui-brand;
-  }
-}
-
-@keyframes breath-top-animation {
-  0% {
-    box-shadow: 0 0 0 $devui-brand;
-  }
-
-  60% {
-    box-shadow: 0 -3px 4px $devui-brand;
-  }
-
-  to {
-    box-shadow: 0 0 0 $devui-brand;
-  }
-}
-
-@keyframes breath-bottom-animation {
-  0% {
-    box-shadow: 0 0 0 $devui-brand;
-  }
-
-  60% {
-    box-shadow: 0 3px 4px $devui-brand;
-  }
-
-  to {
-    box-shadow: 0 0 0 $devui-brand;
-  }
-}
-
-@keyframes breath-left-animation {
-  0% {
-    box-shadow: 0 0 0 $devui-brand;
-  }
-
-  60% {
-    box-shadow: -3px 0 4px $devui-brand;
-  }
-
-  to {
-    box-shadow: 0 0 0 $devui-brand;
-  }
-}
-
-@keyframes breath-right-animation {
-  0% {
-    box-shadow: 0 0 0 $devui-brand;
-  }
-
-  60% {
-    box-shadow: 3px 0 4px $devui-brand;
   }
 
   to {

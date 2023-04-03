@@ -21,7 +21,6 @@
         class="devui-tag-item"
         *ngFor="let item of selectedTags"
         #selectedDropdown="d-dropdown"
-        [ngStyle]="{ width: tagMaxWidth || '' }"
         dDropDown
         appendToBody
         dDropDownToggle
@@ -85,7 +84,7 @@
                     ></ng-template>
                   </li>
                   <li
-                    *ngIf="item.groupLength === undefined"
+                    *ngIf="item.groupLength === undefined && !item.isSelected"
                     class="devui-dropdown-item"
                     (click)="chooseCategory(item, inputDropdown); closeMenu(inputDropdown)"
                   >
@@ -139,10 +138,10 @@
     </ul>
   </div>
   <div class="devui-category-search-extended-container" *ngIf="showExtendedConfig">
-    <ng-template *ngIf="_extendedConfig.clear.show" [ngTemplateOutlet]="_extendedConfig.clear.template || clearTpl"></ng-template>
-    <ng-template *ngIf="_extendedConfig.save.show" [ngTemplateOutlet]="_extendedConfig.save.template || saveTpl"></ng-template>
-    <ng-template *ngIf="_extendedConfig.more.show" [ngTemplateOutlet]="_extendedConfig.more.template || moreTpl"></ng-template>
-    <ng-template *ngIf="_extendedConfig.customTemplate" [ngTemplateOutlet]="_extendedConfig.customTemplate"></ng-template>
+    <ng-template *ngIf="operationConfig.clear.show" [ngTemplateOutlet]="operationConfig.clear.template || clearTpl"></ng-template>
+    <ng-template *ngIf="operationConfig.save.show" [ngTemplateOutlet]="operationConfig.save.template || saveTpl"></ng-template>
+    <ng-template *ngIf="operationConfig.more.show" [ngTemplateOutlet]="operationConfig.more.template || moreTpl"></ng-template>
+    <ng-template *ngIf="operationConfig.customTemplate" [ngTemplateOutlet]="operationConfig.customTemplate"></ng-template>
   </div>
 </div>
 
@@ -157,8 +156,8 @@
 <ng-template #clearTpl>
   <div
     class="devui-category-search-icon"
-    [class.disabled]="_extendedConfig.clear.disabled"
-    (click)="!_extendedConfig.clear.disabled && clearFilter($event)"
+    [class.disabled]="operationConfig.clear.disabled"
+    (click)="!operationConfig.clear.disabled && clearFilter($event)"
   >
     <svg width="16px" height="16px" viewBox="0 0 16 16">
       <title>{{ i18nCategorySearchText?.clearFilterCondition }}</title>
@@ -179,9 +178,9 @@
     dDropDown
     appendToBody
     [appendToBodyDirections]="['rightDown', 'rightUp', 'leftDown', 'leftUp']"
-    [class.disabled]="_extendedConfig.save.disabled"
+    [class.disabled]="operationConfig.save.disabled"
     [closeScope]="'blank'"
-    [disabled]="_extendedConfig.save.disabled"
+    [disabled]="operationConfig.save.disabled"
     (toggleEvent)="createFilterInputAutoFocus(saveDropdown, createFilterInput, filterNameForm)"
   >
     <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" dDropDownToggle>
@@ -245,7 +244,7 @@
     appendToBody
     [alignOrigin]="primeContainer"
     [appendToBodyDirections]="['rightDown', 'rightUp', 'leftDown', 'leftUp']"
-    [class.disabled]="_extendedConfig.more.disabled"
+    [class.disabled]="operationConfig.more.disabled"
   >
     <svg width="16px" height="16px" viewBox="0 0 16 16" dDropDownToggle>
       <title>{{ i18nCategorySearchText?.seeMore }}</title>
@@ -275,6 +274,7 @@
       [deletable]="true"
       [tag]="isJoinLabelType ? item : item.label + ': ' + (item.value[item.filterKey || 'label'] || '')"
       [titleContent]="item.title"
+      [maxWidth]="tagMaxWidth + 'px'"
       [customViewTemplate]="item.tagCustomTemplate || (isJoinLabelType && defaultTagContentTemplate)"
       (tagDelete)="removeTag(item, $event.event)"
     ></d-tag>
@@ -283,11 +283,13 @@
 
 <ng-template #defaultTagContentTemplate let-tag="tag" let-colorKey="tag.colorKey || 'color'">
   <span>{{ tag.label }}: </span>
-  <ng-container *ngFor="let val of tag.value.cache; let i = index">
-    <span *ngIf="i > 0" class="devui-color-block-split-line">{{ textConfig.labelConnector || '|' }}</span>
-    <span *ngIf="tag.type === 'label'" class="devui-color-block-sm" [style.background]="val[colorKey]"></span>
-    <span [style.color]="val[colorKey]">{{ val[tag.filterKey || 'label'] || '' }}</span>
-  </ng-container>
+  <span class="devui-category-search-multi-tag" [style.max-width]="tagMaxWidth + 'px'">
+    <ng-container *ngFor="let val of tag.value.cache; let i = index">
+      <span *ngIf="i > 0" class="devui-color-block-split-line">{{ textConfig.labelConnector || '|' }}</span>
+      <span *ngIf="tag.type === 'label'" class="devui-color-block-sm" [style.background]="val[colorKey]"></span>
+      <span [style.color]="val[colorKey]">{{ val[tag.filterKey || 'label'] || '' }}</span>
+    </ng-container>
+  </span>
 </ng-template>
 
 <ng-template [type]="'radio'" let-tagOption="tagOption" let-key="tagOption.filterKey || 'label'">

@@ -13,6 +13,7 @@ import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { CustomOpenComponent } from './custom-open/custom-open.component';
 import { DImagePreviewDemoComponent } from './image-preview-demo.component';
+import { ImagePreviewDesignComponent } from './image-preview-design.component';
 import { ZIndexComponent } from './z-index/z-index.component';
 
 @NgModule({
@@ -28,6 +29,10 @@ import { ZIndexComponent } from './z-index/z-index.component';
     ButtonModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: ImagePreviewDesignComponent,
+      },
       { path: 'demo', component: DImagePreviewDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -38,6 +43,7 @@ import { ZIndexComponent } from './z-index/z-index.component';
   exports: [DImagePreviewDemoComponent],
   declarations: [
     DImagePreviewDemoComponent,
+    ImagePreviewDesignComponent,
     BasicComponent,
     CustomOpenComponent,
     ZIndexComponent

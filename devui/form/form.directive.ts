@@ -159,3 +159,11 @@ export class FormDirective {
     this._dValidateRuleDir = dValidateRuleDir;
   }
 }
+
+@Directive({
+  selector: '[dActiveFormControl]',
+  exportAs: 'dActiveFormControl',
+})
+export class ActiveFormControlDirective {
+  @HostBinding('class.devui-active-form') flag = true;
+}

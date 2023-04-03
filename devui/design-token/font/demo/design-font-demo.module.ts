@@ -9,6 +9,7 @@ import { TabsModule } from 'ng-devui/tabs';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { DesignFontDemoComponent } from './design-font-demo.component';
+import { FontDesignComponent } from './font-design.component';
 import { FontComponent } from './font/font.component';
 @NgModule({
   declarations: [DesignFontDemoComponent, FontComponent],
@@ -22,6 +23,10 @@ import { FontComponent } from './font/font.component';
     TabsModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: FontDesignComponent,
+      },
       { path: 'demo', component: DesignFontDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),

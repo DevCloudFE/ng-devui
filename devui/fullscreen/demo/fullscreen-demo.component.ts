@@ -32,9 +32,7 @@ export class FullscreenDemoComponent implements OnInit, OnDestroy {
   ];
   navItems = [];
   subs: Subscription = new Subscription();
-
   constructor(private translate: TranslateService) {}
-
   ngOnInit() {
     this.subs.add(
       this.translate
@@ -52,7 +50,6 @@ export class FullscreenDemoComponent implements OnInit, OnDestroy {
       })
     );
   }
-
   setNavValues(values) {
     this.navItems = [
       {
@@ -65,7 +62,6 @@ export class FullscreenDemoComponent implements OnInit, OnDestroy {
       },
     ];
   }
-
   ngOnDestroy() {
     if (this.subs) {
       this.subs.unsubscribe();

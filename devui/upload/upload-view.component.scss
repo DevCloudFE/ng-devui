@@ -9,16 +9,15 @@
   align-items: center;
   border-collapse: separate;
   width: 100%;
+  border-radius: $devui-border-radius;
 }
 
 .devui-input-group:not(.disabled):hover .devui-input-group-addon {
-  border-color: $devui-form-control-line-active;
   background-color: $devui-dividing-line;
   font-weight: bold;
 }
 
 .devui-input-group:not(.disabled):hover .devui-form-control {
-  border-color: $devui-form-control-line-active;
   border-right-color: $devui-form-control-line;
 }
 

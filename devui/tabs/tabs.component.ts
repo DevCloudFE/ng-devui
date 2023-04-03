@@ -162,14 +162,6 @@ export class TabsComponent implements OnChanges, AfterViewInit {
     });
   }
 
-  checkCloseable(tab: TabComponent): boolean {
-    if (tab.closeable === undefined) {
-      const closeable = this.closeable && (this.closeableIds.length === 0 || this.closeableIds.includes(tab.id));
-      tab.closeable = !tab.disabled && closeable;
-    }
-    return tab.closeable;
-  }
-
   addOrDeleteTab(event: Event, id?: number | string): void {
     event.stopPropagation();
     const operation = id || id >= 0 ? 'delete' : 'add';

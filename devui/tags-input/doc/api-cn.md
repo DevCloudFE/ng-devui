@@ -37,6 +37,7 @@ import { TagsInputModule } from 'ng-devui/tags-input';
 | showAnimation   | `boolean`                       | true                    | 可选，是否开启动画                                                                                    |                                 | ✔          |
 | appendToBody    | `boolean`                       | false                   | 可选，下拉弹出是否 append to body                                                                     | [自定义](demo#customize)        |
 | itemTemplate    | `TemplateRef`                   | --                      | 可选，自定义选项展示模板                                                                              | [自定义](demo#customize)        |
+| tagTemplate     | `TemplateRef`                   | --                      | 可选，自定义标签展示模板                                                                              | [自定义](demo#customize)        |
 | virtualScroll   | `boolean`                       | false                   | 可选，是否虚拟滚动，大数据量场景使用                                                                  | [虚拟滚动](demo#virtual-scroll) |
 | multiline       | `boolean`                       | true                    | 可选，组件是否按两行显示。为 true 时配合 maxHeight 使用，可控制选中标签是否按多行显示                 | [基本用法](demo#basic-usage)    |
 | maxHeight       | `string`                        | --                      | 可选，已选中标签容器最大高度                                                                          | [基本用法](demo#basic-usage)    |

@@ -55,7 +55,8 @@
         <a>...</a>
       </li>
       <li *ngFor="let item of showPages" [ngClass]="{ active: item == pageIndex }">
-        <a (click)="onPageIndexChange(item)">{{ item }}</a>
+        <div #activeBlock class="devui-pagination-active-block" *ngIf="item == pageIndex"></div>
+        <a (click)="onPageIndexChange(item)" style="position: relative">{{ item }}</a>
       </li>
       <li *ngIf="showPages[showPages.length - 1] < totalPage - 1" (click)="nextRange()">
         <a>...</a>

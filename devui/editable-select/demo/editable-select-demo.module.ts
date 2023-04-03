@@ -15,6 +15,7 @@ import { WithSourceComponent } from './basic/with-source.component';
 import { CustomAreaComponent } from './custom-area/custom-area.component';
 import { DisableDataWithSourceComponent } from './disable-data/disable-data-with-source.component';
 import { EditableSelectDemoComponent } from './editable-select-demo.component';
+import { EditableSelectDesignComponent } from './editable-select-design.component';
 import { LazyLoadComponent } from './lazy-load/lazy-load.component';
 import { WithSearchFunctionComponent } from './search-function/with-search-function.component';
 
@@ -31,6 +32,10 @@ import { WithSearchFunctionComponent } from './search-function/with-search-funct
     DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: EditableSelectDesignComponent,
+      },
       { path: 'demo', component: EditableSelectDemoComponent },
       {
         path: 'api',
@@ -45,6 +50,7 @@ import { WithSearchFunctionComponent } from './search-function/with-search-funct
   exports: [EditableSelectDemoComponent],
   declarations: [
     EditableSelectDemoComponent,
+    EditableSelectDesignComponent,
     AsyncDataWithFunctionComponent,
     DisableDataWithSourceComponent,
     WithSearchFunctionComponent,

@@ -12,6 +12,7 @@ import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { ConfigComponent } from './config/config.component';
 import { QuadrantDiagramDemoComponent } from './quadrant-diagram-demo.component';
+import { QuadrantDiagramDesignComponent } from './quadrant-diagram-design.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,6 +25,10 @@ import { QuadrantDiagramDemoComponent } from './quadrant-diagram-demo.component'
     TranslateModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: QuadrantDiagramDesignComponent,
+      },
       { path: 'demo', component: QuadrantDiagramDemoComponent },
       {
         path: 'api', component: DevUIApiComponent, data: {
@@ -39,6 +44,7 @@ import { QuadrantDiagramDemoComponent } from './quadrant-diagram-demo.component'
   declarations: [
     BasicComponent,
     QuadrantDiagramDemoComponent,
+    QuadrantDiagramDesignComponent,
     ConfigComponent
   ]
 })

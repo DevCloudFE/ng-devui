@@ -105,8 +105,6 @@
   margin-right: 20px;
 
   d-checkbox {
-    overflow: hidden;
-
     ::ng-deep .devui-checkbox {
       label {
         text-overflow: ellipsis;

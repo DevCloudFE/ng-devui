@@ -1,5 +1,5 @@
 import { Component, DebugElement, Input, TemplateRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -136,6 +136,7 @@ describe('dialog', () => {
 
       closeDialog(fixture);
       tick();
+      flush();
     }));
 
     it('should buttons/handler works', fakeAsync(() => {
@@ -144,6 +145,7 @@ describe('dialog', () => {
       closeDialog(fixture);
       tick();
       expect(document.querySelector('.modal')).toBeFalsy();
+      flush();
     }));
 
     it('should html/content/offset/backdropCloseable(default) works', fakeAsync(() => {
@@ -178,6 +180,7 @@ describe('dialog', () => {
       fixture.detectChanges();
       tick();
       expect(document.querySelector('.modal')).toBeFalsy();
+      flush();
     }));
 
     it('should contentTemplate/escapable/backdropCloseable(true) works', fakeAsync(() => {
@@ -200,6 +203,7 @@ describe('dialog', () => {
       fixture.detectChanges();
       tick();
       expect(document.querySelector('.modal')).toBeFalsy();
+      flush();
     }));
 
     it('should beforeHidden works', fakeAsync(() => {
@@ -218,6 +222,7 @@ describe('dialog', () => {
       closeDialog(fixture);
       tick();
       expect(document.querySelector('.modal')).toBeFalsy();
+      flush();
     }));
 
     it('should @input parameters works', fakeAsync(() => {
@@ -310,6 +315,7 @@ describe('dialog', () => {
       closeDialog(fixture);
       tick();
       expect(component.dialogConfig.onClose).toHaveBeenCalled();
+      flush();
     }));
   });
 });
@@ -399,6 +405,7 @@ describe('modal', () => {
       tick();
 
       expect(document.querySelector('.modal')).toBeFalsy();
+      flush();
     }));
 
     it('should handler works', fakeAsync(() => {
@@ -412,7 +419,7 @@ describe('modal', () => {
       expect(component.modalConfig.handler).toHaveBeenCalled();
 
       closeModal(fixture);
-      tick();
+      flush();
     }));
   });
 
@@ -462,6 +469,7 @@ describe('modal', () => {
       fixture.detectChanges();
       tick();
       fixture.detectChanges();
+      flush();
     }));
   });
 });

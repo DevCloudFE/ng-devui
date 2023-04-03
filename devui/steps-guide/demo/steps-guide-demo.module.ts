@@ -12,6 +12,7 @@ import { BasicComponent } from './basic/basic.component';
 import { CustomComponent } from './custom/custom.component';
 import { PositionComponent } from './position/position.component';
 import { StepsGuideDemoComponent } from './steps-guide-demo.component';
+import { StepsGuideDesignComponent } from './steps-guide-design.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,10 @@ import { StepsGuideDemoComponent } from './steps-guide-demo.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: StepsGuideDesignComponent,
+      },
       { path: 'demo', component: StepsGuideDemoComponent },
       {
         path: 'api',
@@ -36,6 +41,6 @@ import { StepsGuideDemoComponent } from './steps-guide-demo.component';
     ]),
   ],
   exports: [StepsGuideDemoComponent, BasicComponent, CustomComponent, PositionComponent],
-  declarations: [StepsGuideDemoComponent, BasicComponent, CustomComponent, PositionComponent],
+  declarations: [StepsGuideDemoComponent, StepsGuideDesignComponent, BasicComponent, CustomComponent, PositionComponent],
 })
 export class StepsGuideDemoModule {}

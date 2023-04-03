@@ -14,6 +14,7 @@ import { TransferDemoCustomComponent } from './custom/transfer-demo-custom.compo
 import { TransferDemoSearchComponent } from './search/transfer-demo-search.component';
 import { TransferDemoSortComponent } from './sort/transfer-demo-sort.component';
 import { TransferDemoComponent } from './transfer-demo.component';
+import { TransferDesignComponent } from './transfer-design.component';
 import { TransferVirtualScrollComponent } from './virtual-scroll/transfer-virtual-scroll.component';
 
 @NgModule({
@@ -28,6 +29,10 @@ import { TransferVirtualScrollComponent } from './virtual-scroll/transfer-virtua
     DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: TransferDesignComponent,
+      },
       { path: 'demo', component: TransferDemoComponent },
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -38,6 +43,7 @@ import { TransferVirtualScrollComponent } from './virtual-scroll/transfer-virtua
   exports: [TransferDemoComponent],
   declarations: [
     TransferDemoComponent,
+    TransferDesignComponent,
     TransferDemoSearchComponent,
     TransferDemoBaseComponent,
     TransferDemoCustomComponent,

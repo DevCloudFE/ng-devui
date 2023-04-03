@@ -14,18 +14,19 @@
 
 //内容区布局样式
 .devui-content-layout {
-  top: 60px;
   position: absolute;
   padding: 0 15vw 0 25vw;
   width: calc(100vw - 20px);
-  background-color: $devui-global-bg;
+  background-color: $devui-base-bg;
 }
 
 //内容区文档头样式
 .devui-docs-header {
+  padding-top: 32px;
   h1 {
-    margin: 32px 0 24px 0;
-    @include font-title($devui-font-size-data-overview);
+    @include font-title(36px);
+    margin: 0 0 24px 0;
+    line-height: 44px;
   }
 
   h3 {
@@ -50,8 +51,8 @@
   margin-bottom: 20px;
   padding: 20px;
   background-color: $devui-base-bg;
-  box-shadow: $devui-shadow-length-base $devui-light-shadow;
-  border-radius: 8px;
+  border-radius: 20px;
+  border: 1px solid $devui-dividing-line;
 }
 
 .devui-demo-title {
@@ -90,7 +91,7 @@
 .devui-code-box-meta.markdown {
   position: relative;
   padding: 10px 40px;
-  border-radius: 0 0 4px 4px;
+  border-radius: 0 0 $devui-border-radius-feedback $devui-border-radius-feedback;
   transition: background-color 0.4s;
   width: 100%;
   font-size: $devui-font-size;
@@ -99,13 +100,12 @@
 
 .devui-code-box.expand .devui-code-box-meta {
   border-radius: 0;
-  // border-bottom: 1px dashed $devui-dividing-line;
 }
 
 .devui-code-box .devui-highlight-wrapper {
   display: none;
   overflow: auto;
-  border-radius: 0 0 4px 4px;
+  border-radius: 0 0 $devui-border-radius-feedback $devui-border-radius-feedback;
 }
 
 .devui-code-box .devui-highlight-wrapper-expand {
@@ -119,10 +119,9 @@
 
 .devui-code-box .collapse,
 .devui-code-box .code-link {
-  display: block; /* .collapse conflick with bootstrap */
+  display: block;
   position: absolute;
   left: 20px;
-  // top: -9px;
   cursor: pointer;
   width: 16px;
   height: 16px;
@@ -140,10 +139,6 @@
   }
 }
 
-.devui-code-box .code-link:hover {
-  transform: scale(1.2);
-}
-
 .devui-new-code-copy {
   margin-left: 10px;
 }
@@ -155,39 +150,37 @@
 
 //内容区导航样式
 .devui-content-nav {
-  width: 240px;
+  width: 200px;
   position: fixed;
-  top: 170px;
-  right: 0;
-  height: 100%;
+  top: 32px;
+  right: 40px;
+  max-height: calc(100% - 240px);
   z-index: calc(#{$devui-z-index-framework} + 1);
 
   .devui-fast-forward {
     width: 130px;
-    font-size: $devui-font-size-card-title;
+    font-size: $devui-font-size;
     color: $devui-text;
     line-height: 24px;
-    font-weight: bold;
-    padding-bottom: 10px;
-    margin-left: 20px;
-    border-bottom: 1px solid $devui-dividing-line;
+    font-weight: 600;
+    padding-bottom: 8px;
+    margin-left: 16px;
   }
 
   .devui-step-nav {
-    margin-top: 10px;
-
     & > li {
       list-style: none;
-      padding-left: 20px;
+      padding-left: 16px;
       cursor: pointer;
-      height: 30px;
-      line-height: 30px;
-      font-size: $devui-font-size;
+      height: 36px;
+      line-height: 36px;
+      font-size: $devui-font-size-sm;
       color: $devui-text;
       position: relative;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
+      border-radius: $devui-border-radius-full;
 
       a {
         display: block;
@@ -205,13 +198,17 @@
       }
 
       &.active {
-        color: $devui-link;
+        color: $devui-list-item-active-text;
+        background: $devui-list-item-active-bg;
+        font-weight: bold;
+
         &:not(.open) {
           font-weight: 600;
         }
       }
+
       &:not(.disabled):hover {
-        color: $devui-link;
+        background: $devui-list-item-hover-bg;
       }
     }
   }
@@ -237,57 +234,82 @@
   }
 }
 
+body[ui-lang='en-us'] {
+  @media (max-width: 1480px) {
+    d-common-header .devui-search {
+      width: 120px;
+    }
+  }
+}
+
 // 设置引导页MarkDown文档标题
 .readme {
   h1 {
     @include font-title($devui-font-size-data-overview);
     padding: 40px 0 20px;
+
+    & + h2 {
+      padding: 20px 0 15px;
+    }
   }
+
   h2 {
     @include font-title($devui-font-size-page-title);
     padding: 40px 0 15px;
   }
+
   h3 {
     @include font-title($devui-font-size-card-title);
     padding: 30px 0 10px;
   }
+
   h1,
   h2,
   h3 {
     // font-weight: normal;
     margin: 0;
   }
+
   pre code {
     padding: 0.5em;
   }
 }
+
 // 引导页页面样式设置
 .readme {
   .hljs {
     background: transparent;
+    border-radius: 20px;
   }
+
   pre {
     background-color: $devui-base-bg;
     border: none;
+
     code {
       border: 1px solid $devui-dividing-line;
       overflow-x: auto;
     }
   }
+
   p {
     margin: 1em 0;
   }
 }
+
 // API页MarkDown文档标题样式
 .markdown h1 {
   font-size: $devui-font-size-price;
 }
+
 .markdown h2 {
   font-size: $devui-font-size-page-title;
 }
+
 .markdown h3 {
   font-size: $devui-font-size-card-title;
 }
+
 .markdown h2,
 .markdown h3,
 .markdown h4,
@@ -298,13 +320,16 @@
   font-weight: bold;
   clear: both;
 }
+
 // API页MarkDown文档正文样式
 .markdown {
   color: $devui-text;
   font-size: $devui-font-size-lg;
   line-height: 1.8;
+
   a {
     color: $devui-link;
+
     &:hover {
       color: $devui-link-active;
       text-decoration: underline;
@@ -312,18 +337,22 @@
     }
   }
 }
+
 // 使用Card组件对demo进行封装
 .devui-demo-card-wrapper {
   .devui-demo-example {
     margin-bottom: 0px;
   }
+
   cursor: pointer;
   transition: box-shadow $devui-animation-duration-slow $devui-animation-ease-in-out-smooth,
     transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+
   &:hover {
     box-shadow: $devui-shadow-length-hover $devui-light-shadow;
     // transform: translateY(-5px);
   }
+
   margin-bottom: 40px;
 }
 
@@ -334,4 +363,309 @@
   right: 12px;
   text-align: right;
   cursor: pointer;
+
+  .devui-api-code-copy {
+    fill: $devui-icon-fill;
+  }
+}
+
+.markdown-container {
+  &.readme,
+  &.api-container {
+    p {
+      margin: 0;
+    }
+
+    pre code {
+      border: 1px solid $devui-dividing-line;
+      display: block;
+      color: $devui-text;
+      line-height: 2;
+      overflow-x: auto;
+      border-radius: 4px;
+      padding: 8px 12px;
+    }
+  }
+
+  ul {
+    list-style: disc;
+    margin-left: 20px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding-left: 4px;
+    font-size: $devui-font-size-card-title;
+
+    li {
+      line-height: 1.8;
+    }
+
+    & > li > ul {
+      list-style: circle;
+    }
+  }
+
+  p {
+    font-size: $devui-font-size-card-title;
+    line-height: 1.8;
+
+    img {
+      width: 100%;
+      margin: 16px 0;
+      box-shadow: $devui-shadow-length-connected-overlay $devui-light-shadow;
+    }
+  }
+
+  code {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: $devui-unavailable;
+    background-color: $devui-area;
+    border-radius: $devui-border-radius;
+  }
+
+  .highlight {
+    line-height: 1.5;
+    position: relative;
+  }
+
+  code[class*='language-'],
+  pre[class*='language-'],
+  pre code {
+    white-space: pre-wrap;
+    word-break: break-word;
+    word-wrap: break-word;
+    font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+  }
+
+  pre {
+    display: block;
+    margin: 12px 0;
+    line-height: 1.42857143;
+    color: $devui-text;
+    word-break: break-all;
+    word-wrap: break-word;
+    border-radius: $devui-border-radius;
+  }
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: Consolas, Menlo, Courier, monospace;
+  }
+}
+
+.devui-content-layout {
+  .readme {
+    h1 {
+      @include font-title(36px);
+      line-height: 44px;
+      padding: 32px 0 16px;
+
+      & + h2 {
+        padding: 20px 0 12px;
+      }
+
+      & + h3 {
+      }
+    }
+
+    h2 {
+      @include font-title($devui-font-size-page-title);
+      padding: 32px 0 12px;
+    }
+
+    h3 {
+      @include font-title($devui-font-size-card-title);
+      padding: 24px 0 8px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+    }
+  }
+}
+
+.markdown-container.readme {
+  .hljs {
+    background: transparent;
+  }
+
+  pre {
+    background-color: $devui-base-bg;
+    border: none;
+  }
+}
+
+.markdown-container.api-container {
+  color: $devui-text;
+  font-size: $devui-font-size-lg;
+  line-height: 1.8;
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+
+  h1 {
+    font-size: $devui-font-size-price;
+  }
+
+  h2 {
+    font-size: $devui-font-size-page-title;
+  }
+
+  h3 {
+    font-size: $devui-font-size-card-title;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $devui-text;
+    margin: 1.6em 0 0.6em;
+    font-weight: bold;
+    clear: both;
+  }
+
+  a {
+    color: $devui-link;
+
+    &:hover {
+      color: $devui-link-active;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 1px solid $devui-dividing-line;
+    width: 100%;
+    margin: 8px 0 16px;
+    font-size: 13px;
+
+    th,
+    td {
+      border: 1px solid $devui-dividing-line;
+      padding: 8px 16px;
+      text-align: left;
+    }
+
+    th {
+      background: $devui-area;
+      white-space: nowrap;
+      color: $devui-text;
+      font-weight: 600;
+    }
+  }
+
+  a code {
+    text-decoration: underline;
+  }
+}
+
+.devui-design-h2-title {
+  font-size: 28px;
+  color: $devui-text;
+  line-height: 36px;
+  font-weight: 700;
+}
+.devui-design-h3-title {
+  font-size: 20px;
+  color: $devui-text;
+  line-height: 28px;
+  font-weight: 700;
+}
+.devui-design-h4-title {
+  font-size: 16px;
+  color: $devui-text;
+  line-height: 24px;
+  font-weight: 700;
+}
+.devui-design-desc {
+  font-size: 14px;
+  color: $devui-text;
+  line-height: 22px;
+  max-width: 760px;
+}
+
+.devui-design-mt-64 {
+  margin-top: 64px;
+}
+.devui-design-mt-48 {
+  margin-top: 48px;
+}
+.devui-design-mt-24 {
+  margin-top: 24px;
+}
+.devui-design-mt-20 {
+  margin-top: 20px;
+}
+.devui-design-mt-16 {
+  margin-top: 16px;
+}
+.devui-design-mt-12 {
+  margin-top: 12px;
+}
+.devui-design-mt-8 {
+  margin-top: 8px;
+}
+
+.devui-design-mb-64 {
+  margin-bottom: 64px;
+}
+.devui-design-mb-16 {
+  margin-bottom: 16px;
+}
+.devui-design-mb-40 {
+  margin-bottom: 40px;
+}
+.devui-design-mb-24 {
+  margin-bottom: 24px;
+}
+.devui-design-mb-12 {
+  margin-bottom: 12px;
+}
+.devui-design-mb-8 {
+  margin-bottom: 8px;
+}
+
+.devui-design-mr-8 {
+  margin-right: 8px;
+}
+
+.devui-design-image-1 {
+  width: 100%;
+}
+.devui-design-image-2 {
+  flex: 0 0 calc((100% - 20px) / 2);
+  img {
+    width: 100%;
+  }
+  &:not(:nth-child(2n)) {
+    margin-right: 20px;
+  }
+}
+.devui-design-image-3 {
+  flex: 1;
+  img {
+    width: 100%;
+  }
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
+}
+
+.devui-design-li-container {
+  display: flex;
+}
+.devui-design-image-container {
+  display: flex;
+  flex-wrap: wrap;
 }

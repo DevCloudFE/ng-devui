@@ -160,8 +160,6 @@ export interface ExtendedConfig {
   customTemplate?: TemplateRef<any>;
 }
 
-export const ALLOWED_SEARCH_FIELD_TYPES = ['radio', 'checkbox', 'label'];
-
 export const COLORS = [
   '#f2f5fc',
   '#e9edfa',

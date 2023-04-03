@@ -41,6 +41,12 @@
   cursor: default;
 }
 
+:host ::ng-deep .devui-tag-item.tag-disabled {
+  cursor: not-allowed;
+  background-color: $devui-disabled-bg;
+  color: $devui-disabled-text;
+}
+
 .devui-search-cascader {
   cursor: text;
 }
@@ -177,10 +183,6 @@
     background: $devui-base-bg;
     color: $devui-text;
     padding: 0 8px;
-  }
-
-  &:hover {
-    border-color: $devui-aide-text;
   }
 }
 

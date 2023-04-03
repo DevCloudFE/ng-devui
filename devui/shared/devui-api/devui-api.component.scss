@@ -1,10 +1,10 @@
 @import '~ng-devui/styles-var/devui-var.scss';
 
 d-nav-sprite {
-  width: 240px;
+  width: 200px;
   position: fixed;
-  top: 160px;
-  right: 0;
+  top: 22px;
+  right: 40px;
   height: 100%;
   z-index: calc(#{$devui-z-index-framework} + 1);
   padding: 8px 0 8px 8px;
@@ -34,4 +34,24 @@ d-nav-sprite {
   box-shadow: $devui-shadow-length-base $devui-light-shadow;
   border-radius: 16px;
   margin-bottom: 20px;
+}
+
+:host ::ng-deep d-nav-sprite .devui-nav-sprite-content .devui-nav-sprite-menus > li:not(.disabled):hover {
+  background: $devui-list-item-hover-bg;
+}
+
+:host ::ng-deep d-nav-sprite .devui-nav-sprite-content .devui-nav-sprite-menus > li {
+  padding-left: 16px;
+  border-radius: $devui-border-radius-full;
+  line-height: 36px;
+  height: 36px;
+  font-size: $devui-font-size-sm;
+
+  &.active {
+    background: $devui-list-item-active-bg;
+  }
+}
+
+:host ::ng-deep d-nav-sprite .devui-nav-sprite-content .devui-nav-sprite-menus > li .nav-item a:hover {
+  color: #252b3a !important;
 }

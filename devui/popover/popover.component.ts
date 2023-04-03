@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -5,13 +6,14 @@ import {
   ElementRef,
   HostBinding,
   HostListener,
+  Inject,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
   Renderer2,
   SimpleChanges,
-  TemplateRef,
+  TemplateRef
 } from '@angular/core';
 import { PositionService } from 'ng-devui/position';
 import { directionFadeInOut } from 'ng-devui/utils';
@@ -80,6 +82,8 @@ export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
     return this.content instanceof TemplateRef ? this.content : null;
   }
 
+  document: Document;
+  hasSetScrollElement = false;
   subs: Subscription = new Subscription();
   SCROLL_REFRESH_INTERVAL = 100;
 
@@ -87,8 +91,11 @@ export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
     private renderer: Renderer2,
     private positionService: PositionService,
     public elementRef: ElementRef,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private cdr: ChangeDetectorRef,
+    @Inject(DOCUMENT) private doc: any
+  ) {
+    this.document = this.doc;
+  }
 
   ngOnInit() {
     this.elementRef.nativeElement.style.zIndex = this.zIndex;
@@ -97,7 +104,9 @@ export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
   ngAfterViewInit() {
     this.updatePosition();
     if (this.appendToBody) {
-      if (!this.scrollElement) {
+      if (this.scrollElement) {
+        this.hasSetScrollElement = true;
+      } else {
         this.scrollElement = this.positionService.getScrollParent(this.triggerElementRef.nativeElement);
       }
       this.subs.add(
@@ -157,8 +166,10 @@ export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
       this.appendToBody
     );
     setTimeout(() => {
-      // 预防脏检查
       this.currentPosition = rect.placementPrimary;
+      if (this.checkBounds(rect)) {
+        return;
+      }
       this.animateState = this.currentPosition;
       this.connectionBias = `bias-${rect.placementSecondary}`;
       if (rect.placementSecondary === 'center') {
@@ -174,6 +185,34 @@ export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
       this.renderer.removeStyle(this.elementRef.nativeElement, 'visibility');
       this.renderer.removeStyle(this.elementRef.nativeElement, 'transform');
     });
+  }
+
+  checkBounds(rect): boolean {
+    // 手动设置了scrollElement才执行自动隐藏逻辑，位置信息及判断排列顺序都遵循上右下左
+    if (this.hasSetScrollElement) {
+      const docElement = this.document.documentElement ? this.document.documentElement : this.document.body;
+      const { scrollLeft, scrollTop } = docElement;
+      const containerRect = this.scrollElement.getBoundingClientRect();
+      const positionFix = {
+        top: [rect.height, 0, 0, 0],
+        right: [0, -1 * rect.width, 0, 0],
+        bottom: [0, 0, -1 * rect.height, 0],
+        left: [0, 0, 0, rect.width],
+      };
+      const positionKeyword = this.currentPosition.split('-')[0];
+      const positionFixArr = positionFix[positionKeyword] ?? [0, 0, 0, 0];
+      const bounds = [
+        Math.round(rect.top + positionFixArr[0]) >= Math.round(containerRect.top + scrollTop),
+        Math.round(rect.right + positionFixArr[1]) <= Math.round(containerRect.left + containerRect.width + scrollLeft),
+        Math.round(rect.bottom + positionFixArr[2]) <= Math.round(containerRect.top + containerRect.height + scrollTop),
+        Math.round(rect.left + positionFixArr[3]) >= Math.round(containerRect.left + scrollLeft),
+      ];
+      if (bounds.includes(false)) {
+        this.animateState = 'void';
+        return true;
+      }
+    }
+    return false;
   }
 
   public updatePositionAndDetectChange() {

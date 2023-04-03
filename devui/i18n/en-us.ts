@@ -78,7 +78,10 @@ export default {
     },
     hour: 'Hr',
     min: 'Min',
-    second: 'Sec'
+    second: 'Sec',
+    yearDisplay(year) {
+      return `${year}`;
+    },
   },
   form: {
     required(val): string {
@@ -206,6 +209,7 @@ export default {
     pre: 'Previous',
     next: 'Next',
     origin: 'View the original image',
+    download: 'Download'
   },
   colorPicker: {
     recentlyUsed: 'Recently Used',

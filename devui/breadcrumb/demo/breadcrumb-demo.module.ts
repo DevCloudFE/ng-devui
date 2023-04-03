@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { BreadCrumbDemoComponent } from './breadcrumb-demo.component';
+import { BreadcrumbDesignComponent } from './breadcrumb-design.component';
 import { ClickBlockComponent } from './click-block/click-block.component';
 import { CustomComponent } from './custom/custom.component';
 import { MenuComponent } from './menu/menu.component';
@@ -28,6 +29,10 @@ import { SourceConfigComponent } from './source-config/source-config.component';
     DropDownModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: BreadcrumbDesignComponent,
+      },
       { path: 'demo', component: BreadCrumbDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -45,6 +50,7 @@ import { SourceConfigComponent } from './source-config/source-config.component';
   ],
   declarations: [
     BreadCrumbDemoComponent,
+    BreadcrumbDesignComponent,
     BasicComponent,
     MenuComponent,
     CustomComponent,

@@ -5,6 +5,12 @@ export class AnimationDuration {
   static FAST = '0.1s';
 }
 
+export class AnimationNumberDuration {
+  static SLOW = 300;
+  static BASE = 200;
+  static FAST = 100;
+}
+
 export class AnimationCurves {
   static EASE_OUT = 'cubic-bezier(0.16, 0.75, 0.5, 1)';
   static EASE_IN = 'cubic-bezier(0.5, 0, 0.84, 0.25)';

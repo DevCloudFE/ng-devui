@@ -3,7 +3,8 @@
 
 :host {
   &.devui-splitter-bar {
-    background-color: $devui-label-bg;
+    // 实际场景为边框，此处使用背景色表现效果更好
+    background-color: $devui-dividing-line;
     display: flex;
     position: relative;
     align-items: center;

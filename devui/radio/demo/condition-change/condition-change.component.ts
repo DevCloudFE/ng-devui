@@ -1,22 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-condition-change',
   templateUrl: './condition-change.component.html',
 })
-export class ConditionChangeComponent implements OnInit {
-  valuesChange = ['Item1', 'Item2', 'Item3'];
-  chooseChange = 'Item1';
+export class ConditionChangeComponent {
+  items = ['Item1', 'Item2', 'Item3'];
+  chosenItem = 'Item1';
 
-  constructor() {}
+  beforeChange = (item: string): boolean => {
+    return item !== 'Item2';
+  };
 
-  ngOnInit() {}
-
-  beforeChange(value) {
-    return value !== 'Item2';
-  }
-
-  valueChange(value) {
-    console.log(value);
+  valueChange(item): void {
+    console.log(item);
   }
 }

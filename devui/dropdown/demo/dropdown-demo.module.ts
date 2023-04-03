@@ -16,6 +16,7 @@ import { DropDownDemoAppendToBodyComponent } from './append-to-body/append-to-bo
 import { BasicComponent } from './basic/basic.component';
 import { DropDownDemoClickBlankComponent } from './close-scope/close-scope.component';
 import { DropdownDemoComponent } from './dropdown-demo.component';
+import { DropdownDesignComponent } from './dropdown-design.component';
 import { DropDownDemoFocusComponent } from './focus/focus.component';
 import { DropDownDemoHoverComponent } from './hover/hover.component';
 import { DropDownDemoManuallyComponent } from './manually/manually.component';
@@ -36,6 +37,10 @@ import { DropdownSetIsOpenComponent } from './set-is-open/dropdown-set-is-open.c
     DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: DropdownDesignComponent,
+      },
       { path: 'demo', component: DropdownDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -46,6 +51,7 @@ import { DropdownSetIsOpenComponent } from './set-is-open/dropdown-set-is-open.c
   exports: [DropdownDemoComponent],
   declarations: [
     DropdownDemoComponent,
+    DropdownDesignComponent,
     BasicComponent,
     DropDownDemoClickBlankComponent,
     DropDownDemoFocusComponent,

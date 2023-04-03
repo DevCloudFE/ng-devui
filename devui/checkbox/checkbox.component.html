@@ -7,6 +7,9 @@
     unchecked: !checked
   }"
 >
+  <div class="devui-checkbox-glow-box">
+    <span *ngIf="showAnimation" class="devui-checkbox-glow-bg"></span>
+  </div>
   <label title="{{ isShowTitle ? title || label : '' }}" (click)="toggle($event)">
     <input
       [name]="name || 'checkbox-' + id"
@@ -33,22 +36,18 @@
       }"
     >
       <span class="devui-checkbox-halfchecked-bg"></span>
-      <svg
-        viewBox="0 0 16 16"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        class="devui-checkbox-tick"
-      >
+      <svg viewBox="0 0 14 14" width="14" height="14" class="devui-checkbox-tick">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <polygon
-            fill-rule="nonzero"
-            points="5.17391304 6.56521739 7.7173913 9.10869565 11.826087 5 13 6.17391304 7.7173913 11.4565217 4 7.73913043"
+          <path
             class="devui-tick"
             [ngClass]="{
               'devui-no-animation': !showAnimation || !animationUnlocked
             }"
-          ></polygon>
+            d="M 2.3 7.0 5.6 9.6 11.4 3.5"
+            stroke="#fff"
+            stroke-width="1.5"
+            fill="none"
+          />
         </g>
       </svg>
     </span>

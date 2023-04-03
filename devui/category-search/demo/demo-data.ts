@@ -44,7 +44,7 @@ export const demoData: ICategorySearchTagItem[] = [
     ],
   },
   {
-    label: 'creat time',
+    label: 'create time',
     field: 'creatTime',
     type: 'dateRange',
     group: 'Time-related',
@@ -145,7 +145,7 @@ export const demoData: ICategorySearchTagItem[] = [
       { minlength: 3 },
       { maxlength: 10 },
       {
-        pattern: /[0-9]+/,
+        pattern: /^[0-9.]+$/,
         message: {
           'zh-cn': '只能包含数字',
           'en-us': 'The value can contain only digits.',

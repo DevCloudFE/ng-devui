@@ -1,31 +1,164 @@
-<h1>
-  <span style="position: relative; z-index: 1000">{{ componentName }}</span>
-  <div *ngIf="showHeaderWrapper" class="devui-title-container"></div>
-</h1>
+<div class="devui-content-container">
+  <h1>
+    <span>{{ componentName }}</span>
+  </h1>
 
-<div class="devui-docs-header">
-  <div style="margin-bottom: 40px">{{ description }}</div>
-  <div *ngIf="tmw">
-    <h3 class="devui-h3-title">{{ 'public.whenToUse' | translate }}</h3>
-    <div style="margin-bottom: 20px" [innerHTML]="tmw"></div>
+  <div class="devui-docs-header">
+    <div class="devui-docs-header-description">{{ description }}</div>
   </div>
-</div>
 
-<d-tabs
-  class="d-website-demo-tabs"
-  [showContent]="false"
-  type="slider"
-  size="lg"
-  customWidth="100px"
-  [(activeTab)]="componentTab"
-  (activeTabChange)="activeTabChange($event)"
->
-  <d-tab id="demo" title="Demo"></d-tab>
-  <d-tab id="api" title="API"></d-tab>
-</d-tabs>
+  <div class="devui-tabs-containter">
+    <div class="devui-banner-container">
+      <img [src]="imgPrefix + 'banner/' + curComponentData.banner + '.png'" />
+    </div>
+    <div class="devui-component-icon">
+      <img [src]="imgPrefix + curComponentData.folderName + '/' + curComponentData.lowerName + '.png'" (error)="imgError($event)" />
+    </div>
+    <d-tabs
+      class="d-website-demo-tabs"
+      [ngClass]="{
+        'fix-tab': showHeaderWrapper
+      }"
+      [style]="{ width: tabContainerWidth }"
+      [showContent]="false"
+      type="slider"
+      size="lg"
+      [customWidth]="tabWidth"
+      [(activeTab)]="componentTab"
+      (activeTabChange)="activeTabChange($event)"
+    >
+      <d-tab id="design" *ngIf="showDesignTab">
+        <ng-template dTabTitle>
+          <svg
+            width="16px"
+            height="16px"
+            viewBox="0 0 16 16"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            style="vertical-align: middle"
+          >
+            <title>编组 3</title>
+            <g id="DevUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="切图" transform="translate(-72.000000, -24.000000)">
+                <g id="编组-3" transform="translate(72.000000, 24.000000)">
+                  <rect id="矩形" fill="#D8D8D8" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                  <path
+                    d="M7.49976344,5.855 L7.49925492,8.63421363 C7.20076517,8.80722414 7,9.13016646 7,9.5 C7,10.0522847 7.44771525,10.5 8,10.5 C8.55228475,10.5 9,10.0522847 9,9.5 C9,9.13016646 8.79923483,8.80722414 8.50074508,8.63421363 L8.49976344,5.856 L12.0092524,11.8534228 C12.282519,12.3205453 12.134589,12.9202991 11.6754472,13.2067722 L8.52934698,15.1697237 C8.20539146,15.3718498 7.79460854,15.3718498 7.47065302,15.1697237 L4.32455278,13.2067722 C3.86541096,12.9202991 3.717481,12.3205453 3.99074764,11.8534228 L7.49976344,5.855 Z M9,1 C9.27614237,1 9.5,1.22385763 9.5,1.5 L9.5,1.5 L9.5,1.998 L13.1344277,1.9988857 C13.2890229,1.73242993 13.5631259,1.54392461 13.8833789,1.50672773 L14,1.5 C14.5522847,1.5 15,1.94771525 15,2.5 C15,3.05228475 14.5522847,3.5 14,3.5 C13.6299123,3.5 13.3067803,3.29895877 13.1338571,3.0001295 L11.4629148,2.99825118 C13.2877507,4.14925635 14.5,6.18306018 14.5,8.5 C14.5,8.77614237 14.2761424,9 14,9 C13.7238576,9 13.5,8.77614237 13.5,8.5 C13.5,5.98288422 11.8090939,3.86070072 9.50120614,3.20737378 L9.5,3.5 C9.5,3.77614237 9.27614237,4 9,4 L9,4 L7,4 C6.72385763,4 6.5,3.77614237 6.5,3.5 L6.5,3.5 L6.49994506,3.20704803 C4.19146837,3.85999505 2.5,5.98246572 2.5,8.5 C2.5,8.77614237 2.27614237,9 2,9 C1.72385763,9 1.5,8.77614237 1.5,8.5 C1.5,6.18323492 2.71206644,4.14956312 4.53667231,2.99851162 L2.86614288,3.0001295 C2.69321974,3.29895877 2.37008772,3.5 2,3.5 C1.44771525,3.5 1,3.05228475 1,2.5 C1,1.94771525 1.44771525,1.5 2,1.5 C2.36968103,1.5 2.69250951,1.70059962 2.86557226,1.9988857 L6.5,1.998 L6.5,1.5 C6.5,1.25454011 6.67687516,1.05039163 6.91012437,1.00805567 L7,1 Z M8.5,2 L7.5,2 L7.5,3 L8.5,3 L8.5,2 Z"
+                    id="形状结合"
+                    fill="#71757F"
+                  ></path>
+                </g>
+              </g>
+            </g>
+          </svg>
+          <span style="margin-left: 8px">{{ footer.tabDesign }}</span>
+        </ng-template>
+      </d-tab>
+      <d-tab id="demo">
+        <ng-template dTabTitle>
+          <svg
+            width="16px"
+            height="16px"
+            viewBox="0 0 16 16"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            style="vertical-align: middle"
+          >
+            <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="DevUI" transform="translate(-1216.000000, -279.000000)">
+                <g id="编组-11" transform="translate(480.000000, 258.000000)">
+                  <g id="编组" transform="translate(736.000000, 21.000000)">
+                    <rect id="矩形" fill="#D8D8D8" opacity="0" x="9.47390314e-15" y="0" width="16" height="16"></rect>
+                    <path
+                      d="M4.77598333,12.4435924 C4.59598333,12.4435924 4.41665,12.374259 4.27998333,12.2369257 L1.36198333,9.3049257 C0.657316667,8.59625903 0.657316667,7.44225903 1.36198333,6.73359237 L4.31731667,3.76359237 C4.58931667,3.49025903 5.03265,3.48825903 5.30598333,3.76159237 C5.57998333,4.03359237 5.58131667,4.47625903 5.30865,4.75025903 L2.35398333,7.71959237 C2.18998333,7.8849257 2.18998333,8.1529257 2.35398333,8.3189257 L5.27198333,11.2509257 C5.54398333,11.5249257 5.54265,11.9675924 5.26931667,12.2395924 C5.13265,12.3755924 4.95465,12.4435924 4.77598333,12.4435924 M11.2261833,12.4415924 C11.0481833,12.4415924 10.8695167,12.3735924 10.73285,12.2375924 C10.4595167,11.9655924 10.4581833,11.5229257 10.7301833,11.2489257 L13.6461833,8.31825903 C13.8101833,8.1529257 13.8101833,7.8849257 13.6461833,7.71959237 L10.6915167,4.75025903 C10.41885,4.47625903 10.4201833,4.03359237 10.6941833,3.7609257 C10.9675167,3.48759237 11.41085,3.48959237 11.6835167,3.76359237 L14.6375167,6.7329257 C15.34285,7.44225903 15.34285,8.59559237 14.6375167,9.3049257 L11.7221833,12.2349257 C11.5855167,12.372259 11.4061833,12.4415924 11.2261833,12.4415924 M6.50058333,12.4461924 C6.41391667,12.4461924 6.32658333,12.430859 6.24058333,12.396859 C5.88258333,12.252859 5.70791667,11.8461924 5.85125,11.4875257 L8.84791667,3.99419237 C8.99191667,3.6355257 9.39725,3.46019237 9.75725,3.60419237 C10.1159167,3.74819237 10.2905833,4.15485903 10.14725,4.51419237 L7.15058333,12.006859 C7.04058333,12.2801924 6.77858333,12.4461924 6.50058333,12.4461924"
+                      id="形状结合"
+                      fill="#71757F"
+                    ></path>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+          <span style="margin-left: 8px">Demo</span>
+        </ng-template>
+      </d-tab>
+      <d-tab id="api">
+        <ng-template dTabTitle>
+          <svg
+            width="16px"
+            height="16px"
+            viewBox="0 0 16 16"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            style="vertical-align: middle"
+          >
+            <title>接口</title>
+            <g id="DevUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="切图" transform="translate(-328.000000, -24.000000)">
+                <g id="编组" transform="translate(328.000000, 24.000000)">
+                  <rect id="矩形" fill="#D8D8D8" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                  <path
+                    d="M12,2 C12.3821595,2 12.7392845,2.10718525 13.0429525,2.29313319 L10.9856439,4.35158377 C10.6280352,4.12874083 10.2057188,4 9.75333333,4 C8.46466892,4 7.42,5.04466892 7.42,6.33333333 C7.42,6.42173883 7.45511895,6.50652347 7.51763107,6.56903559 L7.51763107,6.56903559 L9.51763107,8.56903559 L9.56839983,8.61066275 C9.62276182,8.64691226 9.68702921,8.66666667 9.75333333,8.66666667 C11.0419977,8.66666667 12.0866667,7.62199775 12.0866667,6.33333333 C12.0866667,5.85896277 11.9451087,5.41765485 11.7019309,5.04934784 L11.7019309,5.04934784 L13.7393313,3.01201646 C13.8820538,3.26273709 13.9721293,3.54732538 13.9945143,3.85073766 L14,4 L14,12 C14,13.0543618 13.1841222,13.9181651 12.1492623,13.9945143 L12,14 L4,14 C3.64066221,14 3.30345816,13.9052342 3.01201646,13.7393313 L4.99695863,11.7547259 L5.04537073,11.6986469 C5.07008715,11.6653356 5.09012995,11.6296484 5.10312826,11.5931482 C5.47792379,11.849838 5.93142578,12 6.42,12 C7.70866442,12 8.75333333,10.9553311 8.75333333,9.66666667 C8.75333333,9.57826117 8.71821439,9.49347653 8.65570226,9.43096441 L8.65570226,9.43096441 L6.65570226,7.43096441 L6.6049335,7.38933725 C6.55057151,7.35308774 6.48630412,7.33333333 6.42,7.33333333 C5.13133558,7.33333333 4.08666667,8.37800225 4.08666667,9.66666667 C4.08666667,10.1351182 4.22471408,10.571327 4.46295351,10.9347366 C4.39987569,10.9591003 4.34074321,10.9967278 4.28985184,11.0476191 L4.28985184,11.0476191 L2.29313319,13.0429525 C2.1316149,12.7791801 2.02952325,12.4750742 2.00548574,12.1492623 L2,12 L2,4 C2,2.9456382 2.81587779,2.08183488 3.85073766,2.00548574 L4,2 L12,2 Z"
+                    id="形状结合"
+                    fill="#71757F"
+                  ></path>
+                </g>
+              </g>
+            </g>
+          </svg>
+          <span style="margin-left: 8px">API</span>
+        </ng-template>
+      </d-tab>
+    </d-tabs>
+  </div>
 
-<div class="examples-viewer">
-  <div class="examples-viewer-wrapper">
-    <router-outlet></router-outlet>
+  <div class="examples-viewer">
+    <div class="examples-viewer-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <div class="devui-docs-footer">
+    <div>
+      <div class="devui-docs-footer-title">{{ footer.desc }}</div>
+      <div class="devui-docs-footer-content">
+        <div class="content-foot">
+          <a rel="noopener noreferrer" href="https://github.com/DevCloudFE/ng-devui" target="_blank" class="devui-docs-footer-link">
+            <img [src]="imgPrefix + 'footer/github.svg'" />
+            <span>{{ footer.github }}</span>
+          </a>
+        </div>
+
+        <div class="content-foot">
+          <a rel="noopener noreferrer" href="https://juejin.cn/user/712139267650141" target="_blank" class="devui-docs-footer-link">
+            <img [src]="imgPrefix + 'footer/juejin.svg'" />
+            <span>{{ footer.team }}</span>
+          </a>
+        </div>
+
+        <div class="content-foot">
+          <a rel="noopener noreferrer" href="https://zhuanlan.zhihu.com/devui" target="_blank" class="devui-docs-footer-link">
+            <img [src]="imgPrefix + 'footer/zhihu.svg'" />
+            <span>{{ footer.design }}</span></a
+          >
+        </div>
+
+        <div class="content-foot" style="position: relative">
+          <a class="wechat-info">
+            <img [src]="imgPrefix + 'footer/wechat.svg'" />
+            <span>{{ footer.group }}</span>
+            <img class="wechat-img" [src]="imgPrefix + 'footer/wechat.jpg'" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="devui-docs-footer-desc">
+      <img [src]="imgPrefix + 'footer/logo.svg'" alt="" />
+      <span>粤A2-20044005号</span>
+    </div>
   </div>
 </div>

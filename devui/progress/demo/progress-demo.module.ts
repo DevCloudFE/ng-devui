@@ -12,6 +12,7 @@ import { BasicComponent } from './basic/basic.component';
 import { CircleComponent } from './circle/circle.component';
 import { MultipleComponent } from './multiple/multiple.component';
 import { ProgressDemoComponent } from './progress-demo.component';
+import { ProgressDesignComponent } from './progress-design.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,10 @@ import { ProgressDemoComponent } from './progress-demo.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: ProgressDesignComponent,
+      },
       { path: 'demo', component: ProgressDemoComponent },
       {
         path: 'api',
@@ -36,6 +41,6 @@ import { ProgressDemoComponent } from './progress-demo.component';
     ]),
   ],
   exports: [ProgressDemoComponent],
-  declarations: [ProgressDemoComponent, BasicComponent, CircleComponent, MultipleComponent],
+  declarations: [ProgressDemoComponent, ProgressDesignComponent, BasicComponent, CircleComponent, MultipleComponent],
 })
 export class ProgressDemoModule {}

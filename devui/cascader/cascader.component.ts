@@ -19,15 +19,15 @@ const DEBOUNCE_TIME = 200;
   templateUrl: './cascader.component.html',
   styleUrls: ['./cascader.component.scss'],
   providers: [
-  {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => CascaderComponent),
-  multi: true
-  },
-  CascaderService
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CascaderComponent),
+      multi: true
+    },
+    CascaderService
   ],
   preserveWhitespaces: false
-  })
+})
 export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlValueAccessor {
   @ViewChild('mainDropdown') mainDropdown: DropDownDirective;
   @ViewChild('innerInput') innerInput: ElementRef;
@@ -372,7 +372,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     }
 
     if (isOpen && !this.multiple && this.allowSearch) {
-      this.outerInput?.nativeElement.focus();
+      this.outerInput.nativeElement.focus();
     }
 
     if (!isOpen && this.allowSearch) {

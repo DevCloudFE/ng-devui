@@ -13,6 +13,7 @@ import { DecimalLimitComponent } from './decimalLimit/decimal-limit.component';
 import { InputNumberDisabledComponent } from './disabled/input-number-disabled.component';
 import { InputNumberEmptyComponent } from './empty/input-number-empty.component';
 import { InputNumberDemoComponent } from './input-number-demo.component';
+import { InputNumberDesignComponent } from './input-number-design.component';
 import { InputNumberPlaceholderAndMaxLengthComponent } from './placeholderAndMaxLength/input-number-placeholder-maxLength.component';
 import { InputNumberRegComponent } from './reg/input-number-reg.component';
 
@@ -27,6 +28,10 @@ import { InputNumberRegComponent } from './reg/input-number-reg.component';
     DDemoNavModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: InputNumberDesignComponent,
+      },
       { path: 'demo', component: InputNumberDemoComponent },
       {
         path: 'api',
@@ -41,6 +46,7 @@ import { InputNumberRegComponent } from './reg/input-number-reg.component';
   exports: [InputNumberDemoComponent],
   declarations: [
     InputNumberDemoComponent,
+    InputNumberDesignComponent,
     InputNumberBasicComponent,
     InputNumberDisabledComponent,
     InputNumberEmptyComponent,

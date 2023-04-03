@@ -19,8 +19,8 @@
 
   <ng-template #default>
     <input
-      #outerInput
       *ngIf="!multiple"
+      #outerInput
       [placeholder]="placeholder"
       type="text"
       class="devui-form-control devui-select-input devui-input"
@@ -35,7 +35,8 @@
         <d-tag
           *ngFor="let item of multipleValueList; let index = index"
           [tag]="item.label"
-          [deletable]="true"
+          [labelStyle]="item.disabled ? 'tag-disabled' : ''"
+          [deletable]="!item.disabled"
           (tagDelete)="deleteTag($event, item)"
         ></d-tag>
         <input
@@ -195,8 +196,8 @@
   </div>
   <ng-template #default>
     <input
-      #outerInput
       *ngIf="!multiple"
+      #outerInput
       [placeholder]="placeholder"
       type="text"
       class="devui-form-control devui-select-input devui-input"

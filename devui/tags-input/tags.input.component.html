@@ -26,6 +26,7 @@
       [maxHeight]="maxHeight"
       [maxWidth]="'100%'"
       [mode]="multiline ? 'multiple-line' : 'scroll-y'"
+      [customViewTemplate]="tagTemplate"
       (removeChange)="removeTag($event)"
     ></d-toggle-menu-label>
     <d-toggle-menu-search

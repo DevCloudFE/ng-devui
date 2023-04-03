@@ -11,6 +11,7 @@ import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { BasicComponent } from './basic/basic.component';
 import { ServiceWayComponent } from './service-way/service-way.component';
 import { UserGuideDemoComponent } from './user-guide-demo.component';
+import { UserGuideDesignComponent } from './user-guide-design.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,10 @@ import { UserGuideDemoComponent } from './user-guide-demo.component';
     ButtonModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: UserGuideDesignComponent,
+      },
       { path: 'demo', component: UserGuideDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -32,6 +37,7 @@ import { UserGuideDemoComponent } from './user-guide-demo.component';
   ],
   declarations: [
     UserGuideDemoComponent,
+    UserGuideDesignComponent,
     BasicComponent,
     ServiceWayComponent
   ]

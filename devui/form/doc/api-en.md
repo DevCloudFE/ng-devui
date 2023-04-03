@@ -146,6 +146,10 @@ Collaborative form validation.
 | :--------------: | :------: | :-----: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------: |
 | dValidateSyncKey | `string` |   --    | Required. This parameter is mandatory. It specifies the unique key. When the value of one element in the form of the same key changes, verification is triggered. responsive and template-driven forms are supported. | [Form collaboration verification](demo#demo-validate-sync) |
 
+# dActiveFormControl
+
+Add the direct to the customized container of the service to obtain the same click interaction effect as other component forms (such as text-input, select, and cascader).
+
 ## Integrated Validation Rules
 
 ### Using
@@ -249,7 +253,7 @@ export type DValidateRules =
 
       errorStrategy?: DValidationErrorStrategy; // error update policy. The default value is'dirty'.
 
-      message?: string | { [key: string]: string }; // Unified message. If no message is configured for a verification rule, the unified message is used.
+      message?: string | { [key: string]: string } | templateRef<any>; // Unified message. If no message is configured for a verification rule, the unified message is used.
 
       messageShowType?: 'popover' | 'text' | 'none'; // Automatic message display policy (currently, this policy takes effect only for a single form component). (displayed in the popover | d-form-item container | not displayed)
 
@@ -268,7 +272,7 @@ export interface DValidateRule {// Define a synchronization verification rule.
 
   validator ?: DValidatorFn | ValidatorFn; // validator, which is compatible with the native Angular validator. (Set isNgValidator to true.)
 
-  message ?: string | { [key: string]: string }; // Message returned when the verification fails. The internationalization string object can be returned. The key is the key of the corresponding language. The default key is 'default'.
+  message ?: string | { [key: string]: string }  | templateRef<any>; // Message returned when the verification fails. The internationalization string object can be returned. The key is the key of the corresponding language. The default key is 'default'.
 
   errorStrategy ?: DValidationErrorStrategy; // Error update policy of the current rule. The default value is'dirty'.
 
@@ -287,7 +291,7 @@ export interface DValidateRule {// Define a synchronization verification rule.
 export interface DAsyncValidateRule {// Define an asynchronous verification rule.
   id ? : string;
   validator ?: DAsyncValidatorFn | AsyncValidatorFn;
-  message ?: string | { [key: string]: string };
+  message ?: string | { [key: string]: string }  | templateRef<any>;;
   errorStrategy ?: DValidationErrorStrategy;
   priority ? : number;
   isNgValidator ? : boolean;

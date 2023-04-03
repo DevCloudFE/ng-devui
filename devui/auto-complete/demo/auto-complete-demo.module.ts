@@ -13,6 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { AutoDemoArrayComponent } from './array/auto-complete-demo-array.component';
 import { AutoCompleteDemoComponent } from './auto-complete-demo.component';
+import { AutoCompleteDesignComponent } from './auto-complete-design.component';
 import { AutoDemoBasicComponent } from './basic/auto-complete-demo-basic.component';
 import { AutoDemoCustomComponent } from './custom/auto-complete-demo-custom.component';
 import { AutoDemoDisableComponent } from './disabled/auto-complete-demo-disable.component';
@@ -35,6 +36,10 @@ import { AutoDemoObjectComponent } from './object/auto-complete-demo-object.comp
     DDemoNavModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: AutoCompleteDesignComponent,
+      },
       { path: 'demo', component: AutoCompleteDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -45,6 +50,7 @@ import { AutoDemoObjectComponent } from './object/auto-complete-demo-object.comp
   exports: [AutoCompleteDemoComponent],
   declarations: [
     AutoCompleteDemoComponent,
+    AutoCompleteDesignComponent,
     AutoDemoBasicComponent,
     AutoDemoArrayComponent,
     AutoDemoCustomComponent,

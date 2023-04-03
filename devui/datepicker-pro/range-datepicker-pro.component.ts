@@ -54,12 +54,14 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
   }
   @Input() set minDate(value: Date) {
     if (!value) {
+      this.pickerSrv.resetMin();
       return;
     }
     this.pickerSrv.minDate = value;
   }
   @Input() set maxDate(value: Date) {
     if (!value) {
+      this.pickerSrv.resetMax();
       return;
     }
     this.pickerSrv.maxDate = value;

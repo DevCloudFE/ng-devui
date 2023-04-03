@@ -7,7 +7,7 @@
   <span class="devui-toggle-inner-wrapper">
     <ng-template [ngTemplateOutlet]="customTemplate || defaultTemplate"></ng-template>
   </span>
-  <small></small>
+  <small [class.mouseDown]="isMousedown && !disabled"></small>
 </span>
 
 <ng-template #defaultTemplate>

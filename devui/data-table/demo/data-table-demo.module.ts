@@ -22,6 +22,7 @@ import { CellMergeComponent } from './cell-merge/cell-merge.component';
 import { CheckOptionsColumnComponent } from './check-options-column/check-options-column.component';
 import { CheckOptionsComponent } from './check-options/check-options.component';
 import { DataTableDemoComponent } from './data-table-demo.component';
+import { DataTableDesignComponent } from './data-table-design.component';
 import { DragColumnComponent } from './drag-column/drag-column.component';
 import { DragRowComponent } from './drag-row/drag-row.component';
 import { DynamicColsDemoComponent } from './dynamic-cols/dynamic-cols-demo.component';
@@ -61,6 +62,10 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     SplitterModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: DataTableDesignComponent,
+      },
       { path: 'demo', component: DataTableDemoComponent},
       { path: 'api', component: DevUIApiComponent, data: {
         'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
@@ -71,6 +76,7 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
   exports: [DataTableDemoComponent],
   declarations: [
     DataTableDemoComponent,
+    DataTableDesignComponent,
     DatatableDemoBasicComponent,
     DatatableDemoAsyncComponent,
     DatatableDemoMaxheightComponent,

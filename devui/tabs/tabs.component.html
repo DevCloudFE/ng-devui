@@ -34,7 +34,7 @@
           [id]="tab.id === undefined ? '' : tab.id"
           [class.disabled]="tab.disabled"
           [class.active]="tab.id == activeTab"
-          [class.closeable]="checkCloseable(tab)"
+          [class.closeable]="tab | dTabCloseablePipe: closeable:closeableIds"
           (click)="select(tab.id)"
         >
           <a

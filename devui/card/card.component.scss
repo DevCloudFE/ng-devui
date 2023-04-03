@@ -20,9 +20,7 @@ $card-content-font-size: $devui-font-size;
 
   &.devui-card-interactive {
     cursor: pointer;
-    transition:
-      box-shadow $devui-animation-duration-slow $devui-animation-ease-in-out-smooth,
-      transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth, box-shadow $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
 
     &:hover {
       box-shadow: $devui-shadow-length-hover $devui-light-shadow;

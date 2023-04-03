@@ -1,19 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-horizontal',
-  templateUrl: './horizontal.component.html'
+  templateUrl: './horizontal.component.html',
 })
-export class HorizontalComponent implements OnInit {
-  values2 = ['Item1', 'Item2', 'Item3'];
-  choose2_1 = 'Item1';
-  constructor() { }
+export class HorizontalComponent {
+  weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+  chosenItem = 'Wednesday';
 
-  ngOnInit() {
+  valueChange(value: string): void {
+    console.log(value);
   }
-
-  log($event) {
-    console.log($event);
-  }
-
 }

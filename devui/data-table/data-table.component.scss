@@ -390,7 +390,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
     fill: $devui-disabled-text;
   }
 
-  path {
+  path:not(.devui-tick) {
     fill: $devui-disabled-text;
   }
 

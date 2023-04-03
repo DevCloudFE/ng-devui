@@ -2,8 +2,8 @@
   <router-outlet></router-outlet>
   <d-common-header [showShadow]="false" [showGitStar]="true" [hasMaxWidth]="false" [isFixed]="true" [showShadow]="true" [showSearch]="true">
     <d-header-logo [name]="'DevUI'"></d-header-logo>
-    <d-header-menu [menuList]="innerMenuList" [selectedItem]="innerMenuList[1]"></d-header-menu>
-    <d-header-version-switch [versionOptions]="versionOptions"></d-header-version-switch>
+    <d-header-menu></d-header-menu>
+    <d-header-version-switch></d-header-version-switch>
     <d-header-theme-switch></d-header-theme-switch>
     <d-header-language-switch (languageEvent)="toggleLanguage($event)"></d-header-language-switch>
   </d-common-header>
