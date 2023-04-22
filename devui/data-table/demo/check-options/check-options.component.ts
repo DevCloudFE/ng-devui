@@ -133,8 +133,13 @@ export class CheckOptionsComponent implements OnInit {
     const dataItem = this.bufferSource.find(item => item.id === rowItem.id);
     dataItem.$checked = checked;
 
-    this.totalDataChecked = this.basicDataSource.every(item => item.$checked);
-    this.allCheckedStatus = this.bufferSource.every(item => item.$checked);
+    if (checked) {
+      this.totalDataChecked = this.basicDataSource.every(item => item.$checked);
+      this.allCheckedStatus = this.bufferSource.every(item => item.$checked);
+    } else {
+      this.totalDataChecked = false;
+      this.allCheckedStatus = false;
+    }
   }
 
   ngOnInit() {
