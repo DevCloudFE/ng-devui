@@ -12,10 +12,13 @@ import { originSource, SourceType } from '../mock-data';
     margin-top: 4px;
   }
   `]
-})
+  })
 export class CheckOptionsComponent implements OnInit {
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
-  basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
+
+  bufferSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource));
+  basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(this.bufferSource.slice(0, 6)));
+
   dataTableOptions = {
     columns: [
       {
@@ -96,10 +99,13 @@ export class CheckOptionsComponent implements OnInit {
     );
     this.totalDataChecked = true;
     this.allCheckedStatus = true;
+    this.bufferSource = this.bufferSource.map(item => ({ $checked: true, ...item }));
   }
 
   checkAllChange(checked: boolean) {
     this.allCheckedStatus = checked;
+
+    this.updateCurrentPageDataCheck(checked);
   }
 
   checkPageData() {
@@ -110,6 +116,8 @@ export class CheckOptionsComponent implements OnInit {
     );
     this.totalDataChecked = false;
     this.allCheckedStatus = true;
+
+    this.updateCurrentPageDataCheck(true);
   }
 
   onRowCheckChange(checked, rowIndex, nestedIndex, rowItem) {
@@ -121,27 +129,32 @@ export class CheckOptionsComponent implements OnInit {
       rowItem: rowItem,
       checked: checked
     });
+
+    const dataItem = this.bufferSource.find(item => item.id === rowItem.id);
+    dataItem.$checked = checked;
+
+    if (checked) {
+      this.totalDataChecked = this.basicDataSource.every(item => item.$checked);
+      this.allCheckedStatus = this.bufferSource.every(item => item.$checked);
+    } else {
+      this.totalDataChecked = false;
+      this.allCheckedStatus = false;
+    }
   }
 
   ngOnInit() {
   }
 
   onPageIndexChange(pageIndex) {
-    this.basicDataSource = JSON.parse(JSON.stringify(originSource.slice(pageIndex - 1, pageIndex + 5)));
-    setTimeout(() => {
-      if (this.totalDataChecked && this.allCheckedStatus) {
-        this.datatable.setTableCheckStatus(
-          {
-            pageAllChecked: true
-          }
-        );
-      } else {
-        this.datatable.setTableCheckStatus(
-          {
-            pageAllChecked: false
-          }
-        );
-      }
-    });
+    const startIndex = (pageIndex - 1) * this.pager.pageSize;
+    const lastIndex = pageIndex * this.pager.pageSize;
+    this.basicDataSource = this.bufferSource.slice(startIndex, lastIndex);
+  }
+
+  private updateCurrentPageDataCheck(checked: boolean) {
+    const startIndex = (this.pager.pageIndex - 1) * 6;
+    for (let i = startIndex; i < this.pager.pageSize; i++) {
+      this.bufferSource[i].$checked = checked;
+    }
   }
 }
