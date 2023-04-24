@@ -18,6 +18,10 @@
   position: relative;
 }
 
+.devui-date-title-buffer{
+  width: 0.5em;
+}
+
 .devui-month-view .devui-month-view-table {
   margin-bottom: 0;
   background: $devui-connected-overlay-bg;
