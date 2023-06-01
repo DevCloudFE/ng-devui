@@ -1131,7 +1131,7 @@
         },
         "dSafeNullPipe": {
           "title": "空值占位管道",
-          "description": "当数据为 ''、null、undefined时可指定任意字符进行占位展示，默认为：'--'"
+          "description": "当数据为 ''、null、undefined时可指定任意字符进行占位展示，支持全局配置，默认为：'--'"
         }
       },
       "browserDemo": {

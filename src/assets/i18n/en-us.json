@@ -888,7 +888,7 @@
         },
         "dSafeNullPipe": {
           "title": "SafeNullPipe",
-          "description": "When the data is '', null, undefined can be specified any character placeholder display, the default is: '--'"
+          "description": "When the data is '', null, undefined can be specified any character placeholder display,support for global configuration the default is: '--'"
         }
       },
       "browserDemo": {
