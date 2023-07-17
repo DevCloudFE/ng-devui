@@ -33,6 +33,17 @@
   width: auto;
   margin: 0 auto;
 
+  .maximize {
+    -webkit-transition: none;
+    transition: none;
+    transform: none;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    max-height: 100vh;
+    height: 100vh;
+  }
+
   &.place-at-center {
     margin: auto;
   }
@@ -54,6 +65,17 @@
   left: 0;
   z-index: calc(#{$devui-z-index-modal} - 1);
   background-color: $devui-shadow;
+}
+
+.modal-maximized {
+  -webkit-transition: none;
+  transition: none;
+  transform: none;
+  width: 100vw !important;
+  top: 0 !important;
+  left: 0 !important;
+  max-height: 100vh;
+  height: 100vh;
 }
 
 :host ::ng-deep .modal-content {

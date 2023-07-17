@@ -2541,6 +2541,10 @@
         "title": "Standard Dialog Box",
         "description": "Standard dialog boxes that can be dragged using the dialogService."
       },
+      "maximizeDemo":{
+        "title":"Maximize Dialog Box",
+        "description":"You can use the showMaximizeBtn api to set visibility of maximize button."
+      },
       "customizeDemo": {
         "title": "Custom Dialog Box",
         "description": "You can use modalService to customize all the contents in the dialog box."
@@ -2579,6 +2583,7 @@
       },
       "anchorLinkValues": {
         "standard-dialog": "Standard Dialog Box",
+        "maximize-dialog":"Maximize Dialog Box",
         "custom-dialog": "Custom Dialog Box",
         "intercept-dialog-closed": "Blocking dialog box closed",
         "message-hint": "Information",
