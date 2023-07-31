@@ -40,6 +40,7 @@ In the page
 |     showAnimation      |                      `boolean`                      |                     true                      |                                                                                                  optional. Whether to enable animation.                                                                                                   |                                                     | ✔             |
 |       maxHeight        |                      `number`                       |                     `300`                     |                                                                                                Optional. Maximum height of the prompt box.                                                                                                |                                                     |
 |   cdkOverlayOffsetY    |                      `number`                       |                      `0`                      |                                                                              Optional. Specifies the offset of the Y axis when appendToBody is set to true.                                                                               |
+| showGlowStyle | `boolean` | true | (Optional) Indicates whether to display the floating glow effect.|
 
 ## dAutoComplete Event
 

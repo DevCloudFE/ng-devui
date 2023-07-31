@@ -27,6 +27,7 @@ import { InputNumberModule } from 'ng-devui';
 | placeholder  |      `string`      |           --            | 可选，要显示的 placeholder           | [placeholder 和 maxLength](demo#number-placeholder-maxlength) |
 |  maxLength   |      `number`      |            0            | 可选，限制最大输入的长度，0 为不限制 | [placeholder 和 maxLength](demo#number-placeholder-maxlength) |
 |     reg      | `RegExp \| string` |           --            | 可选，用于限制输入的正则或正则字符串 | [正则限制](demo#number-reg)                                   |
+|   showGlowStyle    |       `boolean`        |   true   |       可选，是否显示悬浮发光效果    |
 
 ## d-input-number 事件
 

@@ -6,6 +6,7 @@
 
       <p class="devui-option-subtitle" style="margin-top: 16px">{{ data.i18nText?.colCanSelect }}</p>
       <d-checkbox
+        *ngIf="!filterKey"
         [label]="'All Check'"
         [isShowTitle]="true"
         [ngModel]="allChecked"

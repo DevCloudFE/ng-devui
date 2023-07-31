@@ -106,7 +106,7 @@ export class MutilStylesComponent implements OnInit {
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'checkbox',
-      width: '36px'
+      width: '41px'
     },
     {
       field: '#',

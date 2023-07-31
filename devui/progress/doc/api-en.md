@@ -35,6 +35,7 @@ export interface IProgressItem {
   percentage: number;
   percentageText?: string;
   percentageTextWidth?: string;
+  template?: TemplateRef<any>;
   [key: string]: any;
 }
 
@@ -46,5 +47,6 @@ export interface IGradientColor {
 export interface ShowContentConfig {
   showInnerContent?: boolean; // Indicates whether to display the text information on the progress bar. The default value is false.
   showOuterContent?: boolean; // Indicates whether to display the text information on the right of the progress bar. The default value is true.
+  showCenterContent?: boolean; // Indicates whether to display the text information in the middle of the progress bar container. The line type needs to be manually enabled. The circle type is enabled by default.
 }
 ```

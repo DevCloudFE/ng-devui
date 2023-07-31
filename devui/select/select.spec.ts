@@ -9,47 +9,52 @@ import { CheckBoxComponent } from './../checkbox/checkbox.component';
 import { SelectComponent } from './select.component';
 @Component({
   template: `
-  <div [ngClass]="{
-    'absolute-top': absolutePosition === 'top',
-    'absolute-bottom': absolutePosition === 'bottom'
-  }">
-    <d-select
-      [placeholder]="placeholder"
-      [multiple]="multiple"
-      [overview]="overview"
-      [options]="options"
-      [filterKey]="filterKey"
-      [(ngModel)]="option"
-      [size]="size"
-      [isSearch]="isSearch"
-      [searchPlaceholder]="searchPlaceholder"
-      [disabled]="disabled"
-      [optionImmutableKey] = "optionImmutableKey"
-      [optionDisabledKey]="optionDisabledKey"
-      [isSelectAll]="isSelectAll"
-      [allowClear]="allowClear"
-      [extraConfig]="extraConfig"
-      [searchFn]="searchFn"
-      [keepMultipleOrder]="keepMultipleOrder"
-      [noResultItemTemplate]="enableNoDataTemplate ? noDataTemplate : undefined"
-      [direction]="direction"
-    ></d-select>
-    <ng-template #noDataTemplate>没有自定义数据</ng-template>
-  </div>
+    <div
+      [ngClass]="{
+        'absolute-top': absolutePosition === 'top',
+        'absolute-bottom': absolutePosition === 'bottom'
+      }"
+    >
+      <d-select
+        [placeholder]="placeholder"
+        [multiple]="multiple"
+        [overview]="overview"
+        [options]="options"
+        [filterKey]="filterKey"
+        [(ngModel)]="option"
+        [size]="size"
+        [isSearch]="isSearch"
+        [searchPlaceholder]="searchPlaceholder"
+        [disabled]="disabled"
+        [optionImmutableKey]="optionImmutableKey"
+        [optionDisabledKey]="optionDisabledKey"
+        [isSelectAll]="isSelectAll"
+        [allowClear]="allowClear"
+        [extraConfig]="extraConfig"
+        [searchFn]="searchFn"
+        [keepMultipleOrder]="keepMultipleOrder"
+        [noResultItemTemplate]="enableNoDataTemplate ? noDataTemplate : undefined"
+        [direction]="direction"
+      ></d-select>
+      <ng-template #noDataTemplate>没有自定义数据</ng-template>
+    </div>
   `,
-  styles: [`
-    .absolute-top, .absolute-bottom {
-      position: fixed;
-    }
-    .absolute-top {
-      top: 0;
-      left: 0;
-    }
-    .absolute-bottom {
-      bottom: 0;
-      left: 0;
-    }
-  `]
+  styles: [
+    `
+      .absolute-top,
+      .absolute-bottom {
+        position: fixed;
+      }
+      .absolute-top {
+        top: 0;
+        left: 0;
+      }
+      .absolute-bottom {
+        bottom: 0;
+        left: 0;
+      }
+    `,
+  ],
 })
 class TestSelectComponent {
   option;
@@ -57,7 +62,7 @@ class TestSelectComponent {
   objectOptions = [
     { id: 1, title: '选项1', immutable: true },
     { id: 2, title: '选项2' },
-    { id: 3, title: '选项3', disabled: true }
+    { id: 3, title: '选项3', disabled: true },
   ];
   optionsHundred = new Array(300).fill('').map((item, index) => '选项' + (index + 1));
   multiple = false;
@@ -79,11 +84,7 @@ class TestSelectComponent {
   direction: 'up' | 'down' | 'auto';
   absolutePosition: 'top' | 'bottom';
   searchFnObservable = (term: string) => {
-    return of(
-      this.optionsHundred
-        .filter(option => option.indexOf(term) > -1)
-        .map((option, index) => ({ id: index, option: option }))
-    );
+    return of(this.optionsHundred.filter((option) => option.indexOf(term) > -1).map((option, index) => ({ id: index, option: option })));
   };
 }
 @Component({
@@ -95,7 +96,7 @@ class TestSelectComponent {
       [appendToBodyDirections]="appendToBodyDirections"
       [width]="width"
     ></d-select>
-  `
+  `,
 })
 class TestSelectAppendToBodyComponent {
   option;
@@ -103,15 +104,17 @@ class TestSelectAppendToBodyComponent {
   objectOptions = [
     { id: 1, title: '选项1', immutable: true },
     { id: 2, title: '选项2' },
-    { id: 3, title: '选项3', disabled: true }
+    { id: 3, title: '选项3', disabled: true },
   ];
   appendToBodyDirections: Array<string | any> = ['rightDown'];
-  customDirection = [{
-    originX: 'start',
-    originY: 'top',
-    overlayX: 'end',
-    overlayY: 'top',
-  }];
+  customDirection = [
+    {
+      originX: 'start',
+      originY: 'top',
+      overlayX: 'end',
+      overlayY: 'top',
+    },
+  ];
   width = undefined;
 }
 @Component({
@@ -120,10 +123,11 @@ class TestSelectAppendToBodyComponent {
       [options]="options"
       [(ngModel)]="option"
       [virtualScroll]="virtualScroll"
-      [enableLazyLoad]="enableLazyLoad" (loadMore)="loadMore($event)"
+      [enableLazyLoad]="enableLazyLoad"
+      (loadMore)="loadMore($event)"
     >
     </d-select>
-  `
+  `,
 })
 class TestSelectLazyLoadVirtualScrollComponent {
   @ViewChild(SelectComponent) selectComponent: SelectComponent;
@@ -143,8 +147,7 @@ class TestSelectLazyLoadVirtualScrollComponent {
     if (this.options.length < this.optionsHundred.length) {
       this.options = [
         ...this.options,
-        ...this.optionsHundred
-          .filter((v, i) => i >= this.options.length && i < this.options.length + this.PAGE_SIZE)
+        ...this.optionsHundred.filter((v, i) => i >= this.options.length && i < this.options.length + this.PAGE_SIZE),
       ];
       this.selectComponent.loadFinish();
       if (this.options.length >= this.optionsHundred.length) {
@@ -159,33 +162,26 @@ class TestSelectLazyLoadVirtualScrollComponent {
 
 @Component({
   template: `
-    <d-select
-      [options]="options"
-      [(ngModel)]="option"
-      [virtualScroll]="virtualScroll"
-      [templateItemSize]="templateItemSize"
-    >
-      <ng-template let-option="option"><div class="my-option">{{option}}</div></ng-template>
+    <d-select [options]="options" [(ngModel)]="option" [virtualScroll]="virtualScroll" [templateItemSize]="templateItemSize">
+      <ng-template let-option="option"
+        ><div class="my-option">{{ option }}</div></ng-template
+      >
     </d-select>
   `,
-  styles: [`
-   .my-option {
-     height: 30px; /* 上下各有padding 8px */
-   }
-  `]
+  styles: [
+    `
+      .my-option {
+        height: 30px; /* 上下各有padding 8px */
+      }
+    `,
+  ],
 })
-class TestSelectVirtualScrollItemSizeComponent extends TestSelectLazyLoadVirtualScrollComponent { }
+class TestSelectVirtualScrollItemSizeComponent extends TestSelectLazyLoadVirtualScrollComponent {}
 
 @Component({
   template: `
-    <d-select
-      *ngIf="init"
-      [options]="options"
-      [(ngModel)]="option"
-      [autoFocus]="autoFocus"
-      [toggleOnFocus]="toggleOnFocus"
-    ></d-select>
-  `
+    <d-select *ngIf="init" [options]="options" [(ngModel)]="option" [autoFocus]="autoFocus" [toggleOnFocus]="toggleOnFocus"></d-select>
+  `,
 })
 class TestSelecAutoFocusNToggleOnFocusComponent {
   init = false;
@@ -208,7 +204,7 @@ class TestSelecAutoFocusNToggleOnFocusComponent {
         <div class="custom-title">最近选择</div>
         <ul class="custom-box">
           <li class="custom-item" *ngFor="let recent of recently; let i = index" (click)="choose(recent, getIndex(recent), $event)">
-            <div class="custom-single" >
+            <div class="custom-single">
               {{ recent }}
             </div>
           </li>
@@ -216,33 +212,35 @@ class TestSelecAutoFocusNToggleOnFocusComponent {
       </div>
     </ng-template>
   `,
-  styles: [`
-    .custom-wrapper {
-      padding: 5px;
-    }
+  styles: [
+    `
+      .custom-wrapper {
+        padding: 5px;
+      }
 
-    .custom-title {
-      padding: 5px;
-      color: #adb0b8;
-    }
+      .custom-title {
+        padding: 5px;
+        color: #adb0b8;
+      }
 
-    .custom-item {
-      padding: 5px;
-    }
+      .custom-item {
+        padding: 5px;
+      }
 
-    .custom-single {
-      background: #5e7ce0;
-      color: #fff;
-      border-radius: 2px;
-      text-align: center;
-      padding: 8px;
-      display: inline-block;
-    }
+      .custom-single {
+        background: #5e7ce0;
+        color: #fff;
+        border-radius: 2px;
+        text-align: center;
+        padding: 8px;
+        display: inline-block;
+      }
 
-    .custom-list:hover .custom-single {
-      background: #7693f5;
-    }
-  `]
+      .custom-list:hover .custom-single {
+        background: #7693f5;
+      }
+    `,
+  ],
 })
 class TestSelectCustomAreaComponent {
   option;
@@ -259,8 +257,8 @@ class TestSelectCustomAreaComponent {
       [options]="options"
       [(ngModel)]="option"
       [multiple]="multiple"
-      [inputItemTemplate]="inputItemTemplateEnable ? inputItemTemplate: null"
-      [extraConfig]= "{
+      [inputItemTemplate]="inputItemTemplateEnable ? inputItemTemplate : null"
+      [extraConfig]="{
         selectedItemWithTemplate: {
           enable: templateMode === 'result' || templateMode === 'both'
         }
@@ -268,20 +266,21 @@ class TestSelectCustomAreaComponent {
     >
       <ng-template let-option="option" let-position="position" let-template="template">
         <ng-container *ngIf="position === 'result'">
-          <div *ngIf="!multiple">single-result: {{option}}</div>
+          <div *ngIf="!multiple">single-result: {{ option }}</div>
           <div *ngIf="multiple">
             multiple-result:
             <ng-container *ngFor="let op of option; let first = first">
-              <ng-container *ngIf="!first">,</ng-container>{{op}}
+              <ng-container *ngIf="!first">,</ng-container>{{ op }}
             </ng-container>
           </div>
         </ng-container>
         <ng-container *ngIf="position === 'list'">
-          <ng-container *ngIf="templateMode === 'list' || templateMode==='both'">
-            <div *ngIf="!multiple">single-item: {{option}}</div>
-            <div *ngIf="multiple"> multiple-item: {{option}}</div>
+          <ng-container *ngIf="templateMode === 'list' || templateMode === 'both'">
+            <div *ngIf="!multiple">single-item: {{ option }}</div>
+            <div *ngIf="multiple">multiple-item: {{ option }}</div>
           </ng-container>
-          <ng-template *ngIf="templateMode  === 'result'"
+          <ng-template
+            *ngIf="templateMode === 'result'"
             [ngTemplateOutlet]="template"
             [ngTemplateOutletContext]="{
               option: option,
@@ -294,20 +293,19 @@ class TestSelectCustomAreaComponent {
     </d-select>
     <ng-template #inputItemTemplate let-option="option" let-position="position" let-template="template">
       <ng-container *ngIf="position === 'result'">
-        <div *ngIf="!multiple">input-single-result: {{option}}</div>
+        <div *ngIf="!multiple">input-single-result: {{ option }}</div>
         <div *ngIf="multiple">
           input-multiple-result:
-          <ng-container *ngFor="let op of option; let first = first">
-            <ng-container *ngIf="!first">,</ng-container>{{op}}
-          </ng-container>
+          <ng-container *ngFor="let op of option; let first = first"> <ng-container *ngIf="!first">,</ng-container>{{ op }} </ng-container>
         </div>
       </ng-container>
       <ng-container *ngIf="position === 'list'">
-        <ng-container *ngIf="templateMode === 'list' || templateMode==='both'">
-          <div *ngIf="!multiple">input-single-item: {{option}}</div>
-          <div *ngIf="multiple"> input-multiple-item: {{option}}</div>
+        <ng-container *ngIf="templateMode === 'list' || templateMode === 'both'">
+          <div *ngIf="!multiple">input-single-item: {{ option }}</div>
+          <div *ngIf="multiple">input-multiple-item: {{ option }}</div>
         </ng-container>
-        <ng-template *ngIf="templateMode  === 'result'"
+        <ng-template
+          *ngIf="templateMode === 'result'"
           [ngTemplateOutlet]="template"
           [ngTemplateOutletContext]="{
             option: option,
@@ -317,7 +315,7 @@ class TestSelectCustomAreaComponent {
         ></ng-template>
       </ng-container>
     </ng-template>
-  `
+  `,
 })
 class TestSelectTemplateComponent {
   option;
@@ -331,12 +329,11 @@ class TestSelectTemplateComponent {
   initMultiple() {
     this.option = [...this.options];
   }
-
 }
 
 describe('Select', () => {
   let fixture: ComponentFixture<any>;
-  beforeEach((() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [SelectModule, FormsModule, NoopAnimationsModule],
       declarations: [
@@ -346,23 +343,23 @@ describe('Select', () => {
         TestSelecAutoFocusNToggleOnFocusComponent,
         TestSelectCustomAreaComponent,
         TestSelectVirtualScrollItemSizeComponent,
-        TestSelectTemplateComponent
-      ]
+        TestSelectTemplateComponent,
+      ],
     }).compileComponents();
-  }));
+  });
 
   describe('basic', () => {
     let debugEl: DebugElement;
     let component: TestSelectComponent;
     let toggleElement: DebugElement;
     let menuElement: DebugElement;
-    beforeEach((() => {
+    beforeEach(() => {
       fixture = TestBed.createComponent(TestSelectComponent);
       debugEl = fixture.debugElement;
       component = debugEl.componentInstance;
       toggleElement = debugEl.query(By.css('d-select > div > div.devui-form-group'));
       fixture.detectChanges();
-    }));
+    });
     const openMenu = () => {
       toggleElement.nativeElement.click(); // 展开菜单
       fixture.detectChanges();
@@ -398,10 +395,11 @@ describe('Select', () => {
             fixture.detectChanges();
             tick(); // animation time
             fixture.detectChanges();
+            tick(); // beforeChange
+            fixture.detectChanges();
             expect(component.option).toBe('选项2'); // 选择后ngModel改变
             expect(menuElement.nativeElement.getBoundingClientRect().height).toBe(0); // 面板合起来
           }));
-
         });
         describe('open-close', () => {
           it('click select control element', fakeAsync(() => {
@@ -544,7 +542,8 @@ describe('Select', () => {
         beforeEach(fakeAsync(() => {
           component.multiple = true;
           fixture.detectChanges();
-          tick(); fixture.detectChanges(); // TODO: 不知道为何需要这个
+          tick();
+          fixture.detectChanges(); // TODO: 不知道为何需要这个
           openMenu();
         }));
         it('option display correct', fakeAsync(() => {
@@ -588,12 +587,14 @@ describe('Select', () => {
           searchInputElement.nativeElement.value = '选项';
           searchInputElement.nativeElement.dispatchEvent(new Event('input'));
           fixture.detectChanges();
-          tick(300); fixture.detectChanges();
+          tick(300);
+          fixture.detectChanges();
           const searchInputClearIconElement = debugEl.query(By.css('d-select span.devui-search-clear'));
           expect(searchInputClearIconElement).toBeTruthy();
           searchInputClearIconElement.nativeElement.click();
           fixture.detectChanges();
-          tick(); fixture.detectChanges();
+          tick();
+          fixture.detectChanges();
           expect(searchInputElement.nativeElement.value).toBe('');
         }));
       });
@@ -618,7 +619,8 @@ describe('Select', () => {
           searchInputElement.nativeElement.value = '1';
           searchInputElement.nativeElement.dispatchEvent(new Event('input', {}));
           fixture.detectChanges();
-          tick(300); fixture.detectChanges();
+          tick(300);
+          fixture.detectChanges();
           const optionElements = debugEl.queryAll(By.css('d-select > div >div.devui-dropdown-menu li.devui-dropdown-item'));
           expect(optionElements.length).toBe(1);
           expect(optionElements[0].nativeElement.innerText).toBe('选项1');
@@ -630,7 +632,8 @@ describe('Select', () => {
           searchInputElement.nativeElement.value = '1';
           searchInputElement.nativeElement.dispatchEvent(new Event('input', {}));
           fixture.detectChanges();
-          tick(300); fixture.detectChanges();
+          tick(300);
+          fixture.detectChanges();
           const optionElements = debugEl.queryAll(By.css('d-select > div >div.devui-dropdown-menu li.devui-dropdown-item'));
           expect(optionElements.length).toBe(138); // 1-300  138个含有1
         }));
@@ -653,7 +656,8 @@ describe('Select', () => {
           it('disabled should not open menu', fakeAsync(() => {
             component.multiple = true;
             fixture.detectChanges();
-            tick(); fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
             openMenu();
             expect(menuElement.nativeElement.getBoundingClientRect().height).toBe(0);
           }));
@@ -690,7 +694,8 @@ describe('Select', () => {
           beforeEach(fakeAsync(() => {
             component.multiple = true;
             fixture.detectChanges();
-            tick(); fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
             openMenu();
           }));
           it('option should apply disabled classes', fakeAsync(() => {
@@ -710,7 +715,6 @@ describe('Select', () => {
             expect(component.option).toEqual(undefined); // 选择后ngModel不改变
           }));
         });
-
       });
       describe('immutable', () => {
         beforeEach(fakeAsync(() => {
@@ -744,7 +748,8 @@ describe('Select', () => {
           beforeEach(fakeAsync(() => {
             component.multiple = true;
             fixture.detectChanges();
-            tick(); fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
             openMenu();
           }));
           it('option should apply disabled classes', fakeAsync(() => {
@@ -772,9 +777,7 @@ describe('Select', () => {
             fixture.detectChanges();
             tick(); // animation end setTimeout
             fixture.detectChanges();
-            expect(component.option).toEqual(
-              component.options.filter((item, index) => index !== 0)
-            );
+            expect(component.option).toEqual(component.options.filter((item, index) => index !== 0));
           }));
         });
       });
@@ -838,7 +841,8 @@ describe('Select', () => {
         beforeEach(fakeAsync(() => {
           component.allowClear = true;
           fixture.detectChanges();
-          tick(); fixture.detectChanges();
+          tick();
+          fixture.detectChanges();
           clearIcon = toggleElement.query(By.css('.devui-select-clear-icon'));
         }));
 
@@ -866,21 +870,21 @@ describe('Select', () => {
           fixture.detectChanges();
           expect(window.getComputedStyle(clearIcon.nativeElement).display).toBe('none');
         }));
-
       });
-
     });
     describe('feature only on multiple ', () => {
       beforeEach(fakeAsync(() => {
         component.multiple = true;
         fixture.detectChanges();
-        tick(); fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
       }));
       describe('select all', () => {
         beforeEach(fakeAsync(() => {
           component.isSelectAll = true;
           fixture.detectChanges();
-          tick(); fixture.detectChanges();
+          tick();
+          fixture.detectChanges();
         }));
         describe('isSelectAll', () => {
           it('show select all option', fakeAsync(() => {
@@ -894,13 +898,17 @@ describe('Select', () => {
             const selectAllElement = debugEl.queryAll(By.css('d-select > div >div.devui-dropdown-menu li.devui-dropdown-item'))[0];
             selectAllElement.nativeElement.click();
             fixture.detectChanges();
-            tick(); fixture.detectChanges();
-            tick(); fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
             expect(component.option).toEqual(component.options);
             selectAllElement.nativeElement.click();
             fixture.detectChanges();
-            tick(); fixture.detectChanges();
-            tick(); fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
             expect(component.option).toEqual([]);
           }));
           it('All selected, select all checkbox should checked', fakeAsync(() => {
@@ -927,7 +935,10 @@ describe('Select', () => {
             const firstOptionElement = debugEl.queryAll(By.css('d-select > div >div.devui-dropdown-menu li.devui-dropdown-item'))[1];
             firstOptionElement.nativeElement.click();
             fixture.detectChanges();
-            tick(); fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
             expect(component.option).toEqual([...component.options.filter((item, index) => index !== 0), component.options[0]]);
             const selectAllElement = debugEl.queryAll(By.css('d-select > div >div.devui-dropdown-menu li.devui-dropdown-item'))[0];
             const checkboxComponent = selectAllElement.query(By.directive(CheckBoxComponent));
@@ -943,12 +954,13 @@ describe('Select', () => {
               enable: true,
               overflow: 'normal',
               containnerMaxHeight: undefined,
-              labelMaxWidth: undefined
-            }
+              labelMaxWidth: undefined,
+            },
           };
           component.option = [...component.options];
           fixture.detectChanges();
-          tick(); fixture.detectChanges(); // 这个不提示错误但是是必须
+          tick();
+          fixture.detectChanges(); // 这个不提示错误但是是必须
         }));
         describe('enable labelization', () => {
           it('should show in label', fakeAsync(() => {
@@ -966,11 +978,13 @@ describe('Select', () => {
           it('add option should add new label', fakeAsync(() => {
             component.option = [...component.options.filter((item, index) => index !== 1)];
             fixture.detectChanges();
-            tick(); fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
             const optionElement = debugEl.queryAll(By.css('d-select > div >div.devui-dropdown-menu li.devui-dropdown-item'))[1];
             optionElement.nativeElement.click();
             fixture.detectChanges();
-            tick(); fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
             expect(component.option).toEqual([...component.options.filter((item, index) => index !== 1), component.options[1]]);
           }));
         });
@@ -981,7 +995,8 @@ describe('Select', () => {
             component.option.unshift(longOption);
             component.extraConfig.labelization.labelMaxWidth = '20px';
             fixture.detectChanges();
-            tick(); fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
             const LabelElement = debugEl.queryAll(By.css('.devui-select-tag-list .devui-select-tag-item'))[0];
             expect(LabelElement.nativeElement.getBoundingClientRect().width).toEqual(20);
           }));
@@ -994,7 +1009,8 @@ describe('Select', () => {
           it('normal', fakeAsync(() => {
             component.extraConfig.labelization.overflow = 'normal';
             fixture.detectChanges();
-            tick(); fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
             const listElement = debugEl.query(By.css('.devui-select-tag-list'));
             const containerHeight = listElement.nativeElement.getBoundingClientRect().height;
             expect(containerHeight).toEqual(26);
@@ -1003,7 +1019,8 @@ describe('Select', () => {
           it('scroll-y', fakeAsync(() => {
             component.extraConfig.labelization.overflow = 'scroll-y';
             fixture.detectChanges();
-            tick(); fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
             const listElement = debugEl.query(By.css('.devui-select-tag-list'));
             const containerHeight = listElement.nativeElement.getBoundingClientRect().height;
             expect(containerHeight).toEqual(26);
@@ -1013,17 +1030,21 @@ describe('Select', () => {
             beforeEach(fakeAsync(() => {
               component.extraConfig.labelization.overflow = 'multiple-line';
               fixture.detectChanges();
-              tick(); fixture.detectChanges();
+              tick();
+              fixture.detectChanges();
             }));
-            it('default 2 line', fakeAsync(() => { // 多行 自动撑高 默认撑高成两行
+            it('default 2 line', fakeAsync(() => {
+              // 多行 自动撑高 默认撑高成两行
               const listElement = debugEl.query(By.css('.devui-select-tag-list'));
               const containerHeight = listElement.nativeElement.getBoundingClientRect().height;
               expect(containerHeight).toEqual(48);
             }));
-            it('no containerMaxHeight constrain', fakeAsync(() => { // 多行 自动撑高
+            it('no containerMaxHeight constrain', fakeAsync(() => {
+              // 多行 自动撑高
               component.extraConfig.labelization.containerMaxHeight = 'unset';
               fixture.detectChanges();
-              tick(); fixture.detectChanges();
+              tick();
+              fixture.detectChanges();
               const listElement = debugEl.query(By.css('.devui-select-tag-list'));
               const containerBottom = listElement.nativeElement.getBoundingClientRect().bottom;
               const lastTag = debugEl.query(By.css('.devui-select-tag-list > li.devui-select-tag-item:last-of-type'));
@@ -1031,7 +1052,6 @@ describe('Select', () => {
               expect(containerBottom).toBeGreaterThanOrEqual(lastTagBottom);
             }));
           });
-
         });
         describe('containerMaxHeight', () => {
           it('containerMaxHeight should work', fakeAsync(() => {
@@ -1040,7 +1060,8 @@ describe('Select', () => {
             component.extraConfig.labelization.containerMaxHeight = '321px';
             component.extraConfig.labelization.overflow = 'multiple-line';
             fixture.detectChanges();
-            tick(); fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
             const listElement = debugEl.query(By.css('.devui-select-tag-list'));
             expect(listElement.nativeElement.getBoundingClientRect().height).toEqual(321);
           }));
@@ -1049,10 +1070,11 @@ describe('Select', () => {
       describe('keep multiple selected order', () => {
         const chooseByOrder = (order: number[], offset = 0) => {
           const optionElements = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'));
-          order.forEach(index => {
+          order.forEach((index) => {
             optionElements[index + offset].nativeElement.click();
             fixture.detectChanges();
-            tick(); fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
           });
         };
         it('keep order = user-selected, should order by user select', fakeAsync(() => {
@@ -1109,6 +1131,7 @@ describe('Select', () => {
             fixture.detectChanges();
             tick();
             fixture.detectChanges();
+            flush();
             expect(optionElementNext.classes['active']).toBeTruthy();
             expect(component.option).toEqual(component.options[2]);
             expect(menuElement.nativeElement.getBoundingClientRect().height).toBe(0); // 选择完面板会关闭
@@ -1209,7 +1232,8 @@ describe('Select', () => {
             searchInputElement.nativeElement.value = '1';
             searchInputElement.nativeElement.dispatchEvent(new Event('input', {}));
             fixture.detectChanges();
-            tick(300); fixture.detectChanges();
+            tick(300);
+            fixture.detectChanges();
           }));
           it('expected first option in search list to be navigated', fakeAsync(() => {
             const optionElementNext = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'))[0];
@@ -1219,6 +1243,8 @@ describe('Select', () => {
             const optionElementNext = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'))[0];
             expect(optionElementNext.classes['active']).toBeFalsy();
             searchInputElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+            fixture.detectChanges();
+            tick();
             fixture.detectChanges();
             tick();
             fixture.detectChanges();
@@ -1235,7 +1261,8 @@ describe('Select', () => {
             searchInputElement.nativeElement.value = '1';
             searchInputElement.nativeElement.dispatchEvent(new Event('input', {}));
             fixture.detectChanges();
-            tick(300); fixture.detectChanges();
+            tick(300);
+            fixture.detectChanges();
           }));
           it('expect first option in search list to be not navigated', fakeAsync(() => {
             // 多选和单选不一样 搜索后不会自动导航到第一个项
@@ -1247,9 +1274,9 @@ describe('Select', () => {
       describe('toggle element focus, keydown.Enter', () => {
         it('after focus on toggleElement, keydown enter should open menu', fakeAsync(() => {
           toggleElement = debugEl.query(By.css('d-select > div > div.devui-form-group'));
-          toggleElement.nativeElement.dispatchEvent(new MouseEvent('focus', { 'bubbles': false, 'cancelable': false }));
+          toggleElement.nativeElement.dispatchEvent(new MouseEvent('focus', { bubbles: false, cancelable: false }));
           fixture.detectChanges();
-          toggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { 'key': 'Enter', 'bubbles': true, 'cancelable': true }));
+          toggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick();
           fixture.detectChanges();
@@ -1281,7 +1308,8 @@ describe('Select', () => {
           searchInputElement.nativeElement.value = '4';
           searchInputElement.nativeElement.dispatchEvent(new Event('input', {}));
           fixture.detectChanges();
-          tick(300); fixture.detectChanges();
+          tick(300);
+          fixture.detectChanges();
           const itemElements = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'));
           const nodataElement = debugEl.query(By.css('d-select > div > div.devui-dropdown-menu div.devui-no-data-tip'));
           expect(itemElements.length).toBe(0);
@@ -1298,7 +1326,8 @@ describe('Select', () => {
           searchInputElement.nativeElement.value = '4';
           searchInputElement.nativeElement.dispatchEvent(new Event('input', {}));
           fixture.detectChanges();
-          tick(300); fixture.detectChanges();
+          tick(300);
+          fixture.detectChanges();
           const itemElements = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'));
           const nodataElement = debugEl.query(By.css('d-select > div > div.devui-dropdown-menu div.devui-no-data-tip'));
           expect(itemElements.length).toBe(0);
@@ -1312,13 +1341,13 @@ describe('Select', () => {
     let toggleElement: DebugElement;
     let menuElement: HTMLElement;
     let component: TestSelectAppendToBodyComponent;
-    beforeEach((() => {
+    beforeEach(() => {
       fixture = TestBed.createComponent(TestSelectAppendToBodyComponent);
       debugEl = fixture.debugElement;
       component = debugEl.componentInstance;
       toggleElement = debugEl.query(By.css('d-select > div > div.devui-form-group'));
       fixture.detectChanges();
-    }));
+    });
     const openMenu = () => {
       toggleElement.nativeElement.click(); // 展开菜单
       fixture.detectChanges();
@@ -1347,6 +1376,8 @@ describe('Select', () => {
             optionElement.click(); // 选择其中一个选项
             fixture.detectChanges();
             tick(); // animation time
+            fixture.detectChanges();
+            tick(); // beforeChange
             fixture.detectChanges();
             menuElement = document.querySelector('div.devui-dropdown-menu');
             expect(menuElement).toBeFalsy(); // 面板合起来
@@ -1407,7 +1438,7 @@ describe('Select', () => {
         const originRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
         const menuRect = menuElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 4; // 有个间距
-        expect((originRect.x + (originRect.width / 2)) - ((menuRect.x + menuRect.width / 2))).toBeLessThan(1);
+        expect(originRect.x + originRect.width / 2 - (menuRect.x + menuRect.width / 2)).toBeLessThan(1);
         expect(originRect.y + originRect.height + verticalBorderOverlayWidth).toBeCloseTo(menuRect.y);
       }));
       it('rightUp should in the right place', fakeAsync(() => {
@@ -1440,7 +1471,7 @@ describe('Select', () => {
         const originRect = toggleElement.nativeElement.parentElement.getBoundingClientRect();
         const menuRect = menuElement.getBoundingClientRect();
         const verticalBorderOverlayWidth = 4; // 有个间距
-        expect((originRect.x + (originRect.width / 2)) - ((menuRect.x + menuRect.width / 2))).toBeLessThan(1);
+        expect(originRect.x + originRect.width / 2 - (menuRect.x + menuRect.width / 2)).toBeLessThan(1);
         expect(originRect.y).toBeCloseTo(menuRect.y + menuRect.height + verticalBorderOverlayWidth);
       }));
       it('custom direction should placed to the left of toggle element', fakeAsync(() => {
@@ -1473,13 +1504,13 @@ describe('Select', () => {
     let component: TestSelectLazyLoadVirtualScrollComponent;
     let toggleElement: DebugElement;
     let menuElement: DebugElement;
-    beforeEach((() => {
+    beforeEach(() => {
       fixture = TestBed.createComponent(TestSelectLazyLoadVirtualScrollComponent);
       debugEl = fixture.debugElement;
       component = debugEl.componentInstance;
       toggleElement = debugEl.query(By.css('d-select > div > div.devui-form-group'));
       fixture.detectChanges();
-    }));
+    });
     const openMenu = () => {
       toggleElement.nativeElement.click(); // 展开菜单
       fixture.detectChanges();
@@ -1503,7 +1534,7 @@ describe('Select', () => {
           expect(listElement.nativeElement.children.length).toEqual(15);
           listElement.nativeElement.scrollTop = listElement.nativeElement.scrollHeight;
           fixture.detectChanges();
-          listElement.nativeElement.dispatchEvent(new Event('scroll', { 'bubbles': true, 'cancelable': false }));
+          listElement.nativeElement.dispatchEvent(new Event('scroll', { bubbles: true, cancelable: false }));
           fixture.detectChanges();
           tick();
           fixture.detectChanges();
@@ -1578,9 +1609,9 @@ describe('Select', () => {
           const singleHeight = 36;
           const listItemSpace = 4;
           listElement.scrollTop = (singleHeight + listItemSpace) * 100;
-          listElement.dispatchEvent(new Event('scroll', { 'bubbles': true, 'cancelable': false }));
+          listElement.dispatchEvent(new Event('scroll', { bubbles: true, cancelable: false }));
           virtualScrollFlush();
-          const option11th = [...innerList.children].filter(el => el.innerText.trim() === '选项101').pop();
+          const option11th = [...innerList.children].filter((el) => el.innerText.trim() === '选项101').pop();
           expect(option11th).toBeTruthy();
           expect(option11th.getBoundingClientRect().top).toBeCloseTo(listElement.getBoundingClientRect().top);
         }));
@@ -1630,9 +1661,9 @@ describe('Select', () => {
           const listElement = menuElement.nativeElement.querySelector('.devui-select-list-unstyled');
           const innerList = menuElement.nativeElement.querySelector('.devui-select-list-unstyled > .cdk-virtual-scroll-content-wrapper');
           listElement.scrollTop = (templateItemSize + listItemSpace) * 100;
-          listElement.dispatchEvent(new Event('scroll', { 'bubbles': true, 'cancelable': false }));
+          listElement.dispatchEvent(new Event('scroll', { bubbles: true, cancelable: false }));
           virtualScrollFlush();
-          const option11th = [...innerList.children].filter(el => el.innerText.trim() === '选项101').pop();
+          const option11th = [...innerList.children].filter((el) => el.innerText.trim() === '选项101').pop();
           expect(option11th).toBeTruthy();
           expect(option11th.getBoundingClientRect().top).toBeCloseTo(listElement.getBoundingClientRect().top);
         }));
@@ -1729,12 +1760,12 @@ describe('Select', () => {
     let component: TestSelecAutoFocusNToggleOnFocusComponent;
     let toggleElement: DebugElement;
     let menuElement: DebugElement;
-    beforeEach((() => {
+    beforeEach(() => {
       fixture = TestBed.createComponent(TestSelecAutoFocusNToggleOnFocusComponent);
       debugEl = fixture.debugElement;
       component = debugEl.componentInstance;
       fixture.detectChanges();
-    }));
+    });
     describe('autoFocus', () => {
       it('after init, toggleElement has been focus', fakeAsync(() => {
         component.autoFocus = true;
@@ -1754,7 +1785,7 @@ describe('Select', () => {
         tick(); // init
         fixture.detectChanges();
         toggleElement = debugEl.query(By.css('d-select > div > div.devui-form-group'));
-        toggleElement.nativeElement.dispatchEvent(new MouseEvent('focus', { 'bubbles': false, 'cancelable': false }));
+        toggleElement.nativeElement.dispatchEvent(new MouseEvent('focus', { bubbles: false, cancelable: false }));
         tick(); // animation
         fixture.detectChanges();
         tick(100); // searchFn
@@ -1769,11 +1800,11 @@ describe('Select', () => {
         tick(); // init
         fixture.detectChanges();
         toggleElement = debugEl.query(By.css('d-select > div > div.devui-form-group'));
-        toggleElement.nativeElement.dispatchEvent(new MouseEvent('mousedown', { 'bubbles': true, 'cancelable': true }));
+        toggleElement.nativeElement.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
-        toggleElement.nativeElement.dispatchEvent(new MouseEvent('focus', { 'bubbles': false, 'cancelable': false }));
+        toggleElement.nativeElement.dispatchEvent(new MouseEvent('focus', { bubbles: false, cancelable: false }));
         fixture.detectChanges();
-        toggleElement.nativeElement.dispatchEvent(new MouseEvent('mouseup', { 'bubbles': true, 'cancelable': true }));
+        toggleElement.nativeElement.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
         tick(); // animation
         fixture.detectChanges();
         tick(100); // searchFn
@@ -1783,7 +1814,8 @@ describe('Select', () => {
       }));
     });
     describe('autoFocus and toggle on focus', () => {
-      xit('after init, menu should open', fakeAsync(() => { // TODO: 用例有问题执行不通过
+      xit('after init, menu should open', fakeAsync(() => {
+        // TODO: 用例有问题执行不通过
         component.toggleOnFocus = true;
         component.autoFocus = true;
         component.init = true;
@@ -1813,19 +1845,20 @@ describe('Select', () => {
       tick(100); // searchFn的订阅
       fixture.detectChanges();
     };
-    beforeEach((() => {
+    beforeEach(() => {
       fixture = TestBed.createComponent(TestSelectTemplateComponent);
       debugEl = fixture.debugElement;
       component = debugEl.componentInstance;
       toggleElement = debugEl.query(By.css('d-select > div > div.devui-form-group'));
       fixture.detectChanges();
-    }));
+    });
     describe('single - list template', () => {
       beforeEach(fakeAsync(() => {
         component.option = component.options[0];
         component.templateMode = 'list';
         fixture.detectChanges();
-        tick(); fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
       }));
       it('should show result item without any prefix', fakeAsync(() => {
         const inputElement = debugEl.query(By.css('d-select > div > div.devui-form-group > input.devui-select-input'));
@@ -1843,7 +1876,8 @@ describe('Select', () => {
         component.templateMode = 'list';
         component.multiple = true;
         fixture.detectChanges();
-        tick(); fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
       }));
       it('should show result item without any prefix', fakeAsync(() => {
         const inputElement = debugEl.query(By.css('d-select > div > div.devui-form-group > input.devui-select-input'));
@@ -1860,7 +1894,8 @@ describe('Select', () => {
         component.option = component.options[0];
         component.templateMode = 'result';
         fixture.detectChanges();
-        tick(); fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
       }));
       it('should show result item with "single-result" prefix', fakeAsync(() => {
         expect(toggleElement.nativeElement.innerText.trim()).toEqual('single-result: ' + component.options[0]);
@@ -1877,7 +1912,8 @@ describe('Select', () => {
         component.templateMode = 'result';
         component.multiple = true;
         fixture.detectChanges();
-        tick(); fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
       }));
       it('should show result item with "multi-result" prefix', fakeAsync(() => {
         expect(toggleElement.nativeElement.innerText.trim()).toEqual('multiple-result: ' + component.options[0]);
@@ -1893,7 +1929,8 @@ describe('Select', () => {
         component.option = component.options[0];
         component.templateMode = 'both';
         fixture.detectChanges();
-        tick(); fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
       }));
       it('should show result item with "single-result" prefix', fakeAsync(() => {
         expect(toggleElement.nativeElement.innerText.trim()).toEqual('single-result: ' + component.options[0]);
@@ -1910,7 +1947,8 @@ describe('Select', () => {
         component.templateMode = 'both';
         component.multiple = true;
         fixture.detectChanges();
-        tick(); fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
       }));
       it('should show result item with "multi-result" prefix', fakeAsync(() => {
         expect(toggleElement.nativeElement.innerText.trim()).toEqual('multiple-result: ' + component.options[0]);
@@ -1931,7 +1969,8 @@ describe('Select', () => {
           component.option = component.options[0];
           component.templateMode = 'list';
           fixture.detectChanges();
-          tick(); fixture.detectChanges();
+          tick();
+          fixture.detectChanges();
         }));
         it('should show result item without any prefix', fakeAsync(() => {
           const inputElement = debugEl.query(By.css('d-select > div > div.devui-form-group > input.devui-select-input'));
@@ -1949,7 +1988,8 @@ describe('Select', () => {
           component.templateMode = 'list';
           component.multiple = true;
           fixture.detectChanges();
-          tick(); fixture.detectChanges();
+          tick();
+          fixture.detectChanges();
         }));
         it('should show result item without any prefix', fakeAsync(() => {
           const inputElement = debugEl.query(By.css('d-select > div > div.devui-form-group > input.devui-select-input'));
@@ -1966,7 +2006,8 @@ describe('Select', () => {
           component.option = component.options[0];
           component.templateMode = 'result';
           fixture.detectChanges();
-          tick(); fixture.detectChanges();
+          tick();
+          fixture.detectChanges();
         }));
         it('should show result item with "input-single-result" prefix', fakeAsync(() => {
           expect(toggleElement.nativeElement.innerText.trim()).toEqual('input-single-result: ' + component.options[0]);
@@ -1983,7 +2024,8 @@ describe('Select', () => {
           component.templateMode = 'result';
           component.multiple = true;
           fixture.detectChanges();
-          tick(); fixture.detectChanges();
+          tick();
+          fixture.detectChanges();
         }));
         it('should show result item with "input-multi-result" prefix', fakeAsync(() => {
           expect(toggleElement.nativeElement.innerText.trim()).toEqual('input-multiple-result: ' + component.options[0]);
@@ -1999,7 +2041,8 @@ describe('Select', () => {
           component.option = component.options[0];
           component.templateMode = 'both';
           fixture.detectChanges();
-          tick(); fixture.detectChanges();
+          tick();
+          fixture.detectChanges();
         }));
         it('should show result item with "input-single-result" prefix', fakeAsync(() => {
           expect(toggleElement.nativeElement.innerText.trim()).toEqual('input-single-result: ' + component.options[0]);
@@ -2016,7 +2059,8 @@ describe('Select', () => {
           component.templateMode = 'both';
           component.multiple = true;
           fixture.detectChanges();
-          tick(); fixture.detectChanges();
+          tick();
+          fixture.detectChanges();
         }));
         it('should show result item with "input-multi-result" prefix', fakeAsync(() => {
           expect(toggleElement.nativeElement.innerText.trim()).toEqual('input-multiple-result: ' + component.options[0]);

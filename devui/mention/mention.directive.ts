@@ -9,6 +9,7 @@ import {
   ElementRef,
   EventEmitter,
   Host,
+  HostBinding,
   HostListener,
   Input,
   OnChanges,
@@ -22,6 +23,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import { NgModel } from '@angular/forms';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MentionComponent } from './mention.component';
@@ -47,6 +49,11 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
   @Output() mentionSelectItem = new EventEmitter();
   @Output() mentionSearchChange: EventEmitter<MentionOnSearchTypes> = new EventEmitter();
   @Output() mentionAfterMentionInit: EventEmitter<MentionDirective> = new EventEmitter();
+
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+    return this.showGlowStyle;
+  };
 
   isOpen = false;
   activeIndex = -1;
@@ -74,7 +81,8 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
     private el: ElementRef,
     private viewContainerRef: ViewContainerRef,
     private cdr: ChangeDetectorRef,
-    private overlay: Overlay
+    private overlay: Overlay,
+    private devConfigService: DevConfigService
   ) {}
 
   @HostListener('keydown', ['$event'])
@@ -311,7 +319,7 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
     this.el.nativeElement.value = newValue;
     this.value = newValue;
     if (this.ngModelInstance) {
-      this.ngModelInstance.viewToModelUpdate(newValue);
+      this.ngModelInstance.control.setValue(newValue);
     }
   }
 

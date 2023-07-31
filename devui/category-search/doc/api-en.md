@@ -35,6 +35,7 @@ In the page
 | categoryInGroup         | `boolean`                                                                           | false   | Optional. Indicates whether to display the category drop-down list by group.                                                                                                      | [Large-scale data display optimization](demo#auto-scroll) |
 | groupOrderConfig        | `String[]`                                                                          | --      | Optional. Configure the sorting of groups.                                                                                                                                        | [Large-scale data display optimization](demo#auto-scroll) |
 | customGroupNameTemplate | `TemplateRef<any>`                                                                  | --      | Optional. Custom Group Name Display Template.                                                                                                                                     | [Large-scale data display optimization](demo#auto-scroll) |
+| showGlowStyle | `boolean` | true | (Optional) Indicates whether to display the floating glow effect.|
 
 ### d-category-search 事件
 
@@ -178,6 +179,7 @@ export interface TextConfig {
   createFilter?: string;
   filterTitle?: string;
   labelConnector?: string;
+  noCategoriesAvailable?: string;
 }
 
 export interface ExtendedConfig {

@@ -21,6 +21,7 @@ import * as hljs from 'highlight.js/lib/core';
     `
       .readme {
         box-sizing: border-box;
+        margin-bottom: 40px;
       }
     `,
   ],

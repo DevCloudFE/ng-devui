@@ -1,0 +1,10 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.bar-text {
+  color: $devui-light-text;
+  font-size: $devui-font-size;
+  position: absolute;
+  right: 8px;
+  height: 100%;
+  line-height: 16px;
+}

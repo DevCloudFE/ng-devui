@@ -36,6 +36,7 @@ In the page:
 | dynamicUploadOptionsFn | [`IUploadOptions`](#iuploadoptions) | -- | Set upload parameters dynamically for file. The parameters are the currently selected file and the value of `uploadOptions` | [Basic Usage](demo#basic-usage) |
 | disabled | `boolean` | false | Optional. Specifies whether to disable the upload component. | [Basic Usage](demo#basic-usage) |
 | showTip | `boolean` | false | Optional. Indicating whether to display the upload message. | [Automatic Upload](demo#auto-upload) |
+| showGlowStyle | `boolean` | true | (Optional) Indicates whether to display the floating glow effect.|
 
 ## d-single-upload event
 

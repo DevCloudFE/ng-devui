@@ -74,7 +74,7 @@ export default {
       '12月'
     ],
     getYearMonthStr(year, month) {
-      return `${year}年${month}月`;
+      return `${year}年 ${month}月`;
     },
     hour: '时',
     min: '分',

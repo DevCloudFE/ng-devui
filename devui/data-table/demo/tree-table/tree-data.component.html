@@ -32,7 +32,6 @@
             dTooltip
             [content]="rowItem.$checkBoxTips"
             [position]="['top', 'right', 'bottom', 'left']"
-            [showAnimation]="false"
           >
           </d-checkbox>
         </td>
@@ -50,7 +49,7 @@
         </td>
         <td dTableCell>{{ rowItem['lastName'] }}</td>
         <td dTableCell>{{ rowItem['status'] }}</td>
-        <td dTableCell>{{ rowItem['dob'] | i18nDate: 'short':false }}</td>
+        <td dTableCell>{{ rowItem['dob'] | i18nDate : 'short' : false }}</td>
       </tr>
     </ng-template>
   </tbody>

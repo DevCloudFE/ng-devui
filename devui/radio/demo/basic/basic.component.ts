@@ -8,7 +8,7 @@ export class BasicComponent {
   items = ['Item1', 'Item2', 'Item3'];
   chosenItem = 'Item1';
 
-  valueChange(item): void {
+  valueChange(item: string): void {
     console.log(item);
   }
 }

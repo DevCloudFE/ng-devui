@@ -67,7 +67,7 @@
       }
 
       &.devui-option-item-active {
-        box-shadow: $devui-shadow-length-hover $devui-light-shadow;
+        box-shadow: $devui-shadow-length-hover $devui-hover-shadow;
         font-weight: bold;
         color: $devui-text;
 
@@ -77,7 +77,7 @@
       }
 
       &:hover {
-        box-shadow: $devui-shadow-length-hover $devui-light-shadow;
+        box-shadow: $devui-shadow-length-hover $devui-hover-shadow;
 
         d-checkbox {
           display: block;

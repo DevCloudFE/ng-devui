@@ -11,7 +11,7 @@
   height: 32px;
   padding: 8px 12px;
   cursor: pointer;
-  display: flex;
+  display: flex !important;
   align-items: center;
 
   .dropdown-item-label {

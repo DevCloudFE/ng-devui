@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import {
   Component, EventEmitter,
 
-  forwardRef, Inject, Input, OnDestroy,
+  forwardRef, HostBinding, Inject, Input, OnDestroy,
 
   OnInit, Output, TemplateRef,
   ViewChild
@@ -10,6 +10,7 @@ import {
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ToastService } from 'ng-devui/toast';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { from, Observable, Subscription } from 'rxjs';
 import { debounceTime, last, map, mergeMap } from 'rxjs/operators';
 import {
@@ -57,6 +58,10 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
   @Input() beforeUpload: (files) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() setCustomUploadOptions: (files, uploadOptions) => IUploadOptions;
   @Input() enableDrop = false;
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+    return this.showGlowStyle;
+  };
   @Output() successEvent: EventEmitter<Array<{ file: File; response: any }>> = new EventEmitter<Array<{ file: File; response: any }>>();
   @Output() errorEvent: EventEmitter<Array<{ file: File; response: any }>> = new EventEmitter<Array<{ file: File; response: any }>>();
   @Output() deleteUploadedFileEvent: EventEmitter<string> = new EventEmitter<string>();
@@ -79,6 +84,7 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
     private selectFiles: SelectFiles,
     private i18n: I18nService,
     @Inject(DOCUMENT) private doc: any,
+    private devConfigService: DevConfigService,
     private toastService: ToastService) {
     this.document = this.doc;
   }

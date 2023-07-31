@@ -28,6 +28,7 @@ In the page:
 | mentionTrigger         | `string[]`                                      | `['@']`                            | Option. Prefix for triggering components                                                                          | [Custom Prefix](demo#custom-prefix)     |
 | mentionSeparator       | `string`                                        | --                                 | Option.Used to separate the content of the triggering component from other content. The default value is a space. | [Use Separators](demo#use-separator)    |
 | mentionSeparatorToggle | `{ prefix: boolean,`<br>`suffix: boolean }`     | `{ prefix: false, suffix: false }` | Option.Controls whether components are separated from other content by spaces                                     | [Use Separators](demo#use-separator)    |
+| showGlowStyle | `boolean` | true | (Optional) Indicates whether to display the floating glow effect.|
 
 ### mention Event
 

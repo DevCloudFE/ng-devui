@@ -39,7 +39,7 @@ In the page:
 | maxBufferPx         | `number`                             | 900             | Optional. Sets the maximum buffer size during virtual scrolling. For details, see https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [Operation tree of large data volume](demo#virtual-scroll) | .             |
 | showAnimation       | `boolean`                            | true            | Optional. Indicating whether to display animations.                                                                                                                  | [Without Animation](demo#without-animation)                | ✔             |
 | indent       | `string`                            | '16px'            | Optional.   Sets the indentation between tree levels                                                                                                           | [Basic Usage](demo#basic-usage)        |      |
-
+| operatorAlign       | `'start'\|'end'`                            | 'start'            | Optional. Sets the align of operators                                                                                                             |  [Custom Icon](demo#custom-icon)        |          |
 ## d-tree Event
 
 | Parameter        | Type                                                              | Description                                                                                                                                                                                                                                               | Jump to Demo                                                                                                           |
@@ -191,6 +191,8 @@ The `checkAllNodes(checked:boolean)`: determines the check status of all nodes b
 
 `transferToTreeNode(originNode, parentId = undefined,treeNodeChildrenKey?,treeNodeIdKey?,checkboxDisabledKey?,selectDisabledKey?,toggleDisabledKey?,treeNodeTitleKey?)`: Transfer origin node data to the structure of the tree needed .
 
+`toggleAllNodes(toggle:boolean = true)`: If toggle is true, all nodes are expanded. If toggle is false, all nodes are collapsed.
+
 ```
 
 ### Customizing a Template
@@ -232,8 +234,8 @@ export interface ITreeItem {
   isActive?: boolean; // Check whether the node is in the selected state.
   isChecked?: boolean; // Check whether the node is in the checked state.
   halfChecked?: boolean; //Whether the node is in the half-selected state
-  disabled?: boolean; //Whether the node is in the half-selected state
-  disableAdd?: boolean; // Indicates whether to disable the check function on the node.
+  disabled?: boolean; //Indicates whether to disable the check function on the node
+  disableAdd?: boolean; // Indicates whether to disable the add function on the node.
   disableEdit?: boolean; // Indicates whether the node cannot be edited.
   disableDelete?: boolean; // Indicates whether the node cannot be deleted.
   disableSelect?: boolean; // Indicates whether to disable the select function on the node.

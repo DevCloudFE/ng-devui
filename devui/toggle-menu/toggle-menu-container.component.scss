@@ -111,8 +111,6 @@
     &.devui-custom-right,
     &.devui-custom-left,
     &.devui-custom-top {
-      min-width: 400px;
-
       d-toggle-menu-list {
         width: 100%;
         display: flex !important;
@@ -155,10 +153,6 @@
 
     &.devui-custom-top > .devui-select-custom-area {
       border-bottom: 1px solid $devui-dividing-line;
-    }
-
-    &.devui-reset-min-width {
-      min-width: auto;
     }
   }
 }

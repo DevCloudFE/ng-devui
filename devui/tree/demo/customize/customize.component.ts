@@ -8,8 +8,8 @@ import { TreeComponent } from 'ng-devui/tree';
 })
 export class CustomizeComponent {
   @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
-  iconParentOpen = '<span class="icon icon-chevron-down"></span>';
-  iconParentClose = '<span class="icon icon-collapse"></span>';
+  iconParentOpen = '<span class="icon icon-chevron-down-2"></span>';
+  iconParentClose = '<span style="transform: rotate(90deg)" class="icon icon-chevron-up-2"></span>';
   iconLeaf = '<span></span>';
   disableMouseEvent = false;
   data2 = [{

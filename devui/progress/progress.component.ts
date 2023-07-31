@@ -1,5 +1,6 @@
-import { Component, ContentChild, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
+import { AfterViewInit, Component, ContentChildren, Input, OnChanges, QueryList, SimpleChanges, TemplateRef } from '@angular/core';
 import { merge } from 'lodash-es';
+import { ProgressTemplateDirective } from './progress-template.directive';
 import { IGradientColor, IProgressItem, ShowContentConfig } from './progress.types';
 
 @Component({
@@ -8,7 +9,7 @@ import { IGradientColor, IProgressItem, ShowContentConfig } from './progress.typ
   styleUrls: ['./progress.component.scss'],
   preserveWhitespaces: false,
 })
-export class ProgressComponent implements OnChanges {
+export class ProgressComponent implements OnChanges, AfterViewInit {
   static ID_SEED = 0;
   @Input() isDynamic = true;
   @Input() percentage = 0;
@@ -37,7 +38,7 @@ export class ProgressComponent implements OnChanges {
   @Input() type: 'line' | 'circle' = 'line';
   @Input() showContent: boolean | ShowContentConfig;
   @Input() multiProgressConfig: IProgressItem[] = [];
-  @ContentChild(TemplateRef) customViewTemplate: TemplateRef<any>;
+  @ContentChildren(ProgressTemplateDirective) templates: QueryList<ProgressTemplateDirective>;
 
   id: number;
   pathString: string;
@@ -50,6 +51,8 @@ export class ProgressComponent implements OnChanges {
     showOuterContent: false,
     showCenterContent: true,
   };
+  centerTemplate: TemplateRef<any>;
+  outerTemplate: TemplateRef<any>;
 
   get content() {
     return this.percentageText ? this.percentageText : `${this.percentage}%`;
@@ -75,6 +78,26 @@ export class ProgressComponent implements OnChanges {
             showCenterContent: false,
           }
           : { ...this.showContentConfig, ...this.showContent };
+    }
+  }
+
+  ngAfterViewInit(): void {
+    // 兼容之前line中自定义模板对应右侧模板，circle对应中间模板
+    if (this.templates?.length) {
+      const restItem = [];
+      this.templates.forEach((item) => {
+        const pos = item.position || item.dPosition;
+        const name = pos && `${pos}Template`;
+        if (name) {
+          this[name] = item.template;
+        } else {
+          restItem.push(item);
+        }
+      });
+      if (restItem.length) {
+        this.outerTemplate = this.outerTemplate || restItem[0].template;
+        this.centerTemplate = this.centerTemplate || restItem[restItem.length - 1]?.template;
+      }
     }
   }
 

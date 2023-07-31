@@ -55,7 +55,7 @@ export class InteractionComponent implements OnInit {
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'checkbox',
-      width: '30px'
+      width: '41px'
     },
     {
       field: '$index',

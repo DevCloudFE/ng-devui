@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { backdropFadeInOut, wipeInOutAnimation } from 'ng-devui/utils';
 import { isUndefined } from 'lodash-es';
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, fromEvent } from 'rxjs';
 import { ModalContainerDirective } from './modal.directive';
 
 @Component({
@@ -19,12 +19,6 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   @Input() id: string;
   @Input() showAnimation = true;
-  /**
-   * @deprecated Use showAnimation to replace.
-   */
-  @Input() set showAnimate(isShowAnimate: any) {
-    this.showAnimation = isShowAnimate;
-  }
   @Input() width: string;
   @Input() zIndex: number;
   @Input() backDropZIndex: number;

@@ -46,4 +46,12 @@
   &.devui-status-bg-initial::before {
     background: $devui-initial;
   }
+
+  &.devui-status-bg-skipped::before {
+    background: $devui-feedback-overlay-text;
+  }
+
+  &.devui-status-bg-canceled::before {
+    background: $devui-icon-fill-weak;
+  }
 }

@@ -1,33 +1,19 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, TemplateRef, ViewChild } from '@angular/core';
 import { ProgressComponent } from 'ng-devui/progress';
 
 @Component({
   selector: 'd-multiple',
   templateUrl: './multiple.component.html',
+  styleUrls: ['./multiple.component.scss'],
 })
-export class MultipleComponent implements OnInit {
+export class MultipleComponent implements AfterViewInit {
   @ViewChild('multilineBar') barInstance: ProgressComponent;
   @ViewChild('multilineCircle') circleInstance: ProgressComponent;
-  percentage = 0;
+  @ViewChild('barTemplate') barTemplate: TemplateRef<any>;
+  config = [];
   content = 'This is a progress bar with a gradient background color.';
   count = 0;
-  config = [
-    {
-      name: 'success',
-      color: '#50d4ab',
-      percentage: 21,
-    },
-    {
-      name: 'fail',
-      color: '#f66f6a',
-      percentage: 16,
-    },
-    {
-      name: 'other',
-      color: '#fac20a',
-      percentage: 30,
-    },
-  ];
+  percentage = 0;
   showContentConfig = {
     showInnerContent: true,
     showOuterContent: false,
@@ -43,11 +29,35 @@ export class MultipleComponent implements OnInit {
     { color: '#5e7ce0', percentage: '100%' },
   ];
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    if (this.barTemplate) {
+      setTimeout(() => {
+        this.config = [
+          {
+            name: 'success',
+            color: '#50d4ab',
+            percentage: 21,
+            template: this.barTemplate,
+          },
+          {
+            name: 'fail',
+            color: '#f66f6a',
+            percentage: 16,
+            template: this.barTemplate,
+          },
+          {
+            name: 'other',
+            color: '#fac20a',
+            percentage: 30,
+            template: this.barTemplate,
+          },
+        ];
+      });
+    }
     this.progressing(3);
   }
 
-  progressing(time: number) {
+  progressing(time: number): void {
     setTimeout(() => {
       if (this.count < time) {
         this.config.forEach((item) => {

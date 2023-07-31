@@ -2,9 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { BadgeModule } from 'ng-devui/badge';
 import { ButtonModule } from 'ng-devui/button';
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import { DropDownModule } from 'ng-devui/dropdown';
+import { IconModule } from 'ng-devui/icon';
 import { LoadingModule } from 'ng-devui/loading';
 import { SearchModule } from 'ng-devui/search';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
@@ -45,6 +47,8 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     DropDownModule,
     SafePipeModule,
     SearchModule,
+    BadgeModule,
+    IconModule,
     RouterModule.forChild([
       { path: '',  redirectTo: 'demo', pathMatch: 'full' },
       {
@@ -72,9 +76,7 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     VirtualScrollComponent,
     CustomLoadingComponent,
     MergeNodeComponent,
-    OperationForAllNodesComponent
+    OperationForAllNodesComponent,
   ],
-
 })
-export class TreeDemoModule {
-}
+export class TreeDemoModule {}

@@ -236,6 +236,7 @@ d-select .devui-form-group {
   }
 
   .devui-select-list-wrapper.devui-form-control {
+    .devui-select-selected-item-with-template,
     .devui-select-placeholder {
       height: 28px;
       line-height: 28px;
@@ -284,6 +285,16 @@ input {
   // 存在搜索框时
   & > li {
     padding: 12px 12px 0 12px;
+  }
+
+  &.devui-auto-complete-list {
+    & > .devui-no-data-tip {
+      padding: 12px;
+    }
+
+    & > li {
+      padding: 8px 12px 4px 12px;
+    }
   }
 
   ul,
@@ -377,7 +388,7 @@ d-multiple-upload {
   }
 }
 
-div.popper-container div.popper-container-scrollable div.devui-tree-select.devui-options-container {
+div.popper-container div.popper-container-scrollable {
   padding: 12px;
 }
 
@@ -408,7 +419,6 @@ d-pagination {
     span:hover,
     a:focus,
     span:focus {
-      background-color: transparent !important;
       color: $devui-text !important;
       border: 1px solid $devui-dividing-line !important;
       box-shadow: 0 1px 3px 0 $devui-light-shadow !important;

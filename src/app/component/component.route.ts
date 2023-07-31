@@ -1,9 +1,9 @@
+import { Routes } from "@angular/router";
 import { ExamplePanelComponent } from './example-panel.component';
 import { GetStartedComponent } from './get-started.component';
 import { GlobalConfigComponent } from './global-config.component';
 import { ComponentsOverviewComponent } from './overview.component';
 import { ThemeGuideComponent } from './theme-guide.component';
-import { Routes } from "@angular/router";
 
 export const routesConfig: Routes = [
   {
@@ -140,6 +140,18 @@ export const routesConfig: Routes = [
       name: 'Accordion',
       cnName: '手风琴',
       bannerName: "17",
+    },
+  },
+  {
+    path: 'input-group',
+    component: ExamplePanelComponent,
+    loadChildren: () => import('../../../devui/input-group/demo/input-group-demo.module').then((m) => m.InputGroupDemoModule),
+    data: {
+      type: '数据录入',
+      enType: 'Data Entry',
+      name: 'InputGroup',
+      cnName: '输入框组合',
+      bannerName: "3",
     },
   },
   {

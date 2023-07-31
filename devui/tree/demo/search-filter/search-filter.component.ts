@@ -66,6 +66,13 @@ export class SearchFilterComponent {
     }]
   }];
 
+  toggle = true;
+
+  expandOrCollapse(event) {
+    this.dOperableTreeComponent.treeFactory.toggleAllNodes(this.toggle);
+    this.toggle = !this.toggle;
+  }
+
   onKeyUp(event) {
     this.dOperableTreeComponent.operableTree.treeFactory.searchTree(event);
   }

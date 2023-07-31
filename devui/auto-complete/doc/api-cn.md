@@ -40,6 +40,7 @@ import { AutoCompleteModule } from 'ng-devui/auto-complete';
 |     showAnimation      |                      `boolean`                      |                       true                       |                                                                       可选，是否开启动画                                                                        |                                        | ✔          |
 |       maxHeight        |                      `number`                       |                      `300`                       |                                                                     可选，提示框的最大高度                                                                      |                                        |
 |   cdkOverlayOffsetY    |                      `number`                       |                       `0`                        |                                                           可选，appendToBody 为 true 时，Y 轴的偏移量                                                           |
+|   showGlowStyle    |       `boolean`        |   true   |       可选，是否显示悬浮发光效果    |
 
 ## dAutoComplete 事件
 

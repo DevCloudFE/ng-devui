@@ -406,6 +406,8 @@ shadowType?:'embed' |'normal';
 | filterBoxWidth | `any` | -- | Optional. Width of the filter dialog box, for example, 300px. |
 | filterBoxHeight | `any` | -- | Optional. Height of the filter dialog box, for example, 400px. |
 | nestedColumnIndent | `number` | 16 | Indentation distance of a subtable in a cell, in px | [tree table](demo#tree-form) |
+| advancedHeader | `advancedHeader` | -- | column Tables | [Header Grouping](demo#header-grouping) |
+| headCellApplyAll | `boolean` | false | column table applies to the table header at each layer. The value false indicates that the head-cell template applies only to the last layer. | |
 
 ## d-column event
 
@@ -506,12 +508,14 @@ Note: Empty cells also need to be indicated. Set rowspan/colspan to 0 based on t
 |     dataTableProperties      |      [`DataTablePropertiesInterface`](#DataTablePropertiesInterface)      | --     |         Optional. Support for original parameters of dataTable, Parameters defined in DataTablePropertiesInterface can be supported.                           |[Tree table with a large amount of data Interaction](demo#virtual-scroll-tree-table-interaction)|
 |     draggable      |      `boolean`      | false     |                   Optional. Indicates whether to enable row dragging in the table.    |[Tree table with a large amount of data Interaction](demo#virtual-scroll-tree-table-interaction)|
 |     checkableRelation      | `CheckableRelation`  | { upward: true, downward: true }  |       Optional, Logical relationship between parent and child in the table tree      | - |
+| dragDomTemplate | `TemplateRef<any>` | - | Drag the DOM template to expose two parameters rowItemList and columns | - |
 
 ## virtual-scroll-tree-table event
 | Event | Type | Description | Jump to Demo |
 | :-------------------: | :------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: |
 |        save         |  `EventEmitter<any>`  |               Returns the data after the operation is changed.               | [Tree table with a large amount of data Basic](demo#virtual-scroll-tree-table-basic) |
 |        allChecked         |  `EventEmitter<any>`  |               Return to Table Header Checkbox Status.               | [Tree table with a large amount of data Interaction](demo#virtual-scroll-tree-table-interaction) |
+|        dropRow         |  `EventEmitter<dataList: any[];dropIndex: number;>`  |               Placement event of dragging a table row               | [Dragging a tree table with a large amount of data](demo#virtual-scroll-tree-table-multi-drag) |
 
 The original datatable events can be transparently transmitted. The multiSortChange, cellClick, cellDBClick, rowClick, rowDBClick, cellEditStart, cellEditEnd, and resize events are supported.
 
@@ -738,6 +742,29 @@ dragDown(downEvent, rowItem, rowIndex) {
 }
 
 // Use @ViewChild to call dragDown method in VirtualScrollTreeTableComponent
+```
+
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+dragDown(downEvent, rowItem, rowIndex) {
+  this.VirtualTableTree.customDragDown(
+    [rowItemList], true,
+    this.customDragMove,
+    this.customDrop
+  );
+}
+
+customDragMove = (event, rowItemList) => {
+//Customize the movement logic. You can add the effect of floating triggering in related areas.
+}
+
+customDrop(event, rowItemList) => {
+//Customize the placement logic.
+}
+
+//Use @ViewChild to call the customDragDown method in VirtualScrollTreeTableComponent.
 ```
 
 ## check a large amount of data from a tree table

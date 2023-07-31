@@ -54,10 +54,10 @@
     .devui-checkbox-material:not(.custom-color) {
       background-size: 0% 0%;
       transition: background-size $devui-animation-duration-base $devui-animation-ease-in-out, border-color $devui-animation-duration-base $devui-animation-ease-in-out;
+    }
 
-      &:hover {
-        border-color: $devui-brand;
-      }
+    &:hover .devui-checkbox-material:not(.custom-color) {
+      border-color: $devui-brand;
     }
   }
 
@@ -210,7 +210,9 @@
       }
     }
   }
+}
 
+::ng-deep :root .devui-glow-style .devui-checkbox {
   .devui-checkbox-glow-box {
     position: absolute;
     width: 16px;

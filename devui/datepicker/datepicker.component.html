@@ -57,8 +57,11 @@
           </a>
         </td>
         <td colspan="3" class="devui-dropdown">
-          <span class="devui-date-title" (click)="toggle($event, 'year')">{{ i18nText?.yearDisplay(currentYear) }}</span>
-          <span class="devui-date-title" (click)="toggle($event, 'month')" *ngIf="mode !== 'year'">{{
+          <span class="devui-date-title" (click)="toggle($event, 'month')" *ngIf="mode !== 'year' && i18nLocale === 'en-us'">{{
+            (i18nText?.monthsOfYear)[currentMonthIndex]
+          }}</span>
+          <span class="devui-date-title" (click)="toggle($event, 'year')"> {{ i18nText?.yearDisplay(currentYear) }} </span>
+          <span class="devui-date-title" (click)="toggle($event, 'month')" *ngIf="mode !== 'year' && i18nLocale === 'zh-cn'">{{
             (i18nText?.monthsOfYear)[currentMonthIndex]
           }}</span>
           <ul class="devui-monthOption text-center" [style.display]="openChooseMonth ? 'block' : 'none'">

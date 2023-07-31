@@ -11,6 +11,12 @@ export class BasicComponent implements OnInit {
     pageSize: 10
   };
 
+  pagerLg = {
+    total: 1000,
+    pageIndex: 5,
+    pageSize: 50
+  };
+
   constructor() { }
 
   ngOnInit() {

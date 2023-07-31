@@ -1,19 +1,9 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, ContentChildren, HostListener, Inject, Input, isDevMode, OnInit, QueryList } from '@angular/core';
+import { Component, ContentChildren, HostListener, Inject, Input, isDevMode, OnInit, QueryList, ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DevuiCommonsService } from '../devui-commons.service';
 import { I18nUtil } from '../i18n/i18n.util';
 import { LogoComponent } from './logo/logo.component';
-
-export interface UserInfo {
-  displayNameCn: string;
-  uid?:string;
-  employeeNumber: string;
-  iconUrl:string;
-  docCount?:number;
-  questionCount?:number;
-  draftCount?:number;
-};
 
 @Component({
   selector: 'd-common-header',
@@ -30,6 +20,7 @@ export class HeaderComponent implements OnInit {
   @Input() repoName = 'ng-devui';
 
   repoLink!: SafeResourceUrl;
+  githubLink;
 
   @ContentChildren(LogoComponent) subLogo: QueryList<LogoComponent> = new QueryList<LogoComponent>();
 
@@ -42,6 +33,10 @@ export class HeaderComponent implements OnInit {
   MIN_WIDTH = 1279;
   showExpandButton = false;
   showCollapseButton = false;
+  showHamburger = false;
+  showMobileHeader = false;
+  isHomePage = false;
+  mediaQuery;
 
 
   @HostListener('window:resize')
@@ -55,6 +50,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private commonsService: DevuiCommonsService,
     private sanitizer: DomSanitizer,
+    private cdr: ChangeDetectorRef,
     @Inject(DOCUMENT) private doc: any,
   ) {
     this.document = this.doc;
@@ -68,6 +64,20 @@ export class HeaderComponent implements OnInit {
     this.showExpandButton = this.document.body.clientWidth < this.MIN_WIDTH ? true : false;
     this.setSlideBarStyle();
     this.repoLink = this.sanitizer.bypassSecurityTrustResourceUrl(`https://ghbtns.com/github-btn.html?user=DevCloudFE&repo=${this.repoName}&type=star&count=true`);
+    this.githubLink = `https://github.com/DevCloudFE/${this.repoName}`;
+    this.isHomePage = window.location.pathname.split('/')[1] === 'home' ? true : false;
+    this.mediaQuery = window.matchMedia('(max-width: 767px)');
+    this.mediaQuery.addListener(this.handleScreenChange);
+    this.handleScreenChange(this.mediaQuery);
+  }
+
+  handleScreenChange = (e) => {
+    if (e.matches) {
+      this.showMobileHeader = true;
+    } else {
+      this.showMobileHeader = false;
+    }
+    this.cdr.detectChanges();
   }
 
   onSearch(term): void {
@@ -90,7 +100,8 @@ export class HeaderComponent implements OnInit {
       this.showCollapseButton = false;
       this.showExpandButton = true;
     }
-    
+    this.cdr.detectChanges();
+
     this.showSlideMenu = typeof showMenu === 'boolean' ? showMenu : !this.showSlideMenu;
     this.setSlideBarStyle(true);
   }
@@ -113,5 +124,10 @@ export class HeaderComponent implements OnInit {
   changeLanguage(lang: string): void {
     this.curLanguage = lang;
     this.searchPlaceholder = this.curLanguage === 'zh-cn' ? '请输入你想查找的组件' : 'Enter the component';
+  }
+
+  toggleHamburger(event) {
+    this.showHamburger = !this.showHamburger;
+    this.cdr.detectChanges();
   }
 }

@@ -5,6 +5,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostBinding,
   HostListener,
   Input,
   OnChanges,
@@ -48,22 +49,29 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   @Input() width: number;
   @Input() disabledKey: string;
   @Input() allowClear = false;
+  @Input() enableSelectedValueList = false;
   @Input() enableLazyLoad = false;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() customViewDirection: 'bottom' | 'right' | 'left' | 'top' = 'bottom';
   @Input() formatter = (item: any) => (item ? item.label || item.toString() : '');
-  @Input() valueParser = (item) => item;
+  @Input() valueParser = (item: any) => (item ? item.label || item.toString() : '');
   @Input() searchFn: (term: string) => Observable<any[]>;
   @Input() @WithConfig() showAnimation = true;
   @Input() @WithConfig() styleType = 'default';
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
+    return this.showGlowStyle;
+  }
   @Output() loadMore = new EventEmitter<any>();
   @Output() toggleChange = new EventEmitter<any>();
-  @Output() hoverItem: EventEmitter<any> = new EventEmitter();
+  @Output() hoverItem = new EventEmitter<any>();
+  @Output() selectItem = new EventEmitter<any>();
   @ViewChild(AutoCompleteDirective, { static: true }) autoCompleteDirective: AutoCompleteDirective;
   @ViewChild('editableSelectBox', { static: true }) editableSelectBox: ElementRef;
 
-  multiItems: any[] = [];
   inputValue: any;
+  inputValueCache: any;
+  multiItems: any[] = [];
   activeIndex = 0;
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
@@ -81,6 +89,10 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
 
   get dropDownOpen() {
     return this._dropDownOpen;
+  }
+
+  get placeholderContent() {
+    return this.valueParser(this.inputValueCache) || this.placeholder;
   }
 
   private ANIMATION_DELAY = 300;
@@ -123,8 +135,8 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
     }
   }
 
-  writeValue(obj: any): void {
-    this.inputValue = obj || '';
+  writeValue(value: any): void {
+    this.inputValueCache = this.inputValue = value ?? '';
     this.cdr.markForCheck();
   }
 
@@ -136,26 +148,36 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
     this.onTouched = fn;
   }
 
-  selectValue(): void {
-    this.dropDownOpen = false;
+  selectValue(value: any): void {
+    this._dropDownOpen = false;
+    this.inputValueCache = this.inputValue = value ?? '';
+    this.selectItem.emit(this.inputValue);
+    this.onChange(this.inputValue);
+    this.onTouched();
   }
 
   valueClear(event: Event): void {
     event.stopPropagation();
-    this.inputValue = '';
-    this.onChange(this.inputValue);
+    this.inputValueCache = this.inputValue = '';
+    this.onChange('');
   }
 
   onTermChange(value: any): void {
-    this.inputValue = value;
+    this.inputValueCache = this.inputValue = value;
     this.onChange(this.inputValue);
   }
 
   toggle(): void {
-    const inputString = this.formatter(this.inputValue);
-    this.activeIndex = this.source.map((item) => this.formatter(item).toLowerCase()).indexOf(inputString.toLowerCase());
+    const inputString = this.formatter(this.inputValue) ?? '';
+    this.activeIndex = this.enableSelectedValueList
+      ? this.autoCompleteDirective.popupRef.instance.activeIndex
+      : this.source.map((item) => this.formatter(item).toLowerCase()).indexOf(inputString.toLowerCase());
     this.activeIndex = this.activeIndex > -1 ? this.activeIndex : 0;
     this.dropDownOpen = !this.dropDownOpen;
+    if (this.dropDownOpen && !this.enableSelectedValueList) {
+      this.autoCompleteDirective.searchValue('', false);
+      this.autoCompleteDirective.popupRef.instance.scrollToActive(this.activeIndex);
+    }
   }
 
   loadMoreEvent(event: any): void {
@@ -164,6 +186,7 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
 
   toggleChangeHandler(value: boolean): void {
     this._dropDownOpen = value;
+    this.inputValue = !this.enableSelectedValueList && value ? '' : this.inputValueCache;
     this.toggleChange.emit(value);
   }
 

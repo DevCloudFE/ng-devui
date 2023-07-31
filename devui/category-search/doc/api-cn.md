@@ -36,6 +36,7 @@ import { CategorySearchModule } from 'ng-devui/category-search';
 | categoryInGroup         | `boolean`                                                                           | false | 可选，是否按组别显示分类下拉列表                                                            | [大数据量优化展示](demo#auto-scroll)    |
 | groupOrderConfig        | `String[]`                                                                          | --    | 可选，配置组的排序                                                                          | [大数据量优化展示](demo#auto-scroll)    |
 | customGroupNameTemplate | `TemplateRef<any>`                                                                  | --    | 可选，自定义组名称显示模板                                                                  | [大数据量优化展示](demo#auto-scroll)    |
+|   showGlowStyle    |       `boolean`        |   true   |       可选，是否显示悬浮发光效果    |
 
 ### d-category-search 事件
 
@@ -179,6 +180,7 @@ export interface TextConfig {
   createFilter?: string;
   filterTitle?: string;
   labelConnector?: string;
+  noCategoriesAvailable?: string;
 }
 
 export interface ExtendedConfig {

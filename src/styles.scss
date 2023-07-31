@@ -44,8 +44,10 @@ section {
 
   .devui-api-table-wrapper {
     overflow-x: auto;
+
     table {
       overflow-wrap: anywhere;
+
       tr th:first-child {
         min-width: 136px;
       }

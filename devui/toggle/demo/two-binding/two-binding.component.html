@@ -1,1 +1,4 @@
-<d-toggle [(ngModel)]="enable" [beforeChange]="beforeChange" (change)="onChange2($event)" [size]="'sm'"></d-toggle> {{ enable }}
+<div>
+  <d-toggle [(ngModel)]="enable" [beforeChange]="beforeChange" (change)="onChange($event)"></d-toggle>
+  <span>state: {{ enable }}</span>
+</div>

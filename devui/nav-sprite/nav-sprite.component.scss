@@ -20,12 +20,20 @@
     padding: 0;
 
     &:hover {
-      color: $devui-light-text;
       background-color: $devui-brand;
+
+      svg path {
+        fill: $devui-light-text;
+      }
     }
 
-    i {
+    svg {
+      display: block;
       cursor: pointer;
+
+      path {
+        fill: $devui-text;
+      }
     }
   }
 

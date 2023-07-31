@@ -12,7 +12,26 @@
     <ng-container *ngIf="isOpen; else minTemp">
       <div class="devui-nav-sprite-header" *ngIf="title !== undefined" [ngClass]="{ 'devui-nav-sprite-header-with-title': title }">
         <div class="devui-nav-sprite-header-title">{{ title }}</div>
-        <d-button icon="icon-close" bsStyle="text" title="close" (click)="hide()"></d-button>
+        <d-icon [icon]="closeTemplate" [operable]="true" (click)="hide()"></d-icon>
+        <ng-template #closeTemplate>
+          <svg
+            width="16px"
+            height="16px"
+            viewBox="0 0 16 16"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path
+                d="M14.6887175,1.25368865 C15.0770801,1.64205125 15.0121881,2.34244569 14.544513,2.81012074 L9.383,7.971 L14.544513,13.1322854 C14.9787827,13.5665551 15.0657548,14.2014859 14.7650189,14.6009195 L14.6887175,14.6887175 C14.3003549,15.0770801 13.5999604,15.0121881 13.1322854,14.544513 L13.1322854,14.544513 L7.971,9.383 L2.81012075,14.544513 C2.3424457,15.0121881 1.64205125,15.0770801 1.25368865,14.6887175 C0.865326051,14.3003549 0.930218063,13.5999605 1.39789313,13.1322854 L6.558,7.971 L1.39789311,2.81012074 C0.963623424,2.37585105 0.876651354,1.74092026 1.17738727,1.34148668 L1.25368865,1.25368865 C1.64205125,0.865326051 2.34244569,0.930218063 2.81012074,1.39789311 L2.81012074,1.39789311 L7.971,6.558 L13.1322854,1.39789311 C13.5999605,0.930218063 14.3003549,0.865326051 14.6887175,1.25368865 Z"
+                id="close-icon"
+                fill="#8A8E99"
+                fill-rule="nonzero"
+              ></path>
+            </g>
+          </svg>
+        </ng-template>
       </div>
       <ng-container [ngTemplateOutlet]="defaultItemsTemp"></ng-container>
     </ng-container>
@@ -46,8 +65,24 @@
 
 <!-- 精灵模式最小化模板 -->
 <ng-template #minTemp>
-  <div class="devui-sprite-min" dTooltip [content]="title">
-    <i class="icon-frame-contract" (click)="open()"></i>
+  <div class="devui-sprite-min" dTooltip [content]="title" (click)="open()">
+    <svg
+      width="16px"
+      height="16px"
+      viewBox="0 0 16 16"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <g id="frame_contract" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path
+          d="M10,6 L10,1 L12,1 L12,4 L15,4 L15,6 L10,6 Z M6,1 L6,6 L1,6 L1,4 L4,4 L4,1 L6,1 Z M10,15 L10,10 L15,10 L15,12 L12,12 L12,15 L10,15 Z M6,10 L6,15 L4,15 L4,12 L1,12 L1,10 L6,10 Z"
+          id="形状"
+          fill="#293040"
+          fill-rule="nonzero"
+        ></path>
+      </g>
+    </svg>
   </div>
 </ng-template>
 

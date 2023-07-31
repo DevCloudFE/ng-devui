@@ -91,7 +91,9 @@
                     <span title="{{ item?.label }}">{{ item?.label }}</span>
                   </li>
                 </ng-container>
-                <div class="devui-no-data-text" *ngIf="showNoDataTips">{{ i18nCategorySearchText?.noFilterConditions }}</div>
+                <div class="devui-no-data-text" *ngIf="showNoDataTips">
+                  {{ textConfig.noCategoriesAvailable || i18nCategorySearchText?.noFilterConditions }}
+                </div>
               </ng-container>
               <ng-container *ngIf="enterSearch">
                 <li
@@ -292,7 +294,7 @@
   </span>
 </ng-template>
 
-<ng-template [type]="'radio'" let-tagOption="tagOption" let-key="tagOption.filterKey || 'label'">
+<ng-template [dType]="'radio'" let-tagOption="tagOption" let-key="tagOption.filterKey || 'label'">
   <div *ngIf="!tagOption.options?.length">
     <ng-container *ngTemplateOutlet="noData"></ng-container>
   </div>
@@ -309,7 +311,7 @@
   </ul>
 </ng-template>
 
-<ng-template [type]="'dateRange'" let-tagOption="tagOption" let-dropdown="dropdown">
+<ng-template [dType]="'dateRange'" let-tagOption="tagOption" let-dropdown="dropdown">
   <d-datepicker-calendar
     #datepickerCalendarItem
     *ngIf="dropdown.isOpen"
@@ -339,7 +341,7 @@
   </d-datepicker-calendar>
 </ng-template>
 
-<ng-template [type]="'checkbox'" let-tagOption="tagOption" let-dropdown="dropdown">
+<ng-template [dType]="'checkbox'" let-tagOption="tagOption" let-dropdown="dropdown">
   <div *ngIf="!tagOption.options?.length">
     <ng-container *ngTemplateOutlet="noData"></ng-container>
   </div>
@@ -358,7 +360,7 @@
   </div>
 </ng-template>
 
-<ng-template [type]="'label'" let-tagOption="tagOption" let-dropdown="dropdown">
+<ng-template [dType]="'label'" let-tagOption="tagOption" let-dropdown="dropdown">
   <div *ngIf="!tagOption.options?.length">
     <ng-container *ngTemplateOutlet="noData"></ng-container>
   </div>
@@ -382,7 +384,7 @@
   </div>
 </ng-template>
 
-<ng-template [type]="'textInput'" let-tagOption="tagOption" let-dropdown="dropdown">
+<ng-template [dType]="'textInput'" let-tagOption="tagOption" let-dropdown="dropdown">
   <form #textInputForm="ngForm">
     <input
       name="text-input"
@@ -403,7 +405,7 @@
   </div>
 </ng-template>
 
-<ng-template [type]="'numberRange'" let-tagOption="tagOption" let-dropdown="dropdown">
+<ng-template [dType]="'numberRange'" let-tagOption="tagOption" let-dropdown="dropdown">
   <div class="devui-input-number-operation-area">
     <d-input-number
       size="sm"
@@ -435,7 +437,7 @@
   </div>
 </ng-template>
 
-<ng-template [type]="'treeSelect'" let-tagOption="tagOption" let-dropdown="dropdown" let-isSelected="isSelected">
+<ng-template [dType]="'treeSelect'" let-tagOption="tagOption" let-dropdown="dropdown" let-isSelected="isSelected">
   <div *ngIf="tagOption.multiple && tagOption.options?.length && tagOption.value.value?.length">
     <ul class="devui-select-list">
       <span>{{ i18nCategorySearchText?.selected }}</span>

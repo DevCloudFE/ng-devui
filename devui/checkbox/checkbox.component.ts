@@ -6,6 +6,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostBinding,
   Input,
   OnChanges,
   Output,
@@ -42,8 +43,13 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges, After
   @Input() labelTemplate: TemplateRef<any>;
   @Input() halfchecked = false;
   @Input() @WithConfig() showAnimation = true;
+  @Input() @WithConfig() showGlowStyle = true;
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+    return this.showGlowStyle;
+  };
+
   public animationUnlocked = false;
   public id: number;
   public checked: boolean;

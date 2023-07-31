@@ -9,6 +9,10 @@ export class TextDirective {
   @Input() @HostBinding('class.error') error: boolean;
   @Input() size = '';
   @Input() @WithConfig() styleType = 'default';
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+    return this.showGlowStyle;
+  };
 
   @HostBinding('class.devui-textinput-lg')
   get large() {

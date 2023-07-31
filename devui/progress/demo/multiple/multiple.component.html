@@ -18,3 +18,7 @@
 <div class="progress-container circle-type">
   <d-progress [type]="'circle'" [percentage]="85" [strokeWidth]="8" [strokeColor]="circleGradientColor"></d-progress>
 </div>
+
+<ng-template #barTemplate let-bar="bar">
+  <span class="bar-text">{{ bar.name }} {{ bar.percentage }}%</span>
+</ng-template>

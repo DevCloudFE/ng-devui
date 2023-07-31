@@ -80,3 +80,51 @@
     }
   }
 }
+
+.mobile-header-container {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  background-image: linear-gradient(179deg, #E9FBFF 0%, #F3F5FF 100%);
+  .mobile-header-left {
+    display: flex;
+    align-items: center;
+  }
+  .mobile-hamburger {
+    margin-left: 12px;
+  }
+
+  .expand-sidebar {
+    margin-top: 0 !important;
+    margin-left: 12px;
+  }
+}
+
+.mobile-sider {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 56px;
+  left: 0;
+
+  height: calc(100vh - 56px);
+  width: 0;
+  background-color: $devui-base-bg;
+  transition: all 0.3s;
+}
+
+.mobile-sider-show {
+  width: 242px !important;
+  padding: 12px;
+}
+
+.mobile-bottom-menu-hidden {
+  display: none;
+}
+
+.mobile-bottom-menu-show {
+  display: block !important;
+}

@@ -1,6 +1,6 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import {
-  Component, ElementRef, EventEmitter, forwardRef, Input,
+  Component, ElementRef, EventEmitter, forwardRef, HostBinding, Input,
   OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef, ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -50,6 +50,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   @Input() hostTemplate: TemplateRef<any>;
   @Input() dropdownPanelClass = '';
   @Input() appendToBody = true;
+  @Input() tagMaxWidth = '200px';
   @Input() @WithConfig() showAnimation = true;
   @Input() @WithConfig() styleType = 'default';
   @Input()
@@ -60,6 +61,11 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     }
   }
   @Output() toggleEvent = new EventEmitter<boolean>();
+
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+    return this.showGlowStyle;
+  };
 
   subMenuDirections: ConnectedPosition[] = [{
     originX: 'start',
@@ -194,6 +200,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
         if (res.isAdd) {
           if (targetIndex === -1) {
             this.multipleValueList.push(res.option);
+            this.updateMultipleValuePathList();
           }
         } else if (targetIndex !== -1) {
           this.multipleValueList.splice(targetIndex, 1);
@@ -282,8 +289,23 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
         this.cascaderSrv.currentMultipleValue = value as Array<number | string>[];
         this.lazyloadValue = value;
         this.multipleValueList = this.getMultipleValueFromValueList(value as Array<number | string>[]);
+        this.updateMultipleValuePathList();
       }
     }
+  }
+
+  updateMultipleValuePathList() {
+    if (!this.showPath) {
+      return;
+    }
+    const valueList = this.cascaderSrv.currentMultipleValue;
+    valueList.forEach((item, index) => {
+      const value = item[item.length - 1];
+      const target = this.multipleValueList.find(t => t.value === value);
+      if (target) {
+        target['pathLabel'] = this.getPathLabelFormValue(item);
+      }
+    });
   }
 
   // 从路径数组中获取所有tag的值，并让对应checkbox激活

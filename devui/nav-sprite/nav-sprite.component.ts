@@ -18,8 +18,8 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { scrollAnimate } from 'ng-devui/utils';
-import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { Subscription, fromEvent } from 'rxjs';
+import { throttleTime } from 'rxjs/operators';
 import { NavMenu, SpriteMode, SpriteOption } from './nav-sprite.type';
 
 const DEFAULT_OPTIONS = {
@@ -98,6 +98,8 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   timeGap = 60;
 
+  throttleTimeGap = 300;
+
   document: Document;
 
   get baseUrl() {
@@ -129,7 +131,7 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       const container = this.targetContainer === this.document.documentElement ? window : this.targetContainer;
       this.scrollSub = fromEvent(container, 'scroll')
-        .pipe(debounceTime(300))
+        .pipe(throttleTime(this.throttleTimeGap))
         .subscribe(() => {
           this.scrollEventHandler();
         });
@@ -205,8 +207,12 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.isToViewByNav) {
       const scrollTop = this.targetContainer.scrollTop;
       const index = this.menus.findIndex((ele, i) => {
-        this.menus[i + 1].scrollPosition = this.getScrollPosition(this.menus[i + 1].element);
-        return scrollTop >= ele.scrollPosition.startLine && scrollTop < this.menus[i + 1]?.scrollPosition.startLine;
+        if (this.menus[i + 1]) {
+          this.menus[i + 1].scrollPosition = this.getScrollPosition(this.menus[i + 1].element);
+          return scrollTop >= ele.scrollPosition.startLine && scrollTop < this.menus[i + 1]?.scrollPosition.startLine;
+        } else {
+          return false;
+        }
       });
       if (index !== -1 && this.activeIndex !== index) {
         this.activeIndex = index;

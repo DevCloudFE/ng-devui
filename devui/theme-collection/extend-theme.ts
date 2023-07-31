@@ -29,7 +29,7 @@ export const provenceTheme: Theme = new Theme({
     'devui-text': '#070036',
     'devui-aide-text': '#717087',
     'devui-placeholder': '#babbc0',
-    'devui-disabled-text': '#cfd0d3',
+    'devui-disabled-text': '#babbc0',
     'devui-disabled-bg': '#f5f5f6',
     'devui-line': '#E2E2E5',
     'devui-dividing-line': '#F2F2F3',
@@ -78,7 +78,7 @@ export const sweetTheme: Theme = new Theme({
     'devui-text': '#2f272f',
     'devui-aide-text': '#827d82',
     'devui-placeholder': '#bdb8bd',
-    'devui-disabled-text': '#cbcacb',
+    'devui-disabled-text': '#bdb8bd',
     'devui-disabled-bg': '#f6f6f6',
     'devui-line': '#aea6ad',
     'devui-dividing-line': '#eae7e9',
@@ -228,7 +228,9 @@ export const galaxyTheme: Theme = new Theme({
     'devui-shadow-length-fullscreen-overlay': '0 0 6px 0',
     'devui-gray-form-control-bg': '#323338',
     'devui-gray-form-control-hover-bg': '#393A3E',
-    'devui-nav-expand-bg': '#1d1d21'
+    'devui-nav-expand-bg': '#1d1d21',
+    'devui-link': '#7693F5',
+    'devui-link-active': '#465EB8'
   },
   extends: 'devui-dark-theme',
   isDark: true,

@@ -4,7 +4,7 @@
       <ng-container *ngIf="!sourceCustomViewTemplate">
         <div class="devui-transfer-title">
           <d-checkbox
-            [label]="titles.source"
+            [labelTemplate]="sourceLabel"
             [disabled]="disabled || sourceDisplayOptionLen === 0"
             [isShowTitle]="false"
             (change)="checkAll(transferDirection.SOURCE, $event)"
@@ -12,15 +12,18 @@
             [(ngModel)]="sourceAllChecked"
           >
           </d-checkbox>
+          <ng-template #sourceLabel>
+            <span [style.font-weight]="600">{{ titles.source }}</span>
+          </ng-template>
           <span class="devui-transfer-num">{{ sourceCheckedLen }}/{{ sourceDisplayOptionLen }}</span>
         </div>
-        <div class="devui-transfer-line"></div>
         <div class="devui-transfer-content" [class.disabled]="disabled">
           <div class="devui-transfer-search" *ngIf="isSearch">
             <d-search
               style="width: 100%"
+              [styleType]="'gray'"
               [placeholder]="i18nCommonText?.searchPlaceholder"
-              [size]="'sm'"
+              [iconPosition]="'left'"
               [(ngModel)]="sourceSearchText"
               (searchFn)="search(transferDirection.SOURCE, $event)"
             ></d-search>
@@ -161,22 +164,25 @@
         <div class="devui-transfer-title">
           <d-checkbox
             [disabled]="disabled || targetDisplayOptionLen === 0"
-            [label]="titles.target"
+            [labelTemplate]="targetLabel"
             [isShowTitle]="false"
             (change)="checkAll(transferDirection.TARGET, $event)"
             [halfchecked]="targetHalfChecked"
             [(ngModel)]="targetAllChecked"
           >
           </d-checkbox>
+          <ng-template #targetLabel>
+            <span [style.font-weight]="600">{{ titles.target }}</span>
+          </ng-template>
           <span class="devui-transfer-num">{{ targetCheckedLen }}/{{ targetDisplayOptionLen }}</span>
         </div>
-        <div class="devui-transfer-line"></div>
         <div class="devui-transfer-content" [class.disabled]="disabled">
           <div class="devui-transfer-search" *ngIf="isSearch" [class.disabled]="disabled">
             <d-search
               style="width: 100%"
+              [styleType]="'gray'"
               [placeholder]="i18nCommonText?.searchPlaceholder"
-              [size]="'sm'"
+              [iconPosition]="'left'"
               [(ngModel)]="targetSearchText"
               (searchFn)="search(transferDirection.TARGET, $event)"
             ></d-search>

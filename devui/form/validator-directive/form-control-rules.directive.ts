@@ -14,7 +14,7 @@ import {
   Self,
   SimpleChanges,
   SkipSelf,
-  TemplateRef
+  TemplateRef,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -23,7 +23,7 @@ import {
   ControlContainer,
   NgControl,
   ValidationErrors,
-  ValidatorFn
+  ValidatorFn,
 } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
@@ -40,7 +40,7 @@ import {
   DValidateRule,
   DValidateRules,
   DValidationErrorStrategy,
-  ruleReservedWords
+  ruleReservedWords,
 } from './validate.type';
 
 @Directive()
@@ -512,8 +512,9 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
   @Input('dValidatePopConfig') popConfig: DPopConfig;
 
   popoverComponentRef: ComponentRef<PopoverComponent>;
-  private destroy$ = new Subject<void>();
   popMessage: string | TemplateRef<any>; // 最终显示的message
+  private destroy$ = new Subject<void>();
+  private _prevMessage: string;
 
   get showType() {
     return (this.fullRules as { messageShowType: string }).messageShowType || 'popover';
@@ -524,13 +525,13 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
   }
 
   constructor(
-  @Self() cd: NgControl,
-          @Optional() @Host() private dFormItem: FormItemComponent,
-          @Optional() @Host() @SkipSelf() parentDir: DFormGroupRuleDirective,
-          private i18n: I18nService,
-          public triggerElementRef: ElementRef,
-          private overlayContainerRef: OverlayContainerRef,
-          private componentFactoryResolver: ComponentFactoryResolver
+    @Self() cd: NgControl,
+    @Optional() @Host() private dFormItem: FormItemComponent,
+    @Optional() @Host() @SkipSelf() parentDir: DFormGroupRuleDirective,
+    private i18n: I18nService,
+    public triggerElementRef: ElementRef,
+    private overlayContainerRef: OverlayContainerRef,
+    private componentFactoryResolver: ComponentFactoryResolver
   ) {
     super(cd, parentDir);
   }
@@ -575,8 +576,11 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
   _updatePopMessage(status: DFormControlStatus, message: string): void {
     this.popMessage = status === 'error' ? message : null; // 暂不提供除errorMessage外提示
     if (this.popoverComponentRef) {
-      this.hidePopMessage();
-      this.showPopMessage();
+      if (this._prevMessage !== this.popMessage) {
+        this.hidePopMessage();
+        this.showPopMessage();
+        this._prevMessage = this.popMessage;
+      }
     }
   }
 
