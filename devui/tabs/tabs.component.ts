@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
   ElementRef,
@@ -70,7 +71,7 @@ export class TabsComponent implements OnChanges, AfterViewInit {
     return this.scrollModeToggle && ['tabs', 'pills', 'wrapped'].includes(this.type);
   }
 
-  constructor(private el: ElementRef) {
+  constructor(private el: ElementRef, private cdr: ChangeDetectorRef) {
     this.id = `devuiTabs${TabsComponent.ID_SEED++}`;
   }
 
@@ -118,6 +119,7 @@ export class TabsComponent implements OnChanges, AfterViewInit {
           const leftFix = this.scrollModeToggle ? this.tabsEle.nativeElement.scrollLeft : 0;
           this.offsetLeft = tabEle.getBoundingClientRect().left + leftFix - this.tabsEle.nativeElement.getBoundingClientRect().left;
           this.offsetWidth = tabEle.getBoundingClientRect().width;
+          this.cdr.detectChanges();
         }
       });
     }

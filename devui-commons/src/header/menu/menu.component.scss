@@ -9,12 +9,12 @@
     padding: 12px 20px;
 
     .menu-list {
+
       .menu-list-title {
         line-height: 36px;
       }
 
       .menu-sublist-item:not(:last-child) {
-        // padding: 0 10px;
         margin-bottom: 8px;
       }
 
@@ -78,12 +78,13 @@
       .menu-sublist {
         .menu-sublist-item {
           a {
-            .menu-sublist-title {
+            .menu-sublist-title{
               font-size: $devui-font-size;
               font-weight: $devui-font-content-weight;
               margin-bottom: 0;
             }
           }
+
         }
         .menu-sublist-item:not(:last-child) {
           margin-bottom: 4px;
@@ -92,6 +93,7 @@
     }
   }
 }
+
 
 .header-menu-container {
   display: flex;
@@ -156,4 +158,56 @@
 }
 .ecology-desc-container {
   margin-left: 8px;
+}
+
+@media (max-width: 767px) {
+  .header-menu-container {
+    display: none;
+  }
+}
+
+.mobile-menu-wrapper {
+  display: flex;
+  align-items: center;
+
+  .logo {
+    display: flex;
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+}
+
+:host ::ng-deep .devui-accordion-item-title .devui-accordion-splitter {
+  border-left: none !important;
+  &::before {
+    display: none !important;
+  }
+}
+
+:host ::ng-deep .devui-accordion-item-title {
+  padding-left: 12px !important;
+  border-radius: $devui-border-radius-full;
+}
+
+:host ::ng-deep .devui-accordion-item-title:not(.disabled).devui-router-active {
+  background: $devui-list-item-active-bg;
+  a {
+    color: $devui-list-item-active-text !important;
+  }
+}
+
+:host ::ng-deep .devui-accordion-item-title:not(.disabled):hover {
+  background: $devui-list-item-hover-bg;
+}
+
+:host ::ng-deep d-accordion-item-hreflink.devui-accordion-item-title > a {
+  padding: 0 0 0 0 !important;
+}
+
+:host ::ng-deep .devui-accordion-item:not(:first-child) {
+  margin-top: 8px;
+}
+
+:host ::ng-deep .devui-accordion-submenu {
+  margin-top: 8px;
 }

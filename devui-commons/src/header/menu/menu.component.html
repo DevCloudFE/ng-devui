@@ -1,4 +1,4 @@
-<div class="header-menu-container">
+<div class="header-menu-container"  *ngIf="!showMobileMenu">
   <div
     class="header-menu-item"
     *ngFor="let item of menuList"
@@ -21,12 +21,9 @@
       <div class="text">{{ curLanguage === 'zh-cn' ? item.name : item.enName }}</div>
       <div dDropDownMenu class="devui-scrollbar menu-list-wrapper">
         <div class="menu-lists" [ngClass]="{ 'menu-lists-specifications': item.name === '开发规范' }">
-          <div class="menu-list" *ngFor="let itemInList of item.children">
-            <div class="menu-list-title" *ngIf="itemInList.name">
-              {{ curLanguage === 'zh-cn' ? itemInList.name : itemInList.enName }}
-            </div>
+          <div class="menu-list">
             <ul class="menu-sublist">
-              <li class="menu-sublist-item" *ngFor="let itemInSubList of itemInList.children">
+              <li class="menu-sublist-item" *ngFor="let itemInSubList of item.children">
                 <a
                   *ngIf="itemInSubList.href"
                   [href]="itemInSubList.href"
@@ -63,4 +60,21 @@
       </div>
     </div>
   </div>
+</div>
+<div class="mobile-menu" *ngIf="showMobileMenu">
+  <d-accordion
+    [titleKey]="'name'"
+    [linkKey]="'href'"
+    [linkType]="'hrefLink'"
+    [data]="menuList"
+    [itemTemplate]="menutemplate"
+    [menuItemTemplate]="menutemplate"
+    [accordionType]="'embed'"
+  ></d-accordion>
+  <ng-template #menutemplate let-item="item">
+    <div class="mobile-menu-wrapper">
+      <div class="logo" [innerHTML]="item.icon | safe: 'html'"></div>
+      <div class="text">{{ curLanguage === 'zh-cn' ? item.name : item.enName }}</div>
+    </div>
+  </ng-template>
 </div>

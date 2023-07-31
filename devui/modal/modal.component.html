@@ -18,6 +18,7 @@
     [ngStyle]="{ width: width }"
     [@wipeInOutAnimation]="animateState"
     (@wipeInOutAnimation.done)="onAnimationEnd($event)"
+    [@.disabled]="!showAnimation"
     tabindex="1"
     #dialog
   >

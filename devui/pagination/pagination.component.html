@@ -10,12 +10,21 @@
         <span iconPrefix>{{ pageSize }}</span>
       </d-icon>
       <ul dDropDownMenu class="devui-dropdown-menu devui-pagination-dropdown-menu" role="menu" (click)="$event.stopPropagation()">
-        <li *ngFor="let item of pageSizeOptions" class="devui-dropdown-item" (click)="onPageSizeChange(item)">{{ item }}</li>
+        <li
+          *ngFor="let item of pageSizeOptions"
+          class="devui-dropdown-item"
+          [class.devui-pagination-acitve-item]="item === pageSize"
+          (click)="onPageSizeChange(item)"
+        >
+          {{ item }}
+        </li>
       </ul>
     </div>
     <span style="margin-right: 8px">{{ i18nText?.perPage }},</span>
   </ng-container>
-  <div *ngIf="canViewTotal" class="devui-total-size">{{ totalItemText ? totalItemText + ': ' + total : i18nText?.totalItem(total) }}</div>
+  <div *ngIf="canViewTotal" class="devui-total-size">
+    {{ totalItemText ? totalItemText + ': ' + (total | number) : i18nText?.totalItem(total | number) }}
+  </div>
   <div *ngIf="lite && showPageSelector" class="devui-lite-paginator" #litePaginator>
     <d-select
       [scrollHight]="'200px'"
@@ -33,7 +42,7 @@
   <ul class="devui-pagination-list {{ size ? 'devui-pagination-' + size : '' }}">
     <ng-container *ngIf="!lite">
       <li *ngIf="preLink" [ngClass]="{ disabled: pageIndex == totalPage }">
-        <a (click)="prev()" class="devui-pagination-link" [innerHTML]="preLink | safe: 'html'"></a>
+        <a (click)="prev()" class="devui-pagination-link" [innerHTML]="preLink | safe : 'html'"></a>
       </li>
       <li *ngIf="!preLink" [ngClass]="{ disabled: pageIndex == 1 }">
         <a (click)="prev()" class="devui-pagination-link">
@@ -62,7 +71,7 @@
         <a>...</a>
       </li>
       <li *ngIf="showPages[showPages.length - 1] < totalPage" (click)="last()">
-        <a>{{ totalPage }}</a>
+        <a>{{ totalPage | number }}</a>
       </li>
       <ng-container *ngIf="showTruePageIndex && pageIndex > totalPage && totalPage > 0">
         <li *ngIf="pageIndex > totalPage + 1" class="disabled"><a>...</a></li>
@@ -71,7 +80,7 @@
         </li>
       </ng-container>
       <li *ngIf="nextLink" [ngClass]="{ disabled: pageIndex == totalPage }">
-        <a (click)="next()" class="devui-pagination-link" [innerHTML]="nextLink | safe: 'html'"></a>
+        <a (click)="next()" class="devui-pagination-link" [innerHTML]="nextLink | safe : 'html'"></a>
       </li>
       <li *ngIf="!nextLink" [ngClass]="{ disabled: pageIndex == totalPage || !total }">
         <a (click)="next()" class="devui-pagination-link">
@@ -94,7 +103,7 @@
           (click)="prev()"
           [attr.aria-label]="nextLink"
           class="devui-pagination-link devui-pagination-link-lite"
-          [innerHTML]="preLink | safe: 'html'"
+          [innerHTML]="preLink | safe : 'html'"
         ></a>
       </li>
       <li *ngIf="!preLink" [ngClass]="{ disabled: pageIndex == 1 }">
@@ -115,7 +124,7 @@
           (click)="next()"
           [attr.aria-label]="nextLink"
           class="devui-pagination-link devui-pagination-link-lite"
-          [innerHTML]="nextLink | safe: 'html'"
+          [innerHTML]="nextLink | safe : 'html'"
         ></a>
       </li>
       <li *ngIf="!nextLink" [ngClass]="{ disabled: pageIndex >= totalPage }">

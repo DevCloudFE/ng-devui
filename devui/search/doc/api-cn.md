@@ -22,7 +22,8 @@ import { SearchModule } from 'ng-devui/search';
 |   autoFocus    | `boolean` |          false          | 可选，输入框是否自动对焦               | [自动对焦](demo#auto-focus)       |
 | isKeyupSearch | `boolean` |          false          | 可选，是否支持输入值立即出发 searchFn   | [基本用法](demo#basic-usage)           |
 | iconPosition  | `string` |          'right'          | 可选，搜索图标位置，有两种选择'left' / 'right'| [搜索图标左置](demo#icon-left) |
-| noBorder  | `boolean` |          'false'          | 可选，是否显示边框 | [搜索图标左置](demo#icon-left) |
+| noBorder  | `boolean` |          'false'          | 可选，是否显示边框 | [无边框](demo#search-no-border) |
+| styleType  | `'default' \| 'gray'` |          'default'          | 可选，default为默认有线框白底风格，gray为无线框灰底风格 | [无边框](demo#search-no-border) | ✔ |
 |   cssClass    | `string`  |           ''            | 可选，支持传入类名到输入框上            |                                                          |
 
 ## d-search 事件

@@ -11,7 +11,7 @@
         class="devui-time-item devui-first-item"
         [ngClass]="{
           active: item?.active,
-          disabled: item?.disabled
+          disabled: itemIsDisabled('hour', i)
         }"
         (click)="chooseTime(item.type, i, true)"
       >
@@ -24,7 +24,7 @@
         class="devui-time-item devui-second-item"
         [ngClass]="{
           active: item?.active,
-          disabled: item?.disabled
+          disabled: itemIsDisabled('min', i)
         }"
         (click)="chooseTime(item.type, i, true)"
       >
@@ -37,7 +37,7 @@
         class="devui-time-item devui-third-item"
         [ngClass]="{
           active: item?.active,
-          disabled: item?.disabled
+          disabled: itemIsDisabled('sec', i)
         }"
         (click)="chooseTime(item.type, i, true)"
       >

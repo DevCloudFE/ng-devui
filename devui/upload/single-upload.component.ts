@@ -1,8 +1,11 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, EventEmitter, forwardRef, Inject, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Component, EventEmitter, forwardRef, HostBinding, Inject, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ToastService } from 'ng-devui/toast';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { from, merge, Observable, Subscription } from 'rxjs';
 import { last, map, mergeMap, toArray } from 'rxjs/operators';
 import { FileUploader } from './file-uploader.class';
@@ -51,6 +54,10 @@ export class SingleUploadComponent implements OnDestroy, OnInit, ControlValueAcc
   @Output() fileDrop: EventEmitter<any> = new EventEmitter<any>();
   @Output() fileOver: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() fileSelect: EventEmitter<File> = new EventEmitter<File>();
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+    return this.showGlowStyle;
+  };
   @ViewChild('dSingleUploadView', { static: true }) singleUploadViewComponent: SingleUploadViewComponent;
   UploadStatus = UploadStatus;
   isDropOVer = false;
@@ -66,7 +73,8 @@ export class SingleUploadComponent implements OnDestroy, OnInit, ControlValueAcc
     private i18n: I18nService,
     private selectFiles: SelectFiles,
     @Inject(DOCUMENT) private doc: any,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private devConfigService: DevConfigService
   ) {
     this.document = this.doc;
   }

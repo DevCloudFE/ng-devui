@@ -21,7 +21,7 @@ export class FixColumnComponent implements OnInit {
         field: 'firstName',
         header: 'First Name',
         fieldType: 'text',
-        fixedLeft: '36px'
+        fixedLeft: '41px'
       },
       {
         field: 'lastName',
@@ -80,7 +80,7 @@ export class FixColumnComponent implements OnInit {
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'checkbox',
-      width: '36px'
+      width: '41px'
     },
     {
       field: 'firstName',

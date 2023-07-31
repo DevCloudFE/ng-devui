@@ -249,3 +249,10 @@ d-tag {
 ::ng-deep d-accordion-item-routerlink.devui-accordion-item-title:has(.devui-parent-list) {
   font-weight: bold !important;
 }
+
+@media (max-width: 767px) {
+  .sidebar-wrapper {
+    left: 0;
+    top: 56px;
+  }
+}

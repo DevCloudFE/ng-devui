@@ -10,7 +10,7 @@ import { TableTrComponent } from '../row/tr.component';
 })
 export class TableTbodyComponent implements OnInit {
   @Input() dataSource: any[] = [];
-  @Input() rowTemplete: TemplateRef<TableTrComponent>;
+  @Input() rowTemplete: TemplateRef<any>;
   @Input() nestedLayer = 0;
   @Input() nestedIndex = '-1';
   @Input() virtualScroll;

@@ -88,6 +88,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
   mouseDownScreenX: number;
   resizeHandleElement: HTMLElement;
   tableElement: HTMLElement;
+  tableHeaderElement: HTMLElement;
 
   // 以下为内部传递参数，不对外暴露
   @Input() childrenTableOpen: boolean;
@@ -242,6 +243,14 @@ export class TableThComponent implements OnChanges, OnDestroy {
         this.resizeBarRefElement = resizeBar;
       }
 
+      this.tableHeaderElement = this.tableViewRefElement.nativeElement.querySelector('.table-fix-header');
+
+      if (this.tableHeaderElement) {
+        this.renderer2.appendChild(this.tableHeaderElement, resizeBar);
+        this.renderer2.setStyle(resizeBar, 'display', 'block');
+        this.renderer2.setStyle(resizeBar, 'left', initialOffset + this.initialWidth - 2 + 'px');
+      }
+
       this.renderer2.addClass(this.element, 'hover-bg');
 
       const mouseup = fromEvent(this.document, 'mouseup');
@@ -269,6 +278,10 @@ export class TableThComponent implements OnChanges, OnDestroy {
       this.renderer2.removeClass(this.element, 'hover-bg');
       if (this.tableElement) {
         this.renderer2.removeChild(this.tableElement, this.resizeBarRefElement);
+      }
+
+      if(this.tableHeaderElement) {
+        this.renderer2.removeChild(this.tableHeaderElement, this.resizeBarRefElement);
       }
 
       this.resizeEndEvent.emit({ width: finalWidth, beforeWidth: this.initialWidth });

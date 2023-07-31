@@ -1,0 +1,21 @@
+<div class="devui-input-group-container" [class.disabled]="isEmbed && disabled">
+  <span #prefix *ngIf="prefixContent" class="devui-input-group-item prefix">
+    <ng-template
+      [ngTemplateOutlet]="prefixContent | dInputGroupPipe : defaultInputGroupTemplate : isEmbed : container : prefix : 'padding-left'"
+      [ngTemplateOutletContext]="{ content: prefixContent, disabled: disabled }"
+    ></ng-template>
+  </span>
+  <span #container class="devui-input-group-content {{ innerContentClass }}">
+    <ng-content></ng-content>
+  </span>
+  <span #suffix *ngIf="suffixContent" class="devui-input-group-item suffix">
+    <ng-template
+      [ngTemplateOutlet]="suffixContent | dInputGroupPipe : defaultInputGroupTemplate : isEmbed : container : suffix : 'padding-right'"
+      [ngTemplateOutletContext]="{ content: suffixContent, disabled: disabled }"
+    ></ng-template>
+  </span>
+</div>
+
+<ng-template #defaultInputGroupTemplate let-content="content">
+  <span>{{ content }}</span>
+</ng-template>

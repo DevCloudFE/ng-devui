@@ -9,7 +9,7 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./devui-codebox.component.scss'],
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
-})
+  })
 export class DevuiCodeboxComponent implements OnInit {
   _copied = false;
 

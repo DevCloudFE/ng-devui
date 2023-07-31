@@ -55,12 +55,14 @@ import { TreeSelectModule } from 'ng-devui/tree-select';
 | virtualScrollItemSize    | `number`                                                           | 30                                      | 可选, 设置虚拟滚动内元素的尺寸，单位为`px` ，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items                              | [虚拟滚动](demo#virtual-scroll)                                                                   |
 | showAnimation            | `boolean`                                                          | true                                    | 可选，是否开启动画                                                                                                                                               |                                                                                                   | ✔          |
 | checkableRelation        | `'upward' \| 'downward' \| 'both' \| 'none'`                       | 'both'                                  | 可选，设置父子节点的 check 规则                                                                                                                                  | [树组件 checkableRelation](http://devui.huawei.com/components/zh-cn/tree/demo#check-control-tree) |
+| showGlowStyle            | `boolean`                                                          | true                                    | 可选，是否显示悬浮发光效果                                                                                                                                       |
 
 ### d-tree-select 事件
 
 | 事件            | 类型                                             | 说明                                               | 跳转 Demo                    |
 | --------------- | ------------------------------------------------ | -------------------------------------------------- | ---------------------------- |
 | valueChanged    | `EventEmitter<Array<`[`TreeNode`](#treenode)`>>` | 可选，选择节点时触发的变化，返回值为当前选中的节点 | [基本用法](demo#basic-usage) |
+| toggleChange    | `EventEmitter<boolean>`                          | 可选，返回下拉打开关闭状态                         | [基本用法](demo#basic-usage) |
 | nodeToggleEvent | `EventEmitter<`[`TreeNode`](#treenode)`>`        | 可选，展开收起节点时触发，返回值为触发的节点       | [基本用法](demo#basic-usage) |
 
 ## 接口 & 类型定义

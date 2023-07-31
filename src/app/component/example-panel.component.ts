@@ -29,7 +29,7 @@ import { ComponentDataService } from './component.data.service';
   selector: 'd-demo-cell',
   styleUrls: ['./example-panel.component.scss'],
   templateUrl: './example-panel.component.html',
-  })
+})
 export class ExamplePanelComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() data: IExampleData;
   @ViewChildren('html') html: QueryList<ElementRef>;
@@ -69,6 +69,10 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit, OnDestroy {
     this.comDataService.getComData().subscribe((value) => {
       this.componentsData = value;
     });
+    this.setI18n();
+    this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+      this.setI18n();
+    });
   }
   ngOnDestroy(): void {
     if (this.subs) {
@@ -102,6 +106,10 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subs = new Subscription();
     this.addScrollEvent();
     this.imgPrefix = './' + this.srcPrefix + '/overview/';
+  }
+
+  setI18n() {
+    this.footer = this.translate.instant('footer') || {};
   }
 
   addScrollEvent() {

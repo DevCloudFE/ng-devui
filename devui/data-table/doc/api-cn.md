@@ -410,7 +410,8 @@ export interface TableStyleData {
 |          filterBoxWidth           |              `any`              | --                |                              过滤弹出框的宽度，如：‘300px’                              |
 |          filterBoxHeight          |              `any`              | --                |                              过滤弹出框的高度，如：‘400px’                              |
 |        nestedColumnIndent           |           `number`              | 16                |                            单元格中子表格的缩进距离，单位px                              | [树形表格](demo#tree-form) |
-|        advancedHeader           |           `advancedHeader`              |      --          |                            column类型的表格中实现表头单元格合并                              | [树形表格](demo#tree-form) |
+|        advancedHeader           |           `advancedHeader`              |      --          |                            column类型的表格中实现表头单元格合并                              | [表头分组](demo#header-grouping) |
+|        headCellApplyAll           |           `boolean`              |      false          |                            column类型的表格中head-cell模板是否作用于每一层表头，false时只作用于最后一层                           | |
 
 ## d-column 事件
 
@@ -523,12 +524,14 @@ advancedHeader: Array < {
 |     dataTableProperties      |      [`DataTablePropertiesInterface`](#DataTablePropertiesInterface)      | --     |         可选，对dataTable原有参数的支持，可支持定义在DataTablePropertiesInterface中的参数                            |[大数据量树形表格交互](demo#virtual-scroll-tree-table-interaction)|
 |     draggable      |      `boolean`      | false     |                                        可选，表格是否开启行拖拽                                    |[大数据量树形表格交互](demo#virtual-scroll-tree-table-interaction)|
 |     checkableRelation      |      `CheckableRelation`      | { upward: true, downward: true }     |                                        可选，表格的树形父子选中逻辑关系                                  | - |
+|     dragDomTemplate      |      `TemplateRef<any>`      |  -  |            拖拽dom模板，暴露两个参数rowItemList和columns                | - |
 
 ## virtual-scroll-tree-table 事件
 |         事件          |                  类型                  |                           描述                           |                        跳转 Demo                         |
 | :-------------------: | :------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: |
 |        save         |  `EventEmitter<any>`  |               返回操作改变之后的数据               | [大数据量树形表格基本用法](demo#virtual-scroll-tree-table-basic) |
 |        allChecked         |  `EventEmitter<any>`  |               返回表头复选框状态               | [大数据量树形表格交互](demo#virtual-scroll-tree-table-interaction) |
+|        dropRow         |  `EventEmitter<dataList: any[];dropIndex: number;>`  |               表格行拖拽的投放事件               | [大数据量树形表格拖拽](demo#virtual-scroll-tree-table-multi-drag) |
 
 原datatable事件都可以透传，支持multiSortChange，cellClick，cellDBClick，rowClick，rowDBClick，cellEditStart，cellEditEnd，resize事件。
 
@@ -751,11 +754,36 @@ delete(rowItem) {
 @ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
 
 dragDown(downEvent, rowItem, rowIndex) {
+  this.VirtualTableTree.customDragDown(
+    [rowItemList], true,
+    this.customDragMove,
+    this.customDrop
+  );
+}
+
+customDragMove = (event, rowItemList) => {
+  // 自定义移动逻辑，可以添加相关区域悬浮触发的效果
+}
+
+customDrop(event, rowItemList) => {
+  // 自定义投放逻辑
+}
+
+// 使用@ViewChild调用VirtualScrollTreeTableComponent中的customDragDown方法
+```
+
+## 大数据量树形表格自定义拖拽逻辑，可实现向表外拖拽
+
+``` javascript
+@ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+dragDown(rowItem, rowIndex) {
   this.VirtualTableTree.dragDown(downEvent, rowItem, rowIndex, document);
 }
 
 // 使用@ViewChild调用VirtualScrollTreeTableComponent中的dragDown方法
 ```
+
 
 ## 大数据量树形表格复选
 
@@ -802,7 +830,11 @@ onRowCheckChange(event, rowItem) {
 }
 
 onAllCheckChange(event) {
-  this.VirtualTableTree.onAllCheckChange(event);
+  this.VirtualTableTree.onAllCheckChange(event, this.customAllCheckFunc); // onAllCheckChange第二个参数可选，可自定义全选逻辑
+}
+
+const customAllCheckFunc = (treeArray, checked) => { // 操作全量铺平数据checked属性，自定义全选逻辑
+  treeArray.forEach(() => .....)
 }
 
 allChecked(event) {

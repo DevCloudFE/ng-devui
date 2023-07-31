@@ -74,7 +74,7 @@ export class TableOptionModalComponent implements OnInit {
   }
 
   searchIndex(col) {
-    return this.data.columnsData.findIndex(t => t.header === col.header);
+    return this.data.columnsData.findIndex(t => t.header === col?.header);
   }
 
   onDrop(e) {
@@ -86,7 +86,7 @@ export class TableOptionModalComponent implements OnInit {
       }
       this._columnsData.splice(index, 0, fromIndex === -1 ? e.dragData : this._columnsData.splice(fromIndex, 1)[0]);
     } else {
-      this._columnsData.push(e.dragData);
+      this._columnsData.push(this._columnsData.splice(fromIndex, 1)[0]);
     }
   }
 

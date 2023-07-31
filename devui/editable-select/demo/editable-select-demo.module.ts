@@ -17,6 +17,7 @@ import { DisableDataWithSourceComponent } from './disable-data/disable-data-with
 import { EditableSelectDemoComponent } from './editable-select-demo.component';
 import { EditableSelectDesignComponent } from './editable-select-design.component';
 import { LazyLoadComponent } from './lazy-load/lazy-load.component';
+import { ObjectSourceComponent } from './object/object-source.component';
 import { WithSearchFunctionComponent } from './search-function/with-search-function.component';
 
 @NgModule({
@@ -57,6 +58,7 @@ import { WithSearchFunctionComponent } from './search-function/with-search-funct
     WithSourceComponent,
     LazyLoadComponent,
     CustomAreaComponent,
+    ObjectSourceComponent,
   ],
   providers: [],
 })

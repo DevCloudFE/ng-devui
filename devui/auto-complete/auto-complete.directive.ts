@@ -18,7 +18,7 @@ import {
   Renderer2,
   SimpleChanges,
   TemplateRef,
-  ViewContainerRef,
+  ViewContainerRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
@@ -30,12 +30,15 @@ import {
   AppendToBodyScrollStrategyType,
   DevConfigService,
   removeClassFromOrigin,
-  WithConfig,
+  WithConfig
 } from 'ng-devui/utils';
 import { fromEvent, Observable, of, Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { AutoCompleteConfig } from './auto-complete-config';
 import { AutoCompletePopupComponent } from './auto-complete-popup.component';
+
+// select(下拉框) select-extend(editable-select用,下拉聚焦时不搜索，变更inputValue后手动搜索) suggest(联想)
+export type autoCompleteSceneType = '' | 'select' | 'select-extend' | 'suggest';
 
 @Directive({
   selector: '[dAutoComplete]',
@@ -58,6 +61,10 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
    */
   @Input() cssClass: string;
   @Input() delay = 300;
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
+    return this.showGlowStyle;
+  }
   /**
    * @deprecated
    */
@@ -82,7 +89,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   @Input() cdkOverlayOffsetY = 0; // 内部使用不开放
   @Input() dAutoCompleteWidth: number;
   @Input() formatter: (item: any) => string;
-  @Input() sceneType = ''; // sceneType使用场景：select(下拉框) suggest(联想)
+  @Input() sceneType: autoCompleteSceneType = '';
   @Input() tipsText = ''; // 提示文字
   /*
  overview: border none multiline single
@@ -122,6 +129,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   position: any;
   focus = false;
   scrollStrategy: ScrollStrategy;
+  SELECT_TYPES = ['select', 'select-extend'];
 
   private destroy$ = new Subject<void>();
   private valueChanges: Observable<any[]>;
@@ -171,9 +179,8 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
         this.loadMore.emit(item.value);
         return;
       }
-      const value = this.valueParser(item.value);
-      this.writeValue(value);
-      this.onChange(value);
+      this.writeValue(item.value);
+      this.onChange(item.value);
       this.hidePopup();
       this.selectValue.emit(item.value);
       if (this.overview && this.overview !== 'single') {
@@ -250,7 +257,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
   // 调用时机：input keyup
   onSourceChange(source) {
     if (!this.elementRef.nativeElement.value) {
-      if (this.sceneType !== 'select' && !this.allowEmptyValueSearch) {
+      if (!this.SELECT_TYPES.includes(this.sceneType) && !this.allowEmptyValueSearch) {
         // 下拉场景不展示最近输入
         this.showLatestSource();
       } else {
@@ -298,7 +305,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
       this.popTipsText = this.tipsText || '';
       this.fillPopup(source, this.value);
       if (setOpen) {
-        this.openPopup();
+        this.openPopup(isReset ? 0 : -1);
       }
       this.changeDetectorRef.markForCheck();
       this.updatePosition();
@@ -317,17 +324,21 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     }
   }
 
-  public openPopup(activeIndex = 0) {
-    this.popupRef.instance.activeIndex = activeIndex;
-    this.popupRef.instance.isOpen = true;
+  public openPopup(activeIndex?: number) {
+    const index = activeIndex >= 0 ? activeIndex : this.popupRef.instance.activeIndex;
+    this.popupRef.instance.activeIndex = index;
+    this.popupRef.instance.hoverIndex = index;
     this.popupRef.instance.disabled = this.disabled;
-    addClassToOrigin(this.elementRef);
-    this.changeDropDownStatus.emit(true);
-    this.toggleChange.emit(true);
+    if (!this.popupRef.instance.isOpen) {
+      this.popupRef.instance.isOpen = true;
+      addClassToOrigin(this.elementRef);
+      this.changeDropDownStatus.emit(true);
+      this.toggleChange.emit(true);
+    }
   }
 
   writeValue(obj): void {
-    this.value = this.formatter(obj) || '';
+    this.value = this.valueParser(obj) || '';
     this.writeInputValue(this.value);
   }
 
@@ -360,11 +371,8 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
       focus: true,
       popupRef: this.popupRef,
     });
-    const isOpen = this.sceneType !== 'select';
     if (this.sceneType === 'select') {
-      this.searchFn(this.value ?? '').subscribe((source) => {
-        this.showSource(source, isOpen, false);
-      });
+      this.searchValue(this.value ?? '', false);
     }
   }
 
@@ -418,28 +426,40 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
 
     // TODO: sceneType为'select'时，自定义了太多处理，十分不优雅，需要合一化
     const hostElement = this.elementRef.nativeElement;
+    const isInside = hostElement.contains($event.target);
+    const isSelect = this.SELECT_TYPES.includes(this.sceneType);
+    const value = this.elementRef.nativeElement.value;
     if (this.popupRef && this.popupRef.instance.isOpen) {
-      if ((!hostElement.contains($event.target) && this.sceneType === 'select') || this.sceneType !== 'select') {
+      if ((!isInside && isSelect) || !isSelect) {
         this.hidePopup();
       }
-      if (!hostElement.contains($event.target)) {
+      if (!isInside) {
         this.transInputFocusEmit.emit({
           focus: false,
           popupRef: this.popupRef,
         });
       }
-    } else if (hostElement.contains($event.target) && this.sceneType !== 'select') {
-      if (!this.elementRef.nativeElement.value && !this.allowEmptyValueSearch) {
+    } else if (isInside && !isSelect) {
+      if (!value && !this.allowEmptyValueSearch) {
         this.showLatestSource();
       } else {
-        this.searchFn(this.elementRef.nativeElement.value).subscribe((source) => {
-          this.showSource(source, true, false);
-        });
+        this.searchValue(value, true);
       }
     }
   }
 
-  public hidePopup = () => {
+  searchValue(value: any, isOpen: boolean) {
+    this.searchFn(value).subscribe((source) => {
+      const searchStr = this.formatter(value) ?? '';
+      if (searchStr) {
+        const activeIndex = source.map((item) => this.formatter(item).toLowerCase()).indexOf(searchStr.toLowerCase());
+        this.popupRef.instance.activeIndex = activeIndex > -1 ? activeIndex : 0;
+      }
+      this.showSource(source, isOpen, false);
+    });
+  }
+
+  hidePopup = () => {
     if (this.popupRef) {
       this.popupRef.instance.isOpen = false;
       removeClassFromOrigin(this.elementRef);

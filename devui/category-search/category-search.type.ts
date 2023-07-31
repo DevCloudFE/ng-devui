@@ -138,6 +138,7 @@ export interface TextConfig {
   createFilter?: string;
   filterTitle?: string;
   labelConnector?: string;
+  noCategoriesAvailable?: string;
 }
 
 export interface ExtendedConfig {

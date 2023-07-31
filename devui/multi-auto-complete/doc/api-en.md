@@ -37,6 +37,7 @@ In the page:
 | latestSource           | `Array<any>`                                        | --                                            | Optional. Latest input                                                                                                                                                                                                                    | [Last input](demo#auto-latest)                         |
 | showAnimation          | `boolean`                                           | true                                          | optional. Whether to enable animation.                                                                                                                                                                                                    |                                                        | ✔             |
 | cssClass               | `string`                                            | --                                            | Optional. ClassName of the input.                                                                                                                                                                                                         |
+| showGlowStyle | `boolean` | true | (Optional) Indicates whether to display the floating glow effect.|
 
 ## d-multi-auto-complete events
 

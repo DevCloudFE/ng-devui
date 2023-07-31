@@ -1,4 +1,6 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component, ElementRef, OnDestroy, OnInit
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
@@ -18,6 +20,7 @@ interface TimeObj {
   templateUrl: './timepicker-panel.component.html',
   styleUrls: ['./timepicker-panel.component.scss'],
   preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimepickerPanelComponent implements OnInit, OnDestroy {
 
@@ -38,7 +41,8 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
   constructor(
     private el: ElementRef,
     private pickSrv: DatepickerProService,
-    protected i18n: I18nService
+    protected i18n: I18nService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +65,7 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
       if (isOpen) {
         setTimeout(() => {
           this.initDateList(true);
+          this.cdr.detectChanges();
         });
       }
     });
@@ -79,6 +84,7 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
       if (this.secIndex !== value.seconds) {
         this.chooseTime('sec', value.seconds);
       }
+      this.cdr.detectChanges();
     });
 
     if (this.pickSrv.isRange) {
@@ -98,8 +104,28 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
         if (this.secIndex !== this.pickSrv.curSec || isNull) {
           this.chooseTime('sec', isNull ? null : this.pickSrv.curSec);
         }
+
       });
     }
+
+    this.pickSrv.selectedDateChange.pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(() => {
+      const isFixTime = this.fixTime();
+
+      this.cdr.detectChanges();
+
+      if (isFixTime) {
+        setTimeout(() => {
+          this.pickSrv.selectedTimeChange.next({
+            activeInput: this.pickSrv.currentActiveInput,
+            hour: this.hourIndex,
+            min: this.minIndex,
+            seconds: this.secIndex
+          });
+        });
+      }
+    });
   }
 
   initDateList(justScroll = false) {
@@ -114,30 +140,38 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
   }
 
   chooseTime(type: string, index: number, handle = false, justScroll = false) {
+    if (this.itemIsDisabled(type, index)) {
+      return;
+    };
+    let fixed: boolean;
     switch (type) {
     case 'hour':
       this.hourIndex = index;
+      fixed = this.fixTime(justScroll);
       this.firstList = new Array(24).fill(1).map((t, i) => {
         return {
           time: i < 10 ? `0${i}` : String(i),
           type: 'hour',
           active: this.hourIndex === i,
-          disabled: false
         };
       });
-      this.setAllScroll(index, this.pickSrv.curMin, this.pickSrv.curSec, justScroll);
+      if(!fixed) {
+        this.setScroll('first', this.hourIndex, justScroll);
+      };
       break;
     case 'min':
       this.minIndex = index;
+      this.fixTime(justScroll);
       this.secondList = new Array(60).fill(1).map((t, i) => {
         return {
           time: i < 10 ? `0${i}` : String(i),
           type: 'min',
           active: this.minIndex === i,
-          disabled: false
         };
       });
-      this.setAllScroll(this.pickSrv.curHour, index, this.pickSrv.curSec, justScroll);
+      if(!fixed) {
+        this.setScroll('second', this.minIndex, justScroll);
+      };
       break;
     case 'sec':
       this.secIndex = index;
@@ -146,11 +180,12 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
           time: i < 10 ? `0${i}` : String(i),
           type: 'sec',
           active: this.secIndex === i,
-          disabled: false
         };
       });
-      this.setAllScroll(this.pickSrv.curHour, this.pickSrv.curMin, index, justScroll);
+      this.setScroll('third', this.secIndex, justScroll);
     }
+
+    this.cdr.detectChanges();
 
     if (handle) {
       this.pickSrv.selectedTimeChange.next({
@@ -160,6 +195,79 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
         seconds: this.secIndex
       });
     }
+  }
+
+  fixTime(justScroll = false) {
+    let curTime: Date;
+
+    if (this.pickSrv.isRange) {
+      curTime = new Date(this.pickSrv.curRangeDate[this.pickSrv.currentActiveInput === 'start' ? 0 : 1]);
+    } else {
+      curTime = new Date(this.pickSrv.curDate);
+    }
+    curTime.setHours(this.hourIndex);
+    curTime.setMinutes(this.minIndex);
+    curTime.setSeconds(this.secIndex);
+
+    let isFixTime = false;
+
+    if (curTime.getTime() < this.pickSrv.minDate.getTime()) {
+      this.pickSrv.curDate = this.pickSrv.minDate;
+      isFixTime = true;
+    }
+
+    if (curTime.getTime() > this.pickSrv.maxDate.getTime()) {
+      this.pickSrv.curDate = this.pickSrv.maxDate;
+      isFixTime = true;
+    }
+
+    if(isFixTime) {
+      this.initDateList(justScroll);
+    }
+
+    return isFixTime;
+  }
+
+  itemIsDisabled(type, index) {
+    let curTime: Date;
+
+    if (this.pickSrv.isRange) {
+      curTime = new Date(this.pickSrv.curRangeDate[this.pickSrv.currentActiveInput === 'start' ? 0 : 1]);
+    } else {
+      curTime = new Date(this.pickSrv.curDate);
+    }
+
+    if (!curTime) {
+      return false;
+    }
+
+    let flag = false;
+    let time;
+    let isTimeBoundary = false;
+    const maxTime = this.pickSrv.maxDate.getTime();
+    const minTime = this.pickSrv.minDate.getTime();
+    switch (type) {
+    case 'hour':
+      curTime.setHours(index);
+      curTime.setMinutes(this.minIndex);
+      time = curTime.setSeconds(this.secIndex);
+      isTimeBoundary = time > maxTime ? this.pickSrv.maxDate.getHours() === index : this.pickSrv.minDate.getHours() === index;
+      break;
+    case 'min':
+      curTime.setHours(this.hourIndex);
+      curTime.setMinutes(index);
+      time = curTime.setSeconds(this.secIndex);
+      isTimeBoundary = time > maxTime ? this.pickSrv.maxDate.getMinutes() === index : this.pickSrv.minDate.getMinutes() === index;
+      break;
+    case 'sec':
+      curTime.setHours(this.hourIndex);
+      curTime.setMinutes(this.minIndex);
+      time = curTime.setSeconds(index);
+      break;
+    }
+    flag = time > maxTime || time < minTime;
+
+    return flag && !isTimeBoundary;
   }
 
   setAllScroll(first: number, second: number, third: number, justScroll: boolean) {

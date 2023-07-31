@@ -52,11 +52,13 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes['options']) {
+      this.values = this.values ?? [];
       this.checkType();
     }
   }
 
   checkType() {
+    this.options = this.options ?? [];
     this.options_display = [];
     const checkedArray = [];
     this.values.forEach(item => {

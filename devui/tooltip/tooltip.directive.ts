@@ -148,6 +148,10 @@ export class TooltipDirective implements OnChanges, AfterViewInit, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.tooltipComponentRef) {
       const { content, position, showAnimation } = changes;
+      if (!content.currentValue) {
+        this.hide();
+      }
+
       if (content) {
         this.instanceAssignValue('content');
       }

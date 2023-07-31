@@ -1,0 +1,28 @@
+<section>
+  <d-input-group #protocolItem [prefixContent]="protocol" [suffixContent]="star" [isEmbed]="true">
+    <input [style.padding-left]="paddingLeft" dTextInput [(ngModel)]="devui" />
+  </d-input-group>
+  <d-input-group [prefixContent]="protocol" [isEmbed]="true" [disabled]="true">
+    <input dTextInput [disabled]="true" [(ngModel)]="mailBox" />
+  </d-input-group>
+</section>
+
+<ng-template #protocol let-disabled="disabled">
+  <div #dropdownItem="d-dropdown" dDropDown appendToBody class="protocol-box" [class.disabled]="disabled">
+    <span dDropDownToggle>
+      <span>{{ disabled ? protocolDisabled : protocolValue }}</span>
+      <em class="icon icon-select-arrow" [ngClass]="{ open: dropdownItem.isOpen }"></em>
+    </span>
+    <ul dDropDownMenu class="protocol-list">
+      <li *ngFor="let protocolItem of protocolOptions" (click)="selectItem(protocolItem, dropdownItem)">
+        <a dDropDownMenuItem [class.selected]="protocolItem === protocolValue">{{ protocolItem }}</a>
+      </li>
+    </ul>
+  </div>
+</ng-template>
+
+<ng-template #star>
+  <div class="protocol-box" title="Light up a star for devui!">
+    <d-icon [icon]="icon" [color]="iconColor" (click)="lightUp()"></d-icon>
+  </div>
+</ng-template>

@@ -12,7 +12,7 @@ import { originSource, SourceType } from '../mock-data';
     margin-top: 4px;
   }
   `]
-  })
+})
 export class CheckOptionsComponent implements OnInit {
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
 
@@ -47,7 +47,7 @@ export class CheckOptionsComponent implements OnInit {
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'checkbox',
-      width: '60px'
+      width: '41px'
     },
     {
       field: '#',

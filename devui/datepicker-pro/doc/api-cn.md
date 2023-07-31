@@ -32,6 +32,7 @@ import { DatepickerProModule } from 'ng-devui/datepicker-pro';
 | mode | `'year' \| 'month' \| 'date'` | 'date' |  面板模式 | [年月选择器](demo#monthYear)|
 | markedDateList | `Date[]` | [] |  标记日期列表，可以配合MarkDateInfoTemplate模板展示提示信息 | [标记信息](demo#date-marked)|
 | markedRangeDateList | `Date[][]` | [] |  标记范围日期列表 | [标记信息](demo#date-marked)|
+|   showGlowStyle    |       `boolean`        |   true   |       可选，是否显示悬浮发光效果    |
 
 ## d-datepicker-pro 事件
 

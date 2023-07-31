@@ -1,0 +1,65 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+section {
+  width: 360px;
+
+  d-input-group {
+    margin-bottom: 4px;
+
+    input[dTextInput] {
+      width: 320px;
+    }
+  }
+}
+
+.protocol-box {
+  cursor: pointer;
+  height: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+
+  em.icon-select-arrow {
+    vertical-align: text-bottom;
+    margin-left: 4px;
+    font-size: 14px;
+    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &.disabled {
+    color: $devui-disabled-text;
+    cursor: not-allowed;
+
+    & > span {
+      pointer-events: none;
+    }
+  }
+
+  &:has(.icon-star) {
+    width: fit-content;
+  }
+}
+
+:host ::ng-deep span.devui-input-group {
+  &:has(.protocol-box.disabled) {
+    cursor: not-allowed;
+  }
+}
+
+::ng-deep {
+  .protocol-list {
+    transform: translateX(-8px);
+
+    li {
+      margin-bottom: 4px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
