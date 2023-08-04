@@ -38,6 +38,7 @@ export class ExtendComponent implements AfterViewInit {
   textConfig = {
     createFilter: '自定义过滤器',
     filterTitle: '自定义过滤器标题',
+    noCategoriesAvailable: '自定义无可用分类',
   };
   showSearchCategory = {
     keyword: false,

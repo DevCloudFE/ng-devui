@@ -158,6 +158,36 @@
         "change-values": "Change key value"
       }
     },
+    "input-group": {
+      "name": "input-group",
+      "type": "Data entry",
+      "path": "input-group",
+      "description": "Adds a prefix or suffix to the content of one or more class text boxes and provides the adaptive stitching effect.",
+      "tmw": "Scenario where the content of multiple text boxes needs to be combined.",
+      "basicDemo": {
+        "title": "Basic Usage",
+        "description": "It can contain one or more text box components. Line breaks are not allowed."
+      },
+      "responsiveDemo": {
+        "title": "Responsive usage",
+        "description": "It can be spliced based on the container width.",
+        "alarmRule": "Alarm Rule",
+        "defaultRule": "Default Rule",
+        "indicatorName": "Indicator Name",
+        "indicatorNamePlaceholder": "Enter an indicator name.",
+        "valueType": "Average",
+        "valueTypes": "Average, Maximum, Minimum"
+      },
+      "embedDemo": {
+        "title": "Embed Usage",
+        "description": "Works with the text-input component and does not support adaptive stitching."
+      },
+      "anchorLinkValues": {
+        "basic-usage": "Basic Usage",
+        "responsive-usage": "Responsive usage",
+        "embed-usage": "Embed Usage"
+      }
+    },
     "alert": {
       "name": "Alert",
       "type": "Feedback",
@@ -982,7 +1012,7 @@
           },
           "colorSource": {
             "devui-global-bg": "Global background with background color",
-            "devui-glass-morphism-bg":"Glass morphism background color",
+            "devui-glass-morphism-bg": "Glass morphism background color",
             "devui-global-bg-normal": "Global white background",
             "devui-base-bg": "Base block background white",
             "devui-base-bg-dark": "Base Block Background Dark (Fixed)",
@@ -1017,18 +1047,18 @@
             "devui-unavailable": "Unavailable or Disabled",
             "devui-shadow": "shadow color",
             "devui-light-shadow": "Weak shadow color",
-            "devui-icon-fill-weak":"Weakened icon fill color",
-            "devui-shape-icon-fill":"Shape type svg icon fill color",
-            "devui-shape-icon-fill-hover":"Shape type svg icon hover color",
-            "devui-shape-icon-fill-active":"Shape type svg icon active color",
-            "devui-shape-icon-fill-disabled":"Shape type svg icon disabled color",
+            "devui-icon-fill-weak": "Weakened icon fill color",
+            "devui-shape-icon-fill": "Shape type svg icon fill color",
+            "devui-shape-icon-fill-hover": "Shape type svg icon hover color",
+            "devui-shape-icon-fill-active": "Shape type svg icon active color",
+            "devui-shape-icon-fill-disabled": "Shape type svg icon disabled color",
             "devui-icon-text": "Text icon color, which is the same as the text color.",
             "devui-icon-bg": "svg Icon Background Color",
             "devui-icon-fill": "Grey fill color of the svg icon",
             "devui-icon-fill-hover": "svg Icon Gray Fill Color Hover Feedback Color",
             "devui-icon-fill-active": "svg Icon Highlight Fill Color (Active)",
             "devui-icon-fill-active-hover": "svg Icon Highlight Fill Color Hover Feedback Color",
-            "devui-form-control-bg":"Form control background color",
+            "devui-form-control-bg": "Form control background color",
             "devui-form-control-line": "Form control border color, which is the same as the border divider.",
             "devui-form-control-line-hover": "Form Control Border Hover Feedback Color",
             "devui-form-control-line-active": "Form Control Border Activation Color for Focus",
@@ -1073,8 +1103,8 @@
             "devui-primary-bg": "Primary background color",
             "devui-default-line": "Default border",
             "devui-default-bg": "Default background color",
-            "devui-connected-overlay-shadow":"Drop-down-menu shadow color",
-            "devui-feedback-overlay-shadow":"Information feedback block shadow color"
+            "devui-connected-overlay-shadow": "Drop-down-menu shadow color",
+            "devui-feedback-overlay-shadow": "Information feedback block shadow color"
           },
           "catalogs": {
             "basic": "Basic variable",
@@ -1230,7 +1260,9 @@
             "devui-shadow": "shadow color",
             "devui-light-shadow": "Weak shadow color",
             "devui-connected-overlay-shadow": "Pop-up (overlay) layer with connection points shadow color",
-            "devui-feedback-overlay-shadow": "Information Prompt Feedback Class shadow color"
+            "devui-feedback-overlay-shadow": "Information Prompt Feedback Class shadow color",
+            "devui-hover-shadow": "Dom hover shadow",
+            "devui-float-block-shadow": "Special floating layer background color"
           }
         }
       },
@@ -1509,6 +1541,10 @@
         "title": "Tree table with a large amount of data Interaction",
         "description": "Advanced operations on tree tables with a large amount of data, including dragging, selecting, deleting, and inheriting most functions of the original table."
       },
+      "virtualScrollTreeTableMultiDragDemo": {
+        "title": "Draging Big Data Tree Tables in Batches",
+        "description": "Hold down Ctrl to select and drag rows in batches."
+      },
       "mutilStylesDemo": {
         "title": "Table Style"
       },
@@ -1549,7 +1585,8 @@
         "muti-drag-row": "Batch Row dragging",
         "virtual-scroll-tree-table-basic": "Big Data Tree Table Basic",
         "virtual-scroll-tree-table-operation": "Big Data Tree Table Operation",
-        "virtual-scroll-tree-table-interaction": "Big Data Tree Table Interaction"
+        "virtual-scroll-tree-table-interaction": "Big Data Tree Table Interaction",
+        "virtual-scroll-tree-table-multi-drag": "Big Data Tree Table multiDrag"
       }
     },
     "datepickerPro": {
@@ -2384,7 +2421,11 @@
       "tmw": "You can use it easily when you want to search existed data.",
       "basicDemo": {
         "title": "Basic usage",
-        "description": "Set source to a data source."
+        "description": "Set source to a data source, and use enableSelectedValueList to control whether to display all options when a value is selected."
+      },
+      "ObjectDemo": {
+        "title": "Set an array of objects as the source",
+        "description": "Reads the label attribute by default when source is the object array. Use valueParser and formatter methods to customize the display value and format."
       },
       "disableDataDemo": {
         "title": "Set disable options",
@@ -2408,6 +2449,7 @@
       },
       "anchorLinkValues": {
         "basic-usage": "Basic usage",
+        "object-source": "Set an array of objects as the source",
         "disable-data-with-source": "Set disable options",
         "with-search-function": "Customized data matching method",
         "async-data-with-function": "Asynchronously obtaining the data source and setting the matching method",
@@ -2720,7 +2762,7 @@
       "tmw": "<div>1. When the operation takes a long time. </div> <div> 2. When an operation takes a long time to interrupt the current interface or background operation. </div> <div>3. To display the percentage of completed operations or the number of completed steps/total steps.</div>",
       "basicDemo": {
         "title": "Linear Progress Bar",
-        "description": "You can configure to display text or custom templates on the right or as you progress bar."
+        "description": "You can configure text and custom templates to be displayed in the middle, right, or as you progress."
       },
       "circleDemo": {
         "title": "Circular progress bar",
@@ -3636,7 +3678,7 @@
         "multiRowNotWebkitTitle": "Multiline Text by calculation",
         "multiRowExpandTitle": "Multiline Text Using collapse"
       },
-      "adaptiveInputDemo":{
+      "adaptiveInputDemo": {
         "title": "Adaptive Input",
         "description": "During editing, expands the input to textarea, then restored. This feature enables users to easily input and read a large amount of text when using input."
       },

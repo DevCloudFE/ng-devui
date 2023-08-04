@@ -32,6 +32,7 @@ export class ShadowComponent implements OnInit, OnDestroy {
 
   changeValueInTable = () => {
     this.shadows = [];
+    this.shadowColor = [];
     const theme = this.themeService.currentTheme;
     for (const key in theme.data) {
       if (Object.prototype.hasOwnProperty.call(theme.data, key)) {

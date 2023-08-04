@@ -1,0 +1,21 @@
+<div class="single-input-group-container">
+  <d-input-group [prefixContent]="'duration'" [suffixContent]="'ms'">
+    <input class="duration-value" dTextInput [(ngModel)]="duration" [placeholder]="'Please enter execution duration.'" />
+  </d-input-group>
+  <br />
+  <d-input-group [prefixContent]="'compare value'" [spliceType]="'right'">
+    <input class="input-value" dTextInput [placeholder]="'Please enter left value.'" [(ngModel)]="leftValue" />
+    <d-select class="comparison-symbol" [(ngModel)]="comparisonSymbol" [options]="comparisonSymbols"></d-select>
+    <input class="input-value" dTextInput [placeholder]="'Please enter right value.'" [(ngModel)]="rightValue" />
+  </d-input-group>
+  <br />
+  <d-input-group [suffixContent]="star">
+    <input class="user-name" dTextInput [(ngModel)]="userName" />
+  </d-input-group>
+</div>
+
+<ng-template #star>
+  <d-icon [icon]="'icon-star'">
+    <span iconPrefix>user name</span>
+  </d-icon>
+</ng-template>

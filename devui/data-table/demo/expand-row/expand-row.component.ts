@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
@@ -35,7 +35,7 @@ export class ExpandRowComponent implements OnInit, AfterContentInit {
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'expand',
-      width: '36px'
+      width: '40px'
     },
     {
       field: '$index',

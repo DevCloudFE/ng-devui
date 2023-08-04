@@ -3,7 +3,10 @@
   <d-button id="normal" (btnClick)="activateRandomTab()">Activate Random Tab</d-button>
   <d-tabs [type]="'wrapped'" [scrollMode]="true" [(activeTab)]="normalTabActiveId">
     <d-tab *ngFor="let item of staticData" [id]="item.id">
-      <ng-template dTabTitle>{{ item.title }}</ng-template>
+      <ng-template dTabTitle let-position="position">
+        <!-- Title only in the right drop-down list -->
+        <span [title]="position === 'list' ? item.title : ''">{{ item.title }}</span>
+      </ng-template>
     </d-tab>
   </d-tabs>
   <br />

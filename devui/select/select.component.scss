@@ -14,7 +14,6 @@
   &.devui-custom-right,
   &.devui-custom-left,
   &.devui-custom-top {
-    min-width: 400px;
     display: flex !important;
 
     & > .devui-dropdown-menu-wrap {
@@ -54,10 +53,6 @@
 
   &.devui-custom-top > .devui-select-custom-area {
     border-bottom: 1px solid $devui-dividing-line;
-  }
-
-  &.devui-reset-min-width {
-    min-width: auto;
   }
 
   .devui-dropdown-menu-wrap {
@@ -624,6 +619,7 @@ svg.svg-icon-search path {
   }
 }
 
+.devui-form-group.devui-has-feedback > .devui-form-control-feedback.devui-search-clear,
 .devui-form-control-feedback.devui-search-clear {
   right: 28px;
   cursor: pointer;
@@ -753,4 +749,9 @@ input::-ms-clear {
   .devui-select-list-wrapper.devui-form-control {
     background-color: transparent;
   }
+}
+
+:host .devui-no-data-tip {
+  border-radius: $devui-border-radius;
+  padding: 12px;
 }

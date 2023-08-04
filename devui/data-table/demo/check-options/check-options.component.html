@@ -24,13 +24,12 @@
               dTooltip
               [content]="rowItem.$checkBoxTips"
               [position]="['top', 'right', 'bottom', 'left']"
-              [showAnimation]="false"
             >
             </d-checkbox>
           </td>
           <td dTableCell>{{ rowIndex + 1 }}</td>
           <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
-            {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
+            {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate : 'short' : false) : rowItem[colOption.field] }}
           </td>
         </tr>
       </ng-template>

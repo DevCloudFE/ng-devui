@@ -10,6 +10,10 @@ export class TextareaDirective implements AfterViewInit, OnDestroy {
   @Input() @HostBinding('style.resize') resize: 'none' | 'vertical' | 'horizontal' | 'both' | 'inherit' = 'none';
   @Input() @HostBinding('class.error') error: boolean;
   @Input() @WithConfig() styleType = 'default';
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+    return this.showGlowStyle;
+  };
   @HostBinding('class.devui-gray-style')
   get gray() {
     return this.styleType === 'gray';

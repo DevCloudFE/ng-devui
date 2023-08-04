@@ -34,8 +34,7 @@
         'devui-custom-right': listInstance?.customViewDirection === 'right',
         'devui-custom-left': listInstance?.customViewDirection === 'left',
         'devui-custom-top': listInstance?.customViewDirection === 'top',
-        'devui-dropdown-menu-multiple': listInstance?.multiple,
-        'devui-reset-min-width': width
+        'devui-dropdown-menu-multiple': listInstance?.multiple
       }"
       [@fadeInOut]="isOpen && startAnimation ? (appendToBody ? menuPosition : popDirection) : 'void'"
       (@fadeInOut.done)="animationEnd()"

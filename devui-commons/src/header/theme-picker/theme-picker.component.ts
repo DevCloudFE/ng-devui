@@ -62,7 +62,7 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
 
   setI18n(lang?) {
     const curLanguage = lang || I18nUtil.getCurrentLanguage() || 'zh-cn';
-    this.themePicker = themePicker[curLanguage];
+    this.themePicker = themePicker[curLanguage];    
   }
 
   getThemePrefix() {
@@ -78,6 +78,9 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
       this.currentAdvancedTheme = this.advancedThemeList.find(theme => theme.value === themeName) ? themeName : 'infinity';
       this.advancedThemeChange(this.currentAdvancedTheme);
     }
+  }
+  isCustomizeTheme() {
+    return localStorage.getItem('user-custom-theme')?.startsWith('customize-theme');
   }
 
   checkInitThemeType() {

@@ -1,0 +1,24 @@
+<d-editable-select
+  placeholder="Search"
+  [source]="dataWithLabel"
+  [maxHeight]="300"
+  [allowClear]="true"
+  [appendToBody]="true"
+  [appendToBodyDirections]="['leftDown', 'leftUp']"
+  [(ngModel)]="lang"
+  (selectItem)="selectItem($event)"
+  (toggleChange)="toggleChange($event)"
+>
+</d-editable-select>
+<br />
+<d-editable-select
+  placeholder="Search"
+  [source]="dataWithOtherProperty"
+  [maxHeight]="300"
+  [formatter]="formatter"
+  [valueParser]="valueParser"
+  [(ngModel)]="bestLang"
+  (selectItem)="selectItem($event)"
+  (toggleChange)="toggleChange($event)"
+>
+</d-editable-select>

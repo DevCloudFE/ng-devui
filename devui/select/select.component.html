@@ -142,8 +142,7 @@
       'devui-custom-right': customViewTemplate && customViewDirection === 'right',
       'devui-custom-left': customViewTemplate && customViewDirection === 'left',
       'devui-custom-top': customViewTemplate && customViewDirection === 'top',
-      'devui-dropdown-menu-multiple': multiple,
-      'devui-reset-min-width': width
+      'devui-dropdown-menu-multiple': multiple
     }"
     [@fadeInOut]="isOpen && startAnimation ? (appendToBody ? menuPosition : popDirection) : 'void'"
     (@fadeInOut.done)="animationEnd($event)"
@@ -172,7 +171,7 @@
             class="devui-form-control devui-select-search devui-select-input"
             (keydown.ArrowUp)="handleKeyUpEvent($event)"
             (keydown.ArrowDown)="handleKeyDownEvent($event)"
-            (keydown.enter)="handleKeyEnterEvent($event)"
+            (keydown.enter)="handleKeyEnterEvent($event, true)"
             (keydown.esc)="onEscKeyup($event)"
           />
           <span class="devui-form-control-feedback">
@@ -234,10 +233,10 @@
         <ng-container *ngFor="let item of availableOptions; let index = index; trackBy: trackByFn">
           <ng-template [ngTemplateOutlet]="dropdownItemTpl" [ngTemplateOutletContext]="{ item: item, index: index }"></ng-template>
         </ng-container>
-        <div *ngIf="availableOptions?.length === 0 && !noResultItemTemplate && !this.showLoading" class="devui-no-data-tip">
-          {{ filter ? i18nCommonText?.noRecordsFound : i18nCommonText?.noData }}
-        </div>
       </ul>
+      <div *ngIf="availableOptions?.length === 0 && !noResultItemTemplate && !this.showLoading" class="devui-no-data-tip">
+        <span>{{ filter ? i18nCommonText?.noRecordsFound : i18nCommonText?.noData }}</span>
+      </div>
       <div *ngIf="availableOptions?.length === 0 && noResultItemTemplate && !this.showLoading" class="devui-no-data-tip">
         <ng-template [ngTemplateOutlet]="noResultItemTemplate" [ngTemplateOutletContext]="{ options: options }"></ng-template>
       </div>
@@ -253,11 +252,12 @@
 <!--虚拟滚动模板-->
 <ng-template #scrollViewTpl>
   <cdk-virtual-scroll-viewport
+    *ngIf="availableOptions?.length > 0"
     [ngStyle]="{
       height: getVirtualScrollHeight(availableOptions?.length, size),
       width: '100%',
       'max-height': scrollHight,
-      'min-height': availableOptions?.length === 0 ? '46px' : '60px'
+      'min-height': availableOptions?.length === 0 ? '46px' : showSelectAll ? '100px' : '60px'
     }"
     [itemSize]="realVirtualScrollItemSize"
     [minBufferPx]="minBuffer"
@@ -269,18 +269,12 @@
     <ng-container *cdkVirtualFor="let item of availableOptions; let index = index; trackBy: trackByFn">
       <ng-template [ngTemplateOutlet]="dropdownItemTpl" [ngTemplateOutletContext]="{ item: item, index: index }"></ng-template>
     </ng-container>
-    <div *ngIf="availableOptions?.length === 0 && !noResultItemTemplate && !this.showLoading" class="devui-no-data-tip">
-      {{ filter ? i18nCommonText?.noRecordsFound : i18nCommonText?.noData }}
-    </div>
   </cdk-virtual-scroll-viewport>
-  <div *ngIf="availableOptions?.length === 0 && noResultItemTemplate && !this.showLoading" class="devui-no-data-tip">
-    <ng-template [ngTemplateOutlet]="noResultItemTemplate" [ngTemplateOutletContext]="{ options: options }"></ng-template>
-  </div>
 </ng-template>
 
 <!--全选模板-->
 <ng-template #selectAllTpl>
-  <li class="devui-dropdown-item" *ngIf="showSelectAll()" (click)="selectAll()">
+  <li class="devui-dropdown-item" *ngIf="showSelectAll" (click)="selectAll()">
     <span>
       <d-checkbox [label]="i18nCommonText.checkAll" [isShowTitle]="false" [halfchecked]="halfChecked" [(ngModel)]="allChecked"></d-checkbox>
     </span>

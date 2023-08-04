@@ -37,6 +37,8 @@ In the page:
 |    appendToBody     |                                    `boolean`                                     |               true               |                                 Optional, attach the drop-down to the body                             |                                   |
 | showAnimation | `boolean` | true | optional. Whether to enable animation. |   | ✔ |
 |    hostTemplate     |                                    `templateRef<any>`                                     |               -               |              User-defined drop-down list. The value parameter is exposed, which is the currently selected value.            |            [Basic usage](demo#basic-usage)           |
+| showGlowStyle | `boolean` | true | (Optional) Indicates whether to display the floating glow effect.|
+| tagMaxWidth | `string` | '200px' | Optional. Maximum width of each tag when the display path is enabled in multi-choice mode. |
 
 ## d-cascader event
 

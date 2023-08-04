@@ -2,6 +2,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BadgeModule } from 'ng-devui/badge';
 import { ButtonModule } from 'ng-devui/button';
 import { CheckBoxModule } from 'ng-devui/checkbox';
 import { DCommonModule } from 'ng-devui/common';
@@ -63,7 +64,8 @@ import { DataTableHeadCellTmplComponent } from './tmpl/data-table-head-cell-tmpl
     DragDropModule,
     LazyLoadModule,
     ToggleModule,
-    SearchModule
+    SearchModule,
+    BadgeModule
   ],
   exports: [
     DataTableComponent,

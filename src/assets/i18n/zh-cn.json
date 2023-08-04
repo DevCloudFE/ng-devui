@@ -49,6 +49,8 @@
     "showCode": "展开代码",
     "hideCode": "收起代码",
     "copyCode": "复制代码",
+    "codesandbox": "在 CodeSandbox 上打开",
+    "stackblitz": "在 StackBlitz 上打开",
     "success": "复制成功"
   },
   "components": {
@@ -154,6 +156,36 @@
         "using-templates": "使用模板",
         "compound-level-and-auto-expand": "复合层级和自动展开",
         "change-values": "改变键值"
+      }
+    },
+    "input-group": {
+      "name": "输入框组合",
+      "type": "数据录入",
+      "path": "input-group",
+      "description": "为一个或多个类输入框内容添加前后缀，并提供自适应拼接效果。",
+      "tmw": "多个类输入框内容需要拼接组合的场景。",
+      "basicDemo": {
+        "title": "基本用法",
+        "description": "可包含单个或多个类输入框组件拼接，不可换行。"
+      },
+      "responsiveDemo": {
+        "title": "自适应拼接用法",
+        "description": "多个该组件可根据容器宽度自适应拼接。",
+        "alarmRule": "告警规则",
+        "defaultRule": "默认规则",
+        "indicatorName": "指标名称",
+        "indicatorNamePlaceholder": "请输入指标名称",
+        "valueType": "平均值",
+        "valueTypes": "平均值,最大值,最小值"
+      },
+      "embedDemo": {
+        "title": "嵌入用法",
+        "description": "与 text-input 组件配合使用，不支持自适应拼接。"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "基本用法",
+        "responsive-usage": "自适应拼接用法",
+        "embed-usage": "嵌入用法"
       }
     },
     "alert": {
@@ -1217,7 +1249,7 @@
           },
           "colorSource": {
             "devui-global-bg": "全局带底色背景",
-            "devui-glass-morphism-bg":"毛玻璃样式背景色",
+            "devui-glass-morphism-bg": "毛玻璃样式背景色",
             "devui-global-bg-normal": "全局白色背景",
             "devui-base-bg": "基础区块背景白色",
             "devui-base-bg-dark": "基础区块背景深色(固定)",
@@ -1253,17 +1285,17 @@
             "devui-shadow": "阴影色",
             "devui-light-shadow": "弱化阴影色",
             "devui-icon-text": "文字图标颜色，同 正文颜色",
-            "devui-icon-fill-weak":"弱化型图标填充色",
-            "devui-shape-icon-fill":"面型svg图标填充色",
-            "devui-shape-icon-fill-hover":"面型svg图标悬停反馈色",
-            "devui-shape-icon-fill-active":"面型svg图标高亮填充色（激活状态）",
-            "devui-shape-icon-fill-disabled":"面型svg图标禁用色",
+            "devui-icon-fill-weak": "弱化型图标填充色",
+            "devui-shape-icon-fill": "面型svg图标填充色",
+            "devui-shape-icon-fill-hover": "面型svg图标悬停反馈色",
+            "devui-shape-icon-fill-active": "面型svg图标高亮填充色（激活状态）",
+            "devui-shape-icon-fill-disabled": "面型svg图标禁用色",
             "devui-icon-bg": " svg图标 背景色",
             "devui-icon-fill": " svg图标 灰色填充色",
             "devui-icon-fill-hover": "svg图标 灰色填充色悬停反馈色",
             "devui-icon-fill-active": "svg图标 高亮填充色（激活状态）",
             "devui-icon-fill-active-hover": "svg图标 高亮填充色悬停反馈色",
-            "devui-form-control-bg":"表单控件背景色",
+            "devui-form-control-bg": "表单控件背景色",
             "devui-form-control-line": "表单控件边框色，同 边框分割线",
             "devui-form-control-line-hover": "表单控件边框悬停反馈色",
             "devui-form-control-line-active": "表单控件边框激活色，用于获得焦点",
@@ -1308,8 +1340,8 @@
             "devui-primary-bg": "主要底色",
             "devui-default-line": "默认边框",
             "devui-default-bg": "默认底色",
-            "devui-connected-overlay-shadow":"下拉菜单类阴影",
-            "devui-feedback-overlay-shadow":"信息提示类阴影"
+            "devui-connected-overlay-shadow": "下拉菜单类阴影",
+            "devui-feedback-overlay-shadow": "信息提示类阴影"
           },
           "catalogs": {
             "basic": "基本变量",
@@ -1464,7 +1496,9 @@
             "devui-shadow": "阴影色",
             "devui-light-shadow": "弱化阴影色",
             "devui-connected-overlay-shadow": "有连接点的弹出(覆盖)层阴影色",
-            "devui-feedback-overlay-shadow": "信息提示反馈类阴影色"
+            "devui-feedback-overlay-shadow": "信息提示反馈类阴影色",
+            "devui-hover-shadow": "悬浮阴影色",
+            "devui-float-block-shadow": "特殊浮层背景色"
           }
         }
       },
@@ -1743,6 +1777,10 @@
         "title": "大数据量树形表格交互",
         "description": "大数据量树形表格的高级操作，拖拽、复选、批量删除、继承原本数据表格的大部分功能。"
       },
+      "virtualScrollTreeTableMultiDragDemo": {
+        "title": "大数据树形表格批量拖拽",
+        "description": "按住ctrl批量选择行并进行批量拖拽"
+      },
       "mutilStylesDemo": {
         "title": "表格样式"
       },
@@ -1783,7 +1821,8 @@
         "muti-drag-row": "批量行拖拽",
         "virtual-scroll-tree-table-basic": "大数据量树形表格基本用法",
         "virtual-scroll-tree-table-operation": "大数据量树形表格操作功能",
-        "virtual-scroll-tree-table-interaction": "大数据量树形表格交互"
+        "virtual-scroll-tree-table-interaction": "大数据量树形表格交互",
+        "virtual-scroll-tree-table-multi-drag": "大数据量树形表格批量拖拽"
       }
     },
     "datepickerPro": {
@@ -2618,7 +2657,11 @@
       "tmw": "当需要同时支持用户输入数据和选择已有数据的时候使用，加入输入联想功能，方便用户搜索已有数据。",
       "basicDemo": {
         "title": "基本用法",
-        "description": "通过 source 设置数据源。"
+        "description": "通过 source 设置数据源，使用 enableSelectedValueList 控制在已选值时是否显示全部选项。"
+      },
+      "objectDemo": {
+        "title": "使用对象数组",
+        "description": "对象数组默认读取 label 属性，可使用 value Parser 和 formatter 方法自定义显示值和格式。"
       },
       "disableDataDemo": {
         "title": "设置禁用选项",
@@ -2642,6 +2685,7 @@
       },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
+        "object-source": "使用对象数组",
         "disable-data-with-source": "设置禁用选项",
         "with-search-function": "自定义匹配方法",
         "async-data-with-function": "异步获取数据源并设置匹配方法",
@@ -2954,7 +2998,7 @@
       "tmw": "<div>1. 当操作需要较长的时间时，向用户展示操作进度。</div> <div>2. 当操作需要打断现有界面或后台运行，需要较长时间时。</div> <div>3. 当需要显示一个操作完成的百分比或已完成的步骤/总步骤时。</div>",
       "basicDemo": {
         "title": "线形进度条",
-        "description": "可配置在右端或随进度显示文字或自定义模板。"
+        "description": "可配置在中间、右端或随进度显示的文字和自定义模板。"
       },
       "circleDemo": {
         "title": "环形进度条",
@@ -3977,7 +4021,7 @@
         "multiRowNotWebkitTitle": "使用计算方式处理多行文本",
         "multiRowExpandTitle": "设置展开收起显示多行文本"
       },
-      "adaptiveInputDemo":{
+      "adaptiveInputDemo": {
         "title": "自适应内容输入框",
         "description": "编辑时将单行input扩展为textarea，结束后恢复。使用户在使用单行input时更方便的输入和阅读大量文本内容。"
       },

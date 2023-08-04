@@ -58,19 +58,20 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
   width: 100%;
 }
 
-d-search .devui-input,
-d-cascader .devui-input:not(.inner-input),
-d-cascader .devui-tags-input-wrapper,
-d-editable-select .devui-form-control,
-d-input-number .devui-input,
-d-multi-auto-complete .devui-dropdown-origin,
-d-select .devui-dropdown-origin:not(.devui-select-underlined-border):not(.devui-gray-style) .devui-input,
-d-tree-select .devui-form-control,
-d-datepicker-pro .devui-single-picker,
-d-range-datepicker-pro .devui-range-picker,
-d-category-search .devui-category-search-container,
-d-single-upload .devui-input-group,
-d-multiple-upload .devui-input-group,
+d-search.devui-glow-style .devui-input,
+d-cascader.devui-glow-style .devui-input:not(.inner-input),
+d-cascader.devui-glow-style .devui-tags-input-wrapper,
+d-editable-select.devui-glow-style .devui-form-control,
+d-input-number.devui-glow-style .devui-input,
+d-multi-auto-complete.devui-glow-style .devui-dropdown-origin,
+d-select.devui-glow-style .devui-dropdown-origin:not(.devui-select-underlined-border):not(.devui-gray-style) .devui-input,
+d-select.devui-glow-style .devui-dropdown-origin:not(.devui-select-underlined-border):not(.devui-gray-style) .devui-select-list-wrapper,
+d-tree-select.devui-glow-style .devui-form-control,
+d-datepicker-pro.devui-glow-style .devui-single-picker,
+d-range-datepicker-pro.devui-glow-style .devui-range-picker,
+d-category-search.devui-glow-style .devui-category-search-container,
+d-single-upload.devui-glow-style .devui-input-group,
+d-multiple-upload.devui-glow-style .devui-input-group,
 .devui-active-form {
   box-shadow: 0 0 0 0 $devui-form-control-interactive-outline;
 
@@ -107,7 +108,7 @@ d-multiple-upload .devui-input-group,
   box-shadow: 0 0 0 0 $devui-form-control-interactive-outline;
   @include border-transition();
 
-  &:not([disabled]):not(.disabled):not(.devui-disabled):not(.error):not(.devui-error):not(.inner-input) {
+  &.devui-glow-style:not([disabled]):not(.disabled):not(.devui-disabled):not(.error):not(.devui-error):not(.inner-input) {
     &:hover {
       box-shadow: 0 0 0 4px $devui-form-control-interactive-outline;
     }
@@ -119,6 +120,16 @@ d-multiple-upload .devui-input-group,
 
     &:active {
       box-shadow: none;
+    }
+  }
+
+  &:not(.devui-glow-style):not([disabled]):not(.disabled):not(.devui-disabled):not(.error):not(.devui-error) {
+    &:hover {
+      border-color: $devui-form-control-line-hover;
+    }
+
+    &:focus {
+      border-color: $devui-form-control-line-active;
     }
   }
 
@@ -414,6 +425,19 @@ d-select:not([disabled]):not(.disabled):not(.devui-disabled):not(.multiple-label
     .devui-form-group .devui-form-control.devui-select-list-wrapper {
       background-color: $devui-danger-bg;
     }
+
+    &.devui-gray-style {
+      .devui-form-group .devui-input.devui-form-control.devui-select-input:not(.devui-select-search),
+      .devui-form-group .devui-select-input:not(.devui-select-search) + .devui-form-control-feedback,
+      .devui-form-group .devui-form-control.devui-select-list-wrapper {
+        background-color: $devui-danger-bg !important;
+        border-color: transparent !important;
+      }
+
+      &.devui-dropdown-origin:not(.open) {
+        border-color: $devui-danger-line !important;
+      }
+    }
   }
 }
 
@@ -673,6 +697,12 @@ d-form-control {
   }
 
   &:not(.disabled) {
+    textarea[dTextarea],
+    input[dTextInput],
+    input[class*='devui-'] {
+      @include gray-style-input();
+    }
+
     &.devui-dropdown-origin,
     &.devui-toggle-menu-container {
       transition: all $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
@@ -693,10 +723,16 @@ d-form-control {
       }
     }
 
-    textarea[dTextarea],
-    input[dTextInput],
-    input[class*='devui-'] {
-      @include gray-style-input();
+    &.devui-dropdown-origin-open:not(:focus) {
+      textarea[dTextarea],
+      input[dTextInput],
+      input[class*='devui-'] {
+        background-color: $devui-form-control-bg !important;
+
+        &:hover {
+          background-color: $devui-form-control-bg !important;
+        }
+      }
     }
   }
 

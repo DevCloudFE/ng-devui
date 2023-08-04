@@ -6,6 +6,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostBinding,
   Input,
   OnChanges,
   OnDestroy,
@@ -101,6 +102,10 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   ) {}
   @Input() @WithConfig() showAnimation = true;
   @Input() @WithConfig() styleType = 'default';
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
+    return this.showGlowStyle;
+  }
   @Input() placeholder = '';
   @Input() searchPlaceholder = '';
   @Input() disabled = false;
@@ -138,6 +143,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   // TODO: need to change to nodeToggledEvent
   @Output() nodeToggleEvent = new EventEmitter<any>();
   @Output() valueChanged = new EventEmitter<any>();
+  @Output() toggleChange = new EventEmitter<boolean>();
   @Input() virtualScroll = false;
   @Input() virtualScrollItemSize = 30;
   @Input() virtualScrollMinBufferPx = 300;
@@ -411,10 +417,10 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
     if (popperState && this.searchable) {
       this.focusSearchInput();
     }
-
     if (popperState && this.virtualScroll && this.tree) {
       this.tree.operableTree.viewPort.checkViewportSize();
     }
+    this.toggleChange.emit(popperState);
   }
 
   private focusSearchInput() {

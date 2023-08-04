@@ -24,3 +24,12 @@
   margin-top: 16px;
   margin-bottom: 24px;
 }
+
+@media (max-width: 767px) {
+  .header-logo-container {
+    flex-direction: row;
+    margin-left: 12px;
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+  }
+}

@@ -186,11 +186,11 @@ export class CascaderService implements OnDestroy {
 
       targetNode['checked'] = checked;
       targetNode['halfChecked'] = false;
-      if (targetNode.children && downward) {
-        this.updateChildrenChecked(targetNode, checked, isEmit);
-      }
       if (upward) {
         this.updateParentChecked(parentNode, isEmit);
+      }
+      if (targetNode.children && downward) {
+        this.updateChildrenChecked(targetNode, checked, isEmit);
       }
     }
   }

@@ -77,6 +77,10 @@
         &:last-child {
           margin-bottom: 254px;
         }
+
+        &.disabled {
+          cursor: not-allowed;
+        }
       }
     }
 

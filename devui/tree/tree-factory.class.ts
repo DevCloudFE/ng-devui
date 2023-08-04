@@ -643,6 +643,15 @@ export class TreeFactory {
     }
   }
 
+  public toggleAllNodes(toggle = true) {
+    for (const id of Object.keys(this.nodes)) {
+      this.nodes[id].data.isOpen = toggle;
+    }
+    if (this.isVirtualScroll) {
+      this.renderFlattenTree();
+    }
+  }
+
   public transferToTreeNode(
     originNode,
     parentId?,

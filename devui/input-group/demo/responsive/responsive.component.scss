@@ -1,0 +1,27 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+d-input-group {
+  margin-bottom: 4px;
+
+  &.time-input-group {
+    width: 160px;
+  }
+}
+
+.comparison-symbol-box {
+  cursor: pointer;
+  min-width: 24px;
+  text-align: center;
+}
+
+:host d-input-group ::ng-deep {
+  span.devui-input-group:has(.protocol-box.disabled) {
+    cursor: not-allowed;
+  }
+}
+
+::ng-deep {
+  .comparison-symbol-list {
+    transform: translateX(-24px);
+  }
+}

@@ -8,7 +8,8 @@ import {
 })
 export class ShowTimeDatepickerProComponent {
   value = new Date();
-  minDate = new Date(new Date().setMonth(0));
+  minDate = new Date('2023/4/19 20:30:30');
+  maxDate = new Date(new Date().setHours(21));
   constructor() {
   }
 }

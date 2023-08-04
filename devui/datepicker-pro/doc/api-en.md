@@ -32,6 +32,7 @@ In the page:
 | mode | `'year' \| 'month' \| 'date'` | 'date' | panel mode | [year and month selector](demo#monthYear)|
 | markedDateList | `Date[]` | [] | Marked date list, which can be used with the MarkDateInfoTemplate template to display prompt information | [mark information](demo#date-marked)|
 | markedRangeDateList | `Date[][]` | [] | Marking Range Date List|[Marking Information](demo#date-marked)|
+| showGlowStyle | `boolean` | true | (Optional) Indicates whether to display the floating glow effect.|
 
 ## d-datepicker-pro event
 

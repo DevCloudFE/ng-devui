@@ -21,8 +21,9 @@ In the page:
 | disabled | `boolean` | false | Optional. Indicating whether the text box is available. | [Basic Usage](demo#basic-usage)
 | autoFocus | `boolean` | false | Optional. Whether to enable autofocus for the text box. | [Auto Focus](demo#auto-focus) |
 | isKeyupSearch | `boolean` | false | Optional. Indicates whether to support immediate searchFn after input. | [Basic Usage](demo#basic-usage) |
-| iconPosition | `string` | 'right' | Optional. The options are'left' and'right'.| [Left Search Icon](demo#icon-left)|
+| iconPosition | `string` | 'right' | Optional. The options are'left' and'right'.| [No Border](demo#search-no-border)|
 | noBorder  | `boolean` |          'false'          | Optional. Specifies whether to display the border. | [Left Search Icon](demo#icon-left) |
+| styleType  | `'default' \| 'gray'` |          'default'          | Optional. Default indicates the white background style of the wire frame, and gray indicates the gray background style of the wireless frame. | [No Border](demo#search-no-border) | ✔ |
 | cssClass | `string` |'' | Optional. The class name can be transferred to the text box. | |
 
 ## d-search event

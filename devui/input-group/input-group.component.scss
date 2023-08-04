@@ -1,0 +1,170 @@
+@import '../style/theme/color';
+@import '../style/theme/corner';
+@import '../style/core/animation';
+
+$border-change-time: 300ms;
+$border-change-function: $devui-animation-ease-in-out-smooth;
+
+@mixin spliceOuter($direction) {
+  border-top-#{$direction}-radius: 0;
+  border-bottom-#{$direction}-radius: 0;
+  border-#{$direction}: none;
+}
+
+@mixin spliceInner($first, $last, $firstValue, $lastValue) {
+  [dTextInput],
+  d-select {
+    margin-right: -1px;
+    z-index: 0;
+
+    &,
+    & > div.devui-dropdown-origin {
+      border-radius: 0 !important;
+    }
+
+    &:hover {
+      z-index: 1;
+    }
+
+    &:focus,
+    &:has(:focus) {
+      z-index: 2;
+    }
+
+    &:first-child {
+      border-top-#{$first}-radius: #{$firstValue} !important;
+      border-bottom-#{$first}-radius: #{$firstValue} !important;
+
+      & > div.devui-dropdown-origin {
+        border-top-#{$first}-radius: #{$firstValue} !important;
+        border-bottom-#{$first}-radius: #{$firstValue} !important;
+      }
+    }
+
+    &:last-child {
+      margin-right: 0;
+      border-top-#{$last}-radius: #{$lastValue} !important;
+      border-bottom-#{$last}-radius: #{$lastValue} !important;
+
+      & > div.devui-dropdown-origin {
+        border-top-#{$last}-radius: #{$lastValue} !important;
+        border-bottom-#{$last}-radius: #{$lastValue} !important;
+      }
+    }
+  }
+}
+
+@mixin embedSpliceInner($direction) {
+  [dTextInput],
+  d-select > div {
+    border-top-#{$direction}-radius: $devui-border-radius !important;
+    border-bottom-#{$direction}-radius: $devui-border-radius !important;
+  }
+}
+
+:host {
+  display: inline-block;
+  position: relative;
+
+  .devui-input-group-container {
+    display: flex;
+    align-items: stretch;
+
+    .devui-input-group-item {
+      padding: 4px 8px;
+      width: fit-content;
+      border: 1px solid $devui-form-control-line;
+      border-radius: $devui-border-radius;
+      background-color: $devui-gray-form-control-bg;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+
+    .devui-input-group-item:has(+ .devui-input-group-content:not(:empty)).prefix {
+      @include spliceOuter('right');
+    }
+
+    .devui-input-group-content:not(:empty) + .devui-input-group-item.suffix {
+      @include spliceOuter('left');
+    }
+  }
+
+  &:not([class*='devui-splice-']) {
+    margin-right: 8px;
+  }
+
+  &.devui-splice-left-item {
+    .devui-input-group-item.prefix {
+      @include spliceOuter('left');
+    }
+
+    ::ng-deep {
+      @include spliceInner('left', 'right', 0, $devui-border-radius);
+    }
+  }
+
+  &.devui-splice-right-item {
+    .devui-input-group-item.suffix {
+      @include spliceOuter('right');
+    }
+
+    ::ng-deep {
+      @include spliceInner('right', 'left', $devui-border-radius, 0);
+    }
+  }
+
+  ::ng-deep span.devui-input-group-content {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+
+    &.both {
+      @include spliceInner('left', 'right', 0, 0);
+    }
+
+    &.prefix {
+      @include spliceInner('left', 'right', 0, $devui-border-radius);
+    }
+
+    &.suffix {
+      @include spliceInner('right', 'left', 0, $devui-border-radius);
+    }
+  }
+
+  &.embed {
+    .devui-input-group-container {
+      .devui-input-group-item {
+        height: 100%;
+        position: absolute;
+        border: none;
+        background: transparent;
+
+        &.prefix {
+          left: 0;
+        }
+
+        &.suffix {
+          right: 0;
+        }
+      }
+
+      ::ng-deep span.devui-input-group-content {
+        @include embedSpliceInner('left');
+        @include embedSpliceInner('right');
+      }
+    }
+
+    &:not(.disabled) ::ng-deep {
+      &:hover input[dTextInput] {
+        border-color: $devui-form-control-line-hover;
+        box-shadow: 0 0 0 4px $devui-form-control-interactive-outline;
+      }
+
+      &:has(:focus) input[dTextInput] {
+        border-color: $devui-form-control-line-active;
+      }
+    }
+  }
+}

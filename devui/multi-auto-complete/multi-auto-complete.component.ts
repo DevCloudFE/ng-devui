@@ -6,6 +6,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostBinding,
   Input,
   OnChanges,
   OnInit,
@@ -63,6 +64,10 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
   @Input() formatter: (item: any) => string;
   @Input() valueParser: (item: any) => any;
   @Input() @WithConfig() showAnimation = true;
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+    return this.showGlowStyle;
+  };
   @Output() autoSubmit = new EventEmitter<any>(); // 失焦自动提交
 
   @ViewChild('multiAutoCompleteInput') multiAutoCompleteInputElement: ElementRef;

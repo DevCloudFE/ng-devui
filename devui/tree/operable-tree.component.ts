@@ -75,6 +75,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
    * @deprecated
    */
   @Input() canIdEmpty = true;
+  @Input() operatorAlign: 'start' | 'end' = 'start';
   @Output() nodeSelected = new EventEmitter<TreeNode | TreeNode[]>();
   @Output() nodeDblClicked = new EventEmitter<TreeNode>();
   @Output() nodeRightClicked = new EventEmitter<{ node: TreeNode; event: MouseEvent }>();
@@ -293,8 +294,8 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
           const dragNodeIds: string[] = [];
           // 使用对象存储选择状态，因为节点id为数字，避免产生长索引数组影响性能
           const dragNodesCheckStatus = {};
-          if (this.canActivateMultipleNode) {
-            const multipleData = transferData['multipleData'];
+          const multipleData = transferData['multipleData'];
+          if (this.canActivateMultipleNode && multipleData?.length > 1) {
             // 多选时遍历所有被激活的节点确认是否为目标节点或其父节点并储存可用节点的选择状态
             // 反序遍历用于先处理子节点以更新父子同时拖拽的状态
             multipleData.reverse().forEach((node) => this.reverseSelection(node, dropNodeId, dragNodeIds, dragNodesCheckStatus));
@@ -335,15 +336,15 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   setSelection(dropNode, dragNodeId, dragNodeIds, dragNodesCheckStatus) {
-    if (this.canActivateMultipleNode) {
+    let finalDragNodeIds = [dragNodeId];
+    if (this.canActivateMultipleNode && dragNodeIds?.length > 1) {
       dragNodeIds.reverse().forEach((id) => this.handleDropNode(id, dropNode));
+      finalDragNodeIds = dragNodeIds;
     } else {
       this.handleDropNode(dragNodeId, dropNode);
     }
     this.treeFactory.renderFlattenTree();
-
     // 移动结束后向上整理选择状态，恢复半选状态
-    const finalDragNodeIds = this.canActivateMultipleNode ? dragNodeIds : [dragNodeId];
     finalDragNodeIds.forEach((id) => {
       const node = this.treeFactory.getCompleteNodeById(id);
       node.data.isChecked = dragNodesCheckStatus[id].checked;

@@ -30,6 +30,8 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
     [prop: string]: any;
   }>;
 
+  @Input() headCellApplyAll = false;
+
   @Input() maxWidth: string;
   @Input() minWidth: string;
   @Input() field: string;

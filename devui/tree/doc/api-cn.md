@@ -39,6 +39,7 @@ import { TreeModule } from 'ng-devui/tree';
 | maxBufferPx         | `number`                             | 900             | 可选，设置虚拟滚动时的最大 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](demo#virtual-scroll) |
 | showAnimation       | `boolean`                            | true            | 可选，是否展示动画                                                                                                             | [无动画](demo#without-animation)        | ✔          |
 | indent       | `string`                            | '16px'            | 可选，设置树各层级之间的缩进                                                                                                             | [基本用法](demo#basic-usage)        |          |
+| operatorAlign       | `'start'\|'end'`                            | 'start'            | 可选，设置树节点操作按钮的对齐方式                                                                                                             | [自定义图标](demo#custom-icon)        |          |
 
 ## d-tree 事件
 
@@ -196,6 +197,8 @@ import { TreeModule } from 'ng-devui/tree';
     toggleDisabledKey?,
     treeNodeTitleKey?)`: 将原始节点转化为树节点
 
+`toggleAllNodes(toggle:boolean = true)`: toggle 为 true 展开所有节点， 为 false 收起所有节点
+
 ```
 
 ### 自定义模板
@@ -241,8 +244,8 @@ export interface ITreeItem {
   isChecked?: boolean; // 节点是否为checked状态
   halfChecked?: boolean; // 节点是否为半选状态
   showCheckbox?: boolean; // 是否显示checkbox，常用于父节点仅作为分类，不具备可操作的场景
-  disabled?: boolean; // 节点是否为半选状态
-  disableAdd?: boolean; // 节点是否禁止check
+  disabled?: boolean; // 节点是否禁止check
+  disableAdd?: boolean; // 节点是否禁止添加
   disableEdit?: boolean; // 节点是否禁止编辑
   disableDelete?: boolean; // 节点是否禁止删除
   disableSelect?: boolean; // 节点是否禁止select

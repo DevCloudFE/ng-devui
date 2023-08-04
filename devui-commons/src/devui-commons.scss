@@ -234,11 +234,23 @@
   }
 }
 
+@media (max-width: 767px) {
+  .devui-content-layout {
+    margin-top: 56px;
+  }
+}
+
 body[ui-lang='en-us'] {
   @media (max-width: 1480px) {
     d-common-header .devui-search {
       width: 120px;
     }
+  }
+}
+
+body[ui-theme='galaxy-theme'] {
+  .header-container {
+    background-image: linear-gradient(179deg, #141721 0%, #1A1E29 100%);
   }
 }
 
