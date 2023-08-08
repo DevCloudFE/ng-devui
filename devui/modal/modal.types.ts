@@ -50,9 +50,11 @@ export interface IDialogOptions {
   componentFactoryResolver?: ComponentFactoryResolver;
   injector?: Injector;
   onClose?: Function;
+  onMaximize?: Function;
   beforeHidden?: () => boolean | Promise<boolean> | Observable<boolean>;
   dialogtype?: string;
   draggable?: boolean;
+  showMaximizeBtn?: boolean;
   showCloseBtn?: boolean;
   placement?: 'center' | 'top' | 'bottom';
   offsetX?: string;

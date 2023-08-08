@@ -2819,6 +2819,10 @@
         "title": "标准对话框",
         "description": "使用dialogService可拖拽的标准对话框。"
       },
+      "maximizeDemo":{
+        "title":"最大化对话框",
+        "description":"使用showMaximizeBtn可设置最大化/退出最大化按钮的显示/隐藏"
+      },
       "customizeDemo": {
         "title": "自定义对话框",
         "description": "使用modalService可以自定义对话框内的所有内容。"
@@ -2857,6 +2861,7 @@
       },
       "anchorLinkValues": {
         "standard-dialog": "标准对话框",
+        "maximize-dialog":"最大化对话框",
         "custom-dialog": "自定义对话框",
         "intercept-dialog-closed": "拦截对话框关闭",
         "message-hint": "信息提示",
