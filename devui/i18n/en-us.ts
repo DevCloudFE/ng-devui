@@ -1,3 +1,17 @@
+const monthsOfYear = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
 export default {
   locale: 'en-us',
   common: {
@@ -35,31 +49,6 @@ export default {
     clear: 'Clear',
     daysOfWeek: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
     monthsOfYear: [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ],
-    startDate: 'Start Date',
-    endDate: 'End Date',
-    yearDisplay(year) {
-      return `${year}`;
-    },
-  },
-  datePickerPro: {
-    placeholder: 'select date',
-    startPlaceholder: 'select start date',
-    endPlaceholder: 'select end date',
-    daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
-    monthsOfYear: [
       'Jan',
       'Feb',
       'Mar',
@@ -73,8 +62,33 @@ export default {
       'Nov',
       'Dec',
     ],
+    startDate: 'Start Date',
+    endDate: 'End Date',
+    yearDisplay(year) {
+      return `${year}`;
+    },
+  },
+  datePickerPro: {
+    placeholder: 'select date',
+    startPlaceholder: 'select start date',
+    endPlaceholder: 'select end date',
+    daysOfWeek: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
+    monthsOfYear: [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ],
     getYearMonthStr(year, month) {
-      return `${year} - ${month}`;
+      return `${monthsOfYear[month - 1]} ${year}`;
     },
     hour: 'Hr',
     min: 'Min',
@@ -143,9 +157,9 @@ export default {
     goTo: 'Go To',
     pageSize: 'Page Size',
     page: 'Page',
-    perPage: 'Per Page',
+    perPage: ' / Page',
     totalItem(total) {
-      return `Total ${total} Records`;
+      return `Total Records: ${total}`;
     }
   },
   quadrant: {

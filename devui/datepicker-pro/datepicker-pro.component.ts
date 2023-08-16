@@ -5,6 +5,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostBinding,
   Input,
   OnDestroy,
   OnInit,
@@ -13,8 +14,8 @@ import {
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { DefaultDateConverter } from 'ng-devui/utils';
+import { EN_US, I18nInterface, I18nService } from 'ng-devui/i18n';
+import { DefaultDateConverter, DevConfigService, WithConfig } from 'ng-devui/utils';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { DatepickerProService } from './datepicker-pro.service';
@@ -48,6 +49,10 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
   @Input() allowClear = true;
   @Output() dropdownToggle = new EventEmitter<boolean>();
   @Output() confirmEvent = new EventEmitter<Date>();
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+    return this.showGlowStyle;
+  };
   @Input() set calenderRange (value) {
     this.pickerSrv.calendarRange = value || [1970, 2099];
   }
@@ -91,7 +96,12 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
       dateConverter: this.datepickerConvert,
       min: this.pickerSrv.minDate || new Date(this.pickerSrv.calendarRange[0] + '/01/01'),
       max: this.pickerSrv.maxDate || new Date(this.pickerSrv.calendarRange[1] + '/12/31'),
-      format: {
+      format: this.i18nLocale === EN_US ? {
+        date: this.format || 'MMM dd, y',
+        time: this.format || 'MMM dd, y HH:mm:ss',
+        month: this.format || 'MMM dd',
+        year: 'y'
+      } : {
         date: this.format || 'y/MM/dd',
         time: this.format || 'y/MM/dd HH:mm:ss',
         month: this.format || 'y-MM',
@@ -115,7 +125,8 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
 
   constructor(
     private i18n: I18nService,
-    private pickerSrv: DatepickerProService
+    private pickerSrv: DatepickerProService,
+    private devConfigService: DevConfigService
   ) {
     this.i18nText = this.i18n.getI18nText().datePickerPro;
     this.datepickerConvert = new DefaultDateConverter();
@@ -224,6 +235,9 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
     ).subscribe((data) => {
       this.i18nLocale = data.locale;
       this.i18nText = data.datePickerPro;
+      if (this.pickerSrv.curDate) {
+        this.dateValue = this.formatDateToString(this.pickerSrv.curDate);
+      }
     });
   }
 
@@ -282,6 +296,9 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
   openDropdown(event: Event) {
     if (this.isOpen) {
       event.stopPropagation();
+    }
+    if (this.disabled) {
+      return;
     }
     this.isOpen = true;
 

@@ -1,13 +1,12 @@
-import {NgModule} from '@angular/core';
-
-import {CommonModule} from '@angular/common';
-import {ProgressComponent} from './progress.component';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ProgressTemplateDirective } from './progress-template.directive';
+import { ProgressComponent } from './progress.component';
 
 @NgModule({
   imports: [CommonModule],
-  exports: [ProgressComponent],
-  declarations: [ProgressComponent],
+  exports: [ProgressComponent, ProgressTemplateDirective],
+  declarations: [ProgressComponent, ProgressTemplateDirective],
   providers: [],
 })
-export class ProgressModule {
-}
+export class ProgressModule {}

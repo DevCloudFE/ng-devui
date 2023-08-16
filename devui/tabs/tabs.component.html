@@ -18,7 +18,6 @@
   >
     <ul
       #tabsEle
-      role="tablist"
       class="devui-nav {{ cssClass }} {{ tabs.length ? 'devui-nav-' + type : '' }}"
       [id]="id"
       [ngClass]="{
@@ -29,25 +28,18 @@
     >
       <ng-container *ngFor="let tab of tabs">
         <li
-          role="presentation"
           class="devui-nav-tab-item"
           [id]="tab.id === undefined ? '' : tab.id"
           [class.disabled]="tab.disabled"
           [class.active]="tab.id == activeTab"
-          [class.closeable]="tab | dTabCloseablePipe: closeable:closeableIds"
+          [class.closeable]="tab | dTabCloseablePipe : closeable : closeableIds"
           (click)="select(tab.id)"
         >
-          <a
-            role="tab"
-            data-toggle="tab"
-            [attr.aria-expanded]="tab.id == activeTab"
-            [style.width]="customWidth"
-            [ngClass]="{ 'custom-width': customWidth }"
-          >
+          <a [attr.aria-expanded]="tab.id == activeTab" [style.width]="customWidth" [ngClass]="{ 'custom-width': customWidth }">
             <ng-template
               *ngIf="!tab.title"
               [ngTemplateOutlet]="tab.titleTpl?.templateRef"
-              [ngTemplateOutletContext]="{ tab: tab }"
+              [ngTemplateOutletContext]="{ tab: tab, position: 'tab' }"
             ></ng-template>
             <span *ngIf="tab.title">{{ tab.title }}</span>
           </a>
@@ -123,7 +115,7 @@
         </g>
       </svg>
     </span>
-    <ul role="menu" dDropDownMenu class="devui-nav-dropdown devui-dropdown-menu devui-dropdown-overlay">
+    <ul dDropDownMenu class="devui-nav-dropdown devui-dropdown-menu devui-dropdown-overlay">
       <li
         *ngFor="let tab of tabs; index as i"
         class="devui-dropdown-item"
@@ -134,7 +126,7 @@
         <ng-template
           *ngIf="!tab.title"
           [ngTemplateOutlet]="tab.titleTpl?.templateRef"
-          [ngTemplateOutletContext]="{ tab: tab }"
+          [ngTemplateOutletContext]="{ tab: tab, position: 'list' }"
         ></ng-template>
         <span *ngIf="tab.title">{{ tab.title }}</span>
       </li>
@@ -148,13 +140,13 @@
 </div>
 
 <ng-template #destroyTpl let-tab="tab">
-  <div class="devui-tab-pane fade in" role="tabpanel" *ngIf="tab.id == activeTab" [ngClass]="{ 'in active': tab.id == activeTab }">
+  <div class="devui-tab-pane fade in" *ngIf="tab.id == activeTab" [ngClass]="{ 'in active': tab.id == activeTab }">
     <ng-template [ngTemplateOutlet]="tab.contentTpl?.templateRef || tab.innerContent"></ng-template>
   </div>
 </ng-template>
 
 <ng-template #hiddenTpl let-tab="tab">
-  <div class="devui-tab-pane fade in" role="tabpanel" [hidden]="tab.id != activeTab" [ngClass]="{ 'in active': tab.id == activeTab }">
+  <div class="devui-tab-pane fade in" [hidden]="tab.id != activeTab" [ngClass]="{ 'in active': tab.id == activeTab }">
     <ng-template [ngTemplateOutlet]="tab.contentTpl?.templateRef || tab.innerContent"></ng-template>
   </div>
 </ng-template>

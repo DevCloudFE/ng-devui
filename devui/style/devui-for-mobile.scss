@@ -77,10 +77,28 @@
   d-modal {
     .modal {
       padding: 32px 20px 0 20px;
+      overflow-y: inherit !important;
+
+      .modal-dialog .maximize {
+        width: calc(100vw - 40px) !important;
+        max-height: calc(100vh - 64px) !important;
+        height: calc(100vh - 64px) !important;
+      }
     }
 
     d-modal-header .modal-header .modal-header-close {
       left: 0;
+      top: -32px;
+      background: $devui-base-bg;
+      border-radius: 100%;
+      padding-left: 8px;
+      width: 32px;
+      transform: scale(0.8);
+      box-shadow: $devui-shadow-length-base $devui-light-shadow;
+    }
+
+    d-modal-header .modal-header .modal-header-maximized {
+      left: 32px;
       top: -32px;
       background: $devui-base-bg;
       border-radius: 100%;

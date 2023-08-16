@@ -35,17 +35,22 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
   nowFilter: string;
   tagList: any = [
     { title: '', name: 'newChangeCmps', checked: false },
-    { title: '', name: 'recentlySuggestCmps', checked: false }
+    { title: '', name: 'recentlySuggestCmps', checked: false },
   ];
   currentLang: string;
   body: any;
   scrollSubscription: Subscription;
 
   constructor(
-    private translate: TranslateService, private router: Router, private comDataService: ComponentDataService,
-    private i18n: I18nService, @Inject(DOCUMENT) public doc: any
+    private translate: TranslateService,
+    private router: Router,
+    private comDataService: ComponentDataService,
+    private i18n: I18nService,
+    @Inject(DOCUMENT) public doc: any
   ) {
-    this.comDataService.getComData().subscribe(value => { this.componentsData = value; });
+    this.comDataService.getComData().subscribe((value) => {
+      this.componentsData = value;
+    });
     this.componentsDataDisplay = cloneDeep(this.componentsData);
     this.setI18n();
 
@@ -70,13 +75,15 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
 
   setI18n() {
     this.overviewText = this.translate.instant('public').overview || {};
-    this.tagList.forEach(tag => { tag.title = this.overviewText ? this.overviewText[tag.name] : ''; });
+    this.tagList.forEach((tag) => {
+      tag.title = this.overviewText ? this.overviewText[tag.name] : '';
+    });
     this.currentLang = this.i18n.getI18nText().locale;
   }
 
   calNumberOfComponents() {
     this.totalNumComponents = 0;
-    this.componentsData.forEach(components => {
+    this.componentsData.forEach((components) => {
       if (!components.nodisplay) {
         this.totalNumComponents = this.totalNumComponents + components.children.length;
       }
@@ -84,7 +91,7 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
   }
 
   setPrefix() {
-    this.imgPrefix = './' + this.srcPrefix + '/overview/';
+    this.imgPrefix = this.srcPrefix + '/overview/';
   }
 
   setTheme() {
@@ -101,9 +108,9 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
 
   setComponentsSuggest(type) {
     this.componentsSuggest = [];
-    this.componentsData.forEach(cmpList => {
-      cmpList.children.forEach(cmp => {
-        if (Array.isArray(type) && type.find(scope => scope.toLocaleLowerCase() === cmp.lowerName)) {
+    this.componentsData.forEach((cmpList) => {
+      cmpList.children.forEach((cmp) => {
+        if (Array.isArray(type) && type.find((scope) => scope.toLocaleLowerCase() === cmp.lowerName)) {
           this.componentsSuggest.push(cloneDeep(cmp));
         } else if (type === 'newChange' && cmp.newChange) {
           this.componentsSuggest.push(cloneDeep(cmp));
@@ -122,19 +129,21 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
 
   searchComponent(event) {
     this.nowFilter = undefined;
-    this.tagList.forEach(tag => { tag.checked = false; });
+    this.tagList.forEach((tag) => {
+      tag.checked = false;
+    });
     this.setComponentsSuggest(suggestScopeList);
     this.componentsDataDisplay = filterData(event, this.componentsData);
     this.componentsLooking = [];
     if (!this.componentsDataDisplay || !this.componentsDataDisplay.length) {
-      const res = componentMap.find(cmp => {
-        return cmp.matches.find(child => {
+      const res = componentMap.find((cmp) => {
+        return cmp.matches.find((child) => {
           return child.includes(event);
         });
       });
       if (res) {
-        this.componentsData.forEach(cmpList => {
-          cmpList.children.forEach(cmp => {
+        this.componentsData.forEach((cmpList) => {
+          cmpList.children.forEach((cmp) => {
             if (res.name.includes(cmp.lowerName)) {
               this.componentsLooking.unshift(cloneDeep(cmp));
             }
@@ -145,8 +154,10 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
   }
 
   filter(type) {
-    const tagIndex = this.tagList.findIndex(tag => tag.name === type);
-    this.tagList.forEach(tag => { tag.checked = false; });
+    const tagIndex = this.tagList.findIndex((tag) => tag.name === type);
+    this.tagList.forEach((tag) => {
+      tag.checked = false;
+    });
     if (this.nowFilter !== type) {
       this.nowFilter = type;
       this.tagList[tagIndex].checked = true;

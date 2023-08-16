@@ -21,24 +21,6 @@ import { IconModule } from 'ng-devui/icon';
 import { LazyLoadModule } from 'ng-devui/utils';
 import { NumberTransModule } from 'ng-devui/number-translation';
 
-import {
-  AutoCompletePopupComponent,
-  DatepickerComponent,
-  DragPreviewComponent,
-  DrawerComponent,
-  InputNumberComponent,
-  LoadingBackdropComponent,
-  LoadingComponent,
-  ModalComponent,
-  ModalContainerComponent,
-  PopoverComponent,
-  ReadTipComponent,
-  SelectComponent,
-  StepsGuideComponent,
-  ToastComponent,
-  TooltipComponent,
-  TreeSelectComponent
-} from "ng-devui";
 
 import { ${componentName} } from './app.component';
 ${importStr}
@@ -60,25 +42,6 @@ ${importStr}
     TranslateModule.forRoot()
   ],
   declarations: [ ${componentName}, ${componentsStr} ],
-  entryComponents: [
-    AutoCompletePopupComponent,
-    DatepickerComponent,
-    DragPreviewComponent,
-    DrawerComponent,
-    InputNumberComponent,
-    LoadingBackdropComponent,
-    LoadingComponent,
-    ModalComponent,
-    ModalContainerComponent,
-    PopoverComponent,
-    ReadTipComponent,
-    SelectComponent,
-    StepsGuideComponent,
-    ToastComponent,
-    TooltipComponent,
-    TreeSelectComponent,
-    ${componentsStr}
-  ],
   bootstrap: [ ${componentName} ],
 })
 export class AppModule { }`;

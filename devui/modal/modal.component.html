@@ -18,10 +18,17 @@
     [ngStyle]="{ width: width }"
     [@wipeInOutAnimation]="animateState"
     (@wipeInOutAnimation.done)="onAnimationEnd($event)"
+    [@.disabled]="!showAnimation"
     tabindex="1"
     #dialog
   >
-    <div class="modal-content" [dMovable]="draggable" [handle]="draggableHandleEl" [ngStyle]="{ transform: resolveTransformTranslate() }">
+    <div
+      class="modal-content"
+      [class.maximize]="maximized"
+      [dMovable]="draggable"
+      [handle]="draggableHandleEl"
+      [ngStyle]="{ transform: resolveTransformTranslate() }"
+    >
       <ng-template dModalContainerHost></ng-template>
       <ng-container *ngIf="contentTemplate">
         <ng-template [ngTemplateOutlet]="contentTemplate" [ngTemplateOutletContext]="{ modalInstance: this }"></ng-template>

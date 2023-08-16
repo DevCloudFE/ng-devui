@@ -1,11 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  ComponentFactoryResolver,
-  ComponentRef,
-  Inject,
-  Injectable,
-  Renderer2, RendererFactory2
-} from '@angular/core';
+import { ComponentFactoryResolver, ComponentRef, Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { DevConfigService } from 'ng-devui/utils';
 import { assign, isUndefined } from 'lodash-es';
@@ -19,10 +13,13 @@ export class DialogService {
   private renderer: Renderer2;
   document: Document;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver,
-              private overlayContainerRef: OverlayContainerRef, private rendererFactory: RendererFactory2,
-              private devConfigService: DevConfigService,
-              @Inject(DOCUMENT) private doc: any) {
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private overlayContainerRef: OverlayContainerRef,
+    private rendererFactory: RendererFactory2,
+    private devConfigService: DevConfigService,
+    @Inject(DOCUMENT) private doc: any
+  ) {
     this.renderer = this.rendererFactory.createRenderer(null, null);
     this.document = this.doc;
   }
@@ -48,6 +45,7 @@ export class DialogService {
     componentFactoryResolver,
     beforeHidden,
     onClose,
+    onMaximize,
     dialogtype = 'standard',
     showCloseBtn = true,
     draggable = true,
@@ -56,7 +54,8 @@ export class DialogService {
     offsetY,
     bodyScrollable = true,
     contentTemplate,
-    escapable = true
+    escapable = true,
+    showMaximizeBtn = false,
   }: IDialogOptions) {
     const finalComponentFactoryResolver = componentFactoryResolver || this.componentFactoryResolver;
 
@@ -95,12 +94,15 @@ export class DialogService {
       offsetX,
       offsetY,
       bodyScrollable,
-      escapable
+      escapable,
     });
 
-    const modalContainerRef = modalRef.instance.modalContainerHost.viewContainerRef
-      .createComponent(finalComponentFactoryResolver.resolveComponentFactory(ModalContainerComponent), 0, injector);
-    assign(modalContainerRef.instance, { title, buttons, maxHeight, dialogtype, showCloseBtn });
+    const modalContainerRef = modalRef.instance.modalContainerHost.viewContainerRef.createComponent(
+      finalComponentFactoryResolver.resolveComponentFactory(ModalContainerComponent),
+      0,
+      injector
+    );
+    assign(modalContainerRef.instance, { title, buttons, maxHeight, dialogtype, showCloseBtn, showMaximizeBtn });
 
     if (contentTemplate) {
       assign(modalContainerRef.instance, { contentTemplate });
@@ -108,8 +110,9 @@ export class DialogService {
       if (typeof content === 'string') {
         assign(modalContainerRef.instance, { content, html });
       } else {
-        this.contentRef = modalContainerRef.instance.modalContentHost.viewContainerRef
-          .createComponent(finalComponentFactoryResolver.resolveComponentFactory(content));
+        this.contentRef = modalContainerRef.instance.modalContentHost.viewContainerRef.createComponent(
+          finalComponentFactoryResolver.resolveComponentFactory(content)
+        );
         assign(this.contentRef.instance, { data, dialogtype });
       }
     }
@@ -118,7 +121,14 @@ export class DialogService {
       modalRef.instance.hide();
     };
 
-    modalRef.instance.updateButtonOptions = buttonOptions => modalContainerRef.instance.updateButtonOptions(buttonOptions);
+    modalContainerRef.instance.onMaximize = () => {
+      modalRef.instance.maximize();
+      if (onMaximize) {
+        onMaximize(modalRef.instance.maximized);
+      }
+    };
+
+    modalRef.instance.updateButtonOptions = (buttonOptions) => modalContainerRef.instance.updateButtonOptions(buttonOptions);
 
     modalRef.instance.onHidden = () => {
       if (modalRef.instance.documentOverFlow) {

@@ -26,6 +26,7 @@ In the page:
 | placeholder  |      `string`      |           --            | Optional. Placeholder to be displayed.                                          | [Set Placeholder and Maxlength](demo#number-placeholder-maxlength)                        |
 |  maxLength   |      `number`      |            0            | Optional. Limit the maximum length. The value 0 indicates no limit.             | [Set Placeholder and Maxlength](demo#number-placeholder-maxlength)                        |
 |     reg      | `RegExp \| string` |           --            | Optional. It is used to restrict the input regular or regular character string. | [Using Regular Expression](demo#number-reg)                                                |
+| showGlowStyle | `boolean` | true | (Optional) Indicates whether to display the floating glow effect.|
 
 ## d-input-number Event
 

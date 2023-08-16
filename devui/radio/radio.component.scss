@@ -28,9 +28,7 @@
     border-radius: $devui-border-radius-full;
     box-shadow: 0 transparent;
     transform: translateY(-1px);
-    transition:
-      box-shadow $devui-animation-duration-slow $devui-animation-ease-in-out-smooth,
-      border $devui-animation-duration-base $devui-animation-ease-in-out;
+    transition: border $devui-animation-duration-base $devui-animation-ease-in-out;
   }
 
   .devui-radio-label {
@@ -75,8 +73,22 @@
     &:hover,
     &:active {
       .devui-radio-material {
-        box-shadow: 0 0 0 6px $devui-range-item-hover-bg;
         border-color: $devui-brand;
+      }
+    }
+  }
+}
+
+::ng-deep :root .devui-glow-style .devui-radio {
+  .devui-radio-material {
+    transition: box-shadow $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+  }
+
+  &:not(.disabled) {
+    &:hover,
+    &:active {
+      .devui-radio-material {
+        box-shadow: 0 0 0 6px $devui-range-item-hover-bg;
       }
     }
   }

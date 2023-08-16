@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
-  moduleId: module.id,
   selector: 'd-drag-column',
   templateUrl: 'drag-column.component.html'
 })

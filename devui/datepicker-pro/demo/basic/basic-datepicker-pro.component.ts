@@ -10,7 +10,7 @@ export class BasicDatepickerProComponent {
   value1;
   value2 = new Date();
   value3 = new Date();
-  value4 = new Date('2021/04/01');
+  value4 = new Date();
   minDate = new Date(new Date().setMonth(new Date().getMonth() - 1));
   maxDate = new Date(new Date().setMonth(new Date().getMonth() + 2));
   constructor() {

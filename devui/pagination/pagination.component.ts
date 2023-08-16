@@ -15,7 +15,7 @@ import {
 import { DropDownAppendToBodyComponent } from 'ng-devui/dropdown';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { AppendToBodyDirection } from 'ng-devui/utils';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 @Component({
   selector: 'd-pagination',
   styleUrls: ['./pagination.component.scss'],
@@ -282,7 +282,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
       const curInfo = this.activeBlock.nativeElement.getBoundingClientRect();
       const element = this.activeBlock.nativeElement;
       this.activeBlock.nativeElement.style.opacity = 1;
-      element.style.transform = `translate(${this.activeBlockInfo.left - curInfo.left}px, ${this.activeBlockInfo.top - curInfo.top}px)`;
+      element.style.transform = `translate(${this.activeBlockInfo.left - curInfo.left}px)`;
       setTimeout(() => {
         element.style.transition = 'transform .25s ease-in-out';
         element.style.transform = 'translate(0, 0)';

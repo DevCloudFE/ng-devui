@@ -20,7 +20,7 @@
 .devui-transfer-target {
   width: calc(50% - 28px);
   border: 1px solid $devui-line;
-  border-radius: $devui-border-radius;
+  border-radius: $devui-border-radius-card;
 }
 
 .devui-transfer-option {
@@ -62,6 +62,8 @@
 
 .devui-transfer-op {
   .devui-transfer-default-svg {
+    cursor: not-allowed;
+
     circle {
       fill: $devui-disabled-bg;
       stroke: $devui-disabled-line;
@@ -76,8 +78,7 @@
     cursor: pointer;
 
     circle {
-      fill: $devui-icon-fill-active;
-      stroke: devui-icon-fill-active;
+      fill: $devui-brand;
     }
 
     path {
@@ -147,14 +148,16 @@
 
 .devui-transfer-title {
   display: flex;
-  height: 40px;
-  line-height: 40px;
+  height: 44px;
+  line-height: 44px;
   align-items: center;
   -webkit-align-items: center;
   -moz-align-items: center;
   -ms-align-items: center;
   -o-align-items: center;
-  margin-left: 20px;
+  padding-left: 20px;
+  background: $devui-area;
+  border-radius: $devui-border-radius-card $devui-border-radius-card 0 0;
 }
 
 .devui-transfer-line {

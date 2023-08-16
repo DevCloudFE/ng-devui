@@ -12,8 +12,8 @@ export class RangeTypepickerProComponent {
   value3 = [];
   value4 = [];
   value5 = [];
-  minDate = new Date(new Date().setMonth(new Date().getMonth() - 1));
-  maxDate = new Date(new Date().setMonth(new Date().getMonth() + 2));
+  minDate = new Date('2023/4/19 20:30:30');
+  maxDate = new Date().setHours(21);
   constructor() {
 
   }

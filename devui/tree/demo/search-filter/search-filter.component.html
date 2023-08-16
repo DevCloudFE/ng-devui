@@ -1,6 +1,12 @@
 <h4>Operable Tree With Search</h4>
 <div class="row">
   <d-search style="width: 300px" [placeholder]="'search your node...'" [isKeyupSearch]="true" (searchFn)="onKeyUp($event)"></d-search>
+  <d-icon
+    [style.margin-left.px]="12"
+    [icon]="toggle ? 'icon-expand' : 'icon-fold'"
+    [operable]="true"
+    (click)="expandOrCollapse($event)"
+  ></d-icon>
 </div>
 
 <div class="row">

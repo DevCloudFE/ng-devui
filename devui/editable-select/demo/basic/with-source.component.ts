@@ -5,7 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './with-source.component.html',
 })
 export class WithSourceComponent {
-  selectItem: any;
+  associationListLang = 'Python';
+  fullListLang = 'TypeScript';
   languages = [
     'C#',
     'C',
@@ -22,6 +23,10 @@ export class WithSourceComponent {
     'LiveScript',
     'CoffeeScript',
   ];
+
+  selectItem(event) {
+    console.log('select:', event);
+  }
 
   toggleChange(event) {
     console.log('isOpen:', event);

@@ -6,6 +6,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostBinding,
   Inject,
   Input,
   OnChanges,
@@ -45,6 +46,10 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
   @Input() maxLength = 0;
   @Input() reg: RegExp | string;
   @Input() @WithConfig() styleType = 'default';
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+    return this.showGlowStyle;
+  };
   @Output() afterValueChanged = new EventEmitter<number>();
   @Output() whileValueChanging = new EventEmitter<number>();
   @ViewChild('incButton', { static: true }) incButton: ElementRef;

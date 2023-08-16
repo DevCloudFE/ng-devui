@@ -38,6 +38,7 @@ import { UploadModule } from 'ng-devui/upload';
 | dynamicUploadOptionsFn |         [`IUploadOptions`](#iuploadoptions)          |     --     |         为文件动态设置自定义的上传参数, 参数为当前选中文件及`uploadOptions`的值          | [基本用法](demo#basic-usage) |
 |        disabled        |                      `boolean`                       |   false    |                                  可选，是否禁用上传组件                                  | [基本用法](demo#basic-usage) |
 |        showTip         |                      `boolean`                       |   false    |                                可选，是否显示上传提示信息                                | [自动上传](demo#auto-upload) |
+|   showGlowStyle    |       `boolean`        |   true   |       可选，是否显示悬浮发光效果    |
 
 ## d-single-upload 事件
 

@@ -147,6 +147,10 @@
   display: flex;
 }
 
+:host:not(.devui-glow-style) .devui-tags-input-wrapper:hover {
+  border-color: $devui-aide-text;
+}
+
 .devui-tags-input-wrapper {
   border: 1px solid $devui-line;
   display: inline-flex;
@@ -195,4 +199,10 @@
 .devui-drop-menu-wrapper {
   white-space: nowrap;
   font-size: 0;
+}
+
+:host ::ng-deep {
+  .devui-max-width-tag {
+    height: 16px;
+  }
 }

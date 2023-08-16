@@ -76,7 +76,7 @@
       span:hover,
       a:focus,
       span:focus {
-        background-color: $devui-list-item-hover-bg;
+        background-color: $devui-base-bg;
         color: $devui-list-item-hover-text;
         text-decoration: none; // 覆盖bootStrap默认样式
       }
@@ -406,4 +406,8 @@
   background: $devui-primary;
   z-index: 0;
   border-radius: $devui-border-radius;
+}
+
+.devui-pagination-acitve-item {
+  background: $devui-list-item-active-bg;
 }

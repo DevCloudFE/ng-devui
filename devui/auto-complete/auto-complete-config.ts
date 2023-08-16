@@ -7,7 +7,7 @@ export class AutoCompleteConfig {
     minLength: 1,
     itemTemplate: null,
     noResultItemTemplate: null,
-    formatter: (item) => item ? (item.label || item.toString()) : '',
-    valueParser: (item) => item
+    formatter: (item) => (item ? item.label || item.toString() : ''),
+    valueParser: (item) => (item ? item.label || item.toString() : ''),
   };
 }

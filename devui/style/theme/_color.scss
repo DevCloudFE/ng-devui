@@ -25,13 +25,13 @@ $devui-link-active: var(--devui-link-active, $devui-blue-60); // 链接文本悬
 $devui-link-light: var(--devui-link-light, $devui-blue-30); // 深色背景下链接文本颜色
 $devui-link-light-active: var(--devui-link-light-active, $devui-blue-20); // 深色背景下链接文本悬停/激活颜色
 $devui-line: var(--devui-line, $devui-slate-30); // 边框分割线，仅用于边框
-$devui-dividing-line: var(--devui-dividing-line, $devui-zinc-10); // 内容分割线，用于内容之间的分割
+$devui-dividing-line: var(--devui-dividing-line, $devui-slate-10); // 内容分割线，用于内容之间的分割
 $devui-block: var(--devui-block, $devui-white-5); // 大面积的不可折叠区块的背景色（例如顶部导航背景色）
 $devui-area: var(--devui-area, $devui-gray-5); // 可折叠区块的背景色（展开区域颜色）
 $devui-danger: var(--devui-danger, $devui-red-50); // 失败、错误、告警
 $devui-warning: var(--devui-warning, $devui-yellow-50); // 警告、需注意类型提示
 $devui-waiting: var(--devui-waiting, $devui-blue-20); // 等待中
-$devui-success: var(--devui-success, $devui-green-50); // 成功、正确
+$devui-success: var(--devui-success, $devui-green-60); // 成功、正确
 $devui-info: var(--devui-info, $devui-blue-50); // 通知、一般提示、执行中
 $devui-initial: var(--devui-initial, $devui-blue-10); // 初始化、未执行
 $devui-unavailable: var(--devui-unavailable, $devui-gray-5); // 不可用、禁用状态
@@ -39,6 +39,7 @@ $devui-shadow: var(--devui-shadow, rgba(37, 43, 58, 0.24)); // 阴影色
 $devui-light-shadow: var(--devui-light-shadow, rgba(37, 43, 58, 0.12)); // 弱化阴影色
 $devui-connected-overlay-shadow: var(--devui-connected-overlay-shadow, rgba(37, 43, 58, 0.16)); // 下拉菜单类阴影色
 $devui-feedback-overlay-shadow: var(--devui-feedback-overlay-shadow, rgba(37, 43, 58, 0.2)); // 信息展示类阴影色
+$devui-hover-shadow: var(--devui-hover-shadow, rgba(37, 43, 58, 0.2)); // 信息展示类阴影色
 
 // 图标
 $devui-icon-text: var(--devui-icon-text, $devui-slate-70); // 文字图标颜色
@@ -60,17 +61,17 @@ $devui-form-control-line-active: var(--devui-form-control-line-active, $devui-bl
 $devui-form-control-interactive-outline: var(--devui-form-control-interactive-outline, rgba(94, 124, 224, 0.08));      // 表单控件边框激活色的外框阴影色
 $devui-form-control-line-active-hover: var(--devui-form-control-line-active-hover, $devui-blue-90); // 表单控件边框激活色，用于获得焦点且悬停
 // 列表
-$devui-list-item-active-bg: var(--devui-list-item-active-bg, $devui-blue-5); // 列表类型单选选中背景
+$devui-list-item-active-bg: var(--devui-list-item-active-bg, $devui-blue-10); // 列表类型单选选中背景
 $devui-list-item-active-text: var(--devui-list-item-active-text, $devui-slate-100); // 列表类型单选选中背景搭配文本，同 有色深色背景下字体颜色（固定）
-$devui-list-item-active-hover-bg: var(--devui-list-item-active-hover-bg, $devui-blue-5); // 列表类型单选选中背景悬停反馈色（仅用于分页等）
+$devui-list-item-active-hover-bg: var(--devui-list-item-active-hover-bg, $devui-blue-10); // 列表类型单选选中背景悬停反馈色（仅用于分页等）
 $devui-list-item-hover-bg: var(--devui-list-item-hover-bg, $devui-zinc-10); // 列表类型普通选项悬停背景
 $devui-list-item-hover-text: var(--devui-list-item-hover-text, $devui-slate-100); // 列表类型普通选项悬停背景搭配文本
-$devui-list-item-selected-bg: var(--devui-list-item-selected-bg, $devui-blue-5); // 列表类型多选被选中的行色，仅用于表格类
+$devui-list-item-selected-bg: var(--devui-list-item-selected-bg, $devui-blue-10); // 列表类型多选被选中的行色，仅用于表格类
 $devui-list-item-strip-bg: var(--devui-list-item-strip-bg, $devui-blue-5); // 列表类型斑马纹色，仅用于表格类
 // 禁用
 $devui-disabled-bg: var(--devui-disabled-bg, $devui-gray-5); // disabled背景颜色
 $devui-disabled-line: var(--devui-disabled-line, $devui-slate-20); // disabled边框颜色
-$devui-disabled-text: var(--devui-disabled-text, $devui-slate-40); // disabled文字颜色
+$devui-disabled-text: var(--devui-disabled-text, $devui-slate-50); // disabled文字颜色
 $devui-primary-disabled: var(--devui-primary-disabled, $devui-blue-20); //主要按钮disabled状态文字颜色
 $devui-icon-fill-active-disabled: var(--devui-icon-fill-active-disabled, $devui-blue-20); // svg图标激活状态禁用色
 // 特殊背景色

@@ -346,7 +346,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   halfChecked = false;
   childrenTableOpen: boolean;
   private scrollY = 0;
-  BUILTIN_COL_WIDTH = '36px';
+  BUILTIN_COL_WIDTH = '41px';
   BUILTIN_COL_WIDTH_EXTRA = '55px';
 
   tableBodyEl: ElementRef;
@@ -566,7 +566,9 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     if (this.onlyOneColumnSort) {
       this.resetThSortOrder();
     }
-    this.initScrollClass();
+    setTimeout(() => {
+      this.initScrollClass();
+    });
   }
 
   // 初始化时判断是否存在横向滚动，并加上相应类名
@@ -815,7 +817,8 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
       this.tableWidthConfig.push({field: 'expand', width: expandWidth + 'px'});
     }
     if (this.checkable) {
-      const checkboxWidth = this.elementRef.nativeElement.querySelector('.devui-checkable-cell').clientWidth;
+      const list = this.elementRef.nativeElement.querySelectorAll('.devui-checkable-cell');
+      const checkboxWidth = list[list.length - 1].clientWidth;
       this.tableWidthConfig.push({field: 'checkbox', width: checkboxWidth + 'px'});
 
     }

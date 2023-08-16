@@ -1,6 +1,6 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
 
-// block Ӧ��������ȷ�����ݲ��� api �п���
+// Block application conditions are to be determined and are not open in APIs.
 export type AppendToBodyScrollStrategyType= 'block' | 'close' | 'noop' | 'reposition';
 export type AppendToBodyDirection= 'rightDown'| 'rightUp' | 'leftUp'| 'leftDown' | 'centerDown' | 'centerUp';
 export const AppendToBodyDirectionsConfig: {

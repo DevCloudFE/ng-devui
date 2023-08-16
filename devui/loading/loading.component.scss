@@ -12,7 +12,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  bottom: 0;
+  bottom: 0 !important;
   left: 0;
   z-index: $devui-z-index-full-page-overlay;
 }

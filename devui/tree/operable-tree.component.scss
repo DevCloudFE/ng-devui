@@ -94,6 +94,14 @@
   font-weight: bold;
 }
 
+.devui-tree-icons-container {
+  display: inline-flex;
+
+  &.align-end {
+    margin-left: auto;
+  }
+}
+
 :host ::ng-deep .devui-tree-node__title d-highlight .devui-match-highlight {
   color: $devui-brand;
   font-weight: bold;

@@ -1,0 +1,36 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.single-input-group-container {
+  min-width: 600px;
+}
+
+.duration-value {
+  width: 240px;
+}
+
+.input-value {
+  width: 88px;
+}
+
+.comparison-symbol {
+  width: 60px;
+}
+
+.user-name {
+  width: 197px;
+}
+
+d-input-group {
+  margin-bottom: 4px;
+}
+
+:host ::ng-deep {
+  input.input-value,
+  d-select input.devui-select-input {
+    text-align: center;
+  }
+
+  d-icon .devui-icon.icon-star {
+    margin-top: -2px;
+  }
+}

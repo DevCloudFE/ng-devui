@@ -264,10 +264,12 @@
           'drop-freeze': colDraggable && colIndex < head?.colDropFreezeTo
         }"
       >
-        <span *ngIf="rowIndex < rows.length - 1 || !column.headCellTmpl?.template" [attr.title]="column.advancedHeader[rowIndex].header">{{
-          column.advancedHeader[rowIndex].header
-        }}</span>
-        <ng-container *ngIf="column.headCellTmpl?.template && rowIndex === rows.length - 1">
+        <span
+          *ngIf="(rowIndex < rows.length - 1 && !column.headCellApplyAll) || !column.headCellTmpl?.template"
+          [attr.title]="column.advancedHeader[rowIndex].header"
+          >{{ column.advancedHeader[rowIndex].header }}</span
+        >
+        <ng-container *ngIf="column.headCellTmpl?.template && (rowIndex === rows.length - 1 || column.headCellApplyAll)">
           <ng-template
             [ngTemplateOutlet]="column.headCellTmpl?.template"
             [ngTemplateOutletContext]="{

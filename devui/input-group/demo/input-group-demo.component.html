@@ -1,0 +1,30 @@
+<div class="devui-demo-container" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems">></d-demo-nav>
+  <div class="devui-demo-example" [dAnchor]="'basic-usage'">
+    <div class="devui-demo-title">{{ 'components.input-group.basicDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.input-group.basicDemo.description' | translate }}
+    </div>
+    <d-codebox id="components-tabs-default" [sourceData]="basicSource">
+      <d-input-group-basic demo></d-input-group-basic>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'responsive-usage'">
+    <div class="devui-demo-title">{{ 'components.input-group.responsiveDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.input-group.responsiveDemo.description' | translate }}
+    </div>
+    <d-codebox id="components-tabs-default" [sourceData]="responsiveSource">
+      <d-input-group-responsive demo></d-input-group-responsive>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'embed-usage'">
+    <div class="devui-demo-title">{{ 'components.input-group.embedDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.input-group.embedDemo.description' | translate }}
+    </div>
+    <d-codebox id="components-tabs-default" [sourceData]="embedSource">
+      <d-input-group-embed demo></d-input-group-embed>
+    </d-codebox>
+  </div>
+</div>

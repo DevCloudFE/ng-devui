@@ -13,7 +13,13 @@ export class BasicComponent implements OnInit {
     showOuterContent: true,
     showCenterContent: false,
   };
+  customContentConfig = {
+    showInnerContent: false,
+    showOuterContent: false,
+    showCenterContent: true,
+  };
   showSuccess = false;
+  text = 'This is a progress bar with info.';
 
   ngOnInit(): void {
     this.progressing(100);

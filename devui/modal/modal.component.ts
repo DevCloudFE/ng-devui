@@ -2,29 +2,19 @@ import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { backdropFadeInOut, wipeInOutAnimation } from 'ng-devui/utils';
 import { isUndefined } from 'lodash-es';
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, fromEvent } from 'rxjs';
 import { ModalContainerDirective } from './modal.directive';
 
 @Component({
   selector: 'd-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
-  animations: [
-    backdropFadeInOut,
-    wipeInOutAnimation
-  ],
+  animations: [backdropFadeInOut, wipeInOutAnimation],
   preserveWhitespaces: false,
 })
 export class ModalComponent implements OnInit, OnDestroy {
-
   @Input() id: string;
   @Input() showAnimation = true;
-  /**
-   * @deprecated Use showAnimation to replace.
-   */
-  @Input() set showAnimate(isShowAnimate: any) {
-    this.showAnimation = isShowAnimate;
-  }
   @Input() width: string;
   @Input() zIndex: number;
   @Input() backDropZIndex: number;
@@ -52,38 +42,37 @@ export class ModalComponent implements OnInit, OnDestroy {
   contentTemplate: TemplateRef<any>;
   document: Document;
 
-  constructor(
-    private elementRef: ElementRef,
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private doc: any
-  ) {
-    this.backdropCloseable = isUndefined(this.backdropCloseable)
-      ? true
-      : this.backdropCloseable;
+  maximized = false;
+  _oldWidth: string;
+
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, @Inject(DOCUMENT) private doc: any) {
+    this.backdropCloseable = isUndefined(this.backdropCloseable) ? true : this.backdropCloseable;
     this.document = this.doc;
   }
 
   ngOnInit() {
     if (this.escapable) {
-      this.pressEscToClose.add(fromEvent(window, 'keydown').subscribe((event) => {
-        if (event['keyCode'] === 27) {
-          this.hide();
-        }
-      }));
+      this.pressEscToClose.add(
+        fromEvent(window, 'keydown').subscribe((event) => {
+          if (event['keyCode'] === 27) {
+            this.hide();
+          }
+        })
+      );
     }
 
     const handle = this.elementRef.nativeElement.querySelector('#d-modal-header');
     if (handle) {
       this.draggableHandleEl = handle;
     }
+
+    this._oldWidth = this.width;
   }
 
   // Will overwrite this method in modal service
-  onHidden() {
-  }
+  onHidden() {}
 
-  updateButtonOptions<T>(buttonOptions: Array<T>) {
-  }
+  updateButtonOptions<T>(buttonOptions: Array<T>) {}
 
   canHideModel() {
     let hiddenResult = Promise.resolve(true);
@@ -106,8 +95,12 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   onModalClick = ($event) => {
     // 一定要document.contains($event.target)，因为$event.target可能已经不在document里了，这个时候就不能进hide了,使用document.body兼容IE
-    if (this.backdropCloseable && !this.ignoreBackDropClick &&
-      (!this.dialogElement.nativeElement.contains($event.target) && this.document.body.contains($event.target))) {
+    if (
+      this.backdropCloseable &&
+      !this.ignoreBackDropClick &&
+      !this.dialogElement.nativeElement.contains($event.target) &&
+      this.document.body.contains($event.target)
+    ) {
       this.hide();
     }
     this.ignoreBackDropClick = false;
@@ -131,6 +124,17 @@ export class ModalComponent implements OnInit, OnDestroy {
 
       this.animateState = 'void';
     });
+  }
+
+  maximize() {
+    this.maximized = !this.maximized;
+    if (this.maximized) {
+      this.width = '100vw';
+      this.renderer.setStyle(this.document.body, 'overflow', 'hidden');
+    } else {
+      this.width = this._oldWidth;
+      this.renderer.setStyle(this.document.body, 'overflow', 'auto');
+    }
   }
 
   onAnimationEnd($event) {
@@ -161,16 +165,16 @@ export class ModalComponent implements OnInit, OnDestroy {
   resolveTransformTranslate() {
     let autoOffsetYByPlacement;
     switch (this.placement) {
-    case 'top':
-      autoOffsetYByPlacement = '40px';
-      break;
-    case 'bottom':
-      autoOffsetYByPlacement = '-40px';
-      break;
-    case 'center':
-    default:
-      autoOffsetYByPlacement = '0';
-      break;
+      case 'top':
+        autoOffsetYByPlacement = '40px';
+        break;
+      case 'bottom':
+        autoOffsetYByPlacement = '-40px';
+        break;
+      case 'center':
+      default:
+        autoOffsetYByPlacement = '0';
+        break;
     }
     const offsetX = this.offsetX ? this.offsetX : '0';
     const offsetY = this.offsetY ? this.offsetY : autoOffsetYByPlacement;

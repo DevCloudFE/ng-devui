@@ -11,7 +11,12 @@
 </d-tags>
 <pre style="margin-top: 8px">{{ tagList2 | json }}</pre>
 <h4>Custom</h4>
-<d-tags [tags]="tagList_custom" [mode]="'closeable'" (tagDelete)="getTagValue($event); deleteTagCustom($event.index)">
+<d-tags
+  [tags]="tagList_custom"
+  [titleProperty]="'name'"
+  [mode]="'closeable'"
+  (tagDelete)="getTagValue($event); deleteTagCustom($event.index)"
+>
   <ng-template let-tag="tag">
     <span class="icon-bug" style="vertical-align: text-bottom; padding-right: 4px"></span>
     <span title="{{ tag.name }}">{{ tag.name }}</span>

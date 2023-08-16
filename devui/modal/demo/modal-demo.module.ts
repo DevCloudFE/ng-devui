@@ -15,6 +15,7 @@ import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { AutofocusComponent } from './autofocus/autofocus.component';
 import { BasicUpdateComponent } from './basic-update/basic-update.component';
 import { BasicComponent } from './basic/basic.component';
+import { MaximizeComponent } from './maximize/maximize.component';
 import { CasesComponent } from './cases/cases.component';
 import { ModalCasesComponent } from './cases/modal-cases.component';
 import { CustomizeComponent } from './customize/customize.component';
@@ -33,53 +34,54 @@ import { TipsComponent } from './tips/tips.component';
 
 @NgModule({
   imports: [
-    FormsModule,
-    TranslateModule,
-    CommonModule,
-    ModalModule,
-    ButtonModule,
-    PopoverModule,
-    FormModule,
-    DevUICodeboxModule,
-    DevUIApiModule,
-    DDemoNavModule,
-    TextInputModule,
-    RouterModule.forChild([
-      { path: '', redirectTo: 'demo', pathMatch: 'full' },
-      {
-        path: 'design',
-        component: ModalDesignComponent,
-      },
-      { path: 'demo', component: ModalDemoComponent },
-      {
-        path: 'api',
-        component: DevUIApiComponent,
-        data: {
-          'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
-          'en-us': require('!html-loader!markdown-loader!../doc/api-en.md'),
-        },
-      },
+  FormsModule,
+  TranslateModule,
+  CommonModule,
+  ModalModule,
+  ButtonModule,
+  PopoverModule,
+  FormModule,
+  DevUICodeboxModule,
+  DevUIApiModule,
+  DDemoNavModule,
+  TextInputModule,
+  RouterModule.forChild([
+    { path: '', redirectTo: 'demo', pathMatch: 'full' },
+    {
+    path: 'design',
+    component: ModalDesignComponent,
+    },
+    { path: 'demo', component: ModalDemoComponent },
+    {
+    path: 'api',
+    component: DevUIApiComponent,
+    data: {
+    'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+    'en-us': require('!html-loader!markdown-loader!../doc/api-en.md'),
+    },
+    },
     ]),
   ],
   declarations: [
-    ModalDemoComponent,
-    ModalDesignComponent,
-    ModalTestComponent,
-    ModalAlertComponent,
-    ModalNoBtnComponent,
-    BasicComponent,
-    CustomizeComponent,
-    TipsComponent,
-    HideComponent,
-    ModalFormComponent,
-    AutofocusComponent,
-    TemplateComponent,
-    DialogContentComponent,
-    ModalContentComponent,
-    BasicUpdateComponent,
-    FixedWrapperComponent,
-    CasesComponent,
-    ModalCasesComponent
+  ModalDemoComponent,
+  ModalDesignComponent,
+  ModalTestComponent,
+  ModalAlertComponent,
+  ModalNoBtnComponent,
+  BasicComponent,
+  MaximizeComponent,
+  CustomizeComponent,
+  TipsComponent,
+  HideComponent,
+  ModalFormComponent,
+  AutofocusComponent,
+  TemplateComponent,
+  DialogContentComponent,
+  ModalContentComponent,
+  BasicUpdateComponent,
+  FixedWrapperComponent,
+  CasesComponent,
+  ModalCasesComponent,
   ],
-})
+  })
 export class ModalDemoModule {}

@@ -9,11 +9,7 @@
   -moz-align-items: center;
   -ms-align-items: center;
   -o-align-items: center;
-  margin-left: 20px;
-}
-
-.line {
-  height: 1px;
-  background: $devui-dividing-line;
-  margin-bottom: 8px;
+  padding-left: 20px;
+  background: $devui-area;
+  font-weight: 600;
 }

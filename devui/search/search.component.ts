@@ -6,6 +6,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostBinding,
   Input,
   OnDestroy,
   OnInit,
@@ -52,6 +53,10 @@ export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @Input() noBorder = false;
   @Input() autoFocus = false;
   @Input() @WithConfig() styleType = 'default';
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+    return this.showGlowStyle;
+  };
   @Output() searchFn = new EventEmitter<string>();
   @ViewChild('filterInput', { static: true }) filterInputElement: ElementRef;
   @ViewChild('line') lineElement: ElementRef;

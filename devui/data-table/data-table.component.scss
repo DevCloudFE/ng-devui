@@ -11,7 +11,6 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 
   &.devui-table-shadow {
     border-radius: $devui-border-radius;
-    overflow: hidden;
     box-shadow: $devui-shadow-length-base $devui-light-shadow;
 
     ::ng-deep table tbody tr:last-child td {
@@ -29,6 +28,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
     border: none;
     position: relative;
     height: 100%;
+    z-index: 1;
 
     &.contain-fix-height {
       display: flex;
@@ -141,7 +141,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       display: block;
       top: 0;
       left: 0;
-      bottom: 0;
+      bottom: 0 !important;
       right: 0;
       z-index: 1000;
     }
@@ -432,6 +432,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
         left: -8px;
         top: 50%;
         transform: translateY(-50%);
+        pointer-events: none;
       }
 
       &::after {
@@ -445,6 +446,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
         left: 6px;
         top: 50%;
         transform: translateY(-50%);
+        pointer-events: none;
       }
     }
   }
@@ -536,7 +538,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 
   &.devui-table-xs ::ng-deep {
     tbody > tr > td {
-      padding: 4px 20px 4px;
+      padding: 3px 20px 4px;
     }
 
     thead > tr > th.devui-checkable-cell {
@@ -550,8 +552,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 
   &.devui-table-mini ::ng-deep {
     tbody > tr > td {
-      padding: 0;
-      padding-left: 18px;
+      padding: 0 0 1px 18px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -570,6 +571,32 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 
     thead tr th .header-container {
       padding-left: 0;
+    }
+  }
+
+  &.table-borderless {
+    &.devui-table-md ::ng-deep {
+      tbody > tr > td {
+        padding: 12px 20px 12px;
+      }
+    }
+
+    &.devui-table-lg ::ng-deep {
+      tbody > tr > td {
+        padding: 16px 20px 16px;
+      }
+    }
+
+    &.devui-table-xs ::ng-deep {
+      tbody > tr > td {
+        padding: 4px 20px 4px;
+      }
+    }
+
+    &.devui-table-mini ::ng-deep {
+      tbody > tr > td {
+        padding: 0 0 0 18px;
+      }
     }
   }
 }

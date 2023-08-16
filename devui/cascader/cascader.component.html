@@ -34,10 +34,11 @@
       <div class="devui-tags-input">
         <d-tag
           *ngFor="let item of multipleValueList; let index = index"
-          [tag]="item.label"
+          [tag]="item.pathLabel || item.label"
           [labelStyle]="item.disabled ? 'tag-disabled' : ''"
           [deletable]="!item.disabled"
           (tagDelete)="deleteTag($event, item)"
+          [maxWidth]="tagMaxWidth"
         ></d-tag>
         <input
           #innerInput

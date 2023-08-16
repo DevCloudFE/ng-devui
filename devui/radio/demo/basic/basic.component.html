@@ -4,7 +4,7 @@
   [name]="'basic-radio'"
   [value]="item"
   [(ngModel)]="chosenItem"
-  (change)="valueChange($event)"
+  (ngModelChange)="valueChange($event)"
 >
   <span>The Radio item is: {{ item }}</span>
 </d-radio>

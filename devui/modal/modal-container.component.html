@@ -3,7 +3,9 @@
     id="d-modal-header"
     [title]="title"
     (closeEvent)="close($event)"
+    (maximizeEvent)="maximize($event)"
     [dialogtype]="dialogtype"
+    [showMaximizeBtn]="showMaximizeBtn"
     [showCloseBtn]="showCloseBtn"
   ></d-modal-header>
   <div
@@ -11,7 +13,7 @@
     [ngClass]="{
       'flex-content': dialogtype === 'warning' || dialogtype === 'failed' || dialogtype === 'success' || dialogtype === 'info'
     }"
-    [ngStyle]="{ maxHeight: maxHeight }"
+    [ngStyle]="{ maxHeight: maxHeight, 'overflow-y': 'auto' }"
   >
     <div
       [ngClass]="{

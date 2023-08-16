@@ -6,6 +6,7 @@ import {
   ContentChildren,
   ElementRef,
   EventEmitter,
+  HostBinding,
   Inject,
   Input,
   OnChanges,
@@ -79,6 +80,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     createFilter: '',
     filterTitle: '',
     labelConnector: '|',
+    noCategoriesAvailable: '',
   };
   @Input() filterNameRules: DValidateRules = [];
   @Input() beforeTagChange: (tag, searchKey, operation) => boolean | Promise<boolean> | Observable<boolean>;
@@ -96,6 +98,11 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   @ViewChildren('selectedDropdown') selectedDropdownList: QueryList<DropDownDirective>;
   @ViewChildren(DefaultTemplateDirective) defaultTemplates: QueryList<DefaultTemplateDirective>;
   @ContentChildren(ContentTemplateDirective) contentTemplates: QueryList<ContentTemplateDirective>;
+
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
+    return this.showGlowStyle;
+  }
 
   id: number;
   searchField: ICategorySearchTagItem[];
@@ -173,11 +180,13 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       textConfig,
     } = changes;
     const hasExtendChanged = [allowClear, allowSave, allowShowMore, extendedConfig].some((change) => change);
+    if (searchKey) {
+      // searchKey输入变化更新缓存，优先处理searchKey避免初始化时再添加关键字
+      this.searchKeyCache = this.searchKey;
+      this.setSearchKeyTag(false);
+    }
     if (defaultSearchField || category || selectedTags) {
       this.init();
-    }
-    if (searchKey) {
-      this.setSearchKeyTag(false);
     }
     if (showSearchCategory) {
       this.setSearchShow();
@@ -194,7 +203,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     // 获取所有默认模板，规避脏检查添加延时
     setTimeout(() =>
       this.defaultTemplates.forEach((item) => {
-        this.templates[item.type] = item.template;
+        this.templates[item.type || item.dType] = item.template;
       })
     );
 
@@ -234,7 +243,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     if (data?.length && this.category) {
       this.customTemplates = {};
       data.forEach((item) => {
-        this.customTemplates[item.field] = item.template;
+        this.customTemplates[item.field || item.dField] = item.template;
       });
       this.category.forEach((tag) => {
         tag.customTemplate = this.customTemplates[tag.field];
@@ -277,7 +286,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
 
   setSearchKeyTag(isSearch = true) {
     const result = this.searchKey || this.searchKeyCache;
-    if (this.showSearchConfig.keyword && !this.currentSelectTag) {
+    if (this.showSearchConfig.keyword) {
       const existingSearchKeyTag = this.selectedTags.find((tag) => tag.field === 'devuiCategorySearchKeyword');
       if (existingSearchKeyTag && !isSearch && this.searchKey === '') {
         this.removeTag(existingSearchKeyTag);
@@ -364,7 +373,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     if (item.type === 'treeSelect' && item.options && item.options.length) {
       item.value.options = cloneDeep(item.options);
     }
-    item.customTemplate = this.customTemplates[item.field] || item.customTemplate;
+    item.customTemplate = this.customTemplates[item.field || item.dField] || item.customTemplate;
     return item;
   }
 
@@ -494,10 +503,13 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   searchInputValue(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    this.searchEvent.emit({
-      selectedTags: this.getSelectedTagsExceptKeyword(),
-      searchKey: this.setSearchKeyTag(),
-    });
+    // 当有分类正在选择时输入关键字不处理
+    if (!this.currentSelectTag) {
+      this.searchEvent.emit({
+        selectedTags: this.getSelectedTagsExceptKeyword(),
+        searchKey: this.setSearchKeyTag(),
+      });
+    }
   }
 
   chooseCategory(item: ICategorySearchTagItem, inputDropdown: DropDownDirective) {
