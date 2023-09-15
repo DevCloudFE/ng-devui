@@ -26,6 +26,7 @@ import {
 } from '@angular/core';
 import { merge, Subscription } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
+import { DataTableHeadComponent } from './data-table-head.component';
 import {
   CellSelectedEventArg, CheckableRelation, ColumnResizeEventArg, RowCheckChangeEventArg,
   RowSelectedEventArg, SortEventArg, TableCheckOptions, TableCheckStatusArg,
@@ -37,21 +38,23 @@ import { TableThComponent } from './table/head/th/th.component';
 import { TableTheadComponent } from './table/head/thead.component';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
+const SCROLL_BAR_WIDTH = 8;
+
 @Component({
   selector: 'd-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: [
-    './data-table.component.scss',
-    './data-table.component.color.scss'
+  './data-table.component.scss',
+  './data-table.component.color.scss'
   ],
   // changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'dataTable',
   preserveWhitespaces: false,
   providers: [{
-    provide: DATA_TABLE,
-    useExisting: forwardRef(() => DataTableComponent)
+  provide: DATA_TABLE,
+  useExisting: forwardRef(() => DataTableComponent)
   }],
-})
+  })
 export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit, AfterViewInit {
   /**
    * 【可选】Datatable是否提供勾选行的功能
@@ -69,6 +72,8 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    * 【可选】表头选中的下拉项及操作
    */
   @Input() checkOptions: TableCheckOptions[];
+
+  @Input() checkOptionsIndex = 1050;
 
   @Input() selectOptionOnCheckbox = false;
   /**
@@ -313,6 +318,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   @ViewChild('cdkVirtualScrollViewport') virtualScrollViewport: CdkVirtualScrollViewport;
   @ViewChild('normalScroll') normalScrollElement: ElementRef;
   @ViewChild('scrollViewTpl') vitualScrollElement: TemplateRef<any>;
+  @ViewChild(DataTableHeadComponent) columnHeaderComponent: DataTableHeadComponent;
   @ViewChild('devuiNormalScrollBody', {read: ElementRef}) devuiNormalScrollBody: ElementRef;
 
   @HostBinding('style.height') get hostHeight() {
@@ -442,8 +448,8 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
     if (this.tableBodyEl) {
       const tableHeader = this.tableBodyEl.nativeElement.querySelector('thead');
-      const tableHeaderHeight = (tableHeader?.offsetHeight + 8) || 0;
-      const curTotalHeight = this.dataSource.length * this.virtualItemSize + tableHeaderHeight;
+      const tableHeaderHeight = (tableHeader?.offsetHeight + SCROLL_BAR_WIDTH) || 0;
+      const curTotalHeight = this.dataSource.length * this.virtualItemSize + tableHeaderHeight + SCROLL_BAR_WIDTH;
       this.virtualBodyHeight = curTotalHeight < parseInt(this.maxHeight, 10) ? curTotalHeight + 'px' : this.maxHeight;
       return;
     }

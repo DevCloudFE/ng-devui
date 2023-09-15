@@ -31,6 +31,12 @@
         }
 
         &.disabled {
+          cursor: not-allowed;
+
+          d-toggle-menu-container div.devui-toggle-menu {
+            background-color: $devui-disabled-bg;
+          }
+
           d-toggle-menu-search .devui-toggle-menu-search input {
             cursor: not-allowed;
           }
@@ -123,11 +129,19 @@
 }
 
 ::ng-deep {
-  .devui-dropdown-menu d-toggle-menu-list-item .devui-dropdown-item:not(.disabled) {
-    &:active,
-    &:active:hover {
-      color: $devui-list-item-hover-text;
-      background-color: $devui-list-item-hover-bg;
+  .devui-dropdown-menu {
+    d-toggle-menu-list-item .devui-dropdown-item:not(.disabled) {
+      &:active,
+      &:active:hover {
+        color: $devui-list-item-hover-text;
+        background-color: $devui-list-item-hover-bg;
+      }
+    }
+
+    .devui-tags-create-item {
+      float: right;
+      font-size: $devui-font-size;
+      color: $devui-placeholder;
     }
   }
 }

@@ -1,9 +1,16 @@
 <div class="devui-backtop-custom">
   <span class="icon-chevron-up"></span>
 </div>
-<d-back-top (backTopEvent)="backTop($event)" [customTemplate]="customTemplate" [bottom]="'100px'" [visibleHeight]="200">
+<d-back-top
+  [customTemplate]="customTemplate"
+  [bottom]="'100px'"
+  [visibleHeight]="200"
+  [draggable]="true"
+  (dragEvent)="toggleTooltip($event)"
+  (backTopEvent)="backTop($event)"
+>
   <ng-template #customTemplate>
-    <div class="devui-backtop-custom" dTooltip [content]="'BackTop'" [position]="'left'">
+    <div #tooltipItem class="devui-backtop-custom" dTooltip [content]="content" [position]="'left'">
       <span class="icon-chevron-up"></span>
     </div>
   </ng-template>

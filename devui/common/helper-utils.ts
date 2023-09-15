@@ -259,7 +259,7 @@ export class HelperUtils {
       }
     };
 
-    httpClient.request(requestMethod, requestUrl, requestOption).subscribe((res: HttpEvent<any>) => {
+    const subscriber = httpClient.request(requestMethod, requestUrl, requestOption).subscribe((res: HttpEvent<any>) => {
       if (res.type === HttpEventType.DownloadProgress) {
         if (onProgress) {
           onProgress(res);
@@ -298,6 +298,8 @@ export class HelperUtils {
         onError(response);
       }
     });
+
+    return subscriber;
   }
 
   private static utf8ArrayToStr(arrayBuffer) {
@@ -321,7 +323,7 @@ export class HelperUtils {
 
 @Directive({
   selector: '[dSimulateATag]'
-})
+  })
 export class SimulateATagDirective {
   @Input() href: string;
   @Input() target: '_blank' | '_self' | '_parent' | '_top' | string   = '_blank';

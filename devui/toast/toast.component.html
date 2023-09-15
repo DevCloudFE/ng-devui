@@ -138,7 +138,7 @@
           <p [style.marginTop]="msg.summary ? '4px' : '0'">{{ msg.content }}</p>
         </ng-template>
         <ng-template #detailTemplate>
-          <p *ngIf="msg.detail" [innerHTML]="msg.detail | safe: 'html'"></p>
+          <p *ngIf="msg.detail" [style.marginTop]="msg.summary ? '4px' : '0'" [innerHTML]="msg.detail | safe : 'html'"></p>
         </ng-template>
       </div>
     </div>

@@ -2,7 +2,7 @@ import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
   selector: '[dAutoFocus]',
-})
+  })
 export class AutoFocusDirective implements AfterViewInit {
 
   @Input('dAutoFocus') autoFocus: boolean;
@@ -12,7 +12,9 @@ export class AutoFocusDirective implements AfterViewInit {
 
   ngAfterViewInit(): void {
     if (this.autoFocus) {
-      this.elementRef.nativeElement.focus();
+      setTimeout(() => {
+        this.elementRef.nativeElement.focus();
+      });
     }
   }
 }

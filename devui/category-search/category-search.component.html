@@ -5,7 +5,7 @@
   (mouseenter)="isHover = true"
   (mouseleave)="isHover = false"
 >
-  <div class="devui-category-search-icon" (click)="search()">
+  <div class="devui-category-search-icon" (click)="searchInputValue()">
     <svg width="16px" height="16px" viewBox="0 0 16 16" class="svg-icon-search">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <path
@@ -58,6 +58,7 @@
               dDropDownToggle
               [readOnly]="inputReadOnly"
               [placeholder]="placeholderText || i18nCategorySearchText?.searchPlaceholder || ''"
+              [maxlength]="showSearchConfig.searchInputMaxLength"
               [ngModel]="searchKey"
               (ngModelChange)="searchKeyChangeEvent($event)"
               (click)="openMenu(inputDropdown, $event)"
@@ -88,7 +89,10 @@
                     class="devui-dropdown-item"
                     (click)="chooseCategory(item, inputDropdown); closeMenu(inputDropdown)"
                   >
-                    <span title="{{ item?.label }}">{{ item?.label }}</span>
+                    <ng-template
+                      [ngTemplateOutlet]="customCategoryNameTemplate || defaultCategoryNameTemplate"
+                      [ngTemplateOutletContext]="{ tag: item }"
+                    ></ng-template>
                   </li>
                 </ng-container>
                 <div class="devui-no-data-text" *ngIf="showNoDataTips">
@@ -149,6 +153,10 @@
 
 <ng-template #defaultGroupNameTemplate let-item="tag">
   <strong>{{ item?.groupName }}</strong>
+</ng-template>
+
+<ng-template #defaultCategoryNameTemplate let-item="tag">
+  <span title="{{ item?.label }}">{{ item?.label }}</span>
 </ng-template>
 
 <ng-template #noData>
@@ -213,7 +221,7 @@
           />
           <svg
             *ngIf="showFilterNameClear"
-            (click)="$event.preventDefault(); $event.stopPropagation(); filterName = ''"
+            (click)="$event.preventDefault(); $event.stopPropagation(); filterNameForm.form.reset()"
             width="16px"
             height="16px"
             viewBox="0 0 16 16"
@@ -289,7 +297,7 @@
     <ng-container *ngFor="let val of tag.value.cache; let i = index">
       <span *ngIf="i > 0" class="devui-color-block-split-line">{{ textConfig.labelConnector || '|' }}</span>
       <span *ngIf="tag.type === 'label'" class="devui-color-block-sm" [style.background]="val[colorKey]"></span>
-      <span [style.color]="val[colorKey]">{{ val[tag.filterKey || 'label'] || '' }}</span>
+      <span [style.color]="val[colorKey]" [style.max-width]="tagMaxWidth + 'px'">{{ val[tag.filterKey || 'label'] || '' }}</span>
     </ng-container>
   </span>
 </ng-template>

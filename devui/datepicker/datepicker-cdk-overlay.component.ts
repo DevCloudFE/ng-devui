@@ -5,7 +5,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  forwardRef,
   HostListener,
   Inject,
   Input,
@@ -16,21 +15,22 @@ import {
   Renderer2,
   SimpleChanges,
   TemplateRef,
-  ViewContainerRef
+  ViewContainerRef,
+  forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import {
-  addClassToOrigin,
   AppendToBodyDirection,
   AppendToBodyDirectionsConfig,
   DateConverter,
   DefaultDateConverter,
+  addClassToOrigin,
   fadeInOut,
   formWithDropDown,
   removeClassFromOrigin
 } from 'ng-devui/utils';
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change-event-args.model';
 import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
@@ -39,9 +39,9 @@ import { DatePickerConfigService as DatePickerConfig } from './date-picker.confi
   /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dDatepicker][appendToBody]',
   providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => DatePickerAppendToBodyComponent),
-    multi: true
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => DatePickerAppendToBodyComponent),
+  multi: true
   }],
   exportAs: 'datepicker',
   template: `
@@ -61,11 +61,11 @@ import { DatePickerConfigService as DatePickerConfig } from './date-picker.confi
     </ng-template>
   `,
   animations: [
-    fadeInOut
+  fadeInOut
   ],
   styleUrls: ['./datepicker-cdk-overlay.component.scss'],
   preserveWhitespaces: false,
-})
+  })
 export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = [
     'rightDown', 'leftDown', 'rightUp', 'leftUp'
@@ -76,7 +76,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   @Input() dateConverter: DateConverter;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() autoOpen = false;
-  @Input() showAnimation = true;
+  @Input() showAnimation = false;
   @Output() selectedDateChange = new EventEmitter<SelectDateChangeEventArgs>();
   selectedDate: Date;
   _isOpen = false;

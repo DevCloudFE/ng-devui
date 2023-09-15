@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-transfer-demo',
   templateUrl: './transfer-demo.component.html',
-})
+  })
 export class TransferDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'html', code: require('./basic/transfer-demo-base.component.html?raw') },
@@ -19,6 +19,7 @@ export class TransferDemoComponent implements OnInit, OnDestroy {
   ];
   searchSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'html', code: require('./search/transfer-demo-search.component.html?raw') },
+    { title: 'SCSS', language: 'css', code: require('./search/transfer-demo-search.component.scss?raw') },
     { title: 'TS', language: 'typescript', code: require('./search/transfer-demo-search.component.ts?raw') },
   ];
   sortSource: Array<DevuiSourceData> = [

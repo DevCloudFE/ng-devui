@@ -9,13 +9,14 @@ import { TableThComponent } from '../head/th/th.component';
   selector: '[dTableRow]',
   templateUrl: './tr.component.html',
   styleUrls: ['./tr.component.scss']
-})
+  })
 export class TableTrComponent implements OnInit, AfterViewInit {
   @ContentChildren(TableThComponent) thList: QueryList<TableThComponent>;
   headerCheckable: boolean;
   headerCheckDisabled: boolean;
   headerRowspan = 1;
   headerCheckOptions: TableCheckOptions[];
+  checkOptionsIndex = 1050;
   curLabel = '';
   showTip = false;
   selectOptionOnCheckbox = false;

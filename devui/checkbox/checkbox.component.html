@@ -7,7 +7,7 @@
     unchecked: !checked
   }"
 >
-  <div class="devui-checkbox-glow-box">
+  <div *ngIf="showGlowStyle" class="devui-checkbox-glow-box">
     <span *ngIf="showAnimation" class="devui-checkbox-glow-bg"></span>
   </div>
   <label title="{{ isShowTitle ? title || label : '' }}" (click)="toggle($event)">
@@ -31,7 +31,7 @@
       [ngClass]="{
         'custom-color': color,
         'devui-checkbox-no-label': !label && !labelTemplate,
-        'devui-no-animation': !showAnimation || !animationUnlocked,
+        'devui-no-animation': !showAnimation,
         'devui-checkbox-default-background': !halfchecked
       }"
     >
@@ -41,7 +41,7 @@
           <path
             class="devui-tick"
             [ngClass]="{
-              'devui-no-animation': !showAnimation || !animationUnlocked
+              'devui-no-animation': !showAnimation
             }"
             d="M 2.3 7.0 5.6 9.6 11.4 3.5"
             stroke="#fff"

@@ -4,8 +4,11 @@
   width: 40px;
   height: 40px;
   position: fixed;
-  cursor: pointer;
   z-index: 1;
+
+  .devui-backtop-drag-handle {
+    cursor: unset !important;
+  }
 
   &-content {
     width: 40px;

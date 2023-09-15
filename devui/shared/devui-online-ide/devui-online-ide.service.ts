@@ -44,7 +44,7 @@ export class DevuiOnlineIdeService {
     '@devui-design/icons': '^1.2.0',
     'core-js': '^3.18.3',
     'date-fns': '^2.23.0',
-    'ng-devui': `^15.0.0`,
+    'ng-devui': `^16.0.0`,
     rxjs: '~7.5.5',
     tslib: '^2.0.0',
     'zone.js': '~0.11.4',

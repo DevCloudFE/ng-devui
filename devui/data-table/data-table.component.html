@@ -13,7 +13,7 @@
       class="table-wrap"
       [style.overflow-x]="'hidden'"
       [style.scrollbar-width]="'none'"
-      [style.overflow-y]="tableOverflowType === 'overlay' ? 'overlay' : 'scroll'"
+      [style.overflow-y]="'scroll'"
       [style.max-height]="maxHeight ? maxHeight : null"
       [style.max-width]="maxWidth ? maxWidth : null"
       [style.width]="!maxWidth ? tableWidth : null"
@@ -192,6 +192,7 @@
   <thead
     dDataTableHead
     [resizeable]="resizeable"
+    [checkOptionsIndex]="checkOptionsIndex"
     [tableViewRefElement]="tableViewRefElement"
     [tableBodyEl]="tableBodyEl"
     [multiSort]="multiSort"

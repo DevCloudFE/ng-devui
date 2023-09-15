@@ -4,6 +4,7 @@
 
 :host {
   text-align: right;
+  margin-left: 8px;
 
   &.devui-icon-show {
     display: block;
@@ -42,8 +43,8 @@
 .line {
   height: 1px;
   background: $devui-dividing-line;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .checkbox-group {

@@ -10,8 +10,8 @@
   "scripts": {
     "ng": "ng",
     "start": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng serve --open",
-    "build": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build  --configuration production  --deploy-url /components/",
-    "build:separate": "npm run build:devui && node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build --configuration production --deploy-url /components/ --configuration separate",
+    "build": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build  --configuration production  --base-href /components/",
+    "build:separate": "npm run build:devui && node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build --configuration production --base-href /components/ --configuration separate",
     "test": "ng test",
     "test:lib": "ng test devui-lib --no-watch --no-progress --browsers=ChromeHeadlessCI",
     "lint": "ng lint",

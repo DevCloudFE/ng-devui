@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { IButtonStyle } from 'ng-devui/button';
 import { ModalComponent } from './modal.component';
@@ -59,7 +65,7 @@ export class ModalContainerComponent implements OnInit {
 
   updateButtonOptions(buttonOptions = []) {
     this.buttons = this.buttons.map((button, index) => {
-      return { ...button, ...buttonOptions[index] };
+      return {...button, ...buttonOptions[index]};
     });
   }
 }

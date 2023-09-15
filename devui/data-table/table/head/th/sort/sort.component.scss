@@ -6,11 +6,7 @@
 }
 
 :host {
-  height: 20px;
-  line-height: 20px;
-  margin-right: 4px;
   margin-left: 8px;
-  flex: 1;
   display: none;
 
   &.devui-icon-show {

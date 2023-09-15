@@ -22,9 +22,10 @@
         >
           <span *ngIf="!rowItem['nameEdit']">{{ rowItem?.lastName }}</span>
           <div *ngIf="rowItem['nameEdit']" class="edit-padding-fix">
+            <!-- 引入dCommonsModule的autofocus -->
             <input
+              [dAutoFocus]="true"
               class="devui-form-control"
-              autofocus
               name="lastname"
               [(ngModel)]="rowItem.lastName"
               [attr.maxlength]="100"
@@ -33,7 +34,7 @@
           </div>
         </td>
         <td dTableCell [editable]="true" [(editing)]="rowItem['dateEdit']">
-          <span *ngIf="!rowItem['dateEdit']">{{ rowItem?.dob | i18nDate: 'short':false }}</span>
+          <span *ngIf="!rowItem['dateEdit']">{{ rowItem?.dob | i18nDate : 'short' : false }}</span>
           <form *ngIf="rowItem['dateEdit']" class="form-inline edit-padding-fix">
             <div class="devui-form-group">
               <div class="devui-input-group devui-dropdown-origin">

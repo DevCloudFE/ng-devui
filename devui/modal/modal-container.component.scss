@@ -3,6 +3,7 @@
 .modal-body {
   padding: 12px 32px 12px 32px;
   overflow-y: hidden;
+  scrollbar-gutter: stable;
 
   &:hover {
     overflow-y: auto;

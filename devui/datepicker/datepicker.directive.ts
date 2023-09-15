@@ -38,13 +38,13 @@ import { DatepickerComponent } from './datepicker.component';
   selector: '[dDatepicker]:not([appendToBody])',
   exportAs: 'datepicker',
   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DatepickerDirective),
-      multi: true,
-    },
+  {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => DatepickerDirective),
+  multi: true,
+  },
   ],
-})
+  })
 export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAccessor {
   @Input() locale: string;
   @Input() cssClass: string;
@@ -55,7 +55,7 @@ export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAcces
   @Input() direction: 'up' | 'down' = 'down';
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() autoOpen = false;
-  @Input() @WithConfig() showAnimation = true;
+  @Input() @WithConfig() showAnimation = false;
   @Output() selectedDateChange = new EventEmitter<SelectDateChangeEventArgs>();
   selectedDate: Date;
   private _isOpen = false;

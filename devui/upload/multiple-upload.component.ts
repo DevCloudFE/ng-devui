@@ -30,13 +30,13 @@ import {
   styleUrls: ['./upload-view.component.scss'],
   preserveWhitespaces: false,
   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MultipleUploadComponent),
-      multi: true
-    }
+  {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => MultipleUploadComponent),
+  multi: true
+  }
   ]
-})
+  })
 export class MultipleUploadComponent implements OnDestroy, OnInit {
   @Input() uploadOptions: IUploadOptions;
   @Input() fileOptions: IFileOptions;
@@ -59,7 +59,7 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
   @Input() setCustomUploadOptions: (files, uploadOptions) => IUploadOptions;
   @Input() enableDrop = false;
   @Input() @WithConfig() showGlowStyle = true;
-  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
     return this.showGlowStyle;
   };
   @Output() successEvent: EventEmitter<Array<{ file: File; response: any }>> = new EventEmitter<Array<{ file: File; response: any }>>();
@@ -150,7 +150,10 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
     let totalFileSize = 0;
     this.multipleUploadViewComponent.fileUploaders.forEach(fileUploader => {
       totalFileSize += fileUploader.file.size;
-      const checkResult = this.selectFiles._validateFiles(fileUploader.file, this.fileOptions.accept, fileUploader.uploadOptions);
+      const checkResult = this.selectFiles.validateFilesCount(
+        this.multipleUploadViewComponent.fileUploaders.length, fileUploader.uploadOptions
+      )
+        || this.selectFiles._validateFiles(fileUploader.file, this.fileOptions.accept, fileUploader.uploadOptions);
       if (checkResult && checkResult.checkError) {
         this.multipleUploadViewComponent.deletePreUploadFile(fileUploader.file);
         this.alertMsg(checkResult.errorMsg);
@@ -215,16 +218,16 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
       .subscribe(
         (results: Array<{ file: File; response: any; status: UploadStatus }>) => {
           const successResult = results.filter(item => item.status === UploadStatus.uploaded).map(item => {
-            return {file: item.file, response: item.response};
+            return { file: item.file, response: item.response };
           });
           const failResult = results.filter(item => item.status === UploadStatus.failed).map(item => {
-            return {file: item.file, response: item.response};
+            return { file: item.file, response: item.response };
           });
-          if(failResult.length) {
+          if (failResult.length) {
             this.errorEvent.emit(failResult);
           }
 
-          if(successResult.length) {
+          if (successResult.length) {
             this.successEvent.emit(successResult);
             successResult.forEach((result) => {
               this.multipleUploadViewComponent.uploadedFilesComponent.addFile(result.file);

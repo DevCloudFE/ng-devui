@@ -15,20 +15,10 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
   [dTextInput],
   d-select {
     margin-right: -1px;
-    z-index: 0;
 
     &,
     & > div.devui-dropdown-origin {
       border-radius: 0 !important;
-    }
-
-    &:hover {
-      z-index: 1;
-    }
-
-    &:focus,
-    &:has(:focus) {
-      z-index: 2;
     }
 
     &:first-child {
@@ -50,6 +40,19 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
         border-top-#{$last}-radius: #{$lastValue} !important;
         border-bottom-#{$last}-radius: #{$lastValue} !important;
       }
+    }
+  }
+
+  [dTextInput] {
+    z-index: 0;
+
+    &:hover {
+      z-index: 1;
+    }
+
+    &:focus,
+    &:has(:focus) {
+      z-index: 2;
     }
   }
 }

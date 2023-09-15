@@ -43,6 +43,7 @@ import { DataTableModule } from 'ng-devui/data-table';
 |   tableWidthConfig    |     [`TableWidthConfig[]`](#tablewidthconfig)      | []     |                                       可选，配置表格的列宽,在含有子表格如树形表格的情况下必选                                       | [基本用法](demo#basic-usage)                     |
 |       checkable       |           `boolean`           | --     |                               可选，Datatable是否提供勾选行的功能                                | [表格交互](demo#table-interaction)               |
 |     checkOptions      |     [`TableCheckOptions[]`](#tablecheckoptions)     | --     |                                   可选，表头选中的下拉项及操作                                   | [自定义表格选中操作](demo#table-check-options)   |
+|     checkOptionsIndex      |     `number`     |   1050    |            可选，表头选中的下拉的z-index               | --   |
 |  headerCheckDisabled  |           `boolean`           | --     |                                  可选，表头checkbox是否disabled                                  |
 |  headerCheckVisible   |           `boolean`           | true   |                                    可选，表头checkbox是否可见                                    |
 |   showExpandToggle    |           `boolean`           | --     |            可选，是否提供显示扩展行的功能，为true则在配置了扩展行的行前面生成操作按钮            | [扩展行](demo#expand-row)                        |
@@ -116,6 +117,7 @@ import { DataTableModule } from 'ng-devui/data-table';
 | :-----------: | :-------------------: | :----- | :------------------------------------------------------------------: | :------------------------------------------------------------------- |
 |   checkable   |       `boolean`       | --     | 可选，在表头第一列显示checkbox，用于全选，可以跟行数据的选中状态联动 | [表格交互](demo#table-interaction)             |
 | checkOptions  | `TableCheckOptions[]` | --     |                     可选，表头选中的下拉项及操作                     | [自定义表格选中操作](demo#table-check-options) |
+|     checkOptionsIndex      |     `number`     |   1050    |            可选，表头选中的下拉的z-index               | --   |
 | checkDisabled |       `boolean`       | --     |                    可选，表头checkbox是否disabled                    |
 
 
@@ -622,6 +624,9 @@ toggleAllNodesExpand(e) {
 
 ``` javascript
 @ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+// 搜索所有列字段为'all', 搜索指定几个列字段用['name', 'attr']
+searchAttr: 'all' | string[];
 
 searchSelectChange() {
   this.BigTableTree.searchAttr = this.searchAttr;

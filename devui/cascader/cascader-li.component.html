@@ -22,20 +22,25 @@
       </ng-template>
     </span>
     <svg
+      *ngIf="!option._loading"
       style="float: right"
       width="16px"
       height="16px"
       viewBox="0 0 16 16"
       class="icon devui-cascader-icon-right"
-      *ngIf="!option._loading"
     >
-      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon
-          fill="#293040"
+      <g id="icon-icon-chevron-right-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g
+          id="ipd_right"
+          transform="translate(8.000000, 8.000000) scale(-1, 1) rotate(-270.000000) translate(-8.000000, -8.000000) translate(3.000000, 5.500000)"
+          fill="#71757F"
           fill-rule="nonzero"
-          transform="translate(8.146447, 8.000000) scale(-1, 1) translate(-8.146447, -8.000000) "
-          points="11.7071068 12.2928932 10.2928932 13.7071068 4.58578644 8 10.2928932 2.29289322 11.7071068 3.70710678 7.41421356 8"
-        ></polygon>
+        >
+          <path
+            d="M-0.353553391,-0.353553391 C-0.179987039,-0.527119742 0.0894373624,-0.546404893 0.284305503,-0.411408841 L0.353553391,-0.353553391 L4.999,4.293 L9.64644661,-0.353553391 C9.82001296,-0.527119742 10.0894374,-0.546404893 10.2843055,-0.411408841 L10.3535534,-0.353553391 C10.5271197,-0.179987039 10.5464049,0.0894373624 10.4114088,0.284305503 L10.3535534,0.353553391 L5.35355339,5.35355339 C5.17998704,5.52711974 4.91056264,5.54640489 4.7156945,5.41140884 L4.64644661,5.35355339 L-0.353553391,0.353553391 C-0.548815536,0.158291245 -0.548815536,-0.158291245 -0.353553391,-0.353553391 Z"
+            id="路径"
+          ></path>
+        </g>
       </g>
     </svg>
     <svg width="16px" height="16px" viewBox="0 0 16 16" style="float: right" class="icon devui-cascader-loading" *ngIf="option._loading">

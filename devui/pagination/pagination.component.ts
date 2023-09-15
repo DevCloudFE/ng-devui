@@ -1,6 +1,9 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import {
-  AfterViewInit, ApplicationRef, ChangeDetectionStrategy, ChangeDetectorRef,
+  AfterViewInit,
+  ApplicationRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -15,7 +18,7 @@ import {
 import { DropDownAppendToBodyComponent } from 'ng-devui/dropdown';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { AppendToBodyDirection } from 'ng-devui/utils';
-import { Subscription, fromEvent } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 @Component({
   selector: 'd-pagination',
   styleUrls: ['./pagination.component.scss'],
@@ -23,7 +26,7 @@ import { Subscription, fromEvent } from 'rxjs';
   exportAs: 'pagination',
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespaces: false,
-})
+  })
 export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy, OnInit {
   static EFFECT_PAGE_RANGE_KEYS = ['total', 'pageSize', 'pageIndex', 'maxItems', 'pageSizeOptions'];
 
@@ -182,11 +185,13 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 
   jump() {
-    const pageInput = parseInt(this.jumpPage, 10);
-    if (pageInput) {
-      if (pageInput > 0 && pageInput <= this.totalPage) {
-        this.onPageIndexChange(pageInput);
+    let pageInput = parseInt(this.jumpPage, 10);
+    if (pageInput && (pageInput < this.totalPage || this.pageIndex < this.totalPage)) {
+      if (pageInput > this.totalPage) {
+        this.jumpPage = this.totalPage;
+        pageInput = this.totalPage;
       }
+      this.onPageIndexChange(pageInput);
     }
   }
 
@@ -348,9 +353,11 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
       this.litePaginator.nativeElement.style.width = `${Math.max(minWidth, width)}px`;
     }
   }
+
   onToggle(event) {
     this.rotateDegrees = event ? 180 : 0;
   }
+
   toggleMenu(force: boolean = null) {
     if (force !== null) {
       this.showConfig = force;

@@ -28,6 +28,12 @@
               (searchFn)="search(transferDirection.SOURCE, $event)"
             ></d-search>
           </div>
+          <ng-container *ngIf="sourceDisplayOptionLen === 0">
+            <ng-template
+              [ngTemplateOutlet]="noResultTemplate || noResultDefaultTemplate"
+              [ngTemplateOutletContext]="{ position: 'source', sourceKeyword: sourceSearchText, targetKeyword: targetSearchText }"
+            ></ng-template>
+          </ng-container>
           <ul
             *ngIf="!virtualScroll; else sourceScrollViewTpl"
             [id]="'default-left-' + id"
@@ -187,6 +193,12 @@
               (searchFn)="search(transferDirection.TARGET, $event)"
             ></d-search>
           </div>
+          <ng-container *ngIf="targetDisplayOptionLen === 0">
+            <ng-template
+              [ngTemplateOutlet]="noResultTemplate || noResultDefaultTemplate"
+              [ngTemplateOutletContext]="{ position: 'target', sourceKeyword: sourceSearchText, targetKeyword: targetSearchText }"
+            ></ng-template>
+          </ng-container>
           <ul
             *ngIf="!virtualScroll; else targetScrollViewTpl"
             dDroppable
@@ -333,4 +345,14 @@
       <ng-template [ngTemplateOutlet]="targetItemTpl" [ngTemplateOutletContext]="{ item: item, index: index }"></ng-template>
     </ng-container>
   </cdk-virtual-scroll-viewport>
+</ng-template>
+
+<ng-template #noResultDefaultTemplate let-position="position" let-sourceKeyword="sourceKeyword" let-targetKeyword="targetKeyword">
+  <div class="devui-no-data-tip">
+    {{
+      (position === 'source' && sourceKeyword) || (position === 'target' && targetKeyword)
+        ? i18nCommonText?.noRecordsFound
+        : i18nCommonText?.noData
+    }}
+  </div>
 </ng-template>

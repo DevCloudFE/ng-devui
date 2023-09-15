@@ -77,6 +77,7 @@
     .devui-option-panel-col-drag {
       flex: 1;
       overflow: hidden;
+      scrollbar-gutter: stable;
 
       &:hover {
         overflow-y: auto;

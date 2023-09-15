@@ -26,15 +26,15 @@ import { debounceTime, map, switchMap } from 'rxjs/operators';
   templateUrl: './tags.input.component.html',
   styleUrls: ['./tags.input.component.scss'],
   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TagsInputComponent),
-      multi: true,
-    },
+  {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => TagsInputComponent),
+  multi: true,
+  },
   ],
   exportAs: 'TagsInput',
   preserveWhitespaces: false,
-})
+  })
 export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges, AfterViewInit {
   /**
    * 【必选】记录输入的标签
@@ -164,7 +164,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   private onChange = (_: any) => null;
   private onTouch = () => null;
 
-  constructor(private i18n: I18nService, private devConfigService: DevConfigService) { }
+  constructor(private i18n: I18nService, private devConfigService: DevConfigService) {}
 
   private setI18nText() {
     this.i18nCommonText = this.i18n.getI18nText().common;
@@ -199,14 +199,20 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
     this.newTag = '';
     this._suggestionList = [...this.suggestionList];
     this.searchFn = (term: any) => {
+      const data = this.showSuggestion && this._suggestionList ? this._suggestionList : [];
+      const matchItem = data.find((item) =>
+        this.caseSensitivity ? item[this.displayProperty] === term : item[this.displayProperty].toLowerCase() === term.toLowerCase()
+      );
       return of(
-        (this._suggestionList ? this._suggestionList : []).filter((item) =>
-          term === ''
-            ? true
-            : this.caseSensitivity
-              ? item[this.displayProperty].indexOf(term) !== -1
-              : item[this.displayProperty].toLowerCase().indexOf(term.toLowerCase()) !== -1
-        )
+        matchItem
+          ? [matchItem]
+          : data.filter((item) =>
+            term === ''
+              ? true
+              : this.caseSensitivity
+                ? item[this.displayProperty].indexOf(term) !== -1
+                : item[this.displayProperty].toLowerCase().indexOf(term.toLowerCase()) !== -1
+          )
       );
     };
     this.registerFilterChange();
@@ -266,6 +272,15 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       )
       .subscribe((options) => {
         this.availableOptions = options;
+        if (this.newTag && this.newTagValid) {
+          const obj = { isDevuiTagsInputCreated: true };
+          obj[this.displayProperty] = this.newTag;
+          if (this.availableOptions.length && this.availableOptions[0].isDevuiTagsInputCreated) {
+            this.availableOptions[0] = obj;
+          } else {
+            this.availableOptions.unshift(obj);
+          }
+        }
         if (this.selectBoxContainer) {
           this.selectBoxContainer.updatePosition();
         }
@@ -273,6 +288,12 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
           this.selectBox.resetIndex(!options.length);
         }
       });
+  }
+
+  checkIsIncludes(option, item, isString?) {
+    const key = this.displayProperty;
+    const value = isString ? item : item[key];
+    return this.caseSensitivity ? option[key] === value : option[key].toLowerCase() === value.toLowerCase();
   }
 
   reduceSuggestionList() {
@@ -284,13 +305,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       this.isReduce = true;
       // 使用用户最初传入的数据来进行过滤
       this._suggestionList = this.suggestionList.filter((suggestion) => {
-        return (
-          this.selectedItems.findIndex(({ option }) =>
-            this.caseSensitivity
-              ? option[this.displayProperty] === suggestion[this.displayProperty]
-              : option[this.displayProperty].toLowerCase() === suggestion[this.displayProperty].toLowerCase()
-          ) === -1
-        );
+        return this.selectedItems.findIndex(({ option }) => this.checkIsIncludes(option, suggestion)) === -1;
       });
       if (this.sourceSubscription && this.searchFn) {
         this.sourceSubscription.next('');
@@ -303,7 +318,9 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       const dom = this.searchBox.el.nativeElement.querySelector('input');
       if (dom && this.selectBox) {
         dom.focus();
-        this.selectBox.resetIndex(false);
+        if (this.selectBox.availableOptions.length) {
+          this.selectBox.resetIndex(false);
+        }
       }
     }
   }
@@ -342,11 +359,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       index < 0 ||
       index >= this.availableOptions.length ||
       this.maxTags <= this.selectedItems.length ||
-      this.selectedItems.findIndex(({ option }) =>
-        this.caseSensitivity
-          ? option[this.displayProperty] === value[this.displayProperty]
-          : option[this.displayProperty].toLowerCase() === value[this.displayProperty].toLowerCase()
-      ) !== -1
+      this.selectedItems.findIndex(({ option }) => this.checkIsIncludes(option, value)) !== -1
     ) {
       return;
     }
@@ -354,15 +367,16 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       if (!result) {
         return;
       }
-      this.checkMaxTags(this.availableOptions[index]);
+      const tag = this.availableOptions[index];
+      const isCreated = tag.isDevuiTagsInputCreated;
+      delete tag.isDevuiTagsInputCreated;
+      this.checkMaxTags(tag);
       this.onChange(this.selectedItems.map((tagItem) => tagItem.option));
-      this.valueChange.emit(this.availableOptions[index]);
-      const suggestionListIndex = this._suggestionList.findIndex((item) =>
-        this.caseSensitivity
-          ? item[this.displayProperty] === value[this.displayProperty]
-          : item[this.displayProperty].toLowerCase() === value[this.displayProperty].toLowerCase()
-      );
-      this._suggestionList.splice(suggestionListIndex, 1);
+      this.valueChange.emit(tag);
+      if (!isCreated) {
+        const suggestionListIndex = this._suggestionList.findIndex((item) => this.checkIsIncludes(item, value));
+        this._suggestionList.splice(suggestionListIndex, 1);
+      }
       this.delayResetNewTag();
       this.sourceSubscription.next('');
     });
@@ -377,7 +391,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       }
       // onPush下 数组长度变化不会触发变更检测
       this.availableOptions = [...this.availableOptions, this.selectedItems[index]?.option];
-      this._suggestionList = this.availableOptions;
+      this._suggestionList = [...this._suggestionList, this.selectedItems[index]?.option];
       const tag = this.selectedItems[index].option;
       this.selectedItems.splice(index, 1);
       if (this.selectedItems.length === 0) {
@@ -390,17 +404,12 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
 
   tagIsValid() {
     const tag = this.newTag;
-    const tmp = this.displayProperty;
     const result =
       tag &&
       tag.length >= this.minLength &&
       tag.length <= this.maxLength &&
-      this._suggestionList.findIndex((item) =>
-        this.caseSensitivity ? item[tmp] === tag : item[tmp].toLowerCase() === tag.toLowerCase()
-      ) === -1 &&
-      this.selectedItems.findIndex(({ option }) =>
-        this.caseSensitivity ? option[tmp] === tag : option[tmp].toLowerCase() === tag.toLowerCase()
-      ) === -1 &&
+      (this.showSuggestion ? this._suggestionList.findIndex((item) => this.checkIsIncludes(item, tag, true)) === -1 : true) &&
+      this.selectedItems.findIndex(({ option }) => this.checkIsIncludes(option, tag, true)) === -1 &&
       !this.isEmptyString(tag);
     this.newTagValid = tag === '' || !!result;
     return result;
@@ -430,8 +439,12 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
           this.newTagValid = false;
         }
       })
-      .finally(() => this.delayResetNewTag());
-    this.sourceSubscription.next('');
+      .finally(() => {
+        if (this.newTag && this.newTagValid) {
+          this.delayResetNewTag();
+          this.sourceSubscription.next('');
+        }
+      });
   }
 
   canAdd(value?) {

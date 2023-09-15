@@ -5,7 +5,7 @@ import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
   selector: 'd-multi',
   templateUrl: './multi.component.html',
   styleUrls: ['./multi.component.scss']
-})
+  })
 export class MultiComponent {
 
   additionalParameter2 = {
@@ -24,12 +24,12 @@ export class MultiComponent {
     method: 'post',
     additionalParameter: this.additionalParameter2,
     maximumSize: 0.5,
+    maximumCount:3,
     checkSameName: true
   };
   fileOptions2: IFileOptions = {
     multiple: true,
     accept: '.xls,.xlsx,.pages,.mp3,.png',
-    webkitdirectory: true
   };
   fileOptions3: IFileOptions = {
     multiple: true,

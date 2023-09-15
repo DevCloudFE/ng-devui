@@ -191,6 +191,9 @@ export default {
     getBeyondMaximalFileSizeMsg(filename, maximalSize) {
       return `Maximum file size (MB): ${maximalSize}. Files whose size exceeds the maximum value: ${filename}`;
     },
+    getBeyondMaximumFileCountMsg(maximalSize){
+      return `Maximum file count: ${maximalSize}. Files exceeds the maximum value`;
+    },
     getAllFilesBeyondMaximalFileSizeMsg(maximalSize) {
       return `Maximum file size (MB): ${maximalSize}. The selected files exceed the maximum value`;
     },
@@ -274,6 +277,7 @@ export default {
   tagsInput: {
     tagsReachMaxLength: 'The length of tags has reached maxTags',
     tagsReachMaxNumber: 'Maximum number reached: ',
+    create: 'Create'
   },
   categorySearch: {
     confirm: 'Confirm',

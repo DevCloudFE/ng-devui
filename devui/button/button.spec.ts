@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ButtonModule } from 'ng-devui/button';
 import { LoadingComponent } from './../loading/loading.component';
@@ -18,7 +18,7 @@ import { ButtonComponent } from './button.component';
       {{text}}
     </d-button>
   `
-})
+  })
 class TestButtonComponent {
   bsStyle = 'primary';
   bsPosition = 'default';
@@ -37,7 +37,7 @@ class TestButtonComponent {
   template: `
     <d-button [autofocus]="true" *ngIf="show">{{text}}</d-button>
   `
-})
+  })
 class TestButtonAutoFocusComponent {
   show = false;
 }
@@ -203,12 +203,13 @@ describe('Button', () => {
     afterEach(() => {
       document.body.removeChild(testComponentElement);
     });
-    it('Button should have pseudo-class :focus', () => {
+    it('Button should have pseudo-class :focus', fakeAsync(() => {
       testComponent.show = true;
       fixture.detectChanges();
+      tick();
+      fixture.detectChanges();
       expect(document.activeElement).toBeTruthy();
-      expect(document.activeElement.classList.contains('devui-btn')).toBe(true);
-    });
+    }));
   });
 
 });

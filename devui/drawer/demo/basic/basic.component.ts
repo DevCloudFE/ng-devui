@@ -6,7 +6,7 @@ import { DrawerContentComponent } from '../drawerContent/drawer-content.componen
 @Component({
   selector: 'd-basic',
   templateUrl: './basic.component.html',
-})
+  })
 export class BasicComponent {
   results: IDrawerOpenResult;
   constructor(private drawerService: DrawerService, private dialogService: DialogService) {
@@ -16,7 +16,7 @@ export class BasicComponent {
   openDrawer() {
     this.results = this.drawerService.open({
       drawerContentComponent: DrawerContentComponent,
-      width: '300px',
+      width: '30%',
       zIndex: 1000,
       isCover: true,
       fullScreen: true,

@@ -34,7 +34,7 @@
             <rect x="4" y="7" width="8" height="2"></rect>
           </g>
         </svg>
-        <span class="customized-icon" *ngIf="iconFoldTable" [innerHTML]="iconFoldTable | safe: 'html'"></span>
+        <span class="customized-icon" *ngIf="iconFoldTable" [innerHTML]="iconFoldTable | safe : 'html'"></span>
       </ng-container>
       <ng-container *ngIf="!childrenTableOpen">
         <svg
@@ -54,11 +54,11 @@
             ></path>
           </g>
         </svg>
-        <span class="customized-icon" *ngIf="iconUnFoldTable" [innerHTML]="iconUnFoldTable | safe: 'html'"></span>
+        <span class="customized-icon" *ngIf="iconUnFoldTable" [innerHTML]="iconUnFoldTable | safe : 'html'"></span>
       </ng-container>
     </span>
   </ng-container>
-  <span class="title" [ngStyle]="{ flex: sortable ? 'inherit' : 1 }">
+  <span class="title">
     <ng-content></ng-content>
   </span>
   <d-table-sort *ngIf="sortable" [sortDirection]="sortDirection" [showSortIcon]="showSortIcon" (sortEvent)="onSort($event)"></d-table-sort>

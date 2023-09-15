@@ -89,6 +89,22 @@
 
 .devui-transfer-content {
   padding-top: 8px;
+  position: relative;
+
+  .devui-no-data-tip {
+    cursor: not-allowed;
+    color: $devui-disabled-text;
+    font-size: $devui-font-size;
+    background: $devui-base-bg;
+    width: 100%;
+    line-height: 22px;
+    padding: 0;
+    text-align: center;
+    user-select: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
 .devui-transfer-content ul {

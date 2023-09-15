@@ -99,6 +99,7 @@ export interface I18nInterface {
     cancelUpload: string;
     getNotAllowedFileTypeMsg(filename, scope): string;
     getBeyondMaximalFileSizeMsg(filename, maximalSize): string;
+    getBeyondMaximumFileCountMsg(maximalSize): string;
     getExistSameNameFilesMsg(sameNames): string;
     getAllFilesBeyondMaximalFileSizeMsg(maximalSize): string;
     getSelectedFilesCount(filesCount): string;
@@ -156,6 +157,7 @@ export interface I18nInterface {
   tagsInput: {
     tagsReachMaxLength: string;
     tagsReachMaxNumber: string;
+    create: string;
   };
   categorySearch: {
     confirm: string;

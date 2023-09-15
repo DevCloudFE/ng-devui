@@ -39,7 +39,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       }
     }
 
-    &.has-width-scroll:not(:hover)::after {
+    &.has-width-scroll:not(:hover):not(:has(.table-row-selected))::after {
       content: '';
       position: absolute;
       right: 0;
@@ -66,12 +66,22 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       overflow-y: scroll;
 
       &.overflow-overlay {
-        overflow: hidden;
-        transform: translate3d(0, 0, 0);
+        &.table-wrap {
+          overflow: auto;
+        }
+
+        scrollbar-color: transparent transparent;
+
+        &::-webkit-scrollbar-thumb {
+          background-color: transparent;
+        }
 
         &:hover {
-          overflow: auto;
-          overflow: overlay;
+          scrollbar-color: $devui-placeholder transparent;
+
+          &::-webkit-scrollbar-thumb {
+            background-color: $devui-placeholder;
+          }
         }
       }
     }
@@ -95,12 +105,22 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       position: relative;
 
       &.overflow-overlay {
-        overflow: hidden;
-        transform: translate3d(0, 0, 0);
+        &.virtual-scroll-wrap {
+          overflow: auto;
+        }
+
+        scrollbar-color: transparent transparent;
+
+        &::-webkit-scrollbar-thumb {
+          background-color: transparent;
+        }
 
         &:hover {
-          overflow: auto;
-          overflow: overlay;
+          scrollbar-color: $devui-placeholder transparent;
+
+          &::-webkit-scrollbar-thumb {
+            background-color: $devui-placeholder;
+          }
         }
       }
 
@@ -323,6 +343,28 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       background: $devui-list-item-selected-bg;
     }
 
+    &:hover td.editable-cell {
+      .cell-editable {
+        position: relative;
+        z-index: 10;
+      }
+
+      &::after {
+        content: '';
+        display: block;
+        width: calc(100% - 32px);
+        position: absolute;
+        height: calc(100% - 14px);
+        border: 1px solid $devui-line;
+        left: 12px;
+        top: 8px;
+        border-radius: $devui-border-radius;
+        pointer-events: none;
+        background-color: $devui-base-bg;
+        z-index: 1;
+      }
+    }
+
     > td {
       background-clip: padding-box;
       vertical-align: middle;
@@ -338,19 +380,6 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 
       &.editable-cell {
         position: relative;
-
-        &:hover::after {
-          content: '';
-          display: block;
-          width: calc(100% - 32px);
-          position: absolute;
-          height: calc(100% - 14px);
-          border: 1px solid $devui-line;
-          left: 12px;
-          top: 8px;
-          border-radius: $devui-border-radius;
-          pointer-events: none;
-        }
       }
 
       &.devui-checkable-cell {
@@ -496,15 +525,6 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       .sort-icon-default {
         visibility: visible;
       }
-    }
-  }
-}
-
-.devui-table ::ng-deep {
-  thead > tr > th.can-sort {
-    d-table-filter {
-      flex: 1;
-      text-align: right;
     }
   }
 }

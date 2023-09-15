@@ -4,6 +4,7 @@ import {
   ContentChildren,
   EventEmitter,
   forwardRef,
+  HostBinding,
   HostListener,
   Input,
   OnChanges,
@@ -12,6 +13,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { Observable } from 'rxjs';
 import { RadioComponent } from './radio.component';
 
@@ -20,16 +22,15 @@ import { RadioComponent } from './radio.component';
   templateUrl: './radio-group.component.html',
   styleUrls: ['./radio-group.component.scss', './radio.component.scss'],
   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => RadioGroupComponent),
-      multi: true,
-    },
+  {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => RadioGroupComponent),
+  multi: true,
+  },
   ],
   preserveWhitespaces: false,
-})
+  })
 export class RadioGroupComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
-  constructor() {}
   @Input() name: string;
   @Input() values: any[];
   /**
@@ -40,6 +41,10 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
   }
   @Input() direction: 'row' | 'column';
   @Input() disabled: boolean;
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
+    return this.showGlowStyle;
+  }
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() change = new EventEmitter<any>();
   @ContentChildren(RadioComponent) radios: QueryList<RadioComponent> = new QueryList<RadioComponent>();
@@ -51,16 +56,23 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
   onRadioChange(event) {
     const target = event.target;
     if (target.tagName.toLowerCase() === 'input') {
+      let value = target.value;
       if (this.disabled) {
         event.preventDefault();
       }
-      this.canChange(target.value).then((change) => {
+      if (this.radios.length) {
+        const result = this.radios.find((item) => item.id === target.id);
+        value = result?.value || value;
+      }
+      this.canChange(value).then((change) => {
         if (!change) {
           event.preventDefault();
         }
       });
     }
   }
+
+  constructor(private devConfigService: DevConfigService) {}
 
   ngAfterViewInit(): void {
     this.radios.forEach((radio) => {

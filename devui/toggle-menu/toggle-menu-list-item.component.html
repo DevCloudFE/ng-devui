@@ -8,6 +8,7 @@
   [class.group]="optionGroupKey && item.option[optionGroupKey]"
   (click)="choose(item.option, item.id, $event)"
 >
+  <ng-content select="[itemPrefix]"></ng-content>
   <ng-template
     [ngTemplateOutlet]="customTemplate || (multiple ? checkBoxItem : isShowKeyword ? defaultHighlight : defaultItem)"
     [ngTemplateOutletContext]="
@@ -37,6 +38,7 @@
     "
   >
   </ng-template>
+  <ng-content select="[itemSuffix]"></ng-content>
 </li>
 
 <ng-template #defaultItem let-option="option">

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DevUIModule } from 'ng-devui';
 import { AutoCompleteModule } from 'ng-devui/auto-complete';
+import { DCommonModule } from 'ng-devui/common';
 import { DataTableModule } from 'ng-devui/data-table';
 import { I18nModule } from 'ng-devui/i18n';
 import { LoadingModule } from 'ng-devui/loading';
@@ -46,65 +47,66 @@ import { TreeDataComponent } from './tree-table/tree-data.component';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 @NgModule({
   imports: [
-    TranslateModule,
-    CommonModule,
-    ScrollingModule,
-    DevUIModule,
-    FormsModule,
-    DataTableModule,
-    DevUICodeboxModule,
-    DevUIApiModule,
-    TooltipModule,
-    AutoCompleteModule,
-    I18nModule,
-    DDemoNavModule,
-    LoadingModule,
-    SplitterModule,
-    RouterModule.forChild([
-      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
-      {
-        path: 'design',
-        component: DataTableDesignComponent,
-      },
-      { path: 'demo', component: DataTableDemoComponent},
-      { path: 'api', component: DevUIApiComponent, data: {
-        'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
-        'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
-      }}
+  TranslateModule,
+  CommonModule,
+  ScrollingModule,
+  DevUIModule,
+  FormsModule,
+  DataTableModule,
+  DevUICodeboxModule,
+  DevUIApiModule,
+  TooltipModule,
+  AutoCompleteModule,
+  I18nModule,
+  DDemoNavModule,
+  LoadingModule,
+  SplitterModule,
+  DCommonModule,
+  RouterModule.forChild([
+    { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+    {
+    path: 'design',
+    component: DataTableDesignComponent,
+    },
+    { path: 'demo', component: DataTableDemoComponent},
+    { path: 'api', component: DevUIApiComponent, data: {
+    'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+    'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
+    }}
     ])
   ],
   exports: [DataTableDemoComponent],
   declarations: [
-    DataTableDemoComponent,
-    DataTableDesignComponent,
-    DatatableDemoBasicComponent,
-    DatatableDemoAsyncComponent,
-    DatatableDemoMaxheightComponent,
-    DatatableDemoMultiHeaderComponent,
-    DatatableDemoLazyloadDataComponent,
-    DatatableDemoEditableComponent,
-    TreeDataComponent,
-    ExpandRowComponent,
-    FixColumnComponent,
-    DragColumnComponent,
-    CellMergeComponent,
-    DragRowComponent,
-    InteractionComponent,
-    BasicOldComponent,
-    HeaderGroupingComponent,
-    EditableOldComponent,
-    ExpandRowOldComponent,
-    TreeTableOldComponent,
-    FixColumnOldComponent,
-    MutiDragRowComponent,
-    CheckOptionsComponent,
-    CheckOptionsColumnComponent,
-    InteractionColumnComponent,
-    VirtualScrollComponent,
-    MutilStylesComponent,
-    FixHeightVirtualScrollComponent,
-    DynamicColsDemoComponent,
+  DataTableDemoComponent,
+  DataTableDesignComponent,
+  DatatableDemoBasicComponent,
+  DatatableDemoAsyncComponent,
+  DatatableDemoMaxheightComponent,
+  DatatableDemoMultiHeaderComponent,
+  DatatableDemoLazyloadDataComponent,
+  DatatableDemoEditableComponent,
+  TreeDataComponent,
+  ExpandRowComponent,
+  FixColumnComponent,
+  DragColumnComponent,
+  CellMergeComponent,
+  DragRowComponent,
+  InteractionComponent,
+  BasicOldComponent,
+  HeaderGroupingComponent,
+  EditableOldComponent,
+  ExpandRowOldComponent,
+  TreeTableOldComponent,
+  FixColumnOldComponent,
+  MutiDragRowComponent,
+  CheckOptionsComponent,
+  CheckOptionsColumnComponent,
+  InteractionColumnComponent,
+  VirtualScrollComponent,
+  MutilStylesComponent,
+  FixHeightVirtualScrollComponent,
+  DynamicColsDemoComponent,
   ],
   providers: [],
-})
+  })
 export class DataTableDemoModule {}

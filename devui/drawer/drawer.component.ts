@@ -16,12 +16,12 @@ import {
 } from '@angular/core';
 import { backdropFadeInOut, flyInOut } from 'ng-devui/utils';
 import { isNumber, parseInt, trim } from 'lodash-es';
-import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Directive({
   selector: '[dDrawerContentHost]',
-})
+  })
 export class DrawerContentDirective {
   constructor(public viewContainerRef: ViewContainerRef) {}
 }
@@ -32,7 +32,7 @@ export class DrawerContentDirective {
   styleUrls: ['./drawer.component.scss'],
   animations: [backdropFadeInOut, flyInOut],
   preserveWhitespaces: false,
-})
+  })
 export class DrawerComponent implements OnInit, OnDestroy {
   animateState = 'void';
   @Input() id: string;
@@ -59,10 +59,12 @@ export class DrawerComponent implements OnInit, OnDestroy {
   oldWidth: string;
   _isCover: boolean;
   subscription: Subscription;
+  isFullScreen: boolean;
 
   animationDone = new Subject<AnimationEvent>();
   animationDoneSub: Subscription;
   resizeSub: Subscription;
+  windowResizeSub: Subscription;
   documentOverFlow: boolean;
   scrollTop: number;
   scrollLeft: number;
@@ -98,6 +100,15 @@ export class DrawerComponent implements OnInit, OnDestroy {
       const widthStr = trim(width, '%');
       const widthNum = parseInt(widthStr, 10);
       this._width = isNumber(widthNum) ? (widthNum * window.innerWidth) / 100 + 'px' : '0px';
+      if (!this.windowResizeSub) {
+        this.windowResizeSub = fromEvent(window, 'resize')
+          .pipe(debounceTime(100))
+          .subscribe(() => {
+            if (!this.isFullScreen) {
+              this.setWidth(this.width);
+            }
+          });
+      }
     } else {
       this._width = width;
     }
@@ -111,6 +122,10 @@ export class DrawerComponent implements OnInit, OnDestroy {
     }
     if (this.resizeSub) {
       this.resizeSub.unsubscribe();
+    }
+
+    if (this.windowResizeSub) {
+      this.windowResizeSub.unsubscribe();
     }
   }
 
@@ -246,6 +261,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
     const drawerContainerEle = this.drawerContainer.nativeElement;
     if (this._width === this.oldWidth) {
       if (fullScreen === true || fullScreen === undefined) {
+        this.isFullScreen = true;
         this._width = this._isCover ? '100%' : window.innerWidth + 'px';
         this.renderer.setStyle(
           drawerContainerEle,
@@ -262,6 +278,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
       }
     } else {
       if (!fullScreen) {
+        this.isFullScreen = false;
         this._width = this.oldWidth;
         if (this.resizeSub) {
           this.resizeSub.unsubscribe();
