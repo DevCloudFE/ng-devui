@@ -57,15 +57,15 @@ import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
   exportAs: 'select',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SelectComponent),
-      multi: true,
-    },
+  {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => SelectComponent),
+  multi: true,
+  },
   ],
   animations: [fadeInOut],
   preserveWhitespaces: false,
-})
+  })
 export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, OnChanges {
   /**
    * 【必选】下拉选项资源，支持Array<string>, Array<{key: value}>
@@ -222,6 +222,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   @Input() autoFocus = false;
   @Input() notAutoScroll = false; // 自动聚焦的时候，自动滚动到select位置
   @Input() loadingTemplateRef: TemplateRef<any>;
+  @Input() showItemTitle = false;
   @Input() @WithConfig() showAnimation = true;
   @Input() @WithConfig() styleType = 'default';
   @Input() @WithConfig() showGlowStyle = true;
@@ -262,8 +263,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       setTimeout(() => {
         this.startAnimation = true;
         this.changeDetectorRef.detectChanges();
+        this.resetScrollTop();
       });
     } else {
+      this.resetScrollTop(true);
       removeClassFromOrigin(this.selectWrapper);
       this.onTouch();
       if (this.direction === 'auto') {
@@ -300,6 +303,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   document: Document;
   dropDownWidth: number;
   scrollHeightNum: number;
+  lastCloseScrollHeight: number;
   minBuffer: number;
   maxBuffer: number;
   scrollStrategy: ScrollStrategy;
@@ -579,7 +583,9 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   }
 
   getOptionIndex(option) {
-    return this.options?.length ? this.options.indexOf(option) : this.availableOptions.findIndex((item) => isEqual(item.option, option));
+    return this.options?.length
+      ? this.options.findIndex((item) => isEqual(item, option))
+      : this.availableOptions.findIndex((item) => isEqual(item.option, option));
   }
 
   getValue = (item, key) => {
@@ -677,6 +683,17 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   updateCdkConnectedOverlayOrigin() {
     if (this.selectWrapper.nativeElement) {
       this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(formWithDropDown(this.selectWrapper) || this.selectWrapper.nativeElement);
+    }
+  }
+
+  resetScrollTop(isClose = false) {
+    const menuDom = this.selectMenuElement?.nativeElement.querySelector('ul.devui-select-list-unstyled.devui-scrollbar');
+    if (this.enableLazyLoad && menuDom) {
+      if (isClose) {
+        this.lastCloseScrollHeight = menuDom.scrollHeight ?? 0;
+      } else if (menuDom.scrollHeight < this.lastCloseScrollHeight) {
+        menuDom.scrollTop = 0;
+      }
     }
   }
 

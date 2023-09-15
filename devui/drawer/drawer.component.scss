@@ -50,11 +50,19 @@
 .drawer-content {
   left: 0;
   right: 0;
-  overflow: hidden;
   box-shadow: $devui-shadow-length-fullscreen-overlay $devui-shadow;
+  overflow: auto;
+  scrollbar-color: transparent transparent;
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
 
   &:hover {
-    overflow: auto;
-    overflow: overlay;
+    scrollbar-color: $devui-placeholder transparent;
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $devui-placeholder;
+    }
   }
 }

@@ -8,9 +8,7 @@ import {
   forwardRef,
   HostBinding,
   Input,
-  OnChanges,
   Output,
-  SimpleChanges,
   TemplateRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -23,15 +21,15 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./checkbox.component.scss'],
   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CheckBoxComponent),
-      multi: true,
-    },
+  {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => CheckBoxComponent),
+  multi: true,
+  },
   ],
   preserveWhitespaces: false,
-})
-export class CheckBoxComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
+  })
+export class CheckBoxComponent implements ControlValueAccessor, AfterViewInit {
   static ID_SEED = 0;
   @Input() name: string;
   @Input() label: string;
@@ -46,11 +44,10 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges, After
   @Input() @WithConfig() showGlowStyle = true;
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
     return this.showGlowStyle;
-  };
+  }
 
-  public animationUnlocked = false;
   public id: number;
   public checked: boolean;
   private onChange = (_: any) => null;
@@ -61,19 +58,20 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges, After
   }
 
   ngAfterViewInit(): void {
-    const glowBox = this.el.nativeElement.querySelector('.devui-checkbox > .devui-checkbox-glow-box');
-    const labelDom = this.el.nativeElement.querySelector('.devui-checkbox > label');
-    const labelHeight = labelDom && getComputedStyle(labelDom).height;
-    if (glowBox && labelHeight && labelHeight !== '16px') {
-      glowBox.style.height = labelHeight;
+    if (this.showGlowStyle) {
+      const glowBox = this.el.nativeElement.querySelector('.devui-checkbox > .devui-checkbox-glow-box');
+      const labelDom = this.el.nativeElement.querySelector('.devui-checkbox > label');
+      const labelHeight = labelDom && getComputedStyle(labelDom).height;
+      if (glowBox && labelHeight && labelHeight !== '16px') {
+        glowBox.style.height = labelHeight;
+      }
     }
   }
 
   writeValue(checked: any): void {
-    if (this.animationUnlocked || checked !== null) {
+    if (checked !== null) {
       this.checked = !!checked;
       this.changeDetectorRef.markForCheck();
-      this.unlockAnimation();
     }
   }
 
@@ -97,14 +95,6 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges, After
     });
   }
 
-  private unlockAnimation() {
-    if (!this.animationUnlocked) {
-      setTimeout(() => {
-        this.animationUnlocked = true;
-      }, 0);
-    }
-  }
-
   canChange() {
     let changeResult = Promise.resolve(true);
 
@@ -122,11 +112,5 @@ export class CheckBoxComponent implements ControlValueAccessor, OnChanges, After
     }
 
     return changeResult;
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (Object.prototype.hasOwnProperty.call(changes, 'halfchecked')) {
-      this.unlockAnimation();
-    }
   }
 }

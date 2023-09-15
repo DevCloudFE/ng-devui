@@ -47,46 +47,46 @@ import { FormsModule } from '@angular/forms';
 
 ### dForm 参数
 
-|     参数     |                 类型                  |     默认     |                                    说明                                    | 跳转 Demo                                    | 全局配置项 |
-| :----------: | :-----------------------------------: | :----------: | :------------------------------------------------------------------------: | :------------------------------------------- | ---------- |
-|    layout    | `'horizontal'\|'vertical'\|'columns'` | 'horizontal' |                          可选，设置表单的排列方式                          | [基本用法](demo#basic-usage)                 |
-|  labelSize   |         `'sm' \| '' \| 'lg'`          |      ''      | 可选，设置 label 的占宽，未设置默认为 100px，'sm'对应 80px，'lg'对应 150px | [label 横向排列](demo#demo-label-horizontal) |
-|  labelAlign  |    `'start' \| 'center' \| 'end'`     |   'start'    |                  可选，设置水平布局方式下，label 对齐方式                  | [label 横向排列](demo#demo-label-horizontal) |
-| dHasFeedback |               `boolean`               |    false     |                    可选，设置当前 form 是否显示反馈图标                    |                                              |
+| 参数         | 类型                                  | 默认         | 说明                                                                       | 跳转 Demo                                    | 全局配置项 |
+| ------------ | ------------------------------------- | ------------ | -------------------------------------------------------------------------- | -------------------------------------------- | ---------- |
+| layout       | `'horizontal'\|'vertical'\|'columns'` | 'horizontal' | 可选，设置表单的排列方式                                                   | [基本用法](demo#basic-usage)                 |
+| labelSize    | `'sm' \| '' \| 'lg'`                  | ''           | 可选，设置 label 的占宽，未设置默认为 100px，'sm'对应 80px，'lg'对应 150px | [label 横向排列](demo#demo-label-horizontal) |
+| labelAlign   | `'start' \| 'center' \| 'end'`        | 'start'      | 可选，设置水平布局方式下，label 对齐方式                                   | [label 横向排列](demo#demo-label-horizontal) |
+| dHasFeedback | `boolean`                             | false        | 可选，设置当前 form 是否显示反馈图标                                       |                                              |
 
 ### dForm 事件
 
-|  参数   |                                                                                    类型                                                                                     | 说明                                                | 跳转 Demo                                               |
-| :-----: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------- | ------------------------------------------------------- |
+| 参数    | 类型                                                                                                                                                                        | 说明                                                | 跳转 Demo                                               |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------- |
 | dSubmit | `EventEmitter<{valid: boolean, directive: `[`DFormGroupRuleDirective`](#dformgroupruledirective) `\| AbstractControlDirective}, errors: {[key: string]: ValidationErrors}>` | 可选，使用 dFormSubmit 绑定元素触发提交时，响应事件 | [模板驱动表单验证（推荐）](demo#demo-validate-template) |
 
 ## d-form-item
 
 ### d-form-item 参数
 
-|     参数     |   类型    | 默认  | 说明                                        | 跳转 Demo                                     |
-| :----------: | :-------: | :---: | :------------------------------------------ | --------------------------------------------- |
+| 参数         | 类型      | 默认  | 说明                                        | 跳转 Demo                                     |
+| ------------ | --------- | ----- | ------------------------------------------- | --------------------------------------------- |
 | dHasFeedback | `boolean` | false | 可选，设置当前 formControl 是否显示反馈图标 | [响应式表单验证](demo#demo-validate-reactive) |
 
 ## d-form-label
 
 ### d-form-label 参数
 
-|   参数   |   类型    | 默认  | 说明                                               | 跳转 Demo                    |
-| :------: | :-------: | :---: | :------------------------------------------------- | ---------------------------- |
+| 参数     | 类型      | 默认  | 说明                                               | 跳转 Demo                    |
+| -------- | --------- | ----- | -------------------------------------------------- | ---------------------------- |
 | required | `boolean` | false | 可选，表单选项是否必填                             | [基本用法](demo#basic-usage) |
 | hasHelp  | `boolean` | false | 可选，表单项是否需要帮助指引                       | [基本用法](demo#basic-usage) |
-| helpTips | `string`  |  ''   | 可选，表单项帮助指引提示内容，需配合 `hasHelp`使用 | [基本用法](demo#basic-usage) |
+| helpTips | `string`  | ''    | 可选，表单项帮助指引提示内容，需配合 `hasHelp`使用 | [基本用法](demo#basic-usage) |
 
 ## d-form-control
 
 ### d-form-control 参数
 
-|      参数      |                    类型                     | 默认 | 说明                                       | 跳转 Demo                                    |
-| :------------: | :-----------------------------------------: | :--: | :----------------------------------------- | -------------------------------------------- |
-|   extraInfo    |        `string \| TemplateRef<any>`         |  --  | 可选，附件信息，一般用于补充表单选项的说明 | [label 横向排列](demo#demo-label-horizontal) |
-| feedbackStatus | [`DFormControlStatus`](#dformcontrolstatus) |  --  | 可选，手动指定当前 control 状态反馈        | [指定表单状态](demo#demo-custom-status)      |
-| suffixTemplate |             `TemplateRef<any>`              |  --  | 可选，可传入图标模板作为输入框后缀         |
+| 参数           | 类型                                        | 默认 | 说明                                       | 跳转 Demo                                    |
+| -------------- | ------------------------------------------- | ---- | ------------------------------------------ | -------------------------------------------- |
+| extraInfo      | `string \| TemplateRef<any>`                | --   | 可选，附件信息，一般用于补充表单选项的说明 | [label 横向排列](demo#demo-label-horizontal) |
+| feedbackStatus | [`DFormControlStatus`](#dformcontrolstatus) | --   | 可选，手动指定当前 control 状态反馈        | [指定表单状态](demo#demo-custom-status)      |
+| suffixTemplate | `TemplateRef<any>`                          | --   | 可选，可传入图标模板作为输入框后缀         |
 
 ## dFormSubmit
 
@@ -95,10 +95,10 @@ import { FormsModule } from '@angular/forms';
 
 ### dFormSubmit 参数
 
-|      参数       |   类型   |  默认   |                                 说明                                  |                   跳转 Demo                   |
-| :-------------: | :------: | :-----: | :-------------------------------------------------------------------: | :-------------------------------------------: |
-|   dFormSubmit   | `string` | 'click' |                  可选，配置用于触发 submit 的事件名                   | [响应式表单验证](demo#demo-validate-reactive) |
-| dFormSubmitData |  `any`   |   --    | 可选，配置需要传递与 dSubmit 回调事件数据，可用于需区分多个按钮的场景 | [响应式表单验证](demo#demo-validate-reactive) |
+| 参数            | 类型     | 默认    | 说明                                                                  | 跳转 Demo                                     |
+| --------------- | -------- | ------- | --------------------------------------------------------------------- | --------------------------------------------- |
+| dFormSubmit     | `string` | 'click' | 可选，配置用于触发 submit 的事件名                                    | [响应式表单验证](demo#demo-validate-reactive) |
+| dFormSubmitData | `any`    | --      | 可选，配置需要传递与 dSubmit 回调事件数据，可用于需区分多个按钮的场景 | [响应式表单验证](demo#demo-validate-reactive) |
 
 ## dFormReset
 
@@ -107,8 +107,8 @@ import { FormsModule } from '@angular/forms';
 
 ### dFormReset 参数
 
-|    参数    |   类型   |  默认   |                说明                | 跳转 Demo |
-| :--------: | :------: | :-----: | :--------------------------------: | :-------: |
+| 参数       | 类型     | 默认    | 说明                               | 跳转 Demo |
+| ---------- | -------- | ------- | ---------------------------------- | --------- |
 | dFormReset | `string` | 'click' | 可选，配置用于触发 submit 的事件名 |           |
 
 ## dValidateRules 表单验证
@@ -133,22 +133,22 @@ import { FormsModule } from '@angular/forms';
 
 ### dValidateRules 参数
 
-|        参数        |                类型                 | 默认 |          说明          |                        跳转 Demo                        |
-| :----------------: | :---------------------------------: | :--: | :--------------------: | :-----------------------------------------------------: |
-|   dValidateRules   | [`DValidateRules`](#dvalidaterules) |  --  | 必选，配置你的校验规则 | [模板驱动表单验证（推荐）](demo#demo-validate-template) |
-| dValidatePopConfig |     [`DPopConfig`](#dpopconfig)     |  --  | 可选，popover 提示配置 | [模板驱动表单验证（推荐）](demo#demo-validate-template) |
+| 参数               | 类型                                | 默认 | 说明                   | 跳转 Demo                                               |
+| ------------------ | ----------------------------------- | ---- | ---------------------- | ------------------------------------------------------- |
+| dValidateRules     | [`DValidateRules`](#dvalidaterules) | --   | 必选，配置你的校验规则 | [模板驱动表单验证（推荐）](demo#demo-validate-template) |
+| dValidatePopConfig | [`DPopConfig`](#dpopconfig)         | --   | 可选，popover 提示配置 | [模板驱动表单验证（推荐）](demo#demo-validate-template) |
 
 ### dValidateSyncKey 参数
 
 表单协同校验。
 
-|       参数       |   类型   | 默认 |                                                     说明                                                      |                跳转 Demo                |
-| :--------------: | :------: | :--: | :-----------------------------------------------------------------------------------------------------------: | :-------------------------------------: |
-| dValidateSyncKey | `string` |  --  | 必选，配置唯一标识 key，相同 key 表单元素将在其中一个元素值发生变更时，同时触发校验，支持响应式与模板驱动表单 | [表单协同验证](demo#demo-validate-sync) |
+| 参数             | 类型     | 默认 | 说明                                                                                                          | 跳转 Demo                               |
+| ---------------- | -------- | ---- | ------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| dValidateSyncKey | `string` | --   | 必选，配置唯一标识 key，相同 key 表单元素将在其中一个元素值发生变更时，同时触发校验，支持响应式与模板驱动表单 | [表单协同验证](demo#demo-validate-sync) |
 
-# dActiveFormControl
+### dActiveFormControl
 
-给业务的自定义容器添加该directive，可以获得与其他组件表单（如text-input, select, cascader）同样的点击交互效果。
+给业务的自定义容器添加该 directive，可以获得与其他组件表单（如 text-input, select, cascader）同样的点击交互效果。
 
 ## 封装的校验规则
 
@@ -169,20 +169,21 @@ const rules: DValidateRules = {
 };
 
 // 自定义校验器的写法可以参考下方代码
-// public static contains(contain: string | number): ValidatorFn {
-//   return (control: AbstractControl): ValidationErrors | null => {
-//     if (DValidators.isEmptyInput(control.value) || DValidators.isEmptyInput(contain)) {
-//       return null;
-//     }
-//     return control.value.indexOf(contain) === -1 ? { contains: { requiredContains: contain,actualValue: control.value } } : null;
-//   };
-// }
-// public static alphabet(control: AbstractControl): ValidationErrors | null {
-//   if (DValidators.isEmptyInput(control.value)) {
-//     return null;
-//   }
-//   return DValidators.AlphabetPattern.test(control.value) ? null : { alphabet: true };
-// }
+public static contains(contain: string | number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (DValidators.isEmptyInput(control.value) || DValidators.isEmptyInput(contain)) {
+      return null;
+    }
+    return control.value.indexOf(contain) === -1 ? { contains: { requiredContains: contain,actualValue: control.value } } : null;
+  };
+}
+
+public static alphabet(control: AbstractControl): ValidationErrors | null {
+  if (DValidators.isEmptyInput(control.value)) {
+    return null;
+  }
+  return DValidators.AlphabetPattern.test(control.value) ? null : { alphabet: true };
+}
 ```
 
 ```html
@@ -192,22 +193,22 @@ const rules: DValidateRules = {
 
 ### 校验规则
 
-|   校验器    |              说明              |
-| :---------: | :----------------------------: |
-|  contains   |          校验是否包含          |
-| notContains |         校验是否不包含         |
-|    equal    |          校验是否等于          |
-|  notEqual   |         校验是否不等于         |
-|    port     | 校验端口号是否属于 [0, 65535]  |
-|    date     |        校验日期是否合法        |
-|     url     |       校验 url 是否合法        |
-|   integer   |         校验是否是整数         |
-|   digits    |         校验是否是数字         |
-|   number    | 校验是否是数字，包括科学计数法 |
-|  alphabet   |         校验是否是字母         |
-|   script    |     校验是否是 script 标签     |
-|    ipv4     |     校验 ipv4 地址是否合法     |
-|    ipv6     |     校验 ipv6 地址是否合法     |
+| 校验器      | 说明                           |
+| ----------- | ------------------------------ |
+| contains    | 校验是否包含                   |
+| notContains | 校验是否不包含                 |
+| equal       | 校验是否等于                   |
+| notEqual    | 校验是否不等于                 |
+| port        | 校验端口号是否属于 [0, 65535]  |
+| date        | 校验日期是否合法               |
+| url         | 校验 url 是否合法              |
+| integer     | 校验是否是整数                 |
+| digits      | 校验是否是数字                 |
+| number      | 校验是否是数字，包括科学计数法 |
+| alphabet    | 校验是否是字母                 |
+| script      | 校验是否是 script 标签         |
+| ipv4        | 校验 ipv4 地址是否合法         |
+| ipv6        | 校验 ipv6 地址是否合法         |
 
 ## 接口 & 类型定义
 
@@ -351,8 +352,9 @@ export const dDefaultValidators = {
 
 ```TS
 export type DPopConfig = {
-  popMaxWidth?: number,
+  popMaxWidth?: number;
   scrollElement?: Element;
-  zIndex?: number,
+  zIndex?: number;
+  showAnimation?: boolean;
 }
 ```

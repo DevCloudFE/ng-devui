@@ -31,7 +31,8 @@ export interface DValidateRule {
   priority?: number;
   isNgValidator?: boolean;
   validateLevel?: 'error' | 'warning'; // 校验级别
-  [id: string]: boolean | number | string | { [key: string]: string } | RegExp | DValidatorFn | ValidatorFn | undefined | TemplateRef<any>; // 万能key
+  [id: string]: boolean | number | string | { [key: string]: string }
+  | RegExp | DValidatorFn | ValidatorFn | undefined | TemplateRef<any>; // 万能key
 }
 export interface DAsyncValidateRule {
   id?: string;
@@ -41,7 +42,16 @@ export interface DAsyncValidateRule {
   priority?: number;
   isNgValidator?: boolean;
   validateLevel?: 'error' | 'warning'; // 校验级别
-  [id: string]: boolean | number | string | { [key: string]: string } | RegExp | DAsyncValidatorFn | AsyncValidatorFn | undefined | TemplateRef<any>; // 万能key
+  [id: string]:
+  | boolean
+  | number
+  | string
+  | { [key: string]: string }
+  | RegExp
+  | DAsyncValidatorFn
+  | AsyncValidatorFn
+  | undefined
+  | TemplateRef<any>; // 万能key
 }
 
 // TODO: 还需提供一个debounceTime
@@ -84,13 +94,11 @@ export type DValidateRules =
   }
   | DValidateRule[];
 
-
 export interface DValidateErrorStatus {
   errorMessage: string | { [key: string]: string } | null;
   showError: boolean;
   errors: { [key: string]: any };
 }
-
 
 /* TODO: 这里是否需要导出 */
 export const ruleReservedWords = [
@@ -117,9 +125,9 @@ export const dDefaultValidators = {
   whitespace: DValidators.whiteSpace,
 };
 
-
 export interface DPopConfig {
   popMaxWidth?: number;
   scrollElement?: Element;
   zIndex?: number;
+  showAnimation?: boolean;
 }

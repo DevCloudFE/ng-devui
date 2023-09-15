@@ -30,7 +30,7 @@ interface PopoverStyle {
   templateUrl: './popover.component.html',
   styleUrls: [`./popover.component.scss`],
   animations: [directionFadeInOut],
-})
+  })
 export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @Input() triggerElementRef: ElementRef;
   currentPosition: PositionType = 'top';
@@ -73,7 +73,7 @@ export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
     return 'devui-popover ' + this.currentPosition + ' ' + this.connectionBias + ' devui-popover-' + this.popType;
   }
   @HostBinding('@directionFadeInOut') get state() {
-    return this.animateState;
+    return this.showAnimation && this.animateState;
   }
   @HostBinding('@.disabled') get disabled() {
     return !this.showAnimation;

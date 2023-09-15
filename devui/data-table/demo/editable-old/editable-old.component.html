@@ -11,7 +11,8 @@
     <d-cell-edit>
       <ng-template let-rowItem="rowItem" let-column="column">
         <div class="customized-editor edit-padding-fix">
-          <input class="devui-form-control" [(ngModel)]="rowItem[column.field]" maxlength="5" />
+          <!-- 引入dCommonsModule的autofocus -->
+          <input [dAutoFocus]="true" class="devui-form-control" [(ngModel)]="rowItem[column.field]" maxlength="5" />
         </div>
       </ng-template>
     </d-cell-edit>
@@ -19,7 +20,7 @@
   <d-column field="dob" header="Date of birth" [editable]="true" [width]="'150px'">
     <d-cell>
       <ng-template let-cellItem="cellItem">
-        {{ cellItem | i18nDate: 'full':false }}
+        {{ cellItem | i18nDate : 'full' : false }}
       </ng-template>
     </d-cell>
     <d-cell-edit>
@@ -69,6 +70,7 @@
             [options]="genderSource"
             [isSearch]="true"
             [filterKey]="'label'"
+            [appendToBody]="true"
             [autoFocus]="true"
             [toggleOnFocus]="true"
             [(ngModel)]="rowItem[column.field]"

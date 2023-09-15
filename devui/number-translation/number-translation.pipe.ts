@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'dNumberTrans'
-})
+  })
 export class NumberTransPipe implements PipeTransform {
 
   getFlowStr(value: number, fixedNum: number) {
@@ -58,7 +58,7 @@ export class NumberTransPipe implements PipeTransform {
 
     switch(type) {
     case 'comma':
-      numberStr = number.toLocaleString();
+      numberStr = number.toLocaleString('zh-CN', {maximumFractionDigits: fixedNum});
       break;
     case 'flow':
       numberStr = this.getFlowStr(number, fixedNum);

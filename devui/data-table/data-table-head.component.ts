@@ -15,12 +15,13 @@ import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.comp
   templateUrl: './data-table-head.component.html',
   styleUrls: ['./data-table-head.component.scss'],
   preserveWhitespaces: false,
-})
+  })
 export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy, DoCheck {
   @Input() checkable: boolean;
   @Input() headerCheckDisabled: boolean;
   @Input() headerCheckVisible: boolean;
   @Input() checkOptions: TableCheckOptions[];
+  @Input() checkOptionsIndex = 1050;
   @Input() showExpandToggle: boolean;
   @Input() pageAllChecked: boolean;
   @Input() columns: DataTableColumnTmplComponent[];

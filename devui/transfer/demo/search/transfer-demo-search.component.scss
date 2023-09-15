@@ -1,0 +1,20 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.no-data-tip {
+  cursor: not-allowed;
+  color: $devui-disabled-text;
+  font-size: $devui-font-size;
+  background: $devui-base-bg;
+  width: 100%;
+  line-height: 22px;
+  padding: 0;
+  text-align: center;
+  user-select: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  i.icon-advisory {
+    padding-right: 8px;
+  }
+}

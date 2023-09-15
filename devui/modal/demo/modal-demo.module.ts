@@ -15,7 +15,6 @@ import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { AutofocusComponent } from './autofocus/autofocus.component';
 import { BasicUpdateComponent } from './basic-update/basic-update.component';
 import { BasicComponent } from './basic/basic.component';
-import { MaximizeComponent } from './maximize/maximize.component';
 import { CasesComponent } from './cases/cases.component';
 import { ModalCasesComponent } from './cases/modal-cases.component';
 import { CustomizeComponent } from './customize/customize.component';
@@ -24,6 +23,7 @@ import { ModalNoBtnComponent } from './customize/modal-no-btn.component';
 import { FixedWrapperComponent } from './fixed/fixed-wrapper.component';
 import { HideComponent } from './hide/hide.component';
 import { ModalFormComponent } from './hide/modal-form.component';
+import { MaximizeComponent } from './maximize/maximize.component';
 import { ModalDemoComponent } from './modal-demo.component';
 import { ModalDesignComponent } from './modal-design.component';
 import { ModalTestComponent } from './modal-test.component';
@@ -81,7 +81,7 @@ import { TipsComponent } from './tips/tips.component';
   BasicUpdateComponent,
   FixedWrapperComponent,
   CasesComponent,
-  ModalCasesComponent,
+  ModalCasesComponent
   ],
   })
 export class ModalDemoModule {}

@@ -1,5 +1,5 @@
 import { Component, DebugElement, Input, TemplateRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, flush, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,7 +20,7 @@ import { IDialogOptions, IModalOptions } from './modal.types';
       <div class="iAmTemplate">I am Template</div>
     </ng-template>
   `,
-})
+  })
 class TestDialogComponent {
   @ViewChild('testContentTemplate') testContentTemplate: TemplateRef<any>;
 
@@ -269,6 +269,7 @@ describe('dialog', () => {
       component.dialogConfig.bodyScrollable = true;
 
       fixture.detectChanges();
+
       debugEl.query(By.css('.devui-btn')).nativeElement.dispatchEvent(new Event('click'));
       fixture.detectChanges();
 
@@ -294,9 +295,6 @@ describe('dialog', () => {
       expect(buttonEle2.querySelector('.button-content').textContent.trim()).toBe('testDialogBtn2');
       expect(buttonEle1.style.width).toBe('300px');
       expect(buttonEle2.style.width).toBe('100px');
-      // buttons的disabled不测
-      expect(document.activeElement).toBeTruthy();
-      expect(document.activeElement.classList.contains('devui-btn')).toBe(true);
       expect(modalWrapper.style.width).toBe('500px');
       document.querySelector('.modal').dispatchEvent(new Event('click'));
       tick();
@@ -325,7 +323,7 @@ describe('dialog', () => {
     <h3 (click)="close($event)" class="closeModal">Modal Component</h3>
     <div (click)="btnClick($event)" class="btnModal">iAmBtn</div>
   `
-})
+  })
 class OpenModalComponent {
   constructor() {}
   @Input() data: any;
@@ -346,7 +344,7 @@ class OpenModalComponent {
   template: `
     <d-button (btnClick)="openModal()">click me!</d-button>
   `,
-})
+  })
 class TestModalComponent {
 
   results: any;

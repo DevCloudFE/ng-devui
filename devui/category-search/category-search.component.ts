@@ -47,7 +47,7 @@ import { DefaultTemplateDirective } from './default-template.directive';
   selector: 'd-category-search',
   templateUrl: './category-search.component.html',
   styleUrls: ['./category-search.component.scss'],
-})
+  })
 export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewInit, AfterContentInit {
   static ID_SEED = 0;
   @Input() category: ICategorySearchTagItem[] = [];
@@ -74,6 +74,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   @Input() categoryInGroup = false; // 是否按组别显示分类下拉列表
   @Input() groupOrderConfig: string[]; // 用户配置组顺序
   @Input() customGroupNameTemplate: TemplateRef<any>; // 用户自定义组名称显示模板
+  @Input() customCategoryNameTemplate: TemplateRef<any>; // 用户自定义分类名称显示模板
   @Input() tagMaxWidth: number;
   @Input() textConfig: TextConfig = {
     keywordName: '',
@@ -86,6 +87,10 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   @Input() beforeTagChange: (tag, searchKey, operation) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() toggleEvent: (dropdown, tag?, currentSelectTag?) => void;
   @Input() @WithConfig() styleType = 'default';
+  @Input() @WithConfig() showGlowStyle = true;
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
+    return this.showGlowStyle;
+  }
   @Output() searchEvent = new EventEmitter<SearchEvent>();
   @Output() selectedTagsChange = new EventEmitter<SelectedTagsEvent>();
   @Output() createFilterEvent = new EventEmitter<CreateFilterEvent>();
@@ -98,11 +103,6 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   @ViewChildren('selectedDropdown') selectedDropdownList: QueryList<DropDownDirective>;
   @ViewChildren(DefaultTemplateDirective) defaultTemplates: QueryList<DefaultTemplateDirective>;
   @ContentChildren(ContentTemplateDirective) contentTemplates: QueryList<ContentTemplateDirective>;
-
-  @Input() @WithConfig() showGlowStyle = true;
-  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
-    return this.showGlowStyle;
-  }
 
   id: number;
   searchField: ICategorySearchTagItem[];
@@ -159,7 +159,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     this.document = this.doc;
     this.dateConverter = new DefaultDateConverter();
     this.id = CategorySearchComponent.ID_SEED++;
-    this.showSearchConfig = { keyword: true, field: true, category: true };
+    this.showSearchConfig = { keyword: true, field: true, category: true, noCategoriesAvailableTip: true };
     this.i18n
       .langChange()
       .pipe(takeUntil(this.destroy$))
@@ -279,6 +279,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
           keyword: this.showSearchCategory,
           field: this.showSearchCategory,
           category: this.showSearchCategory,
+          noCategoriesAvailableTip: this.showSearchCategory,
         }
         : this.showSearchCategory;
     this.showSearchConfig = { ...this.showSearchConfig, ...customConfig };
@@ -386,20 +387,24 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   setValue(data: any, isSelectedTags = false) {
     if (Array.isArray(data) && data.length) {
       data.forEach((item) => {
-        if (isSelectedTags && this.category) {
-          let result = '';
-          const originItem = this.category.find((categoryItem) => categoryItem.field === item.field);
-          mergeWith(item, originItem, this.mergeCheck);
-          if (item.value.value) {
-            item.value.cache = cloneDeep(item.value.value);
-            result = this.joinLabelTypes.includes(item.type) ? this.getItemValue(item.value.value, item.filterKey || 'label') : '';
-          }
-          item.title = this.setTitle(item, item.type, result);
-          if (item.type === 'label' && item.options[0] && !item.options[0].$label) {
-            this.mergeToLabel(item);
-          }
-        } else {
+        if (!isSelectedTags || !this.category) {
           item = this.initCategoryItem(item);
+          return;
+        }
+        let result = '';
+        const originItem = this.category.find((categoryItem) => categoryItem.field === item.field);
+        mergeWith(item, originItem, this.mergeCheck);
+        if (item.value.value) {
+          if (item.type === 'treeSelect') {
+            this.getTreeValue(item, false);
+            return;
+          }
+          item.value.cache = cloneDeep(item.value.value);
+          result = this.joinLabelTypes.includes(item.type) ? this.getItemValue(item.value.value, item.filterKey || 'label') : '';
+        }
+        item.title = this.setTitle(item, item.type, result);
+        if (item.type === 'label' && item.options[0] && !item.options[0].$label) {
+          this.mergeToLabel(item);
         }
       });
     }
@@ -425,7 +430,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       this.handleGroupLength(item, item.isSelected, isInit);
       return item;
     });
-    this.showNoDataTips = this.categoryDisplay.every((item) => item.isSelected);
+    this.showNoDataTips = this.showSearchConfig.noCategoriesAvailableTip ? this.categoryDisplay.every((item) => item.isSelected) : false;
   }
 
   initGroupAndDictionary() {
@@ -447,16 +452,14 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     keys.forEach((key) => {
       const item = this.categoryDictionary[key];
       if (item) {
-        if (item) {
-          if (this.categoryInGroup) {
-            if (item.groupName) {
-              this.categoryOrder.push(item, ...item.children);
-            } else if (!item.group) {
-              this.categoryOrder.push(item);
-            }
-          } else {
+        if (this.categoryInGroup) {
+          if (item.groupName) {
+            this.categoryOrder.push(item, ...item.children);
+          } else if (!item.group) {
             this.categoryOrder.push(item);
           }
+        } else {
+          this.categoryOrder.push(item);
         }
       }
     });
@@ -481,14 +484,6 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     }
   }
 
-  search() {
-    this.searchEvent.emit({
-      selectedTags: this.getSelectedTagsExceptKeyword(),
-      searchKey: this.setSearchKeyTag(),
-    });
-    this.isFocus = true;
-  }
-
   searchCategory(item: ICategorySearchTagItem, value?: string) {
     if (this.valueIsArrayTypes.includes(item.type)) {
       return;
@@ -500,9 +495,11 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     this.finishChoose();
   }
 
-  searchInputValue(event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
+  searchInputValue(event?: Event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     // 当有分类正在选择时输入关键字不处理
     if (!this.currentSelectTag) {
       this.searchEvent.emit({
@@ -510,6 +507,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
         searchKey: this.setSearchKeyTag(),
       });
     }
+    this.isFocus = true;
   }
 
   chooseCategory(item: ICategorySearchTagItem, inputDropdown: DropDownDirective) {
@@ -843,11 +841,11 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     }
   }
 
-  // checkbox | label 将选中项对应filterKey的值合并的方法，当前多选已通过data展示，可考虑移除
+  // checkbox | label 将选中项对应filterKey的值合并的方法
   getItemValue(value: any, key: string) {
     if (value && Array.isArray(value)) {
       const result = value.map((item) => item[key]);
-      return result.join(',');
+      return result.join(' | ');
     }
   }
 
@@ -888,7 +886,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       this.handleAccordingType(this.currentSelectTag.type, this.currentSelectTag.options);
       this.scrollToTailFlag = true;
     }
-    this.showNoDataTips = this.categoryDisplay.every((item) => item.isSelected);
+    this.showNoDataTips = this.showSearchConfig.noCategoriesAvailableTip ? this.categoryDisplay.every((item) => item.isSelected) : false;
   }
 
   resetTreeRender(dropdown: DropDownDirective, tag: any, flag: boolean, isCurrentSelectTag?: boolean) {
@@ -985,8 +983,10 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   }
 
   // treeSelect 树 处理选中项方法
-  getTreeValue(tag: ICategorySearchTagItem) {
-    this.afterDropdownClosed();
+  getTreeValue(tag: ICategorySearchTagItem, isConfirm = true) {
+    if (isConfirm) {
+      this.afterDropdownClosed();
+    }
     const result = [];
     const selectedIds = [];
     const data = tag.value.value as ITagOption[];
@@ -995,18 +995,44 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       selectedIds.push(item[tag.treeNodeIdKey || 'id']);
     });
     if (result.length) {
-      tag.value.options = cloneDeep(tag.options);
+      tag.value.options = isConfirm ? cloneDeep(tag.options) : this.initTreeChecked(tag, tag.options, selectedIds);
       tag.value.cache = cloneDeep(tag.value.value);
       tag.value[tag.filterKey || 'label'] = result.join(',');
       tag.title = this.setTitle(tag, 'treeSelect');
-      if (tag.multiple) {
-        const halfCheckedIds = [];
-        this.treeInstance.nodes.forEach((item) => item.data.halfChecked && halfCheckedIds.push(item.id));
-        this.updateTreeData(tag, tag.value.options, selectedIds, halfCheckedIds);
-      }
-      this.updateSelectedTags(tag);
     } else {
       this.removeTag(tag);
+      return;
+    }
+    if (isConfirm) {
+      this.updateTreeChecked(tag, selectedIds);
+      this.updateSelectedTags(tag);
+    }
+  }
+
+  initTreeChecked(tag: ICategorySearchTagItem, tree: any, selectedIds: string[]) {
+    if (Array.isArray(tree)) {
+      return tree.map((item) => this.initTreeChecked(tag, item, selectedIds));
+    } else if (tree) {
+      const idKey = tag.treeNodeIdKey || 'id';
+      const childKey = tag.treeNodeChildrenKey || 'children';
+      if (Array.isArray(tree[childKey])) {
+        let checkedChild = 0;
+        tree[childKey] = this.initTreeChecked(tag, tree[childKey], selectedIds);
+        tree[childKey].forEach((child) => child.isChecked && checkedChild++);
+        tree.halfChecked = checkedChild > 0 && checkedChild < tree[childKey].length;
+        tree.isChecked = checkedChild > 0 && !tree.halfChecked;
+      } else {
+        tree.isChecked = selectedIds.includes(tree[idKey]);
+      }
+      return tree;
+    }
+  }
+
+  updateTreeChecked(tag: ICategorySearchTagItem, selectedIds: string[]) {
+    if (tag.multiple) {
+      const halfCheckedIds = [];
+      this.treeInstance.nodes.forEach((item) => item.data.halfChecked && halfCheckedIds.push(item.id));
+      this.updateTreeData(tag, tag.value.options, selectedIds, halfCheckedIds);
     }
   }
 

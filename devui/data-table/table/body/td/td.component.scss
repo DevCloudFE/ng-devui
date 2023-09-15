@@ -11,19 +11,6 @@ svg.svg-icon-arrow > g > polygon {
 
 :host.editable-cell {
   position: relative;
-
-  &:hover::after {
-    content: '';
-    display: block;
-    width: calc(100% - 32px);
-    position: absolute;
-    height: calc(100% - 14px);
-    border: 1px solid $devui-line;
-    left: 12px;
-    top: 8px;
-    border-radius: $devui-border-radius;
-    pointer-events: none;
-  }
 }
 
 .cell-modify {
@@ -97,10 +84,6 @@ svg.svg-icon-arrow > g > polygon {
   margin-left: -5px;
   padding-left: 5px;
   min-height: 20px;
-
-  &:hover {
-    background: $devui-list-item-hover-bg;
-  }
 }
 
 .cell-placeholder {

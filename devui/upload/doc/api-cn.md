@@ -162,6 +162,8 @@ export class IUploadOptions {
   method?: string;
   // 上传文件大小限制
   maximumSize?: number;
+   // 上传文件个数限制，多文件上传时可用
+  maximumCount?: number;
   // 自定义请求headers
   headers?: { [key: string]: any };
   // 认证token

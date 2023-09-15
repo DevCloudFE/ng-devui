@@ -1,5 +1,11 @@
 import { DOCUMENT } from '@angular/common';
-import { ComponentFactoryResolver, ComponentRef, Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import {
+  ComponentFactoryResolver,
+  ComponentRef,
+  Inject,
+  Injectable,
+  Renderer2, RendererFactory2
+} from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { DevConfigService } from 'ng-devui/utils';
 import { assign, isUndefined } from 'lodash-es';
@@ -13,13 +19,10 @@ export class DialogService {
   private renderer: Renderer2;
   document: Document;
 
-  constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private overlayContainerRef: OverlayContainerRef,
-    private rendererFactory: RendererFactory2,
-    private devConfigService: DevConfigService,
-    @Inject(DOCUMENT) private doc: any
-  ) {
+  constructor(private componentFactoryResolver: ComponentFactoryResolver,
+              private overlayContainerRef: OverlayContainerRef, private rendererFactory: RendererFactory2,
+              private devConfigService: DevConfigService,
+              @Inject(DOCUMENT) private doc: any) {
     this.renderer = this.rendererFactory.createRenderer(null, null);
     this.document = this.doc;
   }
@@ -94,14 +97,11 @@ export class DialogService {
       offsetX,
       offsetY,
       bodyScrollable,
-      escapable,
+      escapable
     });
 
-    const modalContainerRef = modalRef.instance.modalContainerHost.viewContainerRef.createComponent(
-      finalComponentFactoryResolver.resolveComponentFactory(ModalContainerComponent),
-      0,
-      injector
-    );
+    const modalContainerRef = modalRef.instance.modalContainerHost.viewContainerRef
+      .createComponent(finalComponentFactoryResolver.resolveComponentFactory(ModalContainerComponent), 0, injector);
     assign(modalContainerRef.instance, { title, buttons, maxHeight, dialogtype, showCloseBtn, showMaximizeBtn });
 
     if (contentTemplate) {
@@ -110,9 +110,8 @@ export class DialogService {
       if (typeof content === 'string') {
         assign(modalContainerRef.instance, { content, html });
       } else {
-        this.contentRef = modalContainerRef.instance.modalContentHost.viewContainerRef.createComponent(
-          finalComponentFactoryResolver.resolveComponentFactory(content)
-        );
+        this.contentRef = modalContainerRef.instance.modalContentHost.viewContainerRef
+          .createComponent(finalComponentFactoryResolver.resolveComponentFactory(content));
         assign(this.contentRef.instance, { data, dialogtype });
       }
     }

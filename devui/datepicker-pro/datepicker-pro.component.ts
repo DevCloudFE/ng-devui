@@ -26,15 +26,15 @@ import { DateConfig } from './lib/datepicker-pro.type';
   templateUrl: './datepicker-pro.component.html',
   styleUrls: ['./datepicker-pro.component.scss'],
   providers: [
-    DatepickerProService,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DatepickerProComponent),
-      multi: true
-    }
+  DatepickerProService,
+  {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => DatepickerProComponent),
+  multi: true
+  }
   ],
   preserveWhitespaces: false,
-})
+  })
 export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
   @Input() mode: 'year' | 'month' | 'date' = 'date';
   @Input() showTime = false;
@@ -193,7 +193,7 @@ export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy,
         }
 
         const inputDate = this.datepickerConvert.parse(this.dateValue, this.curFormat);
-        if (inputDate instanceof Date && inputDate.getTime() === this.pickerSrv.curDate.getTime()) {
+        if (inputDate instanceof Date && inputDate.getTime() === this.pickerSrv.curDate?.getTime()) {
           return;
         }
 

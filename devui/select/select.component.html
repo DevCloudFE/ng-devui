@@ -284,7 +284,7 @@
 <!--下拉Item模板-->
 <ng-template #dropdownItemTpl let-item="item" let-index="index">
   <li
-    [title]="inputItemTemplate || itemTemplate ? '' : formatter(item.option)"
+    [title]="!showItemTitle && (inputItemTemplate || itemTemplate) ? '' : formatter(item.option)"
     [ngClass]="[
       'devui-dropdown-item',
       item.isChecked ? highlightItemClass : '',

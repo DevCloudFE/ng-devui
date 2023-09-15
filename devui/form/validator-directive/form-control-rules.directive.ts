@@ -14,7 +14,7 @@ import {
   Self,
   SimpleChanges,
   SkipSelf,
-  TemplateRef,
+  TemplateRef
 } from '@angular/core';
 import {
   AbstractControl,
@@ -23,7 +23,7 @@ import {
   ControlContainer,
   NgControl,
   ValidationErrors,
-  ValidatorFn,
+  ValidatorFn
 } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
@@ -40,7 +40,7 @@ import {
   DValidateRule,
   DValidateRules,
   DValidationErrorStrategy,
-  ruleReservedWords,
+  ruleReservedWords
 } from './validate.type';
 
 @Directive()
@@ -459,7 +459,7 @@ const dControlErrorStatusHost = {
   /* eslint-disable-next-line @angular-eslint/no-host-metadata-property*/
   host: dControlErrorStatusHost,
   exportAs: 'dValidateRules',
-})
+  })
 export class DFormGroupRuleDirective extends DAbstractControlRuleDirective implements OnInit, OnChanges, OnDestroy {
   @Input('dValidateRules') rules: DValidateRules;
   @Output() dRulesStatusChange: EventEmitter<any> = new EventEmitter<any>();
@@ -504,7 +504,7 @@ export class DFormGroupRuleDirective extends DAbstractControlRuleDirective imple
   /* eslint-disable-next-line @angular-eslint/no-host-metadata-property*/
   host: dControlErrorStatusHost,
   exportAs: 'dValidateRules',
-})
+  })
 export class DFormControlRuleDirective extends DAbstractControlRuleDirective implements OnInit, OnChanges, OnDestroy {
   @Input('dValidateRules') rules: DValidateRules;
   @Output() dRulesStatusChange: EventEmitter<any> = new EventEmitter<any>();
@@ -628,8 +628,10 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
       position: this.popPosition,
       popType: type,
       popMaxWidth: this.popConfig?.popMaxWidth || 200,
-      appendToBody: true,
+      scrollElement: this.popConfig?.scrollElement,
       zIndex: this.popConfig?.zIndex || 1060,
+      showAnimation: this.popConfig?.showAnimation ?? true,
+      appendToBody: true,
     });
   }
 

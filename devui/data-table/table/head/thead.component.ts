@@ -10,11 +10,12 @@ import { TableThComponent } from './th/th.component';
   /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dTableHead]',
   templateUrl: './thead.component.html'
-})
+  })
 export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy, OnChanges {
   @Input() checkable: boolean;
   @Input() checkDisabled: boolean;
   @Input() checkOptions: TableCheckOptions[];
+  @Input() checkOptionsIndex = 1050;
   @Input() selectOptionOnCheckbox = false;
   @ContentChildren(TableTrComponent) headerRowList: QueryList<TableTrComponent>;
   @ContentChildren(TableThComponent, { descendants: true }) thList: QueryList<TableThComponent>;
@@ -38,6 +39,7 @@ export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy,
         this.headerFirstRow.headerCheckable = this.checkable;
         this.headerFirstRow.headerCheckDisabled = this.checkDisabled;
         this.headerFirstRow.headerCheckOptions = this.checkOptions;
+        this.headerFirstRow.checkOptionsIndex = this.checkOptionsIndex;
         this.headerFirstRow.selectOptionOnCheckbox = this.selectOptionOnCheckbox;
 
         this.checkStatusSubscription = this.headerFirstRow.headerCheckStatusEvent.subscribe((status) => {

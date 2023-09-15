@@ -11,19 +11,23 @@ In the page:
 ```xml
 <d-back-top></d-back-top>
 ```
-# d-back-top
-## d-back-top Parameter
 
-|    Parameter   |   Type   |      Default        |       Description      |           Jump to Demo         |Global Config| 
-| :----------------: | :---------: | :------------: | :-----: | :--------------------------------------------------------------------------- | |
-| customTemplate | `TemplateRef<any>` | -- | Optional. Custom button style | [Customize](demo#back-top-customize) |
-| bottom | `string` | '50px' | Optional. Position between the button and the bottom of the page | [Customize](demo#back-top-customize) |
-| right | `string` | '30px' | Optional. It is the right margin between the button and the page | [Customize](demo#back-top-customize) |
-| visibleHeight | `number` | 300 | Optional. When the scrolling height reaches the value of visibleHeight, the button is displayed to the top. The unit is `px` | [Customize](demo#back-top-customize) |
-| scrollTarget | `HTMLElement` | Window | Optional. Object that triggers scrolling | [Scrolling Container](demo#back-top-scroll-container) |
+## d-back-top
 
-## d-back-top Event
+### d-back-top Parameter
 
-| Parameter | Type | Description | Jump to Demo |
-| :------: | :-----------------: | :-------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| backTopEvent | `EventEmitter<boolean>` | Optional. Callback function for clicking the button to return to the top | [Basic Usage](demo#back-top-basic) |
+| Parameter      | Type               | Default | Description                                                                                                                  | Jump to Demo                                          | Global Config |
+| -------------- | ------------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------- |
+| customTemplate | `TemplateRef<any>` | --      | Optional. Custom button style                                                                                                | [Customize](demo#back-top-customize)                  |               |
+| bottom         | `string`           | '50px'  | Optional. Position between the button and the bottom of the page                                                             | [Customize](demo#back-top-customize)                  |               |
+| right          | `string`           | '30px'  | Optional. It is the right margin between the button and the page                                                             | [Customize](demo#back-top-customize)                  |               |
+| visibleHeight  | `number`           | 300     | Optional. When the scrolling height reaches the value of visibleHeight, the button is displayed to the top. The unit is `px` | [Customize](demo#back-top-customize)                  |               |
+| scrollTarget   | `HTMLElement`      | Window  | Optional. Object that triggers scrolling                                                                                     | [Scrolling Container](demo#back-top-scroll-container) |               |
+| draggable      | `boolean`          | false   | Optional. Indicates whether to allow dragging to change the position. Press and hold the mouse to start dragging.            | [Customize](demo#back-top-customize)                  |               |
+
+### d-back-top Event
+
+| Parameter    | Type                    | Description                                                              | Jump to Demo                         |
+| ------------ | ----------------------- | ------------------------------------------------------------------------ | ------------------------------------ |
+| backTopEvent | `EventEmitter<boolean>` | Optional. Callback function for clicking the button to return to the top | [Basic Usage](demo#back-top-basic)   |
+| dragEvent    | `EventEmitter<boolean>` | Optional. Callback function at the start or end of a drag event          | [Customize](demo#back-top-customize) |

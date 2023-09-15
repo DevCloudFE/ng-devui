@@ -26,12 +26,6 @@ In the page:
   <p>{{ date | dDatePipe: 'y/MM/dd' }}</p>
 </div>
 
-<!-- SafeNullPipe -->
-<div>
-  <p>{{ name | dSafeNullPipe }}</p>
-  <p>{{ age | dSafeNullPipe:'***' }}</p>
-</div>
-
 <!-- SimulateATag -->
 <button dSimulateATag [href]="'https://angular.io'" [target]="'_blank'"></button>
 
@@ -46,26 +40,27 @@ In the page:
 <button class="icon icon-copy" type="button" dClipboard [content]="value" (copyResultEvent)="copyResultEvent($event)"></button>
 ```
 
-# dLazyLoad
+## dLazyLoad
 
-## dLzayLoad Parameters
+### dLazyLoad Parameters
 
-|    Parameter   |   Type    |Default|     Description      | Jump to Demo                 |Global Config|
-| :----------------: | :------------: | :-------: | :---: | :------------------: | ---------------------------- |
-| enableLazyLoad | `boolean` | false | Optional. Whether to use lazyload | [Lazyload Directive](demo#lazy-load) |
-| target | `HTMLElement` | host | Optional. Indicates the target of the scrolling monitoring. | [懒加载指令](demo#lazy-load) |
+| Parameter      | Type                     | Default    | Description                                                 | Jump to Demo                         | Global Config |
+| -------------- | ------------------------ | ---------- | ----------------------------------------------------------- | ------------------------------------ | ------------- |
+| enableLazyLoad | `boolean`                | false      | Optional. Whether to use lazyload                           | [Lazyload Directive](demo#lazy-load) |
+| target         | `HTMLElement`            | host       | Optional. Indicates the target of the scrolling monitoring. | [Lazyload Directive](demo#lazy-load) |
+| direction      | `vertical \| horizontal` | 'vertical' | Optional. Scrolling direction.                              |                                      |
 
-## dLazyLoad Event
+### dLazyLoad Event
 
-| Parameter|             Type              |       Description        | Jump to Demo                 |
-| :------: | :---------------------------: | :----------------------: | ---------------------------- |
-| loadMore | `EventEmitter< HTMLElement >` | Required. Trigger the lazy loading response event. | [Lazyload Directive](demo#lazy-load) |
+| Parameter | Type                          | Description                                        | Jump to Demo                         |
+| --------- | ----------------------------- | -------------------------------------------------- | ------------------------------------ |
+| loadMore  | `EventEmitter< HTMLElement >` | Required. Trigger the lazy loading response event. | [Lazyload Directive](demo#lazy-load) |
 
-# dAutoFocus
+## dAutoFocus
 
 Automatic focus.
 
-# dDatePipe
+## dDatePipe
 
 Date parsing. Since the date pipe provided by Angular has some compatibility issues with IE, this component library provides a set of date-fns-based pipe to provide maximum compatibility.
 
@@ -301,68 +296,64 @@ The formatting format is slightly different from the format provided by the Angu
   </tbody>
 </table>
 
-# dSafeNullPipe
+## HelperUtils Static Methods
 
-Placeholder display automatically when data is `'', null, undefined`,default is: `--`
-
-# HelperUtils Static Methods
-
-## getBrowserName() => void
+### getBrowserName() => void
 
 Method description: Obtains the current browser name (`IE`|`ClassicEdge`|`Firefox`|`Opera`|`Edge`|`Chrome`|`Safari`|`Other`)
 
-## getBrowserVersion() => void
+### getBrowserVersion() => void
 
 Method description: Obtaining the Current Browser Version (Major Version)
 
-## jumpOuterUrl(url: string, target?: string) => void
+### jumpOuterUrl(url: string, target?: string) => void
 
 Method description: This method is used to redirect to an external URL. The router.navigate cannot be redirected to an external system. Window.open is blocked by the browser. This method uses the a tag to simulate the jump.
 
-| Parameter |   Type   |  Default  |                                                       Description                                                       | Jump to Demo                      |
-| :-------: | :------: | :-------: | :---------------------------------------------------------------------------------------------------------------------: | --------------------------------- |
-|    url    | `string` |    --     |                                                Required. Redirected URL                                                 |
-|  target   | [`TargetType`](#targettype) | '\_black' | Optional. Specifies the target of the hyperlink. | [Helper Utils](demo#helper-utils) |
+| Parameter | Type                        | Default   | Description                                      | Jump to Demo                      |
+| --------- | --------------------------- | --------- | ------------------------------------------------ | --------------------------------- |
+| url       | `string`                    | --        | Required. Redirected URL                         |
+| target    | [`TargetType`](#targettype) | '\_black' | Optional. Specifies the target of the hyperlink. | [Helper Utils](demo#helper-utils) |
 
-## downloadFile(url: string, options?: [DownloadOptionsType](#downloadoptionstype), onError?: (response) => void)
+### downloadFile(url: string, options?: [DownloadOptionsType](#downloadoptionstype), onError?: (response) => void)
 
 Method description: This method is used to download a file without refreshing the page or pop-up window. Implementation Principle Uses hidden iframes and forms to submit data, which is mainly used for post requests. It can also be used for get requests. It is recommended that the a tag and the download attribute be used for get requests.
 
 Note: The browsers use different default opening modes for different types of files. To trigger download, specify Content-Disposition: attachment in the header of the returned file stream response packet. filename=File name.Suffix.
 
-|     Parameter     |                Type                |               Default               |                                                                                                                                                           Description                                                                                                                                                           | Jump to Demo                      |
-| :---------------: | :--------------------------------: | :---------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | --------------------------------- |
-|        url        |              `string`              |                 --                  |                                                                                                                        Required. File address to be downloaded, corresponding to the action of the form.                                                                                                                        |
-|      option       |              `Object`              |                 --                  |                                                                                                                                                            Optional.                                                                                                                                                             |
-|   option.method   | `'POST'\| 'GET' \|'post' \| 'get'` |               'post'                |                                                                                                                                        Optional.                                                                                                                                        | [Helper Utils](demo#helper-utils) |
-|   option.params   |              `Object`              |                 --                  |               Optional. The left value type of a parameter object is string, and the right value type of a parameter object is string. Indicates the form field. When the method type is GET/get, parameters are combined to the URL. When the method type is POST/post, parameters are combined to the payload.                | [Helper Utils](demo#helper-utils) |
-|  option.enctype   |             [`EncType`](#enctype)              | 'application/x-www-form-urlencoded' |                                                                                       Optional. Corresponding to the enctype field in the form.                                                                                       |
-| option.iframename |              `string`              |             'download'              |                                                                                                                        Optional. Specifies the iframe name to prevent conflicts with other iframe names.                                                                                                                        |
-|      onError      |     `(response: any) => void`      |                 --                  | Optional. It is used for callback when the download fails. The type is (response) => void. The parameter response indicates the error information returned by the request. The response attempts to convert the returned information to JSON. If the download fails, the textContent of the original returned data is returned. |
+| Parameter         | Type                               | Default                             | Description                                                                                                                                                                                                                                                                                                                     | Jump to Demo                      |
+| ----------------- | ---------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| url               | `string`                           | --                                  | Required. File address to be downloaded, corresponding to the action of the form.                                                                                                                                                                                                                                               |
+| option            | `Object`                           | --                                  | Optional.                                                                                                                                                                                                                                                                                                                       |
+| option.method     | `'POST'\| 'GET' \|'post' \| 'get'` | 'post'                              | Optional.                                                                                                                                                                                                                                                                                                                       | [Helper Utils](demo#helper-utils) |
+| option.params     | `Object`                           | --                                  | Optional. The left value type of a parameter object is string, and the right value type of a parameter object is string. Indicates the form field. When the method type is GET/get, parameters are combined to the URL. When the method type is POST/post, parameters are combined to the payload.                              | [Helper Utils](demo#helper-utils) |
+| option.enctype    | [`EncType`](#enctype)              | 'application/x-www-form-urlencoded' | Optional. Corresponding to the enctype field in the form.                                                                                                                                                                                                                                                                       |
+| option.iframename | `string`                           | 'download'                          | Optional. Specifies the iframe name to prevent conflicts with other iframe names.                                                                                                                                                                                                                                               |
+| onError           | `(response: any) => void`          | --                                  | Optional. It is used for callback when the download fails. The type is (response) => void. The parameter response indicates the error information returned by the request. The response attempts to convert the returned information to JSON. If the download fails, the textContent of the original returned data is returned. |
 
-## downloadFileByHttpClient(httpClient: HttpClient, url: string, options?: [ClientDownloadOptions](#clientdownloadoptions), onError?: (response) => void, onSuccess?: (response) => void)
+### downloadFileByHttpClient(httpClient: HttpClient, url: string, options?: [ClientDownloadOptions](#clientdownloadoptions), onError?: (response) => void, onSuccess?: (response) => void)
 
 Method description: This method is used to download files without refreshing the page or pop-up window. Implementation Principle: The HTTP client submits a binary stream to obtain the downloaded file and triggers the download. This is mainly used for post requests. It can also be used for get requests. It is recommended that the a tag and the download attribute be used for get requests.
 
 Note: The browsers use different default opening modes for different types of files. To trigger download, specify Content-Disposition: attachment for the header of the returned file stream response packet. filename=File name.Suffix.
 
-|                Parameter                |                Type                |                Default                |                                                                                                                                                                                               Description                                                                                                                                                                                               | Jump to Demo |
-| :-------------------------------------: | :--------------------------------: | :-----------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ------------ |
-|               httpClient                |            `HttpClient`            |                  --                   |                                                                                                                                                               Required. HTTP client that provides ingestion. For details, see Remarks 1.                                                                                                                                                                |
-|                   url                   |              `string`              |                  --                   |                                                                                                                                                                                     Required. File download address.                                                                                                                                                                                     |
-|                 option                  |              `Object`              |                  {}                  |                                                                                                                                                                                                Optional.                                                                                                                                                                                                 |
-|              option.method              | `'POST'\| 'GET' \|'post' \| 'get'` |                'post'                 |                                                                                                                                                                        Optional.                                                                                                                                                                         |
-|              option.params              |              `Object`              |                --                 |                                                 Optional. The left value type of the parameter object is string, and the right value type of the parameter object is string. Indicates the form field. When the method type is GET/get, parameters are combined to the URL. When the method type is POST/post, parameters are combined to the payload.                                                  |
-|             option.enctype              |             `enctype`              | \'application/x-www-form-urlencoded\' |                                                                                                                           Optional. Corresponding to the enctype field in the form.                                                                                                                            |
-|              option.header              |              `Object`              |                  --                   |                                                                  Optional. This parameter is used to set the request header. The object of the key-value pair is used to set the header value. The left value is the key of the header option, and the right value is the value of the header option, for example, `{'X-lang':'en'}`.                                                                  |
-|          option.responseOption          |  `response' \| 'body' \| 'json'`   |                'json'                 |                                                                                                            Optional. This parameter is used to specify the default format returned when the format fails to be processed. If the format fails to be processed, the format will be degraded.                                                                                                             |
-|             option.filename             |              `string`              |                  --                   |                                                                                                Optional. This parameter is not set by default. It is set to a configuration item first, obtained from filename specified in Content-Type in the response header, and then obtained from the access path.                                                                                                |
-|         option.withCredentials          |             `boolean`              |                 false                 |                                                                                                                                                       Optional. Indicates whether to enable xhr.withCredentials when HTTP interfaces are invoked.                                                                                                                                                       |
-| option.reportProgress | `boolean` | false | is optional. The default value is flase. It indicates whether to monitor the download progress. If it is set to true, the onProgress method can be used to monitor the download progress.|
-| option.downloadWithoutDispositionHeader |             `boolean`              |                 false                 |                                                                Optional. Content-Disposition: attachment is required in the request header by default. Otherwise, an error occurs in the non-file stream. If this parameter is set to true, the returned response is forcibly returned when the HTTP code in the response header is 2xx.                                                                |
-|                 onError                 |        `(res: any) => void`        |                  --                   |             Optional. It is used for callback when the download fails. The type is (response) => void. The parameter response indicates the error information returned by the request. The response attempts to convert the returned information to JSON. If the download fails, the textcontent of the original returned data is returned. The value is the same as that of downloadFile.              |
-|                onSuccess                |        `(res: HttpResponse<ArrayBuffer>) => void`        |                  --                   | Optional. It is used to call back the download success. The type is (response) => void. The parameter response indicates the entire HTTP information returned by the request. The loading type of the body in the response is ArrayBuffer. The body is the downloaded file stream. Therefore, the body is not converted to JSON or attempted to parse the body as text. This is different from onError. |
-| onProgress | `(res: HttpProgressEvent) => void` | -- | is optional. It is used to call back the download progress event. The type is (response) => void. The parameter response is the download progress information returned by the request. The loading type of the response is blob.|
+| Parameter                               | Type                                       | Default                               | Description                                                                                                                                                                                                                                                                                                                                                                                             | Jump to Demo |
+| --------------------------------------- | ------------------------------------------ | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| httpClient                              | `HttpClient`                               | --                                    | Required. HTTP client that provides ingestion. For details, see Remarks 1.                                                                                                                                                                                                                                                                                                                              |
+| url                                     | `string`                                   | --                                    | Required. File download address.                                                                                                                                                                                                                                                                                                                                                                        |
+| option                                  | `Object`                                   | {}                                    | Optional.                                                                                                                                                                                                                                                                                                                                                                                               |
+| option.method                           | `'POST'\| 'GET' \|'post' \| 'get'`         | 'post'                                | Optional.                                                                                                                                                                                                                                                                                                                                                                                               |
+| option.params                           | `Object`                                   | --                                    | Optional. The left value type of the parameter object is string, and the right value type of the parameter object is string. Indicates the form field. When the method type is GET/get, parameters are combined to the URL. When the method type is POST/post, parameters are combined to the payload.                                                                                                  |
+| option.enctype                          | `enctype`                                  | \'application/x-www-form-urlencoded\' | Optional. Corresponding to the enctype field in the form.                                                                                                                                                                                                                                                                                                                                               |
+| option.header                           | `Object`                                   | --                                    | Optional. This parameter is used to set the request header. The object of the key-value pair is used to set the header value. The left value is the key of the header option, and the right value is the value of the header option, for example, `{'X-lang':'en'}`.                                                                                                                                    |
+| option.responseOption                   | `response' \| 'body' \| 'json'`            | 'json'                                | Optional. This parameter is used to specify the default format returned when the format fails to be processed. If the format fails to be processed, the format will be degraded.                                                                                                                                                                                                                        |
+| option.filename                         | `string`                                   | --                                    | Optional. This parameter is not set by default. It is set to a configuration item first, obtained from filename specified in Content-Type in the response header, and then obtained from the access path.                                                                                                                                                                                               |
+| option.withCredentials                  | `boolean`                                  | false                                 | Optional. Indicates whether to enable xhr.withCredentials when HTTP interfaces are invoked.                                                                                                                                                                                                                                                                                                             |
+| option.reportProgress                   | `boolean`                                  | false                                 | is optional. The default value is flase. It indicates whether to monitor the download progress. If it is set to true, the onProgress method can be used to monitor the download progress.                                                                                                                                                                                                               |
+| option.downloadWithoutDispositionHeader | `boolean`                                  | false                                 | Optional. Content-Disposition: attachment is required in the request header by default. Otherwise, an error occurs in the non-file stream. If this parameter is set to true, the returned response is forcibly returned when the HTTP code in the response header is 2xx.                                                                                                                               |
+| onError                                 | `(res: any) => void`                       | --                                    | Optional. It is used for callback when the download fails. The type is (response) => void. The parameter response indicates the error information returned by the request. The response attempts to convert the returned information to JSON. If the download fails, the textcontent of the original returned data is returned. The value is the same as that of downloadFile.                          |
+| onSuccess                               | `(res: HttpResponse<ArrayBuffer>) => void` | --                                    | Optional. It is used to call back the download success. The type is (response) => void. The parameter response indicates the entire HTTP information returned by the request. The loading type of the body in the response is ArrayBuffer. The body is the downloaded file stream. Therefore, the body is not converted to JSON or attempted to parse the body as text. This is different from onError. |
+| onProgress                              | `(res: HttpProgressEvent) => void`         | --                                    | is optional. It is used to call back the download progress event. The type is (response) => void. The parameter response is the download progress information returned by the request. The loading type of the response is blob.                                                                                                                                                                        |
 
 How to get httpClient instance:
 
@@ -377,16 +368,16 @@ Internet Explorer 11 does not have TextDecoder. If downloadFileByHttpClient is u
 import 'fastestsmallesttextencoderdecoder';
 ```
 
-## dSimulateATag
+### dSimulateATag
 
 - Instruction description: The jumpOuterUrl method of HelperUtils is used to simulate the a tag.
 
-| Parameter |   Type   |  Default  |                                                        Description                                                         | Jump to Demo |
-| :-------: | :------: | :-------: | :------------------------------------------------------------------------------------------------------------------------: | ------------ |
-|   href    | `string` |    --     |                                                 Required. Redirection URL.                                                 |
-|  target   | [`TargetType`](#targettype) | '\_blank' | Optional. Specifies the target of the hyperlink.|
+| Parameter | Type                        | Default   | Description                                      | Jump to Demo |
+| --------- | --------------------------- | --------- | ------------------------------------------------ | ------------ |
+| href      | `string`                    | --        | Required. Redirection URL.                       |
+| target    | [`TargetType`](#targettype) | '\_blank' | Optional. Specifies the target of the hyperlink. |
 
-## dIframeEventPropagate
+### dIframeEventPropagate
 
 Usage: Add the instruction to the ancestor element of the iframe to pass the mouse event (click event by default) of the iframe to the ancestor element.
 
@@ -398,20 +389,20 @@ Usage: Add the instruction to the ancestor element of the iframe to pass the mou
 
 Instruction description: This command is used to copy a specified text to the clipboard. After the copy is successful, the popover message is displayed.
 
-| Parameter  |                       Type                       | Default |                                                                                  Description                                                                                   | Jump to Demo                                    |
-| :--------: | :----------------------------------------------: | :-----: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ----------------------------------------------- |
-|  content   |                     `string`                     |   --    |                                                                         Required. Copied text content.                                                                          | [Copy to Clipboard Directive](demo#clipboard) |
-|  position  | [`PositionType \| PositionType[]`](#positontype) |  'top'  | Optional. If the copy is successful, the pop-up direction is displayed. If the array format is input, a direction is automatically selected based on the input array sequence. | [Copy to Clipboard Directive](demo#clipboard) |
-|   sticky   |                    `boolean`                     |  false  |        Optional. The message will not disappear after being popped up until you click another position on the page. By default, the message disappears after 3 seconds.        | [Copy to Clipboard Directive](demo#clipboard) |
-| tipContent |        `string\|HTMLElement\|TemplateRef`        |   --    |                                                Optional. Display content or template index displayed when a copy is successful.                                                 | [Copy to Clipboard Directive](demo#clipboard) |
+| Parameter  | Type                                             | Default | Description                                                                                                                                                                    | Jump to Demo                                  |
+| ---------- | ------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------- |
+| content    | `string`                                         | --      | Required. Copied text content.                                                                                                                                                 | [Copy to Clipboard Directive](demo#clipboard) |
+| position   | [`PositionType \| PositionType[]`](#positontype) | 'top'   | Optional. If the copy is successful, the pop-up direction is displayed. If the array format is input, a direction is automatically selected based on the input array sequence. | [Copy to Clipboard Directive](demo#clipboard) |
+| sticky     | `boolean`                                        | false   | Optional. The message will not disappear after being popped up until you click another position on the page. By default, the message disappears after 3 seconds.               | [Copy to Clipboard Directive](demo#clipboard) |
+| tipContent | `string\|HTMLElement\|TemplateRef`               | --      | Optional. Display content or template index displayed when a copy is successful.                                                                                               | [Copy to Clipboard Directive](demo#clipboard) |
 
 ### dClipboard event
 
-|      Event      |        Type         |                                                                 Description                                                                 | Jump to Demo                                    |
-| :-------------: | :-----------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | ----------------------------------------------- |
+| Event           | Type                                      | Description                                                                                                                                 | Jump to Demo                                  |
+| --------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
 | copyResultEvent | [`EventEmitter<CopyResult>`](#copyresult) | Event sent after copying. If the copy operation is not supported, isSupported is false, which can be used to prompt users to copy the data. | [Copy to Clipboard Directive](demo#clipboard) |
 
-# Interface & Type Definition
+## Interface & Type Definition
 
 ### DownloadOptionsType
 
@@ -456,7 +447,7 @@ export type TargetType = '_blank' | '_self' | '_parent' | '_top' | ;
 ### EncType
 
 ```ts
-export type EncType = 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text-plain'
+export type EncType = 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text-plain';
 ```
 
 ### CopyResult

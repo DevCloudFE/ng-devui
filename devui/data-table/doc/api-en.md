@@ -43,6 +43,7 @@ On the page:
 | tableWidthConfig | [`TableWidthConfig[]`](#tablewidthconfig) | [] | Optional. It is used to configure the column width of the table.This parameter is mandatory when subtables such as tree tables are included. | [Basic usage](demo#basic-usage) |
 | checkable | `boolean` | -- | Optional. Whether the Datatable provides the function of selecting rows. | [Table interaction](demo#table-interaction) |
 | checkOptions | [`TableCheckOptions[]`](#tablecheckoptions) | -- | Optional. drop-down list box in the table header and operations | [Customized table selection](demo#table-check-options) |
+| checkOptionsIndex | `number` | 1050 | (Optional) z-index in the drop-down list box selected in the table header | -- |
 | headerCheckDisabled | `boolean` | -- | Optional. Indicates whether the header checkbox is disabled. |
 | headerCheckVisible | `boolean` | true | Optional. Indicates whether the checkbox in the header is visible. |
 | showExpandToggle | `boolean` | -- |: Indicates whether to display extended rows. If the value is true, an operation button is generated before the row where extended rows are configured. | [Extended row](demo#expand-row) |
@@ -116,6 +117,7 @@ On the page:
 | :-----------: | :-------------------: | :----- | :------------------------------------------------------------------: | :------------------------------------------------------------------- |
 | checkable | `boolean` | -- | Optional. The checkbox is displayed in the first column of the table header for selecting all data. The checkbox can be associated with the selection status of the row data. | [Table interaction](demo#table-interaction) |
 | checkOptions | `TableCheckOptions[]` | -- | Optional. Drop-down list box in the table header and operations | [Customized table selection](demo#table-check-options) |
+| checkOptionsIndex | `number` | 1050 | (Optional) z-index in the drop-down list box selected in the table header | -- |
 | checkDisabled | `boolean` | -- | Optional. Indicates whether the header checkbox is disabled. |
 
 ## dHeadCell Parameter
@@ -607,6 +609,8 @@ Use @ViewChild to invoke the search function
 
 ``` javascript
 @ViewChild('VirtualTableTree') VirtualTableTree: VirtualScrollTreeTableComponent;
+
+searchAttr: 'all' | string[];
 
 searchSelectChange() {
   this.BigTableTree.searchAttr = this.searchAttr;

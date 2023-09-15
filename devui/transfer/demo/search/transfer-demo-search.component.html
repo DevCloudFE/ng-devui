@@ -4,6 +4,7 @@
     [sourceOption]="sourceOption1"
     [isSearch]="true"
     [showOptionTitle]="true"
+    [noResultTemplate]="noDataTpl"
     [titles]="{ source: 'Source', target: 'Target' }"
     (afterTransfer)="afterTransfer($event)"
   >
@@ -23,3 +24,14 @@ Disabled: <d-toggle (change)="onChange($event)"></d-toggle>
   >
   </d-transfer>
 </div>
+
+<ng-template #noDataTpl let-position="position" let-sourceKeyword="sourceKeyword" let-targetKeyword="targetKeyword">
+  <div class="no-data-tip">
+    <i class="icon-advisory"></i>
+    <span>
+      {{
+        (position === 'source' && sourceKeyword) || (position === 'target' && targetKeyword) ? 'No records found.' : 'No data available.'
+      }}
+    </span>
+  </div>
+</ng-template>

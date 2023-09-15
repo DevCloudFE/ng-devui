@@ -131,6 +131,8 @@ export interface SearchConfig {
   fieldDescription?: (label: string) => string;
   category?: boolean;
   categoryDescription?: string;
+  noCategoriesAvailableTip?: boolean;
+  searchInputMaxLength?: number;
 }
 
 export interface TextConfig {

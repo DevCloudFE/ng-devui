@@ -75,6 +75,14 @@
   margin-right: $devui-icon-space;
 }
 
+::ng-deep .devui-icon-container:not(.disabled) span[iconPrefix] {
+  color: $devui-text;
+}
+
+::ng-deep .devui-icon-container:not(.disabled) span[iconSuffix] {
+  color: $devui-text;
+}
+
 ::ng-deep .devui-icon-container [iconSuffix] {
   vertical-align: middle;
   margin-left: $devui-icon-space;
@@ -102,7 +110,7 @@
   cursor: pointer;
 
   a {
-    color: $devui-aide-text;
+    color: $devui-text;
   }
 
   &:hover {

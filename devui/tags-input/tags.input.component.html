@@ -30,7 +30,7 @@
       (removeChange)="removeTag($event)"
     ></d-toggle-menu-label>
     <d-toggle-menu-search
-      *ngIf="!disabled"
+      *ngIf="!disabled || selectedItems?.length === 0"
       [inputValue]="newTag"
       [searchPlaceholder]="getPlaceHolder"
       [searchFn]="searchFn"
@@ -61,7 +61,11 @@
           [customTemplate]="itemTemplate"
           [filterKey]="displayProperty"
           (chooseItem)="choose($event)"
-        ></d-toggle-menu-list-item>
+        >
+          <span itemSuffix *ngIf="index === 0 && item.option.isDevuiTagsInputCreated" class="devui-tags-create-item">
+            {{ i18nTagsInputText?.create }}
+          </span>
+        </d-toggle-menu-list-item>
       </ng-template>
     </d-toggle-menu-list>
   </d-toggle-menu-container>

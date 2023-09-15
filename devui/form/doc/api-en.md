@@ -47,46 +47,46 @@ In the page
 
 ### dForm Parameter
 
-|  Parameter   |                 Type                  |   Default    |                                                                      Description                                                                       | Jump to Demo                                               | Global Config |
-| :----------: | :-----------------------------------: | :----------: | :----------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------- | ------------- |
-|    layout    | `'horizontal'\|'vertical'\|'columns'` | 'horizontal' |                                                       Optional. Sets the form arrangement mode.                                                        | [Basic usage](demo#basic-usage)                            |
-|  labelSize   |         `'sm' \| '' \| 'lg'`          |      ''      | Optional. Sets the width of the label. If this parameter is not set, the default value is 100 px. 'sm' corresponds to 80 px, 'lg' corresponds to 150px | [Label horizontal arrangement](demo#demo-label-horizontal) |
-|  labelAlign  |      `'start'\|'center'\|'end'`       |   'start'    |                                 Optional. This parameter specifies the label alignment mode in horizontal layout mode.                                 | [label horizontal arrangement](demo#demo-label-horizontal) |
-| dHasFeedback |               `boolean`               |    false     |                                       Optional. Sets whether to display the feedback icon for the current form.                                        |                                                            |
+| Parameter    | Type                                  | Default      | Description                                                                                                                                            | Jump to Demo                                               | Global Config |
+| ------------ | ------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- | ------------- |
+| layout       | `'horizontal'\|'vertical'\|'columns'` | 'horizontal' | Optional. Sets the form arrangement mode.                                                                                                              | [Basic usage](demo#basic-usage)                            |
+| labelSize    | `'sm' \| '' \| 'lg'`                  | ''           | Optional. Sets the width of the label. If this parameter is not set, the default value is 100 px. 'sm' corresponds to 80 px, 'lg' corresponds to 150px | [Label horizontal arrangement](demo#demo-label-horizontal) |
+| labelAlign   | `'start'\|'center'\|'end'`            | 'start'      | Optional. This parameter specifies the label alignment mode in horizontal layout mode.                                                                 | [label horizontal arrangement](demo#demo-label-horizontal) |
+| dHasFeedback | `boolean`                             | false        | Optional. Sets whether to display the feedback icon for the current form.                                                                              |                                                            |
 
 ### dForm Event
 
-| Parameter |                                                               Type                                                               | Description                                                                                              | Jump to Demo                                                                   |
-| :-------: | :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-|  dSubmit  | `EventEmitter<{valid: boolean, directive: `[`DFormGroupRuleDirective`](#dformgroupruledirective) `\| AbstractControlDirective}>` | Optional. This event is responded to when the dFormSubmit binding element is used to trigger submission. | [Template-driven form verification (recommended)](demo#demo-validate-template) |
+| Parameter | Type                                                                                                                             | Description                                                                                              | Jump to Demo                                                                   |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| dSubmit   | `EventEmitter<{valid: boolean, directive: `[`DFormGroupRuleDirective`](#dformgroupruledirective) `\| AbstractControlDirective}>` | Optional. This event is responded to when the dFormSubmit binding element is used to trigger submission. | [Template-driven form verification (recommended)](demo#demo-validate-template) |
 
 ## d-form-item
 
 ### d-form-item parameter
 
-|  Parameter   |   Type    | Default | Description                                                                       | Jump to Demo                                            |
-| :----------: | :-------: | :-----: | :-------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| dHasFeedback | `boolean` |  false  | Optional. Sets whether to display the feedback icon for the current form control. | [Reactive form validation](demo#demo-validate-reactive) |
+| Parameter    | Type      | Default | Description                                                                       | Jump to Demo                                            |
+| ------------ | --------- | ------- | --------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| dHasFeedback | `boolean` | false   | Optional. Sets whether to display the feedback icon for the current form control. | [Reactive form validation](demo#demo-validate-reactive) |
 
 ## d-form-label
 
 ### d-form-label parameter
 
-| Parameter |   Type    | Default | Description                                                | Jump to Demo                    |
-| :-------: | :-------: | :-----: | :--------------------------------------------------------- | ------------------------------- |
-| required  | `boolean` |  false  | Optional. Indicating whether the form option is mandatory. | [Basic usage](demo#basic-usage) |
-|  hasHelp  | `boolean` |  false  | Optional. Indicating whether a form item requires help.    | [Basic usage](demo#basic-usage) |
-| helpTips  | `string`  |   ''    | Optional. This parameter is used together with `hasHelp`.  | [Basic usage](demo#basic-usage) |
+| Parameter | Type      | Default | Description                                                | Jump to Demo                    |
+| --------- | --------- | ------- | ---------------------------------------------------------- | ------------------------------- |
+| required  | `boolean` | false   | Optional. Indicating whether the form option is mandatory. | [Basic usage](demo#basic-usage) |
+| hasHelp   | `boolean` | false   | Optional. Indicating whether a form item requires help.    | [Basic usage](demo#basic-usage) |
+| helpTips  | `string`  | ''      | Optional. This parameter is used together with `hasHelp`.  | [Basic usage](demo#basic-usage) |
 
 ## d-form-control
 
 ### d-form-control parameters
 
-|   Parameter    |                    Type                     | Default | Description                                                                                     | Jump to Demo                                               |
-| :------------: | :-----------------------------------------: | :-----: | :---------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-|   extraInfo    |        `string \| TemplateRef<any>`         |   --    | Optional. attachment information, which is used to supplement the description of table options. | [Label horizontal arrangement](demo#demo-label-horizontal) |
-| feedbackStatus | [`DFormControlStatus`](#dformcontrolstatus) |   --    | Optional. Manually specify the current control status.                                          | [Specify form status](demo#demo-custom-status)             |
-| suffixTemplate |             `TemplateRef<any>`              |   --    | Optional. Pass icon template to be the suffix of Input.                                         |
+| Parameter      | Type                                        | Default | Description                                                                                     | Jump to Demo                                               |
+| -------------- | ------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| extraInfo      | `string \| TemplateRef<any>`                | --      | Optional. attachment information, which is used to supplement the description of table options. | [Label horizontal arrangement](demo#demo-label-horizontal) |
+| feedbackStatus | [`DFormControlStatus`](#dformcontrolstatus) | --      | Optional. Manually specify the current control status.                                          | [Specify form status](demo#demo-custom-status)             |
+| suffixTemplate | `TemplateRef<any>`                          | --      | Optional. Pass icon template to be the suffix of Input.                                         |
 
 ## dFormSubmit
 
@@ -95,10 +95,10 @@ In the page
 
 ### dFormSubmit Parameter
 
-|    Parameter    |   Type   | Default |                                                                 Description                                                                  |                      Jump to Demo                       |
-| :-------------: | :------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------: |
-|   dFormSubmit   | `string` | 'click' |                                          Optional. Configure the event name used to trigger submit.                                          | [Reactive form validation](demo#demo-validate-reactive) |
-| dFormSubmitData |  `any`   |   --    | Optional. Configure the data that needs to be transferred and the dSubmit callback event, which can be used to distinguish multiple buttons. | [Reactive form validation](demo#demo-validate-reactive) |
+| Parameter       | Type     | Default | Description                                                                                                                                  | Jump to Demo                                            |
+| --------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| dFormSubmit     | `string` | 'click' | Optional. Configure the event name used to trigger submit.                                                                                   | [Reactive form validation](demo#demo-validate-reactive) |
+| dFormSubmitData | `any`    | --      | Optional. Configure the data that needs to be transferred and the dSubmit callback event, which can be used to distinguish multiple buttons. | [Reactive form validation](demo#demo-validate-reactive) |
 
 ## dFormReset
 
@@ -107,8 +107,8 @@ In the page
 
 ### dFormReset Parameter
 
-| Parameter  |   Type   | Default |                        Description                        | Jump to Demo |
-| :--------: | :------: | :-----: | :-------------------------------------------------------: | :----------: |
+| Parameter  | Type     | Default | Description                                               | Jump to Demo |
+| ---------- | -------- | ------- | --------------------------------------------------------- | ------------ |
 | dFormReset | `string` | 'click' | Optional. Configure the event name for triggering submit. |              |
 
 ## dValidateRules Form Validation
@@ -133,20 +133,20 @@ import { Forms } from '@angular/forms';
 
 ### dValidateRules Parameter
 
-|     Parameter      |                Type                 | Default |                Description                 |                                  Jump to Demo                                  |
-| :----------------: | :---------------------------------: | :-----: | :----------------------------------------: | :----------------------------------------------------------------------------: |
-|   dValidateRules   | [`DValidateRules`](#dvalidaterules) |   --    | Required. Configure the verification rule. | [Template-driven form verification (recommended)](demo#demo-validate-template) |
-| dValidatePopConfig |     [`DPopConfig`](#dpopconfig)     |   --    |       Optional. popover hint config        | [Template-driven form verification (recommended)](demo#demo-validate-template) |
+| Parameter          | Type                                | Default | Description                                | Jump to Demo                                                                   |
+| ------------------ | ----------------------------------- | ------- | ------------------------------------------ | ------------------------------------------------------------------------------ |
+| dValidateRules     | [`DValidateRules`](#dvalidaterules) | --      | Required. Configure the verification rule. | [Template-driven form verification (recommended)](demo#demo-validate-template) |
+| dValidatePopConfig | [`DPopConfig`](#dpopconfig)         | --      | Optional. popover hint config              | [Template-driven form verification (recommended)](demo#demo-validate-template) |
 
 ### dValidateSyncKey Parameter
 
 Collaborative form validation.
 
-|    Parameter     |   Type   | Default |                                                                                                      Description                                                                                                      |                        Jump to Demo                        |
-| :--------------: | :------: | :-----: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------: |
-| dValidateSyncKey | `string` |   --    | Required. This parameter is mandatory. It specifies the unique key. When the value of one element in the form of the same key changes, verification is triggered. responsive and template-driven forms are supported. | [Form collaboration verification](demo#demo-validate-sync) |
+| Parameter        | Type     | Default | Description                                                                                                                                                                                                           | Jump to Demo                                               |
+| ---------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| dValidateSyncKey | `string` | --      | Required. This parameter is mandatory. It specifies the unique key. When the value of one element in the form of the same key changes, verification is triggered. responsive and template-driven forms are supported. | [Form collaboration verification](demo#demo-validate-sync) |
 
-# dActiveFormControl
+## dActiveFormControl
 
 Add the direct to the customized container of the service to obtain the same click interaction effect as other component forms (such as text-input, select, and cascader).
 
@@ -169,20 +169,21 @@ const rules: DValidateRules = {
 };
 
 // You can custom your validator like following
-// public static contains(contain: string | number): ValidatorFn {
-//   return (control: AbstractControl): ValidationErrors | null => {
-//     if (DValidators.isEmptyInput(control.value) || DValidators.isEmptyInput(contain)) {
-//       return null;
-//     }
-//     return control.value.indexOf(contain) === -1 ? { contains: { requiredContains: contain,actualValue: control.value } } : null;
-//   };
-// }
-// public static alphabet(control: AbstractControl): ValidationErrors | null {
-//   if (DValidators.isEmptyInput(control.value)) {
-//     return null;
-//   }
-//   return DValidators.AlphabetPattern.test(control.value) ? null : { alphabet: true };
-// }
+public static contains(contain: string | number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (DValidators.isEmptyInput(control.value) || DValidators.isEmptyInput(contain)) {
+      return null;
+    }
+    return control.value.indexOf(contain) === -1 ? { contains: { requiredContains: contain,actualValue: control.value } } : null;
+  };
+}
+
+public static alphabet(control: AbstractControl): ValidationErrors | null {
+  if (DValidators.isEmptyInput(control.value)) {
+    return null;
+  }
+  return DValidators.AlphabetPattern.test(control.value) ? null : { alphabet: true };
+}
 ```
 
 ```html
@@ -192,22 +193,22 @@ const rules: DValidateRules = {
 
 ### Validators
 
-|  Validator  |                      Description                       |
-| :---------: | :----------------------------------------------------: |
-|  contains   |               Check if it contains sth.                |
-| notContains |             Check if it not contains sth.              |
-|    equal    |              Check if it is equal to sth.              |
-|  notEqual   |            Check if it is not equal to sth.            |
-|    port     |        Check if a port number is in [0, 65535]         |
-|    date     |                Check if a date is valid                |
-|     url     |                Check if a url is valid                 |
-|   integer   |                     Check integer                      |
-|   digits    |                      Check digit                       |
-|   number    | Check if it is a number, including scientific notation |
-|  alphabet   |               Check if it is an alphabet               |
-|   script    |              Check if it is a script tag               |
-|    ipv4     |          Check if it is a valid ipv4 address           |
-|    ipv6     |          Check if it is a valid ipv6 address           |
+| Validator   | Description                                            |
+| ----------- | ------------------------------------------------------ |
+| contains    | Check if it contains sth.                              |
+| notContains | Check if it not contains sth.                          |
+| equal       | Check if it is equal to sth.                           |
+| notEqual    | Check if it is not equal to sth.                       |
+| port        | Check if a port number is in [0, 65535]                |
+| date        | Check if a date is valid                               |
+| url         | Check if a url is valid                                |
+| integer     | Check integer                                          |
+| digits      | Check digit                                            |
+| number      | Check if it is a number, including scientific notation |
+| alphabet    | Check if it is an alphabet                             |
+| script      | Check if it is a script tag                            |
+| ipv4        | Check if it is a valid ipv4 address                    |
+| ipv6        | Check if it is a valid ipv6 address                    |
 
 ## Interface & Type Definition
 
@@ -352,8 +353,9 @@ export const dDefaultValidators = {
 
 ```TS
 export type DPopConfig = {
-  popMaxWidth?: number,
+  popMaxWidth?: number;
   scrollElement?: Element;
-  zIndex?: number,
+  zIndex?: number;
+  showAnimation?: boolean;
 }
 ```

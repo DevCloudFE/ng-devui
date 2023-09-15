@@ -153,6 +153,7 @@
           [color]="checkboxInput?.color"
           [cssClass]="'devui-tree-node__checkbox'"
           [disabled]="treeNode.data.disabled"
+          [showGlowStyle]="!virtualScroll"
         >
         </d-checkbox>
         <ng-container *ngIf="iconTemplate && (!iconTemplatePosition || iconTemplatePosition === 'after-checkbox')">
@@ -401,6 +402,7 @@
           [color]="checkboxInput?.color"
           [cssClass]="'devui-tree-node__checkbox'"
           [disabled]="treeNode.data.disabled"
+          [showGlowStyle]="!virtualScroll"
         >
         </d-checkbox>
         <ng-container *ngIf="iconTemplate && (!iconTemplatePosition || iconTemplatePosition === 'after-checkbox')">

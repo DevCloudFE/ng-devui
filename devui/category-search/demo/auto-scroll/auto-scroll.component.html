@@ -8,17 +8,28 @@
   [toggleScrollToTail]="true"
   [categoryInGroup]="true"
   [groupOrderConfig]="groupOrderConfig"
+  [customGroupNameTemplate]="groupTpl"
+  [customCategoryNameTemplate]="categoryTpl"
   (searchEvent)="searchEvent($event)"
   (createFilterEvent)="createFilter($event)"
   (searchKeyChange)="searchKeyChange($event)"
   (selectedTagsChange)="selectedTagsChange($event)"
   (clearAllEvent)="clearAllEvent($event)"
 ></d-category-search>
-<div *ngIf="finalSearchItems && finalSearchItems.length" style="padding: 20px 0">
+<section *ngIf="finalSearchItems && finalSearchItems.length">
   <p>The categories of the current search:</p>
-  >
   <div *ngFor="let item of finalSearchItems">
     <div>{{ item?.label }}: {{ (item?.value)[item.filterKey] || item?.value?.label }}</div>
   </div>
-</div>
-<p *ngIf="finalSearchKey && finalSearchKey.length">The current search keyword: {{ finalSearchKey }}</p>
+</section>
+<section *ngIf="finalSearchKey && finalSearchKey.length">The current search keyword: {{ finalSearchKey }}</section>
+
+<ng-template #groupTpl let-item="tag">
+  <i class="icon icon-folder"></i>
+  <strong>{{ item?.groupName }}</strong>
+</ng-template>
+
+<ng-template #categoryTpl let-item="tag">
+  <i class="icon icon-base-info"></i>
+  <span title="{{ item?.label }}">{{ item?.label }}</span>
+</ng-template>

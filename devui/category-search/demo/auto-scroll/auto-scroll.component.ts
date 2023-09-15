@@ -6,7 +6,18 @@ import { demoData } from '../demo-data';
 @Component({
   selector: 'd-auto-scroll',
   templateUrl: './auto-scroll.component.html',
-})
+  styles: [
+  `
+      section {
+        padding-top: 16px;
+      }
+
+      i.icon {
+        margin-right: 8px;
+      }
+    `,
+  ],
+  })
 export class AutoScrollComponent {
   category = cloneDeep(demoData.slice(0, -2));
   groupOrderConfig = ['Basic', 'Personnel-related', 'Time-related', 'User-defined'];

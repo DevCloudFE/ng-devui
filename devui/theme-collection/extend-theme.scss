@@ -53,6 +53,21 @@ body[ui-theme='galaxy-theme'] {
   d-button .devui-btn-primary:disabled {
     --devui-light-text: #838383;
   }
+
+  .devui-table .devui-month-table .devui-table-date.devui-table-date-selected span,
+  .devui-month-panel .devui-month-list .devui-month-item.devui-table-month-selected span,
+  .year-list-panel .devui-year-list .devui-year-title.devui-active-year,
+  .devui-table .devui-month-table .devui-table-date.devui-table-date-marked span::after {
+    background-color: #ced1db !important;
+  }
+
+  .devui-table .devui-month-table .devui-table-date.devui-table-date-marked.devui-table-date-selected span::after {
+    background-color: #4660b8 !important;
+  }
+
+  .devui-checkbox.disabled .devui-checkbox-material {
+    --devui-icon-fill-active-disabled: #2a3c85;
+  }
 }
 
 body[ui-theme='infinity-theme'],

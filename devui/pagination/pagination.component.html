@@ -150,6 +150,7 @@
       type="text"
       autocomplete="off"
       class="devui-input {{ size ? 'devui-input-' + size : '' }}"
+      [class.error]="jumpPage < 1 || (jumpPage > totalPage && pageIndex === totalPage)"
       name="pageIndex"
       [(ngModel)]="jumpPage"
       (keyup.enter)="jump()"
