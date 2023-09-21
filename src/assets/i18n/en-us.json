@@ -158,6 +158,38 @@
         "change-values": "Change key value"
       }
     },
+    "menu": {
+      "name": "Menu",
+      "type": "Navigation",
+      "path": "menu",
+      "description": "Menu for your websites.",
+      "tmw": "Menu is used when you need to set a menu list navigation.",
+      "basicDemo": {
+        "title": "Basic Usage",
+        "description": "Transfer a menu to listen to the open/close event (menuToggle) or click event (itemClick) of an expandable menu that contains sub-items. By default, the open attribute is used for expandable menus, the active attribute is used for clicking menus, and the disabled attribute is used for disabled items. Set restrictOneOpen to specify whether to display only one level-1 menu.",
+        "Only one level-1 menu can be expanded.": "Only one level-1 menu can be expanded.",
+        "Embedded menu (no shadow)": "Embedded menu (no shadow)",
+        "Content 1": "Content 1",
+        "Subcontent 1": "Subcontent 1",
+        "Subcontent 2": "Subcontent 2",
+        "Subcontent 3": "Subcontent 3",
+        "Content 2 (overlong, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long": "Content 2 (overlong, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long",
+        "Subcontent 1 (Extremely long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long,": "Subcontent 1 (Extremely long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long,",
+        "Content 3 (expanded by default)": "Content 3 (expanded by default)",
+        "Subcontent 1 (disabled)": "Subcontent 1 (disabled)",
+        "Subcontent 2 (activated by default)": "Subcontent 2 (activated by default)",
+        "Content 4 (no sub-item)": "Content 4 (no sub-item)",
+        "Content 5 (Disabled)": "Content 5 (Disabled)",
+        "Content 6 (dynamic loading)": "Content 6 (dynamic loading)"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "Basic Usage",
+        "use-built-in-routing-and-link-types": "Built-in route and link type",
+        "using-templates": "Using a Template",
+        "compound-level-and-auto-expand": "Composite Hierarchy and Auto Expand",
+        "change-values": "Change key value"
+      }
+    },
     "input-group": {
       "name": "input-group",
       "type": "Data entry",
@@ -2583,9 +2615,9 @@
         "title": "Standard Dialog Box",
         "description": "Standard dialog boxes that can be dragged using the dialogService."
       },
-      "maximizeDemo":{
-        "title":"Maximize Dialog Box",
-        "description":"You can use the showMaximizeBtn api to set visibility of maximize button."
+      "maximizeDemo": {
+        "title": "Maximize Dialog Box",
+        "description": "You can use the showMaximizeBtn api to set visibility of maximize button."
       },
       "customizeDemo": {
         "title": "Custom Dialog Box",
@@ -2625,7 +2657,7 @@
       },
       "anchorLinkValues": {
         "standard-dialog": "Standard Dialog Box",
-        "maximize-dialog":"Maximize Dialog Box",
+        "maximize-dialog": "Maximize Dialog Box",
         "custom-dialog": "Custom Dialog Box",
         "intercept-dialog-closed": "Blocking dialog box closed",
         "message-hint": "Information",

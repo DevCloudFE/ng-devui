@@ -1,0 +1,23 @@
+<div class="devui-demo-container" style="padding-left: 4px" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div [dAnchor]="'basic-usage'" class="devui-demo-example">
+    <div class="devui-demo-title">{{ 'components.accordion.basicDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.accordion.basicDemo.description' | translate }}
+    </div>
+    <d-codebox id="accordion-demo-basic" [sourceData]="DemoBasic">
+      <d-basic demo></d-basic>
+    </d-codebox>
+  </div>
+
+  <!--   <div [dAnchor]="'use-built-in-routing-and-link-types'" class="devui-demo-example">
+    <div class="devui-demo-title">{{ 'components.menu.linkDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.menu.linkDemo.description' | translate }}
+    </div>
+    <d-codebox id="menu-demo-link" [sourceData]="Demolink">
+      <d-link demo></d-link>
+    </d-codebox>
+  </div>
+ -->
+</div>
