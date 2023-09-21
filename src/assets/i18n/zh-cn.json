@@ -158,6 +158,35 @@
         "change-values": "改变键值"
       }
     },
+    "menu": {
+      "name": "Menu 菜单",
+      "type": "导航",
+      "path": "menu",
+      "description": "为页面菜单的组件。",
+      "tmw": "需要通过分组组织菜单的时候使用。",
+      "basicDemo": {
+        "title": "基本用法",
+        "description": "传入菜单，监听含子项的可展开菜单的开合事件(menuToggle)或可点击菜单的点击事件(itemClick)。可展开菜单默认展开使用属性open，可点击菜单默认激活使用属性active，禁用项使用disabled。通过restrictOneOpen设置是否限制只能展开一个一级菜单。",
+        "Only one level-1 menu can be expanded.": "限制只能展开一个一级菜单",
+        "Content 1": "内容一",
+        "Subcontent 1": "子内容1",
+        "Subcontent 2": "子内容2",
+        "Subcontent 3": "子内容3",
+        "Content 2 (overlong, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long": "内容二（超长长长长长长长长长长长长长长内容测试）",
+        "Subcontent 1 (Extremely long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long,": "子内容1（超长长长长长长长长长长长长长长内容测试",
+        "Content 3 (expanded by default)": "内容三（默认展开）",
+        "Subcontent 1 (disabled)": "子内容1(禁用)",
+        "Subcontent 2 (activated by default)": "子内容2(默认激活)",
+        "Content 4 (no sub-item)": "内容四（没有子项）",
+        "Content 5 (Disabled)": "内容五（禁用）",
+        "Content 6 (dynamic loading)": "内容六（动态加载）"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "基本用法",
+        "responsive-usage": "自适应拼接用法",
+        "embed-usage": "嵌入用法"
+      }
+    },
     "input-group": {
       "name": "输入框组合",
       "type": "数据录入",
@@ -2819,9 +2848,9 @@
         "title": "标准对话框",
         "description": "使用dialogService可拖拽的标准对话框。"
       },
-      "maximizeDemo":{
-        "title":"最大化对话框",
-        "description":"使用showMaximizeBtn可设置最大化/退出最大化按钮的显示/隐藏"
+      "maximizeDemo": {
+        "title": "最大化对话框",
+        "description": "使用showMaximizeBtn可设置最大化/退出最大化按钮的显示/隐藏"
       },
       "customizeDemo": {
         "title": "自定义对话框",
@@ -2861,7 +2890,7 @@
       },
       "anchorLinkValues": {
         "standard-dialog": "标准对话框",
-        "maximize-dialog":"最大化对话框",
+        "maximize-dialog": "最大化对话框",
         "custom-dialog": "自定义对话框",
         "intercept-dialog-closed": "拦截对话框关闭",
         "message-hint": "信息提示",
