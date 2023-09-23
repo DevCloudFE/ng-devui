@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MenuItemType } from 'ng-devui/menu';
 @Component({
   selector: 'd-basic',
   templateUrl: './basic.component.html',
   styleUrls: ['./basic.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   })
 export class BasicComponent {
-  menu: MenuItemType[] = [
+  menus: MenuItemType[] = [
     {
       key: 'c-1',
       name: 'Content 1 (as a leaf menu)',
@@ -35,16 +36,16 @@ export class BasicComponent {
         {
           key: 'c-3-1',
           name: 'Content 3 Child 1',
-          /*  children: [
-             {
-               key: 'c-3-1-1',
-               name: 'Content 3 grandson 1',
-             },
-             {
-               key: 'c-3-1-1',
-               name: 'Content 3 grandson 2',
-             },
-           ] */
+          children: [
+            {
+              key: 'c-3-1-1',
+              name: 'Content 3 grandson 1',
+            },
+            {
+              key: 'c-3-1-2',
+              name: 'Content 3 grandson 2',
+            },
+          ]
         },
         {
           key: 'c-3-2',

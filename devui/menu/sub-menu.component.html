@@ -1,5 +1,5 @@
-<div class="devui-sub-menu">
-  <div [class]="disabledCls('devui-sub-menu-item')" d-menu-item (itemClick)="titleClick()">
+<ng-container>
+  <div [class]="disabledCls('devui-sub-menu-item')" [class.active]="childActive" d-menu-item (itemClick)="titleClick()">
     <div class="devui-sub-menu-item-title">
       <d-icon class="devui-menu-item-icon" [disabled]="disabled" [icon]="icon" />
       <span class="devui-menu-item-name over-flow-ellipsis">{{ title }}</span>
@@ -9,7 +9,7 @@
       <d-icon class="devui-menu-item-icon" [disabled]="disabled" icon="icon-select-arrow" />
     </div>
   </div>
-  <div class="devui-sub-menu-children" [style.--level]="submenuService.level" *ngIf="_open">
+  <div class="devui-sub-menu-children" [style.--level]="submenuService.level" @collapseForDomDestroy *ngIf="_open">
     <ng-content />
   </div>
-</div>
+</ng-container>
