@@ -1,7 +1,9 @@
 <div class="demo-menu">
-  <d-menu [options]="menu">
-    <ng-container *ngFor="let m of menu; trackBy: trackByMenu">
-      <d-sub-menu
+  <!-- 
+    1. 基础
+     <div d-menu>
+    <ng-container *ngFor="let m of menus; trackBy: trackByMenu">
+      <div d-sub-menu
         [title]="m.name"
         [open]="openKeys.includes(m.key)"
         (openChange)="openChange($event, m.key)"
@@ -16,7 +18,7 @@
           <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
           <span class="devui-menu-item-name">{{ item.name }}</span>
         </div>
-        <d-sub-menu [title]="'abc'">
+        <div d-sub-menu [title]="'abc'">
           <div d-menu-item>
             <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
             <span class="devui-menu-item-name">ddd</span>
@@ -25,8 +27,8 @@
             <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
             <span class="devui-menu-item-name">ddd</span>
           </div>
-        </d-sub-menu>
-      </d-sub-menu>
+        </div>
+      </div>
       <ng-template #leafTpl>
         <div d-menu-item (itemClick)="itemClick(m.key)" [active]="m.key === activeKey">
           <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
@@ -34,5 +36,8 @@
         </div>
       </ng-template>
     </ng-container>
-  </d-menu>
+  </div>
+   -->
+
+  <loop-menu [menus]="menus" />
 </div>

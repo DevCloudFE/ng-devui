@@ -17,13 +17,16 @@ import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { MenuItemType } from './type';
 
 @Component({
-  selector: 'd-menu',
-  templateUrl: './menu.component.html',
+  selector: '[d-menu]',
+  template: '<ng-content />',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./menu.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  host: {
+  '[class.devui-menu]': 'true',
+  }
   })
 export class MenuComponent implements OnInit {
-  @Input() options: MenuItemType[] = [];
+  // @Input() options: MenuItemType[] = [];
   ngOnInit() { }
 }

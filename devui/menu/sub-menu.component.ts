@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   HostBinding,
@@ -8,17 +9,22 @@ import {
   Output,
   inject,
 } from '@angular/core';
+import { expandCollapse, expandCollapseForDomDestroy } from 'ng-devui/utils';
 import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { SubmenuService } from './submenu.service';
 
 @Component({
-  selector: 'd-sub-menu',
+  selector: '[d-sub-menu]',
   templateUrl: './sub-menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SubmenuService],
+  animations: [expandCollapseForDomDestroy],
+  host: {
+  '[class.devui-sub-menu]': 'true'
+  }
   })
 export class SubMenuComponent implements OnInit {
-  _open = false;
+  @HostBinding('class.open') _open = false;
 
   @Input()
   set open(value: boolean) {
@@ -35,6 +41,13 @@ export class SubMenuComponent implements OnInit {
   @Output() openChange = new EventEmitter<boolean>();
 
   protected submenuService = inject(SubmenuService);
+  protected parentSubmenu = inject(SubMenuComponent, {
+    skipSelf: true,
+    optional: true
+  });
+  childActive = false;
+
+  protected cdr = inject(ChangeDetectorRef);
 
   ngOnInit() {
     // console.log('_open', this._open);
@@ -52,5 +65,13 @@ export class SubMenuComponent implements OnInit {
 
   disabledCls(base: string) {
     return `${base} ${this.disabled ? 'disabled' : ''}`;
+  }
+
+  setChildActive(active: boolean) {
+    this.childActive = active;
+    if (this.parentSubmenu) {
+      this.parentSubmenu.setChildActive(active);
+    }
+    this.cdr.markForCheck();
   }
 }
