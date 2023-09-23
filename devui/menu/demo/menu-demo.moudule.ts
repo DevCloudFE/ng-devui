@@ -10,12 +10,14 @@ import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
 import { MenuDemoComponent } from './menu-demo.component';
 import { BasicComponent } from './basic/basic.component';
 import { MenuModule } from 'ng-devui/menu';
+import { IconModule } from 'ng-devui/icon';
 
 @NgModule({
   imports: [
   DDemoNavModule,
   CommonModule,
   TranslateModule,
+  IconModule,
   ToggleModule,
   DevUICodeboxModule,
   DevUIApiModule,
@@ -23,9 +25,9 @@ import { MenuModule } from 'ng-devui/menu';
   RouterModule.forChild([
     { path: '', redirectTo: 'demo', pathMatch: 'full' },
 /*  {
-         path: 'design',
-         component: AccordionDesignComponent,
-       }, */
+               path: 'design',
+               component: AccordionDesignComponent,
+             }, */
     { path: 'demo', component: MenuDemoComponent },
     {
     path: 'api',
