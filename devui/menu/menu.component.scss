@@ -4,5 +4,108 @@
 @import '../style/core/font';
 
 .devui-menu {
-  color: '#f60';
+  --padding-size: 16px;
+  --icon-gap: 10px;
+  $padding-size: var(--padding-size);
+  $icon-gap: var(--icon-gap);
+  $transition-attrs: $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
+
+  max-width: 256px;
+  border: 1px solid $devui-dividing-line;
+
+  .devui-menu-item {
+    display: flex;
+    align-items: center;
+    column-gap: $icon-gap;
+    height: 40px;
+    padding-inline: $padding-size 12px;
+    color: $devui-text-weak;
+    cursor: pointer;
+    transition: background-color $transition-attrs;
+
+    &:not(.disabled, .active):hover {
+      background-color: $devui-list-item-hover-bg;
+      color: $devui-list-item-hover-text;
+    }
+
+    &:not(.disabled):active {
+      background-color: $devui-list-item-selected-bg;
+    }
+
+    & > a {
+      display: block;
+      width: 100%;
+      color: $devui-text-weak;
+      text-decoration: none;
+
+      &:hover {
+        color: inherit;
+      }
+    }
+
+    /* .devui-menu-item-icon {
+      width: 16px;
+    } */
+  }
+
+  .devui-menu-item.active {
+    color: $devui-brand-active;
+    background-color: $devui-list-item-active-bg;
+    font-weight: bold;
+
+    &:hover {
+      background-color: $devui-list-item-hover-bg;
+    }
+
+    .devui-menu-item-icon .devui-icon-container {
+      color: inherit;
+    }
+  }
+
+  .devui-menu-item.disabled {
+    color: $devui-disabled-text;
+    cursor: not-allowed;
+    user-select: none;
+  }
+
+  // sub menu
+  .devui-sub-menu {
+    .devui-sub-menu-item {
+      justify-content: space-between;
+
+      .devui-sub-menu-item-title {
+        display: flex;
+        align-items: center;
+        column-gap: $icon-gap;
+        overflow-x: hidden;
+      }
+
+      .devui-sub-menu-item-arrow {
+        height: 16px;
+        transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+      }
+    }
+
+    .devui-sub-menu-item.active {
+      background-color: initial;
+
+      &:hover {
+        color: $devui-brand-active-focus;
+      }
+    }
+
+    .devui-sub-menu-children {
+      // padding-inline-start: $padding-size;
+      .devui-menu-item {
+        padding-inline-start: calc($padding-size + ($icon-gap + $padding-size) * var(--level, 1));
+      }
+    }
+  }
+
+  .devui-sub-menu.open {
+    .devui-sub-menu-item-arrow {
+      transform: rotate(-180deg);
+      transform-origin: center;
+    }
+  }
 }

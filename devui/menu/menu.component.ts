@@ -10,17 +10,20 @@ import {
   Input,
   OnInit,
   Output,
-  TemplateRef
+  TemplateRef,
+  ViewEncapsulation
 } from '@angular/core';
 import { DevConfigService, WithConfig } from 'ng-devui/utils';
+import { MenuItemType } from './type';
 
 @Component({
   selector: 'd-menu',
   templateUrl: './menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./menu.component.scss'],
-  preserveWhitespaces: false,
+  encapsulation: ViewEncapsulation.None,
   })
 export class MenuComponent implements OnInit {
+  @Input() options: MenuItemType[] = [];
   ngOnInit() { }
 }

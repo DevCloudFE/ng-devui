@@ -27,29 +27,29 @@ export function hljsLanguages() {
 
 @NgModule({
   declarations: [
-    ExamplePanelComponent,
-    AppContentComponent,
-    ComponentsOverviewComponent,
-    GetStartedComponent,
-    ThemeGuideComponent,
-    GlobalConfigComponent,
+  ExamplePanelComponent,
+  AppContentComponent,
+  ComponentsOverviewComponent,
+  GetStartedComponent,
+  ThemeGuideComponent,
+  GlobalConfigComponent,
   ],
   imports: [
-    CommonModule,
-    LazyLoadModule,
-    SafePipeModule,
-    TranslateModule,
-    DevuiCommonsModule,
-    DevUIModule.forRoot(),
-    RouterModule.forChild([
-      {
-        path: '',
-        component: AppContentComponent,
-        data: {},
-        children: routesConfig,
-      },
+  CommonModule,
+  LazyLoadModule,
+  SafePipeModule,
+  TranslateModule,
+  DevuiCommonsModule,
+  DevUIModule.forRoot(),
+  RouterModule.forChild([
+    {
+    path: '',
+    component: AppContentComponent,
+    data: {},
+    children: routesConfig,
+    },
     ]),
   ],
   providers: [ComponentDataService],
-})
-export class AppContentModule {}
+  })
+export class AppContentModule { }
