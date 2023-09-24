@@ -5,26 +5,28 @@ import {
   EventEmitter,
   HostBinding,
   Input,
+  AfterViewInit,
   OnInit,
   Output,
   inject,
 } from '@angular/core';
-import { expandCollapse, expandCollapseForDomDestroy } from 'ng-devui/utils';
+import { expandCollapseForDomDestroyWithChildren } from 'ng-devui/utils';
 import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { SubmenuService } from './submenu.service';
 import { MenuComponent } from './menu.component';
+
 
 @Component({
   selector: '[d-sub-menu]',
   templateUrl: './sub-menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SubmenuService],
-  animations: [expandCollapseForDomDestroy],
+  animations: [expandCollapseForDomDestroyWithChildren],
   host: {
   '[class.devui-sub-menu]': 'true'
   }
   })
-export class SubMenuComponent implements OnInit {
+export class SubMenuComponent implements OnInit, AfterViewInit {
   @HostBinding('class.open') _open = false;
   @Input()
   set open(value: boolean) {
@@ -50,13 +52,29 @@ export class SubMenuComponent implements OnInit {
 
   protected cdr = inject(ChangeDetectorRef);
 
+  afterInitAnimate = true;
   ngOnInit() {
-    // console.log('_open', this._open);
+    /* setTimeout(() => {
+      this.afterInitAnimate = false;
+      this.cdr.markForCheck();
+    }, 0); */
   }
+
+  ngAfterViewInit() { }
 
   titleClick() {
     this.toggleOpen(!this._open);
   }
+
+  /*
+    titleClick() {
+    this.afterInitAnimate = false;
+    setTimeout(() => {
+      this.toggleOpen(!this._open);
+      this.cdr.markForCheck();
+    }, 0);
+  }
+  */
 
   toggleOpen(value: boolean) {
     if (this.disabled) { return; }

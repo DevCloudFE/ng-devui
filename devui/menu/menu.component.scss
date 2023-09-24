@@ -94,7 +94,7 @@
     .devui-sub-menu-item.active {
       background-color: initial;
 
-      &:hover {
+      &:hover:not(.disabled) {
         color: $devui-brand-active-focus;
       }
     }

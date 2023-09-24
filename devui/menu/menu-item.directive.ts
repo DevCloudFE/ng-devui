@@ -25,7 +25,6 @@ import { SubMenuComponent } from './sub-menu.component';
   }
   })
 export class MenuItemDirective implements OnInit, OnChanges {
-
   @HostBinding('class.disabled') @Input() disabled = false;
   @HostBinding('class.active') @Input() active = false;
   // @HostBinding('class.active') _active = this.active;
@@ -39,7 +38,9 @@ export class MenuItemDirective implements OnInit, OnChanges {
 
   @HostListener('click', ['$event']) hostClick(event: MouseEvent) {
     // this._active = true;
-    this.itemClick.emit(event);
+    if (!this.disabled) {
+      this.itemClick.emit(event);
+    }
   }
 
   ngOnChanges({ active }: SimpleChanges): void {

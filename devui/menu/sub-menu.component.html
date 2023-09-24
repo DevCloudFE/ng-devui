@@ -9,7 +9,8 @@
       <d-icon class="devui-menu-item-icon" [disabled]="disabled" icon="icon-select-arrow" />
     </div>
   </div>
-  <div class="devui-sub-menu-children" [style.--level]="submenuService.level" @collapseForDomDestroy *ngIf="_open">
+  <div class="devui-sub-menu-children" *ngIf="_open" [style.--level]="submenuService.level" @collapseForDomDestroyWithChildren>
+    <!-- [@.disabled]="afterInitAnimate" -->
     <ng-content />
   </div>
 </ng-container>
