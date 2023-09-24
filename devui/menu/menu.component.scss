@@ -4,13 +4,15 @@
 @import '../style/core/font';
 
 .devui-menu {
+  --menu-width: 256px;
   --padding-size: 16px;
   --icon-gap: 10px;
+  $menu-width: var(--menu-width);
   $padding-size: var(--padding-size);
   $icon-gap: var(--icon-gap);
   $transition-attrs: $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
 
-  width: 256px;
+  width: $menu-width;
   border: 1px solid $devui-dividing-line;
   transition: width $transition-attrs;
 
@@ -78,7 +80,9 @@
         display: flex;
         align-items: center;
         column-gap: $icon-gap;
-        overflow-x: hidden;
+        width: 100%;
+        max-width: 200px;
+        // overflow-x: hidden;
       }
 
       .devui-sub-menu-item-arrow {
@@ -112,16 +116,26 @@
 }
 
 .devui-menu.collapsed {
-  width: 80px;
+  --menu-width: 60px;
 
   .devui-menu-item {
+    justify-content: center;
+
     .devui-menu-item-icon {
-      transform: scale(1.5);
+      transform: scale(1.2);
     }
 
-    .devui-menu-item-name,
+    .devui-menu-item-icon + .devui-menu-item-name,
     .devui-sub-menu-item-arrow {
       display: none;
     }
+  }
+
+  .devui-sub-menu-item-title {
+    justify-content: inherit;
+  }
+
+  .devui-sub-menu-children {
+    display: none;
   }
 }

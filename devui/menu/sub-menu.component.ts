@@ -12,6 +12,7 @@ import {
 import { expandCollapse, expandCollapseForDomDestroy } from 'ng-devui/utils';
 import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { SubmenuService } from './submenu.service';
+import { MenuComponent } from './menu.component';
 
 @Component({
   selector: '[d-sub-menu]',
@@ -25,7 +26,6 @@ import { SubmenuService } from './submenu.service';
   })
 export class SubMenuComponent implements OnInit {
   @HostBinding('class.open') _open = false;
-
   @Input()
   set open(value: boolean) {
     this._open = value;
@@ -37,7 +37,7 @@ export class SubMenuComponent implements OnInit {
 
   @Input() disabled = false;
   @Input({ required: true }) title = '';
-  @Input() icon = 'icon-op-list';
+  @Input() icon = '';
   @Output() openChange = new EventEmitter<boolean>();
 
   protected submenuService = inject(SubmenuService);
@@ -45,6 +45,7 @@ export class SubMenuComponent implements OnInit {
     skipSelf: true,
     optional: true
   });
+  protected parentMenu = inject(MenuComponent, { skipSelf: true });
   childActive = false;
 
   protected cdr = inject(ChangeDetectorRef);
