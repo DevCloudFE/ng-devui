@@ -38,7 +38,6 @@
     </ng-container>
   </div>
    -->
-
-  <button (click)="collapsed = !collapsed">toggle collapsed</button>
+  <d-button (btnClick)="collapsed = !collapsed">toggle--{{ collapsed }}</d-button>
   <loop-menu [menus]="menus" [collapsed]="collapsed" />
 </div>

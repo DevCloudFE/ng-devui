@@ -13,6 +13,7 @@ import { MenuModule } from 'ng-devui/menu';
 import { IconModule } from 'ng-devui/icon';
 import { LoopMenuComponent } from './loop-menu/loop-menu.component';
 import { LoopSubMenuComponent } from './loop-menu/loop-sub-menu.component';
+import { ButtonModule } from 'ng-devui/button';
 
 @NgModule({
   imports: [
@@ -22,14 +23,15 @@ import { LoopSubMenuComponent } from './loop-menu/loop-sub-menu.component';
   IconModule,
   ToggleModule,
   DevUICodeboxModule,
+  ButtonModule,
   DevUIApiModule,
   MenuModule,
   RouterModule.forChild([
     { path: '', redirectTo: 'demo', pathMatch: 'full' },
 /*  {
-                     path: 'design',
-                     component: AccordionDesignComponent,
-                   }, */
+                           path: 'design',
+                           component: AccordionDesignComponent,
+                         }, */
     { path: 'demo', component: MenuDemoComponent },
     {
     path: 'api',

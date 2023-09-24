@@ -26,7 +26,7 @@ export type IButtonSize = 'lg' | 'md' | 'sm' | 'xs';
   styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespaces: false,
-})
+  })
 export class ButtonComponent implements AfterContentChecked {
   @Input() id: string;
   @Input() type: IButtonType = 'button';
@@ -59,7 +59,7 @@ export class ButtonComponent implements AfterContentChecked {
   waveLeft = 0;
   waveTop = 0;
   showWave = false;
-  isMouseDown = false;
+  // isMouseDown = false;
 
   constructor(private cd: ChangeDetectorRef) {
   }
