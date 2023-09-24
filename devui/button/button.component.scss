@@ -284,9 +284,13 @@ $devui-btn-pseudo-config: (
     }
   }
 
-  &.mouseDown:not(:disabled) {
+  &:active:not(:disabled) {
     transform: scale(0.95);
   }
+
+  /* &.mouseDown:not(:disabled) {
+    transform: scale(0.95);
+  } */
 }
 
 .devui-loading {
