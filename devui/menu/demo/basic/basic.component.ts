@@ -10,11 +10,13 @@ export class BasicComponent {
   menus: MenuItemType[] = [
     {
       key: 'c-1',
-      name: 'Content 1 (as a leaf menu)',
+      icon: 'icon-op-list',
+      name: 'Content 1 (as a leaf menu)'
     },
     {
       key: 'c-2',
       name: 'Content 2 (as a parent menu, has children)',
+      icon: 'icon-op-list',
       children: [
         {
           key: 'c-2-1',
@@ -32,6 +34,7 @@ export class BasicComponent {
     }, {
       key: 'c-3',
       name: 'Content 3 (as a parent menu, has children)',
+      icon: 'icon-op-list',
       children: [
         {
           key: 'c-3-1',
@@ -59,6 +62,7 @@ export class BasicComponent {
     },
     {
       key: 'c-4',
+      icon: 'icon-op-list',
       name: 'Content 4 (as a leaf menu)',
     }
   ];
@@ -88,4 +92,6 @@ export class BasicComponent {
   trackByMenu(_: number, item: MenuItemType) {
     return item.key;
   }
+
+  collapsed = false;
 }

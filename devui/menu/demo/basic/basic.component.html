@@ -39,5 +39,6 @@
   </div>
    -->
 
-  <loop-menu [menus]="menus" />
+  <button (click)="collapsed = !collapsed">toggle collapsed</button>
+  <loop-menu [menus]="menus" [collapsed]="collapsed" />
 </div>

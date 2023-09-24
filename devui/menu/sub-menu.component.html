@@ -1,8 +1,8 @@
-<ng-container>
+<ng-container *ngrxLet="parentMenu.collapsed$ as collapsed">
   <div [class]="disabledCls('devui-sub-menu-item')" [class.active]="childActive" d-menu-item (itemClick)="titleClick()">
-    <div class="devui-sub-menu-item-title">
-      <d-icon class="devui-menu-item-icon" [disabled]="disabled" [icon]="icon" />
-      <span class="devui-menu-item-name over-flow-ellipsis">{{ title }}</span>
+    <div class="devui-sub-menu-item-title" role="menu">
+      <d-icon class="devui-menu-item-icon" *ngIf="icon" [disabled]="disabled" [icon]="icon" />
+      <span class="devui-menu-item-name over-flow-ellipsis" [title]="title">{{ title }}</span>
     </div>
 
     <div class="devui-sub-menu-item-arrow">

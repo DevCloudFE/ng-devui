@@ -6,13 +6,14 @@ import { LoopMenuComponent } from './loop-menu.component';
   template: `
     <div d-sub-menu
       [title]="menu.name"
+      [icon]="menu.icon"
       [open]="openKeys.includes(menu.key)"
       (openChange)="loopMenuComponent.openChange($event, menu.key)">
       <ng-container *ngFor="let item of menu.children; trackBy: trackByMenu">
         <loop-sub-menu [menu]="item" [openKeys]="openKeys" [activeKey]="activeKey" *ngIf="item.children?.length; else leafTpl" />
         <ng-template #leafTpl>
           <div d-menu-item (itemClick)="loopMenuComponent.itemClick(item.key)" [active]="item.key === activeKey">
-            <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
+            <d-icon class="devui-menu-item-icon" *ngIf="item.icon" [icon]="item.icon" />
             <span class="devui-menu-item-name over-flow-ellipsis">{{ item.name }}</span>
           </div>
         </ng-template>
