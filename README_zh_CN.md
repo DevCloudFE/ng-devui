@@ -19,7 +19,7 @@ DevUI Design设计系统包含了DevUI规则、设计语言和最佳实践的资
 * 企业级组件，提供配套设计规范、字体图标库
 * 开箱即用
 
-了解更多请访问官方网站 [devui.design](https://devui.design/home)
+要了解更多请访问官方网站 [devui.design](https://devui.design/home)
 
 ## Angular版本
 
