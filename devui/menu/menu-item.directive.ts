@@ -25,6 +25,7 @@ import { SubMenuComponent } from './sub-menu.component';
   }
   })
 export class MenuItemDirective implements OnInit, OnChanges {
+  @HostBinding('class.no-style') @Input() noStyle = false;
   @HostBinding('class.disabled') @Input() disabled = false;
   @HostBinding('class.active') @Input() active = false;
   // @HostBinding('class.active') _active = this.active;

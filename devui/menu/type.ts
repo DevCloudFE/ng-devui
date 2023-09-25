@@ -5,6 +5,14 @@ interface MenuItemType {
   children?: MenuItemType[];
 }
 
+interface SubTitleContextType {
+  $implicit: string;
+  icon: string;
+  open: boolean;
+  disabled: boolean;
+}
+
 export {
-  MenuItemType
+  MenuItemType,
+  SubTitleContextType,
 };
