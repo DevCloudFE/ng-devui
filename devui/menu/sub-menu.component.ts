@@ -9,11 +9,13 @@ import {
   OnInit,
   Output,
   inject,
+  TemplateRef,
 } from '@angular/core';
 import { expandCollapseForDomDestroyWithChildren } from 'ng-devui/utils';
-import { DevConfigService, WithConfig } from 'ng-devui/utils';
+// import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { SubmenuService } from './submenu.service';
 import { MenuComponent } from './menu.component';
+import { SubTitleContextType } from './type';
 
 
 @Component({
@@ -27,9 +29,11 @@ import { MenuComponent } from './menu.component';
   }
   })
 export class SubMenuComponent implements OnInit, AfterViewInit {
+  @HostBinding('class.no-style') @Input() noStyle = false;
   @HostBinding('class.open') _open = false;
   @Input()
   set open(value: boolean) {
+    console.log('wat set open', value);
     this._open = value;
   }
 
@@ -38,9 +42,18 @@ export class SubMenuComponent implements OnInit, AfterViewInit {
   }
 
   @Input() disabled = false;
-  @Input({ required: true }) title = '';
+  @Input() title: string | TemplateRef<SubTitleContextType> = '';
   @Input() icon = '';
   @Output() openChange = new EventEmitter<boolean>();
+
+  get titleContext(): SubTitleContextType {
+    return {
+      $implicit: this.title instanceof TemplateRef ? '' : this.title,
+      open: this._open,
+      disabled: this.disabled,
+      icon: this.icon,
+    };
+  }
 
   protected submenuService = inject(SubmenuService);
   protected parentSubmenu = inject(SubMenuComponent, {
@@ -82,8 +95,8 @@ export class SubMenuComponent implements OnInit, AfterViewInit {
     this.openChange.emit(value);
   }
 
-  disabledCls(base: string) {
-    return `${base} ${this.disabled ? 'disabled' : ''}`;
+  titleCls(base: string) {
+    return `${base} ${this.childActive ? 'active' : ''} ${this.disabled ? 'disabled' : ''} ${this.noStyle ? 'no-style' : ''}`;
   }
 
   setChildActive(active: boolean) {

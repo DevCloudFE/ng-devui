@@ -50,13 +50,12 @@ export class LoopMenuComponent implements OnInit {
   @Input() collapsed = false;
   @Input() menus: MenuItemType[] = [];
 
-  // disabledKeys = [];
-  disabledKeys = ['c-1', 'c-2', 'c-3-1'];
+  disabledKeys = [];
+  // disabledKeys = ['c-1', 'c-2', 'c-3-1'];
 
   activeKey = 'c-3-1-1';
   openKeys: string[] = [];
   // openKeys: string[] = ['c-3', 'c-3-1'];
-
 
   ngOnInit() {
     this.openKeys = findAllParent(this.menus, 'c-3-1-1');
@@ -72,7 +71,7 @@ export class LoopMenuComponent implements OnInit {
   } */
   openChange(open: boolean, key: string) {
     if (open) {
-      this.openKeys.push(key);
+      this.openKeys = this.openKeys.concat(key);
     } else {
       this.openKeys = this.openKeys.filter(item => item !== key);
     }

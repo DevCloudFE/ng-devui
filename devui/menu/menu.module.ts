@@ -5,9 +5,10 @@ import { MenuComponent } from './menu.component';
 import { IconModule } from 'ng-devui/icon';
 import { MenuItemDirective } from './menu-item.directive';
 import { SubMenuComponent } from './sub-menu.component';
+import { StrTplOutletModule } from 'ng-devui/utils';
 
 @NgModule({
-  imports: [CommonModule, IconModule, LetDirective],
+  imports: [CommonModule, IconModule, LetDirective, StrTplOutletModule],
   exports: [
   MenuComponent,
   MenuItemDirective,
