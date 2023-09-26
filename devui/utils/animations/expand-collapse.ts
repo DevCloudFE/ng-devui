@@ -22,7 +22,14 @@ export const expandCollapseForDomDestroy: AnimationTriggerMetadata = trigger('co
   ]),
 ]);
 
-// todo: 可作成函数指定selector eg: '.devui-sub-menu-children'
+/*
+todo: 可作成函数指定selector eg: '.devui-sub-menu-children'
+@collapseForDomDestroyWithChildren
+bug:
+当前是展开的情况下，
+如果收起父级，再展开父级
+此时再次点击当前菜单收起是不带动画的
+*/
 export const expandCollapseForDomDestroyWithChildren: AnimationTriggerMetadata = trigger('collapseForDomDestroyWithChildren', [
   transition(':enter', [
     style({ opacity: 0, height: 0, overflow: 'hidden' }),
@@ -38,4 +45,12 @@ export const expandCollapseForDomDestroyWithChildren: AnimationTriggerMetadata =
       delay: duration
     }), { optional: true })
   ]),
+]);
+
+
+export const collapseMotion: AnimationTriggerMetadata = trigger('collapseMotion', [
+  state('expanded', style({ height: '*' })),
+  state('collapsed', style({ height: 0, overflow: 'hidden' })),
+  transition('expanded => collapsed', animate(`150ms ${AnimationCurves.EASE_IN_OUT}`)),
+  transition('collapsed => expanded', animate(`150ms ${AnimationCurves.EASE_IN_OUT}`)),
 ]);
