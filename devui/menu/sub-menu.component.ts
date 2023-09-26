@@ -5,13 +5,12 @@ import {
   EventEmitter,
   HostBinding,
   Input,
-  AfterViewInit,
   OnInit,
   Output,
   inject,
   TemplateRef,
 } from '@angular/core';
-import { expandCollapseForDomDestroyWithChildren } from 'ng-devui/utils';
+import { collapseMotion } from 'ng-devui/utils';
 // import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { SubmenuService } from './submenu.service';
 import { MenuComponent } from './menu.component';
@@ -23,17 +22,17 @@ import { SubTitleContextType } from './type';
   templateUrl: './sub-menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SubmenuService],
-  animations: [expandCollapseForDomDestroyWithChildren],
+  animations: [collapseMotion],
   host: {
   '[class.devui-sub-menu]': 'true'
   }
   })
-export class SubMenuComponent implements OnInit, AfterViewInit {
+export class SubMenuComponent implements OnInit {
   @HostBinding('class.no-style') @Input() noStyle = false;
   @HostBinding('class.open') _open = false;
   @Input()
   set open(value: boolean) {
-    console.log('wat set open', value);
+    // console.log('wat set open', value);
     this._open = value;
   }
 
@@ -66,14 +65,8 @@ export class SubMenuComponent implements OnInit, AfterViewInit {
   protected cdr = inject(ChangeDetectorRef);
 
   afterInitAnimate = true;
-  ngOnInit() {
-    /* setTimeout(() => {
-      this.afterInitAnimate = false;
-      this.cdr.markForCheck();
-    }, 0); */
-  }
 
-  ngAfterViewInit() { }
+  ngOnInit() { }
 
   titleClick() {
     this.toggleOpen(!this._open);
@@ -95,6 +88,10 @@ export class SubMenuComponent implements OnInit, AfterViewInit {
     this.openChange.emit(value);
   }
 
+  get expandState() {
+    return this.open ? 'expanded' : 'collapsed';
+  }
+
   titleCls(base: string) {
     return `${base} ${this.childActive ? 'active' : ''} ${this.disabled ? 'disabled' : ''} ${this.noStyle ? 'no-style' : ''}`;
   }
@@ -106,4 +103,8 @@ export class SubMenuComponent implements OnInit, AfterViewInit {
     }
     this.cdr.markForCheck();
   }
+
+  /*  get expandState() {
+     return this.open ? 'expanded' : 'collapsed';
+   } */
 }
