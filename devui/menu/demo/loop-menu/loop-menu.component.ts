@@ -36,7 +36,12 @@ function findAllParent(source: MenuItemType[], key: string) {
           [activeKey]="activeKey"
           *ngIf="item.children?.length; else leafTpl" />
         <ng-template #leafTpl>
-          <div d-menu-item (itemClick)="itemClick(item.key)" [disabled]="disabledKeys.includes(item.key)" [active]="item.key === activeKey">
+          <div
+            d-menu-item
+            (itemClick)="itemClick(item.key)"
+            [disabled]="disabledKeys.includes(item.key)"
+            [active]="item.key === activeKey"
+            dTooltip [content]="collapsed ? item.name : ''" position="right">
             <d-icon class="devui-menu-item-icon" *ngIf="item.icon" [icon]="item.icon" />
             <span class="devui-menu-item-name over-flow-ellipsis">{{ item.name }}</span>
           </div>

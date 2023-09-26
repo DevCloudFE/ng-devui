@@ -11,6 +11,7 @@ import { MenuDemoComponent } from './menu-demo.component';
 import { BasicComponent } from './basic/basic.component';
 import { MenuModule } from 'ng-devui/menu';
 import { IconModule } from 'ng-devui/icon';
+import { TooltipModule } from 'ng-devui/tooltip';
 import { LoopMenuComponent } from './loop-menu/loop-menu.component';
 import { LoopSubMenuComponent } from './loop-menu/loop-sub-menu.component';
 import { ButtonModule } from 'ng-devui/button';
@@ -24,14 +25,15 @@ import { ButtonModule } from 'ng-devui/button';
   ToggleModule,
   DevUICodeboxModule,
   ButtonModule,
+  TooltipModule,
   DevUIApiModule,
   MenuModule,
   RouterModule.forChild([
     { path: '', redirectTo: 'demo', pathMatch: 'full' },
 /*  {
-                           path: 'design',
-                           component: AccordionDesignComponent,
-                         }, */
+                                 path: 'design',
+                                 component: AccordionDesignComponent,
+                               }, */
     { path: 'demo', component: MenuDemoComponent },
     {
     path: 'api',

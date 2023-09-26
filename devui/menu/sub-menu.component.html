@@ -10,7 +10,16 @@
       <d-icon class="devui-menu-item-icon" [disabled]="disabled" icon="icon-select-arrow" />
     </div>
   </div>
-  <div class="devui-sub-menu-children" [style.--level]="submenuService.level" [@collapseMotion]="expandState">
+
+  <div *ngIf="collapsed; else defaultChildrenTpl">popover</div>
+
+  <ng-template #defaultChildrenTpl>
+    <div class="devui-sub-menu-children" [style.--level]="submenuService.level" [@collapseMotion]="expandState">
+      <ng-template [ngTemplateOutlet]="contentTpl" />
+    </div>
+  </ng-template>
+
+  <ng-template #contentTpl>
     <ng-content />
-  </div>
+  </ng-template>
 </ng-container>
