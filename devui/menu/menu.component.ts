@@ -1,25 +1,15 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  DestroyRef,
-  ElementRef,
-  EventEmitter,
-  forwardRef,
   HostBinding,
-  inject,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
-  Output,
   SimpleChanges,
-  TemplateRef,
   ViewEncapsulation
 } from '@angular/core';
 import { DevConfigService, WithConfig } from 'ng-devui/utils';
-import { MenuItemType } from './type';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
