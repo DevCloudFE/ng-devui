@@ -1,5 +1,5 @@
 <ng-container *ngrxLet="parentMenu.collapsed$ as collapsed">
-  <div [class]="titleCls('devui-sub-menu-item')" d-menu-item (itemClick)="titleClick()">
+  <div [class]="titleCls('devui-sub-menu-item')" d-menu-item (itemClick)="titleClick()" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
     <div class="devui-sub-menu-item-title" role="menu" *strTplOutlet="title; context: titleContext">
       <ng-content select="[title]" *ngIf="!title" />
       <d-icon class="devui-menu-item-icon" *ngIf="icon" [disabled]="disabled" [icon]="icon" />
@@ -11,7 +11,24 @@
     </div>
   </div>
 
-  <div *ngIf="collapsed; else defaultChildrenTpl">popover</div>
+  <ng-container *ngIf="collapsed; else defaultChildrenTpl">
+    <!-- 
+cdkConnectedOverlayHasBackdrop
+    cdkConnectedOverlayBackdropClass="devui-menu-popover-backdrop"
+
+     -->
+    <ng-template
+      cdkConnectedOverlay
+      cdkConnectedOverlayPanelClass="devui-menu-popover-panel"
+      [cdkConnectedOverlayOrigin]="trigger"
+      [cdkConnectedOverlayOpen]="open"
+      [cdkConnectedOverlayPositions]="positions"
+    >
+      <div class="devui-menu-popover">
+        <ng-template [ngTemplateOutlet]="contentTpl" />
+      </div>
+    </ng-template>
+  </ng-container>
 
   <ng-template #defaultChildrenTpl>
     <div class="devui-sub-menu-children" [style.--level]="submenuService.level" [@collapseMotion]="expandState">

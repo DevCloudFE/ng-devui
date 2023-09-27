@@ -22,4 +22,5 @@ export * from './popper/popper.module';
 export * from './safe-pipe.module';
 export * from './safe.pipe';
 export * from './tree-utils';
+export * from './type-utils';
 

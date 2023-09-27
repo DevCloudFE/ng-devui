@@ -2,16 +2,20 @@
 @import '../style/theme/color';
 @import '../style/theme/corner';
 @import '../style/core/font';
+@import '../style/core/shadow';
+
+:root {
+  --devui-menu-width: 256px;
+  --devui-padding-size: 16px;
+  --devui-icon-gap: 10px;
+}
+
+$menu-width: var(--devui-menu-width);
+$padding-size: var(--devui-padding-size);
+$icon-gap: var(--devui-icon-gap);
+$transition-attrs: $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
 
 .devui-menu {
-  --menu-width: 256px;
-  --padding-size: 16px;
-  --icon-gap: 10px;
-  $menu-width: var(--menu-width);
-  $padding-size: var(--padding-size);
-  $icon-gap: var(--icon-gap);
-  $transition-attrs: $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
-
   width: $menu-width;
   padding-block: 4px;
   border: 1px solid $devui-dividing-line;
@@ -102,6 +106,8 @@
 
     .devui-sub-menu-children {
       // padding-inline-start: $padding-size;
+      overflow-y: hidden;
+
       .devui-menu-item {
         padding-inline-start: calc($padding-size + ($icon-gap + $padding-size) * var(--level, 1));
       }
@@ -117,7 +123,7 @@
 }
 
 .devui-menu.collapsed {
-  --menu-width: 60px;
+  --devui-menu-width: 60px;
 
   .devui-menu-item {
     justify-content: center;
@@ -138,5 +144,67 @@
 
   .devui-sub-menu-children {
     display: none;
+  }
+}
+
+.devui-menu-popover-panel .devui-menu-popover {
+  background-color: $devui-base-bg;
+  // background-color: #f60;
+  padding-block: 4px;
+  box-shadow: $devui-shadow-length-base $devui-shadow;
+
+  .devui-menu-item:not(.no-style) {
+    display: flex;
+    align-items: center;
+    column-gap: $icon-gap;
+    height: 40px;
+    padding-inline: $padding-size 12px;
+    color: $devui-text-weak;
+    cursor: pointer;
+    transition: background-color $transition-attrs;
+
+    &:not(.disabled, .active):hover {
+      background-color: $devui-list-item-hover-bg;
+      color: $devui-list-item-hover-text;
+    }
+
+    &:not(.disabled):active {
+      background-color: $devui-list-item-selected-bg;
+    }
+
+    .devui-menu-item-icon {
+      transition: transform $transition-attrs;
+    }
+
+    & > a {
+      display: block;
+      width: 100%;
+      color: $devui-text-weak;
+      text-decoration: none;
+
+      &:hover {
+        color: inherit;
+      }
+    }
+  }
+
+  .devui-menu-item:not(.no-style).active {
+    color: $devui-brand-active;
+    background-color: $devui-list-item-active-bg;
+    font-weight: bold;
+
+    &:hover {
+      background-color: $devui-list-item-hover-bg;
+    }
+
+    .devui-menu-item-icon .devui-icon-container {
+      color: inherit;
+    }
+  }
+
+  .devui-menu-item:not(.no-style).disabled {
+    color: $devui-disabled-text;
+    cursor: not-allowed;
+    user-select: none;
   }
 }
