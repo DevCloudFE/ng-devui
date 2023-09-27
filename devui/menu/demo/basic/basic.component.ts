@@ -58,6 +58,10 @@ export class BasicComponent {
           key: 'c-3-3',
           name: 'Content 3 Child 3',
         },
+        {
+          key: 'c-3-4',
+          name: 'Content 3 Child 4',
+        },
       ]
     },
     {

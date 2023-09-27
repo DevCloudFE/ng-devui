@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, inject } from '@angular/core';
 import { MenuItemType } from 'ng-devui/menu';
 
 
@@ -51,7 +51,7 @@ function findAllParent(source: MenuItemType[], key: string) {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   })
-export class LoopMenuComponent implements OnInit {
+export class LoopMenuComponent implements OnInit, AfterViewInit {
   @Input() collapsed = false;
   @Input() menus: MenuItemType[] = [];
 
@@ -61,10 +61,15 @@ export class LoopMenuComponent implements OnInit {
   activeKey = 'c-3-1-1';
   openKeys: string[] = [];
   // openKeys: string[] = ['c-3', 'c-3-1'];
-
+  protected cdr = inject(ChangeDetectorRef);
   ngOnInit() {
-    this.openKeys = findAllParent(this.menus, 'c-3-1-1');
-    // console.log('openKeys', this.openKeys);
+    this.openKeys = findAllParent(this.menus, this.activeKey);
+  }
+  ngAfterViewInit() {
+    /* setTimeout(() => {
+      this.openKeys = findAllParent(this.menus, this.activeKey);
+      this.cdr.markForCheck();
+    }, 0); */
   }
 
   /* openChange(open: boolean, key: string) {

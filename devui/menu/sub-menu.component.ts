@@ -9,12 +9,20 @@ import {
   Output,
   inject,
   TemplateRef,
+  QueryList,
+  ContentChildren,
+  AfterViewInit,
+  AfterContentInit,
+  forwardRef,
+  AfterContentChecked,
 } from '@angular/core';
-import { collapseMotion } from 'ng-devui/utils';
+import { TypeOrNull, collapseMotion } from 'ng-devui/utils';
 // import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { SubmenuService } from './submenu.service';
 import { MenuComponent } from './menu.component';
 import { SubTitleContextType } from './type';
+import { ConnectedPosition, ConnectionPositionPair } from '@angular/cdk/overlay';
+import { MenuItemDirective } from './menu-item.directive';
 
 
 @Component({
@@ -27,7 +35,7 @@ import { SubTitleContextType } from './type';
   '[class.devui-sub-menu]': 'true'
   }
   })
-export class SubMenuComponent implements OnInit {
+export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit, AfterContentChecked {
   @HostBinding('class.no-style') @Input() noStyle = false;
   @HostBinding('class.open') _open = false;
   @Input()
@@ -60,13 +68,43 @@ export class SubMenuComponent implements OnInit {
     optional: true
   });
   protected parentMenu = inject(MenuComponent, { skipSelf: true });
-  childActive = false;
 
   protected cdr = inject(ChangeDetectorRef);
 
   afterInitAnimate = true;
 
+  positions: ConnectedPosition[] = [
+    {
+      originX: 'end',
+      originY: 'top',
+      overlayX: 'start',
+      overlayY: 'top',
+      offsetX: 6
+    }
+  ];
+
+  private childActive = false;
+
+  /* @ContentChildren(SubMenuComponent, { descendants: true })
+  subMenuComponents: QueryList<SubMenuComponent> | null = null; */
+  @ContentChildren(MenuItemDirective, { descendants: true }) menuItemDirectives: TypeOrNull<QueryList<MenuItemDirective>> = null;
+  menuItems: MenuItemDirective[] = [];
   ngOnInit() { }
+  ngAfterViewInit() {
+
+  }
+  ngAfterContentInit(): void {
+    // console.log('ngAfterContentInit');
+    if (this.menuItemDirectives.length) {
+      this.menuItems.push(...this.menuItemDirectives.toArray());
+      if (this.parentSubmenu) {
+        this.parentSubmenu.menuItems.push(...this.menuItemDirectives.toArray());
+      }
+    }
+  }
+  ngAfterContentChecked(): void {
+
+  }
 
   titleClick() {
     this.toggleOpen(!this._open);
@@ -96,11 +134,16 @@ export class SubMenuComponent implements OnInit {
     return `${base} ${this.childActive ? 'active' : ''} ${this.disabled ? 'disabled' : ''} ${this.noStyle ? 'no-style' : ''}`;
   }
 
-  setChildActive(active: boolean) {
+  setChildActive() {
+    // console.log('setChildActive', this.menuItems);
+    const active = this.menuItems.some(item => item.active);
+    this.toggleActive(active);
+    this.parentSubmenu?.toggleActive(active);
+
+  }
+
+  toggleActive(active: boolean) {
     this.childActive = active;
-    if (this.parentSubmenu) {
-      this.parentSubmenu.setChildActive(active);
-    }
     this.cdr.markForCheck();
   }
 
