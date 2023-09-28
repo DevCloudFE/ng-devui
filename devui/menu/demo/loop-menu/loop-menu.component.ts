@@ -1,6 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, inject } from '@angular/core';
-import { MenuItemType } from 'ng-devui/menu';
-
+import { MenuItemClickType, MenuItemType } from 'ng-devui/menu';
 
 function findAllParent(source: MenuItemType[], key: string) {
   const result: string[] = [];
@@ -27,7 +26,7 @@ function findAllParent(source: MenuItemType[], key: string) {
 @Component({
   selector: 'loop-menu',
   template: `
-    <div d-menu [collapsed]="collapsed">
+    <div d-menu [collapsed]="collapsed" (menuItemClick)="menuItemClick($event)">
       <ng-container *ngFor="let item of menus; trackBy: trackByMenu">
         <loop-sub-menu
           [menu]="item"
@@ -38,6 +37,7 @@ function findAllParent(source: MenuItemType[], key: string) {
         <ng-template #leafTpl>
           <div
             d-menu-item
+            [noStyle]="false"
             (itemClick)="itemClick(item.key)"
             [disabled]="disabledKeys.includes(item.key)"
             [active]="item.key === activeKey"
@@ -65,12 +65,7 @@ export class LoopMenuComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.openKeys = findAllParent(this.menus, this.activeKey);
   }
-  ngAfterViewInit() {
-    /* setTimeout(() => {
-      this.openKeys = findAllParent(this.menus, this.activeKey);
-      this.cdr.markForCheck();
-    }, 0); */
-  }
+  ngAfterViewInit() { }
 
   /* openChange(open: boolean, key: string) {
     if (open) {
@@ -90,6 +85,10 @@ export class LoopMenuComponent implements OnInit, AfterViewInit {
 
   itemClick(key: string) {
     this.activeKey = key;
+  }
+
+  menuItemClick(event: MenuItemClickType) {
+    console.log('menuItemClick', event);
   }
 
   trackByMenu(_: number, item: MenuItemType) {
