@@ -38,6 +38,6 @@
     </ng-container>
   </div>
    -->
-  <d-button (btnClick)="collapsed = !collapsed">toggle--{{ collapsed }}</d-button>
+  <d-button (btnClick)="collapsed = !collapsed">{{ collapsed ? '展开' : '收起' }}</d-button>
   <loop-menu [menus]="menus" [collapsed]="collapsed" />
 </div>
