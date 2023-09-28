@@ -169,7 +169,7 @@
         "description": "Expand、select and disabled"
       },
       "openCloseDemo": {
-        "basic-usage": "Expand and collapsed",
+        "title": "Expand and collapsed",
         "description": "The [collapsed] attribute controls menu expansion and collapse, and setting var (--devui menu width) on the menu root element can control the width of expansion and collapse"
       },
       "openOneDemo": {

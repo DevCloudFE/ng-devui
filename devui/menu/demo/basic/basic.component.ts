@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MenuItemType } from 'ng-devui/menu';
+import { MenuItemClickType, MenuItemType } from 'ng-devui/menu';
 import { BASE_MENUS } from '../mock';
 @Component({
   selector: 'd-basic',
@@ -22,6 +22,10 @@ export class BasicComponent {
 
   itemClick(key: string) {
     this.activeKey = key;
+  }
+
+  menuItemClick(event: MenuItemClickType) {
+    console.log('menuItemClick', event);
   }
 
   trackByMenu(_: number, item: MenuItemType) {
