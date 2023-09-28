@@ -15,27 +15,27 @@ import {
   AfterContentInit,
   forwardRef,
   AfterContentChecked,
+  OnDestroy,
 } from '@angular/core';
-import { TypeOrNull, collapseMotion } from 'ng-devui/utils';
+import { TypeOrNull, collapseMotion, scaleInOut } from 'ng-devui/utils';
 // import { DevConfigService, WithConfig } from 'ng-devui/utils';
-import { SubmenuService } from './submenu.service';
 import { MenuComponent } from './menu.component';
-import { SubTitleContextType } from './type';
-import { ConnectedPosition, ConnectionPositionPair } from '@angular/cdk/overlay';
+import { MenuHoverTypes, SubTitleContextType } from './type';
+import { ConnectedPosition } from '@angular/cdk/overlay';
 import { MenuItemDirective } from './menu-item.directive';
-
+import { BehaviorSubject, Subject, auditTime, combineLatest, distinctUntilChanged, filter, merge } from 'rxjs';
+import { debounceTime, map, mapTo, skipWhile, takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: '[d-sub-menu]',
   templateUrl: './sub-menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [SubmenuService],
-  animations: [collapseMotion],
+  animations: [collapseMotion, scaleInOut],
   host: {
   '[class.devui-sub-menu]': 'true'
   }
   })
-export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit, AfterContentChecked {
+export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit, AfterContentChecked, OnDestroy {
   @HostBinding('class.no-style') @Input() noStyle = false;
   @HostBinding('class.open') _open = false;
   @Input()
@@ -56,13 +56,12 @@ export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit
   get titleContext(): SubTitleContextType {
     return {
       $implicit: this.title instanceof TemplateRef ? '' : this.title,
-      open: this._open,
+      open: this.open,
       disabled: this.disabled,
       icon: this.icon,
     };
   }
 
-  protected submenuService = inject(SubmenuService);
   protected parentSubmenu = inject(SubMenuComponent, {
     skipSelf: true,
     optional: true
@@ -85,11 +84,52 @@ export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit
 
   private childActive = false;
 
-  /* @ContentChildren(SubMenuComponent, { descendants: true })
-  subMenuComponents: QueryList<SubMenuComponent> | null = null; */
-  @ContentChildren(MenuItemDirective, { descendants: true }) menuItemDirectives: TypeOrNull<QueryList<MenuItemDirective>> = null;
   menuItems: MenuItemDirective[] = [];
-  ngOnInit() { }
+
+  // { descendants: true } 在递归组件里没用
+  @ContentChildren(MenuItemDirective) menuItemDirectives: TypeOrNull<QueryList<MenuItemDirective>> = null;
+
+  collapsed = false;
+
+  readonly childState$ = new Subject<MenuHoverTypes>();
+  readonly itemInteractive$ = new Subject<MenuHoverTypes>();
+  readonly isChildSubMenuOpen$ = new BehaviorSubject(false);
+
+  level = 1;
+  constructor() {
+    if (this.parentSubmenu) {
+      this.level = this.parentSubmenu.level + 1;
+    }
+  }
+
+  ngOnInit() {
+    this.parentMenu.collapsed$.subscribe(res => {
+      // console.log('parentMenu.collapsed$', res, this.open);
+      this.collapsed = res;
+      if (res) {
+        this.toggleOpen(false);
+      }
+      this.cdr.markForCheck();
+    });
+
+    const isCurrentSubmenuOpen$ = this.childState$.pipe(map((value => value === 'enter')));
+    const isSubMenuOpenWithDebounce$ = combineLatest([this.isChildSubMenuOpen$, isCurrentSubmenuOpen$])
+      .pipe(
+        filter(() => this.collapsed && !this.disabled),
+        map((([parentChildOpen, currentChildOpen]) => {
+          // console.log('map open', parentChildOpen, currentChildOpen)
+          return parentChildOpen || currentChildOpen;
+        })),
+        auditTime(150),
+        distinctUntilChanged(),
+      );
+    isSubMenuOpenWithDebounce$.subscribe(open => {
+      // console.log('isSubMenuOpenWithDebounce', this.open, open);
+
+      this.toggleOpen(open);
+      this.parentSubmenu?.isChildSubMenuOpen$.next(open);
+    });
+  }
   ngAfterViewInit() {
 
   }
@@ -107,30 +147,37 @@ export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit
   }
 
   titleClick() {
-    this.toggleOpen(!this._open);
+    if (this.disabled || this.collapsed) { return; }
+    this.toggleOpen(!this.open);
+  }
+
+
+  titleHover(type: MenuHoverTypes) {
+    this.childState$.next(type);
   }
 
   /*
     titleClick() {
     this.afterInitAnimate = false;
     setTimeout(() => {
-      this.toggleOpen(!this._open);
+      this.toggleOpen(!this.open);
       this.cdr.markForCheck();
     }, 0);
   }
   */
 
-  toggleOpen(value: boolean) {
-    if (this.disabled) { return; }
-    this._open = value;
-    this.openChange.emit(value);
+  toggleOpen(open: boolean) {
+    if (open !== this.open) {
+      this.open = open;
+      this.openChange.emit(open);
+    }
   }
 
   get expandState() {
     return this.open ? 'expanded' : 'collapsed';
   }
 
-  titleCls(base: string) {
+  stateCls(base: string) {
     return `${base} ${this.childActive ? 'active' : ''} ${this.disabled ? 'disabled' : ''} ${this.noStyle ? 'no-style' : ''}`;
   }
 
@@ -147,7 +194,7 @@ export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit
     this.cdr.markForCheck();
   }
 
-  /*  get expandState() {
-     return this.open ? 'expanded' : 'collapsed';
-   } */
+  ngOnDestroy(): void {
+    console.log('sub menu destroy');
+  }
 }

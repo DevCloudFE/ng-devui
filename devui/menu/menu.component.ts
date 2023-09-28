@@ -1,16 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   HostBinding,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
+  Output,
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
-import { DevConfigService, WithConfig } from 'ng-devui/utils';
+// import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { BehaviorSubject } from 'rxjs';
+import { MenuItemClickType } from './type';
 
 @Component({
   selector: '[d-menu]',
@@ -25,12 +28,13 @@ import { BehaviorSubject } from 'rxjs';
 export class MenuComponent implements OnInit, OnChanges, OnDestroy {
   // @Input() options: MenuItemType[] = [];
   @HostBinding('class.collapsed') @Input() collapsed = false;
-
   collapsedSubject = new BehaviorSubject(this.collapsed);
   collapsed$ = this.collapsedSubject.asObservable();
 
+  @Output() readonly menuItemClick = new EventEmitter<MenuItemClickType>();
+
   ngOnChanges({ collapsed }: SimpleChanges): void {
-    if (collapsed && !collapsed.firstChange) {
+    if (collapsed) {
       this.collapsedSubject.next(collapsed.currentValue);
     }
   }

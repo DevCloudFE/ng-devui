@@ -6,78 +6,82 @@
 
 :root {
   --devui-menu-width: 256px;
+  --devui-menu-item-height: 40px;
+  --devui-menu-item-static-padding: 12px;
   --devui-padding-size: 16px;
   --devui-icon-gap: 10px;
 }
 
 $menu-width: var(--devui-menu-width);
+$menu-item-height: var(--devui-menu-item-height);
+$menu-item-static-padding: var(--devui-menu-item-static-padding);
 $padding-size: var(--devui-padding-size);
 $icon-gap: var(--devui-icon-gap);
 $transition-attrs: $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
 
-.devui-menu {
-  width: $menu-width;
-  padding-block: 4px;
-  border: 1px solid $devui-dividing-line;
-  transition: width $transition-attrs;
+.devui-menu-item:not(.no-style) {
+  display: flex;
+  align-items: center;
+  column-gap: $icon-gap;
+  height: $menu-item-height;
+  padding-inline: $padding-size $menu-item-static-padding;
+  color: $devui-text-weak;
+  cursor: pointer;
+  transition: background-color $transition-attrs;
 
-  .devui-menu-item:not(.no-style) {
-    display: flex;
-    align-items: center;
-    column-gap: $icon-gap;
-    height: 40px;
-    padding-inline: $padding-size 12px;
-    color: $devui-text-weak;
-    cursor: pointer;
-    transition: background-color $transition-attrs;
-
-    &:not(.disabled, .active):hover {
-      background-color: $devui-list-item-hover-bg;
-      color: $devui-list-item-hover-text;
-    }
-
-    &:not(.disabled):active {
-      background-color: $devui-list-item-selected-bg;
-    }
-
-    .devui-menu-item-icon {
-      transition: transform $transition-attrs;
-    }
-
-    & > a {
-      display: block;
-      width: 100%;
-      color: $devui-text-weak;
-      text-decoration: none;
-
-      &:hover {
-        color: inherit;
-      }
-    }
+  &:not(.disabled, .active):hover {
+    background-color: $devui-list-item-hover-bg;
+    color: $devui-list-item-hover-text;
   }
 
-  .devui-menu-item:not(.no-style).active {
-    color: $devui-brand-active;
-    background-color: $devui-list-item-active-bg;
-    font-weight: bold;
+  &:not(.disabled):active {
+    background-color: $devui-list-item-selected-bg;
+  }
+
+  .devui-menu-item-icon {
+    transition: transform $transition-attrs;
+  }
+
+  & > a {
+    display: block;
+    width: 100%;
+    color: $devui-text-weak;
+    text-decoration: none;
 
     &:hover {
-      background-color: $devui-list-item-hover-bg;
-    }
-
-    .devui-menu-item-icon .devui-icon-container {
       color: inherit;
     }
   }
+}
 
-  .devui-menu-item:not(.no-style).disabled {
-    color: $devui-disabled-text;
-    cursor: not-allowed;
-    user-select: none;
+.devui-menu-item:not(.no-style).active {
+  color: $devui-brand-active;
+  background-color: $devui-list-item-active-bg;
+  font-weight: bold;
+
+  &:hover {
+    background-color: $devui-list-item-hover-bg;
   }
 
+  .devui-menu-item-icon .devui-icon-container {
+    color: inherit;
+  }
+}
+
+.devui-menu-item:not(.no-style).disabled {
+  color: $devui-disabled-text;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.devui-menu {
+  width: $menu-width;
+  // padding-block: 4px;
+  border: 1px solid $devui-dividing-line;
+  transition: width $transition-attrs;
+
   // sub menu
-  .devui-sub-menu {
+  .devui-sub-menu:not(.no-style) {
     .devui-sub-menu-item {
       justify-content: space-between;
 
@@ -105,7 +109,6 @@ $transition-attrs: $devui-animation-duration-fast $devui-animation-ease-in-out-s
     }
 
     .devui-sub-menu-children {
-      // padding-inline-start: $padding-size;
       overflow-y: hidden;
 
       .devui-menu-item {
@@ -114,18 +117,16 @@ $transition-attrs: $devui-animation-duration-fast $devui-animation-ease-in-out-s
     }
   }
 
-  .devui-sub-menu.open > .devui-sub-menu-item {
-    .devui-sub-menu-item-arrow {
-      transform: rotate(-180deg);
-      transform-origin: center;
-    }
+  .devui-sub-menu.open > .devui-sub-menu-item .devui-sub-menu-item-arrow {
+    transform: rotate(-180deg);
+    transform-origin: center;
   }
 }
 
 .devui-menu.collapsed {
   --devui-menu-width: 60px;
 
-  .devui-menu-item {
+  .devui-menu-item:not(.no-style) {
     justify-content: center;
 
     .devui-menu-item-icon {
@@ -138,73 +139,32 @@ $transition-attrs: $devui-animation-duration-fast $devui-animation-ease-in-out-s
     }
   }
 
-  .devui-sub-menu-item-title {
-    justify-content: inherit;
-  }
+  .devui-sub-menu:not(.no-style) {
+    .devui-sub-menu-item .devui-sub-menu-item-title {
+      justify-content: inherit;
+    }
 
-  .devui-sub-menu-children {
-    display: none;
+    .devui-sub-menu-children {
+      display: none;
+    }
   }
 }
 
-.devui-menu-popover-panel .devui-menu-popover {
+.devui-menu-popover-panel .devui-menu-popover:not(.no-style) {
   background-color: $devui-base-bg;
   // background-color: #f60;
-  padding-block: 4px;
   box-shadow: $devui-shadow-length-base $devui-shadow;
+  transform-origin: left top;
 
-  .devui-menu-item:not(.no-style) {
-    display: flex;
-    align-items: center;
-    column-gap: $icon-gap;
-    height: 40px;
-    padding-inline: $padding-size 12px;
-    color: $devui-text-weak;
-    cursor: pointer;
-    transition: background-color $transition-attrs;
-
-    &:not(.disabled, .active):hover {
-      background-color: $devui-list-item-hover-bg;
-      color: $devui-list-item-hover-text;
-    }
-
-    &:not(.disabled):active {
-      background-color: $devui-list-item-selected-bg;
-    }
-
-    .devui-menu-item-icon {
-      transition: transform $transition-attrs;
-    }
-
-    & > a {
-      display: block;
-      width: 100%;
-      color: $devui-text-weak;
-      text-decoration: none;
-
-      &:hover {
-        color: inherit;
-      }
-    }
+  .devui-sub-menu-item .devui-sub-menu-item-arrow {
+    transform: rotate(-90deg);
   }
 
-  .devui-menu-item:not(.no-style).active {
-    color: $devui-brand-active;
-    background-color: $devui-list-item-active-bg;
-    font-weight: bold;
+  .devui-sub-menu-item.active {
+    background-color: initial;
 
-    &:hover {
-      background-color: $devui-list-item-hover-bg;
+    &:hover:not(.disabled) {
+      color: $devui-brand-active-focus;
     }
-
-    .devui-menu-item-icon .devui-icon-container {
-      color: inherit;
-    }
-  }
-
-  .devui-menu-item:not(.no-style).disabled {
-    color: $devui-disabled-text;
-    cursor: not-allowed;
-    user-select: none;
   }
 }
