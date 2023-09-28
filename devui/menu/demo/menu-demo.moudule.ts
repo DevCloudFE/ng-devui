@@ -12,9 +12,14 @@ import { BasicComponent } from './basic/basic.component';
 import { MenuModule } from 'ng-devui/menu';
 import { IconModule } from 'ng-devui/icon';
 import { TooltipModule } from 'ng-devui/tooltip';
-import { LoopMenuComponent } from './loop-menu/loop-menu.component';
-import { LoopSubMenuComponent } from './loop-menu/loop-sub-menu.component';
+import { LoopMenuComponent } from './loop/loop-menu/loop-menu.component';
+import { LoopSubMenuComponent } from './loop/loop-menu/loop-sub-menu.component';
 import { ButtonModule } from 'ng-devui/button';
+import { OpenCloseComponent } from './open-close/open-close.component';
+import { OpenOneComponent } from './open-one/open-one.component';
+import { LoopComponent } from './loop/loop.component';
+import { CustomNodeComponent } from './custom-node/custom-node.component';
+import { AutoExpandComponent } from './auto-expand/auto-expand.component';
 
 @NgModule({
   imports: [
@@ -31,9 +36,9 @@ import { ButtonModule } from 'ng-devui/button';
   RouterModule.forChild([
     { path: '', redirectTo: 'demo', pathMatch: 'full' },
 /*  {
-                                 path: 'design',
-                                 component: AccordionDesignComponent,
-                               }, */
+                                       path: 'design',
+                                       component: AccordionDesignComponent,
+                                     }, */
     { path: 'demo', component: MenuDemoComponent },
     {
     path: 'api',
@@ -49,6 +54,11 @@ import { ButtonModule } from 'ng-devui/button';
   declarations: [
   MenuDemoComponent,
   BasicComponent,
+  OpenCloseComponent,
+  OpenOneComponent,
+  CustomNodeComponent,
+  AutoExpandComponent,
+  LoopComponent,
   LoopMenuComponent,
   LoopSubMenuComponent,
   ]

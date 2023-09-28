@@ -2,21 +2,21 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MenuItemType } from 'ng-devui/menu';
 import { BASE_MENUS } from '../mock';
 @Component({
-  selector: 'd-basic',
-  templateUrl: './basic.component.html',
+  selector: 'd-open-one',
+  templateUrl: './open-one.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   })
-export class BasicComponent {
+export class OpenOneComponent {
   menus = BASE_MENUS;
-  disabledKeys = ['c-1', 'c-2', 'c-3-1'];
-  openKeys: string[] = ['c-3', 'c-2'];
-  activeKey = 'c-3-2';
+
+  openKey = 'c-2';
+  activeKey = 'c-2-2';
 
   openChange(open: boolean, key: string) {
     if (open) {
-      this.openKeys.push(key);
+      this.openKey = key;
     } else {
-      this.openKeys = this.openKeys.filter(item => item !== key);
+      this.openKey = '';
     }
   }
 

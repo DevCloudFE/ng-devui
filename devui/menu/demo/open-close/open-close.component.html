@@ -1,20 +1,22 @@
 <div class="demo-menu">
-  <div d-menu>
+  <d-button (btnClick)="collapsed = !collapsed" style="margin-bottom: 10px">{{ collapsed ? 'open' : 'close' }}</d-button>
+  <div d-menu [collapsed]="collapsed">
     <ng-container *ngFor="let m of menus; trackBy: trackByMenu">
       <div
         d-sub-menu
         [title]="m.name"
         [icon]="m.icon"
-        [disabled]="disabledKeys.includes(m.key)"
         [open]="openKeys.includes(m.key)"
         (openChange)="openChange($event, m.key)"
         *ngIf="m.children?.length; else leafTpl"
       >
         <div
           d-menu-item
-          [disabled]="disabledKeys.includes(item.key)"
           (itemClick)="itemClick(item.key)"
           [active]="item.key === activeKey"
+          dTooltip
+          [content]="collapsed ? item.name : ''"
+          position="right"
           *ngFor="let item of m.children; trackBy: trackByMenu"
         >
           <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
@@ -22,7 +24,14 @@
         </div>
       </div>
       <ng-template #leafTpl>
-        <div d-menu-item (itemClick)="itemClick(m.key)" [active]="m.key === activeKey" [disabled]="disabledKeys.includes(m.key)">
+        <div
+          d-menu-item
+          (itemClick)="itemClick(m.key)"
+          [active]="m.key === activeKey"
+          dTooltip
+          [content]="collapsed ? m.name : ''"
+          position="right"
+        >
           <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
           <span class="devui-menu-item-name over-flow-ellipsis">{{ m.name }}</span>
         </div>

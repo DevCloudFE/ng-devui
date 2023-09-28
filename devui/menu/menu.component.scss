@@ -17,7 +17,7 @@ $menu-item-height: var(--devui-menu-item-height);
 $menu-item-static-padding: var(--devui-menu-item-static-padding);
 $padding-size: var(--devui-padding-size);
 $icon-gap: var(--devui-icon-gap);
-$transition-attrs: $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
+$transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-smooth;
 
 .devui-menu-item:not(.no-style) {
   display: flex;
@@ -27,7 +27,7 @@ $transition-attrs: $devui-animation-duration-fast $devui-animation-ease-in-out-s
   padding-inline: $padding-size $menu-item-static-padding;
   color: $devui-text-weak;
   cursor: pointer;
-  transition: background-color $transition-attrs;
+  transition: background-color $transition-attrs, color $transition-attrs;
 
   &:not(.disabled, .active):hover {
     background-color: $devui-list-item-hover-bg;
@@ -40,6 +40,10 @@ $transition-attrs: $devui-animation-duration-fast $devui-animation-ease-in-out-s
 
   .devui-menu-item-icon {
     transition: transform $transition-attrs;
+
+    .devui-icon-container {
+      color: inherit;
+    }
   }
 
   & > a {
@@ -61,10 +65,6 @@ $transition-attrs: $devui-animation-duration-fast $devui-animation-ease-in-out-s
 
   &:hover {
     background-color: $devui-list-item-hover-bg;
-  }
-
-  .devui-menu-item-icon .devui-icon-container {
-    color: inherit;
   }
 }
 
@@ -91,7 +91,6 @@ $transition-attrs: $devui-animation-duration-fast $devui-animation-ease-in-out-s
         column-gap: $icon-gap;
         width: 100%;
         max-width: 200px;
-        // overflow-x: hidden;
       }
 
       .devui-sub-menu-item-arrow {
