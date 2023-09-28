@@ -60,7 +60,7 @@ export class LoopMenuComponent implements OnInit, AfterViewInit {
 
   activeKey = 'c-3-1-1';
   openKeys: string[] = [];
-  // openKeys: string[] = ['c-3', 'c-3-1'];
+  openKeys: string[] = ['c-3', 'c-3-1'];
   protected cdr = inject(ChangeDetectorRef);
   ngOnInit() {
     this.openKeys = findAllParent(this.menus, this.activeKey);

@@ -3,16 +3,14 @@
     <ng-container *ngFor="let m of menus; trackBy: trackByMenu">
       <div
         d-sub-menu
-        [title]="m.name"
         [icon]="m.icon"
-        [disabled]="disabledKeys.includes(m.key)"
-        [open]="openKeys.includes(m.key)"
+        [title]="m.name"
+        [open]="openKey === m.key"
         (openChange)="openChange($event, m.key)"
         *ngIf="m.children?.length; else leafTpl"
       >
         <div
           d-menu-item
-          [disabled]="disabledKeys.includes(item.key)"
           (itemClick)="itemClick(item.key)"
           [active]="item.key === activeKey"
           *ngFor="let item of m.children; trackBy: trackByMenu"
@@ -22,7 +20,7 @@
         </div>
       </div>
       <ng-template #leafTpl>
-        <div d-menu-item (itemClick)="itemClick(m.key)" [active]="m.key === activeKey" [disabled]="disabledKeys.includes(m.key)">
+        <div d-menu-item (itemClick)="itemClick(m.key)" [active]="m.key === activeKey">
           <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
           <span class="devui-menu-item-name over-flow-ellipsis">{{ m.name }}</span>
         </div>

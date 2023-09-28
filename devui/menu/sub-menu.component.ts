@@ -36,6 +36,8 @@ import { map } from 'rxjs/operators';
   }
   })
 export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit, AfterContentChecked, OnDestroy {
+  // { descendants: true } 在递归组件里没用
+  @ContentChildren(MenuItemDirective) menuItemDirectives: QueryList<MenuItemDirective>;
   @HostBinding('class.no-style') @Input() noStyle = false;
   @HostBinding('class.open') _open = false;
   @Input()
@@ -86,9 +88,6 @@ export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit
 
   menuItems: MenuItemDirective[] = [];
 
-  // { descendants: true } 在递归组件里没用
-  @ContentChildren(MenuItemDirective) menuItemDirectives: TypeOrNull<QueryList<MenuItemDirective>> = null;
-
   collapsed = false;
 
   readonly childState$ = new Subject<MenuHoverTypes>();
@@ -122,10 +121,10 @@ export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit
         distinctUntilChanged(),
         takeUntilDestroyed()
       ).subscribe(open => {
-        // console.log('isSubMenuOpenWithDebounce', this.open, open);
-
+        // console.log('sub menu open', this.open, open);
         this.toggleOpen(open);
         this.parentSubmenu?.parentPopoverOpen$.next(open);
+        this.cdr.markForCheck();
       });
   }
 
@@ -135,7 +134,7 @@ export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit
   }
   ngAfterContentInit(): void {
     // console.log('ngAfterContentInit');
-    if (this.menuItemDirectives.length) {
+    if (this.menuItemDirectives?.length) {
       this.menuItems.push(...this.menuItemDirectives.toArray());
       if (this.parentSubmenu) {
         this.parentSubmenu.menuItems.push(...this.menuItemDirectives.toArray());
