@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MenuItemType } from 'ng-devui/menu';
 import { LOOP_MENUS } from '../mock';
 @Component({
   selector: 'd-loop',
@@ -8,5 +7,4 @@ import { LOOP_MENUS } from '../mock';
   })
 export class LoopComponent {
   menus = LOOP_MENUS;
-  collapsed = false;
 }

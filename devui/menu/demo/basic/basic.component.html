@@ -1,5 +1,5 @@
 <div class="demo-menu">
-  <div d-menu>
+  <div d-menu (menuItemClick)="menuItemClick($event)">
     <ng-container *ngFor="let m of menus; trackBy: trackByMenu">
       <div
         d-sub-menu
