@@ -97,5 +97,5 @@ export class BasicComponent {
     return item.key;
   }
 
-  collapsed = true;
+  collapsed = false;
 }

@@ -12,8 +12,8 @@ import {
   SimpleChanges,
   ChangeDetectorRef
 } from '@angular/core';
-import { DevConfigService, WithConfig } from 'ng-devui/utils';
-import { MenuHoverTypes, MenuItemType } from './type';
+// import { DevConfigService, WithConfig } from 'ng-devui/utils';
+import { MenuHoverTypes } from './type';
 import { HostListener } from '@angular/core';
 import { SubMenuComponent } from './sub-menu.component';
 import { MenuComponent } from './menu.component';
@@ -21,9 +21,6 @@ import { MenuComponent } from './menu.component';
 @Directive({
   selector: '[d-menu-item]',
   exportAs: 'dMenuItem',
-  /* providers: [
-    { provide: 'testToken', useValue: 'menuItemToken' }
-  ], */
   host: {
   '[class.devui-menu-item]': 'true',
   '(mouseenter)': "hostHover('enter')",

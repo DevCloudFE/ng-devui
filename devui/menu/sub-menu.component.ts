@@ -13,10 +13,10 @@ import {
   ContentChildren,
   AfterViewInit,
   AfterContentInit,
-  forwardRef,
   AfterContentChecked,
   OnDestroy,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TypeOrNull, collapseMotion, scaleInOut } from 'ng-devui/utils';
 // import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { MenuComponent } from './menu.component';
@@ -24,7 +24,7 @@ import { MenuHoverTypes, SubTitleContextType } from './type';
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import { MenuItemDirective } from './menu-item.directive';
 import { BehaviorSubject, Subject, auditTime, combineLatest, distinctUntilChanged, filter, merge } from 'rxjs';
-import { debounceTime, map, mapTo, skipWhile, takeWhile } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: '[d-sub-menu]',
@@ -92,18 +92,16 @@ export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit
   collapsed = false;
 
   readonly childState$ = new Subject<MenuHoverTypes>();
-  readonly itemInteractive$ = new Subject<MenuHoverTypes>();
-  readonly isChildSubMenuOpen$ = new BehaviorSubject(false);
+  readonly parentPopoverOpen$ = new BehaviorSubject(false);
 
   level = 1;
   constructor() {
     if (this.parentSubmenu) {
       this.level = this.parentSubmenu.level + 1;
     }
-  }
 
-  ngOnInit() {
-    this.parentMenu.collapsed$.subscribe(res => {
+    // 如果不在constructor里，takeUntilDestroyed就得传入 destroyRef = inject(DestroyRef);
+    this.parentMenu.collapsed$.pipe(takeUntilDestroyed()).subscribe(res => {
       // console.log('parentMenu.collapsed$', res, this.open);
       this.collapsed = res;
       if (res) {
@@ -112,24 +110,26 @@ export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit
       this.cdr.markForCheck();
     });
 
-    const isCurrentSubmenuOpen$ = this.childState$.pipe(map((value => value === 'enter')));
-    const isSubMenuOpenWithDebounce$ = combineLatest([this.isChildSubMenuOpen$, isCurrentSubmenuOpen$])
+    const currentPopoverOpen$ = this.childState$.pipe(map((value => value === 'enter')));
+    combineLatest([this.parentPopoverOpen$, currentPopoverOpen$])
       .pipe(
         filter(() => this.collapsed && !this.disabled),
-        map((([parentChildOpen, currentChildOpen]) => {
-          // console.log('map open', parentChildOpen, currentChildOpen)
-          return parentChildOpen || currentChildOpen;
+        map((([parentPopoverOpen, currentPopoverOpen]) => {
+          // console.log('map open', parentPopoverOpen, currentPopoverOpen)
+          return parentPopoverOpen || currentPopoverOpen;
         })),
         auditTime(150),
         distinctUntilChanged(),
-      );
-    isSubMenuOpenWithDebounce$.subscribe(open => {
-      // console.log('isSubMenuOpenWithDebounce', this.open, open);
+        takeUntilDestroyed()
+      ).subscribe(open => {
+        // console.log('isSubMenuOpenWithDebounce', this.open, open);
 
-      this.toggleOpen(open);
-      this.parentSubmenu?.isChildSubMenuOpen$.next(open);
-    });
+        this.toggleOpen(open);
+        this.parentSubmenu?.parentPopoverOpen$.next(open);
+      });
   }
+
+  ngOnInit() { }
   ngAfterViewInit() {
 
   }
