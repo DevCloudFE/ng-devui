@@ -63,6 +63,7 @@ export class DevuiCodeboxComponent implements OnInit {
     if (ide === 'StackBlitz') {
       this.onlineIdeService.openOnStackBlitz(this.sourceData);
     } else {
+      console.log('this.sourceData', this.sourceData);
       this.onlineIdeService.openOnCodeSandbox(this.sourceData);
     }
   }
@@ -71,5 +72,5 @@ export class DevuiCodeboxComponent implements OnInit {
     this.document = this.doc;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

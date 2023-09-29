@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, inject } from '@angular/core';
 import { MenuItemType } from 'ng-devui/menu';
-import { LoopMenuComponent } from './loop-menu.component';
+
 @Component({
   selector: 'loop-sub-menu',
   template: `
@@ -9,9 +9,9 @@ import { LoopMenuComponent } from './loop-menu.component';
       [title]="menu.name"
       [icon]="menu.icon">
       <ng-container *ngFor="let item of menu.children; trackBy: trackByMenu">
-        <loop-sub-menu [menu]="item" *ngIf="item.children?.length; else leafTpl" />
+        <loop-sub-menu [menu]="item" [activeKey]="activeKey" (itemClick)="onClick($event)" *ngIf="item.children?.length; else leafTpl" />
         <ng-template #leafTpl>
-          <div d-menu-item>
+          <div d-menu-item [active]="activeKey === item.key" (itemClick)="onClick(item.key)">
             <d-icon class="devui-menu-item-icon" *ngIf="item.icon" [icon]="item.icon" />
             <span class="devui-menu-item-name over-flow-ellipsis">{{ item.name }}</span>
           </div>
@@ -21,8 +21,14 @@ import { LoopMenuComponent } from './loop-menu.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   })
 export class LoopSubMenuComponent {
-  protected loopMenuComponent = inject(LoopMenuComponent);
+  @Input() activeKey = '';
   @Input({ required: true }) menu: MenuItemType;
+  @Output() itemClick = new EventEmitter<string>();
+
+  onClick(key) {
+    this.itemClick.emit(key);
+  }
+
   trackByMenu(_: number, item: MenuItemType) {
     return item.key;
   }
