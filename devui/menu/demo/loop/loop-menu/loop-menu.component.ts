@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MenuItemType } from 'ng-devui/menu';
+import { MenuItemClickType, MenuItemType } from 'ng-devui/menu';
 
 @Component({
   selector: 'loop-menu',
   template: `
-    <div d-menu [collapsed]="collapsed">
+    <div d-menu [collapsed]="collapsed" (menuItemClick)="menuItemClick($event)">
       <ng-container *ngFor="let item of menus; trackBy: trackByMenu">
         <loop-sub-menu
           [menu]="item"
@@ -34,6 +34,10 @@ export class LoopMenuComponent {
 
   itemClick(key: string) {
     this.activeKey = key;
+  }
+
+  menuItemClick(event: MenuItemClickType) {
+    console.log('menuItemClick', event);
   }
 
   trackByMenu(_: number, item: MenuItemType) {

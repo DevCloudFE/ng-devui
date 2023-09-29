@@ -76,7 +76,7 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
       originY: 'top',
       overlayX: 'start',
       overlayY: 'top',
-      offsetX: 6
+      offsetX: 4
     }
   ];
 

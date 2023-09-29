@@ -49,12 +49,14 @@ export class MenuItemDirective implements OnInit, OnChanges {
     // this._active = true;
     if (!this.disabled) {
       this.itemClick.emit(event);
-      this.menuComponent.menuItemClick.emit({
-        item: this,
-        event
-      });
-      if (!this.subMenuHost && this.submenuService) {
-        this.submenuService.childState$.next('leave');
+      if (!this.subMenuHost) {
+        this.menuComponent.menuItemClick.emit({
+          item: this,
+          event
+        });
+        if (this.submenuService) {
+          this.submenuService.childState$.next('leave');
+        }
       }
     }
   }
