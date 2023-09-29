@@ -11,13 +11,10 @@ import {
   TemplateRef,
   QueryList,
   ContentChildren,
-  AfterViewInit,
   AfterContentInit,
-  AfterContentChecked,
-  OnDestroy,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { TypeOrNull, collapseMotion, scaleInOut } from 'ng-devui/utils';
+import { collapseMotion, scaleInOut } from 'ng-devui/utils';
 // import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { MenuComponent } from './menu.component';
 import { MenuHoverTypes, SubTitleContextType } from './type';
@@ -35,7 +32,7 @@ import { map } from 'rxjs/operators';
   '[class.devui-sub-menu]': 'true'
   }
   })
-export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit, AfterContentChecked, OnDestroy {
+export class SubMenuComponent implements OnInit, AfterContentInit {
   // { descendants: true } 在递归组件里没用
   @ContentChildren(MenuItemDirective) menuItemDirectives: QueryList<MenuItemDirective>;
   @HostBinding('class.no-style') @Input() noStyle = false;
@@ -129,9 +126,6 @@ export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit
   }
 
   ngOnInit() { }
-  ngAfterViewInit() {
-
-  }
   ngAfterContentInit(): void {
     // console.log('ngAfterContentInit');
     if (this.menuItemDirectives?.length) {
@@ -140,9 +134,6 @@ export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit
         this.parentSubmenu.menuItems.push(...this.menuItemDirectives.toArray());
       }
     }
-  }
-  ngAfterContentChecked(): void {
-
   }
 
   titleClick() {
@@ -191,9 +182,5 @@ export class SubMenuComponent implements OnInit, AfterViewInit, AfterContentInit
   toggleActive(active: boolean) {
     this.childActive = active;
     this.cdr.markForCheck();
-  }
-
-  ngOnDestroy(): void {
-    console.log('sub menu destroy');
   }
 }
