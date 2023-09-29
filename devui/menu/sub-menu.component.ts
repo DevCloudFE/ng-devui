@@ -20,14 +20,16 @@ import { MenuComponent } from './menu.component';
 import { MenuHoverTypes, SubTitleContextType } from './type';
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import { MenuItemDirective } from './menu-item.directive';
-import { BehaviorSubject, Subject, auditTime, combineLatest, distinctUntilChanged, filter, merge } from 'rxjs';
+import { auditTime, combineLatest, distinctUntilChanged, filter } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { SubMenuService } from './submenu.service';
 
 @Component({
   selector: '[d-sub-menu]',
   templateUrl: './sub-menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [collapseMotion, scaleInOut],
+  providers: [SubMenuService],
   host: {
   '[class.devui-sub-menu]': 'true'
   }
@@ -61,10 +63,7 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
     };
   }
 
-  protected parentSubmenu = inject(SubMenuComponent, {
-    skipSelf: true,
-    optional: true
-  });
+  protected submenuService = inject(SubMenuService, { self: true });
   protected parentMenu = inject(MenuComponent, { skipSelf: true });
 
   protected cdr = inject(ChangeDetectorRef);
@@ -83,19 +82,9 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
 
   private childActive = false;
 
-  menuItems: MenuItemDirective[] = [];
-
   collapsed = false;
 
-  readonly childState$ = new Subject<MenuHoverTypes>();
-  readonly parentPopoverOpen$ = new BehaviorSubject(false);
-
-  level = 1;
   constructor() {
-    if (this.parentSubmenu) {
-      this.level = this.parentSubmenu.level + 1;
-    }
-
     // 如果不在constructor里，takeUntilDestroyed就得传入 destroyRef = inject(DestroyRef);
     this.parentMenu.collapsed$.pipe(takeUntilDestroyed()).subscribe(res => {
       // console.log('parentMenu.collapsed$', res, this.open);
@@ -106,8 +95,24 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
       this.cdr.markForCheck();
     });
 
-    const currentPopoverOpen$ = this.childState$.pipe(map((value => value === 'enter')));
-    combineLatest([this.parentPopoverOpen$, currentPopoverOpen$])
+    const currentActive$ = this.submenuService.childActive$;
+    combineLatest([this.submenuService.parentSubMenuActive$, currentActive$])
+      .pipe(
+        map((([parentActive, currentActive]) => {
+          // console.log('map active', parentActive, currentActive)
+          return parentActive || currentActive;
+        })),
+        distinctUntilChanged(),
+        takeUntilDestroyed()
+      ).subscribe(res => {
+        // console.log('childActive$', res);
+        this.toggleActive(res);
+        this.submenuService.parentSubMenuService?.parentSubMenuActive$?.next(res);
+        this.cdr.markForCheck();
+      });
+
+    const currentPopoverOpen$ = this.submenuService.childState$.pipe(map((value => value === 'enter')));
+    combineLatest([this.submenuService.parentPopoverOpen$, currentPopoverOpen$])
       .pipe(
         filter(() => this.collapsed && !this.disabled),
         map((([parentPopoverOpen, currentPopoverOpen]) => {
@@ -120,7 +125,7 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
       ).subscribe(open => {
         // console.log('sub menu open', this.open, open);
         this.toggleOpen(open);
-        this.parentSubmenu?.parentPopoverOpen$.next(open);
+        this.submenuService.parentSubMenuService?.parentPopoverOpen$.next(open);
         this.cdr.markForCheck();
       });
   }
@@ -129,9 +134,9 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
   ngAfterContentInit(): void {
     // console.log('ngAfterContentInit');
     if (this.menuItemDirectives?.length) {
-      this.menuItems.push(...this.menuItemDirectives.toArray());
-      if (this.parentSubmenu) {
-        this.parentSubmenu.menuItems.push(...this.menuItemDirectives.toArray());
+      this.submenuService.menuItems.push(...this.menuItemDirectives.toArray());
+      if (this.submenuService.parentSubMenuService) {
+        this.submenuService.parentSubMenuService.menuItems.push(...this.menuItemDirectives.toArray());
       }
     }
   }
@@ -143,7 +148,7 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
 
 
   titleHover(type: MenuHoverTypes) {
-    this.childState$.next(type);
+    this.submenuService.childState$.next(type);
   }
 
   /*
@@ -171,16 +176,9 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
     return `${base} ${this.childActive ? 'active' : ''} ${this.disabled ? 'disabled' : ''} ${this.noStyle ? 'no-style' : ''}`;
   }
 
-  setChildActive() {
-    // console.log('setChildActive', this.menuItems);
-    const active = this.menuItems.some(item => item.active);
-    this.toggleActive(active);
-    this.parentSubmenu?.toggleActive(active);
-
-  }
-
   toggleActive(active: boolean) {
-    this.childActive = active;
-    this.cdr.markForCheck();
+    if (active !== this.childActive) {
+      this.childActive = active;
+    }
   }
 }

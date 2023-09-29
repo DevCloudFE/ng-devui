@@ -38,7 +38,7 @@
 </ng-container>
 
 <ng-template #defaultChildrenTpl>
-  <div class="devui-sub-menu-children" [style.--level]="level" [@collapseMotion]="expandState">
+  <div class="devui-sub-menu-children" [style.--level]="submenuService.level" [@collapseMotion]="expandState">
     <ng-template [ngTemplateOutlet]="contentTpl" />
   </div>
 </ng-template>

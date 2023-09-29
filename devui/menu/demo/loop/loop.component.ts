@@ -41,6 +41,16 @@ const MENUS: MenuItemType[] = [
           {
             key: 'c-3-1-2',
             name: 'Content 3 grandson 2',
+            children: [
+              {
+                key: 'c-3-1-2-1',
+                name: 'Content 3 great grandson 1',
+              },
+              {
+                key: 'c-3-1-2-2',
+                name: 'Content 3 great grandson 2',
+              },
+            ]
           },
         ]
       },
@@ -73,4 +83,5 @@ const MENUS: MenuItemType[] = [
   })
 export class LoopComponent {
   menus = MENUS;
+  collapsed = false;
 }
