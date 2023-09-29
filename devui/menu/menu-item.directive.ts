@@ -1,6 +1,4 @@
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
   Input,
   OnInit,
   Directive,
@@ -15,8 +13,8 @@ import {
 // import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { MenuHoverTypes } from './type';
 import { HostListener } from '@angular/core';
-import { SubMenuComponent } from './sub-menu.component';
 import { MenuComponent } from './menu.component';
+import { SubMenuService } from './submenu.service';
 
 @Directive({
   selector: '[d-menu-item]',
@@ -38,13 +36,13 @@ export class MenuItemDirective implements OnInit, OnChanges {
   @Output() titleHover = new EventEmitter<MenuHoverTypes>();
   protected cdr = inject(ChangeDetectorRef);
 
-  protected submenuComponent = inject(SubMenuComponent, {
-    skipSelf: true,
-    optional: true
-  });
-
   protected menuComponent = inject(MenuComponent, {
     skipSelf: true
+  });
+
+  protected submenuService = inject(SubMenuService, {
+    skipSelf: true,
+    optional: true
   });
 
   @HostListener('click', ['$event']) hostClick(event: MouseEvent) {
@@ -55,29 +53,28 @@ export class MenuItemDirective implements OnInit, OnChanges {
         item: this,
         event
       });
-      if (!this.subMenuHost && this.submenuComponent) {
-        this.submenuComponent.childState$.next('leave');
+      if (!this.subMenuHost && this.submenuService) {
+        this.submenuService.childState$.next('leave');
       }
     }
   }
 
   hostHover(type: MenuHoverTypes) {
-    if (!this.disabled && this.submenuComponent) {
+    if (!this.disabled && this.submenuService) {
       this.titleHover.emit(type);
     }
   }
 
   ngOnChanges({ active }: SimpleChanges): void {
     // console.log('active', active, this.submenuService)
-    if (active && this.submenuComponent) {
-      this.submenuComponent.setChildActive();
+    if (active && this.submenuService) {
       if (active.firstChange) {
         setTimeout(() => {
-          this.submenuComponent.setChildActive();
+          this.submenuService.setChildActive();
           this.cdr.markForCheck();
         }, 0);
       } else {
-        this.submenuComponent.setChildActive();
+        this.submenuService.setChildActive();
       }
     }
   }

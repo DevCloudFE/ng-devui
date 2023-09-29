@@ -33,7 +33,6 @@ export class LoopMenuComponent {
   activeKey = '';
 
   itemClick(key: string) {
-    console.log('itemClick', key);
     this.activeKey = key;
   }
 
