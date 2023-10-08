@@ -39,8 +39,7 @@ $transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-s
   }
 
   .devui-menu-item-icon {
-    transition: transform $transition-attrs;
-
+    // transition: transform $transition-attrs;
     .devui-icon-container {
       color: inherit;
     }
@@ -129,7 +128,7 @@ $transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-s
     justify-content: center;
 
     .devui-menu-item-icon {
-      transform: scale(1.2);
+      transform: scale(1.1);
     }
 
     .devui-menu-item-icon + .devui-menu-item-name,

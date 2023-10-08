@@ -122,3 +122,14 @@ export {
 |       disabled       |  `boolean`  |                 表示嵌套结构层级                  |
 |       open       |   `boolean`    |                 所属父级菜单数据                  |
 |   icon   |  `string`  |        图标   |
+
+
+### css variable 说明
+
+|        变量        |    类型    |                   变量含义说明                    |
+| :----------------: | :--------: | :-----------------------------------------------: |
+|       --devui-menu-width        |   `string`    |                菜单宽度                 |
+|       --devui-menu-item-height       |  `string`  |                 单个菜单高度                  |
+|       --devui-menu-item-static-padding       |   `string`    |                 单个菜单的缩进距离                  |
+|   --devui-padding-size   |  `string`  |         菜单基础缩进距离   |
+|   --devui-icon-gap  |  `string`  |        title和icon的间距   |

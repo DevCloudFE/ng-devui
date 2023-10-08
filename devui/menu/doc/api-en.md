@@ -119,6 +119,17 @@ export {
 |        Variable        |    Type    |                   Variable                  |
 | :----------------: | :--------: | :-----------------------------------------------: |
 |       $implicit        |   `string`    |                title attribute                 |
-|       disabled       |  `boolean`  |                 Represents a nested structure hierarchy                  |
-|       open       |   `boolean`    |                 Parent Menu Data                  |
+|       disabled       |  `boolean`  |                 represents a nested structure hierarchy                  |
+|       open       |   `boolean`    |                 parent Menu Data                  |
 |   icon   |  `string`  |        Icon   |
+
+
+### css variable 说明
+
+|        变量        |    类型    |                   变量含义说明                    |
+| :----------------: | :--------: | :-----------------------------------------------: |
+|       --devui-menu-width        |   `string`    |                menu width                 |
+|       --devui-menu-item-height       |  `string`  |                 menu item height                  |
+|       --devui-menu-item-static-padding       |   `string`    |        menu item indent distance                |
+|   --devui-padding-size   |  `string`  |         menu item basic indent distance    |
+|   --devui-icon-gap  |  `string`  |        the spacing between title and icon   |
