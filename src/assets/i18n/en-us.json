@@ -169,8 +169,8 @@
         "description": "Expand、select and disabled"
       },
       "openCloseDemo": {
-        "title": "Expand and collapsed",
-        "description": "The [collapsed] attribute controls menu expansion and collapse, and setting var (--devui menu width) on the menu root element can control the width of expansion and collapse"
+        "title": "Foldable",
+        "description": "The [collapsed] attribute controls menu expansion and fold, and setting var (--devui menu width) on the menu root element can control the width of expansion and fold"
       },
       "openOneDemo": {
         "title": "Accordion effect",
@@ -190,7 +190,7 @@
       },
       "anchorLinkValues": {
         "basic-usage": "Basic usage",
-        "open-close": "Expand and collapsed",
+        "open-close": "Foldable",
         "open-one": "Accordion effect",
         "loop": "Loop menu",
         "custom-node": "Custom node",

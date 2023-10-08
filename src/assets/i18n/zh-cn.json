@@ -169,8 +169,8 @@
         "description": "展开、选中和禁用"
       },
       "openCloseDemo": {
-        "title": "展开收起",
-        "description": "[collapsed] 属性控制菜单展开和收起, 在菜单根元素上设置var(--devui-menu-width)可控制展开和收起的宽度"
+        "title": "可折叠",
+        "description": "[collapsed] 属性控制菜单展开和折叠, 在菜单根元素上设置var(--devui-menu-width)可控制展开和折叠的宽度"
       },
       "openOneDemo": {
         "title": "手风琴效果",
@@ -190,7 +190,7 @@
       },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
-        "open-close": "展开收起",
+        "open-close": "可折叠",
         "open-one": "手风琴效果",
         "loop": "递归菜单",
         "custom-node": "自定义节点",

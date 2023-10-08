@@ -4,6 +4,7 @@ import { MenuItemClickType, MenuItemType } from 'ng-devui/menu';
 @Component({
   selector: 'loop-menu',
   template: `
+  <!-- <loop-menu [menus]="menus" [collapsed]="collapsed" /> -->
     <div d-menu [collapsed]="collapsed" (menuItemClick)="menuItemClick($event)">
       <ng-container *ngFor="let item of menus; trackBy: trackByMenu">
         <loop-sub-menu
