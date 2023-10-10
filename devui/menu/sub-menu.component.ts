@@ -84,14 +84,14 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
 
   collapsed = false;
 
+  popoverOpen = false;
+
   constructor() {
     // 如果不在constructor里，takeUntilDestroyed就得传入 destroyRef = inject(DestroyRef);
     this.parentMenu.collapsed$.pipe(takeUntilDestroyed()).subscribe(res => {
       // console.log('parentMenu.collapsed$', res, this.open);
       this.collapsed = res;
-      if (res) {
-        this.toggleOpen(false);
-      }
+      this.togglePopOpen(false);
       this.cdr.markForCheck();
     });
 
@@ -124,7 +124,7 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
         takeUntilDestroyed()
       ).subscribe(open => {
         // console.log('sub menu open', this.open, open);
-        this.toggleOpen(open);
+        this.togglePopOpen(open);
         this.submenuService.parentSubMenuService?.parentPopoverOpen$.next(open);
         this.cdr.markForCheck();
       });
@@ -165,6 +165,12 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
     if (open !== this.open) {
       this.open = open;
       this.openChange.emit(open);
+    }
+  }
+
+  togglePopOpen(open: boolean) {
+    if (open !== this.popoverOpen) {
+      this.popoverOpen = open;
     }
   }
 

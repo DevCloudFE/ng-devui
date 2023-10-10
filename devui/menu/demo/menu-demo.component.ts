@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
   selector: 'd-menu-demo',
   templateUrl: './menu-demo.component.html',
   })
-export class MenuDemoComponent implements OnInit, OnDestroy {
+export class MenuDemoComponent implements OnInit {
   DemoBasic: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
@@ -65,11 +65,7 @@ export class MenuDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'open-one', value: values['open-one'] },
       { dAnchorLink: 'loop', value: values['loop'] },
       { dAnchorLink: 'custom-node', value: values['custom-node'] },
-      { dAnchorLink: 'auto-expand', value: values['auto-expand'] },
+      // { dAnchorLink: 'auto-expand', value: values['auto-expand'] },
     ];
-  }
-
-  ngOnDestroy() {
-
   }
 }
