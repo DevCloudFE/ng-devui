@@ -6,7 +6,7 @@
 
 :root {
   --devui-menu-width: 256px;
-  --devui-menu-item-height: 40px;
+  --devui-menu-item-height: 36px;
   --devui-menu-item-static-padding: 12px;
   --devui-padding-size: 16px;
   --devui-icon-gap: 10px;
@@ -27,6 +27,8 @@ $transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-s
   padding-inline: $padding-size $menu-item-static-padding;
   color: $devui-text-weak;
   cursor: pointer;
+  margin-block: 8px;
+  border-radius: 20px;
   transition: background-color $transition-attrs, color $transition-attrs;
 
   &:not(.disabled, .active):hover {
@@ -75,21 +77,21 @@ $transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-s
 
 .devui-menu {
   width: $menu-width;
-  // padding-block: 4px;
-  border: 1px solid $devui-dividing-line;
+  padding: 20px 12px;
   transition: width $transition-attrs;
 
   // sub menu
   .devui-sub-menu:not(.no-style) {
     .devui-sub-menu-item {
       justify-content: space-between;
+      margin-block: 0;
 
       .devui-sub-menu-item-title {
         display: flex;
         align-items: center;
         column-gap: $icon-gap;
         width: 100%;
-        max-width: 200px;
+        max-width: 176px;
       }
 
       .devui-sub-menu-item-arrow {
@@ -103,6 +105,7 @@ $transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-s
 
       &:hover:not(.disabled) {
         color: $devui-brand-active-focus;
+        background-color: $devui-list-item-hover-bg;
       }
     }
 

@@ -124,12 +124,12 @@ export {
 |   icon   |  `string`  |        Icon   |
 
 
-### css variable 说明
+### css variable
 
-|        变量        |    类型    |                   变量含义说明                    |
-| :----------------: | :--------: | :-----------------------------------------------: |
-|       --devui-menu-width        |   `string`    |                menu width                 |
-|       --devui-menu-item-height       |  `string`  |                 menu item height                  |
-|       --devui-menu-item-static-padding       |   `string`    |        menu item indent distance                |
-|   --devui-padding-size   |  `string`  |         menu item basic indent distance    |
-|   --devui-icon-gap  |  `string`  |        the spacing between title and icon   |
+|        Variable        |    Type    |        Default    |          Description                    |
+| :----------------: | :--------: | :---------------: |---------------------------------: |
+|       --devui-menu-width        |   `string`    |      256  |          menu width                 |
+|       --devui-menu-item-height       |  `string`  |       36  |          menu item height                  |
+|       --devui-menu-item-static-padding       |   `string`    |   12  |     menu item indent distance                |
+|   --devui-padding-size   |  `string`  |    16  |     menu item basic indent distance    |
+|   --devui-icon-gap  |  `string`  |     10  |   the spacing between title and icon   |

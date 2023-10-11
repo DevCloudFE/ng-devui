@@ -1,11 +1,3 @@
-<!-- 
-  fix bug: button click事件点两次只触发一次
-
-  移除下列属性
-  [class.mouseDown]="isMouseDown"
-  (mousedown)="isMouseDown = true"
-  (mouseup)="isMouseDown = false"
- -->
 <button
   [attr.id]="id"
   class="devui-btn devui-btn-{{ bsStyle }} devui-btn-{{ bsSize }} devui-btn-{{ bsPosition }}"
@@ -13,6 +5,7 @@
   [type]="type"
   [disabled]="disabled"
   [class.bordered]="bordered"
+  [class.mouseDown]="isMouseDown"
   [backdrop]="true"
   dLoading
   [showLoading]="showLoading"
@@ -21,6 +14,8 @@
   [dAutoFocus]="autofocus"
   (click)="onClick($event)"
   [ngClass]="{ 'd-btn-icon': !!icon && !hasContent(), 'd-btn-icon-wrap': !!icon }"
+  (mousedown)="isMouseDown = true"
+  (mouseup)="isMouseDown = false"
 >
   <span *ngIf="!!icon" class="devui-icon-fix icon {{ icon }}" [ngClass]="{ 'clear-right-4': hasContent() }"></span>
   <!--

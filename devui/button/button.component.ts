@@ -59,7 +59,7 @@ export class ButtonComponent implements AfterContentChecked {
   waveLeft = 0;
   waveTop = 0;
   showWave = false;
-  // isMouseDown = false;
+  isMouseDown = false;
 
   constructor(private cd: ChangeDetectorRef) {
   }
