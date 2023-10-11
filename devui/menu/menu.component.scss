@@ -28,7 +28,7 @@ $transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-s
   color: $devui-text-weak;
   cursor: pointer;
   margin-block: 8px;
-  border-radius: 20px;
+  border-radius: $devui-border-radius;
   transition: background-color $transition-attrs, color $transition-attrs;
 
   &:not(.disabled, .active):hover {
