@@ -132,4 +132,4 @@ export {
 |       --devui-menu-item-height       |  `string`  |       36  |          menu item height                  |
 |       --devui-menu-item-static-padding       |   `string`    |   12  |     menu item indent distance                |
 |   --devui-padding-size   |  `string`  |    16  |     menu item basic indent distance    |
-|   --devui-icon-gap  |  `string`  |     10  |   the spacing between title and icon   |
+|   --devui-menu-icon-gap  |  `string`  |     10  |   the spacing between title and icon   |

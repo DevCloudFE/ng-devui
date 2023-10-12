@@ -132,4 +132,4 @@ export {
 |       --devui-menu-item-height       |  `string`  |              36    |       单个菜单高度                  |
 |       --devui-menu-item-static-padding       |   `string`    |           12    |          单个菜单的缩进距离                  |
 |   --devui-padding-size   |  `string`  |      16    |       菜单基础缩进距离   |
-|   --devui-icon-gap  |  `string`  |       10    |     title和icon的间距   |
+|   --devui-menu-icon-gap  |  `string`  |       10    |     title和icon的间距   |

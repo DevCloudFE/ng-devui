@@ -50,7 +50,7 @@
     "date-fns": "^2.23.0",
     "gridstack": "^6.0.0",
     "marked": "^4.0.10",
-    "tslib": "^2.6.2",
+    "tslib": "^2.0.0",
     "zone.js": "~0.13.1"
   },
   "devDependencies": {
@@ -72,9 +72,9 @@
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.30.0",
     "clean-css-cli": "^4.3.0",
+    "css-vars-ponyfill": "^2.3.2",
     "codelyzer": "^6.0.0",
     "codesandbox": "^2.2.3",
-    "css-vars-ponyfill": "^2.3.2",
     "eslint": "^7.32.0",
     "highlight.js": "^10.2.0",
     "html-loader": "^1.3.0",
@@ -122,8 +122,8 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "npx commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npx lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged",
       "pre-push": "npm run test:lib"
     }
   }
