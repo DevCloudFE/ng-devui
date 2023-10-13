@@ -23,14 +23,12 @@ export class SubMenuService {
   protected cdr = inject(ChangeDetectorRef);
   level = 1;
   constructor() {
-    // console.log('parentSubMenuService', this.parentSubMenuService);
     if (this.parentSubMenuService) {
       this.level = this.parentSubMenuService.level + 1;
     }
   }
 
   setChildActive() {
-    // console.log('setChildActive', this.menuItems);
     const active = this.menuItems.some(item => item.active);
     this.childActive$.next(active);
   }

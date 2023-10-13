@@ -65,7 +65,6 @@ export class MenuDemoComponent implements OnInit {
       { dAnchorLink: 'open-one', value: values['open-one'] },
       { dAnchorLink: 'loop', value: values['loop'] },
       { dAnchorLink: 'custom-node', value: values['custom-node'] },
-      // { dAnchorLink: 'auto-expand', value: values['auto-expand'] },
     ];
   }
 }

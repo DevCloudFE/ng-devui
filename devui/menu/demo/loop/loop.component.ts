@@ -49,8 +49,22 @@ const MENUS: MenuItemType[] = [
               {
                 key: 'c-3-1-2-2',
                 name: 'Content 3 great grandson 2',
+                children: [
+                  {
+                    key: 'c-3-1-2-2-1',
+                    name: 'Content 3 great grandson 1',
+                  },
+                  {
+                    key: 'c-3-1-2-2-2',
+                    name: 'Content 3 great grandson 2',
+                  },
+                ]
               },
             ]
+          },
+          {
+            key: 'c-3-1-3',
+            name: 'Content 3 grandson 3',
           },
         ]
       },

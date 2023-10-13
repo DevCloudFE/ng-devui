@@ -35,10 +35,6 @@ import { AutoExpandComponent } from './auto-expand/auto-expand.component';
   MenuModule,
   RouterModule.forChild([
     { path: '', redirectTo: 'demo', pathMatch: 'full' },
-/*  {
-                                       path: 'design',
-                                       component: AccordionDesignComponent,
-                                     }, */
     { path: 'demo', component: MenuDemoComponent },
     {
     path: 'api',

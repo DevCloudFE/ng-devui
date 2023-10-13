@@ -11,7 +11,6 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
-// import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { BehaviorSubject } from 'rxjs';
 import { MenuItemClickType } from './type';
 
@@ -26,7 +25,6 @@ import { MenuItemClickType } from './type';
   }
   })
 export class MenuComponent implements OnInit, OnChanges, OnDestroy {
-  // @Input() options: MenuItemType[] = [];
   @HostBinding('class.collapsed') @Input() collapsed = false;
   collapsedSubject = new BehaviorSubject(this.collapsed);
   collapsed$ = this.collapsedSubject.asObservable();

@@ -10,7 +10,6 @@ import {
   SimpleChanges,
   ChangeDetectorRef
 } from '@angular/core';
-// import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { MenuHoverTypes } from './type';
 import { HostListener } from '@angular/core';
 import { MenuComponent } from './menu.component';
@@ -26,11 +25,10 @@ import { SubMenuService } from './submenu.service';
   }
   })
 export class MenuItemDirective implements OnInit, OnChanges {
-  @Input() subMenuHost = false; // todo: 删
+  @Input() subMenuHost = false;
   @HostBinding('class.no-style') @Input() noStyle = false;
   @HostBinding('class.disabled') @Input() disabled = false;
   @HostBinding('class.active') @Input() active = false;
-  // @HostBinding('class.active') _active = this.active;
 
   @Output() itemClick = new EventEmitter<MouseEvent>();
   @Output() titleHover = new EventEmitter<MenuHoverTypes>();
@@ -46,7 +44,6 @@ export class MenuItemDirective implements OnInit, OnChanges {
   });
 
   @HostListener('click', ['$event']) hostClick(event: MouseEvent) {
-    // this._active = true;
     if (!this.disabled) {
       this.itemClick.emit(event);
       if (!this.subMenuHost) {
@@ -68,7 +65,6 @@ export class MenuItemDirective implements OnInit, OnChanges {
   }
 
   ngOnChanges({ active }: SimpleChanges): void {
-    // console.log('active', active, this.submenuService)
     if (active && this.submenuService) {
       if (active.firstChange) {
         setTimeout(() => {

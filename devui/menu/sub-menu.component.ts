@@ -15,7 +15,6 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { collapseMotion, scaleInOut } from 'ng-devui/utils';
-// import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { MenuComponent } from './menu.component';
 import { MenuHoverTypes, SubTitleContextType } from './type';
 import { ConnectedPosition } from '@angular/cdk/overlay';
@@ -35,13 +34,11 @@ import { SubMenuService } from './submenu.service';
   }
   })
 export class SubMenuComponent implements OnInit, AfterContentInit {
-  // { descendants: true } 在递归组件里没用
   @ContentChildren(MenuItemDirective) menuItemDirectives: QueryList<MenuItemDirective>;
   @HostBinding('class.no-style') @Input() noStyle = false;
   @HostBinding('class.open') _open = false;
   @Input()
   set open(value: boolean) {
-    // console.log('wat set open', value);
     this._open = value;
   }
 
@@ -89,7 +86,6 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
   constructor() {
     // 如果不在constructor里，takeUntilDestroyed就得传入 destroyRef = inject(DestroyRef);
     this.parentMenu.collapsed$.pipe(takeUntilDestroyed()).subscribe(res => {
-      // console.log('parentMenu.collapsed$', res, this.open);
       this.collapsed = res;
       this.togglePopOpen(false);
       this.cdr.markForCheck();
@@ -105,7 +101,6 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
         distinctUntilChanged(),
         takeUntilDestroyed()
       ).subscribe(res => {
-        // console.log('childActive$', res);
         this.toggleActive(res);
         this.submenuService.parentSubMenuService?.parentSubMenuActive$?.next(res);
         this.cdr.markForCheck();
@@ -116,14 +111,12 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
       .pipe(
         filter(() => this.collapsed && !this.disabled),
         map((([parentPopoverOpen, currentPopoverOpen]) => {
-          // console.log('map open', parentPopoverOpen, currentPopoverOpen)
           return parentPopoverOpen || currentPopoverOpen;
         })),
         auditTime(150),
         distinctUntilChanged(),
         takeUntilDestroyed()
       ).subscribe(open => {
-        // console.log('sub menu open', this.open, open);
         this.togglePopOpen(open);
         this.submenuService.parentSubMenuService?.parentPopoverOpen$.next(open);
         this.cdr.markForCheck();
@@ -132,7 +125,6 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
 
   ngOnInit() { }
   ngAfterContentInit(): void {
-    // console.log('ngAfterContentInit');
     if (this.menuItemDirectives?.length) {
       this.submenuService.menuItems.push(...this.menuItemDirectives.toArray());
       if (this.submenuService.parentSubMenuService) {
@@ -150,16 +142,6 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
   titleHover(type: MenuHoverTypes) {
     this.submenuService.childState$.next(type);
   }
-
-  /*
-    titleClick() {
-    this.afterInitAnimate = false;
-    setTimeout(() => {
-      this.toggleOpen(!this.open);
-      this.cdr.markForCheck();
-    }, 0);
-  }
-  */
 
   toggleOpen(open: boolean) {
     if (open !== this.open) {

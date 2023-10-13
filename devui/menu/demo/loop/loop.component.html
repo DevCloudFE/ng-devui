@@ -1,25 +1,4 @@
 <div class="demo-menu">
   <d-button (btnClick)="collapsed = !collapsed" style="margin-bottom: 10px">{{ collapsed ? 'open' : 'close' }}</d-button>
   <loop-menu [menus]="menus" [collapsed]="collapsed" />
-  <!-- <div d-menu [collapsed]="collapsed" (menuItemClick)="menuItemClick($event)">
-    <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menus }" />
-    <ng-template #menuTpl let-menus>
-      <ng-container *ngFor="let m of menus; trackBy: trackByMenu">
-        <div
-          *ngIf="m.children?.length"
-          d-sub-menu
-          [title]="m.name"
-          [icon]="m.icon"
-          [open]="openKeys.includes(m.key)"
-          (openChange)="openChange($event, m.key)"
-        >
-        <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: m.children }" />
-        </div>
-        <div *ngIf="!m.children?.length" d-menu-item (itemClick)="itemClick(m.key)" [active]="m.key === activeKey">
-          <d-icon class="devui-menu-item-icon" *ngIf="m.icon" [icon]="m.icon" icon="icon-op-list" />
-          <span class="devui-menu-item-name over-flow-ellipsis">{{ m.name }}</span>
-        </div>
-      </ng-container>
-    </ng-template>
-  </div> -->
 </div>
