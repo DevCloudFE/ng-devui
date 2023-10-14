@@ -128,8 +128,9 @@ export {
 
 |        变量        |    类型    |           默认    |            变量含义说明                    |
 | :----------------: | :--------: | :----------------: |-------------------------------: |
-|       --devui-menu-width        |   `string`    |         256    |           菜单宽度                 |
+|       --devui-menu-width        |   `string`    |         100%    |           菜单宽度                 |
 |       --devui-menu-item-height       |  `string`  |              36    |       单个菜单高度                  |
+|       --devui-menu-item-gap      |  `string`  |              4    |       菜单间距                  |
 |       --devui-menu-item-static-padding       |   `string`    |           12    |          单个菜单的缩进距离                  |
 |   --devui-padding-size   |  `string`  |      16    |       菜单基础缩进距离   |
 |   --devui-menu-icon-gap  |  `string`  |       10    |     title和icon的间距   |

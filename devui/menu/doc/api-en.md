@@ -128,8 +128,9 @@ export {
 
 |        Variable        |    Type    |        Default    |          Description                    |
 | :----------------: | :--------: | :---------------: |---------------------------------: |
-|       --devui-menu-width        |   `string`    |      256  |          menu width                 |
+|       --devui-menu-width        |   `string`    |      100%  |          menu width                 |
 |       --devui-menu-item-height       |  `string`  |       36  |          menu item height                  |
+|       --devui-menu-item-gap      |  `string`  |              4    |       menu item gap                    |
 |       --devui-menu-item-static-padding       |   `string`    |   12  |     menu item indent distance                |
 |   --devui-padding-size   |  `string`  |    16  |     menu item basic indent distance    |
 |   --devui-menu-icon-gap  |  `string`  |     10  |   the spacing between title and icon   |

@@ -1,4 +1,4 @@
-<div class="demo-menu">
+<div class="demo-menu" style="width: 388px; overflow-x: auto">
   <d-button (btnClick)="collapsed = !collapsed" style="margin-bottom: 10px">{{ collapsed ? 'open' : 'close' }}</d-button>
   <div d-menu [collapsed]="collapsed">
     <ng-container *ngFor="let m of menus; trackBy: trackByMenu">

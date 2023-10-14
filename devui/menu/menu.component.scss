@@ -5,8 +5,9 @@
 @import '../style/core/shadow';
 
 :root {
-  --devui-menu-width: 256px;
+  --devui-menu-width: 100%;
   --devui-menu-item-height: 36px;
+  --devui-menu-item-gap: 4px;
   --devui-menu-item-static-padding: 12px;
   --devui-menu-padding-size: 16px;
   --devui-menu-icon-gap: 10px;
@@ -14,6 +15,7 @@
 
 $menu-width: var(--devui-menu-width);
 $menu-item-height: var(--devui-menu-item-height);
+$menu-item-gap: var(--devui-menu-item-gap);
 $menu-item-static-padding: var(--devui-menu-item-static-padding);
 $padding-size: var(--devui-menu-padding-size);
 $icon-gap: var(--devui-menu-icon-gap);
@@ -27,7 +29,7 @@ $transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-s
   padding-inline: $padding-size $menu-item-static-padding;
   color: $devui-text-weak;
   cursor: pointer;
-  margin-block: 4px;
+  margin-block: $menu-item-gap;
   border-radius: $devui-border-radius;
   transition: background-color $transition-attrs, color $transition-attrs;
 
@@ -41,7 +43,6 @@ $transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-s
   }
 
   .devui-menu-item-icon {
-    // transition: transform $transition-attrs;
     .devui-icon-container {
       color: inherit;
     }
@@ -79,7 +80,6 @@ $transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-s
   width: $menu-width;
   padding: 16px 12px;
   transition: width $transition-attrs;
-  overflow-x: auto;
 
   .devui-sub-menu:not(.no-style) {
     .devui-sub-menu-item {
@@ -93,7 +93,8 @@ $transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-s
         width: 100%;
 
         .devui-menu-item-name {
-          max-width: 150px;
+          // max-width: 150px;
+          white-space: nowrap;
         }
       }
 
@@ -118,10 +119,6 @@ $transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-s
       .devui-menu-item {
         padding-inline-start: calc($padding-size + ($icon-gap + $padding-size) * var(--level, 1));
       }
-    }
-
-    .devui-sub-menu-children::-webkit-scrollbar {
-      height: 0;
     }
   }
 
@@ -159,6 +156,8 @@ $transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-s
 }
 
 .devui-menu-popover-panel .devui-menu-popover:not(.no-style) {
+  --devui-menu-item-gap: 0;
+
   background-color: $devui-base-bg;
   // background-color: #f60;
   box-shadow: $devui-shadow-length-base $devui-shadow;
