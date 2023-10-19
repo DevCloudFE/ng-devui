@@ -91,15 +91,10 @@ $transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-s
         align-items: center;
         column-gap: $icon-gap;
         width: 100%;
-
-        .devui-menu-item-name {
-          // max-width: 150px;
-          white-space: nowrap;
-        }
       }
 
       .devui-sub-menu-item-arrow {
-        height: 16px;
+        width: 16px;
         transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
       }
     }
@@ -119,6 +114,10 @@ $transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-s
       .devui-menu-item {
         padding-inline-start: calc($padding-size + ($icon-gap + $padding-size) * var(--level, 1));
       }
+    }
+
+    .devui-sub-menu-children::-webkit-scrollbar {
+      height: 0;
     }
   }
 
