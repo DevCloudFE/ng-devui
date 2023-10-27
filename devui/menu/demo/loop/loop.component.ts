@@ -98,26 +98,4 @@ const MENUS: MenuItemType[] = [
 export class LoopComponent {
   menus = MENUS;
   collapsed = false;
-  openKeys: string[] = [];
-  activeKey = '';
-
-  openChange(open: boolean, key: string) {
-    if (open) {
-      this.openKeys.push(key);
-    } else {
-      this.openKeys = this.openKeys.filter(item => item !== key);
-    }
-  }
-
-  itemClick(key: string) {
-    this.activeKey = key;
-  }
-
-  menuItemClick(event: MenuItemClickType) {
-    console.log('menuItemClick', event);
-  }
-
-  trackByMenu(_: number, item: MenuItemType) {
-    return item.key;
-  }
 }

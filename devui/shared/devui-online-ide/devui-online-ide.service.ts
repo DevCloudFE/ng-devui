@@ -84,7 +84,6 @@ export class DevuiOnlineIdeService {
   }
 
   getFiles(sourceData: DevuiSourceData[], ide: 'StackBlitz' | 'CodeSandbox' = 'StackBlitz'): any {
-    // console.log(sourceData);
     const _sourceData = sourceData.map((item) => ({ ...item, code: (item.code.default || item.code) as string }));
 
     // #region 处理Enter文件

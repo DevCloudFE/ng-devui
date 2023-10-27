@@ -94,10 +94,7 @@ export class SubMenuComponent implements OnInit, AfterContentInit {
     const currentActive$ = this.submenuService.childActive$;
     combineLatest([this.submenuService.parentSubMenuActive$, currentActive$])
       .pipe(
-        map((([parentActive, currentActive]) => {
-          // console.log('map active', parentActive, currentActive)
-          return parentActive || currentActive;
-        })),
+        map((([parentActive, currentActive]) => parentActive || currentActive)),
         distinctUntilChanged(),
         takeUntilDestroyed()
       ).subscribe(res => {

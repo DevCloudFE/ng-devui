@@ -1,4 +1,4 @@
-import { animate, animateChild, AnimationTriggerMetadata, query, state, style, transition, trigger } from '@angular/animations';
+import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from '@angular/animations';
 import { AnimationCurves, AnimationDuration } from './animationParameters';
 
 const easeInOut = AnimationCurves.EASE_IN_OUT;
@@ -21,32 +21,6 @@ export const expandCollapseForDomDestroy: AnimationTriggerMetadata = trigger('co
     animate(`${duration} ${easeInOut}`, style({ opacity: 0, height: 0, overflow: 'hidden' })),
   ]),
 ]);
-
-/*
-todo: 可作成函数指定selector eg: '.devui-sub-menu-children'
-@collapseForDomDestroyWithChildren
-bug:
-当前是展开的情况下，
-如果收起父级，再展开父级
-此时再次点击当前菜单收起是不带动画的
-*/
-export const expandCollapseForDomDestroyWithChildren: AnimationTriggerMetadata = trigger('collapseForDomDestroyWithChildren', [
-  transition(':enter', [
-    style({ opacity: 0, height: 0, overflow: 'hidden' }),
-    animate(`${duration} ${easeInOut}`, style({ opacity: 1, height: '*', overflow: 'hidden' })),
-    query('@collapseForDomDestroyWithChildren', animateChild({
-      delay: duration
-    }), { optional: true })
-  ]),
-  transition(':leave', [
-    style({ opacity: 1, height: '*', overflow: 'hidden' }),
-    animate(`${duration} ${easeInOut}`, style({ opacity: 0, height: 0, overflow: 'hidden' })),
-    query('@collapseForDomDestroyWithChildren', animateChild({
-      delay: duration
-    }), { optional: true })
-  ]),
-]);
-
 
 export const collapseMotion: AnimationTriggerMetadata = trigger('collapseMotion', [
   state('expanded', style({ height: '*' })),
