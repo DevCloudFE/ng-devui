@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "@angular/cdk": "^16.0.0",
-    "@ngrx/component": "^16.2.0",
     "@popperjs/core": "^2.5.4",
     "css-vars-ponyfill": "^2.3.2",
     "date-fns": "^2.20.0",
