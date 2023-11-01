@@ -1,0 +1,52 @@
+<div class="devui-demo-container" style="padding-left: 4px" dAnchorBox dAnchorHashSupport [view]="{ top: 180, bottom: 0 }">
+  <d-demo-nav [navItems]="navItems"></d-demo-nav>
+  <div dAnchor="basic-usage" class="devui-demo-example">
+    <div class="devui-demo-title">{{ 'components.menu.basicDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.menu.basicDemo.description' | translate }}
+    </div>
+    <d-codebox id="menu-demo-basic" [sourceData]="DemoBasic">
+      <d-basic demo />
+    </d-codebox>
+  </div>
+
+  <div dAnchor="open-close" class="devui-demo-example">
+    <div class="devui-demo-title">{{ 'components.menu.openCloseDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.menu.openCloseDemo.description' | translate }}
+    </div>
+    <d-codebox id="menu-demo-open-close" [sourceData]="DemoOpenClose">
+      <d-open-close demo />
+    </d-codebox>
+  </div>
+
+  <div dAnchor="open-one" class="devui-demo-example">
+    <div class="devui-demo-title">{{ 'components.menu.openOneDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.menu.openOneDemo.description' | translate }}
+    </div>
+    <d-codebox id="menu-demo-open-one" [sourceData]="DemoOpenOne">
+      <d-open-one demo />
+    </d-codebox>
+  </div>
+
+  <div dAnchor="loop" class="devui-demo-example">
+    <div class="devui-demo-title">{{ 'components.menu.LoopDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.menu.LoopDemo.description' | translate }}
+    </div>
+    <d-codebox id="menu-demo-loop" [sourceData]="DemoLoop">
+      <d-loop demo />
+    </d-codebox>
+  </div>
+
+  <div dAnchor="custom-node" class="devui-demo-example">
+    <div class="devui-demo-title">{{ 'components.menu.CustomNodeDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.menu.CustomNodeDemo.description' | translate }}
+    </div>
+    <d-codebox id="menu-demo-custom-node" [sourceData]="DemoCustomNode">
+      <d-custom-node demo />
+    </d-codebox>
+  </div>
+</div>

@@ -260,47 +260,6 @@ body[ui-theme='galaxy-theme'] {
   }
 }
 
-.devui-menu {
-  outline: none;
-  margin-bottom: 0;
-  padding-left: 0;
-  list-style: none;
-  z-index: 1050;
-  background: $devui-base-bg;
-}
-
-.devui-menu-item {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  padding-left: 20px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-
-  &:not(.devui-menu-item-selected):hover {
-    background-color: $devui-list-item-hover-bg;
-
-    a {
-      color: $devui-list-item-hover-text;
-    }
-  }
-}
-
-.devui-menu-item > a {
-  @include font-content();
-
-  display: block;
-  color: $devui-text;
-  text-decoration: none;
-}
-
-.devui-menu-item-selected {
-  a {
-    color: $devui-brand-active;
-    font-weight: bold;
-  }
-}
-
 .main {
   .docs-header {
     & > h1 {

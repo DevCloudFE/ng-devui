@@ -158,6 +158,45 @@
         "change-values": "Change key value"
       }
     },
+    "menu": {
+      "name": "Menu",
+      "type": "Navigation",
+      "path": "menu",
+      "description": "Menu for your websites.",
+      "tmw": "Menu is used when you need to set a menu list navigation.",
+      "basicDemo": {
+        "title": "Basic usage",
+        "description": "Expand、select and disabled"
+      },
+      "openCloseDemo": {
+        "title": "Foldable",
+        "description": "The [collapsed] attribute controls menu expansion and fold, and setting var (--devui menu width) on the menu root element can control the width of expansion and fold"
+      },
+      "openOneDemo": {
+        "title": "Accordion effect",
+        "description": "Control the [open] attribute of d-sub menu to achieve accordion effect"
+      },
+      "LoopDemo": {
+        "title": "Loop menu",
+        "description": "Implementing Recursive Menu by Encapsulating Recursive Components"
+      },
+      "CustomNodeDemo": {
+        "title": "Custom nodes",
+        "description": "Custom node styles, [noStyle] attribute will clear all pre made styles, which means that all styles have to be written by themselves"
+      },
+      "AutoExpandDemo": {
+        "title": "Auto expand selected menu",
+        "description": "Auto expand its parent menu based on the selected item"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "Basic usage",
+        "open-close": "Foldable",
+        "open-one": "Accordion effect",
+        "loop": "Loop menu",
+        "custom-node": "Custom node",
+        "auto-expand": "Auto expand"
+      }
+    },
     "input-group": {
       "name": "input-group",
       "type": "Data entry",
@@ -2583,9 +2622,9 @@
         "title": "Standard Dialog Box",
         "description": "Standard dialog boxes that can be dragged using the dialogService."
       },
-      "maximizeDemo":{
-        "title":"Maximize Dialog Box",
-        "description":"You can use the showMaximizeBtn api to set visibility of maximize button."
+      "maximizeDemo": {
+        "title": "Maximize Dialog Box",
+        "description": "You can use the showMaximizeBtn api to set visibility of maximize button."
       },
       "customizeDemo": {
         "title": "Custom Dialog Box",
@@ -2625,7 +2664,7 @@
       },
       "anchorLinkValues": {
         "standard-dialog": "Standard Dialog Box",
-        "maximize-dialog":"Maximize Dialog Box",
+        "maximize-dialog": "Maximize Dialog Box",
         "custom-dialog": "Custom Dialog Box",
         "intercept-dialog-closed": "Blocking dialog box closed",
         "message-hint": "Information",

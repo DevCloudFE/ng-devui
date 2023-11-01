@@ -26,7 +26,7 @@ export type IButtonSize = 'lg' | 'md' | 'sm' | 'xs';
   styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespaces: false,
-})
+  })
 export class ButtonComponent implements AfterContentChecked {
   @Input() id: string;
   @Input() type: IButtonType = 'button';

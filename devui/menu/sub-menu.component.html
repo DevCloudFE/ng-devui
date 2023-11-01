@@ -1,0 +1,42 @@
+<div
+  [class]="stateCls('devui-sub-menu-item')"
+  d-menu-item
+  [subMenuHost]="true"
+  (itemClick)="titleClick()"
+  (titleHover)="titleHover($event)"
+  cdkOverlayOrigin
+  #trigger="cdkOverlayOrigin"
+>
+  <div class="devui-sub-menu-item-title" role="menu" *strTplOutlet="title; context: titleContext">
+    <ng-content select="[title]" *ngIf="!title" />
+    <d-icon class="devui-menu-item-icon" *ngIf="icon" [disabled]="disabled" [icon]="icon" />
+    <span class="devui-menu-item-name over-flow-ellipsis" [title]="title">{{ title }}</span>
+  </div>
+  <d-icon class="devui-sub-menu-item-arrow" [disabled]="disabled" icon="icon-select-arrow" />
+</div>
+
+<ng-container *ngIf="collapsed; else defaultChildrenTpl">
+  <ng-template
+    cdkConnectedOverlay
+    cdkConnectedOverlayPush
+    cdkConnectedOverlayPanelClass="devui-menu-popover-panel"
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="popoverOpen"
+    [cdkConnectedOverlayPositions]="positions"
+    cdkConnectedOverlayTransformOriginOn=".devui-sub-menu"
+  >
+    <div [class]="stateCls('devui-menu-popover')" @scaleInOut (mouseenter)="titleHover('enter')" (mouseleave)="titleHover('leave')">
+      <ng-template [ngTemplateOutlet]="contentTpl" />
+    </div>
+  </ng-template>
+</ng-container>
+
+<ng-template #defaultChildrenTpl>
+  <div class="devui-sub-menu-children" [style.--level]="submenuService.level" [@collapseMotion]="expandState">
+    <ng-template [ngTemplateOutlet]="contentTpl" />
+  </div>
+</ng-template>
+
+<ng-template #contentTpl>
+  <ng-content />
+</ng-template>

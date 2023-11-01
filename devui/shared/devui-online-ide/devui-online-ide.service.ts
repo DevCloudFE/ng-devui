@@ -84,7 +84,6 @@ export class DevuiOnlineIdeService {
   }
 
   getFiles(sourceData: DevuiSourceData[], ide: 'StackBlitz' | 'CodeSandbox' = 'StackBlitz'): any {
-    console.log(sourceData);
     const _sourceData = sourceData.map((item) => ({ ...item, code: (item.code.default || item.code) as string }));
 
     // #region 处理Enter文件
@@ -107,7 +106,7 @@ url('~@devui-design/icons/icomoon/fonts/devui-icomoon.ttf?1622620995') format('t
 url('~@devui-design/icons/icomoon/fonts/devui-icomoon.svg?1622620995#devui-icomoon') format('svg'); }
 `,
     };
-    if(ide === 'CodeSandbox') {
+    if (ide === 'CodeSandbox') {
       files['sandbox.config.json'] = '{"infiniteLoopProtection" : false}';
     }
     if (/templateUrl\:/.test(tsCode)) {

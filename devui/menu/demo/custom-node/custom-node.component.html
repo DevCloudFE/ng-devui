@@ -1,0 +1,45 @@
+<div class="demo-menu" style="width: 256px">
+  <div d-menu>
+    <ng-container *ngFor="let m of menus; trackBy: trackByMenu">
+      <!-- [noStyle]="true" 会完全移除预制样式 -->
+      <div
+        d-sub-menu
+        [title]="titleTpl"
+        [icon]="m.icon"
+        [open]="openKeys.includes(m.key)"
+        (openChange)="openChange($event, m.key)"
+        *ngIf="m.children?.length; else leafTpl"
+      >
+        <ng-template #titleTpl let-open="open" let-disabled="disabled" let-icon="icon">
+          <div class="my-title">
+            <b
+              ><i>{{ m.name }}</i></b
+            >
+          </div>
+        </ng-template>
+        <!-- 
+        如果不传[title]属性，还可以用插槽的形式
+        <div class="my-title" title>
+          <b><i>{{menu.name}}</i></b>
+        </div>
+       -->
+        <div
+          d-menu-item
+          (itemClick)="itemClick(item.key)"
+          [active]="item.key === activeKey"
+          *ngFor="let item of m.children; trackBy: trackByMenu"
+        >
+          <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
+          <span class="devui-menu-item-name over-flow-ellipsis">{{ item.name }}</span>
+        </div>
+      </div>
+      <ng-template #leafTpl>
+        <!-- [noStyle]="true" 会完全移除预制样式 -->
+        <div d-menu-item (itemClick)="itemClick(m.key)" [active]="m.key === activeKey">
+          <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
+          <span class="devui-menu-item-name over-flow-ellipsis">{{ m.name }}</span>
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>

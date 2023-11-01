@@ -71,5 +71,5 @@ export class DevuiCodeboxComponent implements OnInit {
     this.document = this.doc;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

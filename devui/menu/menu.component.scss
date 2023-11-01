@@ -1,0 +1,176 @@
+@import '../style/core/animation';
+@import '../style/theme/color';
+@import '../style/theme/corner';
+@import '../style/core/font';
+@import '../style/core/shadow';
+
+:root {
+  --devui-menu-width: 100%;
+  --devui-menu-item-height: 36px;
+  --devui-menu-item-gap: 4px;
+  --devui-menu-item-static-padding: 12px;
+  --devui-menu-padding-size: 16px;
+  --devui-menu-icon-gap: 10px;
+}
+
+$menu-width: var(--devui-menu-width);
+$menu-item-height: var(--devui-menu-item-height);
+$menu-item-gap: var(--devui-menu-item-gap);
+$menu-item-static-padding: var(--devui-menu-item-static-padding);
+$padding-size: var(--devui-menu-padding-size);
+$icon-gap: var(--devui-menu-icon-gap);
+$transition-attrs: $devui-animation-duration-base $devui-animation-ease-in-out-smooth;
+
+.devui-menu-item:not(.no-style) {
+  display: flex;
+  align-items: center;
+  column-gap: $icon-gap;
+  height: $menu-item-height;
+  padding-inline: $padding-size $menu-item-static-padding;
+  color: $devui-text-weak;
+  cursor: pointer;
+  margin-block: $menu-item-gap;
+  border-radius: $devui-border-radius;
+  transition: background-color $transition-attrs, color $transition-attrs;
+
+  &:not(.disabled, .active):hover {
+    background-color: $devui-list-item-hover-bg;
+    color: $devui-list-item-hover-text;
+  }
+
+  &:not(.disabled):active {
+    background-color: $devui-list-item-selected-bg;
+  }
+
+  .devui-menu-item-icon {
+    .devui-icon-container {
+      color: inherit;
+    }
+  }
+
+  & > a {
+    display: block;
+    width: 100%;
+    color: $devui-text-weak;
+    text-decoration: none;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+}
+
+.devui-menu-item:not(.no-style).active {
+  color: $devui-brand-active;
+  background-color: $devui-list-item-active-bg;
+  font-weight: bold;
+
+  &:hover {
+    background-color: $devui-list-item-hover-bg;
+  }
+}
+
+.devui-menu-item:not(.no-style).disabled {
+  color: $devui-disabled-text;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.devui-menu {
+  width: $menu-width;
+  padding: 16px 12px;
+  transition: width $transition-attrs;
+
+  .devui-sub-menu:not(.no-style) {
+    .devui-sub-menu-item {
+      justify-content: space-between;
+      margin-block: 0;
+
+      .devui-sub-menu-item-title {
+        display: flex;
+        align-items: center;
+        column-gap: $icon-gap;
+        width: 100%;
+      }
+
+      .devui-sub-menu-item-arrow {
+        width: 16px;
+        transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+      }
+    }
+
+    .devui-sub-menu-item.active {
+      background-color: initial;
+
+      &:hover:not(.disabled) {
+        color: $devui-brand-active-focus;
+        background-color: $devui-list-item-hover-bg;
+      }
+    }
+
+    .devui-sub-menu-children {
+      overflow-y: hidden;
+
+      .devui-menu-item {
+        padding-inline-start: calc($padding-size + ($icon-gap + $padding-size) * var(--level, 1));
+      }
+    }
+
+    .devui-sub-menu-children::-webkit-scrollbar {
+      height: 0;
+    }
+  }
+
+  .devui-sub-menu.open > .devui-sub-menu-item .devui-sub-menu-item-arrow {
+    transform: rotate(-180deg);
+    transform-origin: center;
+  }
+}
+
+.devui-menu.collapsed {
+  --devui-menu-width: 60px;
+
+  .devui-menu-item:not(.no-style) {
+    justify-content: center;
+
+    .devui-menu-item-icon {
+      transform: scale(1.1);
+    }
+
+    .devui-menu-item-icon + .devui-menu-item-name,
+    .devui-sub-menu-item-arrow {
+      display: none;
+    }
+  }
+
+  .devui-sub-menu:not(.no-style) {
+    .devui-sub-menu-item .devui-sub-menu-item-title {
+      justify-content: inherit;
+    }
+
+    .devui-sub-menu-children {
+      display: none;
+    }
+  }
+}
+
+.devui-menu-popover-panel .devui-menu-popover:not(.no-style) {
+  --devui-menu-item-gap: 0;
+
+  background-color: $devui-base-bg;
+  // background-color: #f60;
+  box-shadow: $devui-shadow-length-base $devui-shadow;
+  transform-origin: left top;
+
+  .devui-sub-menu-item .devui-sub-menu-item-arrow {
+    transform: rotate(-90deg);
+  }
+
+  .devui-sub-menu-item.active {
+    background-color: initial;
+
+    &:hover:not(.disabled) {
+      color: $devui-brand-active-focus;
+    }
+  }
+}

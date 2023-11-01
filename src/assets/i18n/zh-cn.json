@@ -158,6 +158,45 @@
         "change-values": "改变键值"
       }
     },
+    "menu": {
+      "name": "Menu 菜单",
+      "type": "导航",
+      "path": "menu",
+      "description": "为页面菜单的组件。",
+      "tmw": "需要通过分组组织菜单的时候使用。",
+      "basicDemo": {
+        "title": "基本用法",
+        "description": "展开、选中和禁用"
+      },
+      "openCloseDemo": {
+        "title": "可折叠",
+        "description": "[collapsed] 属性控制菜单展开和折叠, 在菜单根元素上设置var(--devui-menu-width)可控制展开和折叠的宽度"
+      },
+      "openOneDemo": {
+        "title": "手风琴效果",
+        "description": "控制d-sub-menu的[open]属性实现手风琴效果"
+      },
+      "LoopDemo": {
+        "title": "递归菜单",
+        "description": "通过封装递归组件实现递归菜单"
+      },
+      "CustomNodeDemo": {
+        "title": "自定义节点",
+        "description": "自定义节点样式，[noStyle]属性会清掉所有预制样式，这意味着得所有样式都得自己写"
+      },
+      "AutoExpandDemo": {
+        "title": "自动展开选中菜单",
+        "description": "根据选中项自动展开其父级菜单"
+      },
+      "anchorLinkValues": {
+        "basic-usage": "基本用法",
+        "open-close": "可折叠",
+        "open-one": "手风琴效果",
+        "loop": "递归菜单",
+        "custom-node": "自定义节点",
+        "auto-expand": "自动展开选中项"
+      }
+    },
     "input-group": {
       "name": "输入框组合",
       "type": "数据录入",
@@ -2819,9 +2858,9 @@
         "title": "标准对话框",
         "description": "使用dialogService可拖拽的标准对话框。"
       },
-      "maximizeDemo":{
-        "title":"最大化对话框",
-        "description":"使用showMaximizeBtn可设置最大化/退出最大化按钮的显示/隐藏"
+      "maximizeDemo": {
+        "title": "最大化对话框",
+        "description": "使用showMaximizeBtn可设置最大化/退出最大化按钮的显示/隐藏"
       },
       "customizeDemo": {
         "title": "自定义对话框",
@@ -2861,7 +2900,7 @@
       },
       "anchorLinkValues": {
         "standard-dialog": "标准对话框",
-        "maximize-dialog":"最大化对话框",
+        "maximize-dialog": "最大化对话框",
         "custom-dialog": "自定义对话框",
         "intercept-dialog-closed": "拦截对话框关闭",
         "message-hint": "信息提示",
