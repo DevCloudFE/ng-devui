@@ -1,9 +1,9 @@
 <div class="demo-menu" style="width: 256px">
-  <div d-menu>
+  <div dMenu>
     <ng-container *ngFor="let m of menus; trackBy: trackByMenu">
       <!-- [noStyle]="true" 会完全移除预制样式 -->
       <div
-        d-sub-menu
+        dSubMenu
         [title]="titleTpl"
         [icon]="m.icon"
         [open]="openKeys.includes(m.key)"
@@ -24,7 +24,7 @@
         </div>
        -->
         <div
-          d-menu-item
+          dMenuItem
           (itemClick)="itemClick(item.key)"
           [active]="item.key === activeKey"
           *ngFor="let item of m.children; trackBy: trackByMenu"
@@ -35,7 +35,7 @@
       </div>
       <ng-template #leafTpl>
         <!-- [noStyle]="true" 会完全移除预制样式 -->
-        <div d-menu-item (itemClick)="itemClick(m.key)" [active]="m.key === activeKey">
+        <div dMenuItem (itemClick)="itemClick(m.key)" [active]="m.key === activeKey">
           <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
           <span class="devui-menu-item-name over-flow-ellipsis">{{ m.name }}</span>
         </div>

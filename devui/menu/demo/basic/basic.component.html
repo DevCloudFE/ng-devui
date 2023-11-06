@@ -1,8 +1,8 @@
 <div class="demo-menu" style="width: 256px">
-  <div d-menu (menuItemClick)="menuItemClick($event)">
+  <div dMenu (menuItemClick)="menuItemClick($event)">
     <ng-container *ngFor="let m of menus; trackBy: trackByMenu">
       <div
-        d-sub-menu
+        dSubMenu
         [title]="m.name"
         [icon]="m.icon"
         [disabled]="disabledKeys.includes(m.key)"
@@ -11,7 +11,7 @@
         *ngIf="m.children?.length; else leafTpl"
       >
         <div
-          d-menu-item
+          dMenuItem
           [disabled]="disabledKeys.includes(item.key)"
           (itemClick)="itemClick(item.key)"
           [active]="item.key === activeKey"
@@ -22,7 +22,7 @@
         </div>
       </div>
       <ng-template #leafTpl>
-        <div d-menu-item (itemClick)="itemClick(m.key)" [active]="m.key === activeKey" [disabled]="disabledKeys.includes(m.key)">
+        <div dMenuItem (itemClick)="itemClick(m.key)" [active]="m.key === activeKey" [disabled]="disabledKeys.includes(m.key)">
           <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
           <span class="devui-menu-item-name over-flow-ellipsis">{{ m.name }}</span>
         </div>
