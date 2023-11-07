@@ -1,13 +1,13 @@
 <div
   [class]="stateCls('devui-sub-menu-item')"
-  d-menu-item
+  dMenuItem
   [subMenuHost]="true"
   (itemClick)="titleClick()"
   (titleHover)="titleHover($event)"
   cdkOverlayOrigin
   #trigger="cdkOverlayOrigin"
 >
-  <div class="devui-sub-menu-item-title" role="menu" *strTplOutlet="title; context: titleContext">
+  <div class="devui-sub-menu-item-title" role="menu" *dStrTplOutlet="title; context: titleContext">
     <ng-content select="[title]" *ngIf="!title" />
     <d-icon class="devui-menu-item-icon" *ngIf="icon" [disabled]="disabled" [icon]="icon" />
     <span class="devui-menu-item-name over-flow-ellipsis" [title]="title">{{ title }}</span>

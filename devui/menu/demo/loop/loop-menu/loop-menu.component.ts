@@ -2,18 +2,18 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MenuItemClickType, MenuItemType } from 'ng-devui/menu';
 
 @Component({
-  selector: 'loop-menu',
+  selector: 'd-loop-menu',
   template: `
-    <div d-menu [collapsed]="collapsed" (menuItemClick)="menuItemClick($event)">
+    <div dMenu [collapsed]="collapsed" (menuItemClick)="menuItemClick($event)">
       <ng-container *ngFor="let item of menus; trackBy: trackByMenu">
-        <loop-sub-menu
+        <d-loop-sub-menu
           [menu]="item"
           [activeKey]="activeKey"
           (itemClick)="itemClick($event)"
           *ngIf="item.children?.length; else leafTpl" />
         <ng-template #leafTpl>
           <div
-            d-menu-item
+            dMenuItem
             [active]="activeKey === item.key"
             (itemClick)="itemClick(item.key)"
             dTooltip [content]="collapsed ? item.name : ''" position="right">

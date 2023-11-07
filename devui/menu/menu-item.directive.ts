@@ -14,21 +14,18 @@ import { MenuHoverTypes } from './type';
 import { HostListener } from '@angular/core';
 import { MenuComponent } from './menu.component';
 import { SubMenuService } from './submenu.service';
+import { log } from 'console';
 
 @Directive({
-  selector: '[d-menu-item]',
+  selector: '[dMenuItem]',
   exportAs: 'dMenuItem',
-  host: {
-  '[class.devui-menu-item]': 'true',
-  '(mouseenter)': "hostHover('enter')",
-  '(mouseleave)': "hostHover('leave')",
-  }
   })
 export class MenuItemDirective implements OnInit, OnChanges {
   @Input() subMenuHost = false;
   @HostBinding('class.no-style') @Input() noStyle = false;
   @HostBinding('class.disabled') @Input() disabled = false;
   @HostBinding('class.active') @Input() active = false;
+  @HostBinding('class.devui-menu-item') menuItemClass = true;
 
   @Output() itemClick = new EventEmitter<MouseEvent>();
   @Output() titleHover = new EventEmitter<MenuHoverTypes>();
@@ -42,6 +39,14 @@ export class MenuItemDirective implements OnInit, OnChanges {
     skipSelf: true,
     optional: true
   });
+
+  @HostListener('mouseenter', ['$event']) hostMouseEenter(event: MouseEvent) {
+    this.hostHover('enter');
+  }
+
+  @HostListener('mouseleave', ['$event']) hostMouseLeave(event: MouseEvent) {
+    this.hostHover('leave');
+  }
 
   @HostListener('click', ['$event']) hostClick(event: MouseEvent) {
     if (!this.disabled) {

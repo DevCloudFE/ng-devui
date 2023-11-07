@@ -9,22 +9,22 @@ import { MenuModule } from 'ng-devui/menu';
 On the page:
 
 ```html
-<div d-menu>
-   <div d-menu-item>
+<div dMenu>
+   <div dMenuItem>
     <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
     <span class="devui-menu-item-name">menu item 1</span>
    </div>
-   <div d-sub-menu title="sub menu" icon="icon-more-func">
-      <div d-menu-item>
+   <div dSubMenu title="sub menu" icon="icon-more-func">
+      <div dMenuItem>
         <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
         <span class="devui-menu-item-name">sub menu item 1</span>
       </div>
-      <div d-menu-item>
+      <div dMenuItem>
         <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
         <span class="devui-menu-item-name">sub menu item 2</span>
       </div>
     </div>
-    <div d-menu-item>
+    <div dMenuItem>
       <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
       <span class="devui-menu-item-name">menu item 3</span>
     </div>
@@ -33,20 +33,20 @@ On the page:
 
 ## Menu
 
-### d-menu Parameter
+### dMenu Parameter
 
 |        Parameter        |                         Type                          |    Default    |                                                                                                                  Description                                                                                                                  | Jump to Demo                                                      |Global Config| 
 | :----------------: | :----------------: | :---------------------------------------------------: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------- |
 |      collapsed      |                       `boolean`                        |  false   |                                                                                    whether to disable collapse                                                                                    | [Open Close](demo#open-close)                                 |
 
-### d-menu Event
+### dMenu Event
 
 |       Event       |                                   Type                                    |                                                                            Description                                                                            | Jump to Demo                    |
 | :--------------: | :-----------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------- |
-|    menuItemClick    | [MenuItemClickType](#menutypeDefinition) | Click Event on the menu item, and the Parameter is the instruction and native MouseEvent of the d-menu item itself | [Basic usage](demo#basic-usage) |                                                                        | [Basic usage](demo#basic-usage) |
+|    menuItemClick    | [MenuItemClickType](#menutypeDefinition) | Click Event on the menu item, and the Parameter is the instruction and native MouseEvent of the dMenu item itself | [Basic usage](demo#basic-usage) |                                                                        | [Basic usage](demo#basic-usage) |
 
 
-### d-sub-menu Parameter
+### dSubMenu Parameter
 
 |        Parameter        |                         Type                          |    Default    |                                                                                                                  Description                                                                                                                  | Jump to Demo                                                      |Global Config| 
 | :----------------: | :----------------: | :---------------------------------------------------: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------- |
@@ -56,13 +56,13 @@ On the page:
 |      disabled      |                       `boolean`                        |  false   |  whether to disable interactive                                                                              |                                |
 |      icon      |                       `string`                        |  ''   |  Icon                                                                         |                               |
 
-### d-sub-menu Event
+### dSubMenu Event
 
 |       Event       |                                   Type                                    |                                                                            Description                                                                            | Jump to Demo                    |
 | :--------------: | :-----------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------- |
 |    openChange    | `boolean` | Open close change Event |                                                                                                        |  |
 
-### d-menu-item Parameter
+### dMenuItem Parameter
 
 |        Parameter        |                         Type                          |    Default    |                                                                                                                  Description                                                                                                                  | Jump to Demo                                                      |Global Config| 
 | :----------------: | :----------------: | :---------------------------------------------------: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------- |
@@ -70,7 +70,7 @@ On the page:
 |      noStyle      |                       `boolean`                        |  false   |  whether to remove all prefabricated Styles                                                                                         |                                |
 |      disabled      |                       `boolean`                        |  false   |  whether to disable interactive                                                                                          |                                |
 
-### d-menu-item Event
+### dMenuItem Event
 
 |       Event       |                                   Type                                    |                                                                            Description                                                                            | Jump to Demo                    |
 | :--------------: | :-----------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------- |
