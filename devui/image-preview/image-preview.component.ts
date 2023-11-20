@@ -30,7 +30,8 @@ export class DImagePreviewComponent implements OnInit, OnDestroy {
   isOptimal = true;
   targetImageIndex: number;
   totalImageNum: number;
-
+  disabledZoomIn = false;
+  disabledZoomOut = false;
   showInput = false;
 
   onClose: () => void;
@@ -115,11 +116,13 @@ export class DImagePreviewComponent implements OnInit, OnDestroy {
   }
 
   zoomIn() {
-    this.transformableImageElementRef.zoomIn();
+    this.disabledZoomOut = false;
+    this.disabledZoomIn = this.transformableImageElementRef.zoomIn();
   }
 
   zoomOut() {
-    this.transformableImageElementRef.zoomOut();
+    this.disabledZoomIn = false;
+    this.disabledZoomOut = this.transformableImageElementRef.zoomOut();
   }
 
   rotate() {

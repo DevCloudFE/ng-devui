@@ -22,14 +22,14 @@ import { RadioComponent } from './radio.component';
   templateUrl: './radio-group.component.html',
   styleUrls: ['./radio-group.component.scss', './radio.component.scss'],
   providers: [
-  {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => RadioGroupComponent),
-  multi: true,
-  },
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => RadioGroupComponent),
+      multi: true,
+    },
   ],
   preserveWhitespaces: false,
-  })
+})
 export class RadioGroupComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
   @Input() name: string;
   @Input() values: any[];

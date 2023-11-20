@@ -12,6 +12,7 @@ export interface I18nInterface {
     btnClose: string;
     btnClickMe: string;
     copied: string;
+    reset: string;
   };
   autoComplete: {
     latestInput: string;

@@ -20,7 +20,7 @@ import { IDialogOptions, IModalOptions } from './modal.types';
       <div class="iAmTemplate">I am Template</div>
     </ng-template>
   `,
-  })
+})
 class TestDialogComponent {
   @ViewChild('testContentTemplate') testContentTemplate: TemplateRef<any>;
 
@@ -323,7 +323,7 @@ describe('dialog', () => {
     <h3 (click)="close($event)" class="closeModal">Modal Component</h3>
     <div (click)="btnClick($event)" class="btnModal">iAmBtn</div>
   `
-  })
+})
 class OpenModalComponent {
   constructor() {}
   @Input() data: any;
@@ -344,7 +344,7 @@ class OpenModalComponent {
   template: `
     <d-button (btnClick)="openModal()">click me!</d-button>
   `,
-  })
+})
 class TestModalComponent {
 
   results: any;

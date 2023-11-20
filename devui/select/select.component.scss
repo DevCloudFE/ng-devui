@@ -392,6 +392,8 @@ div.devui-dropdown-menu.devui-dropdown-menu-multiple > ul.devui-list-unstyled li
     line-height: 24px;
     color: $devui-placeholder;
     padding-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .devui-select-tag-list {

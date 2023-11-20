@@ -18,7 +18,7 @@ import { ButtonComponent } from './button.component';
       {{text}}
     </d-button>
   `
-  })
+})
 class TestButtonComponent {
   bsStyle = 'primary';
   bsPosition = 'default';
@@ -37,7 +37,7 @@ class TestButtonComponent {
   template: `
     <d-button [autofocus]="true" *ngIf="show">{{text}}</d-button>
   `
-  })
+})
 class TestButtonAutoFocusComponent {
   show = false;
 }

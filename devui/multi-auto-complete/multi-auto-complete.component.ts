@@ -49,27 +49,23 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
   @Input() tipsText: string; // 提示文字
   @Input() placeholder = ''; // placeholder
   @Input() disabled = false;
+  @Input() retainInputValue = false;
   @Input() source: any[];
   @Input() latestSource: any[]; // 最近输入
   @Input() disabledKey: string; // 单个选项禁用
   @Input() width: number;
-  // @Input() isOpen: boolean;   // 未使用
-  // @Input() term: string; // 未使用
   @Input() itemTemplate: TemplateRef<any>;
   @Input() noResultItemTemplate: TemplateRef<any>;
-  // @Input() dropdown: boolean; // 未使用
-  // @Input() minLength: number; // 未使用
   @Input() delay: number;
   @Input() searchFn: (term: string) => Observable<any[]>;
   @Input() formatter: (item: any) => string;
   @Input() valueParser: (item: any) => any;
   @Input() @WithConfig() showAnimation = true;
   @Input() @WithConfig() showGlowStyle = true;
-  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
     return this.showGlowStyle;
-  };
+  }
   @Output() autoSubmit = new EventEmitter<any>(); // 失焦自动提交
-
   @ViewChild('multiAutoCompleteInput') multiAutoCompleteInputElement: ElementRef;
   @ViewChild('multiAutoCompleteWrapper') multiAutoCompleteWrapperElement: ElementRef;
   @ViewChild(AutoCompleteDirective) autoCompleteDirective: AutoCompleteDirective;
@@ -195,8 +191,7 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
     this.setSinglePlaceholder();
     this.autoSubmit.emit(this.multiItems);
     this.onChange(this.multiItems);
-    this.inputValue = null;
-    this.multiAutoCompleteInputElement.nativeElement.value = '';
+    this.clearInputValue();
   }
 
   public removeLabel(label: any) {
@@ -220,9 +215,15 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
       }, 0);
     } else {
       this.multipleLabelClassNameSuffix = this.multipleLabelClassNameConfig[this.overview]['blur'];
+      this.clearInputValue();
+      this.autoSubmit.emit(this.multiItems);
+    }
+  }
+
+  clearInputValue() {
+    if (!this.retainInputValue) {
       this.inputValue = null;
       this.multiAutoCompleteInputElement.nativeElement.value = '';
-      this.autoSubmit.emit(this.multiItems);
     }
   }
 

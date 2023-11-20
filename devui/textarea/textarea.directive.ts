@@ -11,13 +11,13 @@ export class TextareaDirective implements AfterViewInit, OnDestroy {
   @Input() @HostBinding('class.error') error: boolean;
   @Input() @WithConfig() styleType = 'default';
   @Input() @WithConfig() showGlowStyle = true;
-  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
     return this.showGlowStyle;
-  };
-  @HostBinding('class.devui-gray-style')
-  get gray() {
+  }
+  @HostBinding('class.devui-gray-style') get gray() {
     return this.styleType === 'gray';
   }
+  @HostBinding('attr.rows') rows = 3;
   checkMaxLength: any;
 
   constructor(private devConfigService: DevConfigService, private el: ElementRef, private render: Renderer2) {}

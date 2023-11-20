@@ -87,6 +87,10 @@ export interface ICategorySearchTagItem {
    */
   customTemplate?: TemplateRef<any>;
   /**
+   * Indicates whether the current category can be deleted after being selected.
+   */
+  deletable?: boolean;
+  /**
    * Selected Value
    */
   value?: {

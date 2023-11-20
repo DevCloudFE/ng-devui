@@ -23,6 +23,10 @@ export class BasicComponent {
   @ViewChild('customTemplate') customTemplate: TemplateRef<any>;
   msgs: Array<Object> = [];
 
+  get host() {
+    return window.location.origin;
+  }
+
   showToast(type: any) {
     switch (type) {
     case 'link':

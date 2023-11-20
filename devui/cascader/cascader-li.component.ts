@@ -36,6 +36,9 @@ export class CascaderLiComponent implements OnInit, OnDestroy {
   @HostListener('mouseenter', ['$event'])
   onMouseEnter(event) {
     if (this.trigger === 'hover') {
+      if (this.option.disabled) {
+        return;
+      }
       this.cascaderSrv.openColumn(this.option, this.colIndex, false);
     }
   }
@@ -75,6 +78,9 @@ export class CascaderLiComponent implements OnInit, OnDestroy {
   }
 
   clickItem(): void {
+    if (this.option.disabled) {
+      return;
+    }
     this.cascaderSrv.openColumn(this.option, this.colIndex, this.isLazyLoad);
     if (this.canSelectParent && !this.multiple) {
       this.cascaderSrv.setCurrentValue();

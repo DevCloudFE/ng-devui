@@ -14,6 +14,7 @@
   >
     <div
       class="overlay-backdrop"
+      [ngClass]="{ 'display-width': _isCover && animateState === 'in' }"
       [@backdropAnimation]="animateState"
       [@.disabled]="!showAnimation"
       (click)="backdropCloseable && hide()"
@@ -34,6 +35,16 @@
       <div *ngIf="contentTemplate" class="drawer-content" cdkScrollable>
         <ng-template [ngTemplateOutlet]="contentTemplate"></ng-template>
       </div>
+      <div
+        #resizeBar
+        dResize
+        class="devui-drawer-resize-bar"
+        [ngClass]="{
+          'devui-drawer-can-hover': resizable,
+          'devui-drawer-resize-bar-left': position === 'left',
+          'devui-drawer-resize-bar-right': position === 'right'
+        }"
+      ></div>
     </div>
   </div>
 </div>

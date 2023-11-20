@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-transfer-demo',
   templateUrl: './transfer-demo.component.html',
-  })
+})
 export class TransferDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'html', code: require('./basic/transfer-demo-base.component.html?raw') },

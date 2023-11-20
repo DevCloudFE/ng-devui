@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-demo-time-axis-alternative-mode',
-  templateUrl: './alternative-mode.component.html'
+  templateUrl: './alternative-mode.component.html',
 })
-export class AlternativeModeComponent implements OnInit {
+export class AlternativeModeComponent {
   dataHorizontal = {
     direction: 'horizontal',
     list: [
@@ -24,7 +24,7 @@ export class AlternativeModeComponent implements OnInit {
         dotColor: 'var(--devui-danger)'
       },
       {
-        text: 'Depoy',
+        text: 'Deploy',
         position: 'bottom',
         dotColor: 'var(--devui-warning)'
       },
@@ -35,7 +35,6 @@ export class AlternativeModeComponent implements OnInit {
       },
     ]
   };
-
   dataVertical = {
     direction: 'vertical',
     list: [
@@ -51,7 +50,7 @@ export class AlternativeModeComponent implements OnInit {
         dotColor: 'var(--devui-danger)'
       },
       {
-        text: 'Depoy',
+        text: 'Deploy',
         dotColor: 'var(--devui-warning)'
       },
       {
@@ -60,10 +59,4 @@ export class AlternativeModeComponent implements OnInit {
       },
     ]
   };
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

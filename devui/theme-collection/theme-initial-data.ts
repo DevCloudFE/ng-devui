@@ -137,4 +137,5 @@ export const devuiInitialThemeData = {
   'devui-z-index-modal': '1050',
   'devui-z-index-drawer': '1040',
   'devui-z-index-framework': '1000',
+  'devui-table-column-shadow-color': 'rgba(37,43,58,0.08)'
 };

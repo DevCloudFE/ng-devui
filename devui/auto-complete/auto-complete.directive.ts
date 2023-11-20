@@ -110,6 +110,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
    *  【可选】启用数据懒加载，默认不启用
    */
   @Input() enableLazyLoad = false;
+  @Input() retainInputValue = false;
   @Input() allowEmptyValueSearch = false; // 在value为空时，是否允许进行搜索
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() customViewDirection: 'bottom' | 'right' | 'left' | 'top' = 'bottom';
@@ -339,7 +340,9 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
 
   writeValue(obj): void {
     this.value = this.valueParser(obj) || '';
-    this.writeInputValue(this.value);
+    if (!this.retainInputValue) {
+      this.writeInputValue(this.value);
+    }
   }
 
   registerOnChange(fn): void {

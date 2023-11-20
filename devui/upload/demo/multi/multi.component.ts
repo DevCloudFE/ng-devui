@@ -5,7 +5,7 @@ import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
   selector: 'd-multi',
   templateUrl: './multi.component.html',
   styleUrls: ['./multi.component.scss']
-  })
+})
 export class MultiComponent {
 
   additionalParameter2 = {

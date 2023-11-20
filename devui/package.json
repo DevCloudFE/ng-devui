@@ -1,6 +1,6 @@
 {
   "name": "ng-devui",
-  "version": "16.1.0",
+  "version": "16.2.0",
   "license": "MIT",
   "description": "DevUI components based on Angular",
   "keywords": [
@@ -18,11 +18,11 @@
   },
   "dependencies": {
     "@angular/cdk": "^16.0.0",
-    "@popperjs/core": "^2.5.4",
-    "css-vars-ponyfill": "^2.3.2",
     "date-fns": "^2.20.0",
     "lodash-es": "^4.17.11",
-    "tslib": "^2.6.2"
+    "@popperjs/core": "^2.5.4",
+    "css-vars-ponyfill": "^2.3.2",
+    "tslib": "^2.0.0"
   },
   "peerDependencies": {
     "@angular/animations": "^16.0.0",

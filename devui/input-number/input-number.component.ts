@@ -47,9 +47,9 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
   @Input() reg: RegExp | string;
   @Input() @WithConfig() styleType = 'default';
   @Input() @WithConfig() showGlowStyle = true;
-  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
     return this.showGlowStyle;
-  };
+  }
   @Output() afterValueChanged = new EventEmitter<number>();
   @Output() whileValueChanging = new EventEmitter<number>();
   @ViewChild('incButton', { static: true }) incButton: ElementRef;
@@ -211,13 +211,13 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
 
   subscribeIncAction() {
     if (this.incListener && !this.incAction) {
-      this.incAction = this.incListener.subscribe(this.increaseValue.bind(this));
+      this.incAction = this.incListener.subscribe(this.increaseValue);
     }
   }
 
   subscribeDecAction() {
     if (this.decListener && !this.decAction) {
-      this.decAction = this.decListener.subscribe(this.decreaseValue.bind(this));
+      this.decAction = this.decListener.subscribe(this.decreaseValue);
     }
   }
 
@@ -242,13 +242,13 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     }
   }
 
-  private increaseValue() {
+  private increaseValue = () => {
     this.inDecreaseValue('increase');
-  }
+  };
 
-  private decreaseValue() {
+  private decreaseValue = () => {
     this.inDecreaseValue('decrease');
-  }
+  };
 
   private inDecreaseValue(type: string) {
     const canContinue = type === 'increase' ? this.canIncrease() : this.canDecrease();
@@ -259,7 +259,13 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
         const decimals = this.getMaxDecimals(this.value);
         const floatValue = type === 'increase' ? this.value + this.step : this.value - this.step;
         if (this.matchReg(String(floatValue))) {
-          this.updateValue(parseFloat(floatValue.toFixed(decimals)));
+          let value;
+          if (floatValue < 0) {
+            value = Math.ceil(floatValue * Number(`1e+${decimals}`) - Number('1e-12')) / Number(`1e+${decimals}`);
+          } else {
+            value = Math.floor(floatValue * Number(`1e+${decimals}`) + Number('1e-12')) / Number(`1e+${decimals}`);
+          }
+          this.updateValue(value);
         }
       }
       this.inputElement.nativeElement.focus();
@@ -294,6 +300,8 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
     if (disabled) {
       this.unsubscribeActions();
     } else {
+      this.disabledDec = this.value === this.min;
+      this.disabledInc = this.value === this.max;
       this.subscribeActions();
     }
   }
@@ -384,7 +392,11 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
       return;
     } else if (value.match(/^\s*(-|\+)?(\d+|(\d*(\.\d*)))$/)) {
       if (this.decimalLimit !== undefined && this.decimalLimit !== null) {
-        value = parseFloat(value).toFixed(this.decimalLimit);
+        if (value < 0) {
+          value = Math.ceil(value * Number(`1e+${this.decimalLimit}`) - Number('1e-12')) / Number(`1e+${this.decimalLimit}`);
+        } else {
+          value = Math.floor(value * Number(`1e+${this.decimalLimit}`) + Number('1e-12')) / Number(`1e+${this.decimalLimit}`);
+        }
       }
       value = parseFloat(value as string);
       if (!isNaN(value)) {

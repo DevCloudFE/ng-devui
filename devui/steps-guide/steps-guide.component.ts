@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { PositionService } from 'ng-devui/position';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 import { debounceTime, throttleTime } from 'rxjs/operators';
 import { StepsGuideService } from './steps-guide.service';
 import { ExtraConfig } from './steps-guide.types';
@@ -149,7 +149,11 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   closeAll() {
-    localStorage.setItem(`devui_guide_${this.pageName}`, '0');
+    try {
+      localStorage.setItem(`devui_guide_${this.pageName}`, '0');
+    } catch (error) {
+      console.error(error);
+    }
     this.close(this.stepService.getCurrentStep(), 'close');
   }
 

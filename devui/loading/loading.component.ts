@@ -1,21 +1,14 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-  TemplateRef
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
 import { LoadingStyle } from './loading.types';
 @Component({
   selector: 'd-loading',
-  template: `<div class="devui-loading-wrapper" [ngClass]="{ 'devui-loading-full': targetName === 'BODY' }">
+  template: `<div class="devui-loading-wrapper" [ngClass]="{ 'devui-loading-full': targetName === 'BODY' }" [style.zIndex]="zIndex">
     <ng-container *ngTemplateOutlet="loadingTemplateRef ? loadingTemplateRef : default"> </ng-container>
     <ng-template #default>
       <div
         class="devui-spinner-wrapper"
         [ngClass]="{ 'devui-fix-loading-position': !customPosition, 'devui-message-wrapper': !!message }"
-        [ngStyle]="{ 'z-index': zIndex, top: top, left: left }"
+        [ngStyle]="{ top: top, left: left }"
       >
         <div class="devui-busy-default-sign">
           <div *ngIf="loadingStyle === 'default'" class="devui-busy-default-spinner">

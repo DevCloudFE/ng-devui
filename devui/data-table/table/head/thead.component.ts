@@ -10,7 +10,7 @@ import { TableThComponent } from './th/th.component';
   /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dTableHead]',
   templateUrl: './thead.component.html'
-  })
+})
 export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy, OnChanges {
   @Input() checkable: boolean;
   @Input() checkDisabled: boolean;

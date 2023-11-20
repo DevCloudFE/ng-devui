@@ -230,7 +230,8 @@ export const galaxyTheme: Theme = new Theme({
     'devui-gray-form-control-hover-bg': '#393A3E',
     'devui-nav-expand-bg': '#1d1d21',
     'devui-link': '#7693F5',
-    'devui-link-active': '#465EB8'
+    'devui-link-active': '#465EB8',
+    'devui-table-column-shadow-color': 'rgba(0,0,0,0.24)'
   },
   extends: 'devui-dark-theme',
   isDark: true,

@@ -79,6 +79,7 @@ export class ButtonComponent implements AfterContentChecked {
 
     setTimeout(() => {
       this.showWave = false;
+      this.cd.detectChanges();
     }, AnimationNumberDuration.SLOW);
   }
 

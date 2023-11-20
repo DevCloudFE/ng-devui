@@ -245,10 +245,15 @@
         "title": "不使用默认图标",
         "description": "不使用默认的类型图标。"
       },
+      "carouselDemo": {
+        "title": "自动轮播",
+        "description": "循环播放一系列文字提示信息。"
+      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
         "tips-to-close": "可关闭的提示",
-        "without-icon": "不使用默认图标"
+        "without-icon": "不使用默认图标",
+        "carousel": "自动轮播"
       }
     },
     "animations": {
@@ -1792,6 +1797,10 @@
         "title": "表格交互",
         "description": "支持列排序、列过滤、自定义过滤模板、选中、调整列宽\n支持两种实现方式，方式一通过自定义head、body模板和其中的行、单元格实现，方式二通过配置column来实现。"
       },
+      "memoryDemo": {
+        "title": "表格列宽记忆",
+        "description": "通过缓存来记忆列宽, 刷新后列宽不变。"
+      },
       "lazyDemo": {
         "title": "懒加载",
         "description": "使用lazy启用懒加载，当滚动表格底部时到触发loadMore事件实现懒加载。"
@@ -1844,6 +1853,7 @@
         "dynamic-cols": "动态列及样式配置器",
         "async-loading": "异步加载数据",
         "table-interaction": "表格交互",
+        "table-memory": "表格列宽记忆",
         "table-check-options": "自定义表格选中操作",
         "lazy-loading-of-list-data": "懒加载",
         "virtual-scroll": "虚拟滚动",
@@ -2567,10 +2577,15 @@
         "title": "自定义模板",
         "description": "自定义抽屉板模板。"
       },
+      "resizeDemo": {
+        "title": "动态调整宽度",
+        "description": "侧滑宽度动态可调整"
+      },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
         "do-not-destroy-after-closing": "关闭后不销毁",
-        "template": "自定义模板"
+        "template": "自定义模板",
+        "resize": "动态调整宽度"
       }
     },
     "dropdown": {
@@ -2858,9 +2873,9 @@
         "title": "标准对话框",
         "description": "使用dialogService可拖拽的标准对话框。"
       },
-      "maximizeDemo": {
-        "title": "最大化对话框",
-        "description": "使用showMaximizeBtn可设置最大化/退出最大化按钮的显示/隐藏"
+      "maximizeDemo":{
+        "title":"最大化对话框",
+        "description":"使用showMaximizeBtn可设置最大化/退出最大化按钮的显示/隐藏"
       },
       "customizeDemo": {
         "title": "自定义对话框",
@@ -2900,7 +2915,7 @@
       },
       "anchorLinkValues": {
         "standard-dialog": "标准对话框",
-        "maximize-dialog": "最大化对话框",
+        "maximize-dialog":"最大化对话框",
         "custom-dialog": "自定义对话框",
         "intercept-dialog-closed": "拦截对话框关闭",
         "message-hint": "信息提示",

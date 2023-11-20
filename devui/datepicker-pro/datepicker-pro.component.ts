@@ -26,15 +26,15 @@ import { DateConfig } from './lib/datepicker-pro.type';
   templateUrl: './datepicker-pro.component.html',
   styleUrls: ['./datepicker-pro.component.scss'],
   providers: [
-  DatepickerProService,
-  {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => DatepickerProComponent),
-  multi: true
-  }
+    DatepickerProService,
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DatepickerProComponent),
+      multi: true
+    }
   ],
   preserveWhitespaces: false,
-  })
+})
 export class DatepickerProComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
   @Input() mode: 'year' | 'month' | 'date' = 'date';
   @Input() showTime = false;

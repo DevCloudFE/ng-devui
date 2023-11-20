@@ -17,7 +17,7 @@
   (mousedown)="isMouseDown = true"
   (mouseup)="isMouseDown = false"
 >
-  <span *ngIf="!!icon" class="devui-icon-fix icon {{ icon }}" [ngClass]="{ 'clear-right-4': hasContent() }"></span>
+  <span *ngIf="!!icon" class="devui-icon-fix icon {{ icon }}" [ngClass]="{ 'clear-right-8': hasContent() }"></span>
   <!--
   --><span class="button-content" [class.devui-btn-more-text-omits]="width !== undefined" #buttonContent><ng-content></ng-content></span>
   <div class="devui-button-water-wave" *ngIf="showWave" [ngStyle]="{ top: waveTop + 'px', left: waveLeft + 'px' }"></div>

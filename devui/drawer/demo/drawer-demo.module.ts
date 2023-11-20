@@ -14,6 +14,7 @@ import { BasicComponent } from './basic/basic.component';
 import { DrawerDemoComponent } from './drawer-demo.component';
 import { DrawerDesignComponent } from './drawer-design.component';
 import { DrawerContentComponent } from './drawerContent/drawer-content.component';
+import { ResizeComponent } from './resize/resize.component';
 import { TemplateComponent } from './template/template.component';
 import { UndestroyableComponent } from './undestroyable/undestroyable.component';
 
@@ -52,7 +53,8 @@ import { UndestroyableComponent } from './undestroyable/undestroyable.component'
     BasicComponent,
     UndestroyableComponent,
     DrawerContentComponent,
-    TemplateComponent
+    TemplateComponent,
+    ResizeComponent
   ],
 })
 export class DrawerDemoModule {}

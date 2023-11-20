@@ -8,7 +8,7 @@ import { IconModule } from "./icon.module";
 @Component({
   template: `
     <d-icon-group>
-        <d-icon 
+        <d-icon
             [icon]="icon"
             [operable]="operable"
             [disabled]="disabled"
@@ -21,11 +21,11 @@ import { IconModule } from "./icon.module";
     </ng-template>`,
   standalone: true,
   imports: [IconModule]
-})
+  })
 class TestIconComponent {
   icon: string | TemplateRef<any> = '';
-  operable: boolean = false;
-  disabled: boolean = false;
+  operable = false;
+  disabled = false;
   rotate?: number | 'infinite';
   color?: string;
   @ViewChild('iconTemplate', { static: true }) iconTemplate: TemplateRef<any>;

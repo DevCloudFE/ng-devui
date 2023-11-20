@@ -18,7 +18,7 @@ export class CustomizeAreaUploadComponent {
     checkSameName: true
   };
   fileOptions: IFileOptions = {
-    multiple: true,
+    multiple: true
   };
   UPLOADED: string;
   CANCELUPLOAD: string;

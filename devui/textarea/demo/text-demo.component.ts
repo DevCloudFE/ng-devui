@@ -10,12 +10,10 @@ export class TextDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./basic/basic.component.css?raw') },
   ];
   resizeSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./resize/resize.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./resize/resize.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./resize/resize.component.css?raw') },
   ];
   countSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./count/count.component.html?raw') },
@@ -25,7 +23,7 @@ export class TextDemoComponent implements OnInit, OnDestroy {
 
   navItems = [];
   subs: Subscription = new Subscription();
-  constructor(private translate: TranslateService) {}
+  constructor(private translate: TranslateService) { }
 
   ngOnInit() {
     this.subs.add(

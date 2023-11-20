@@ -10,6 +10,10 @@ export class StorageService implements IStorageService {
     if (typeof window === 'undefined') {
       return;
     }
-    window.localStorage.setItem(key, value);
+    try {
+      window.localStorage.setItem(key, value);
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

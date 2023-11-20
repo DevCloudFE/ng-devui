@@ -27,7 +27,12 @@ export class UserGuideService {
       for (let i = 0; i < this.steps.length; i++) {
         if (this.steps[i]?.defaultStart === true && this.firstOpenShow === 'true') {
           this.start(i);
-          localStorage.setItem('devui-user-guide-first-open-show', 'false');
+
+          try {
+            localStorage.setItem('devui-user-guide-first-open-show', 'false');
+          } catch (error) {
+            console.error(error);
+          }
           break;
         }
       }
@@ -53,7 +58,12 @@ export class UserGuideService {
     this.userGuideCoreService.next();
 
     this.currentTutorial = index;
-    localStorage.setItem('devui-user-guide-last-tutorial', index.toString());
+
+    try {
+      localStorage.setItem('devui-user-guide-last-tutorial', index.toString());
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   goStep(index: number) {

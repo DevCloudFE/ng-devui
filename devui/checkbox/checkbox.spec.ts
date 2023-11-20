@@ -18,7 +18,7 @@ import { CheckBoxModule } from './checkbox.module';
     [beforeChange]="beforeChange"
   >
   </d-checkbox>`,
-  })
+})
 class TestCheckBoxComponent {
   @ViewChild('comp') comp: CheckBoxComponent;
   public checked = false;

@@ -63,6 +63,7 @@ openDrawer() {
 |      bodyScrollable      |                   `boolean`                   |  true   | 可选，drawer 打开后，body 是否可滚动，默认为可滚动,false 时隐藏滚动,隐藏滚动条可能会产生抖动，可以通过设置外层 fixed 来同时避免滚动与抖动,可参考 modal 的解决方案 | [解决抖动滚动问题](demo#template-fixed)           |
 |      showAnimation      |                   `boolean`                   |  true   | 可选，是否开启动效 |
 | id | `string` | -- | 可选，窗口的id |
+|      resizable      |                   `boolean`                   |  false   | 可选，是否可动态调整抽屉宽度 |
 
 ## IDrawerOpenResult 参数
 

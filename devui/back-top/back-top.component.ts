@@ -25,7 +25,7 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./back-top.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespaces: false,
-  })
+})
 export class BackTopComponent implements OnChanges, OnInit, OnDestroy, AfterViewInit {
   @Input() customTemplate: TemplateRef<any>;
   @Input() visibleHeight = 300;
@@ -41,6 +41,7 @@ export class BackTopComponent implements OnChanges, OnInit, OnDestroy, AfterView
   cursorTimer: any;
   dragBoundary: any;
   moveCursor = false;
+  moveToggle = false;
   isVisible = false;
   target: HTMLElement | Window;
   subs: Subscription = new Subscription();
@@ -131,6 +132,10 @@ export class BackTopComponent implements OnChanges, OnInit, OnDestroy, AfterView
   }
 
   goTop() {
+    if (this.draggable && this.duration > this.MOUSEDOWN_DELAY) {
+      this.duration = 0;
+      return;
+    }
     if (this.target === window) {
       this.document.documentElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
       this.document.body.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
@@ -138,6 +143,7 @@ export class BackTopComponent implements OnChanges, OnInit, OnDestroy, AfterView
       this.scrollTarget.style.scrollBehavior = 'smooth';
       this.scrollTarget.scrollTop = 0;
     }
+    this.duration = 0;
     this.backTopEvent.emit(true);
   }
 
@@ -171,11 +177,11 @@ export class BackTopComponent implements OnChanges, OnInit, OnDestroy, AfterView
   mousedownEvent(event: MouseEvent) {
     if (this.draggable) {
       event.preventDefault();
+      this.setDragBoundary();
+      this.duration = new Date().getTime();
+      this.moveToggle = true;
       this.cursorTimer = setTimeout(() => {
-        this.setDragBoundary();
-        this.duration = new Date().getTime();
         this.moveCursor = true;
-        this.cdr.markForCheck();
         this.dragEvent.emit(true);
       }, this.MOUSEDOWN_DELAY);
     }
@@ -187,22 +193,15 @@ export class BackTopComponent implements OnChanges, OnInit, OnDestroy, AfterView
     }
   }
 
-  clickEvent(event: MouseEvent) {
-    if (this.draggable && this.duration > this.MOUSEDOWN_DELAY) {
-      event.stopPropagation();
-      this.duration = 0;
-    }
-  }
-
   @HostListener('document:mouseup', [])
   onMouseUp() {
     if (this.draggable) {
       if (this.cursorTimer) {
         clearTimeout(this.cursorTimer);
       }
-      if (this.moveCursor) {
+      if (this.moveToggle) {
+        this.moveToggle = false;
         this.moveCursor = false;
-        this.cdr.markForCheck();
         this.dragEvent.emit(false);
       }
       this.duration = this.duration && new Date().getTime() - this.duration;
@@ -211,9 +210,10 @@ export class BackTopComponent implements OnChanges, OnInit, OnDestroy, AfterView
 
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
-    if (this.draggable && this.moveCursor && this.dragBoundary) {
+    if (this.draggable && this.moveToggle && this.dragBoundary) {
       // 先判断再执行阻止默认事件，否则可能影响鼠标拖选功能
       event.preventDefault();
+      this.moveCursor = true;
       const posX = event.movementX;
       const posY = event.movementY;
       const rect = this.dragBoundary.dom.getBoundingClientRect();

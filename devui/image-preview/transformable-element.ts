@@ -130,11 +130,13 @@ export class TransformableElement {
   zoomOut(step = 0.25) {
     this.zoom = Math.max(this.MIN_SCALE, this.zoom - step);
     this.setElementTransform();
+    return this.zoom === this.MIN_SCALE;
   }
 
   zoomIn(step = 0.25) {
     this.zoom = Math.min(this.MAX_SCALE, this.zoom + step);
     this.setElementTransform();
+    return this.zoom === this.MAX_SCALE;
   }
 
   rotate() {

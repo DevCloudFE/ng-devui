@@ -1,0 +1,7 @@
+<d-alert [type]="'info'" [autoplay]="true" [operationTemplate]="operationTemplate">
+  <d-alert-carousel-item *ngFor="let item of data">{{ item.content }}</d-alert-carousel-item>
+</d-alert>
+
+<ng-template #operationTemplate let-close="close">
+  <span class="not-show" title="Don't prompt again" (click)="close()">Don't prompt again</span>
+</ng-template>

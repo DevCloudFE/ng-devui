@@ -432,7 +432,7 @@ body {
   color: var(--devui-text, #252b3a);
   font-size: 12px;
   font-size: var(--devui-font-size, 12px);
-  font-family: 'HuaweiFont', helvetica, arial, 'PingFang', 'Microsoft YaHei', 'Hiragino Sans GB', 'Microsoft JhengHei', sans-serif;
+  font-family: helvetica, arial, 'PingFang', 'Microsoft YaHei', 'Hiragino Sans GB', 'Microsoft JhengHei', sans-serif;
   font-variant: tabular-nums;
   line-height: 1.5;
 }
@@ -519,7 +519,15 @@ body > * ::-webkit-scrollbar {
   height: 8px;
 }
 
+body * {
+  scrollbar-width: thin;
+}
+
 body > * ::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+body *::-moz-scrollbar-track {
   background-color: transparent;
 }
 
@@ -5366,6 +5374,10 @@ ul {
   background-color: var(--devui-area, #f8f8f8);
   padding: 0.5em;
   font-size: 12px;
+}
+
+.devui-md-view pre code {
+  padding: 0;
 }
 
 .devui-md-view pre.hljs,

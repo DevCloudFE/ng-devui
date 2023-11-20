@@ -5,8 +5,8 @@ import {
 } from '@angular/core';
 import { DropDownDirective } from 'ng-devui/dropdown';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
-import { debounceTime, map, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subscription, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { FilterConfig } from '../../../../data-table.model';
 import { TABLE_TH } from '../th.token';
 
@@ -109,6 +109,17 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
     const checkedList = this.removeDuplication(this.checkedListForFilter, keyValue).filter(item => item.checked);
     this.setFilterIconActive(checkedList);
     this.filterChange.emit(checkedList);
+  }
+
+  resetFilterData() {
+    this.filterList.forEach(t => {
+      t.checked = false;
+    });
+    this.filterListDisplay.forEach(t => {
+      t.checked = false;
+    });
+    this.setFilterIconActive([]);
+    this.filterChange.emit(this.filterList);
   }
 
   removeDuplication(array, key) {
@@ -242,23 +253,12 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
     this.setHalfChecked();
   }
 
-  searchInputValueChangeEvent() {
-    this.filterSubscription = fromEvent(this.searchElement, 'input')
-      .pipe(
-        map((e: any) => e.target.value),
-        debounceTime(this.DEBONCE_TIME) // hard code need refactory
-      )
-      .subscribe(term => {
-        return this.sourceSubject.next(term);
-      });
+  onSearch(value) {
+    return this.sourceSubject.next(value);
   }
 
   registerFilterChange(): void {
     this.sourceSubject = new BehaviorSubject<any>('');
-    setTimeout(() => {
-      this.searchElement = this.document.querySelector('.data-table-column-filter-content input');
-      this.searchInputValueChangeEvent();
-    });
     this.sourceSubscription = this.sourceSubject.pipe(switchMap(term => this.searchFn(term))).subscribe(options => {
       this.filterListDisplay = options;
       this.checkedListForFilter.push(...options.filter(item => item.checked));

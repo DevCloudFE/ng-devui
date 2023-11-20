@@ -40,6 +40,7 @@ $devui-light-shadow: var(--devui-light-shadow, rgba(37, 43, 58, 0.12)); // 弱�
 $devui-connected-overlay-shadow: var(--devui-connected-overlay-shadow, rgba(37, 43, 58, 0.16)); // 下拉菜单类阴影色
 $devui-feedback-overlay-shadow: var(--devui-feedback-overlay-shadow, rgba(37, 43, 58, 0.2)); // 信息展示类阴影色
 $devui-hover-shadow: var(--devui-hover-shadow, rgba(37, 43, 58, 0.2)); // 信息展示类阴影色
+$devui-table-column-shadow-color: var(--devui-table-column-shadow-color, rgba(37, 43, 58, 0.08)); // 固定列阴影色
 
 // 图标
 $devui-icon-text: var(--devui-icon-text, $devui-slate-70); // 文字图标颜色

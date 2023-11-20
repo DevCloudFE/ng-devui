@@ -234,7 +234,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     const prevPercent = dropPrev ? (dropInner ? 0.25 : dropNext ? 0.45 : 1) : -1;
     const nextPercent = dropNext ? (dropInner ? 0.75 : dropPrev ? 0.55 : 0) : 1;
     const targetPosition = event.currentTarget.getBoundingClientRect();
-    const treeNodePosition = event.currentTarget.querySelector('.devui-tree-node__title').getBoundingClientRect();
+    const treeNodePosition = event.currentTarget.querySelector('.devui-tree-drag-handle').getBoundingClientRect();
     const distance = event.clientY - targetPosition.top;
 
     if (distance < targetPosition.height * prevPercent) {
@@ -554,7 +554,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   treeNodeHover(treeNode, type) {
-    if (this.disableMouseEvent) {
+    if (this.disableMouseEvent || treeNode.data.disableMouseEvent) {
       return;
     }
     treeNode.data.isHover = type === 'enter';

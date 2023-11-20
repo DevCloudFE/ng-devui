@@ -43,6 +43,10 @@
       &.devui-select-no-label {
         padding-left: 10px;
       }
+
+      & > span.devui-tree-select-placeholder {
+        text-indent: 0;
+      }
     }
   }
 

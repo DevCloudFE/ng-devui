@@ -55,6 +55,15 @@
       </d-tab>
     </d-tabs>
   </div>
+  <div class="devui-demo-example" [dAnchor]="'table-memory'">
+    <div class="devui-demo-title">{{ 'components.datatable.memoryDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.datatable.memoryDemo.description' | translate }}
+    </div>
+    <d-codebox id="table-lazy" [sourceData]="memoryTableSource">
+      <d-memory-table-demo demo></d-memory-table-demo>
+    </d-codebox>
+  </div>
   <div class="devui-demo-example" [dAnchor]="'table-check-options'">
     <div class="devui-demo-title">{{ 'components.datatable.checkOptionsDemo.title' | translate }}</div>
     <div class="devui-demo-text">{{ 'components.datatable.checkOptionsDemo.description' | translate }}</div>

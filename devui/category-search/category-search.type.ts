@@ -53,6 +53,10 @@ export interface ICategorySearchTagItem {
    */
   tagCustomTemplate?: TemplateRef<any>;
   /**
+   * 当前分类选中后是否可以删除
+   */
+  deletable?: boolean;
+  /**
    * 已选中值
    */
   value?: {

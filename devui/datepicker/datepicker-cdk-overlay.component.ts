@@ -39,9 +39,9 @@ import { DatePickerConfigService as DatePickerConfig } from './date-picker.confi
   /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dDatepicker][appendToBody]',
   providers: [{
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => DatePickerAppendToBodyComponent),
-  multi: true
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => DatePickerAppendToBodyComponent),
+    multi: true
   }],
   exportAs: 'datepicker',
   template: `
@@ -61,11 +61,11 @@ import { DatePickerConfigService as DatePickerConfig } from './date-picker.confi
     </ng-template>
   `,
   animations: [
-  fadeInOut
+    fadeInOut
   ],
   styleUrls: ['./datepicker-cdk-overlay.component.scss'],
   preserveWhitespaces: false,
-  })
+})
 export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = [
     'rightDown', 'leftDown', 'rightUp', 'leftUp'

@@ -31,7 +31,7 @@ export function tableResizeFunc(tableWidthConfig: TableWidthConfig[], ele: Eleme
         tableWidthConfig.forEach(t => {
           t.width = parseInt(t.width, 10) * ratio + 'px';
         });
-        _totalWidth = ele.nativeElement.querySelector('.table-wrap').offsetWidth;
+        _totalWidth = ele.nativeElement.querySelector('.table-wrap').offsetWidth - 8;
         lastWidth = parseInt(tableWidthConfig.slice(-1)[0].width);
       }
       tableWidthConfig[index].width = width + 'px';

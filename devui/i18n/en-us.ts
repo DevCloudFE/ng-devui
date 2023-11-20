@@ -24,6 +24,7 @@ export default {
     btnOk: 'OK',
     btnCancel: 'Cancel',
     btnClose: 'Close',
+    reset: 'Reset',
     btnClickMe: 'click me!',
     copied: 'Copied',
   },
@@ -130,18 +131,18 @@ export default {
     month: 'Month',
     milestone: 'milestone',
     monthsOfYear: [
-      'January',
-      'February',
-      'March',
-      'April',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
       'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sept',
+      'Oct',
+      'Nov',
+      'Dec',
     ],
     yearDisplay(year) {
       return `${year}`;
@@ -150,7 +151,7 @@ export default {
       return this.monthsOfYear[Number(strMonthIndex) - 1];
     },
     yearAndMonthDisplay(year: string, strMonthIndex: string) {
-      return this.yearDisplay(year) + this.monthDisplay(strMonthIndex);
+      return this.monthDisplay(strMonthIndex) + ' ' + this.yearDisplay(year);
     },
   },
   pagination: {

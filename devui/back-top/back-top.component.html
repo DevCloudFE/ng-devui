@@ -8,7 +8,7 @@
   }"
   (click)="goTop()"
 >
-  <div class="devui-backtop-drag-handle" (mousedown)="mousedownEvent($event)" (mouseleave)="mouseleaveEvent()" (click)="clickEvent($event)">
+  <div class="devui-backtop-drag-handle" (mousedown)="mousedownEvent($event)" (mouseleave)="mouseleaveEvent()">
     <ng-template [ngTemplateOutlet]="customTemplate ? customTemplate : default"></ng-template>
     <ng-template #default>
       <div class="devui-backtop-content">

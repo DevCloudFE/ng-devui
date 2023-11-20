@@ -14,10 +14,10 @@ import { TABLE_TH } from './th.token';
   templateUrl: './th.component.html',
   styleUrls: ['./th.component.scss'],
   providers: [{
-  provide: TABLE_TH,
-  useExisting: forwardRef(() => TableThComponent)
+    provide: TABLE_TH,
+    useExisting: forwardRef(() => TableThComponent)
   }],
-  })
+})
 export class TableThComponent implements OnChanges, OnDestroy {
   @HostBinding('class.resizeable') resizeEnabledClass = false;
   @HostBinding('class.operable') operableClass = false;

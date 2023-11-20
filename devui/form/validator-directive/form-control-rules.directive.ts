@@ -459,7 +459,7 @@ const dControlErrorStatusHost = {
   /* eslint-disable-next-line @angular-eslint/no-host-metadata-property*/
   host: dControlErrorStatusHost,
   exportAs: 'dValidateRules',
-  })
+})
 export class DFormGroupRuleDirective extends DAbstractControlRuleDirective implements OnInit, OnChanges, OnDestroy {
   @Input('dValidateRules') rules: DValidateRules;
   @Output() dRulesStatusChange: EventEmitter<any> = new EventEmitter<any>();
@@ -504,7 +504,7 @@ export class DFormGroupRuleDirective extends DAbstractControlRuleDirective imple
   /* eslint-disable-next-line @angular-eslint/no-host-metadata-property*/
   host: dControlErrorStatusHost,
   exportAs: 'dValidateRules',
-  })
+})
 export class DFormControlRuleDirective extends DAbstractControlRuleDirective implements OnInit, OnChanges, OnDestroy {
   @Input('dValidateRules') rules: DValidateRules;
   @Output() dRulesStatusChange: EventEmitter<any> = new EventEmitter<any>();
@@ -525,13 +525,13 @@ export class DFormControlRuleDirective extends DAbstractControlRuleDirective imp
   }
 
   constructor(
-    @Self() cd: NgControl,
-    @Optional() @Host() private dFormItem: FormItemComponent,
-    @Optional() @Host() @SkipSelf() parentDir: DFormGroupRuleDirective,
-    private i18n: I18nService,
-    public triggerElementRef: ElementRef,
-    private overlayContainerRef: OverlayContainerRef,
-    private componentFactoryResolver: ComponentFactoryResolver
+  @Self() cd: NgControl,
+          @Optional() @Host() private dFormItem: FormItemComponent,
+          @Optional() @Host() @SkipSelf() parentDir: DFormGroupRuleDirective,
+          private i18n: I18nService,
+          public triggerElementRef: ElementRef,
+          private overlayContainerRef: OverlayContainerRef,
+          private componentFactoryResolver: ComponentFactoryResolver
   ) {
     super(cd, parentDir);
   }

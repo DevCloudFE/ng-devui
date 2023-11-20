@@ -14,7 +14,6 @@ import { MenuHoverTypes } from './type';
 import { HostListener } from '@angular/core';
 import { MenuComponent } from './menu.component';
 import { SubMenuService } from './submenu.service';
-import { log } from 'console';
 
 @Directive({
   selector: '[dMenuItem]',
@@ -40,7 +39,7 @@ export class MenuItemDirective implements OnInit, OnChanges {
     optional: true
   });
 
-  @HostListener('mouseenter', ['$event']) hostMouseEenter(event: MouseEvent) {
+  @HostListener('mouseenter', ['$event']) hostMouseEnter(event: MouseEvent) {
     this.hostHover('enter');
   }
 

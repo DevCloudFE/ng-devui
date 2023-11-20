@@ -4,6 +4,7 @@
   [placeholder]="taskTagConfig.placeholder"
   [multiline]="taskTagConfig.multiline"
   [suggestionList]="suggestionList"
+  [generateOptionFromInput]="false"
   [(ngModel)]="tagList"
   (valueChange)="getTagValue($event)"
 >

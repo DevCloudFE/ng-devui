@@ -10,7 +10,7 @@
       </g>
     </svg>
   </button>
-  <img class="devui-image-preview-main-image" [class.devui-optimal-proportion]="isOptimal" [attr.src]="targetImageSrc | safe: 'url'" />
+  <img class="devui-image-preview-main-image" [class.devui-optimal-proportion]="isOptimal" [attr.src]="targetImageSrc | safe : 'url'" />
 
   <!-- TODO: button参数化重构 -->
   <button class="devui-fixed-arrow-left" (click)="pre()" dTooltip [position]="'right'" [content]="i18nText.pre">
@@ -38,7 +38,7 @@
   </button>
 
   <div class="devui-image-preview-toolbar">
-    <button (click)="zoomIn()" dTooltip [position]="'top'" [content]="i18nText?.zoomIn">
+    <button [class.disabled]="disabledZoomIn" (click)="zoomIn()" dTooltip [position]="'top'" [content]="i18nText?.zoomIn">
       <svg width="18px" height="18px" viewBox="0 0 16 16">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <g fill="#293040" fill-rule="nonzero">
@@ -49,7 +49,7 @@
         </g>
       </svg>
     </button>
-    <button (click)="zoomOut()" dTooltip [position]="'top'" [content]="i18nText.zoomOut">
+    <button [class.disabled]="disabledZoomOut" (click)="zoomOut()" dTooltip [position]="'top'" [content]="i18nText.zoomOut">
       <svg width="18px" height="18px" viewBox="0 0 16 16">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <g fill="#293040" fill-rule="nonzero">

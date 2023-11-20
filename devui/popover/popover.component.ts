@@ -30,7 +30,7 @@ interface PopoverStyle {
   templateUrl: './popover.component.html',
   styleUrls: [`./popover.component.scss`],
   animations: [directionFadeInOut],
-  })
+})
 export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @Input() triggerElementRef: ElementRef;
   currentPosition: PositionType = 'top';

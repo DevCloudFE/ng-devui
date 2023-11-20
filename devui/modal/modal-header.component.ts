@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './modal-header.component.html',
   styleUrls: ['./modal-header.component.scss'],
   preserveWhitespaces: false,
-  })
+})
 export class ModalHeaderComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() dialogtype = 'standard';

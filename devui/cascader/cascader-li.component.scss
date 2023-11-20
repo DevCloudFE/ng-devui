@@ -80,10 +80,6 @@
 }
 
 .devui-dropdown-item:not(.disabled):active:hover {
-  span {
-    color: $devui-light-text;
-  }
-
   .devui-cascader-icon-right polygon {
     fill: $devui-light-text;
   }

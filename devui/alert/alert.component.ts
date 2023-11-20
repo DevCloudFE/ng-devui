@@ -1,10 +1,20 @@
 import {
+  AfterViewInit,
   Component,
-
+  ContentChildren,
+  ElementRef,
   EventEmitter,
   Input,
-  Output
+  OnChanges,
+  OnDestroy,
+  Output,
+  QueryList,
+  Renderer2,
+  SimpleChanges,
+  TemplateRef,
+  ViewChild
 } from '@angular/core';
+import { AlertCarouselItemComponent } from './alert-carousel-item.component';
 import { AlertType } from './alert.types';
 
 @Component({
@@ -13,26 +23,89 @@ import { AlertType } from './alert.types';
   styleUrls: ['./alert.component.scss'],
   preserveWhitespaces: false,
 })
-export class AlertComponent {
+export class AlertComponent implements OnChanges, OnDestroy, AfterViewInit {
   @Input() type: AlertType = 'info';
   @Input() cssClass: string;
   @Input() closeable = true;
-  /**
-   * @deprecated
-   */
-  @Input() content: HTMLElement | string;
   @Input() showIcon = true;
-  @Output() closeEvent = new EventEmitter<AlertComponent>();
-  @Input() set dismissTime(time) {
+  @Input() autoplay = false;
+  @Input() autoplaySpeed = 3000;
+  @Input() transitionSpeed = 500;
+  @Input() operationTemplate: TemplateRef<any>;
+  @Input() set dismissTime(time: number) {
     setTimeout(() => {
       this.close();
     }, time);
   }
-
+  @Output() closeEvent = new EventEmitter<AlertComponent>();
+  @ViewChild('carouselContainer') box: ElementRef<any>;
+  @ContentChildren(AlertCarouselItemComponent) carouselItems: QueryList<AlertCarouselItemComponent>;
   hide = false;
+  carouselNum: number;
+  currentIndex = 1;
+  scheduledId: any;
 
-  close() {
+  constructor(private renderer: Renderer2) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    const { autoplay, autoplaySpeed, transitionSpeed } = changes;
+    if ((autoplay || autoplaySpeed) && (!this.autoplay || !this.autoplaySpeed)) {
+      this.clearScheduledTransition();
+    } else {
+      this.autoScheduleTransition();
+    }
+    if (transitionSpeed && this.transitionSpeed) {
+      this.renderer.setStyle(this.box.nativeElement, 'transition', `top ${this.transitionSpeed}ms ease`);
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.renderCarouselItem();
+    this.carouselItems.changes.subscribe(() => this.renderCarouselItem());
+  }
+
+  ngOnDestroy() {
+    this.clearScheduledTransition();
+  }
+
+  renderCarouselItem() {
+    this.carouselNum = this.carouselItems.length;
+    if (this.carouselNum) {
+      this.renderer.setStyle(this.box.nativeElement, 'transition', `top ${this.transitionSpeed}ms ease`);
+      this.autoScheduleTransition();
+    }
+  }
+
+  next = (): void => {
+    if (this.currentIndex < this.carouselNum) {
+      this.currentIndex++;
+    } else {
+      this.currentIndex = 1;
+    }
+    this.translatePosition(this.currentIndex - 1);
+    this.autoScheduleTransition();
+  };
+
+  autoScheduleTransition() {
+    this.clearScheduledTransition();
+    if (this.autoplay && this.autoplaySpeed) {
+      this.scheduledId = setTimeout(() => this.next(), this.autoplaySpeed);
+    }
+  }
+
+  clearScheduledTransition() {
+    if (this.scheduledId) {
+      clearTimeout(this.scheduledId);
+      this.scheduledId = undefined;
+    }
+  }
+
+  translatePosition(size: number) {
+    this.renderer.setStyle(this.box.nativeElement, 'top', `${-size * 100}%`);
+  }
+
+  close = (): void => {
     this.closeEvent.emit(this);
     this.hide = true;
-  }
+  };
 }
