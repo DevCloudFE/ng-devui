@@ -44,17 +44,17 @@ const SCROLL_BAR_WIDTH = 8;
   selector: 'd-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: [
-  './data-table.component.scss',
-  './data-table.component.color.scss'
+    './data-table.component.scss',
+    './data-table.component.color.scss'
   ],
   // changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'dataTable',
   preserveWhitespaces: false,
   providers: [{
-  provide: DATA_TABLE,
-  useExisting: forwardRef(() => DataTableComponent)
+    provide: DATA_TABLE,
+    useExisting: forwardRef(() => DataTableComponent)
   }],
-  })
+})
 export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit, AfterViewInit {
   /**
    * 【可选】Datatable是否提供勾选行的功能
@@ -836,7 +836,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   beginResizeHandlerEvent($event) {
     const thRenderWidthList = $event.thRenderWidthList;
     if (thRenderWidthList.length > 0) {
-      this._tableTotalWidth = this.elementRef.nativeElement.querySelector('.table-wrap').offsetWidth;
+      this._tableTotalWidth = this.elementRef.nativeElement.querySelector('.table-wrap').offsetWidth - 8;
       // 兼容d-column表头分组场景
       const reverseThList = thRenderWidthList.reverse();
       this._columns.forEach(column => {

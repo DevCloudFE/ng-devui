@@ -47,7 +47,7 @@ import { DefaultTemplateDirective } from './default-template.directive';
   selector: 'd-category-search',
   templateUrl: './category-search.component.html',
   styleUrls: ['./category-search.component.scss'],
-  })
+})
 export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewInit, AfterContentInit {
   static ID_SEED = 0;
   @Input() category: ICategorySearchTagItem[] = [];
@@ -152,6 +152,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     return this.operationConfig.show ?? Boolean(this.selectedTags.length || this.searchKey);
   }
 
+  private categoryCache: ICategorySearchTagItem[];
   private categoryOrder = [];
   private categoryDictionary = {};
 
@@ -185,7 +186,12 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       this.searchKeyCache = this.searchKey;
       this.setSearchKeyTag(false);
     }
+    if (category) {
+      // 通过 categoryCache 保存初始数据状态并重置 category，避免 category 被操作污染后覆盖 selectedTags
+      this.categoryCache = cloneDeep(category.currentValue);
+    }
     if (defaultSearchField || category || selectedTags) {
+      this.category = cloneDeep(this.categoryCache);
       this.init();
     }
     if (showSearchCategory) {
@@ -873,7 +879,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       this.resetTreeRender(dropdown, tagItem, false);
       return;
     }
-    if (tag) {
+    if (tag && tag !== this.currentSelectTag) {
       this.scrollToTailFlag = false;
       this.resetTreeRender(dropdown, tagItem, true);
       if (!isEqual(tag.value.value, tag.value.cache)) {
@@ -881,7 +887,8 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
         this.handleAccordingType(tag.type, tag.value.options);
       }
     } else if (this.currentSelectTag) {
-      this.currentSelectTag.value.value = this.valueIsArrayTypes.includes(this.currentSelectTag.type) ? [] : undefined;
+      // checkbox 值不是必须数组，但重置时需空数组才能触发，undefined 不行
+      this.currentSelectTag.value.value = ['checkbox', ...this.valueIsArrayTypes].includes(this.currentSelectTag.type) ? [] : undefined;
       this.resetTreeRender(dropdown, tagItem, true, true);
       this.handleAccordingType(this.currentSelectTag.type, this.currentSelectTag.options);
       this.scrollToTailFlag = true;
@@ -916,11 +923,9 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   }
 
   clearCurrentSelectTagFromSearch() {
-    if (this.currentSelectTag) {
-      if (this.isSearchCategory) {
-        this.isSearchCategory = false;
-        setTimeout(() => this.finishChoose(), this.DELAY);
-      }
+    if (this.currentSelectTag && this.isSearchCategory) {
+      this.isSearchCategory = false;
+      setTimeout(() => this.finishChoose(), this.DELAY);
     }
   }
 

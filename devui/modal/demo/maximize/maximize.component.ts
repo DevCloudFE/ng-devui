@@ -5,7 +5,7 @@ import { ModalTestComponent } from '../modal-test.component';
 @Component({
   selector: 'd-maximize',
   templateUrl: './maximize.component.html',
-  })
+})
 export class MaximizeComponent {
   config = {
     id: 'dialog-service',

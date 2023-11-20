@@ -138,7 +138,7 @@ export class SingleUploadComponent implements OnDestroy, OnInit, ControlValueAcc
 
   checkValid() {
     this.singleUploadViewComponent.fileUploaders.forEach((fileUploader) => {
-      const checkResult = this.selectFiles._validateFiles(fileUploader.file, this.fileOptions.accept, fileUploader.uploadOptions);
+      const checkResult = this.selectFiles._validateFiles(this.singleUploadViewComponent.fileUploaders.length,fileUploader.file, this.fileOptions.accept, fileUploader.uploadOptions);
       if (checkResult.checkError) {
         this.singleUploadViewComponent.deletePreUploadFile(fileUploader.file);
         this.alertMsg(checkResult.errorMsg);

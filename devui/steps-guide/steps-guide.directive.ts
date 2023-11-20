@@ -154,7 +154,11 @@ export class StepsGuideDirective implements OnInit, OnDestroy {
         localStorage.removeItem(`devui_guide_${this.pageName}`);
         this.stepService.setCurrentIndex(currentIndex);
       } else {
-        localStorage.setItem(`devui_guide_${this.pageName}`, '0');
+        try {
+          localStorage.setItem(`devui_guide_${this.pageName}`, '0');
+        } catch (error) {
+          console.error(error);
+        }
         this.destroyView();
       }
     }));

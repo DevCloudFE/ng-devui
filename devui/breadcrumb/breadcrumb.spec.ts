@@ -27,7 +27,7 @@ class TestBreadCrumbComponent {
     {
       title: '面包屑', showMenu: true, link: '/components/zh-cn/breadcrumb/demo', noNavigation: true, isSearch: true,
       menuList: [
-        { name: '锚点', link: 'http://devui.huawei.com/components/anchor/demo', target: '_blank' },
+        { name: '锚点', link: '/components/anchor/demo', target: '_blank' },
         { name: '按钮', link: '/', linkType: 'routerLink' } // 测试是否进入navigateTo方法处理routerLink的情况
       ]
     }];

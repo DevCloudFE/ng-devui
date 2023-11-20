@@ -115,20 +115,16 @@ export class SelectFiles {
     }
   }
 
-  _validateFiles(file, accept, uploadOptions) {
-    if (!this.isAllowedFileType(accept, <File>file)) {
-      this.NOT_ALLOWED_FILE_TYPE_MSG = this.i18nText.getNotAllowedFileTypeMsg((<File>file).name, accept);
+  _validateFiles(filesLen, currentFile, accept, uploadOptions) {
+    if (!this.isAllowedFileType(accept, <File>currentFile)) {
+      this.NOT_ALLOWED_FILE_TYPE_MSG = this.i18nText.getNotAllowedFileTypeMsg((<File>currentFile).name, accept);
       return { checkError: true, errorMsg: this.NOT_ALLOWED_FILE_TYPE_MSG };
     }
-    if (this.beyondMaximalSize((<File>file).size, uploadOptions.maximumSize)) {
-      this.BEYOND_MAXIMAL_FILE_SIZE_MSG = this.i18nText.getBeyondMaximalFileSizeMsg((<File>file).name, uploadOptions.maximumSize);
+    if (this.beyondMaximalSize((<File>currentFile).size, uploadOptions.maximumSize)) {
+      this.BEYOND_MAXIMAL_FILE_SIZE_MSG = this.i18nText.getBeyondMaximalFileSizeMsg((<File>currentFile).name, uploadOptions.maximumSize);
       return { checkError: true, errorMsg: this.BEYOND_MAXIMAL_FILE_SIZE_MSG };
     }
-    return { checkError: false, errorMsg: undefined };
-  }
-
-  validateFilesCount(files, uploadOptions) {
-    if (this.beyondMaximumFileCount(files, uploadOptions.maximumCount)) {
+    if (this.beyondMaximumFileCount(filesLen, uploadOptions.maximumCount)) {
       this.BEYOND_MAXIMAL_FILE_COUNT_MSG = this.i18nText.getBeyondMaximumFileCountMsg(uploadOptions.maximumCount);
       return { checkError: true, errorMsg: this.BEYOND_MAXIMAL_FILE_COUNT_MSG };
     }

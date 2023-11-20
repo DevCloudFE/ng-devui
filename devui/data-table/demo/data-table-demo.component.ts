@@ -27,6 +27,12 @@ export class DataTableDemoComponent implements OnInit, OnDestroy {
     { title: 'TS', language: 'typescript', code: require('./interaction/interaction.component.ts?raw') },
     { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
   ];
+  memoryTableSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./memory-table/memory-table.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./memory-table/memory-table.component.ts?raw') },
+    { title: 'Directive', language: 'typescript', code: require('./memory-table/memory-table-width.directive.ts?raw') },
+    { title: 'mock-data', language: 'typescript', code: require('./mock-data?raw') },
+  ];
   checkOptionSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./check-options/check-options.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./check-options/check-options.component.ts?raw') },
@@ -173,6 +179,7 @@ export class DataTableDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'dynamic-cols', value: values['dynamic-cols'] },
       { dAnchorLink: 'async-loading', value: values['async-loading'] },
       { dAnchorLink: 'table-interaction', value: values['table-interaction'] },
+      { dAnchorLink: 'table-memory', value: values['table-memory'] },
       { dAnchorLink: 'table-check-options', value: values['table-check-options'] },
       { dAnchorLink: 'lazy-loading-of-list-data', value: values['lazy-loading-of-list-data'] },
       { dAnchorLink: 'virtual-scroll', value: values['virtual-scroll'] },

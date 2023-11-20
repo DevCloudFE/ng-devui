@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-common-helper-download',
   templateUrl: './helper-download.component.html',
-  })
+})
 export class HelperDownloadDemoComponent {
   downError: string;
   sub: Subscription;

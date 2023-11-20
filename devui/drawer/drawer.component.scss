@@ -27,12 +27,8 @@
 .overlay-backdrop {
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
   bottom: 0 !important;
   background: $devui-shadow;
-  width: 100vw;
-  height: 100vh;
 }
 
 .drawer-nav,
@@ -64,5 +60,28 @@
     &::-webkit-scrollbar-thumb {
       background-color: $devui-placeholder;
     }
+  }
+}
+
+.devui-drawer-resize-bar {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  z-index: 10;
+  border-left: 1px solid $devui-dividing-line;
+
+  &.devui-drawer-resize-bar-left {
+    right: -1px;
+  }
+
+  &.devui-drawer-resize-bar-right {
+    left: -1px;
+  }
+
+  &.devui-drawer-can-hover:hover {
+    border-left-color: $devui-brand-hover;
+    border-left-width: 2px;
+    cursor: col-resize;
   }
 }

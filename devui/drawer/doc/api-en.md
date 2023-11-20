@@ -60,6 +60,7 @@ Note: Components passed to drawerContentComponent in the API need to be register
 | bodyScrollable | `boolean` | true | Optional. Whether the body can be scrolled when the drawer opens. The default value is false. If the scroll bar is hidden, the scroll bar may jitter. You need to resolve the problem in the page layout. |s
 | showAnimation | `boolean` | true | optional. Whether to enable animation. |
 | id | `string` | -- | Optional. Id of the drawer. |
+| resizable | `boolean` | false | Optional. Whether the drawer's width can be dynamically adjusted. |
 
 ## IDrawerOpenResult Parameter
 

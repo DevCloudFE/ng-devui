@@ -28,8 +28,8 @@ import * as hljs from 'highlight.js/lib/core';
 export class ThemeGuideComponent implements OnInit, AfterViewInit {
   _readMe: HTMLElement;
 
-  @Input() set readMe(readMe: HTMLElement) {
-    this._readMe = readMe;
+  @Input() set readMe(readMe: any) {
+    this._readMe = readMe.default || readMe;
     setTimeout(() => {
       this.refreshView();
     });

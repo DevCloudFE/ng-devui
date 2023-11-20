@@ -8,6 +8,7 @@ export default {
     loading: '加载中...',
     checkAll: '全选',
     btnOk: '确定',
+    reset: '重置',
     btnCancel: '取消',
     btnClose: '关闭',
     btnClickMe: '点击我',

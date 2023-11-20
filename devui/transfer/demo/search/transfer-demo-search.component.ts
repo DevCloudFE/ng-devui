@@ -5,7 +5,7 @@ import { TransferDirection } from 'ng-devui';
   selector: 'd-transfer-demo-search',
   templateUrl: './transfer-demo-search.component.html',
   styleUrls: ['./transfer-demo-search.component.scss']
-  })
+})
 export class TransferDemoSearchComponent {
   disabled = false;
   sourceOption1 = [

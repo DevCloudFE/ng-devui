@@ -2,17 +2,9 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "types": [
-      "node",
-      "jasmine"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "types": ["node", "jasmine"],
+    "typeRoots": ["node_modules/@types"]
   },
-  "files": [
-    "main.ts",
-    "polyfills.ts"
-  ],
+  "files": ["main.ts", "polyfills.ts"],
   "include": []
 }

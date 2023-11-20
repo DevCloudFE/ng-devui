@@ -39,6 +39,8 @@ import { InteractionColumnComponent } from './interaction-column/interaction-col
 import { InteractionComponent } from './interaction/interaction.component';
 import { DatatableDemoLazyloadDataComponent } from './lazy/data-table-demo-lazyloaddata.component';
 import { DatatableDemoMaxheightComponent } from './max-height/data-table-demo-maxheight.component';
+import { MemoryTableWidthDirective } from './memory-table/memory-table-width.directive';
+import { MemoryTableComponent } from './memory-table/memory-table.component';
 import { DatatableDemoMultiHeaderComponent } from './multi-header/data-table-demo-multiheader.component';
 import { MutiDragRowComponent } from './muti-drag-row/muti-drag-row.component';
 import { MutilStylesComponent } from './mutil-styles/mutil-styles.component';
@@ -47,66 +49,68 @@ import { TreeDataComponent } from './tree-table/tree-data.component';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 @NgModule({
   imports: [
-  TranslateModule,
-  CommonModule,
-  ScrollingModule,
-  DevUIModule,
-  FormsModule,
-  DataTableModule,
-  DevUICodeboxModule,
-  DevUIApiModule,
-  TooltipModule,
-  AutoCompleteModule,
-  I18nModule,
-  DDemoNavModule,
-  LoadingModule,
-  SplitterModule,
-  DCommonModule,
-  RouterModule.forChild([
-    { path: '',  redirectTo: 'demo', pathMatch: 'full' },
-    {
-    path: 'design',
-    component: DataTableDesignComponent,
-    },
-    { path: 'demo', component: DataTableDemoComponent},
-    { path: 'api', component: DevUIApiComponent, data: {
-    'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
-    'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
-    }}
+    TranslateModule,
+    CommonModule,
+    ScrollingModule,
+    DevUIModule,
+    FormsModule,
+    DataTableModule,
+    DevUICodeboxModule,
+    DevUIApiModule,
+    TooltipModule,
+    AutoCompleteModule,
+    I18nModule,
+    DDemoNavModule,
+    LoadingModule,
+    SplitterModule,
+    DCommonModule,
+    RouterModule.forChild([
+      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
+      {
+        path: 'design',
+        component: DataTableDesignComponent,
+      },
+      { path: 'demo', component: DataTableDemoComponent},
+      { path: 'api', component: DevUIApiComponent, data: {
+        'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+        'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
+      }}
     ])
   ],
   exports: [DataTableDemoComponent],
   declarations: [
-  DataTableDemoComponent,
-  DataTableDesignComponent,
-  DatatableDemoBasicComponent,
-  DatatableDemoAsyncComponent,
-  DatatableDemoMaxheightComponent,
-  DatatableDemoMultiHeaderComponent,
-  DatatableDemoLazyloadDataComponent,
-  DatatableDemoEditableComponent,
-  TreeDataComponent,
-  ExpandRowComponent,
-  FixColumnComponent,
-  DragColumnComponent,
-  CellMergeComponent,
-  DragRowComponent,
-  InteractionComponent,
-  BasicOldComponent,
-  HeaderGroupingComponent,
-  EditableOldComponent,
-  ExpandRowOldComponent,
-  TreeTableOldComponent,
-  FixColumnOldComponent,
-  MutiDragRowComponent,
-  CheckOptionsComponent,
-  CheckOptionsColumnComponent,
-  InteractionColumnComponent,
-  VirtualScrollComponent,
-  MutilStylesComponent,
-  FixHeightVirtualScrollComponent,
-  DynamicColsDemoComponent,
+    DataTableDemoComponent,
+    DataTableDesignComponent,
+    DatatableDemoBasicComponent,
+    DatatableDemoAsyncComponent,
+    DatatableDemoMaxheightComponent,
+    DatatableDemoMultiHeaderComponent,
+    DatatableDemoLazyloadDataComponent,
+    DatatableDemoEditableComponent,
+    TreeDataComponent,
+    ExpandRowComponent,
+    FixColumnComponent,
+    DragColumnComponent,
+    CellMergeComponent,
+    DragRowComponent,
+    InteractionComponent,
+    BasicOldComponent,
+    HeaderGroupingComponent,
+    EditableOldComponent,
+    ExpandRowOldComponent,
+    TreeTableOldComponent,
+    FixColumnOldComponent,
+    MutiDragRowComponent,
+    CheckOptionsComponent,
+    CheckOptionsColumnComponent,
+    InteractionColumnComponent,
+    VirtualScrollComponent,
+    MutilStylesComponent,
+    FixHeightVirtualScrollComponent,
+    DynamicColsDemoComponent,
+    MemoryTableComponent,
+    MemoryTableWidthDirective
   ],
   providers: [],
-  })
+})
 export class DataTableDemoModule {}

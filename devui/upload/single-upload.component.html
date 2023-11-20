@@ -22,7 +22,7 @@
           {{ filename }}
         </span>
         <span
-          class="icon icon-close
+          class="icon devui-upload-remove
             {{ dSingleUploadView.fileUploaders[0]?.status === UploadStatus.failed ? 'devui-upload-delete-file-button' : '' }}
             {{
             dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploading ||
@@ -32,6 +32,28 @@
           }}"
           (click)="deleteFile($event)"
         >
+          <svg
+            width="16px"
+            height="16px"
+            viewBox="0 0 16 16"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g transform="translate(-270.000000, -2376.000000)">
+                <g transform="translate(198.000000, 1991.000000)">
+                  <g transform="translate(0.000000, 383.000000)">
+                    <g transform="translate(72.000000, 2.000000)">
+                      <path
+                        d="M4.570404,4.06442993 L4.6207661,4.10650663 L8,7.48581818 L11.3792339,4.10650663 C11.5212427,3.96449779 11.7514845,3.96449779 11.8934934,4.10650663 C12.0197234,4.2327367 12.033749,4.42868172 11.9355701,4.570404 L11.8934934,4.6207661 L8.51418182,8 L11.8934934,11.3792339 C12.0355022,11.5212427 12.0355022,11.7514845 11.8934934,11.8934934 C11.7672633,12.0197234 11.5713183,12.033749 11.429596,11.9355701 L11.3792339,11.8934934 L8,8.51418182 L4.6207661,11.8934934 C4.47875727,12.0355022 4.24851546,12.0355022 4.10650663,11.8934934 C3.98027655,11.7672633 3.96625099,11.5713183 4.06442993,11.429596 L4.10650663,11.3792339 L7.48581818,8 L4.10650663,4.6207661 C3.96449779,4.47875727 3.96449779,4.24851546 4.10650663,4.10650663 C4.2327367,3.98027655 4.42868172,3.96625099 4.570404,4.06442993 Z"
+                      ></path>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
         </span>
         <div *ngIf="dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploading" class="icon devui-upload-progress">
           <d-progress

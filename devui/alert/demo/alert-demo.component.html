@@ -9,7 +9,6 @@
       <d-alert-basic demo></d-alert-basic>
     </d-codebox>
   </div>
-
   <div class="devui-demo-example" [dAnchor]="'tips-to-close'">
     <div class="devui-demo-title">{{ 'components.alert.closableDemo.title' | translate }}</div>
     <div class="devui-demo-text">
@@ -19,7 +18,6 @@
       <d-alert-close demo></d-alert-close>
     </d-codebox>
   </div>
-
   <div class="devui-demo-example" [dAnchor]="'without-icon'">
     <div class="devui-demo-title">{{ 'components.alert.withoutIconDemo.title' | translate }}</div>
     <div class="devui-demo-text">
@@ -27,6 +25,15 @@
     </div>
     <d-codebox id="components-tabs-withoutIcon" [sourceData]="withoutIconSource">
       <d-alert-without-icon demo></d-alert-without-icon>
+    </d-codebox>
+  </div>
+  <div class="devui-demo-example" [dAnchor]="'carousel'">
+    <div class="devui-demo-title">{{ 'components.alert.carouselDemo.title' | translate }}</div>
+    <div class="devui-demo-text">
+      {{ 'components.alert.carouselDemo.description' | translate }}
+    </div>
+    <d-codebox id="components-tabs-carousel" [sourceData]="carouselSource">
+      <d-alert-carousel demo></d-alert-carousel>
     </d-codebox>
   </div>
 </div>

@@ -30,13 +30,13 @@ import {
   styleUrls: ['./upload-view.component.scss'],
   preserveWhitespaces: false,
   providers: [
-  {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => MultipleUploadComponent),
-  multi: true
-  }
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => MultipleUploadComponent),
+      multi: true
+    }
   ]
-  })
+})
 export class MultipleUploadComponent implements OnDestroy, OnInit {
   @Input() uploadOptions: IUploadOptions;
   @Input() fileOptions: IFileOptions;
@@ -150,10 +150,7 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
     let totalFileSize = 0;
     this.multipleUploadViewComponent.fileUploaders.forEach(fileUploader => {
       totalFileSize += fileUploader.file.size;
-      const checkResult = this.selectFiles.validateFilesCount(
-        this.multipleUploadViewComponent.fileUploaders.length, fileUploader.uploadOptions
-      )
-        || this.selectFiles._validateFiles(fileUploader.file, this.fileOptions.accept, fileUploader.uploadOptions);
+      const checkResult =  this.selectFiles._validateFiles(this.multipleUploadViewComponent.fileUploaders.length,fileUploader.file, this.fileOptions.accept, fileUploader.uploadOptions);
       if (checkResult && checkResult.checkError) {
         this.multipleUploadViewComponent.deletePreUploadFile(fileUploader.file);
         this.alertMsg(checkResult.errorMsg);

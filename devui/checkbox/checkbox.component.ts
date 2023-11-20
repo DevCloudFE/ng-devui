@@ -21,14 +21,14 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./checkbox.component.scss'],
   providers: [
-  {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => CheckBoxComponent),
-  multi: true,
-  },
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CheckBoxComponent),
+      multi: true,
+    },
   ],
   preserveWhitespaces: false,
-  })
+})
 export class CheckBoxComponent implements ControlValueAccessor, AfterViewInit {
   static ID_SEED = 0;
   @Input() name: string;

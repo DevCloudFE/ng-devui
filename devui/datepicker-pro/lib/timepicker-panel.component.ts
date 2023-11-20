@@ -28,9 +28,9 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
   secondList: Array<TimeObj> = [];
   thirdList: Array<TimeObj> = [];
 
-  hourIndex = null;
-  minIndex = null;
-  secIndex = null;
+  hourIndex = 0;
+  minIndex = 0;
+  secIndex = 0;
 
   typeList = ['hour', 'min', 'sec'];
 
@@ -201,8 +201,15 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
     let curTime: Date;
 
     if (this.pickSrv.isRange) {
-      curTime = new Date(this.pickSrv.curRangeDate[this.pickSrv.currentActiveInput === 'start' ? 0 : 1]);
+      const target = this.pickSrv.curRangeDate[this.pickSrv.currentActiveInput === 'start' ? 0 : 1];
+      if (!target) {
+        return;
+      }
+      curTime = new Date(target);
     } else {
+      if (!this.pickSrv.curDate) {
+        return;
+      }
       curTime = new Date(this.pickSrv.curDate);
     }
     curTime.setHours(this.hourIndex);
@@ -230,10 +237,16 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
 
   itemIsDisabled(type, index) {
     let curTime: Date;
-
     if (this.pickSrv.isRange) {
-      curTime = new Date(this.pickSrv.curRangeDate[this.pickSrv.currentActiveInput === 'start' ? 0 : 1]);
+      const target = this.pickSrv.curRangeDate[this.pickSrv.currentActiveInput === 'start' ? 0 : 1];
+      if (!target) {
+        return false;
+      }
+      curTime = new Date(target);
     } else {
+      if (!this.pickSrv.curDate) {
+        return false;
+      }
       curTime = new Date(this.pickSrv.curDate);
     }
 

@@ -34,6 +34,11 @@ $keyframe-blue: #5e7ce0;
       background-color: $devui-list-item-selected-bg;
       text-decoration: none;
       border-color: transparent;
+
+      .devui-tree-node__title {
+        color: $devui-text;
+        font-weight: bold;
+      }
     }
 
     &:not(.active):hover {
@@ -303,7 +308,9 @@ $keyframe-blue: #5e7ce0;
 }
 
 .devui-tree-node__content {
-  transition: color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth, background-color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
+  transition:
+    color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth,
+    background-color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
 }
 
 ::ng-deep d-tree .cdk-virtual-scroll-content-wrapper {

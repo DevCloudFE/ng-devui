@@ -5,4 +5,8 @@
   font-weight: bold;
   color: $devui-text;
   font-size: $devui-font-size-sm;
+
+  &:has(.devui-dropdown-open) d-table-sort {
+    display: block !important;
+  }
 }

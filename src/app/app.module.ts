@@ -18,47 +18,47 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 @NgModule({
   declarations: [
-  AppComponent
+    AppComponent
   ],
   imports: [
-  BrowserModule,
-  BrowserAnimationsModule,
-  HttpClientModule,
-  DevUIModule.forRoot(),
-  FormsModule,
-  HttpClientModule,
-  DevuiCommonsModule,
-  RouterModule.forRoot([
-    {
-    path: '',
-    redirectTo: 'components/zh-cn',
-    pathMatch: 'full'
-    },
-    {
-    path: 'components/:lang',
-    loadChildren: () => import('./component/app-content.module').then(m => m.AppContentModule)
-    },
-    {
-    path: '**',
-    redirectTo: 'components/zh-cn'
-    }
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    DevUIModule.forRoot(),
+    FormsModule,
+    HttpClientModule,
+    DevuiCommonsModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        redirectTo: 'components/zh-cn',
+        pathMatch: 'full'
+      },
+      {
+        path: 'components/:lang',
+        loadChildren: () => import('./component/app-content.module').then(m => m.AppContentModule)
+      },
+      {
+        path: '**',
+        redirectTo: 'components/zh-cn'
+      }
     ], {}),
-  TranslateModule.forRoot({
-    loader: {
-    provide: TranslateLoader,
-    useFactory: HttpLoaderFactory,
-    deps: [HttpClient]
-    }
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
     })
   ],
   providers: [
-  { provide: APP_BASE_HREF, useValue: '/' },
-  {
-  provide: DEVUI_LANG,
-  useValue: ZH_CN
-  },
-  I18nService
+    { provide: APP_BASE_HREF, useValue: '/' },
+    {
+      provide: DEVUI_LANG,
+      useValue: ZH_CN
+    },
+    I18nService
   ],
   bootstrap: [AppComponent]
-  })
+})
 export class AppModule { }

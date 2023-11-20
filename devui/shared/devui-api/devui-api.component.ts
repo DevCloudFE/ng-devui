@@ -16,7 +16,9 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   subs: Subscription = new Subscription();
   _api: any;
   @Input() set api(api: any) {
-    const newApi = api.replace(/<table>/g, `<div class="devui-api-table-wrapper"><table>`).replace(/<\/table>/g, `</table></div>`);
+    const newApi = (api.default || api)
+      .replace(/<table>/g, `<div class="devui-api-table-wrapper"><table>`)
+      .replace(/<\/table>/g, `</table></div>`);
     this._api = newApi;
   }
   get api() {

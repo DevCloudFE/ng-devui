@@ -281,17 +281,20 @@
 <ng-template #joinLabelTypesTemplate let-item="item" let-isJoinLabelType="isJoinLabelType">
   <div class="devui-tag-container">
     <d-tag
-      [deletable]="true"
-      [tag]="isJoinLabelType ? item : item.label + ': ' + (item.value[item.filterKey || 'label'] || '')"
+      [tag]="item"
+      [deletable]="item.deletable === false ? false : true"
       [titleContent]="item.title"
-      [maxWidth]="tagMaxWidth + 'px'"
-      [customViewTemplate]="item.tagCustomTemplate || (isJoinLabelType && defaultTagContentTemplate)"
+      [customViewTemplate]="item.tagCustomTemplate || (isJoinLabelType ? defaultJoinLabelTypeTemplate : defaultTagTemplate)"
       (tagDelete)="removeTag(item, $event.event)"
     ></d-tag>
   </div>
 </ng-template>
 
-<ng-template #defaultTagContentTemplate let-tag="tag" let-colorKey="tag.colorKey || 'color'">
+<ng-template #defaultTagTemplate let-tag="tag">
+  <span [style.maxWidth]="tagMaxWidth + 'px'">{{ tag.label + ': ' + (tag.value[tag.filterKey || 'label'] || '') }}</span>
+</ng-template>
+
+<ng-template #defaultJoinLabelTypeTemplate let-tag="tag" let-colorKey="tag.colorKey || 'color'">
   <span>{{ tag.label }}: </span>
   <span class="devui-category-search-multi-tag" [style.max-width]="tagMaxWidth + 'px'">
     <ng-container *ngFor="let val of tag.value.cache; let i = index">

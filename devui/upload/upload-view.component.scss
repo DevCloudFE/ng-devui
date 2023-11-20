@@ -102,6 +102,7 @@
         right: 8px;
         top: 50%;
         transform: translateY(-50%);
+        line-height: 1;
 
         &.icon-right {
           color: $devui-success;
@@ -118,6 +119,15 @@
         &.devui-uploading-delete {
           display: none;
         }
+
+        &.devui-upload-remove {
+          width: 16px;
+          height: 16px;
+
+          svg path {
+            fill: $devui-text;
+          }
+        }
       }
 
       &:hover {
@@ -126,7 +136,7 @@
           display: none;
         }
 
-        .icon-close {
+        .devui-upload-remove {
           display: inline-block;
         }
       }

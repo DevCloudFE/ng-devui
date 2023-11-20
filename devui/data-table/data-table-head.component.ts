@@ -15,7 +15,7 @@ import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.comp
   templateUrl: './data-table-head.component.html',
   styleUrls: ['./data-table-head.component.scss'],
   preserveWhitespaces: false,
-  })
+})
 export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy, DoCheck {
   @Input() checkable: boolean;
   @Input() headerCheckDisabled: boolean;

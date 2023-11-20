@@ -14,11 +14,11 @@ export const expandCollapse: AnimationTriggerMetadata = trigger('collapse', [
 export const expandCollapseForDomDestroy: AnimationTriggerMetadata = trigger('collapseForDomDestroy', [
   transition(':enter', [
     style({ opacity: 0, height: 0, overflow: 'hidden' }),
-    animate(`${duration} ${easeInOut}`, style({ opacity: 1, height: '*', overflow: 'hidden' })),
+    animate(`${duration} ${easeInOut}`, style({ opacity: 1, height: '*', overflow: 'hidden' }))
   ]),
   transition(':leave', [
     style({ opacity: 1, height: '*', overflow: 'hidden' }),
-    animate(`${duration} ${easeInOut}`, style({ opacity: 0, height: 0, overflow: 'hidden' })),
+    animate(`${duration} ${easeInOut}`, style({ opacity: 0, height: 0, overflow: 'hidden' }))
   ]),
 ]);
 

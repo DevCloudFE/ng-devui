@@ -323,7 +323,7 @@ export class HelperUtils {
 
 @Directive({
   selector: '[dSimulateATag]'
-  })
+})
 export class SimulateATagDirective {
   @Input() href: string;
   @Input() target: '_blank' | '_self' | '_parent' | '_top' | string   = '_blank';

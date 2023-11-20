@@ -69,13 +69,13 @@
         {{ placeholder }}
       </div>
       <ul
+        *ngIf="multiItems.length > 0"
         class="devui-select-tag-list {{ extraConfig?.labelization?.overflow }}"
         [style.maxHeight]="extraConfig?.labelization?.containerMaxHeight || extraConfig?.labelization?.containnerMaxHeight"
-        *ngIf="multiItems.length > 0"
       >
         <li
           class="devui-select-tag-item"
-          *ngFor="let item of multiItems; let index = index; trackBy: trackByOptionPointer"
+          *ngFor="let item of showMoreTags ? [multiItems[0]] : multiItems; let index = index; trackBy: trackByOptionPointer"
           [style.maxWidth]="extraConfig?.labelization?.labelMaxWidth"
           [ngClass]="{
             disabled: optionDisabledKey && item.option[optionDisabledKey]
@@ -87,6 +87,9 @@
             [tag]="valueParser(item.option)"
             (tagDelete)="removeItem(item, $event?.event)"
           ></d-tag>
+        </li>
+        <li *ngIf="showMoreTags" class="devui-select-tag-item">
+          <d-tag [tag]="moreTagsNum"></d-tag>
         </li>
       </ul>
     </div>

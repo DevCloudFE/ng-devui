@@ -1,0 +1,22 @@
+<d-data-table
+  [dataSource]="dataSource"
+  [scrollable]="true"
+  [resizeable]="true"
+  [tableOverflowType]="'overlay'"
+  dMemoryTableWidth
+  [memoryId]="'table1'"
+>
+  <d-column field="$index" header="#" [width]="'10%'"></d-column>
+  <d-column field="firstName" header="First Name" [sortable]="true" [width]="'20%'"></d-column>
+  <d-column field="lastName" header="Last Name" [sortable]="true" [width]="'20%'" [minWidth]="'100px'"></d-column>
+  <d-column field="gender" header="Gender" [sortable]="true" [width]="'20%'"></d-column>
+  <d-column
+    field="dob"
+    header="Date of birth"
+    [fieldType]="'date'"
+    [extraOptions]="{ dateFormat: 'MM/dd/yyyy' }"
+    [width]="'20%'"
+  ></d-column>
+  <d-column field="description" header="description" [width]="'20%'"></d-column>
+  <d-column field="hidden" header="hidden" [width]="'20%'">hidden</d-column>
+</d-data-table>

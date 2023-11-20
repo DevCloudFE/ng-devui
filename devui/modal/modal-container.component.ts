@@ -14,7 +14,7 @@ import { ModalContentDirective } from './modal.directive';
   templateUrl: './modal-container.component.html',
   styleUrls: ['./modal-container.component.scss'],
   preserveWhitespaces: false,
-  })
+})
 export class ModalContainerComponent implements OnInit {
   @Input() maxHeight: string;
   @Input() data: any;

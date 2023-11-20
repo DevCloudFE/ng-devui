@@ -1,5 +1,5 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -161,7 +161,7 @@ describe('upload', () => {
       flush();
       fixture.detectChanges();
       expect(component.onSuccess).toHaveBeenCalled();
-      const deleteIcon: HTMLElement = debugEl.query(By.css('.devui-file-tag .icon.icon-close')).nativeElement;
+      const deleteIcon: HTMLElement = debugEl.query(By.css('.devui-file-tag .devui-upload-remove')).nativeElement;
       deleteIcon.dispatchEvent(new Event('click'));
       expect(component.deleteUploadedFile).toHaveBeenCalled();
       expect(component.multipleUpload.multipleUploadViewComponent.fileUploaders.length).toEqual(1);

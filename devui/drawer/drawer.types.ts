@@ -28,6 +28,7 @@ export interface IDrawerOptions {
   bodyScrollable?: boolean;
   showAnimation?: boolean;
   contentTemplate?: TemplateRef<any>;
+  resizable?: boolean;
 }
 
 export interface IDrawerOpenResult {

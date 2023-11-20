@@ -31,7 +31,8 @@ export class DrawerService {
     position = 'right',
     bodyScrollable = true,
     showAnimation = true,
-    contentTemplate
+    contentTemplate,
+    resizable = false
   }: IDrawerOptions): IDrawerOpenResult {
     const componentFactoryResolver_ = componentFactoryResolver || this.componentFactoryResolver;
     const drawerRef = this.overlayContainerRef.createComponent(
@@ -52,7 +53,8 @@ export class DrawerService {
       backdropCloseable: isUndefined(backdropCloseable) ? true : backdropCloseable,
       bodyScrollable,
       showAnimation,
-      contentTemplate
+      contentTemplate,
+      resizable
     });
 
     let drawerContentRef;

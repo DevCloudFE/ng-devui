@@ -26,7 +26,7 @@ import { fromEvent, Subscription } from 'rxjs';
   exportAs: 'pagination',
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespaces: false,
-  })
+})
 export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy, OnInit {
   static EFFECT_PAGE_RANGE_KEYS = ['total', 'pageSize', 'pageIndex', 'maxItems', 'pageSizeOptions'];
 
@@ -270,7 +270,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
         this.constructLitePaginatorOptions();
       }
       this.adjustPaginatorWidth();
-      if (this.activeBlockInfo) {
+      if (this.activeBlockInfo && changes.pageIndex) {
         this.setActiveAnimation();
       }
     }

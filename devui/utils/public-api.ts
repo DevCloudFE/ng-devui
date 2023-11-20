@@ -14,13 +14,11 @@ export * from './lazy-load/lazy-load.directive';
 export * from './lazy-load/lazy-load.module';
 export * from './observeVisibility/observer-visibility.directive';
 export * from './observeVisibility/observer-visibility.module';
-export * from './observeVisibility/observer-visibility.directive';
-export * from './str-tpl-outlet/str-tpl-outlet.module';
 export * from './str-tpl-outlet/str-tpl-outlet.directive';
+export * from './str-tpl-outlet/str-tpl-outlet.module';
 export * from './popper/popper.component';
 export * from './popper/popper.module';
 export * from './safe-pipe.module';
 export * from './safe.pipe';
 export * from './tree-utils';
-export * from './type-utils';
 

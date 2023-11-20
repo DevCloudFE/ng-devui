@@ -10,11 +10,11 @@ import { ModalContainerDirective } from './modal.directive';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
   animations: [
-  backdropFadeInOut,
-  wipeInOutAnimation
+    backdropFadeInOut,
+    wipeInOutAnimation
   ],
   preserveWhitespaces: false,
-  })
+})
 export class ModalComponent implements OnInit, OnDestroy {
 
   @Input() id: string;

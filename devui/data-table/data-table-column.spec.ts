@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, DebugElement, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,7 +15,7 @@ import { LoadingType } from '..';
 import { I18nModule } from '../i18n';
 import { createMouseEvent } from '../utils/testing/event-helper';
 import { DataTableModule } from './data-table.module';
-import { editableOriginSource, genderSource, originSource, SourceType, treeDataSource } from './demo/mock-data';
+import { SourceType, editableOriginSource, genderSource, originSource, treeDataSource } from './demo/mock-data';
 const dataTableOptions = {
   columns: [
     {
@@ -821,7 +821,7 @@ describe('data-table column', () => {
           fixture.detectChanges();
         }
 
-        let btnOK = filterContent.query(By.css('span.button-style'));
+        let btnOK = filterContent.query(By.css('d-button.button-style'));
         btnOK.nativeElement.dispatchEvent(new Event('click'));
         tick();
         fixture.detectChanges();
@@ -844,7 +844,7 @@ describe('data-table column', () => {
         tick();
         fixture.detectChanges();
 
-        btnOK = filterContent.query(By.css('span.button-style'));
+        btnOK = filterContent.query(By.css('d-button.button-style'));
         btnOK.nativeElement.dispatchEvent(new Event('click'));
         tick();
         fixture.detectChanges();

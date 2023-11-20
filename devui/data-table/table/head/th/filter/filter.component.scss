@@ -13,7 +13,7 @@
 
 .data-table-column-filter-content {
   background: $devui-connected-overlay-bg;
-  border-radius: $devui-border-radius;
+  border-radius: $devui-border-radius-card;
 
   .drop-down-item {
     white-space: nowrap;
@@ -36,6 +36,10 @@
   }
 }
 
+.devui-dropdown-menu {
+  border-radius: $devui-border-radius-card;
+}
+
 .filter-content-hidden {
   display: none !important;
 }
@@ -49,20 +53,6 @@
 
 .checkbox-group {
   height: 30px;
-}
-
-.button-style {
-  display: inline-block;
-  width: 45%;
-  font-size: $devui-font-size;
-  color: $devui-text;
-  text-align: center;
-  line-height: 20px;
-  cursor: pointer;
-}
-
-.button-style:hover {
-  color: $devui-brand;
 }
 
 ::ng-deep .filter-options .normal-filter-list-container .cdk-virtual-scroll-content-wrapper {
@@ -82,6 +72,15 @@
 
 .normal-filter-list-container {
   overflow-y: auto;
+}
+
+.filter-search-container {
+  padding-top: 10px;
+  text-align: center;
+}
+
+.filter-options {
+  padding: 4px 8px;
 }
 
 .icon-filter-style {

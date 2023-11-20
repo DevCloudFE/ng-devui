@@ -241,21 +241,19 @@
         "title": "Closable Prompt",
         "description": "The close button is displayed. Click to close the prompt."
       },
-      "directionFadeInDemo": {
-        "title": "Without Icon",
-        "description": "Without default icon."
+      "withoutIconDemo": {
+        "title": "Without the default icon",
+        "description": "Hide the default icon, display only custom content."
       },
-      "slideMenuDemo": {
-        "title": "Without Icon",
-        "description": "Without default icon."
+      "carouselDemo": {
+        "title": "Automatic NVOD",
+        "description": "Loop a series of prompt messages."
       },
-      "ModalDemo": {
-        "title": "Without Icon",
-        "description": "Without default icon."
-      },
-      "fadeInOutDemo": {
-        "title": "Without Icon",
-        "description": "Without default icon."
+      "anchorLinkValues": {
+        "basic-usage": "Basic Usage",
+        "tips-to-close": "Closable Prompt",
+        "without-icon": "Without the default icon",
+        "carousel": "Automatic NVOD"
       }
     },
     "icon": {
@@ -978,7 +976,6 @@
       },
       "anchorLinkValues": {
         "lazy-load": "Lazyload Directive",
-        "safe-null-pipe": "Safe Null Pipe",
         "browser-version": "Current browser name and version",
         "date-pipe": "Datepipe",
         "open-url": "Open URL in A New Tag",
@@ -1556,6 +1553,10 @@
         "title": "Table interaction",
         "description": "Supports column sorting, column filtering, customized filtering template, selection, and column width adjustment.\nTwo implementation modes are supported. Method 1 is implemented by customizing the head and body templates and the rows and cells in the templates. Method 2 is implemented by configuring columns."
       },
+      "memoryDemo": {
+        "title": "Table column width memory",
+        "description": "The column width is memorized through the cache. After the refresh, the column width remains unchanged."
+      },
       "lazyDemo": {
         "title": "lazy loading",
         "description": "Use lazy to enable lazy loading. When the bottom of a table is scrolled, the loadMore event is triggered to implement lazy loading."
@@ -1608,6 +1609,7 @@
         "dynamic-cols": "Dynamic Columns And Style",
         "async-loading": "Asynchronous data loading",
         "table-interaction": "Table interaction",
+        "table-memory": "Table column width memory",
         "table-check-options": "Customizing Table Selection",
         "lazy-loading-of-list-data": "Lazy loading",
         "virtual-scroll": "Virtual scrolling",
@@ -2331,10 +2333,15 @@
         "title": "Custom Template",
         "description": "Custom Drawer Template."
       },
+      "resizeDemo": {
+        "title": "Dynamic Width Adjustment",
+        "description": "Dynamically adjustable side slip width"
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "do-not-destroy-after-closing": "Do not destroy after being closed",
-        "template": "Custom Template"
+        "template": "Custom Template",
+        "resize": "Dynamic Width Adjustment"
       }
     },
     "dropdown": {
@@ -2622,9 +2629,9 @@
         "title": "Standard Dialog Box",
         "description": "Standard dialog boxes that can be dragged using the dialogService."
       },
-      "maximizeDemo": {
-        "title": "Maximize Dialog Box",
-        "description": "You can use the showMaximizeBtn api to set visibility of maximize button."
+      "maximizeDemo":{
+        "title":"Maximize Dialog Box",
+        "description":"You can use the showMaximizeBtn api to set visibility of maximize button."
       },
       "customizeDemo": {
         "title": "Custom Dialog Box",
@@ -2664,7 +2671,7 @@
       },
       "anchorLinkValues": {
         "standard-dialog": "Standard Dialog Box",
-        "maximize-dialog": "Maximize Dialog Box",
+        "maximize-dialog":"Maximize Dialog Box",
         "custom-dialog": "Custom Dialog Box",
         "intercept-dialog-closed": "Blocking dialog box closed",
         "message-hint": "Information",

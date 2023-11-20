@@ -109,6 +109,10 @@ path {
     align-items: center;
     justify-content: center;
     color: $devui-text;
+
+    &.disabled svg path {
+      fill: $devui-disabled-text;
+    }
   }
 
   .devui-image-preview-index {

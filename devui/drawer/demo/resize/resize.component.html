@@ -1,0 +1,11 @@
+<d-button (click)="openDrawer()">click me!</d-button>
+
+<ng-template #drawerContent>
+  <div [style.margin]="'20px 20px 0 0'" [style.text-align]="'right'" [style.cursor]="'pointer'">
+    <span (click)="close($event)" title="Close" class="icon icon-close"></span>
+  </div>
+  <div [style.margin]="'20px 20px 0 20px'">
+    <div>Hello, Drawer!</div>
+    <div>Powered by template.</div>
+  </div>
+</ng-template>

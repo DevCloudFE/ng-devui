@@ -18,7 +18,7 @@
       readonly
       popper-activator
     >
-      {{ !valueType ? placeholder : '' }}
+      <span class="devui-tree-select-placeholder">{{ !valueType ? placeholder : '' }}</span>
       <div class="devui-select-item" *ngIf="valueType === 'object' && enableLabelization && !customItemTemplate">
         <span class="devui-select-item-content">{{ value[treeNodeTitleKey] }}</span>
         <span *ngIf="!disabled" class="devui-select-item-clear-icon" (click)="clearValue($event, value)">

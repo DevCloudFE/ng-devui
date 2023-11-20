@@ -83,10 +83,10 @@ export class CustomizeComponent {
   }
   onToggle($event, node) {
     if ($event && node.data.isHover) {
-      this.disableMouseEvent = true;
+      node.data.disableMouseEvent = true;
     } else {
       node.data.isHover = false;
-      this.disableMouseEvent = false;
+      node.data.disableMouseEvent = false;
     }
   }
   activeNode(node) {

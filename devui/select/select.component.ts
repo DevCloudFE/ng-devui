@@ -57,15 +57,15 @@ import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
   exportAs: 'select',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-  {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => SelectComponent),
-  multi: true,
-  },
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SelectComponent),
+      multi: true,
+    },
   ],
   animations: [fadeInOut],
   preserveWhitespaces: false,
-  })
+})
 export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, OnChanges {
   /**
    * 【必选】下拉选项资源，支持Array<string>, Array<{key: value}>
@@ -188,6 +188,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
        */
       containnerMaxHeight?: string; // 默认值1.8em
       labelMaxWidth?: string; // 默认100%
+      maxTags?: number; // 可点选最大标签数，超出则省略显示
     };
     selectedItemWithTemplate?: {
       // 单选情况下，显示选项使用了template的情况下，顶部选中的内容是否也以template展示
@@ -281,6 +282,14 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
   get isClearIconShow() {
     return this.allowClear && !this.multiple && !this.disabled && this.value;
+  }
+
+  get showMoreTags() {
+    return this.multiItems.length > (this.extraConfig?.labelization?.maxTags || 40) && this.isSelectAll && this.virtualScroll;
+  }
+
+  get moreTagsNum() {
+    return `+${this.multiItems.length - 1}`;
   }
 
   _inputValue: any;
@@ -521,8 +530,13 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   writeValue(value: any): void {
     if (this.multiple) {
       this.value = value ?? [];
-      this.getMultipleSelectedOption();
-      this.setAllChecked();
+      if (this.showMoreTags) {
+        this.value = this.value || [];
+        this.value = Array.isArray(this.value) ? this.value : [this.value];
+      } else {
+        this.getMultipleSelectedOption();
+        this.setAllChecked();
+      }
     } else {
       this.value = value ?? '';
       this.getSingleSelectedOption();
@@ -542,6 +556,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     }
     this._inputValue = this.multiple ? (valueItem || []).map((option) => this.valueParser(option)).join(', ') : this.valueParser(valueItem);
     this.setAvailableOptions();
+    if (this.showMoreTags) {
+      this.multiItems = this.availableOptions.filter((item) => item.isChecked);
+      this.setAllChecked();
+    }
   }
 
   setAvailableOptions() {

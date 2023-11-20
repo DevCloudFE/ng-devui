@@ -2,6 +2,8 @@
   <d-tags-input
     [appendToBody]="true"
     [checkBeforeAdd]="customCheck"
+    [checkBeforeGenerate]="customCheck"
+    [generateOptionFromInput]="canGenerate"
     [itemTemplate]="customizeItemTemplate"
     [tagTemplate]="customizeTagTemplate"
     [suggestionList]="suggestionList"

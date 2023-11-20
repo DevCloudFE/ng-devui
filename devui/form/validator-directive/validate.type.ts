@@ -31,8 +31,8 @@ export interface DValidateRule {
   priority?: number;
   isNgValidator?: boolean;
   validateLevel?: 'error' | 'warning'; // 校验级别
-  [id: string]: boolean | number | string | { [key: string]: string }
-  | RegExp | DValidatorFn | ValidatorFn | undefined | TemplateRef<any>; // 万能key
+  [id: string]: boolean | number | string |
+  { [key: string]: string } | RegExp | DValidatorFn | ValidatorFn | undefined | TemplateRef<any>; // 万能key
 }
 export interface DAsyncValidateRule {
   id?: string;

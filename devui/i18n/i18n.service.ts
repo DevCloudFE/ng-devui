@@ -35,7 +35,11 @@ export class I18nService {
   }
 
   toggleLang(lang = this.DEFAULT_LANG) {
-    localStorage.setItem('lang', lang);
+    try {
+      localStorage.setItem('lang', lang);
+    } catch (error) {
+      console.error(error);
+    }
     if (Object.prototype.hasOwnProperty.call(this.i18nConfig, lang)) {
       this.currentLang = lang;
       this.i18nSubject.next(this.getI18nText());

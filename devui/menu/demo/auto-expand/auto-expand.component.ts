@@ -60,7 +60,6 @@ function findAllParent(source: MenuItemType[], key: string) {
   const loop = (list: MenuItemType[]) => {
     for (const item of list) {
       if (item.key === key) {
-        // parentKeys.unshift(key);
         return true;
       }
       if (item.children?.length) {

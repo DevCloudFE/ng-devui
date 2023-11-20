@@ -26,15 +26,15 @@ import { debounceTime, map, switchMap } from 'rxjs/operators';
   templateUrl: './tags.input.component.html',
   styleUrls: ['./tags.input.component.scss'],
   providers: [
-  {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => TagsInputComponent),
-  multi: true,
-  },
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TagsInputComponent),
+      multi: true,
+    },
   ],
   exportAs: 'TagsInput',
   preserveWhitespaces: false,
-  })
+})
 export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges, AfterViewInit {
   /**
    * 【必选】记录输入的标签
@@ -104,12 +104,14 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
    * 【可选】已选中标签容器最大高度
    */
   @Input() maxHeight: string;
+  @Input() generateOptionFromInput = true;
   /**
    * 【可选】大小写敏感
    */
   @Input() caseSensitivity = false;
   @Input() itemTemplate: TemplateRef<any>;
   @Input() tagTemplate: TemplateRef<any>;
+  @Input() checkBeforeGenerate: (newTag: string) => boolean;
   @Input() checkBeforeAdd: (newTag: string) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() @WithConfig() showAnimation = true;
   @Input() @WithConfig() styleType = 'default';
@@ -228,7 +230,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
           if (this.isOpen) {
             return;
           }
-          if (!isEmpty(this.newTag)) {
+          if (this.generateOptionFromInput && !isEmpty(this.newTag)) {
             this.addTag();
           }
         });
@@ -272,7 +274,9 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       )
       .subscribe((options) => {
         this.availableOptions = options;
-        if (this.newTag && this.newTagValid) {
+        const flag = this.checkBeforeGenerate?.(this.newTag);
+        const flags = [this.generateOptionFromInput, !!this.newTag, this.newTagValid, flag];
+        if (!flags.includes(false)) {
           const obj = { isDevuiTagsInputCreated: true };
           obj[this.displayProperty] = this.newTag;
           if (this.availableOptions.length && this.availableOptions[0].isDevuiTagsInputCreated) {
@@ -343,7 +347,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
         event.stopPropagation();
         if (this.selectBox?.selectIndex !== -1) {
           this.addSuggestionByIndex(this.selectBox.selectIndex, this.availableOptions[this.selectBox.selectIndex]);
-        } else {
+        } else if (this.generateOptionFromInput) {
           this.addTag();
         }
       }

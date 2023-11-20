@@ -16,23 +16,9 @@
   border-radius: $devui-border-radius;
   word-break: normal;
   word-wrap: break-word;
-
-  .devui-close {
-    color: $devui-text;
-    opacity: 1;
-    line-height: 26px;
-    height: 24px;
-
-    & > svg path {
-      fill: $devui-light-text;
-    }
-
-    span {
-      color: $devui-text;
-      font-size: $devui-font-size;
-      font-weight: bold;
-    }
-  }
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
 
   &.devui-alert-success {
     background-color: $devui-success-bg;
@@ -93,6 +79,10 @@
     }
   }
 
+  .devui-alert-icon {
+    padding-right: 8px;
+  }
+
   svg.devui-icon {
     width: 16px;
     height: 16px;
@@ -151,8 +141,78 @@
       }
     }
   }
-}
 
-.devui-alert-icon {
-  margin-right: 4px;
+  .devui-alert-carousel-container {
+    flex-grow: 1;
+    flex-shrink: 0;
+    height: 24px;
+    overflow: hidden;
+
+    .devui-alert-carousel-box {
+      position: relative;
+      left: 0;
+      top: 0;
+    }
+  }
+
+  .devui-alert-operation-container {
+    flex-grow: 0;
+    flex-shrink: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 24px;
+    min-width: 200px;
+
+    .devui-alert-carousel-num {
+      padding-right: 8px;
+    }
+
+    .devui-alert-carousel-button {
+      margin-left: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 16px;
+      line-height: 16px;
+      vertical-align: middle;
+      background-color: transparent;
+      text-align: center;
+      border-radius: $devui-border-radius;
+      cursor: pointer;
+
+      svg path {
+        fill: $devui-text;
+      }
+
+      &:hover {
+        background-color: $devui-shape-icon-fill-hover;
+
+        svg path {
+          fill: $devui-light-text;
+        }
+      }
+    }
+  }
+
+  .devui-close {
+    flex-grow: 0;
+    flex-shrink: 1;
+    color: $devui-text;
+    opacity: 1;
+    line-height: 26px;
+    height: 24px;
+    padding-left: 8px;
+
+    & > svg path {
+      fill: $devui-light-text;
+    }
+
+    span {
+      color: $devui-text;
+      font-size: $devui-font-size;
+      font-weight: bold;
+    }
+  }
 }

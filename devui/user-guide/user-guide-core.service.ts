@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, OnDestroy, Renderer2, RendererFactory2 } from '@angular/core';
-import { BehaviorSubject, fromEventPattern, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, fromEventPattern } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PanelPostion } from './utils/calculate-panel-position';
 import { disableClick, documentRealHeight } from './utils/help-functions';
@@ -240,7 +240,13 @@ export class UserGuideCoreService implements OnDestroy {
       this.canFinish.next(false);
     }
 
-    localStorage.setItem('devui-user-guide-last-step', this.currentStep);
+
+    try {
+      localStorage.setItem('devui-user-guide-last-step', this.currentStep);
+    } catch (error) {
+      console.error(error);
+    }
+
 
     if (this.interactableEvent.eventType !== null) {
       this.interactableEvent.element.forEach((item, index) => {

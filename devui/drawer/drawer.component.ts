@@ -1,6 +1,7 @@
 import { AnimationEvent } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
 import {
+  ChangeDetectorRef,
   Component,
   Directive,
   ElementRef,
@@ -14,14 +15,15 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
+import { ResizeDirective } from 'ng-devui/splitter';
 import { backdropFadeInOut, flyInOut } from 'ng-devui/utils';
 import { isNumber, parseInt, trim } from 'lodash-es';
-import { Observable, Subject, Subscription, fromEvent } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 @Directive({
   selector: '[dDrawerContentHost]',
-  })
+})
 export class DrawerContentDirective {
   constructor(public viewContainerRef: ViewContainerRef) {}
 }
@@ -32,7 +34,7 @@ export class DrawerContentDirective {
   styleUrls: ['./drawer.component.scss'],
   animations: [backdropFadeInOut, flyInOut],
   preserveWhitespaces: false,
-  })
+})
 export class DrawerComponent implements OnInit, OnDestroy {
   animateState = 'void';
   @Input() id: string;
@@ -53,7 +55,9 @@ export class DrawerComponent implements OnInit, OnDestroy {
   @Input() afterOpened: Function;
   @Input() position: 'right' | 'left' = 'right';
   @Input() bodyScrollable = true; // drawer打开body是否可滚动
+  @Input() resizable = false;
   @ViewChild('drawerContainer', { static: true }) drawerContainer: ElementRef;
+  @ViewChild('resizeBar', { read: ResizeDirective }) resizeCmp: ResizeDirective;
   _width: string;
   // 全屏时用来记录之前的宽度，因为没遮罩的情况下width不能是百分比
   oldWidth: string;
@@ -72,8 +76,14 @@ export class DrawerComponent implements OnInit, OnDestroy {
 
   contentTemplate: TemplateRef<any>;
   _right: string;
+  _curWidth;
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2, @Inject(DOCUMENT) private doc: any) {
+  constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private doc: any,
+    private cdr: ChangeDetectorRef
+  ) {
     this.document = this.doc;
   }
 
@@ -165,6 +175,9 @@ export class DrawerComponent implements OnInit, OnDestroy {
     if (activeElement && typeof activeElement['blur'] === 'function') {
       activeElement['blur']();
     }
+    setTimeout(() => {
+      this.handleResizeWidth();
+    }, 0);
     this.isCover = this.isCover === undefined ? true : this.isCover;
     if (!this.backdropCloseable || this.isCover) {
       return;
@@ -293,5 +306,53 @@ export class DrawerComponent implements OnInit, OnDestroy {
 
   public setFullScreen(fullScreen: boolean) {
     this._setFullScreen(fullScreen);
+  }
+
+  private stopPropagation = ({ originalEvent: event }) => {
+    event.stopPropagation();
+    if (event.cancelable) {
+      event.preventDefault();
+    }
+  };
+
+  private moveStream = (resize) => (mouseDown) =>
+    resize.dragEvent.pipe(
+      takeUntil(resize.releaseEvent),
+      map(({ pageX, pageY }) => ({
+        originalX: mouseDown.pageX,
+        originalY: mouseDown.pageY,
+        pageX,
+        pageY,
+      }))
+    );
+
+  public handleResizeWidth() {
+    if (this.resizable) {
+      this.resizeCmp.pressEvent
+        .pipe(
+          tap(this.stopPropagation),
+          filter(() => {
+            this._curWidth = this._width;
+            return this.resizable;
+          }),
+          switchMap(this.moveStream(this.resizeCmp))
+        )
+        .subscribe(({ pageX, originalX }) => {
+          this.showAnimation = false;
+          let tmpWidth;
+          if (this.position === 'left') {
+            tmpWidth = parseInt(this._curWidth, 10) + pageX - originalX + 'px';
+          } else {
+            tmpWidth = parseInt(this._curWidth, 10) + originalX - pageX + 'px';
+          }
+          this.setWidth(tmpWidth);
+
+          this.cdr.detectChanges();
+        });
+
+      this.resizeCmp.releaseEvent.subscribe(() => {
+        this.showAnimation = true;
+      });
+    }
   }
 }

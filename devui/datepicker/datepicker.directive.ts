@@ -38,13 +38,13 @@ import { DatepickerComponent } from './datepicker.component';
   selector: '[dDatepicker]:not([appendToBody])',
   exportAs: 'datepicker',
   providers: [
-  {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => DatepickerDirective),
-  multi: true,
-  },
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DatepickerDirective),
+      multi: true,
+    },
   ],
-  })
+})
 export class DatepickerDirective implements OnInit, OnDestroy, ControlValueAccessor {
   @Input() locale: string;
   @Input() cssClass: string;

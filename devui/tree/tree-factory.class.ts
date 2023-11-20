@@ -495,6 +495,7 @@ export class TreeFactory {
     } else {
       index !== undefined ? this._treeRoot.splice(index, 0, childNode) : this._treeRoot.push(childNode);
     }
+    this.nodes[childNode.id] = childNode;
   }
 
   private removeChildNode(parentNode: TreeNode, childNode: TreeNode) {

@@ -279,6 +279,10 @@ input {
   height: 32px;
 }
 
+[dTextarea] {
+  min-height: 32px;
+}
+
 // select带有搜索存在两层ul
 .devui-dropdown-menu > .devui-dropdown-menu-wrap,
 .devui-dropdown-menu > d-toggle-menu-list > .devui-dropdown-menu-wrap {
@@ -297,7 +301,7 @@ input {
     }
   }
 
-  ul,
+  ul:not(:empty),
   .cdk-virtual-scroll-content-wrapper {
     padding: 12px;
 

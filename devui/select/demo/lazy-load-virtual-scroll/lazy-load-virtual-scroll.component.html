@@ -1,7 +1,14 @@
 <h4>Virtual Scroll<!--虚拟滚动--></h4>
 <div class="row">
   <div class="col-md-5">
-    <d-select [virtualScroll]="true" [placeholder]="'Standard Input'" [options]="options"></d-select>
+    <d-select
+      [virtualScroll]="true"
+      [multiple]="true"
+      [isSelectAll]="true"
+      [extraConfig]="{ labelization: { enable: true, maxTags: 5 } }"
+      [placeholder]="'Standard Input'"
+      [options]="options"
+    ></d-select>
   </div>
 </div>
 <h4>Scroll to the bottom lazy loading data<!--滚动到底部懒加载数据--></h4>

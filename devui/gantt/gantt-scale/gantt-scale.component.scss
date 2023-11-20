@@ -99,7 +99,7 @@
   bottom: 0;
   width: 1px;
   z-index: 1;
-  background: $devui-gray-5;
+  background: $devui-area;
   opacity: 1;
 }
 
@@ -152,7 +152,7 @@
   top: 0;
   bottom: 0;
   z-index: 1;
-  background: $devui-gray-5;
+  background: $devui-area;
   background-size: 6px 6px;
 
   &.day {

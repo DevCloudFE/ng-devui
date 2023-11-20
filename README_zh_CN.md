@@ -107,7 +107,7 @@ ng serve --open
 
 ## 谁在使用
 
-<p><a href="https://devcloud.huaweicloud.com/" target="_blank" rel="noopener noreferrer"><img alt="DevCloud Logo" src="devcloud-logo.png" width="150" style="max-width:100%;"></a></p>
+<p><a href="https://www.huaweicloud.com/devcloud/" target="_blank" rel="noopener noreferrer"><img alt="CodeArts Logo" src="CodeArts-logo.png" width="150" style="max-width:100%;"></a></p>
 
 ## LICENSE
 

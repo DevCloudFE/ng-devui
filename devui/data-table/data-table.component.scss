@@ -10,7 +10,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
   display: block;
 
   &.devui-table-shadow {
-    border-radius: $devui-border-radius;
+    border-radius: $devui-border-radius-card;
     box-shadow: $devui-shadow-length-base $devui-light-shadow;
 
     ::ng-deep table tbody tr:last-child td {
@@ -306,7 +306,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
         &.devui-sticky-left-cell,
         &.devui-sticky-right-cell {
           position: sticky;
-          z-index: 5;
+          z-index: 40;
         }
 
         & .header-container {
@@ -396,7 +396,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       &.devui-sticky-left-cell,
       &.devui-sticky-right-cell {
         position: sticky;
-        z-index: 5;
+        z-index: 40;
       }
     }
   }
@@ -641,11 +641,12 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
       background-color: $devui-list-item-strip-bg;
 
       .devui-first-sticky-right-cell {
-        background: linear-gradient(to right, transparent, $devui-list-item-strip-bg 10px);
+        background: linear-gradient(to right, transparent, $devui-table-column-shadow-color 10px, $devui-list-item-strip-bg 10px);
       }
 
       .devui-last-sticky-left-cell {
-        background: linear-gradient(to left, transparent, $devui-list-item-strip-bg 10px);
+        background: linear-gradient(to left, transparent, $devui-table-column-shadow-color 10px $devui-list-item-strip-bg 10px);
+        border-right-color: transparent;
       }
     }
   }
@@ -681,11 +682,12 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
     background: $devui-list-item-hover-bg;
 
     .devui-first-sticky-right-cell {
-      background: linear-gradient(to right, transparent, $devui-list-item-hover-bg 10px);
+      background: linear-gradient(to right, transparent, $devui-table-column-shadow-color 10px, $devui-list-item-hover-bg 10px);
     }
 
     .devui-last-sticky-left-cell {
-      background: linear-gradient(to left, transparent, $devui-list-item-hover-bg 10px);
+      background: linear-gradient(to left, transparent, $devui-table-column-shadow-color 10px, $devui-list-item-hover-bg 10px);
+      border-right-color: transparent;
     }
   }
 }
@@ -785,24 +787,14 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
   tr,
   th {
     .devui-last-sticky-left-cell {
-      background: linear-gradient(to left, transparent, $devui-base-bg 10px);
-
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 10px;
-        pointer-events: none;
-        box-shadow: inset $devui-table-inset-shadow-left $devui-light-shadow;
-      }
+      background: linear-gradient(to left, transparent, $devui-table-column-shadow-color 10px, $devui-base-bg 10px);
+      border-right-color: transparent;
     }
   }
 
   tr.table-row-selected {
     .devui-last-sticky-left-cell {
-      background: linear-gradient(to left, transparent, $devui-list-item-selected-bg 10px);
+      background: linear-gradient(to left, transparent, $devui-table-column-shadow-color 10px, $devui-list-item-selected-bg 10px);
     }
   }
 }
@@ -812,24 +804,13 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
   tr,
   th {
     .devui-first-sticky-right-cell {
-      background: linear-gradient(to right, transparent, $devui-base-bg 10px);
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        width: 10px;
-        pointer-events: none;
-        box-shadow: inset $devui-table-inset-shadow-right $devui-light-shadow;
-      }
+      background: linear-gradient(to right, transparent, $devui-table-column-shadow-color 10px, $devui-base-bg 10px);
     }
   }
 
   tr.table-row-selected {
     .devui-first-sticky-right-cell {
-      background: linear-gradient(to right, transparent, $devui-list-item-selected-bg 10px);
+      background: linear-gradient(to right, transparent, $devui-table-column-shadow-color 10px, $devui-list-item-selected-bg 10px);
     }
   }
 }

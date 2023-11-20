@@ -9,7 +9,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  bottom: 0;
+  bottom: 0 !important;
   right: 0;
   z-index: calc(#{$devui-z-index-full-page-overlay} - 1);
   inset: 0;
@@ -26,7 +26,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  bottom: 0;
+  bottom: 0 !important;
   right: 0;
   z-index: calc(#{$devui-z-index-full-page-overlay} - 1);
   inset: 0;
@@ -331,7 +331,7 @@
 
 .devui-mask-layer {
   top: 0;
-  bottom: 0;
+  bottom: 0 !important;
   left: 0;
   right: 0;
   position: 'fixed';

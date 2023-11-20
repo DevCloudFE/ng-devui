@@ -1,6 +1,12 @@
 <div class="sidebar-wrapper">
-  <d-search class="sidebar-search-container" [iconPosition]="'left'" [styleType]="'gray'" [isKeyupSearch]="true"
-    [placeholder]="searchPlaceholder" (searchFn)="onSearch($event)"></d-search>
+  <d-search
+    class="sidebar-search-container"
+    [iconPosition]="'left'"
+    [styleType]="'gray'"
+    [isKeyupSearch]="true"
+    [placeholder]="searchPlaceholder"
+    (searchFn)="onSearch($event)"
+  ></d-search>
   <ul class="sidebar-menu" [ngClass]="{'sidebar-menu-design': !sideMenuList.length}">
     <li *ngFor="let item of sideMenuList" class="sidebar-menu-item" routerLinkActive="sidebar-menu-item-selected">
       <a *ngIf="item.linkType === 'routerLink'" [routerLink]="item.path">
@@ -12,8 +18,7 @@
     </li>
   </ul>
   <nav class="sidebar-nav">
-    <d-accordion [data]="componentsDataDisplay" [linkType]="linkType" [itemTemplate]="itemtemplate"
-      (itemClick)="handleResetPage()" [linkDefaultTarget]="linkDefaultTarget"></d-accordion>
+    <d-accordion [data]="componentsDataDisplay" [linkType]="linkType" [itemTemplate]="itemtemplate" (itemClick)="handleResetPage()" [linkDefaultTarget]="linkDefaultTarget"></d-accordion>
     <ng-template #itemtemplate let-item="item">
       {{ item.title }}
       <d-tag *ngIf="item.newChange" [tag]="text.new" [labelStyle]="'update-custom'"></d-tag>
