@@ -166,7 +166,7 @@ export class TabsComponent implements OnChanges, AfterViewInit {
 
   addOrDeleteTab(event: Event, id?: number | string): void {
     event.stopPropagation();
-    const operation = id || id >= 0 ? 'delete' : 'add';
+    const operation = id || id === 0 ? 'delete' : 'add';
     this.addOrDeleteTabChange.emit({ id, operation });
   }
 
