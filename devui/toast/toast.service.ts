@@ -48,7 +48,7 @@ export class ToastService {
     });
 
     toastRef.instance.close = (index?: number | Message) => {
-      if (index !== undefined && index > -1) {
+      if (index || index === 0) {
         toastRef.instance.removeIndexThrottle(index as number);
       } else if (index !== undefined) {
         toastRef.instance.removeMsgThrottle(index);

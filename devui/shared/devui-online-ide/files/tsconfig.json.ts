@@ -11,7 +11,6 @@ export default {
     moduleResolution: 'node',
     importHelpers: true,
     target: 'es2015',
-    typeRoots: ['node_modules/@types'],
     lib: ['es2018', 'dom'],
   },
   angularCompilerOptions: {
