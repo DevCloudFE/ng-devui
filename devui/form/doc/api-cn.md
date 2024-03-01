@@ -77,6 +77,7 @@ import { FormsModule } from '@angular/forms';
 | required | `boolean` | false | 可选，表单选项是否必填                             | [基本用法](demo#basic-usage) |
 | hasHelp  | `boolean` | false | 可选，表单项是否需要帮助指引                       | [基本用法](demo#basic-usage) |
 | helpTips | `string`  | ''    | 可选，表单项帮助指引提示内容，需配合 `hasHelp`使用 | [基本用法](demo#basic-usage) |
+| customHelpTipTemplate | `TemplateRef<any>`  | ''    | 可选，自定义提示模板，需配合 `hasHelp`使用 | [多列表单](demo#demo-multi-col) |
 
 ## d-form-control
 

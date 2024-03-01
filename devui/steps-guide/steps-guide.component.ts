@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, Renderer2, TemplateRef } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { PositionService } from 'ng-devui/position';
 import { Subscription, fromEvent } from 'rxjs';
@@ -25,7 +25,7 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
   scrollElement: HTMLElement;
   pageName: string; // 页面名称，用于标记当页帮助信息是否关闭
   title: string; // 引导标题
-  content: string; // 引导介绍内容
+  content: string | TemplateRef<any>; // 引导介绍内容
   stepsCount: number; // 总步骤数
   stepIndex: number; // 该步骤序号
   position = 'top';

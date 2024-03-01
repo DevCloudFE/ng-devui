@@ -25,7 +25,8 @@ import { IframPropagateDemoComponent } from './iframe-propagate/iframe-propagate
 import { LazyLoadComponent } from './lazy-load/lazy-load.component';
 import { DatePipeDemoComponent } from './pipe/date-pipe/date-pipe.component';
 import { SafeNullPipeComponent } from './pipe/safe-null-pipe/safe-null-pipe.component';
-
+import { ShapeIconHoverableDemoComponent } from "./shapeIconHoverable/shapeIconHoverable.component";
+import { PopoverModule } from "ng-devui";
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { SafeNullPipeComponent } from './pipe/safe-null-pipe/safe-null-pipe.comp
     I18nModule,
     DataTableModule,
     TextInputModule,
+    PopoverModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
       {
@@ -71,7 +73,8 @@ import { SafeNullPipeComponent } from './pipe/safe-null-pipe/safe-null-pipe.comp
     IframPropagateDemoComponent,
     LazyLoadComponent,
     ClipboardDemoComponent,
-    SafeNullPipeComponent
+    SafeNullPipeComponent,
+    ShapeIconHoverableDemoComponent,
   ],
 })
 export class CommonDemoModule {}

@@ -14,13 +14,12 @@ export class UploadSliceComponent implements OnInit {
   public beforeUploadFn: (file: any) => boolean | Observable<boolean> | Promise<boolean>;
   additionalParameter = {
     name: 'tom',
-    age: 11
+    age: 11,
   };
   // accept all file types
   fileOptions: IFileOptions = {
     multiple: false,
   };
-
   uploadedFiles: Array<Object> = [];
   uploadOptions: IUploadOptions = {
     uri: 'http://localhost:8080/upload',
@@ -32,18 +31,23 @@ export class UploadSliceComponent implements OnInit {
     method: 'POST',
     fileFieldName: 'dFile',
     withCredentials: true,
-    responseType: 'json'
+    responseType: 'json',
   };
-
   selectedFiles: any;
 
   constructor(private http: HttpClient, @Inject(DOCUMENT) private doc: any) {
     this.beforeUploadFn = this.beforeUpload2.bind(this);
   }
 
-  dynamicUploadOptionsFn(file, options) {
+  ngOnInit() {
+    this.doc.getElementById('fileInput').addEventListener('change', (event) => {
+      this.selectedFiles = (event.target as HTMLInputElement).files;
+    });
+  }
+
+  dynamicUploadOptionsFn(file, options, chunkedFileIndex?) {
     let uploadOptions = options;
-    if (file.type  === 'application/pdf') {
+    if (file.type === 'application/pdf') {
       uploadOptions = {
         uri: 'http://localhost:8080/upload',
         headers: {},
@@ -52,15 +56,15 @@ export class UploadSliceComponent implements OnInit {
         method: 'POST',
         fileFieldName: 'dFile',
         withCredentials: true,
-        responseType: 'json'
+        responseType: 'json',
       };
     }
+    if (chunkedFileIndex) {
+      /* 分片上传时分片序号从 1 开始，用于给不同分片添加自定义参数 */
+      console.log(`this is slice : ${chunkedFileIndex}`);
+      uploadOptions['count'] = chunkedFileIndex;
+    }
     return uploadOptions;
-  }
-  ngOnInit() {
-    this.doc.getElementById('fileInput').addEventListener('change', event => {
-      this.selectedFiles = (event.target as HTMLInputElement).files;
-    });
   }
 
   onSuccess(result) {
@@ -68,13 +72,13 @@ export class UploadSliceComponent implements OnInit {
   }
 
   beforeUpload(file) {
-    console.log(this); // this指向SingleUploadComponent
+    console.log(this);
     console.log(file);
     return true;
   }
 
   beforeUpload2(file) {
-    console.log(this); // this指向BasicComponent
+    console.log(this);
     console.log(file);
     return true;
   }

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 export class BigDataComponent {
   toggle = false;
   showLoading = false;
-  normalTabActiveId: string | number = 'tab1';
+  normalTabActiveId: string | number = '';
   autoTabActiveId: string | number = 'tab1';
   baseData = [{ id: 'tab1', title: 'Tab1', content: 'Tab1 Content' }];
   staticData = [];

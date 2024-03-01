@@ -4,7 +4,10 @@
 <div class="devui-guide-container">
   <p class="devui-title">{{ title }}</p>
   <div class="icon icon-close" (click)="closeAll()"></div>
-  <div class="devui-content" [innerHTML]="content | safe: 'html'"></div>
+  <ng-template [ngTemplateOutlet]="content | dIsTemplatePipe : plainText"></ng-template>
+  <ng-template #plainText>
+    <div class="devui-content" [innerHTML]="content | safe : 'html'"></div>
+  </ng-template>
   <div class="devui-ctrl">
     <div *ngIf="dots.length > 1 && !extraConfig?.hideStepNav" class="devui-dots">
       <em *ngFor="let dot of dots; index as i" class="icon icon-dot-status {{ i === stepIndex ? 'devui-active' : '' }}"></em>

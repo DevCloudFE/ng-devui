@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { DataTableComponent, SortDirection, SortEventArg, tableResizeFunc, TableWidthConfig } from 'ng-devui/data-table';
-import { originSource, SourceType } from '../mock-data';
+import { DataTableComponent, SortDirection, SortEventArg, TableWidthConfig, tableResizeFunc } from 'ng-devui/data-table';
+import { SourceType, originSource } from '../mock-data';
 
 @Component({
   selector: 'd-interaction',
@@ -59,27 +59,27 @@ export class InteractionComponent implements OnInit {
     },
     {
       field: '$index',
-      width: '200px'
+      width: '100px'
     },
     {
       field: 'firstName',
-      width: '200px'
+      width: '100px'
     },
     {
       field: 'lastName',
-      width: '200px'
+      width: '100px'
     },
     {
       field: 'gender',
-      width: '200px'
+      width: '100px'
     },
     {
       field: 'dob',
-      width: '200px'
+      width: '100px'
     },
     {
       field: 'description',
-      width: '200px'
+      width: '100px'
     }
   ];
 

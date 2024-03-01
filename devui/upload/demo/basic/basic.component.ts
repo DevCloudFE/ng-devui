@@ -1,4 +1,4 @@
-// 注意需要在使用的NgModule中 import { HttpClientModule  } from '@angular/common/http';
+/* 注意需要在使用的NgModule中 import { HttpClientModule  } from '@angular/common/http'; */
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
@@ -7,16 +7,16 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'd-basic',
-  templateUrl: './basic.component.html'
+  templateUrl: './basic.component.html',
 })
 export class BasicComponent implements OnInit {
-  @ViewChild('singleuploadDrag', { static: true }) singleuploadDrag: SingleUploadComponent;
+  @ViewChild('singleUploadDrag', { static: true }) singleUploadDrag: SingleUploadComponent;
   public beforeUploadFn: (file: any) => boolean | Observable<boolean> | Promise<boolean>;
   additionalParameter = {
     name: 'tom',
-    age: 11
+    age: 11,
   };
-  // accept all file types
+  /* accept all file types */
   fileOptions: IFileOptions = {
     multiple: false,
   };
@@ -33,18 +33,23 @@ export class BasicComponent implements OnInit {
     method: 'POST',
     fileFieldName: 'dFile',
     withCredentials: true,
-    responseType: 'json'
+    responseType: 'json',
   };
-
   selectedFiles: any;
 
   constructor(private http: HttpClient, @Inject(DOCUMENT) private doc: any) {
     this.beforeUploadFn = this.beforeUpload2.bind(this);
   }
 
+  ngOnInit() {
+    this.doc.getElementById('fileInput').addEventListener('change', (event) => {
+      this.selectedFiles = (event.target as HTMLInputElement).files;
+    });
+  }
+
   dynamicUploadOptionsFn(file, options) {
     let uploadOptions = options;
-    if (file.type  === 'application/pdf') {
+    if (file.type === 'application/pdf') {
       uploadOptions = {
         uri: '/upload',
         headers: {},
@@ -53,15 +58,10 @@ export class BasicComponent implements OnInit {
         method: 'POST',
         fileFieldName: 'dFile',
         withCredentials: true,
-        responseType: 'json'
+        responseType: 'json',
       };
     }
     return uploadOptions;
-  }
-  ngOnInit() {
-    this.doc.getElementById('fileInput').addEventListener('change', event => {
-      this.selectedFiles = (event.target as HTMLInputElement).files;
-    });
   }
 
   onSuccess(result) {
@@ -69,13 +69,15 @@ export class BasicComponent implements OnInit {
   }
 
   beforeUpload(file) {
-    console.log(this); // this指向SingleUploadComponent
+    /* this指向SingleUploadComponent */
+    console.log(this);
     console.log(file);
     return true;
   }
 
   beforeUpload2(file) {
-    console.log(this); // this指向BasicComponent
+    /* this指向BasicComponent */
+    console.log(this);
     console.log(file);
     return true;
   }
@@ -107,6 +109,6 @@ export class BasicComponent implements OnInit {
   }
 
   customUploadEvent() {
-    this.singleuploadDrag.upload();
+    this.singleUploadDrag.upload();
   }
 }

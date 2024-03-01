@@ -52,7 +52,7 @@ openStandardDialog(dialogtype?: string) {
 | componentFactoryResolver |   `ComponentFactoryResolver`    |    --    | 可选，自定义动态渲染组件解析器               |
 |         onClose          |           `Function`            |    --    | 可选，弹出框关闭之后回调的函数               | [自定义对话框](demo#custom-dialog)            |
 |       beforeHidden       | `Function\|Promise\|Observable` |    --    | 可选，关闭窗口之前的回调                       |
-|        placement         | `enum('center'\|'top'\|'bottom')` | 'center' | 可选，弹出框出现的位置                         |
+|        placement         | `enum('center'\|'top'\|'bottom'\|'unset')` | 'center' | 可选，弹出框出现的位置,设置为unset时可以避免transform样式影响内容定位                         |
 |         offsetX          |            `string`             |  '0px'   | 可选，弹出框横向偏移                           |
 |         offsetY          |            `string`             |  '0px'   | 可选，弹出框纵向偏移                           |
 |      bodyScrollable      |            `boolean`            |  true    | 可选，modal 打开后，body是否可滚动，默认可滚动，false时隐藏滚动条,隐藏滚动条可能会产生抖动，可以通过设置外层fixed来同时避免滚动与抖动 | [通过外层fixed同时避免滚动和抖动](demo#template-fixed)  |
@@ -86,7 +86,7 @@ openStandardDialog(dialogtype?: string) {
 |       beforeHidden       | `Function\|Promise\|Observable` |     --     | 可选，可以阻止对话框关闭                                                 | [拦截对话框关闭](demo#intercept-dialog-closed) |
 |        dialogtype        |            `string`             | 'standard' | 可选，弹出框类型，有四种选择<br />`'standard' \| 'success' \| 'failed' \| 'warning' \| 'info'` | [信息提示](demo#message-hint)             |
 |        draggable         |            `boolean`            |    true    | 可选，弹出框是否可拖拽                                                   |
-|        placement         | `enum('center'\|'top'\|'bottom')` |  'center'  | 可选，弹出框出现的位置                                                   |
+|        placement         | `enum('center'\|'top'\|'bottom'\|'unset')` |  'center'  | 可选，弹出框出现的位置,,设置为unset时可以避免transform样式影响内容定位                                                |
 |         offsetX          |            `string`             |   '0px'    | 可选，弹出框横向偏移                                                     |
 |         offsetY          |            `string`             |   '0px'    | 可选，弹出框纵向偏移                                                     |
 |      bodyScrollable      |            `boolean`            |   true    | 可选，dialog 打开后，body是否可滚动，默认可滚动，false时隐藏滚动条，隐藏滚动条可能会产生抖动，可以通过设置外层fixed来同时避免滚动与抖动 |   [通过外层fixed同时避免滚动和抖动](demo#template-fixed)                       |

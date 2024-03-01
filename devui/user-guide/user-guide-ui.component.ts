@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { IButtonStyle } from 'ng-devui/button';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 import { UserGuideCoreService } from './user-guide-core.service';
 import { IUserGuideExtraConfig } from './user-guide.types';
-import { IButtonStyle } from 'ng-devui/button';
 
 @Component({
   selector: 'd-user-guide-ui',
@@ -50,7 +50,6 @@ export class UserGuideUIComponent implements OnInit, OnDestroy {
   get nextButtonType(): IButtonStyle {
     return (this.extraConfig?.nextButtonType || 'primary') as IButtonStyle;
   }
-
   constructor(private userGuideCoreService: UserGuideCoreService, private i18n: I18nService) { }
 
   ngOnInit() {

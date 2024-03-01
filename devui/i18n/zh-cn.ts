@@ -254,12 +254,20 @@ export default {
     yearsLater(num: number) {
       return num === 1 ? '明年' : `${num}年后`;
     },
-    hoursAgo: '小时前',
-    minutesAgo: '分钟前',
+    hoursAgo(num: number) {
+      return `${num}小时前`;
+    },
+    minutesAgo(num: number) {
+      return `${num}分钟前`;
+    },
+    minutesLater(num: number) {
+      return `${num}分钟后`;
+    },
+    hoursLater(num: number) {
+      return `${num}小时后`;
+    },
     justnow: '刚刚',
-    later: '稍后',
-    minutesLater: '分钟后',
-    hoursLater: '小时后',
+    later: '稍后'
   },
   tagsInput: {
     tagsReachMaxLength: '您输入的标签已达到最大长度限制',

@@ -9,7 +9,7 @@ import { LoadingModule } from 'ng-devui/loading';
 在页面中使用:
 
 ```html
-<!-- xxx可以使任何html元素 -->
+<!-- xxx可以是任意html元素 -->
 <xxx dLoading></xxx>
 ```
 

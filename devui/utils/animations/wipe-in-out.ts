@@ -8,10 +8,10 @@ const duration = AnimationDuration.FAST;
 
 export const wipeInOutAnimation: AnimationTriggerMetadata = trigger('wipeInOutAnimation', [
   state('void', style({ opacity: 0.2, transform: 'translateY(-24px)' })),
-  state('in', style({ opacity: 1, transform: 'translateY(0)' })),
+  state('in', style({ opacity: 1, transform: 'unset' })),
   transition('void => in', group([
     animate(`${duration} ${easeOut}`, style({ opacity: 1 })),
-    animate(`${duration} ${linear}`, style({ transform: 'translateY(0)' }))
+    animate(`${duration} ${linear}`, style({ transform: 'unset' }))
   ])),
   transition('in => void', group([
     animate(`${duration} ${easeIn}`, style({ opacity: 0.2 })),

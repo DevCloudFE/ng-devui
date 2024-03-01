@@ -8,6 +8,7 @@ import { LoadingModule } from 'ng-devui/loading';
 import { TagsModule } from 'ng-devui/tags';
 import { LazyLoadModule } from 'ng-devui/utils';
 import { WindowRefModule } from 'ng-devui/window-ref';
+import { BeforeCheckboxChangePipe } from './before-checkbox-change.pipe';
 import { SelectComponent } from './select.component';
 
 @NgModule({
@@ -23,6 +24,6 @@ import { SelectComponent } from './select.component';
     TagsModule,
   ],
   exports: [SelectComponent],
-  declarations: [SelectComponent],
+  declarations: [SelectComponent, BeforeCheckboxChangePipe],
 })
 export class SelectModule {}

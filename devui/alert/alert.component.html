@@ -1,4 +1,4 @@
-<div class="devui-alert devui-alert-{{ type }} {{ cssClass }}" *ngIf="!hide">
+<div class="devui-alert devui-alert-{{ type }} {{ cssClass }}" *ngIf="!hide" [style.alignItems]="carouselNum > 1 ? 'center' : 'flex-start'">
   <span class="devui-alert-icon" *ngIf="showIcon !== false && type !== 'simple'">
     <svg
       width="16px"
@@ -58,7 +58,7 @@
       </g>
     </svg>
   </span>
-  <div class="devui-alert-carousel-container">
+  <div class="devui-alert-carousel-container" [style.height]="carouselNum > 1 ? autoplayHeight : 'auto'">
     <div
       #carouselContainer
       class="devui-alert-carousel-box"
@@ -69,11 +69,15 @@
     </div>
   </div>
   <div class="devui-alert-operation-container">
-    <div *ngIf="carouselNum > 1" class="devui-alert-carousel-num">
-      <span>{{ currentIndex }}/{{ carouselNum }}</span>
-      <span class="devui-alert-carousel-button" (click)="next()">
+    <ng-container *ngIf="carouselNum > 1">
+      <div class="devui-alert-carousel-num">
+        <span>{{ currentIndex }}/{{ carouselNum }}</span>
+      </div>
+      <span class="devui-alert-carousel-button">
         <svg
+          (click)="next()"
           width="12px"
+          devui-alert-operation-container
           height="12px"
           viewBox="0 0 16 16"
           version="1.1"
@@ -88,7 +92,7 @@
           </g>
         </svg>
       </span>
-    </div>
+    </ng-container>
     <ng-template [ngTemplateOutlet]="operationTemplate" [ngTemplateOutletContext]="{ close: close }"> </ng-template>
     <div class="devui-close" (click)="close()" *ngIf="closeable">
       <svg

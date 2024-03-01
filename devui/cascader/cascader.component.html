@@ -31,7 +31,7 @@
       (ngModelChange)="valueChanges($event)"
     />
     <div class="devui-tags-input-wrapper" *ngIf="multiple">
-      <div class="devui-tags-input">
+      <div class="devui-tags-input devui-scrollbar">
         <d-tag
           *ngFor="let item of multipleValueList; let index = index"
           [tag]="item.pathLabel || item.label"
@@ -131,7 +131,7 @@
     <ng-container *ngIf="!showSearchPanel">
       <ul
         *ngFor="let optionList of columnList; let i = index"
-        class="devui-cascader-list"
+        class="devui-cascader-list devui-scrollbar"
         [ngClass]="{ 'devui-drop-no-data': !options.length }"
         [ngStyle]="{ width: dropdownWidth + 'px' }"
         role="menu"
@@ -161,7 +161,7 @@
 
     <ng-container *ngIf="showSearchPanel">
       <ul
-        class="devui-cascader-list"
+        class="devui-cascader-list devui-scrollbar"
         [style.minWidth]="dropdownWidth - 2 + 'px'"
         [ngClass]="{ 'devui-drop-no-data': !searchResultList.length }"
       >
@@ -209,7 +209,7 @@
       (ngModelChange)="valueChanges($event)"
     />
     <div class="devui-tags-input-wrapper" *ngIf="multiple">
-      <div class="devui-tags-input">
+      <div class="devui-tags-input devui-scrollbar">
         <d-tag
           *ngFor="let item of multipleValueList; let index = index"
           [tag]="item.label"
@@ -307,7 +307,7 @@
     <ng-container *ngIf="!showSearchPanel">
       <ul
         *ngFor="let optionList of columnList; let i = index"
-        class="devui-cascader-list"
+        class="devui-cascader-list devui-scrollbar"
         [ngClass]="{ 'devui-drop-no-data': !options.length }"
         [ngStyle]="{ width: dropdownWidth + 'px' }"
         role="menu"
@@ -337,7 +337,7 @@
 
     <ng-container *ngIf="showSearchPanel">
       <ul
-        class="devui-cascader-list"
+        class="devui-cascader-list devui-scrollbar"
         [style.minWidth]="dropdownWidth - 2 + 'px'"
         [ngClass]="{ 'devui-drop-no-data': !searchResultList.length }"
       >

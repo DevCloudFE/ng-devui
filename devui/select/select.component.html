@@ -70,7 +70,7 @@
       </div>
       <ul
         *ngIf="multiItems.length > 0"
-        class="devui-select-tag-list {{ extraConfig?.labelization?.overflow }}"
+        class="devui-select-tag-list devui-scrollbar {{ extraConfig?.labelization?.overflow }}"
         [style.maxHeight]="extraConfig?.labelization?.containerMaxHeight || extraConfig?.labelization?.containnerMaxHeight"
       >
         <li
@@ -305,7 +305,8 @@
               checked: item.isChecked,
               filterKey: filterKey,
               position: 'list',
-              template: checkBoxItem
+              template: checkBoxItem,
+              index: index
             }
           : {
               option: item.option,
@@ -323,13 +324,14 @@
   {{ formatter(option) }}
 </ng-template>
 
-<ng-template #checkBoxItem let-option="option" let-checked="checked">
+<ng-template #checkBoxItem let-option="option" let-checked="checked" let-index="index">
   <d-checkbox
     [color]="color"
     [label]="formatter(option)"
     [cssClass]="'devui-select-checkbox'"
     [ngModel]="checked"
     [disabled]="option[optionDisabledKey]"
+    [beforeChange]="beforeChange | dBeforeCheckboxChangePipe : option : index"
   >
   </d-checkbox>
 </ng-template>

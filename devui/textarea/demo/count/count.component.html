@@ -1,4 +1,8 @@
-<d-form-control>
-  <textarea #countArea dTextarea [placeholder]="'Please Enter'" [maxLength]="66" [maxLengthBlocker]="true"></textarea>
-  <div class="count-length">{{ curLength }}/{{ maxLength }}</div>
-</d-form-control>
+<textarea
+  placeholder="Please Enter"
+  maxlength="80"
+  resize="both"
+  style="min-width: 160px; max-height: 160px"
+  dTextarea
+  [maxLengthCounter]="true"
+></textarea>

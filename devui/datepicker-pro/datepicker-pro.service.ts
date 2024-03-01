@@ -23,9 +23,9 @@ export class DatepickerProService implements OnDestroy {
   get minDate(): Date {
     return this._minDate;
   }
-  _maxDate: Date = new Date(this.calendarRange[1], 11, 31);
+  _maxDate: Date = new Date(this.calendarRange[1], 11, 31, 23, 59, 59);
   set maxDate(value: Date) {
-    this._maxDate = new Date(value) || new Date(this.calendarRange[1], 11, 31);
+    this._maxDate = new Date(value) || new Date(this.calendarRange[1], 11, 31, 23, 59, 59);
     this.detectedChanges.next();
   }
   get maxDate(): Date {

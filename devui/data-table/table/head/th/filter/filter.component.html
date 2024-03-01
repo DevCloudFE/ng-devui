@@ -56,7 +56,7 @@
     <div class="filter-search-container">
       <d-search
         [iconPosition]="'left'"
-        style="width: 224px"
+        [style.width]="filterWidthNum - filterPadding + 'px'"
         [isKeyupSearch]="true"
         [styleType]="'gray'"
         [placeholder]="i18nCommonText?.searchPlaceholder"
@@ -96,7 +96,7 @@
     </div>
     <div class="line"></div>
     <div style="text-align: center; padding-bottom: 8px; padding-top: 4px">
-      <d-button bsStyle="common" style="margin-right: 8px" (click)="resetFilterData(); closeFilter(dropdown)">{{
+      <d-button bsStyle="common" style="margin-right: 8px" [disabled]="!isDirty" (btnClick)="resetFilterData(); closeFilter(dropdown)">{{
         i18nCommonText?.reset
       }}</d-button>
       <d-button class="button-style" (click)="getFilterDataMultiple(); closeFilter(dropdown)">{{ i18nCommonText?.btnOk }}</d-button>
@@ -108,7 +108,7 @@
     <div class="filter-search-container">
       <d-search
         [iconPosition]="'left'"
-        style="width: 224px"
+        [style.width]="filterWidthNum - filterPadding + 'px'"
         [isKeyupSearch]="true"
         [styleType]="'gray'"
         [placeholder]="i18nCommonText?.searchPlaceholder"

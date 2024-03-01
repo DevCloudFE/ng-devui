@@ -3,6 +3,8 @@ export class IUploadOptions {
   isChunked?: boolean;
   // 分片大小
   chunkSize?: number;
+  // 串行上传分片文件，默认并发
+  chunkInSequence?: boolean;
   // 上传接口地址
   uri: string;
   // http 请求方法

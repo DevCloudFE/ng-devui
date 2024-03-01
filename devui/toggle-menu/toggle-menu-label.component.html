@@ -1,4 +1,4 @@
-<ul class="devui-select-tag-list {{ mode }}" [style.maxHeight]="maxHeight" *ngIf="multiItems.length > 0">
+<ul class="devui-select-tag-list devui-scrollbar {{ mode }}" [style.maxHeight]="maxHeight" *ngIf="multiItems.length > 0">
   <li
     class="devui-select-tag-item"
     *ngFor="let item of multiItems; let index = index; trackBy: trackByOptionPointer"

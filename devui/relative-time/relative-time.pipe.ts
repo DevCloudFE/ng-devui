@@ -1,7 +1,7 @@
 import { OnDestroy, Pipe, PipeTransform } from '@angular/core';
 import { I18nService } from 'ng-devui/i18n';
 import * as datefns from 'date-fns';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
 @Pipe({
@@ -79,9 +79,9 @@ export class RelativeTimePipe implements PipeTransform, OnDestroy {
         } else if (absDiffDays > 0 && absDiffHours > threshold.hour) {
           return  diffDays > 0 ? i18nCommonText.daysAgo(absDiffDays) : i18nCommonText.daysLater(absDiffDays);
         } else if (absDiffHours > 0 && absDiffMinutes > threshold.minute) {
-          return absDiffHours + (diffHours > 0 ? i18nCommonText.hoursAgo : i18nCommonText.hoursLater);
+          return  diffHours > 0 ? i18nCommonText.hoursAgo(absDiffHours) : i18nCommonText.hoursLater(absDiffHours);
         } else if (absDiffMinutes > 0 && absDiffSeconds > threshold.second) {
-          return absDiffMinutes + (diffMinutes > 0 ? i18nCommonText.minutesAgo : i18nCommonText.minutesLater);
+          return diffMinutes > 0 ? i18nCommonText.minutesAgo(absDiffMinutes) : i18nCommonText.minutesLater(absDiffMinutes);
         } else if (diffSeconds || diffSeconds === 0) {
           return diffSeconds >= 0 ? i18nCommonText.justnow : i18nCommonText.later;
         } else {

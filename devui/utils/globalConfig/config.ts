@@ -2,6 +2,7 @@ import { InjectionToken } from '@angular/core';
 export interface IGlobalConfig {
   showAnimation?: boolean;
   showGlowStyle?: boolean;
+  bodyScrollable?: boolean;
   styleType?: 'default' | 'gray';
   size?: 'xs' | 'sm' | 'md' | 'lg';
 }

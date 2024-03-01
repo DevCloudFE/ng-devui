@@ -1,11 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  ComponentFactoryResolver,
-  ComponentRef,
-  Inject,
-  Injectable,
-  Renderer2, RendererFactory2
-} from '@angular/core';
+import { ComponentFactoryResolver, ComponentRef, Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { OverlayContainerRef } from 'ng-devui/overlay-container';
 import { DevConfigService } from 'ng-devui/utils';
 import { assign, isUndefined } from 'lodash-es';
@@ -19,10 +13,13 @@ export class DialogService {
   private renderer: Renderer2;
   document: Document;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver,
-              private overlayContainerRef: OverlayContainerRef, private rendererFactory: RendererFactory2,
-              private devConfigService: DevConfigService,
-              @Inject(DOCUMENT) private doc: any) {
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private overlayContainerRef: OverlayContainerRef,
+    private rendererFactory: RendererFactory2,
+    private devConfigService: DevConfigService,
+    @Inject(DOCUMENT) private doc: any
+  ) {
     this.renderer = this.rendererFactory.createRenderer(null, null);
     this.document = this.doc;
   }
@@ -55,34 +52,22 @@ export class DialogService {
     placement = 'center',
     offsetX,
     offsetY,
-    bodyScrollable = true,
+    bodyScrollable,
     contentTemplate,
     escapable = true,
     showMaximizeBtn = false,
   }: IDialogOptions) {
     const finalComponentFactoryResolver = componentFactoryResolver || this.componentFactoryResolver;
-
     const modalRef = this.overlayContainerRef.createComponent(
       finalComponentFactoryResolver.resolveComponentFactory(ModalComponent),
       injector
     );
-    let showAnimateValue = true;
     const componentConfig = this.devConfigService.getConfigForComponent('modal') || {};
-    const configValue = componentConfig['showAnimation'];
-    const apiConfig = this.devConfigService.getConfigForApi('showAnimation');
-    if (configValue !== undefined) {
-      showAnimateValue = configValue;
-    } else if (apiConfig !== undefined) {
-      showAnimateValue = apiConfig;
-    }
+    const showAnimationApiConfig = this.devConfigService.getConfigForApi('showAnimation');
+    const bodyScrollableApiConfig = this.devConfigService.getConfigForApi('bodyScrollable');
+    showAnimation = showAnimation ?? showAnimate ?? componentConfig.showAnimation ?? showAnimationApiConfig;
+    bodyScrollable = bodyScrollable ?? componentConfig.bodyScrollable ?? bodyScrollableApiConfig ?? true;
 
-    if (showAnimation === undefined) {
-      if (showAnimate !== undefined) {
-        showAnimation = showAnimate;
-      } else {
-        showAnimation = showAnimateValue;
-      }
-    }
     assign(modalRef.instance, {
       id,
       width,

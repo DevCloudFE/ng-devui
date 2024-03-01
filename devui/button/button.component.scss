@@ -186,7 +186,7 @@ $devui-btn-pseudo-config: (
     &:disabled {
       color: $devui-light-text;
       background: $devui-primary-disabled;
-      border: none;
+      border-color: transparent;
     }
   }
 
@@ -247,7 +247,7 @@ $devui-btn-pseudo-config: (
     &.devui-btn-danger {
       border-color: $devui-danger;
       color: $devui-danger;
-      background-color: $devui-danger;
+      background-color: $devui-block;
     }
   }
 

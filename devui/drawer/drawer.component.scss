@@ -48,16 +48,17 @@
   right: 0;
   box-shadow: $devui-shadow-length-fullscreen-overlay $devui-shadow;
   overflow: auto;
-  scrollbar-color: transparent transparent;
 
   &::-webkit-scrollbar-thumb {
     background-color: transparent;
   }
 
   &:hover {
-    scrollbar-color: $devui-placeholder transparent;
-
     &::-webkit-scrollbar-thumb {
+      background-color: $devui-line;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
       background-color: $devui-placeholder;
     }
   }

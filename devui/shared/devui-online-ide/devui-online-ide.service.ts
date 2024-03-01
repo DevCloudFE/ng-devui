@@ -26,25 +26,25 @@ const regConfig = {
 
 @Injectable({
   providedIn: 'root',
-  })
+})
 export class DevuiOnlineIdeService {
   document: Document;
   dependencies = {
-    '@angular/animations': '^16.0.0',
-    '@angular/cdk': '^16.0.0',
-    '@angular/common': '^16.0.0',
-    '@angular/compiler': '^16.0.0',
-    '@angular/core': '^16.0.0',
-    '@angular/forms': '^16.0.0',
-    '@angular/platform-browser': '^16.0.0',
-    '@angular/platform-browser-dynamic': '^16.0.0',
-    '@angular/router': '^16.0.0',
-    "@ngx-translate/core": "^14.0.0",
+    '@angular/animations': '^17.0.0',
+    '@angular/cdk': '^17.0.0',
+    '@angular/common': '^17.0.0',
+    '@angular/compiler': '^17.0.0',
+    '@angular/core': '^17.0.0',
+    '@angular/forms': '^17.0.0',
+    '@angular/platform-browser': '^17.0.0',
+    '@angular/platform-browser-dynamic': '^17.0.0',
+    '@angular/router': '^17.0.0',
+    "@ngx-translate/core": "^15.0.0",
     "lodash-es": "^4.17.15",
     '@devui-design/icons': '^1.2.0',
     'core-js': '^3.18.3',
     'date-fns': '^2.23.0',
-    'ng-devui': `^16.0.0`,
+    'ng-devui': `^17.0.0`,
     rxjs: '~7.5.5',
     tslib: '^2.0.0',
     'zone.js': '~0.11.4',

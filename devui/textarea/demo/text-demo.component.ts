@@ -18,12 +18,11 @@ export class TextDemoComponent implements OnInit, OnDestroy {
   countSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./count/count.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./count/count.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./count/count.component.scss?raw') },
   ];
 
   navItems = [];
   subs: Subscription = new Subscription();
-  constructor(private translate: TranslateService) { }
+  constructor(private translate: TranslateService) {}
 
   ngOnInit() {
     this.subs.add(

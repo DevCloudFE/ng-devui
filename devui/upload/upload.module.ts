@@ -1,6 +1,5 @@
-import {NgModule} from '@angular/core';
-
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { ButtonModule } from 'ng-devui/button';
 import { ProgressModule } from 'ng-devui/progress';
 import { ToastModule } from 'ng-devui/toast';
@@ -10,8 +9,10 @@ import { MultipleUploadComponent } from './multiple-upload.component';
 import { SelectFiles } from './select-files.utils';
 import { SingleUploadViewComponent } from './single-upload-view.component';
 import { SingleUploadComponent } from './single-upload.component';
+import { SliceUploadService } from './slice-upload.service';
 import { UploadDirective } from './upload.directive';
 import { UploadedFilesComponent } from './uploaded-files.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -26,7 +27,7 @@ import { UploadedFilesComponent } from './uploaded-files.component';
     MultipleUploadComponent,
     UploadedFilesComponent,
     FileDropDirective,
-    UploadDirective
+    UploadDirective,
   ],
   declarations: [
     MultipleUploadViewComponent,
@@ -35,10 +36,9 @@ import { UploadedFilesComponent } from './uploaded-files.component';
     MultipleUploadComponent,
     UploadedFilesComponent,
     FileDropDirective,
-    UploadDirective
+    UploadDirective,
   ],
 
-  providers: [SelectFiles],
+  providers: [SelectFiles, SliceUploadService],
 })
-export class UploadModule {
-}
+export class UploadModule {}

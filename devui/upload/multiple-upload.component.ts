@@ -1,10 +1,15 @@
 import { DOCUMENT } from '@angular/common';
 import {
-  Component, EventEmitter,
-
-  forwardRef, HostBinding, Inject, Input, OnDestroy,
-
-  OnInit, Output, TemplateRef,
+  Component,
+  EventEmitter,
+  forwardRef,
+  HostBinding,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  TemplateRef,
   ViewChild
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -13,15 +18,10 @@ import { ToastService } from 'ng-devui/toast';
 import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { from, Observable, Subscription } from 'rxjs';
 import { debounceTime, last, map, mergeMap } from 'rxjs/operators';
-import {
-  IFileOptions,
-  IUploadOptions,
-  UploadStatus
-} from './file-uploader.types';
+import { IFileOptions, IUploadOptions, UploadStatus } from './file-uploader.types';
 import { MultipleUploadViewComponent } from './multiple-upload-view.component';
-import {
-  SelectFiles
-} from './select-files.utils';
+import { SelectFiles } from './select-files.utils';
+import { SliceUploadService } from './slice-upload.service';
 
 @Component({
   selector: 'd-multiple-upload',
@@ -33,9 +33,9 @@ import {
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => MultipleUploadComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class MultipleUploadComponent implements OnDestroy, OnInit {
   @Input() uploadOptions: IUploadOptions;
@@ -56,14 +56,15 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
   @Input() oneTimeUpload = false;
   @Input() disabled = false;
   @Input() beforeUpload: (files) => boolean | Promise<boolean> | Observable<boolean>;
-  @Input() setCustomUploadOptions: (files, uploadOptions) => IUploadOptions;
+  @Input() setCustomUploadOptions: (file, uploadOptions, chunkedFileIndex?) => IUploadOptions;
   @Input() enableDrop = false;
   @Input() @WithConfig() showGlowStyle = true;
   @HostBinding('class.devui-glow-style') get hasGlowStyle() {
     return this.showGlowStyle;
-  };
+  }
   @Output() successEvent: EventEmitter<Array<{ file: File; response: any }>> = new EventEmitter<Array<{ file: File; response: any }>>();
   @Output() errorEvent: EventEmitter<Array<{ file: File; response: any }>> = new EventEmitter<Array<{ file: File; response: any }>>();
+  @Output() errorChunkEvent: EventEmitter<{ file: File; response: any }> = new EventEmitter<{ file: File; response: any }>();
   @Output() deleteUploadedFileEvent: EventEmitter<string> = new EventEmitter<string>();
   @Output() fileDrop: EventEmitter<any> = new EventEmitter<any>();
   @Output() fileOver: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -77,6 +78,7 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
   UploadStatus = UploadStatus;
   uploadTips: string;
   document: Document;
+
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
@@ -84,8 +86,10 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
     private selectFiles: SelectFiles,
     private i18n: I18nService,
     @Inject(DOCUMENT) private doc: any,
+    private sliceUploadService: SliceUploadService,
     private devConfigService: DevConfigService,
-    private toastService: ToastService) {
+    private toastService: ToastService
+  ) {
     this.document = this.doc;
   }
   ngOnInit(): void {
@@ -99,7 +103,7 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
 
   writeValue(files: any): void {
     if (files) {
-      const simulateFiles = from(this.simulateSelectFiles(files)).pipe(mergeMap(file => <any>file));
+      const simulateFiles = from(this.simulateSelectFiles(files)).pipe(mergeMap((file) => <any>file));
       this._dealFiles(simulateFiles);
     }
   }
@@ -120,10 +124,11 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
 
   _dealFiles(observale) {
     this.multipleUploadViewComponent.resetSameNameFiles();
-    observale.pipe(
-      map(file => this.multipleUploadViewComponent.addFile(file)),
-      debounceTime(100)
-    )
+    observale
+      .pipe(
+        map((file) => this.multipleUploadViewComponent.addFile(file)),
+        debounceTime(100)
+      )
       .subscribe(
         () => {
           this.checkValid();
@@ -131,10 +136,10 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
           if (this.uploadOptions.checkSameName && sameNameFiles.length) {
             this.alertMsg(this.i18nText.getExistSameNameFilesMsg(sameNameFiles));
           }
-          this.onChange(this.multipleUploadViewComponent.fileUploaders.map(fileUploader => fileUploader.file));
+          this.onChange(this.multipleUploadViewComponent.fileUploaders.map((fileUploader) => fileUploader.file));
           const selectedFiles = this.multipleUploadViewComponent.fileUploaders
-            .filter(fileUploader => fileUploader.status === UploadStatus.preLoad)
-            .map(fileUploader => fileUploader.file);
+            .filter((fileUploader) => fileUploader.status === UploadStatus.preLoad)
+            .map((fileUploader) => fileUploader.file);
           this.onFileSelect(selectedFiles);
           if (this.autoUpload) {
             this.upload();
@@ -148,9 +153,14 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
 
   checkValid() {
     let totalFileSize = 0;
-    this.multipleUploadViewComponent.fileUploaders.forEach(fileUploader => {
+    this.multipleUploadViewComponent.fileUploaders.forEach((fileUploader) => {
       totalFileSize += fileUploader.file.size;
-      const checkResult =  this.selectFiles._validateFiles(this.multipleUploadViewComponent.fileUploaders.length,fileUploader.file, this.fileOptions.accept, fileUploader.uploadOptions);
+      const checkResult = this.selectFiles._validateFiles(
+        this.multipleUploadViewComponent.fileUploaders.length,
+        fileUploader.file,
+        this.fileOptions.accept,
+        fileUploader.uploadOptions
+      );
       if (checkResult && checkResult.checkError) {
         this.multipleUploadViewComponent.deletePreUploadFile(fileUploader.file);
         this.alertMsg(checkResult.errorMsg);
@@ -190,48 +200,42 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
   }
 
   handleOneTimeUpload(uploadObservable) {
-    uploadObservable
-      .pipe(
-        last()
-      )
-      .subscribe(
-        (results: Array<{ file: File; response: any }>) => {
-          this.successEvent.emit(results);
-          results.forEach((result) => {
-            this.multipleUploadViewComponent.uploadedFilesComponent.addFile(result.file);
-          });
-        },
-        (error) => {
-          this.errorEvent.emit(error);
-        }
-      );
+    uploadObservable.pipe(last()).subscribe(
+      (results: Array<{ file: File; response: any }>) => {
+        this.successEvent.emit(results);
+        results.forEach((result) => {
+          this.multipleUploadViewComponent.uploadedFilesComponent.addFile(result.file);
+        });
+      },
+      (error) => {
+        this.errorEvent.emit(error);
+      }
+    );
   }
 
   handleUpload(uploadObservable) {
-    uploadObservable
-      .pipe(
-        last()
-      )
-      .subscribe(
-        (results: Array<{ file: File; response: any; status: UploadStatus }>) => {
-          const successResult = results.filter(item => item.status === UploadStatus.uploaded).map(item => {
-            return { file: item.file, response: item.response };
-          });
-          const failResult = results.filter(item => item.status === UploadStatus.failed).map(item => {
-            return { file: item.file, response: item.response };
-          });
-          if (failResult.length) {
-            this.errorEvent.emit(failResult);
-          }
+    uploadObservable.pipe(last()).subscribe((results: Array<{ file: File; response: any; status: UploadStatus }>) => {
+      const successResult = results
+        .filter((item) => item.status === UploadStatus.uploaded)
+        .map((item) => {
+          return { file: item.file, response: item.response };
+        });
+      const failResult = results
+        .filter((item) => item.status === UploadStatus.failed)
+        .map((item) => {
+          return { file: item.file, response: item.response };
+        });
+      if (failResult.length) {
+        this.errorEvent.emit(failResult);
+      }
 
-          if (successResult.length) {
-            this.successEvent.emit(successResult);
-            successResult.forEach((result) => {
-              this.multipleUploadViewComponent.uploadedFilesComponent.addFile(result.file);
-            });
-          }
-        }
-      );
+      if (successResult.length) {
+        this.successEvent.emit(successResult);
+        successResult.forEach((result) => {
+          this.multipleUploadViewComponent.uploadedFilesComponent.addFile(result.file);
+        });
+      }
+    });
   }
 
   upload(event?, fileUploader?) {
@@ -247,12 +251,16 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
       if (tempNode) {
         this.document.body.removeChild(tempNode);
       }
-      const uploadObservable = this.oneTimeUpload ?
-        this.multipleUploadViewComponent.oneTimeUpload() :
-        this.multipleUploadViewComponent.upload(fileUploader, true);
-      if (this.oneTimeUpload) {
-        this.handleOneTimeUpload(uploadObservable);
+      if (
+        this.uploadOptions.isChunked &&
+        this.sliceUploadService.isNeedChunk(this.multipleUploadViewComponent.fileUploaders, this.uploadOptions)
+      ) {
+        this.sliceUploadService.sliceUpload(this, this.multipleUploadViewComponent);
+      } else if (this.oneTimeUpload) {
+        const oneTimeUploadObservable = this.multipleUploadViewComponent.oneTimeUpload();
+        this.handleOneTimeUpload(oneTimeUploadObservable);
       } else {
+        const uploadObservable = this.multipleUploadViewComponent.upload(fileUploader, true);
         this.handleUpload(uploadObservable);
       }
     });
@@ -277,7 +285,7 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
 
   _onDeleteUploadedFile(filePath: string) {
     this.deleteUploadedFileEvent.emit(filePath);
-    this.onChange(this.multipleUploadViewComponent.fileUploaders.map(fileUploader => fileUploader.file));
+    this.onChange(this.multipleUploadViewComponent.fileUploaders.map((fileUploader) => fileUploader.file));
   }
 
   deleteFile($event, file) {
@@ -323,7 +331,8 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
   }
 
   cancelUpload() {
-    this.multipleUploadViewComponent.fileUploaders.filter((fileUploader) => fileUploader.status === UploadStatus.uploading)
+    this.multipleUploadViewComponent.fileUploaders
+      .filter((fileUploader) => fileUploader.status === UploadStatus.uploading)
       .forEach((fileUploader) => {
         fileUploader.status = UploadStatus.failed;
       });
@@ -332,7 +341,6 @@ export class MultipleUploadComponent implements OnDestroy, OnInit {
   ngOnDestroy() {
     if (this.i18nSubscription) {
       this.i18nSubscription.unsubscribe();
-
     }
   }
 }

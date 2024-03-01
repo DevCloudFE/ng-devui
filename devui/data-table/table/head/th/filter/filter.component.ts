@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { DropDownDirective } from 'ng-devui/dropdown';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { BehaviorSubject, Observable, Subscription, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { FilterConfig } from '../../../../data-table.model';
 import { TABLE_TH } from '../th.token';
@@ -41,6 +41,12 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
     return this.showFilterIcon || this.filterIconActive || this.filterIconActiveInner;
   }
 
+  isDirty = false;
+
+  get filterWidthNum() {
+    return parseInt(this.filterBoxWidth || 250);
+  }
+
   @ViewChild('filterDropdown') filterDropdown;
   private sourceSubject: BehaviorSubject<any>;
   private sourceSubscription: Subscription;
@@ -58,6 +64,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   filterIconActiveInner: boolean;
   DEBONCE_TIME = 300;
   document: Document;
+  filterPadding = 26;
   constructor(private ref: ChangeDetectorRef, private i18n: I18nService, @Inject(TABLE_TH) private thComponent: any,
               @Inject(DOCUMENT) private doc: any) {
     this.i18nCommonText = this.i18n.getI18nText().common;
@@ -112,6 +119,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   resetFilterData() {
+    this.isDirty = false;
     this.filterList.forEach(t => {
       t.checked = false;
     });
@@ -218,6 +226,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
 
   filterCheckAll($event) {
     this.filterHalfChecked = false;
+    this.isDirty = true;
     // 全选时只针对当前面板操作，全不选时针对所有数据
     if ($event) {
       this.filterListDisplay.forEach(item => {
@@ -250,6 +259,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
 
   checkboxChange($event, item) {
     this.checkedListForFilter.push(item);
+    this.isDirty = true;
     this.setHalfChecked();
   }
 

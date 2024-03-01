@@ -14,7 +14,8 @@
 
 .popper-container {
   &.devui-popover-container-right,
-  &.devui-popover-container-left {
+  &.devui-popover-container-left,
+  &.devui-popover-container-top {
     display: flex !important;
 
     & > .devui-dropdown-menu-wrap {
@@ -33,6 +34,10 @@
         display: none;
       }
     }
+  }
+
+  &.devui-popover-container-top {
+    flex-direction: column-reverse;
   }
 
   &.devui-popover-container-left .popper-append-area {

@@ -115,7 +115,7 @@
         {{ title }}
       </div>
       <div *ngIf="content" class="user-guide-panel-content" [style.color]="extraConfig?.infoColor">
-        <div *ngIf="!isTemplateContent()" [innerHTML]="content | safe: 'html'"></div>
+        <div *ngIf="!isTemplateContent()" [innerHTML]="content | safe : 'html'"></div>
         <ng-container *ngIf="isTemplateContent()">
           <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
         </ng-container>
@@ -156,7 +156,7 @@
     <div *ngIf="curStepType === 'tip'" class="devui-user-guide-panel-arrow"></div>
     <div [class.user-guide-panel-tip]="curStepType === 'tip'" [class.user-guide-panel-single]="curStepType !== 'tip'">
       {{ title }}
-      <div *ngIf="content" class="user-guide-panel-content" [innerHTML]="content | safe: 'html'"></div>
+      <div *ngIf="content" class="user-guide-panel-content" [innerHTML]="content | safe : 'html'"></div>
       <button type="button" class="close" aria-label="Close" (click)="exit()">
         <svg class="svg-icon-close" xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" viewBox="0 0 12 12" version="1.1">
           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

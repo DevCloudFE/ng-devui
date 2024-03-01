@@ -3,7 +3,14 @@
     <div class="grid">
       <div class="u-1-3">
         <d-form-item>
-          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">Name</d-form-label>
+          <d-form-label [required]="true" [hasHelp]="true" [customHelpTipTemplate]="customTmp">Name</d-form-label>
+          <ng-template #customTmp>
+            <div style="padding-left: 20px">
+              <b>自定义提示内容模板</b>
+              <br />
+              <span>custom name</span>
+            </div>
+          </ng-template>
           <d-form-control class="form-control-width">
             <input dTextInput name="userName" />
           </d-form-control>

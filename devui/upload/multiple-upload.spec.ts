@@ -6,37 +6,38 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { IFileOptions, IUploadOptions, UploadStatus } from './file-uploader.types';
 import { MultipleUploadComponent } from './multiple-upload.component';
+import { SliceUploadService } from './slice-upload.service';
 import { UploadModule } from './upload.module';
 @Component({
   template: `
-   <d-multiple-upload
-    #multipleUpload
-    [fileOptions]="fileOptions"
-    [uploadedFiles]="uploadedFiles"
-    [uploadOptions]="uploadOptions"
-    [filePath]="'name'"
-    [autoUpload] ="autoUpload"
-    [beforeUpload]="beforeUpload"
-    (successEvent)="onSuccess($event)"
-    (deleteUploadedFileEvent)="deleteUploadedFile($event)"
-    (errorEvent)="onError($event)"
-    [ngModel]="files"
-    [showTip]="true"
-    [oneTimeUpload]="oneTimeUpload "
-  >
-  </d-multiple-upload>
-  `
+    <d-multiple-upload
+      #multipleUpload
+      [fileOptions]="fileOptions"
+      [uploadedFiles]="uploadedFiles"
+      [uploadOptions]="uploadOptions"
+      [filePath]="'name'"
+      [autoUpload]="autoUpload"
+      [beforeUpload]="beforeUpload"
+      (successEvent)="onSuccess($event)"
+      (deleteUploadedFileEvent)="deleteUploadedFile($event)"
+      (errorEvent)="onError($event)"
+      [ngModel]="files"
+      [showTip]="true"
+      [oneTimeUpload]="oneTimeUpload"
+    >
+    </d-multiple-upload>
+  `,
 })
 class TestUploadComponent {
   @ViewChild('multipleUpload') multipleUpload: MultipleUploadComponent;
   fileOptions: IFileOptions = {
     multiple: true,
     accept: '.xls,.xlsx,.pages,.mp3,.png',
-    webkitdirectory: true
+    webkitdirectory: true,
   };
   additionalParameter = {
     name: 'tom',
-    age: 11
+    age: 11,
   };
   uploadedFiles: Array<Object> = [];
   uploadOptions: IUploadOptions = {
@@ -47,11 +48,14 @@ class TestUploadComponent {
     method: 'POST',
     fileFieldName: 'dFile',
     withCredentials: true,
-    responseType: 'json'
+    responseType: 'json',
   };
   files = [];
   autoUpload = false;
   oneTimeUpload = false;
+
+  constructor(public sliceUploadService: SliceUploadService) {}
+
   dynamicUploadOptionsFn(file, options) {
     let uploadOptions = options;
     if (file.type === 'application/pdf') {
@@ -63,7 +67,7 @@ class TestUploadComponent {
         method: 'POST',
         fileFieldName: 'dFile',
         withCredentials: true,
-        responseType: 'json'
+        responseType: 'json',
       };
     }
     return uploadOptions;
@@ -87,7 +91,7 @@ describe('upload', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [UploadModule, FormsModule, NoopAnimationsModule],
-      declarations: [TestUploadComponent]
+      declarations: [TestUploadComponent],
     });
   });
 
@@ -105,11 +109,11 @@ describe('upload', () => {
     });
 
     it('should upload file successfully', fakeAsync(() => {
-      const file1 = new File(['upload'], "upload1.png");
-      const file2 = new File(['upload'], "upload2.png");
+      const file1 = new File(['upload'], 'upload1.png');
+      const file2 = new File(['upload'], 'upload2.png');
       component.multipleUpload.multipleUploadViewComponent.addFile(file1);
       component.multipleUpload.multipleUploadViewComponent.addFile(file2);
-      component.multipleUpload.multipleUploadViewComponent.fileUploaders.forEach(FileUploader => {
+      component.multipleUpload.multipleUploadViewComponent.fileUploaders.forEach((FileUploader) => {
         spyOn(FileUploader, 'sendMultiple').and.callFake(() => {
           return Promise.resolve({ file: FileUploader.file, response: 'successful', status: UploadStatus.uploaded });
         });
@@ -124,11 +128,11 @@ describe('upload', () => {
       expect(component.onSuccess).toHaveBeenCalled();
     }));
     it('should upload file filed', fakeAsync(() => {
-      const file1 = new File(['upload'], "upload1.png");
-      const file2 = new File(['upload'], "upload2.png");
+      const file1 = new File(['upload'], 'upload1.png');
+      const file2 = new File(['upload'], 'upload2.png');
       component.multipleUpload.multipleUploadViewComponent.addFile(file1);
       component.multipleUpload.multipleUploadViewComponent.addFile(file2);
-      component.multipleUpload.multipleUploadViewComponent.fileUploaders.forEach(FileUploader => {
+      component.multipleUpload.multipleUploadViewComponent.fileUploaders.forEach((FileUploader) => {
         spyOn(FileUploader, 'sendMultiple').and.callFake(() => {
           return Promise.reject({ file: FileUploader.file, response: 'error', status: UploadStatus.failed });
         });
@@ -144,11 +148,11 @@ describe('upload', () => {
     }));
 
     it('should delete file successfully', fakeAsync(() => {
-      const file1 = new File(['upload'], "upload1.png");
-      const file2 = new File(['upload'], "upload2.png");
+      const file1 = new File(['upload'], 'upload1.png');
+      const file2 = new File(['upload'], 'upload2.png');
       component.multipleUpload.multipleUploadViewComponent.addFile(file1);
       component.multipleUpload.multipleUploadViewComponent.addFile(file2);
-      component.multipleUpload.multipleUploadViewComponent.fileUploaders.forEach(FileUploader => {
+      component.multipleUpload.multipleUploadViewComponent.fileUploaders.forEach((FileUploader) => {
         spyOn(FileUploader, 'sendMultiple').and.callFake(() => {
           return Promise.resolve({ file: FileUploader.file, response: 'successful', status: UploadStatus.uploaded });
         });
@@ -169,7 +173,7 @@ describe('upload', () => {
 
     it('should write value correctly', fakeAsync(() => {
       expect(component).toBeTruthy();
-      component.files = [new File(['upload'], "upload1.png"), new File(['upload'], "upload2.png")];
+      component.files = [new File(['upload'], 'upload1.png'), new File(['upload'], 'upload2.png')];
       tick();
       fixture.detectChanges();
       flush();
@@ -183,16 +187,41 @@ describe('upload', () => {
 
     it('should one time upload file successfully', fakeAsync(() => {
       component.oneTimeUpload = true;
-      const file1 = new File(['upload'], "upload1.png");
-      const file2 = new File(['upload'], "upload2.png");
+      const file1 = new File(['upload'], 'upload1.png');
+      const file2 = new File(['upload'], 'upload2.png');
       component.multipleUpload.multipleUploadViewComponent.addFile(file1);
       component.multipleUpload.multipleUploadViewComponent.addFile(file2);
-      component.multipleUpload.multipleUploadViewComponent.fileUploaders.forEach(FileUploader => {
+      component.multipleUpload.multipleUploadViewComponent.fileUploaders.forEach((FileUploader) => {
         spyOn(FileUploader, 'send').and.callFake(() => {
           return Promise.resolve({ file: FileUploader.file, response: 'successful', status: UploadStatus.uploaded });
         });
       });
       fixture.detectChanges();
+      const el: HTMLElement = debugEl.query(By.css('.devui-btn-default.devui-btn-common')).nativeElement;
+      el.dispatchEvent(new Event('click'));
+      fixture.detectChanges();
+      tick();
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+      expect(component.onSuccess).toHaveBeenCalled();
+    }));
+
+    it('should chunk upload correctly', fakeAsync(() => {
+      expect(component).toBeTruthy();
+      component.sliceUploadService.defaultChunkSize = 1;
+      component.uploadOptions.isChunked = true;
+      const file = new File(['upload'], 'upload.txt');
+      component.multipleUpload.multipleUploadViewComponent.addFile(file);
+      const chunkFiles = component.sliceUploadService.createFileChunk(file, component.uploadOptions);
+      chunkFiles.forEach((FileUploader) => {
+        spyOn(FileUploader, 'send').and.callFake(() => {
+          return Promise.resolve({ file: FileUploader.file, response: 'successful' });
+        });
+      });
+      spyOn(component.sliceUploadService, 'createFileChunk').and.callFake(() => {
+        return chunkFiles;
+      });
       const el: HTMLElement = debugEl.query(By.css('.devui-btn-default.devui-btn-common')).nativeElement;
       el.dispatchEvent(new Event('click'));
       fixture.detectChanges();

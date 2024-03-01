@@ -1,7 +1,7 @@
 // 字号大小变量
 @import '../theme/font';
 
-$font-family: 'HuaweiFont', 'Helvetica','Arial', 'PingFangSC-Regular', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑','Microsoft JhengHei';
+$font-family: 'Helvetica','Arial', 'PingFangSC-Regular', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑','Microsoft JhengHei';
 
 @mixin font-content() {
   font-size: $devui-font-size;

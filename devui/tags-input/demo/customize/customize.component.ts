@@ -28,7 +28,9 @@ export class TagsInputDemoCustomizeComponent implements OnInit {
   customCheck = (tag: string | { name: string }) => {
     const str = typeof tag === 'string' ? tag : tag.name;
     const result = str.indexOf('item') >= 0;
-    this.tagInputItem.generateOptionFromInput = result;
+    if (this.tagInputItem) {
+      this.tagInputItem.generateOptionFromInput = result;
+    }
     return result;
   };
 

@@ -1,5 +1,5 @@
 <div style="width: 50%">
-  <h4>Basic Usage</h4>
+  <h4>Single</h4>
   <d-single-upload
     #singleupload
     [fileOptions]="fileOptions"
@@ -13,6 +13,20 @@
     (errorEvent)="onError($event)"
   >
   </d-single-upload>
+  <h4>Multiple</h4>
+  <d-multiple-upload
+    #multipleupload
+    [fileOptions]="fileOptions"
+    [uploadedFiles]="uploadedFiles"
+    [filePath]="'name'"
+    [uploadOptions]="uploadOptions"
+    (successEvent)="onSuccess($event)"
+    (deleteUploadedFileEvent)="deleteUploadedFile($event)"
+    (errorEvent)="onError($event)"
+    [showTip]="true"
+    (fileSelect)="fileSelect($event)"
+  >
+  </d-multiple-upload>
   <h4>Dragdrop</h4>
   <d-single-upload
     #singleuploadDrag

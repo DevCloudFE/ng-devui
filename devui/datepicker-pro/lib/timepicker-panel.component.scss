@@ -44,7 +44,6 @@
       scroll-behavior: auto;
       padding-right: 6px;
       scrollbar-gutter: stable;
-      scrollbar-width: thin;
 
       &:last-child {
         padding-right: 0;
@@ -56,7 +55,6 @@
 
       &:hover {
         overflow-y: scroll;
-        overflow-y: overlay;
       }
 
       .devui-time-item {

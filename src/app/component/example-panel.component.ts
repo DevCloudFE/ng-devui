@@ -131,7 +131,6 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit, OnDestroy {
       this.description = component.description;
       this.tmw = component.tmw;
     }
-    this.footer = translations['footer'];
   }
 
   activeTabChange(tab: string | number) {

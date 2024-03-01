@@ -1,4 +1,3 @@
-
 export * from './animations';
 export * from './cdk-origin-handler';
 export * from './cdk-overlay-config.type';
@@ -10,6 +9,8 @@ export * from './fun-utils';
 export * from './globalConfig';
 export * from './highlight/highlight.component';
 export * from './highlight/highlight.module';
+export * from './is-template.module';
+export * from './is-template.pipe';
 export * from './lazy-load/lazy-load.directive';
 export * from './lazy-load/lazy-load.module';
 export * from './observeVisibility/observer-visibility.directive';
@@ -21,4 +22,3 @@ export * from './popper/popper.module';
 export * from './safe-pipe.module';
 export * from './safe.pipe';
 export * from './tree-utils';
-

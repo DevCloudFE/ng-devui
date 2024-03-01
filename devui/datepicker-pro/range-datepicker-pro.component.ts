@@ -196,6 +196,9 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
       this.dropdownToggle.emit(false);
       if (isConfirm) {
         this.confirmEvent.emit(this.pickerSrv.curRangeDate);
+        if (this.dateValue.length !== this.pickerSrv.curRangeDate.length) {
+          this.onChange(this.pickerSrv.curRangeDate);
+        }
         this.dateValue = this.pickerSrv.curRangeDate.map(d => this.formatDateToString(d));
       }
     });
@@ -334,6 +337,9 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
 
   inputBlurCallback = (type) => {
     const targetValue = type === 'start' ? this.dateValue[0] : this.dateValue[1];
+    if (this.dateValue.length !== this.pickerSrv.curRangeDate.length) {
+      this.onChange(this.pickerSrv.curRangeDate);
+    }
     if (!this.validateDate(targetValue)) {
       if (type === 'start') {
         this.dateValue[0] = this.pickerSrv.curRangeDate[0] ?

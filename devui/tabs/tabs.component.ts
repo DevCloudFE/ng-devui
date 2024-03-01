@@ -11,7 +11,7 @@ import {
   QueryList,
   SimpleChanges,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { sum } from 'lodash-es';
 import { Observable } from 'rxjs';
@@ -77,17 +77,17 @@ export class TabsComponent implements OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     const { activeTab, scrollMode } = changes;
+    if (scrollMode) {
+      this.getTabsWidth();
+    }
     if (activeTab) {
       this.changeActiveSlidingBlock();
-      if (this.scrollMode && this.tabsEle && this.tabs) {
+      if (this.scrollModeToggle && this.tabsEle && this.tabs) {
         const tabs = this.tabsEle.nativeElement.querySelectorAll('li.devui-nav-tab-item');
         const index = Array.from(this.tabs).findIndex((item) => item.id === this.activeTab);
         this.offsetIndex = index;
         this.scrollIntoView(tabs[index]);
       }
-    }
-    if (scrollMode) {
-      this.getTabsWidth();
     }
   }
 
@@ -101,7 +101,6 @@ export class TabsComponent implements OnChanges, AfterViewInit {
         this.changeActiveSlidingBlock();
       }
     }
-
     this.getTabsWidth();
     this.tabs.changes.subscribe(() => {
       this.changeActiveSlidingBlock();

@@ -11,8 +11,8 @@ export class AvatarComponent implements OnChanges, OnInit {
   isNobody = true;
   isErrorImg = false;
   /**
-  * 自定义头像显示文字
-  */
+   * 自定义头像显示文字
+   */
   @Input() gender: 'male' | 'female' | string;
   /**
    * avatar宽度
@@ -22,45 +22,46 @@ export class AvatarComponent implements OnChanges, OnInit {
    * avatar高度
    */
   @Input() height = 36;
-
   /**
    * 是否是圆形n
    */
   @Input() isRound = true;
-
   /**
    * 是否是图片
    */
   @Input() imgSrc: string;
   /**
- * 用户名称
- */
+   * 用户名称
+   */
   @Input() name: string;
   /**
    * 自定义头像显示文字
    */
   @Input() customText: string;
-
+  /**
+   * 头像中间文字最小尺寸
+   */
+  MINIMUM_FONT_SIZE = 12;
   fontSize = 12;
   code: number;
   nameDisplay: string;
-  constructor() { }
+
   ngOnInit(): void {
     this.calcValues(this.customText ? this.customText : this.name);
   }
+
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['width'] && !changes['width'].isFirstChange() ||
-      changes['customText'] && !changes['customText'].isFirstChange() ||
-      changes['gender'] && !changes['gender'].isFirstChange() ||
-      changes['height'] && !changes['height'].isFirstChange() ||
-      changes['name'] && !changes['name'].isFirstChange()
-    ) {
+    const { width, customText, gender, height, name } = changes;
+    const result = [width, customText, gender, height, name].map((item) => item && !item.isFirstChange());
+    if (result.includes(true)) {
       this.calcValues(this.customText ? this.customText : this.name);
     }
   }
+
   showErrAvatar() {
     this.isErrorImg = true;
   }
+
   calcValues(nameInput) {
     const userName = nameInput;
     const minNum = Math.min(this.width, this.height);
@@ -74,8 +75,10 @@ export class AvatarComponent implements OnChanges, OnInit {
     } else {
       this.isNobody = true;
     }
-    this.fontSize = minNum / 4 + 3;
+    const size = minNum / 4 + 3;
+    this.fontSize = size < this.MINIMUM_FONT_SIZE ? this.MINIMUM_FONT_SIZE : size;
   }
+
   setDisplayName(name, width) {
     if (this.customText) {
       this.nameDisplay = this.customText;
@@ -109,6 +112,7 @@ export class AvatarComponent implements OnChanges, OnInit {
     }
     this.getBackgroundColor(name.substr(0, 1));
   }
+
   getBackgroundColor(char) {
     if (this.gender) {
       if (this.gender.toLowerCase() === 'male') {

@@ -12,6 +12,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
   &.devui-table-shadow {
     border-radius: $devui-border-radius-card;
     box-shadow: $devui-shadow-length-base $devui-light-shadow;
+    background-color: $devui-base-bg;
 
     ::ng-deep table tbody tr:last-child td {
       border-bottom-color: transparent;
@@ -70,16 +71,16 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
           overflow: auto;
         }
 
-        scrollbar-color: transparent transparent;
-
         &::-webkit-scrollbar-thumb {
           background-color: transparent;
         }
 
         &:hover {
-          scrollbar-color: $devui-placeholder transparent;
-
           &::-webkit-scrollbar-thumb {
+            background-color: $devui-line;
+          }
+
+          &::-webkit-scrollbar-thumb:hover {
             background-color: $devui-placeholder;
           }
         }
@@ -109,16 +110,16 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
           overflow: auto;
         }
 
-        scrollbar-color: transparent transparent;
-
         &::-webkit-scrollbar-thumb {
           background-color: transparent;
         }
 
         &:hover {
-          scrollbar-color: $devui-placeholder transparent;
-
           &::-webkit-scrollbar-thumb {
+            background-color: $devui-line;
+          }
+
+          &::-webkit-scrollbar-thumb:hover {
             background-color: $devui-placeholder;
           }
         }
@@ -176,10 +177,6 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
     & .cdk-virtual-scroll-content-wrapper {
       padding-top: $half-sort-icon-size;
     }
-  }
-
-  .devui-scrollbar {
-    scrollbar-width: thin;
   }
 }
 
@@ -635,18 +632,40 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
   }
 }
 
-.devui-table.header-bg ::ng-deep {
+:host ::ng-deep .devui-table.header-bg {
   thead {
     tr {
       background-color: $devui-list-item-strip-bg;
+    }
+  }
+}
 
-      .devui-first-sticky-right-cell {
-        background: linear-gradient(to right, transparent, $devui-table-column-shadow-color 10px, $devui-list-item-strip-bg 10px);
+:host ::ng-deep .devui-table-scroll-middle:not(.d-table-on-resize),
+:host ::ng-deep .devui-table-scroll-right:not(.d-table-on-resize) {
+  .devui-table.header-bg {
+    thead {
+      tr {
+        background-color: $devui-list-item-strip-bg;
+
+        .devui-last-sticky-left-cell {
+          background: linear-gradient(to left, transparent, $devui-table-column-shadow-color 10px, $devui-list-item-strip-bg 10px);
+          border-right-color: transparent;
+        }
       }
+    }
+  }
+}
 
-      .devui-last-sticky-left-cell {
-        background: linear-gradient(to left, transparent, $devui-table-column-shadow-color 10px $devui-list-item-strip-bg 10px);
-        border-right-color: transparent;
+:host ::ng-deep .devui-table-scroll-middle:not(.d-table-on-resize),
+:host ::ng-deep .devui-table-scroll-left:not(.d-table-on-resize) {
+  .devui-table.header-bg {
+    thead {
+      tr {
+        background-color: $devui-list-item-strip-bg;
+
+        .devui-first-sticky-right-cell {
+          background: linear-gradient(to right, transparent, $devui-table-column-shadow-color 10px, $devui-list-item-strip-bg 10px);
+        }
       }
     }
   }
@@ -680,14 +699,18 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 .devui-table.table-hover ::ng-deep {
   tbody > tr:not(.table-row-selected):not(.expand-row):not(.child-table):hover {
     background: $devui-list-item-hover-bg;
+  }
+}
 
+.devui-table-scroll-middle:not(.d-table-on-resize) .devui-table.table-hover ::ng-deep {
+  tbody > tr:not(.table-row-selected):not(.expand-row):not(.child-table):hover {
     .devui-first-sticky-right-cell {
       background: linear-gradient(to right, transparent, $devui-table-column-shadow-color 10px, $devui-list-item-hover-bg 10px);
     }
 
     .devui-last-sticky-left-cell {
       background: linear-gradient(to left, transparent, $devui-table-column-shadow-color 10px, $devui-list-item-hover-bg 10px);
-      border-right-color: transparent;
+      border-right-color: transparent !important;
     }
   }
 }
@@ -753,42 +776,42 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 :host ::ng-deep table {
   &.table-fix-header thead tr {
     th:first-child {
-      border-top-left-radius: $devui-border-radius;
+      border-top-left-radius: $devui-border-radius-card;
     }
 
     th:last-child {
-      border-top-right-radius: $devui-border-radius;
+      border-top-right-radius: $devui-border-radius-card;
     }
   }
 
   thead tr {
     th:first-child {
-      border-top-left-radius: $devui-border-radius;
+      border-top-left-radius: $devui-border-radius-card;
     }
 
     th:last-child {
-      border-top-right-radius: $devui-border-radius;
+      border-top-right-radius: $devui-border-radius-card;
     }
   }
 
   tbody tr:last-child {
     td:first-child {
-      border-bottom-left-radius: $devui-border-radius;
+      border-bottom-left-radius: $devui-border-radius-card;
     }
 
     td:last-child {
-      border-bottom-right-radius: $devui-border-radius;
+      border-bottom-right-radius: $devui-border-radius-card;
     }
   }
 }
 
-:host ::ng-deep .devui-talbe-scorll-middle,
-:host ::ng-deep .devui-talbe-scorll-right {
+:host ::ng-deep .devui-table-scroll-middle:not(.d-table-on-resize),
+:host ::ng-deep .devui-table-scroll-right:not(.d-table-on-resize) {
   tr,
   th {
     .devui-last-sticky-left-cell {
       background: linear-gradient(to left, transparent, $devui-table-column-shadow-color 10px, $devui-base-bg 10px);
-      border-right-color: transparent;
+      border-right-color: transparent !important;
     }
   }
 
@@ -799,8 +822,8 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
   }
 }
 
-:host ::ng-deep .devui-talbe-scorll-middle,
-:host ::ng-deep .devui-talbe-scorll-left {
+:host ::ng-deep .devui-table-scroll-middle:not(.d-table-on-resize),
+:host ::ng-deep .devui-table-scroll-left:not(.d-table-on-resize) {
   tr,
   th {
     .devui-first-sticky-right-cell {

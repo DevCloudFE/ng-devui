@@ -1,7 +1,7 @@
 <div style="width: 50%">
   <h4>Basic Usage</h4>
   <d-single-upload
-    #singleupload
+    #singleUpload
     [fileOptions]="fileOptions"
     [uploadedFiles]="uploadedFiles"
     [uploadOptions]="uploadOptions"
@@ -13,9 +13,9 @@
     (errorEvent)="onError($event)"
   >
   </d-single-upload>
-  <h4>Dragdrop</h4>
+  <h4>Drag Drop</h4>
   <d-single-upload
-    #singleuploadDrag
+    #singleUploadDrag
     [enableDrop]="true"
     [fileOptions]="fileOptions2"
     [uploadedFiles]="uploadedFiles"
@@ -34,9 +34,9 @@
   <div [style.margin-top.px]="8">
     <d-button (btnClick)="customUploadEvent()">Upload</d-button>
   </div>
-  <h4>ngModel</h4>
+  <h4>NgModel</h4>
   <d-single-upload
-    #singleupload
+    #singleUpload
     [fileOptions]="fileOptions"
     [uploadedFiles]="uploadedFiles"
     [uploadOptions]="uploadOptions"
@@ -57,7 +57,7 @@
   </div>
   <h4>Disabled</h4>
   <d-single-upload
-    #singleupload
+    #singleUpload
     [fileOptions]="fileOptions"
     [uploadedFiles]="uploadedFiles"
     [uploadOptions]="uploadOptions"

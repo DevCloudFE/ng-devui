@@ -17,7 +17,7 @@
   [ganttScaleContainerOffsetLeft]="ganttScaleContainerOffsetLeft"
   [ganttBarContainerElement]="ganttBarContainerElement"
 >
-  <div class="devui-scale-start" [ngClass]="{ milestone: data.milestone }">
+  <div class="devui-scale-start" [ngClass]="{ milestone: data.milestone }" [title]="data.milestone || ''">
     <ng-container *ngIf="data.milestone && unit === 'day'">
       {{ data.milestone }}
     </ng-container>

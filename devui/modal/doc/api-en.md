@@ -86,7 +86,7 @@ openStandardDialog(dialogtype?: string) {
 | beforeHidden | `Function\|Promise\|Observable` | -- | Optional. It can prevent dialog boxes from closing. | [Blocking dialog box closed](demo#intercept-dialog-closed) |
 | dialogtype | `string` | 'standard' | Optional. The options are <br />`'standard' \| 'success' \| 'failed' \| 'warning' \| 'info'`. | [Standard Dialog Box](demo#message-hint) |
 | draggable | `boolean` | true | Optional. Whether the pop-up box can be dragged. |
-| placement | `enum('center'\|'top'\|'bottom')` | 'center' | Optional. This parameter is optional and specifies the position where the dialog box is displayed. |
+| placement | `enum('center'\|'top'\|'bottom'\|'unset')` | 'center' | Optional. This parameter is optional and specifies the position where the dialog box is displayed. |
 | offsetX | `string` | '0px' | Optional. Horizontal offset of the pop-up box. |
 | offsetY | `string` | '0px' | Optional. Vertical offset of the pop-up box. |
 | bodyScrollable | `boolean` | true |Optional. Specifies whether the body can scroll after dialog is enabled. The default value is false. The scroll bar is hidden. Hiding the scroll bar may cause jitter. You can set the outer fixed to avoid scrolling and jitter. |[The outer layer is fixed to solve the jitter and scrolling problem](demo#template-fixed) |

@@ -75,7 +75,7 @@
             class="devui-dropdown-menu devui-dropdown-menu-fix devui-scrollbar devui-category-dropdown-menu-{{ id }}"
             [ngClass]="{ 'max-height': currentSelectTag?.type !== 'treeSelect' }"
           >
-            <ul *ngIf="!currentSelectTag" class="devui-dropdown-menu-template">
+            <ul *ngIf="!currentSelectTag" class="devui-dropdown-menu-template devui-scrollbar">
               <ng-container *ngIf="!enterSearch && !currentSelectTag">
                 <ng-container *ngFor="let item of categoryDisplay">
                   <li *ngIf="item.groupLength" class="devui-dropdown-item devui-category-search-group">
@@ -120,7 +120,7 @@
                   <div class="devui-dropdown-menu-tip" [style.paddingBottom]="currentSearchCategory.length ? '0' : '12px'">
                     {{ showSearchConfig.categoryDescription }}
                   </div>
-                  <ul class="devui-category-search-keyword-in-category devui-dropdown-menu-template">
+                  <ul class="devui-category-search-keyword-in-category devui-dropdown-menu-template devui-scrollbar">
                     <li
                       *ngFor="let item of currentSearchCategory"
                       (click)="showCurrentSearchCategory(item, inputDropdown)"
@@ -333,6 +333,7 @@
     [showTime]="tagOption.showTime"
     [activeRangeType]="tagOption.activeRangeType || 'start'"
     [(ngModel)]="tagOption.value.value"
+    (input)="dateChange(datepickerCalendarItem, tagOption)"
   >
     <ng-template #footerTemplate>
       <div class="devui-datepicker-footer">
@@ -356,7 +357,7 @@
   <div *ngIf="!tagOption.options?.length">
     <ng-container *ngTemplateOutlet="noData"></ng-container>
   </div>
-  <div *ngIf="tagOption.options?.length" class="devui-dropdown-menu-template">
+  <div *ngIf="tagOption.options?.length" class="devui-dropdown-menu-template devui-scrollbar">
     <d-checkbox-group
       [(ngModel)]="tagOption.value.value"
       [options]="tagOption.options"
@@ -375,7 +376,7 @@
   <div *ngIf="!tagOption.options?.length">
     <ng-container *ngTemplateOutlet="noData"></ng-container>
   </div>
-  <div *ngIf="tagOption.options?.length" class="devui-dropdown-menu-template">
+  <div *ngIf="tagOption.options?.length" class="devui-dropdown-menu-template devui-scrollbar">
     <d-checkbox-group
       [(ngModel)]="tagOption.value.value"
       [options]="tagOption.options"

@@ -5,7 +5,7 @@ import {
   ConnectedPosition,
   ScrollStrategy,
   ScrollStrategyOptions,
-  VerticalConnectionPos
+  VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
@@ -17,7 +17,6 @@ import {
   ContentChild,
   ElementRef,
   EventEmitter,
-  forwardRef,
   HostBinding,
   HostListener,
   Inject,
@@ -30,24 +29,25 @@ import {
   Renderer2,
   SimpleChanges,
   TemplateRef,
-  ViewChild
+  ViewChild,
+  forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import {
-  addClassToOrigin,
   AppendToBodyDirection,
   AppendToBodyDirectionsConfig,
   AppendToBodyScrollStrategyType,
   DevConfigService,
+  WithConfig,
+  addClassToOrigin,
   fadeInOut,
   formWithDropDown,
   removeClassFromOrigin,
-  WithConfig
 } from 'ng-devui/utils';
 import { WindowRef } from 'ng-devui/window-ref';
 import { differenceBy, isEqual } from 'lodash-es';
-import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, fromEvent, of } from 'rxjs';
 import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -325,6 +325,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     lg: 50,
     space: 4,
   };
+  // 容器边距，虚拟滚动设置高度需考虑上下边距
+  CONTAINER_MARGINS = 12;
   ANIMATION_DELAY = 300;
 
   get showSelectAll() {
@@ -449,7 +451,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       }
       const scrollHeight = parseInt(this.scrollHight, 10);
       this.scrollHeightNum = height > scrollHeight ? scrollHeight : height;
-      return `${this.scrollHeightNum}px`;
+      return `${this.scrollHeightNum + this.CONTAINER_MARGINS * 2}px`;
     }
   }
 

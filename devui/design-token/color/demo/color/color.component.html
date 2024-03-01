@@ -9,7 +9,7 @@
   <div class="color-block block-6"></div>
   <div class="color-block block-7"></div>
 
-  <div *ngFor="let table of dataSource | keyvalue: preserveOrder">
+  <div *ngFor="let table of dataSource | keyvalue : preserveOrder">
     <div class="devui-table-catalog">
       {{ 'components.design-color.colorDemo.instance.catalogs.' + table.key | translate }}
     </div>
@@ -37,7 +37,7 @@
       </tbody>
     </d-data-table>
   </div>
-  <div style="margin-top: 8px">
+  <div *ngIf="showFormColor" style="margin-top: 8px">
     <span class="devui-table-catalog">{{ 'components.design-color.colorDemo.instance.formColor' | translate }}</span>
     <div class="swatches">
       <div *ngFor="let col of colorTypeList; let index = index" class="formColor">
