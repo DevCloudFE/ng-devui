@@ -960,7 +960,7 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
       } else {
         this.setScrollViewClass('left');
       }
-    } else if (scrollLeft + target.clientWidth === target.scrollWidth) {
+    } else if (Math.abs(scrollLeft + target.clientWidth - target.scrollWidth) < 1) {
       this.setScrollViewClass('right');
     } else {
       this.setScrollViewClass('middle');
@@ -975,12 +975,12 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
   private setScrollViewClass(position: string) {
     const element = this.tableViewRefElement.nativeElement;
-    const className = 'devui-talbe-scorll-' + position;
+    const className = 'devui-table-scroll-' + position;
     const elClassList = element.classList;
     if (!elClassList.contains(className)) {
       for (let index = 0; index < elClassList.length; index++) {
         const clName = elClassList[index];
-        if (clName.startsWith('devui-talbe-scorll-')) {
+        if (clName.startsWith('devui-table-scroll-')) {
           this.renderer.removeClass(element, clName);
         }
       }

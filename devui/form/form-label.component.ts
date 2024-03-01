@@ -3,7 +3,7 @@ import {
   Component,
   ElementRef,
   HostBinding,
-  Input, Renderer2
+  Input, Renderer2, TemplateRef
 } from '@angular/core';
 import { DFormControlStatus } from './validator-directive/validate.type';
 
@@ -17,6 +17,7 @@ export class FormLabelComponent {
   @Input() required = false;
   @Input() hasHelp = false;
   @Input() helpTips = '';
+  @Input() customHelpTipTemplate: TemplateRef<any>;
 
   feedbackStatus: DFormControlStatus | null = null;
 

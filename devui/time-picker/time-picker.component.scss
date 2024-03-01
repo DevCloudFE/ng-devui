@@ -28,7 +28,6 @@
     overflow-x: hidden;
     scrollbar-gutter: stable;
     padding-left: $devui-scrollbar-width-sm;
-    scrollbar-width: thin;
 
     &::-webkit-scrollbar {
       width: $devui-scrollbar-width-sm;
@@ -36,7 +35,6 @@
 
     &:hover {
       overflow-y: scroll;
-      overflow-y: overlay;
     }
 
     &:not(:last-child) {

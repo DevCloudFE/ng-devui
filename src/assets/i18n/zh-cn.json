@@ -594,10 +594,6 @@
         "title": "checkbox 渲染",
         "description": "支持checkbox渲染。"
       },
-      "latexDemo": {
-        "title": "数学公式渲染",
-        "description": "支持Latex格式渲染"
-      },
       "tocDemo": {
         "title": "TOC 渲染",
         "description": "支持生成TOC目录"
@@ -628,7 +624,6 @@
         "single-render-md": "单独渲染md文本",
         "mermaid-render": "Mermaid渲染",
         "checked-render": "checkbox渲染",
-        "latex-render": "数学公式渲染",
         "toc-render": "TOC渲染",
         "uml-render": "UML渲染",
         "big-data-process": "大数据量场景处理"
@@ -1226,15 +1221,18 @@
       "helperDownloadDemo": {
         "title": "下载文件"
       },
+      "shapeIconHoverableDemo": {
+        "title": "shapeIcon 悬停变色"
+      },
       "anchorLinkValues": {
         "lazy-load": "懒加载指令",
-        "safe-null-pipe": "空值占位管道",
         "browser-version": "当前浏览器名和版本",
         "date-pipe": "日期解析器",
         "open-url": "新标签页打开网页",
         "download-file": "文件下载",
         "iframe-propagate": "iframe 冒泡事件",
-        "clipboard": "复制到剪贴板指令"
+        "clipboard": "复制到剪贴板指令",
+        "shapeIconHoverable": "shapeIcon 悬停变色"
       }
     },
     "color-picker": {
@@ -2264,7 +2262,7 @@
       },
       "validateReactiveDemo": {
         "title": "响应式表单验证",
-        "description": "模板中绑定<code>formGroup、formControlName、formControl</code>，使用<code>dValidateRules</code>配置校验规则。<p>推荐阅读<a href=\"https://angular.cn/guide/reactive-forms\" target=\"_blank\">【Angular响应式表单】</a></p>"
+        "description": "模板中绑定<code>formGroup、formControlName、formControl</code>，使用<code>dValidateRules</code>配置校验规则。<p>推荐阅读<a class='devui-link' href=\"https://angular.cn/guide/reactive-forms\" target=\"_blank\">【Angular响应式表单】</a></p>"
       },
       "customStatusDemo": {
         "title": "指定表单Feedback状态",

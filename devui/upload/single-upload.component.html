@@ -9,9 +9,10 @@
   style="display: flex"
 >
   <div
-    [class.disabled]="this.disabled || dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploading"
-    (click)="onClick($event)"
     class="devui-input-group"
+    [class.disabled]="this.disabled || dSingleUploadView.fileUploaders[0]?.status === UploadStatus.uploading"
+    [class.with-button]="!withoutBtn"
+    (click)="onClick($event)"
   >
     <div class="devui-form-control devui-files-list">
       <div *ngIf="!filename" class="devui-file-item devui-upload-placeholder">

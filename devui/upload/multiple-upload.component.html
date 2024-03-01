@@ -7,7 +7,7 @@
   [ngStyle]="{ border: isDropOVer ? '1px solid #15bf15' : '0' }"
   style="display: flex"
 >
-  <div class="devui-input-group" [class.disabled]="disabled" (click)="onClick($event)">
+  <div class="devui-input-group" [class.disabled]="disabled" [class.with-button]="!withoutBtn" (click)="onClick($event)">
     <div *ngIf="dMultipleUploadView.fileUploaders.length === 0" class="devui-form-control devui-upload-placeholder">
       {{ placeholderText ? placeholderText : i18nText?.chooseFile }}
     </div>

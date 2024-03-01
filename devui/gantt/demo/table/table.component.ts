@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } fr
 import { ColumnAdjustStrategy, ColumnResizeEventArg } from 'ng-devui/data-table';
 import { GanttMilestone, GanttScaleUnit, GanttService, GanttTaskInfo } from 'ng-devui/gantt';
 import { Subscription } from 'rxjs';
-import { curYear, SourceType, treeDataSource } from '../mock-data';
+import { SourceType, curYear, treeDataSource } from '../mock-data';
 
 const DEFAULT_WIDTH_CONFIG = [
   {
@@ -73,7 +73,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.ganttScaleWidth = this.ganttService.getDurationWidth(this.ganttStartDate, this.ganttEndDate) + 'px';
     this.tableWidthConfig[3].width = this.ganttScaleWidth;
     const milestone: GanttMilestone = {
-      date: new Date(2020, 1, 8),
+      date: new Date(curYear, 4, 10),
       lable: 'V1.2',
     };
     this.milestoneList = [];

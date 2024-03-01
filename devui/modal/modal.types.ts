@@ -16,7 +16,7 @@ export interface IModalOptions {
   injector?: Injector;
   onClose?: Function;
   beforeHidden?: () => boolean | Promise<boolean> | Observable<boolean>;
-  placement?: 'center' | 'top' | 'bottom';
+  placement?: 'center' | 'top' | 'bottom' | 'unset';
   offsetX?: string;
   offsetY?: string;
   bodyScrollable?: boolean;
@@ -56,7 +56,7 @@ export interface IDialogOptions {
   draggable?: boolean;
   showMaximizeBtn?: boolean;
   showCloseBtn?: boolean;
-  placement?: 'center' | 'top' | 'bottom';
+  placement?: 'center' | 'top' | 'bottom' | 'unset';
   offsetX?: string;
   offsetY?: string;
   bodyScrollable?: boolean;

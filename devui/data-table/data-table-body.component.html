@@ -97,7 +97,7 @@
     <td [attr.colspan]="childTdColspan">
       <table
         class="devui-table {{ type ? 'table-' + type : '' }} {{ rowHoveredHighlight ? 'table-hover' : '' }}"
-        [style.table-layout]="'fixed'"
+        style="table-layout: fixed; width: calc(100% + 2px); max-width: calc(100% + 2px); margin-left: -1px"
       >
         <colgroup>
           <col [style.width]="config.width" *ngFor="let config of tableWidthConfig" />

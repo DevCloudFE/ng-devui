@@ -13,7 +13,6 @@
     overflow: auto;
     text-align: center;
     font-size: 12px;
-    scrollbar-width: none;
 
     &::-webkit-scrollbar {
       width: 0 !important;
@@ -44,7 +43,6 @@
     width: 180px;
     height: 295px;
     font-size: 12px;
-    scrollbar-width: none;
 
     &::-webkit-scrollbar {
       width: 0 !important;

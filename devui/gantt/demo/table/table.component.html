@@ -18,7 +18,7 @@
     <d-data-table
       #datatable
       [borderType]="'borderless'"
-      [cssClass]="'devui-talbe-scorll-middle'"
+      [cssClass]="'devui-table-scroll-middle'"
       [fixHeader]="true"
       [dataSource]="basicDataSource"
       [scrollable]="true"
@@ -250,8 +250,8 @@
     <div class="content">
       <div>Duration: {{ ganttInstance?.duration }}</div>
       <div>ProgressRate: {{ (ganttInstance?.progressRate || 0) + '%' }}</div>
-      <div>startDate: {{ ganttInstance?.startDate | i18nDate: 'short' }}</div>
-      <div>endDate: {{ ganttInstance?.endDate | i18nDate: 'short' }}</div>
+      <div>startDate: {{ ganttInstance?.startDate | i18nDate : 'short' }}</div>
+      <div>endDate: {{ ganttInstance?.endDate | i18nDate : 'short' }}</div>
     </div>
   </ng-template>
 

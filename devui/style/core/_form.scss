@@ -42,6 +42,7 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
   width: 100%;
   height: 28px;
   font-size: $devui-font-size;
+  text-overflow: ellipsis;
 
   &.devui-textinput-sm {
     font-size: $devui-font-size-sm;
@@ -56,6 +57,9 @@ $border-change-function: $devui-animation-ease-in-out-smooth;
 
 [dTextArea] {
   width: 100%;
+  max-width: 100%;
+  min-width: 36px;
+  min-height: 28px;
 }
 
 d-search.devui-glow-style .devui-input,
@@ -160,6 +164,27 @@ d-multiple-upload.devui-glow-style .devui-input-group,
 .devui-form-controls textarea,
 [dTextarea] {
   width: 100%;
+
+  + .devui-textarea-counter {
+    float: left;
+    display: block;
+    position: relative;
+    pointer-events: none;
+    overflow: visible;
+    color: $devui-aide-text;
+    font-size: $devui-font-size-sm;
+    width: 0 !important;
+
+    & > i {
+      display: block;
+      font-style: normal;
+      white-space: nowrap;
+      text-align: right;
+      position: relative;
+      right: 10px;
+      bottom: 7px;
+    }
+  }
 }
 
 // input 样式

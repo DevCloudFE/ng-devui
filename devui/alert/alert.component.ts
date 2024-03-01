@@ -12,7 +12,7 @@ import {
   Renderer2,
   SimpleChanges,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { AlertCarouselItemComponent } from './alert-carousel-item.component';
 import { AlertType } from './alert.types';
@@ -41,11 +41,13 @@ export class AlertComponent implements OnChanges, OnDestroy, AfterViewInit {
   @ViewChild('carouselContainer') box: ElementRef<any>;
   @ContentChildren(AlertCarouselItemComponent) carouselItems: QueryList<AlertCarouselItemComponent>;
   hide = false;
+  autoplayHeight: string;
   carouselNum: number;
   currentIndex = 1;
   scheduledId: any;
+  SINGLE_LINE_HEIGHT = '24px';
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnChanges(changes: SimpleChanges) {
     const { autoplay, autoplaySpeed, transitionSpeed } = changes;
@@ -70,7 +72,16 @@ export class AlertComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   renderCarouselItem() {
     this.carouselNum = this.carouselItems.length;
-    if (this.carouselNum) {
+    if (this.carouselNum > 1) {
+      if (!this.autoplayHeight) {
+        const itemHeights = this.carouselItems.map((item) => {
+          const rect = item?.el.nativeElement.getBoundingClientRect();
+          return rect?.height || 0;
+        });
+        const maxHeight = Math.max(...itemHeights);
+        this.autoplayHeight = maxHeight ? `${maxHeight}px` : this.SINGLE_LINE_HEIGHT;
+      }
+      this.el.nativeElement.style.setProperty('--devui-alert-carousel-item-height', this.autoplayHeight);
       this.renderer.setStyle(this.box.nativeElement, 'transition', `top ${this.transitionSpeed}ms ease`);
       this.autoScheduleTransition();
     }
@@ -105,6 +116,7 @@ export class AlertComponent implements OnChanges, OnDestroy, AfterViewInit {
   }
 
   close = (): void => {
+    this.clearScheduledTransition();
     this.closeEvent.emit(this);
     this.hide = true;
   };

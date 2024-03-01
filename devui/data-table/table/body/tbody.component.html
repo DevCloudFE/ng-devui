@@ -25,7 +25,7 @@
   ></ng-template>
   <tr class="child-table" *ngIf="rowItem['children'] && rowItem['$isChildTableOpen']" [style.height]="minHeight ? '40px' : null">
     <td [attr.colspan]="tableWidthConfig.length">
-      <table class="devui-table" [style.table-layout]="'fixed'">
+      <table class="devui-table" style="table-layout: fixed; width: calc(100% + 2px); max-width: calc(100% + 2px); margin-left: -1px">
         <colgroup>
           <col [style.width]="config.width" *ngFor="let config of tableWidthConfig" />
         </colgroup>

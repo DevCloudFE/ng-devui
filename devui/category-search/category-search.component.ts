@@ -16,7 +16,7 @@ import {
   SimpleChanges,
   TemplateRef,
   ViewChild,
-  ViewChildren
+  ViewChildren,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DatepickerProCalendarComponent } from 'ng-devui/datepicker-pro';
@@ -26,8 +26,8 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ITreeItem, OperableTreeComponent } from 'ng-devui/tree';
 import { DefaultIcons } from 'ng-devui/tree-select';
 import { DateConverter, DefaultDateConverter, DevConfigService, WithConfig } from 'ng-devui/utils';
-import { cloneDeep, isEqual, merge, mergeWith } from 'lodash-es';
-import { fromEvent, Observable, Subject } from 'rxjs';
+import { cloneDeep, intersectionBy, isEqual, merge, mergeWith } from 'lodash-es';
+import { Observable, Subject, fromEvent } from 'rxjs';
 import { debounceTime, takeUntil, tap } from 'rxjs/operators';
 import {
   COLORS,
@@ -38,7 +38,7 @@ import {
   SearchConfig,
   SearchEvent,
   SelectedTagsEvent,
-  TextConfig
+  TextConfig,
 } from './category-search.type';
 import { ContentTemplateDirective } from './content-template.directive';
 import { DefaultTemplateDirective } from './default-template.directive';
@@ -152,7 +152,6 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     return this.operationConfig.show ?? Boolean(this.selectedTags.length || this.searchKey);
   }
 
-  private categoryCache: ICategorySearchTagItem[];
   private categoryOrder = [];
   private categoryDictionary = {};
 
@@ -186,12 +185,16 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       this.searchKeyCache = this.searchKey;
       this.setSearchKeyTag(false);
     }
-    if (category) {
-      // 通过 categoryCache 保存初始数据状态并重置 category，避免 category 被操作污染后覆盖 selectedTags
-      this.categoryCache = cloneDeep(category.currentValue);
+    if (selectedTags?.previousValue?.length) {
+      const result = intersectionBy([selectedTags.previousValue], selectedTags.currentValue, 'field');
+      result.forEach((selectedTag: any) => {
+        const item = this.category.find((categoryItem) => categoryItem.field === selectedTag.field);
+        if (item?.value.value) {
+          this.resetValue(item);
+        }
+      });
     }
     if (defaultSearchField || category || selectedTags) {
-      this.category = cloneDeep(this.categoryCache);
       this.init();
     }
     if (showSearchCategory) {
@@ -739,8 +742,13 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
 
   clearFilter(event: MouseEvent) {
     if (this.selectedTags.length) {
-      this.selectedTags.forEach((item) => this.resetValue(item));
-      this.selectedTags = [];
+      this.selectedTags = this.selectedTags.filter((item) => {
+        if (item.deletable === false) {
+          return item;
+        }
+        this.resetValue(item);
+        return undefined;
+      });
     }
     if (this.searchKey || this.searchKeyCache) {
       this.searchKey = '';
@@ -749,7 +757,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     if (this.currentSelectTag) {
       this.currentSelectTag = undefined;
     }
-    this.selectedTagsChange.emit({ selectedTags: [], currentChangeTag: undefined, operation: 'clear' });
+    this.selectedTagsChange.emit({ selectedTags: this.selectedTags, currentChangeTag: undefined, operation: 'clear' });
     this.clearAllEvent.emit(event);
     this.initCategoryDisplay();
   }
@@ -808,6 +816,26 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     tag.value[key] = chooseItem[key];
     tag.title = this.setTitle(tag, 'radio');
     this.updateSelectedTags(tag);
+  }
+
+  // date 改变输入值相应变化
+  dateChange(datepicker: DatepickerProCalendarComponent, tag: ICategorySearchTagItem) {
+    const index = datepicker.currentActiveInput === 'start' ? 0 : 1;
+    const dateFormat = tag.showTime ? 'y/MM/dd HH:mm:ss' : 'y/MM/dd';
+    const targetDate = datepicker.dateValue[index];
+    const inputDate = datepicker.datepickerConvert.parse(targetDate);
+    const valueFormat = inputDate && !isNaN(inputDate.getTime()) && datepicker.datepickerConvert.format(inputDate, dateFormat);
+    if (targetDate === valueFormat) {
+      tag.value.value[index] = inputDate;
+      if (tag.showTime) {
+        datepicker.pickerSrv.updateTimeChange.next({
+          activeInput: datepicker.currentActiveInput,
+          hour: inputDate.getHours(),
+          min: inputDate.getMinutes(),
+          seconds: inputDate.getSeconds(),
+        });
+      }
+    }
   }
 
   confirmDate(datepicker: DatepickerProCalendarComponent, tag: ICategorySearchTagItem, dropdown: DropDownDirective) {

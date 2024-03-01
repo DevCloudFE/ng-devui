@@ -12,7 +12,7 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { fadeInOut } from 'ng-devui/utils';
@@ -153,6 +153,8 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
     lg: 50,
     space: 4,
   };
+  // 容器边距，虚拟滚动设置高度需考虑上下边距
+  CONTAINER_MARGINS = 12;
 
   constructor(private changeDetectorRef: ChangeDetectorRef, private i18n: I18nService) {}
 
@@ -410,7 +412,7 @@ export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
       }
       const scrollHeight = parseInt(this.scrollHeight, 10);
       this.scrollHeightNum = height > scrollHeight ? scrollHeight : height;
-      return `${this.scrollHeightNum}px`;
+      return `${this.scrollHeightNum + this.CONTAINER_MARGINS * 2}px`;
     }
   }
 

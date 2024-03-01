@@ -45,34 +45,21 @@ export class ModalService {
     placement = 'center',
     offsetX,
     offsetY,
-    bodyScrollable = true,
+    bodyScrollable,
     contentTemplate,
     escapable = true,
     cssClass
   }: IModalOptions) {
     const finalComponentFactoryResolver = componentFactoryResolver || this.componentFactoryResolver;
-
     const modalRef = this.overlayContainerRef.createComponent(
       finalComponentFactoryResolver.resolveComponentFactory(ModalComponent),
       injector
     );
-    let showAnimateValue = true;
     const componentConfig = this.devConfigService.getConfigForComponent('modal') || {};
-    const configValue = componentConfig['showAnimation'];
-    const apiConfig = this.devConfigService.getConfigForApi('showAnimation');
-    if (configValue !== undefined) {
-      showAnimateValue = configValue;
-    } else if (apiConfig !== undefined) {
-      showAnimateValue = apiConfig;
-    }
-
-    if (showAnimation === undefined) {
-      if (showAnimate !== undefined) {
-        showAnimation = showAnimate;
-      } else {
-        showAnimation = showAnimateValue;
-      }
-    }
+    const showAnimationApiConfig = this.devConfigService.getConfigForApi('showAnimation');
+    const bodyScrollableApiConfig = this.devConfigService.getConfigForApi('bodyScrollable');
+    showAnimation = showAnimation ?? showAnimate ?? componentConfig.showAnimation ?? showAnimationApiConfig;
+    bodyScrollable = bodyScrollable ?? componentConfig.bodyScrollable ?? bodyScrollableApiConfig ?? true;
 
     assign(modalRef.instance, {
       id,

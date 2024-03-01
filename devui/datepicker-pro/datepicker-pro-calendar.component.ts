@@ -60,12 +60,12 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
     } else if (this.mode === 'month') {
       return 'y-MM';
     } else {
-      return  this.showTime ? 'y/MM/dd HH:mm:ss' :  'y/MM/dd';
+      return this.showTime ? 'y/MM/dd HH:mm:ss' : 'y/MM/dd';
     }
   }
 
   constructor(
-    private pickerSrv: DatepickerProService,
+    public pickerSrv: DatepickerProService,
     private i18n: I18nService
   ) {
     this.i18nText = this.i18n.getI18nText().datePickerPro;

@@ -9,7 +9,6 @@
   .devui-year-list {
     width: 184px;
     height: 186px;
-    scrollbar-width: none;
 
     &::-webkit-scrollbar {
       width: 0;
@@ -17,7 +16,6 @@
 
     &:hover {
       overflow-y: overlay;
-      scrollbar-width: thin;
 
       &::-webkit-scrollbar {
         width: 4px;

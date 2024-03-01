@@ -219,3 +219,7 @@ svg.svg-icon-dot > path {
     cursor: pointer;
   }
 }
+
+.with-button {
+  max-width: calc(100% - 72px);
+}

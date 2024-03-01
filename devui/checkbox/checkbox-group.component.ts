@@ -1,17 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  forwardRef,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
-  TemplateRef
-} from '@angular/core';
-import {
-  ControlValueAccessor,
-  NG_VALUE_ACCESSOR
-} from '@angular/forms';
+import { Component, EventEmitter, forwardRef, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { isArray } from 'lodash-es';
 import { Observable } from 'rxjs';
@@ -20,11 +8,13 @@ import { Observable } from 'rxjs';
   selector: 'd-checkbox-group',
   templateUrl: './checkbox-group.component.html',
   styleUrls: ['./checkbox-group.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => CheckBoxGroupComponent),
-    multi: true
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CheckBoxGroupComponent),
+      multi: true,
+    },
+  ],
   preserveWhitespaces: false,
 })
 export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
@@ -46,10 +36,7 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   options_display = [];
   private onChange = (_: any) => null;
   private onTouch = () => null;
-  constructor(
-    private devConfigService: DevConfigService
-  ) {
-  }
+  constructor(private devConfigService: DevConfigService) {}
   ngOnChanges(changes: SimpleChanges) {
     if (changes['options']) {
       this.values = this.values ?? [];
@@ -61,22 +48,22 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
     this.options = this.options ?? [];
     this.options_display = [];
     const checkedArray = [];
-    this.values.forEach(item => {
+    this.values.forEach((item) => {
       if (this.filterKey && item[this.filterKey]) {
         checkedArray[item[this.filterKey]] = true;
       } else {
         checkedArray[item] = true;
       }
     });
-    this.options.forEach(item => {
+    this.options.forEach((item) => {
       const option = { isChecked: false };
       option['value'] = item;
       if (this.filterKey && item[this.filterKey]) {
-        if (checkedArray[item[this.filterKey]]) {
+        if (checkedArray[item[this.filterKey]] === true) {
           option['isChecked'] = true;
         }
       } else {
-        if (checkedArray[item]) {
+        if (checkedArray[item] === true) {
           option['isChecked'] = true;
         }
       }
@@ -107,7 +94,7 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
 
   getCheckedArray() {
     const checkedArray = [];
-    this.options_display.forEach(item => {
+    this.options_display.forEach((item) => {
       if (item.isChecked) {
         checkedArray.push(item.value);
       }

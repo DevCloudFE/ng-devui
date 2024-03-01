@@ -86,10 +86,6 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  isTemplate(content) {
-    return content instanceof TemplateRef ? content : null;
-  }
-
   severityDelay(item: Message) {
     switch (item.severity) {
     case 'warn':

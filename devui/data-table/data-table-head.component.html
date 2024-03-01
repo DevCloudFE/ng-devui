@@ -141,6 +141,7 @@
       [tableViewRefElement]="tableViewRefElement"
       [colDraggable]="colDraggable && colIndex > head?.colDropFreezeTo - 1"
       [childrenTableOpen]="childrenTableOpen"
+      class="{{ column.cellClass ? column.cellClass : '' }}"
       [ngClass]="{
         sindu_handle: colDraggable && colIndex > head?.colDropFreezeTo - 1,
         'drop-freeze': colDraggable && colIndex < head?.colDropFreezeTo

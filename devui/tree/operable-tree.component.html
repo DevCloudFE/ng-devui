@@ -168,7 +168,7 @@
           *ngIf="!nodeTemplate && !treeNode.data?.editable"
           (dblclick)="nodeDblClick($event, treeNode)"
           (contextmenu)="contextmenuEvent($event, treeNode)"
-          class="devui-tree-node__title"
+          class="devui-tree-node__title devui-tree-drag-handle"
           [class.select-disabled]="treeNode.data.disableSelect"
           title="{{ treeNode.data.title }}"
         >
@@ -409,10 +409,10 @@
           <ng-template [ngTemplateOutlet]="iconTemplate" [ngTemplateOutletContext]="{ node: treeNode.data, completeNode: treeNode }">
           </ng-template>
         </ng-container>
-        <span class="devui-tree-drag-handle" *ngIf="nodeTemplate">
+        <ng-container *ngIf="nodeTemplate">
           <ng-template [ngTemplateOutlet]="nodeTemplate" [ngTemplateOutletContext]="{ node: treeNode.data, completeNode: treeNode }">
           </ng-template>
-        </span>
+        </ng-container>
         <span
           *ngIf="!nodeTemplate && !treeNode.data?.editable"
           (dblclick)="nodeDblClick($event, treeNode)"

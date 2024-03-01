@@ -238,6 +238,10 @@ export class TableThComponent implements OnChanges, OnDestroy {
 
       this.tableElement = this.tableViewRefElement.nativeElement.querySelector('.devui-scrollbar table');
 
+      if (this.isLastFixedLeft || this.isFirstFixedRight) {
+        this.renderer2.addClass(this.tableViewRefElement.nativeElement, 'd-table-on-resize');
+      }
+
       this.initialOffset = this.initialOffset - this.tableElement.parentElement.scrollLeft;
       if (this.tableElement) {
         this.renderer2.appendChild(this.tableElement, resizeBar);
@@ -277,6 +281,8 @@ export class TableThComponent implements OnChanges, OnDestroy {
       this.renderer2.removeChild(this.element, this.resizeOverlay);
 
       this.renderer2.removeClass(this.tableViewRefElement.nativeElement, 'table-view-selector');
+
+      this.renderer2.removeClass(this.tableViewRefElement.nativeElement, 'd-table-on-resize');
 
       this.renderer2.removeClass(this.element, 'hover-bg');
       if (this.tableElement) {

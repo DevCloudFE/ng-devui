@@ -132,7 +132,7 @@ export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterV
   @Input() customNoDataTemplate: TemplateRef<any>;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() customSearchFn: (treeData: TreeNode[], keyword: string) => boolean | TreeNode[];
-  @Input() customViewDirection: 'bottom' | 'right' | 'left' = 'bottom';
+  @Input() customViewDirection: 'top' | 'bottom' | 'right' | 'left' = 'bottom';
   @ViewChild('selectHost', { static: true }) selectHost: ElementRef;
   @ViewChild('optionsContainer', { static: true }) optionsContainer: ElementRef;
   @ViewChild('tree', { static: true }) tree: OperableTreeComponent;

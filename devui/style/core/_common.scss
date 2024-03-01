@@ -130,3 +130,13 @@ a:hover {
   align-items: center;
   justify-content: center;
 }
+
+[dShapeIconHoverable] {
+  &.devui-shape-icon {
+    color: $devui-shape-icon-fill;
+  }
+
+  &.devui-shape-icon:hover {
+    color: $devui-shape-icon-fill-hover;
+  }
+}

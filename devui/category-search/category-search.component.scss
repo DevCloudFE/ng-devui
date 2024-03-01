@@ -278,6 +278,10 @@ d-tag {
     & > form {
       position: relative;
 
+      input {
+        padding-right: 28px;
+      }
+
       svg {
         position: absolute;
         right: 8px;

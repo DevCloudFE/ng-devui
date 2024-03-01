@@ -522,10 +522,6 @@
         "title": "checkbox rendering",
         "description": "Support checkbox rendering。"
       },
-      "latexDemo": {
-        "title": "Latex Rendering",
-        "description": "Mathematical Formula Rendering"
-      },
       "tocDemo": {
         "title": "TOC rendering",
         "description": "Generating the TOC directory"
@@ -556,7 +552,6 @@
         "single-render-md": "Render md text separately",
         "mermaid-render": "Mermaid-render",
         "checked-render": "checkbox-render",
-        "latex-render": "Latex-render",
         "toc-render": "TOC-render",
         "uml-render": "UML-render",
         "big-data-process": "Processing a large amount of data"
@@ -974,6 +969,9 @@
       "helperDownloadDemo": {
         "title": "Download File"
       },
+      "shapeIconHoverableDemo": {
+        "title": "shapeIcon Hover Color Change"
+      },
       "anchorLinkValues": {
         "lazy-load": "Lazyload Directive",
         "browser-version": "Current browser name and version",
@@ -981,7 +979,8 @@
         "open-url": "Open URL in A New Tag",
         "download-file": "Download File",
         "iframe-propagate": "iframe Event Propagate API",
-        "clipboard": "Copy to Clipboard Directive"
+        "clipboard": "Copy to Clipboard Directive",
+        "shapeIconHoverable": "shapeIcon Hover Color Change"
       }
     },
     "color-picker": {

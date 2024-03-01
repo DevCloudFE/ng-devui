@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'd-alert-carousel-item',
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   template: `<ng-content></ng-content>`,
   preserveWhitespaces: false,
 })
-export class AlertCarouselItemComponent {}
+export class AlertCarouselItemComponent {
+  constructor(public el: ElementRef) {}
+}

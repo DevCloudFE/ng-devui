@@ -140,3 +140,9 @@
 :focus {
   outline: none;
 }
+
+::ng-deep .devui-body-scrollblock-modal {
+  width: 100%;
+  position: fixed;
+  overflow-y: scroll;
+}

@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
   TemplateRef,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
@@ -31,7 +31,7 @@ export class MultipleUploadViewComponent extends UploadComponent implements OnDe
   @Input() uploadedFilesRef: TemplateRef<any>;
   @Input() filePath: string;
   @Output() deleteUploadedFileEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Input() setCustomUploadOptions: (files, uploadOptions) => IUploadOptions;
+  @Input() setCustomUploadOptions: (file, uploadOptions) => IUploadOptions;
   UploadStatus = UploadStatus;
   fileUploaders: Array<FileUploader> = [];
   i18nText: I18nInterface['upload'];

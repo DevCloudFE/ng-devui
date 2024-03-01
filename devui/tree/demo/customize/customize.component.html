@@ -8,14 +8,18 @@
     [iconTemplatePosition]="'after-checkbox'"
     [disableMouseEvent]="disableMouseEvent"
     [operatorAlign]="'end'"
+    [draggable]="true"
   >
     <ng-template #iconTemplate let-node="node">
       <span [ngClass]="{ 'my-icon': node?.data?.type }" class="{{ node?.data?.type }}"></span>
     </ng-template>
     <ng-template #nodeTemplate let-node="node" let-completeNode="completeNode">
-      <span *ngIf="!node?.editable" style="margin: 0 10px; cursor: pointer" (click)="activeNode(completeNode)">{{ node?.title }}</span>
-      <span class="devui-tree-node__edit" *ngIf="node?.editable">
-        <input [(ngModel)]="node.title" (blur)="onBlurEdit(node)" />
+      <!-- add class 'devui-tree-drag-handle' for drag scope -->
+      <span class="devui-tree-drag-handle">
+        <span *ngIf="!node?.editable" style="margin: 0 10px; cursor: pointer" (click)="activeNode(completeNode)">{{ node?.title }}</span>
+        <span class="devui-tree-node__edit" *ngIf="node?.editable">
+          <input [(ngModel)]="node.title" (blur)="onBlurEdit(node)" />
+        </span>
       </span>
     </ng-template>
     <ng-template #statusTemplate let-node="node">

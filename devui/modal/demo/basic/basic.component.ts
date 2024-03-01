@@ -29,6 +29,7 @@ export class BasicComponent {
       ...this.config,
       dialogtype: dialogtype,
       showAnimation: showAnimation,
+      placement: 'unset',
       buttons: [
         {
           cssClass: 'primary',

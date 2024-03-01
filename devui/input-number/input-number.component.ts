@@ -411,7 +411,7 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
         return;
       }
     } else {
-      this.setValue(this.value);
+      this.setValue(value.slice(0, value.length - 1));
       setTimeout(() => {
         event.target['setSelectionRange'](selectionStart, selectionStart);
       }, 0);

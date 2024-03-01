@@ -105,7 +105,15 @@
       ></path>
     </svg>
   </ng-template>
-  <d-icon class="modal-header-close" *ngIf="showCloseBtn" [icon]="closeTemplate" [operable]="true" (click)="close($event)"> </d-icon>
+  <d-icon
+    class="modal-header-close"
+    *ngIf="showCloseBtn"
+    [icon]="closeTemplate"
+    [operable]="true"
+    (mousedown)="$event.stopPropagation()"
+    (click)="close($event)"
+  >
+  </d-icon>
   <ng-template #closeTemplate>
     <svg
       width="16px"

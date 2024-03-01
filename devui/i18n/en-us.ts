@@ -55,8 +55,8 @@ export default {
       'Mar',
       'Apr',
       'May',
-      'June',
-      'July',
+      'Jun',
+      'Jul',
       'Aug',
       'Sep',
       'Oct',
@@ -125,7 +125,7 @@ export default {
     },
   },
   gantt: {
-    today: 'today',
+    today: 'Today',
     day: 'Day',
     week: 'Week',
     month: 'Month',
@@ -268,12 +268,20 @@ export default {
     yearsLater(num: number) {
       return num === 1 ? 'next year' : `${num} years later`;
     },
-    hoursAgo: ' hours ago',
-    minutesAgo: ' minutes ago',
+    hoursAgo(num: number) {
+      return num === 1 ? `1 hour ago` : `${num} hours ago`;
+    },
+    minutesAgo(num: number) {
+      return num === 1 ? `1 minute ago` : `${num} minutes ago`;
+    },
+    minutesLater(num: number) {
+      return num === 1 ? `1 minute later` : `${num} minutes later`;
+    },
+    hoursLater(num: number) {
+      return num === 1 ? `1 hours later` : `${num} hours later`;
+    },
     justnow: 'just now',
     later: 'later',
-    minutesLater: ' minutes later',
-    hoursLater: ' hours later',
   },
   tagsInput: {
     tagsReachMaxLength: 'The length of tags has reached maxTags',

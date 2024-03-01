@@ -13,7 +13,7 @@
     [ngClass]="{
       'place-at-top': placement === 'top',
       'place-at-bottom': placement === 'bottom',
-      'place-at-center': placement === 'center'
+      'place-at-center': placement === 'center' || placement === 'unset'
     }"
     [ngStyle]="{ width: width }"
     [@wipeInOutAnimation]="animateState"

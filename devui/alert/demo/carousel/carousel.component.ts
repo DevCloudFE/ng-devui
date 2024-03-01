@@ -15,7 +15,7 @@ export class CarouselComponent {
   data = [
     {
       id: 1,
-      content: 'info 1',
+      content: `info 1`,
     },
     {
       id: 2,

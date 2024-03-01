@@ -6,24 +6,25 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { IFileOptions, IUploadOptions } from './file-uploader.types';
 import { SingleUploadComponent } from './single-upload.component';
+import { SliceUploadService } from './slice-upload.service';
 import { UploadModule } from './upload.module';
 @Component({
   template: `
-   <d-single-upload
-    #singleupload
-    [fileOptions]="fileOptions"
-    [uploadedFiles]="uploadedFiles"
-    [uploadOptions]="uploadOptions"
-    [filePath]="'name'"
-    [beforeUpload]="beforeUpload"
-    [dynamicUploadOptionsFn]="dynamicUploadOptionsFn"
-    (successEvent)="onSuccess($event)"
-    (deleteUploadedFileEvent)="deleteUploadedFile($event)"
-    (errorEvent)="onError($event)"
-    [ngModel]="files"
-  >
-  </d-single-upload>
-  `
+    <d-single-upload
+      #singleupload
+      [fileOptions]="fileOptions"
+      [uploadedFiles]="uploadedFiles"
+      [uploadOptions]="uploadOptions"
+      [filePath]="'name'"
+      [beforeUpload]="beforeUpload"
+      [dynamicUploadOptionsFn]="dynamicUploadOptionsFn"
+      (successEvent)="onSuccess($event)"
+      (deleteUploadedFileEvent)="deleteUploadedFile($event)"
+      (errorEvent)="onError($event)"
+      [ngModel]="files"
+    >
+    </d-single-upload>
+  `,
 })
 class TestUploadComponent {
   @ViewChild('singleupload') singleupload: SingleUploadComponent;
@@ -32,7 +33,7 @@ class TestUploadComponent {
   };
   additionalParameter = {
     name: 'tom',
-    age: 11
+    age: 11,
   };
   uploadedFiles: Array<Object> = [];
   uploadOptions: IUploadOptions = {
@@ -43,9 +44,12 @@ class TestUploadComponent {
     method: 'POST',
     fileFieldName: 'dFile',
     withCredentials: true,
-    responseType: 'json'
+    responseType: 'json',
   };
   files = [];
+
+  constructor(public sliceUploadService: SliceUploadService) {}
+
   dynamicUploadOptionsFn(file, options) {
     let uploadOptions = options;
     if (file.type === 'application/pdf') {
@@ -57,7 +61,7 @@ class TestUploadComponent {
         method: 'POST',
         fileFieldName: 'dFile',
         withCredentials: true,
-        responseType: 'json'
+        responseType: 'json',
       };
     }
     return uploadOptions;
@@ -81,7 +85,7 @@ describe('upload', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [UploadModule, NoopAnimationsModule, FormsModule],
-      declarations: [TestUploadComponent]
+      declarations: [TestUploadComponent],
     });
   });
 
@@ -99,10 +103,10 @@ describe('upload', () => {
     });
 
     it('should upload file successfully', fakeAsync(() => {
-      const file = new File(['upload'], "upload.txt");
+      const file = new File(['upload'], 'upload.txt');
       component.singleupload.singleUploadViewComponent.addFile(file);
 
-      component.singleupload.singleUploadViewComponent.fileUploaders.forEach(FileUploader => {
+      component.singleupload.singleUploadViewComponent.fileUploaders.forEach((FileUploader) => {
         spyOn(FileUploader, 'send').and.callFake(() => {
           return Promise.resolve({ file: file, response: 'successful' });
         });
@@ -117,9 +121,9 @@ describe('upload', () => {
       expect(component.onSuccess).toHaveBeenCalled();
     }));
     it('should upload file filed', fakeAsync(() => {
-      const file = new File(['upload'], "upload.txt");
+      const file = new File(['upload'], 'upload.txt');
       component.singleupload.singleUploadViewComponent.addFile(file);
-      component.singleupload.singleUploadViewComponent.fileUploaders.forEach(FileUploader => {
+      component.singleupload.singleUploadViewComponent.fileUploaders.forEach((FileUploader) => {
         spyOn(FileUploader, 'send').and.callFake(() => {
           return Promise.reject({ file: file, response: 'error' });
         });
@@ -135,9 +139,9 @@ describe('upload', () => {
     }));
 
     it('should delete file successfully', fakeAsync(() => {
-      const file = new File(['upload'], "upload.txt");
+      const file = new File(['upload'], 'upload.txt');
       component.singleupload.singleUploadViewComponent.addFile(file);
-      component.singleupload.singleUploadViewComponent.fileUploaders.forEach(FileUploader => {
+      component.singleupload.singleUploadViewComponent.fileUploaders.forEach((FileUploader) => {
         spyOn(FileUploader, 'send').and.callFake(() => {
           return Promise.resolve({ file: file, response: 'error' });
         });
@@ -157,7 +161,7 @@ describe('upload', () => {
 
     it('should write value correctly', fakeAsync(() => {
       expect(component).toBeTruthy();
-      component.files = [new File(['upload'], "upload.png")];
+      component.files = [new File(['upload'], 'upload.png')];
       tick();
       fixture.detectChanges();
       flush();
@@ -170,17 +174,17 @@ describe('upload', () => {
 
     it('should chunk upload correctly', fakeAsync(() => {
       expect(component).toBeTruthy();
-      component.singleupload.defaultChunkSize = 1;
+      component.sliceUploadService.defaultChunkSize = 1;
       component.uploadOptions.isChunked = true;
-      const file = new File(['upload'], "upload.txt");
+      const file = new File(['upload'], 'upload.txt');
       component.singleupload.singleUploadViewComponent.addFile(file);
-      const chunkFiles = component.singleupload.createFileChunk(file);
-      chunkFiles.forEach(FileUploader => {
+      const chunkFiles = component.sliceUploadService.createFileChunk(file, component.uploadOptions);
+      chunkFiles.forEach((FileUploader) => {
         spyOn(FileUploader, 'send').and.callFake(() => {
           return Promise.resolve({ file: FileUploader.file, response: 'successful' });
         });
       });
-      spyOn(component.singleupload, 'createFileChunk').and.callFake(() => {
+      spyOn(component.sliceUploadService, 'createFileChunk').and.callFake(() => {
         return chunkFiles;
       });
       const el: HTMLElement = debugEl.query(By.css('.devui-btn-default.devui-btn-common')).nativeElement;

@@ -1,7 +1,4 @@
-import {
-  IUploadOptions,
-  UploadStatus
-} from './file-uploader.types';
+import { IUploadOptions, UploadStatus } from './file-uploader.types';
 
 export class FileUploader {
   private xhr: XMLHttpRequest;
@@ -9,25 +6,15 @@ export class FileUploader {
   public response: any;
   public percentage = 0;
 
-  constructor(public file: File,
-              public uploadOptions: IUploadOptions) {
+  constructor(public file: File, public uploadOptions: IUploadOptions) {
     this.file = file;
     this.uploadOptions = uploadOptions;
     this.status = UploadStatus.preLoad;
   }
 
   private sendCommonHandle(uploadFiles?) {
-    const {
-      uri,
-      method,
-      headers,
-      authToken,
-      authTokenHeader,
-      additionalParameter,
-      fileFieldName,
-      withCredentials,
-      responseType
-    } = this.uploadOptions;
+    const { uri, method, headers, authToken, authTokenHeader, additionalParameter, fileFieldName, withCredentials, responseType } =
+      this.uploadOptions;
     const authTokenHeader_ = authTokenHeader || 'Authorization';
     const fileFieldName_ = fileFieldName || 'file';
 
@@ -52,13 +39,14 @@ export class FileUploader {
       });
     }
 
-    this.xhr.upload.onprogress = e => {
-      this.percentage = Math.round(e.loaded * 100 / e.total);
+    this.xhr.upload.onprogress = (e) => {
+      this.percentage = Math.round((e.loaded * 100) / e.total);
     };
 
-    const formData = uploadFiles && uploadFiles.length ?
-      this.oneTimeUploadFiles(fileFieldName_, additionalParameter, uploadFiles) :
-      this.parallelUploadFiles(fileFieldName_, additionalParameter);
+    const formData =
+      uploadFiles && uploadFiles.length
+        ? this.oneTimeUploadFiles(fileFieldName_, additionalParameter, uploadFiles)
+        : this.parallelUploadFiles(fileFieldName_, additionalParameter);
 
     this.xhr.send(formData);
     this.status = UploadStatus.uploading;
@@ -69,7 +57,7 @@ export class FileUploader {
     };
   }
 
-  private sendErrorAndLoadHandle(resolve, reject, isMultiple=false) {
+  private sendErrorAndLoadHandle(resolve, reject, isMultiple = false) {
     this.xhr.onerror = () => {
       this.response = this.xhr.response;
       this.status = UploadStatus.failed;
@@ -92,7 +80,7 @@ export class FileUploader {
       } else {
         this.response = this.xhr.response;
         this.status = UploadStatus.failed;
-        if(isMultiple) {
+        if (isMultiple) {
           reject({ file: this.file, response: this.xhr.response, status: UploadStatus.failed });
         } else {
           reject({ file: this.file, response: this.xhr.response });
@@ -104,7 +92,6 @@ export class FileUploader {
   public send(uploadFiles?): Promise<{ file: File; response: any }> {
     return new Promise((resolve, reject) => {
       this.sendCommonHandle(uploadFiles);
-
       this.sendErrorAndLoadHandle(resolve, reject);
     });
   }
@@ -112,7 +99,6 @@ export class FileUploader {
   public sendMultiple(uploadFiles?): Promise<{ file: File; response: any; status: UploadStatus }> {
     return new Promise((resolve, reject) => {
       this.sendCommonHandle(uploadFiles);
-
       this.sendErrorAndLoadHandle(resolve, reject, true);
     });
   }
@@ -130,7 +116,7 @@ export class FileUploader {
 
   public oneTimeUploadFiles(fileFieldName_, additionalParameter, uploadFiles) {
     const formData = new FormData();
-    uploadFiles.forEach(element => {
+    uploadFiles.forEach((element) => {
       formData.append(fileFieldName_, element.file, element.file.name);
       if (additionalParameter) {
         Object.keys(additionalParameter).forEach((key: string) => {

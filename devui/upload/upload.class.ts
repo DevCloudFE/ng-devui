@@ -1,13 +1,12 @@
 import { from, merge, of } from 'rxjs';
 import { catchError, toArray } from 'rxjs/operators';
-import {
-  FileUploader
-} from './file-uploader.class';
+import { FileUploader } from './file-uploader.class';
 import { UploadStatus } from './file-uploader.types';
 
 export class UploadComponent {
   fileUploaders: Array<FileUploader> = [];
   filesWithSameName = [];
+
   addFile(file, options) {
     if (options && options.checkSameName) {
       if (this.checkFileSame(file.name)) {
@@ -17,6 +16,7 @@ export class UploadComponent {
       this.fileUploaders.push(new FileUploader(file, options));
     }
   }
+
   checkFileSame(fileName) {
     let checkRel = true;
 
@@ -33,30 +33,30 @@ export class UploadComponent {
   }
 
   getFiles() {
-    return this.fileUploaders.map(fileUploader => {
+    return this.fileUploaders.map((fileUploader) => {
       return fileUploader.file;
     });
   }
 
   getFullFiles() {
-    return this.fileUploaders.map(fileUploader => {
+    return this.fileUploaders.map((fileUploader) => {
       return fileUploader;
     });
   }
 
-  upload(oneFile?, isMultipleUpload=false) {
+  upload(oneFile?, isMultipleUpload = false) {
     let uploads: any[] = [];
     if (oneFile) {
       oneFile.percentage = 0;
       uploads.push(from(oneFile.send()));
     } else {
-      const preFiles = this.fileUploaders.filter((fileUploader) => (fileUploader.status === UploadStatus.preLoad));
-      const failedFiles = this.fileUploaders.filter((fileUploader) => (fileUploader.status === UploadStatus.failed));
+      const preFiles = this.fileUploaders.filter((fileUploader) => fileUploader.status === UploadStatus.preLoad);
+      const failedFiles = this.fileUploaders.filter((fileUploader) => fileUploader.status === UploadStatus.failed);
       const uploadFiles = preFiles.length > 0 ? preFiles : failedFiles;
       uploads = uploadFiles.map((fileUploader) => {
         fileUploader.percentage = 0;
-        if(isMultipleUpload) {
-          return from(fileUploader.sendMultiple()).pipe(catchError(error => of(error)));
+        if (isMultipleUpload) {
+          return from(fileUploader.sendMultiple()).pipe(catchError((error) => of(error)));
         } else {
           return from(fileUploader.send());
         }
@@ -70,8 +70,7 @@ export class UploadComponent {
   }
 
   oneTimeUpload() {
-    const uploads = this.fileUploaders
-      .filter((fileUploader) => fileUploader.status !== UploadStatus.uploaded);
+    const uploads = this.fileUploaders.filter((fileUploader) => fileUploader.status !== UploadStatus.uploaded);
     return from(this.dealOneTimeUploadFiles(uploads));
   }
 
@@ -91,7 +90,6 @@ export class UploadComponent {
       });
     }
     );
-
     return finalUploads;
   }
 
@@ -105,9 +103,11 @@ export class UploadComponent {
     this.fileUploaders = [];
     this.filesWithSameName = [];
   }
+
   getSameNameFiles() {
     return this.filesWithSameName.join();
   }
+
   resetSameNameFiles() {
     this.filesWithSameName = [];
   }

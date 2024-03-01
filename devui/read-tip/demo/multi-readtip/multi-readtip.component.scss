@@ -19,7 +19,8 @@
 }
 
 .third-content {
-  color: $devui-brand-foil;
+  color: $devui-aide-text;
+  font-size: $devui-font-size;
 
   &:hover {
     text-decoration: underline;

@@ -77,6 +77,7 @@ In the page
 | required  | `boolean` | false   | Optional. Indicating whether the form option is mandatory. | [Basic usage](demo#basic-usage) |
 | hasHelp   | `boolean` | false   | Optional. Indicating whether a form item requires help.    | [Basic usage](demo#basic-usage) |
 | helpTips  | `string`  | ''      | Optional. This parameter is used together with `hasHelp`.  | [Basic usage](demo#basic-usage) |
+| customHelpTipTemplate | `TemplateRef<any>` | - |Optional, user-defined prompt template, which must be used together with `hasHelp` | [multi-list](demo#demo-multi-col) |
 
 ## d-form-control
 

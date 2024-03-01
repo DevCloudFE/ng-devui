@@ -1,0 +1,15 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+.devui-dropdown-menu {
+  min-width: 82px;
+}
+
+.btn-group {
+  display: inline-block;
+}
+
+a[dDropDownMenuItem] {
+  &:focus {
+    color: $devui-text;
+  }
+}

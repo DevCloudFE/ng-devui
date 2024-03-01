@@ -5,6 +5,7 @@ import {
   ContentChild,
   ElementRef,
   EventEmitter,
+  HostListener,
   Inject,
   Input,
   OnDestroy,
@@ -17,6 +18,7 @@ import {
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { DevConfigService, expandCollapseForDomDestroy, WithConfig } from 'ng-devui/utils';
+import { difference } from 'lodash-es';
 import { Subscription } from 'rxjs';
 import { Dictionary, ITreeItem, ITreeNodeData, TreeNode } from './tree-factory.class';
 import { TreeComponent } from './tree.component';
@@ -119,6 +121,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   };
   afterInitAnimate = true;
   document: Document;
+  isOpenedOonDragOver = [];
 
   constructor(@Inject(DOCUMENT) private doc: any, private i18n: I18nService, private devConfigService: DevConfigService) {
     this.document = this.doc;
@@ -135,6 +138,12 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     setTimeout(() => {
       this.afterInitAnimate = false;
     });
+  }
+
+  ngOnDestroy() {
+    if (this.i18nSubscription) {
+      this.i18nSubscription.unsubscribe();
+    }
   }
 
   contextmenuEvent(event, node) {
@@ -181,6 +190,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onDragstart(event, treeNode) {
+    this.isOpenedOonDragOver = [];
     this.dragState.draggingNode = event.target;
     const result = { event, treeNode };
     const data = {
@@ -217,8 +227,11 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
         clearTimeout(this.treeNodeDragoverResponder.timeout);
         this.treeNodeDragoverResponder.node = treeNode;
         this.treeNodeDragoverResponder.timeout = setTimeout(() => {
-          this.treeFactory.openNodesById(treeNode.id);
-          this.nodeToggled.emit(treeNode);
+          if (treeNode.data.isParent && !treeNode.data.isOpen) {
+            this.isOpenedOonDragOver.push(treeNode.id);
+            this.treeFactory.openNodesById(treeNode.id);
+            this.nodeToggled.emit(treeNode);
+          }
         }, 1000);
       }
       this.handlerDragState(event, treeNode);
@@ -234,7 +247,9 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     const prevPercent = dropPrev ? (dropInner ? 0.25 : dropNext ? 0.45 : 1) : -1;
     const nextPercent = dropNext ? (dropInner ? 0.75 : dropPrev ? 0.55 : 0) : 1;
     const targetPosition = event.currentTarget.getBoundingClientRect();
-    const treeNodePosition = event.currentTarget.querySelector('.devui-tree-drag-handle').getBoundingClientRect();
+    const dom =
+      event.currentTarget.querySelector('.devui-tree-drag-handle') || event.currentTarget.querySelector('.devui-tree-node__title');
+    const treeNodePosition = dom.getBoundingClientRect();
     const distance = event.clientY - targetPosition.top;
 
     if (distance < targetPosition.height * prevPercent) {
@@ -310,15 +325,27 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
           if (this.beforeNodeDrop) {
             dragResult = this.beforeNodeDrop(dragNodeId, dropNodeId, this.dragState.dropType, dragNodeIds);
           }
-          dragResult.then(() => this.setSelection(dropNode, dragNodeId, dragNodeIds, dragNodesCheckStatus));
+          dragResult
+            .then(() => {
+              this.setSelection(dropNode, dragNodeId, dragNodeIds, dragNodesCheckStatus);
+              if (this.nodeOnDrop.observers.length > 0) {
+                if (this.isOpenedOonDragOver.length) {
+                  const ids = this.treeFactory.getLineage(dropNode);
+                  this.isOpenedOonDragOver = difference(this.isOpenedOonDragOver, ids);
+                }
+                this.nodeOnDrop.emit({ event, treeNode: dropNode, dropType: this.dragState.dropType });
+              }
+            })
+            .catch(() => {});
         }
-      } catch (e) {
-      } finally {
-        if (this.nodeOnDrop.observers.length > 0) {
-          this.nodeOnDrop.emit({ event, treeNode: dropNode, dropType: this.dragState.dropType });
-        }
-      }
+      } catch (e) {}
     }
+  }
+
+  @HostListener('dragend', [])
+  onDragend() {
+    this.isOpenedOonDragOver.forEach((id) => this.treeFactory.closeNodesById(id));
+    this.isOpenedOonDragOver = [];
   }
 
   reverseSelection(node, dropNodeId, dragNodeIds, dragNodesCheckStatus) {
@@ -650,11 +677,5 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   eventTriggerBlur(event) {
     (event.target as HTMLElement).blur();
-  }
-
-  ngOnDestroy() {
-    if (this.i18nSubscription) {
-      this.i18nSubscription.unsubscribe();
-    }
   }
 }

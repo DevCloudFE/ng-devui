@@ -1,4 +1,5 @@
-import { AfterViewInit, Directive, ElementRef, HostBinding, Input, OnDestroy, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { AfterViewInit, Directive, ElementRef, HostBinding, Inject, Input, OnDestroy, Renderer2 } from '@angular/core';
 import { DevConfigService, WithConfig } from 'ng-devui/utils';
 
 @Directive({
@@ -7,6 +8,7 @@ import { DevConfigService, WithConfig } from 'ng-devui/utils';
 })
 export class TextareaDirective implements AfterViewInit, OnDestroy {
   @Input() maxLengthBlocker = false;
+  @Input() maxLengthCounter = false;
   @Input() @HostBinding('style.resize') resize: 'none' | 'vertical' | 'horizontal' | 'both' | 'inherit' = 'none';
   @Input() @HostBinding('class.error') error: boolean;
   @Input() @WithConfig() styleType = 'default';
@@ -18,11 +20,43 @@ export class TextareaDirective implements AfterViewInit, OnDestroy {
     return this.styleType === 'gray';
   }
   @HostBinding('attr.rows') rows = 3;
-  checkMaxLength: any;
+  checkMaxLength: Function;
+  getMaxLength: Function;
+  counter: HTMLSpanElement;
+  counterInner: HTMLElement;
+  document: any;
+  resizeWatcher: any;
+  fontSize = 12;
 
-  constructor(private devConfigService: DevConfigService, private el: ElementRef, private render: Renderer2) {}
+  constructor(
+    @Inject(DOCUMENT) private doc: any,
+    private devConfigService: DevConfigService,
+    private el: ElementRef,
+    private render: Renderer2
+  ) {
+    this.document = this.doc;
+    const root = getComputedStyle(this.document.querySelector(':root'));
+    this.fontSize = parseInt(root.getPropertyValue('--devui-font-size-sm'), 10) || 12;
+  }
 
   ngAfterViewInit(): void {
+    this.setMaxLengthBlocker();
+    this.setMaxLengthCounter();
+  }
+
+  ngOnDestroy(): void {
+    if (this.checkMaxLength) {
+      this.checkMaxLength();
+    }
+    if (this.getMaxLength) {
+      this.getMaxLength();
+    }
+    if (this.resizeWatcher) {
+      this.resizeWatcher.unobserve();
+    }
+  }
+
+  setMaxLengthBlocker(): void {
     if (this.maxLengthBlocker) {
       this.checkMaxLength = this.render.listen(this.el.nativeElement, 'compositionupdate', () => {
         /**
@@ -43,9 +77,23 @@ export class TextareaDirective implements AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    if (this.checkMaxLength) {
-      this.checkMaxLength();
+  setMaxLengthCounter(): void {
+    const max = this.el.nativeElement.maxLength;
+    if (this.maxLengthCounter && max) {
+      this.counter = this.document.createElement('span');
+      this.counter.className = 'devui-textarea-counter';
+      this.counterInner = this.document.createElement('i');
+      this.counterInner.textContent = `${this.el.nativeElement.value.length}/${max}`;
+      this.counterInner.style.width = `${(String(max).length * 2 + 1) * this.fontSize}px`;
+      this.counter.appendChild(this.counterInner);
+      this.el.nativeElement.after(this.counter);
+      this.checkMaxLength = this.render.listen(this.el.nativeElement, 'input', () => {
+        this.counterInner.textContent = `${this.el.nativeElement.value.length}/${this.el.nativeElement.maxLength}`;
+      });
+      this.resizeWatcher = new ResizeObserver(() => {
+        this.counter.style.left = `${this.el.nativeElement.offsetWidth - this.counterInner.offsetWidth}px`;
+        this.counter.style.top = `${this.el.nativeElement.offsetHeight - this.counter.offsetHeight}px`;
+      }).observe(this.el.nativeElement);
     }
   }
 }

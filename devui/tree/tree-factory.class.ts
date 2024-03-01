@@ -63,7 +63,7 @@ export interface ITreeInput {
 }
 
 export class TreeNode implements ITreeNodeData {
-  constructor(public id, public parentId, public data) { }
+  constructor(public id, public parentId, public data) {}
 }
 
 export class TreeFactory {
@@ -320,11 +320,11 @@ export class TreeFactory {
       this.checkParentNodes(this.nodes[id]);
       break;
     case 'downward':
-      this.checkChildNodes(this.nodes[id], checked);
+      this.checkChildNodes(this.nodes[id], checked, this.nodes[id].data.isHide);
       break;
     case 'both':
       this.checkParentNodes(this.nodes[id]);
-      this.checkChildNodes(this.nodes[id], checked);
+      this.checkChildNodes(this.nodes[id], checked, this.nodes[id].data.isHide);
       break;
     case 'none':
       break;
@@ -355,7 +355,7 @@ export class TreeFactory {
     }
   }
 
-  private checkChildNodes(node: TreeNode, checked: boolean) {
+  private checkChildNodes(node: TreeNode, checked: boolean, hasHiddenAncestor = undefined) {
     const { id } = node;
     const childrenNode = this.getChildrenById(id);
     if (childrenNode.length > 0) {
@@ -365,9 +365,10 @@ export class TreeFactory {
         if (!nodeData.disabled) {
           nodeData.isChecked = checked;
           nodeData.halfChecked = false;
+          nodeData.hasHiddenAncestor = hasHiddenAncestor;
           this.maintainCheckedNodeList(childNode, checked);
         }
-        this.checkChildNodes(childNode, checked);
+        this.checkChildNodes(childNode, checked, nodeData.isHide);
       });
       const childrenFullCheckedCount = childrenNode.filter(({ data: nodeData }) => nodeData.isChecked).length;
       const childrenCheckedCount = childrenNode.filter(({ data: nodeData }) => nodeData.isChecked || nodeData.halfChecked).length;
@@ -375,8 +376,24 @@ export class TreeFactory {
     }
   }
 
+  getLineage(node: TreeNode): Array<string> {
+    const { parentId } = node;
+    if (parentId) {
+      const parentNode = this.nodes[parentId];
+      return [node.id, ...this.getLineage(parentNode)];
+    } else {
+      return [node.id];
+    }
+  }
+
   getCheckedNodes(): Array<any> {
     return Array.from(this._checked);
+  }
+
+  getCheckedNodesWithoutHide(hideInVirtualScroll = false): Array<any> {
+    return Array.from(this._checked).filter(
+      (item: any) => !((hideInVirtualScroll ? item.data.hideInVirtualScroll : item.data.isHide) || item.data.hasHiddenAncestor)
+    );
   }
 
   getActivatedNodes(): Array<any> {

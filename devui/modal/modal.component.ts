@@ -9,14 +9,10 @@ import { ModalContainerDirective } from './modal.directive';
   selector: 'd-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
-  animations: [
-    backdropFadeInOut,
-    wipeInOutAnimation
-  ],
+  animations: [backdropFadeInOut, wipeInOutAnimation],
   preserveWhitespaces: false,
 })
 export class ModalComponent implements OnInit, OnDestroy {
-
   @Input() id: string;
   @Input() showAnimation = true;
   @Input() width: string;
@@ -25,7 +21,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() backdropCloseable: boolean;
   @Input() beforeHidden: () => boolean | Promise<boolean> | Observable<boolean>;
   @Input() draggable: boolean;
-  @Input() placement: 'center' | 'top' | 'bottom' = 'center';
+  @Input() placement: 'center' | 'top' | 'bottom' | 'unset' = 'center';
   @Input() offsetX: string;
   @Input() offsetY: string;
   @Input() bodyScrollable = true; // 打开弹窗body是否可滚动
@@ -49,24 +45,20 @@ export class ModalComponent implements OnInit, OnDestroy {
   maximized = false;
   _oldWidth: string;
 
-  constructor(
-    private elementRef: ElementRef,
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private doc: any
-  ) {
-    this.backdropCloseable = isUndefined(this.backdropCloseable)
-      ? true
-      : this.backdropCloseable;
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, @Inject(DOCUMENT) private doc: any) {
+    this.backdropCloseable = isUndefined(this.backdropCloseable) ? true : this.backdropCloseable;
     this.document = this.doc;
   }
 
   ngOnInit() {
     if (this.escapable) {
-      this.pressEscToClose.add(fromEvent(window, 'keydown').subscribe((event) => {
-        if (event['keyCode'] === 27) {
-          this.hide();
-        }
-      }));
+      this.pressEscToClose.add(
+        fromEvent(window, 'keydown').subscribe((event) => {
+          if (event['keyCode'] === 27) {
+            this.hide();
+          }
+        })
+      );
     }
 
     const handle = this.elementRef.nativeElement.querySelector('#d-modal-header');
@@ -77,12 +69,17 @@ export class ModalComponent implements OnInit, OnDestroy {
     this._oldWidth = this.width;
   }
 
-  // Will overwrite this method in modal service
-  onHidden() {
+  ngOnDestroy(): void {
+    if (this.pressEscToClose) {
+      this.pressEscToClose.unsubscribe();
+      this.pressEscToClose = null;
+    }
   }
 
-  updateButtonOptions<T>(buttonOptions: Array<T>) {
-  }
+  // Will overwrite this method in modal service
+  onHidden() {}
+
+  updateButtonOptions<T>(buttonOptions: Array<T>) {}
 
   canHideModel() {
     let hiddenResult = Promise.resolve(true);
@@ -105,8 +102,12 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   onModalClick = ($event) => {
     // 一定要document.contains($event.target)，因为$event.target可能已经不在document里了，这个时候就不能进hide了,使用document.body兼容IE
-    if (this.backdropCloseable && !this.ignoreBackDropClick &&
-      (!this.dialogElement.nativeElement.contains($event.target) && this.document.body.contains($event.target))) {
+    if (
+      this.backdropCloseable &&
+      !this.ignoreBackDropClick &&
+      !this.dialogElement.nativeElement.contains($event.target) &&
+      this.document.body.contains($event.target)
+    ) {
       this.hide();
     }
     this.ignoreBackDropClick = false;
@@ -121,16 +122,6 @@ export class ModalComponent implements OnInit, OnDestroy {
       this.ignoreBackDropClick = true;
     }
   };
-
-  hide() {
-    this.canHideModel().then((canHide) => {
-      if (!canHide) {
-        return;
-      }
-
-      this.animateState = 'void';
-    });
-  }
 
   maximize() {
     this.maximized = !this.maximized;
@@ -150,21 +141,45 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   show() {
-    if (this.document.documentElement.scrollHeight > this.document.documentElement.clientHeight) {
-      this.documentOverFlow = true;
+    this.documentOverFlow = this.document.documentElement.scrollHeight > this.document.documentElement.clientHeight;
+    if (this.documentOverFlow) {
       this.scrollTop = this.document.documentElement.scrollTop || this.document.body.scrollTop;
       this.scrollLeft = this.document.documentElement.scrollLeft || this.document.body.scrollLeft;
       this.renderer.addClass(this.document.body, 'devui-body-scrollblock');
       this.renderer.setStyle(this.document.body, 'top', `-${this.scrollTop}px`);
       this.renderer.setStyle(this.document.body, 'left', `-${this.scrollLeft}px`);
     }
-    if (!this.bodyScrollable && this.documentOverFlow) {
-      this.renderer.addClass(this.document.body, 'devui-body-overflow-hidden');
-    }
-
+    this.bodyScrollBlock(true);
     this.dialogElement.nativeElement.focus();
     if (this.showAnimation) {
       this.animateState = 'in';
+    }
+  }
+
+  hide() {
+    this.canHideModel().then((canHide) => {
+      if (!canHide) {
+        return;
+      }
+      this.bodyScrollBlock(false);
+      this.animateState = 'void';
+    });
+  }
+
+  bodyScrollBlock(toggle: boolean) {
+    if (this.bodyScrollable || !this.documentOverFlow) {
+      return;
+    }
+    if (toggle) {
+      this.renderer.addClass(this.document.documentElement, 'devui-body-scrollblock-modal');
+      this.renderer.setStyle(this.document.documentElement, 'top', `-${this.scrollTop}px`);
+      this.renderer.setStyle(this.document.documentElement, 'left', `-${this.scrollLeft}px`);
+    } else {
+      this.renderer.removeClass(this.document.documentElement, 'devui-body-scrollblock-modal');
+      this.renderer.removeStyle(this.document.documentElement, 'top');
+      this.renderer.removeStyle(this.document.documentElement, 'left');
+      this.document.documentElement.scrollLeft = this.scrollLeft;
+      this.document.documentElement.scrollTop = this.scrollTop;
     }
   }
 
@@ -179,17 +194,15 @@ export class ModalComponent implements OnInit, OnDestroy {
       break;
     case 'center':
     default:
-      autoOffsetYByPlacement = '0';
+      autoOffsetYByPlacement = 0;
       break;
     }
-    const offsetX = this.offsetX ? this.offsetX : '0';
-    const offsetY = this.offsetY ? this.offsetY : autoOffsetYByPlacement;
-    return 'translate(' + offsetX + ',' + offsetY + ')';
-  }
-  ngOnDestroy(): void {
-    if (this.pressEscToClose) {
-      this.pressEscToClose.unsubscribe();
-      this.pressEscToClose = null;
+    if (this.placement !== 'unset') {
+      const offsetX = this.offsetX ? this.offsetX : '0';
+      const offsetY = this.offsetY ? this.offsetY : autoOffsetYByPlacement;
+      return 'translate(' + offsetX + ',' + offsetY + ')';
+    } else {
+      return 'unset';
     }
   }
 }

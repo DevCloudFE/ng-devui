@@ -6,6 +6,7 @@ export * from './multiple-upload.component';
 export * from './select-files.utils';
 export * from './single-upload-view.component';
 export * from './single-upload.component';
+export * from './slice-upload.service';
 export * from './upload.class';
 export * from './upload.directive';
 export * from './upload.module';
