@@ -1,6 +1,6 @@
 <section>
   <div class="btn-group" dDropDown (toggleEvent)="onToggle($event)">
-    <d-icon dDropDownToggle [icon]="'icon-select-arrow'" [operable]="true" [rotate]="rotateDegrees">
+    <d-icon dDropDownToggle [icon]="'icon-chevron-down-2'" [operable]="true" [rotate]="rotateDegrees">
       <span iconPrefix>more</span>
     </d-icon>
     <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
@@ -37,7 +37,7 @@
 <section>
   <h5>Attached to Body to avoid being blocked by container with scrollbar</h5>
   <div class="btn-group" dDropDown appendToBody (toggleEvent)="onToggle($event)">
-    <d-icon dDropDownToggle class="devui-dropdown-default devui-dropdown-origin" [icon]="'icon-select-arrow'" [rotate]="rotateDegrees">
+    <d-icon dDropDownToggle class="devui-dropdown-default devui-dropdown-origin" [icon]="'icon-chevron-down-2'" [rotate]="rotateDegrees">
       <span iconPrefix>more</span>
     </d-icon>
     <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">

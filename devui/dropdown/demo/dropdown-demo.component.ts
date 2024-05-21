@@ -6,6 +6,14 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-dropdown',
   templateUrl: './dropdown-demo.component.html',
+  styles: [
+    `
+      :host ::ng-deep .icon-chevron-down-2 {
+        font-size: 14px !important;
+        vertical-align: middle;
+      }
+    `,
+  ],
 })
 export class DropdownDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

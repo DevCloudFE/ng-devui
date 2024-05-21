@@ -57,6 +57,12 @@
 
   .devui-dropdown-menu-wrap {
     position: initial;
+
+    &.limit-max-height {
+      display: flex;
+      flex-direction: column;
+      max-height: 100%;
+    }
   }
 }
 
@@ -599,7 +605,7 @@ svg.svg-icon-search path {
 }
 
 .devui-select-chevron-icon svg path {
-  fill: $devui-icon-text;
+  fill: $devui-icon-fill;
 }
 
 .disabled {
@@ -617,6 +623,10 @@ svg.svg-icon-search path {
     .devui-select-clear-icon {
       display: inline-flex;
       vertical-align: middle;
+
+      path {
+        fill: $devui-shape-icon-fill-hover;
+      }
     }
   }
 }
@@ -675,32 +685,18 @@ svg.svg-icon-search path {
   pointer-events: auto;
   cursor: pointer;
 
-  &::after,
-  &::before {
-    position: absolute;
-    content: '';
-    height: 14px;
-    width: 2px;
-    background-color: $devui-icon-text;
-    left: 50%;
+  path {
+    fill: $devui-shape-icon-fill;
+    transition: all $devui-animation-ease-in-out-smooth $devui-animation-duration-slow;
   }
 
-  &::before {
-    transform: rotate(45deg);
-  }
-
-  &::after {
-    transform: rotate(-45deg);
+  &:hover path {
+    fill: $devui-shape-icon-fill-hover;
   }
 }
 
 .devui-form-control-feedback.devui-search-clear:hover g > g > polygon {
   fill: $devui-icon-fill-active;
-}
-
-.devui-select-clear-icon:hover::before,
-.devui-select-clear-icon:hover::after {
-  background-color: $devui-icon-fill-active;
 }
 
 input::-ms-clear {

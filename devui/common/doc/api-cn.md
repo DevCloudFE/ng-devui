@@ -29,7 +29,7 @@ import { HelperUtils } from 'ng-devui';
 
 <!-- 日期解析器 -->
 <div>
-  <p>{{ date | dDatePipe: 'y/MM/dd' }}</p>
+  <p>{{ date | dDatePipe: 'y-MM-dd' }}</p>
 </div>
 
 <!-- SimulateATag -->

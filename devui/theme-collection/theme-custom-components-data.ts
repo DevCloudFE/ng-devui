@@ -3,6 +3,7 @@ export const devuiCustomComponentsThemeData = {
   'devui-btn-padding': '0 16px',
   'devui-btn-lg-padding': '0 20px',
   'devui-btn-common-bg': '#EBEBEB',
+  'devui-btn-common-bg-disabled': '#F0F0F0',
   'devui-btn-common-border-color': 'transparent',
   'devui-btn-common-bg-hover': '#D1D1D1',
   'devui-btn-common-color-hover': '#252B3A',
@@ -20,6 +21,7 @@ export const devuiCustomComponentsDarkThemeData = {
   'devui-btn-padding': '0 16px',
   'devui-btn-lg-padding': '0 20px',
   'devui-btn-common-bg': '#393a3e',
+  'devui-btn-common-bg-disabled': '#323338',
   'devui-btn-common-border-color': 'transparent',
   'devui-btn-common-bg-hover': '#4e5057',
   'devui-btn-common-color-hover': '#CED1DB',
@@ -33,7 +35,17 @@ export const devuiCustomComponentsDarkThemeData = {
 };
 
 export const devuiCustomComponentsDeepThemeData = {
-  'devui-btn-common-bg': '#E0E0E0',
-  'devui-btn-common-bg-hover': '#BDBDBD',
-  'devui-btn-common-bg-active': '#A1A1A1'
+  'devui-btn-common-bg': '#ffffff',
+  'devui-btn-common-bg-hover': '#ffffff',
+  'devui-btn-common-bg-active': '#ffffff',
+  'devui-btn-common-bg-disabled': '#F0F0F0',
+  'devui-btn-common-text-disabled':'#c2c2c2',
+  'devui-btn-common-border-color': '#595959',
+  'devui-btn-common-border-color-hover': '#C2C2C2',
+  'devui-btn-common-border-color-active': '#C2C2C2',
+  'devui-icon-hover-bg': '#DBDBDB',
+  'devui-icon-active-bg': '#C2C2C2',
+  'devui-btn-border-radius':'100px',
+  'devui-btn-primary-bg-disabled': '#F0F0F0',
+  'devui-btn-primary-text-disabled':'#c2c2c2',
 };

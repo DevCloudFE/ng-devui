@@ -22,6 +22,10 @@ In the page：
 | disabledBarSize | `string` | '1px' | Optional. This parameter is valid when the unadjustable width is set for the panel. | [Vertical layout usage](demo#vertical-layout) |
 | showCollapseButton | `boolean` | true | Optional. Whether to display the collapse/expand button | [Collapse and collapse menu](demo#shrink-show-menu) |
 
+## d-splitter instance method
+
+Provides the active folding and unfolding method toggleCollapsed(index: number), where index is the sequence number of the expanded bar.
+
 # d-splitter-pane
 
 ## d-splitter-pane parameters

@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, OnDestroy, Renderer2, RendererFactory2 } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, fromEventPattern } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, fromEvent, fromEventPattern, Observable, Subject } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { PanelPostion } from './utils/calculate-panel-position';
 import { disableClick, documentRealHeight } from './utils/help-functions';
 
@@ -35,6 +35,7 @@ export class UserGuideCoreService implements OnDestroy {
   private currentDirection;
 
   public onResize: Observable<Event>;
+  public onScroll;
 
   curContent = new BehaviorSubject('start');
   curSubContent = new BehaviorSubject('');
@@ -57,6 +58,14 @@ export class UserGuideCoreService implements OnDestroy {
     this.panelPostion = new PanelPostion(this.document);
 
     this.createOnResizeObservable(renderer);
+    this.onScroll = fromEvent(window, 'scroll')
+      .pipe(takeUntil(this._destory), debounceTime(100))
+      .subscribe(() => {
+        if (this.isStart && this.stepsDetails[this.currentStep].type !== 'display') {
+          this.updateCurrentStepElement();
+          this.setStepShow(this.currentType, this.currentStep);
+        }
+      });
 
     this.onResize.subscribe((e: Event) => {
       if (this.isStart && this.stepsDetails[this.currentStep].type !== 'display') {
@@ -200,7 +209,8 @@ export class UserGuideCoreService implements OnDestroy {
     if (this.stepsDetails[cur].element) {
       const rect = this.stepsDetails[cur].element.getBoundingClientRect();
       const hasHighlightOffset = this.stepsDetails[cur].highlightOffset;
-      this.stepsDetails[cur].top = rect?.top - (hasHighlightOffset ? this.stepsDetails[cur].highlightOffset[0] : 0);
+      const scrollTop = this.document.documentElement.scrollTop;
+      this.stepsDetails[cur].top = rect?.top - (hasHighlightOffset ? this.stepsDetails[cur].highlightOffset[0] : 0) + scrollTop;
       this.stepsDetails[cur].left = rect?.left - (hasHighlightOffset ? this.stepsDetails[cur].highlightOffset[3] : 0);
       this.stepsDetails[cur].width =
         rect?.width + (hasHighlightOffset ? this.stepsDetails[cur].highlightOffset[3] + this.stepsDetails[cur].highlightOffset[1] : 0);

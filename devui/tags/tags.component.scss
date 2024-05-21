@@ -7,6 +7,15 @@
   line-height: 24px;
 }
 
+.devui-tags-suffix {
+  width: min-content;
+  display: none;
+
+  &:not(:empty) {
+    display: inline-block;
+  }
+}
+
 .beyond-tags-wrapper {
   max-width: 300px;
   margin-top: 8px;

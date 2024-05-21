@@ -17,6 +17,6 @@ export function parseDate(date: any, pattern?: string): Date {
   return isValidDate(parsedDate) ? parsedDate : new Date(date);
 }
 
-export function formatDate(date: Date, pattern = 'y/MM/dd HH:mm:ss'): string {
+export function formatDate(date: Date, pattern = 'y-MM-dd HH:mm:ss'): string {
   return isValidDate(date) ? datefns.format(date, pattern) : '';
 }

@@ -59,6 +59,10 @@ export class ThemeService {
       const themes = this.context.getDataFromNameSpace(THEME_KEY.themeCollection);
       if (themes && Object.keys(themes).length > 0) {
         theme = themes[themeId];
+        if (!theme) {
+          const key = Object.keys(themes).find(t => themes[t].id === themeId);
+          theme = themes[key];
+        }
       }
     }
     this.currentTheme = theme || {

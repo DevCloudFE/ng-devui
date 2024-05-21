@@ -18,7 +18,7 @@ In the page:
 | Parameter | Type | Default | Description | Jump to Demo |
 | :-------: | :-------: | :-------: | :-------: | :-------: |
 | cssClass | `string` | -- | Optional, custom class | |
-| format | [ng Customized date format] (https://angular.cn/api/common/DatePipe#custom-format-options) | 'y/MM/dd'\| 'y/MM/dd HH:mm:ss' | Optional. The format is transferred, the default value varies depending on whether showTime is set. | [Basic usage](demo#basic-usage) |
+| format | [ng Customized date format] (https://angular.cn/api/common/DatePipe#custom-format-options) | 'y-MM-dd'\| 'y-MM-dd HH:mm:ss' | Optional. The format is transferred, the default value varies depending on whether showTime is set. | [Basic usage](demo#basic-usage) |
 | showTime | `boolean` | false | Optional, indicating whether to display hour, minute, and second | [display time](demo#show-time) |
 | disabled | `boolean` | false | Optional, indicating whether the selector is disabled | [Basic usage](demo#basic-usage) |
 | autoOpen | `boolean` | false | Optional, indicating whether to expand the initialization directly. | [Display time](demo#show-time) |
@@ -48,7 +48,7 @@ Triggered when the | dropdownToggle | `EventEmitter<boolean>` | -- | drop-down p
 | Parameter | Type | Default | Description | Jump to Demo |
 | :-------: | :-------: | :-------: | :-------: | :-------: |
 | cssClass | `string` | -- | Optional, custom class | |
-| format | [ng Customized date format] (https://angular.cn/api/common/DatePipe#custom-format-options) | 'y/MM/dd'\| 'y/MM/dd HH:mm:ss' | Optional. The format is transferred, the default value varies depending on whether showTime is set. | [Basic usage](demo#basic-usage) |
+| format | [ng Customized date format] (https://angular.cn/api/common/DatePipe#custom-format-options) | 'y-MM-dd'\| 'y-MM-dd HH:mm:ss' | Optional. The format is transferred, the default value varies depending on whether showTime is set. | [Basic usage](demo#basic-usage) |
 | showTime | `boolean` | false | Optional, indicating whether to display hour, minute, and second | [range selector](demo#range-picker) |
 | disabled | `boolean` | false | Optional, indicating whether the selector is disabled | [Basic usage](demo#basic-usage) |
 | autoOpen | `boolean` | false | Optional, indicating whether to expand the initialization directly. | [Display time](demo#show-time) |

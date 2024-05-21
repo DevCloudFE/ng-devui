@@ -24,7 +24,7 @@ export class MultipleComponent implements AfterViewInit {
     { color: '#ffad63', percentage: '100%' },
   ];
   lineGradientColor = [
-    { color: '#50d4ab', percentage: '0%' },
+    { color: '#029931', percentage: '0%' },
     { color: '', percentage: '40%' },
     { color: '#5e7ce0', percentage: '100%' },
   ];
@@ -35,7 +35,7 @@ export class MultipleComponent implements AfterViewInit {
         this.config = [
           {
             name: 'success',
-            color: '#50d4ab',
+            color: '#029931',
             percentage: 21,
             template: this.barTemplate,
           },

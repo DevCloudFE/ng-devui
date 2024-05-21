@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, DebugElement, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,7 +15,7 @@ import { LoadingType } from '..';
 import { I18nModule } from '../i18n';
 import { createMouseEvent } from '../utils/testing/event-helper';
 import { DataTableModule } from './data-table.module';
-import { SourceType, editableOriginSource, genderSource, originSource, treeDataSource } from './demo/mock-data';
+import { editableOriginSource, genderSource, originSource, SourceType, treeDataSource } from './demo/mock-data';
 const dataTableOptions = {
   columns: [
     {
@@ -134,7 +134,7 @@ class TestDataTableColumnBasicComponent {
         field="dob"
         header="Date of birth"
         [fieldType]="'date'"
-        [extraOptions]="{ dateFormat: 'MM/dd/yyyy' }"
+        [extraOptions]="{ dateFormat: 'MM-dd-yyyy' }"
         [width]="'20000px'"
       ></d-column>
       <d-column field="hidden" header="hidden" [width]="'100px'">hidden</d-column>
@@ -344,7 +344,7 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
                     [(ngModel)]="rowItem[column.field]"
                     dDatepicker
                     appendToBody
-                    [dateFormat]="yyyy / MM / DD"
+                    [dateFormat]="yyyy-MM-DD"
                     #datePicker="datepicker"
                     [showTime]="true"
                     [autoOpen]="true"
@@ -426,7 +426,7 @@ class TestDataTableColumnEditComponent {
         field="dob"
         header="date"
         [fieldType]="'date'"
-        [extraOptions]="{ dateFormat: 'MM/dd/yyyy' }"
+        [extraOptions]="{ dateFormat: 'MM-dd-yyyy' }"
         [width]="'20%'"
       ></d-column>
     </d-data-table>
@@ -476,7 +476,7 @@ class TestDataTableColumnWithChildrenComponent {
         field="dob"
         header="Date of birth"
         [fieldType]="'date'"
-        [extraOptions]="{ dateFormat: 'MM/dd/yyyy' }"
+        [extraOptions]="{ dateFormat: 'MM-dd-yyyy' }"
         [width]="'200px'"
       ></d-column>
     </d-data-table>
@@ -1050,7 +1050,7 @@ describe('data-table column', () => {
       fixture.detectChanges();
       let dateColumnDebugEl = debugEl.query(By.css('.devui-table tbody tr td:nth-child(2) .cell-editable'));
       let dateText = dateColumnDebugEl.nativeElement.textContent.trim();
-      expect(dateText.substr(0, 10)).toBe('1991/01/01');
+      expect(dateText.substr(0, 10)).toBe('1991-01-01');
 
       dateColumnDebugEl.nativeElement.dispatchEvent(new Event('click'));
       tick();

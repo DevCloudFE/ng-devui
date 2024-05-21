@@ -8,6 +8,7 @@
     [ngClass]="{ 'is-min': !isOpen }"
     (cdkDragStarted)="cdkDragStarted()"
     (cdkDragEnded)="cdkDragEnded()"
+    [cdkDragConstrainPosition]="constrainPosition"
   >
     <ng-container *ngIf="isOpen; else minTemp">
       <div class="devui-nav-sprite-header" *ngIf="title !== undefined" [ngClass]="{ 'devui-nav-sprite-header-with-title': title }">

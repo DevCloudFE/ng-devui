@@ -29,22 +29,6 @@
       <span class="op-icons icon icon-add" (click)="addNode($event, node)"></span>
       <span class="op-icons icon icon-edit" (click)="editNode($event, node)"></span>
       <span class="op-icons icon icon-close" (click)="deleteNode($event, node)"></span>
-      <span
-        class="op-icons icon icon-more-operate"
-        dDropDown
-        dDropDownToggle
-        appendToBody
-        [trigger]="'hover'"
-        (toggleEvent)="onToggle($event, node)"
-      >
-        <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
-          <li class="disabled" role="menuitem">
-            <a class="devui-dropdown-item disabled">option 1</a>
-          </li>
-          <li role="menuitem"><a class="devui-dropdown-item">option 2</a></li>
-          <li role="menuitem"><a class="devui-dropdown-item">option 3</a></li>
-        </ul>
-      </span>
     </ng-template>
   </d-operable-tree>
 </div>

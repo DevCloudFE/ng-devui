@@ -1,6 +1,7 @@
 <ng-content select="d-splitter-pane"></ng-content>
 <ng-container *ngFor="let pane of panes; let index = index; let last = last">
   <d-splitter-bar
+    #bar
     dResize
     [style.order]="index * 2 + 1"
     *ngIf="!last"

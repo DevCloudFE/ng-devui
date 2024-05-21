@@ -107,6 +107,25 @@
     }
   }
 
+  span.customize-area-upload-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    transform: translate(-50%, -50%);
+    margin-left: 14px;
+    display: none;
+
+    &:last-child {
+      margin-left: -14px;
+    }
+
+    svg path {
+      fill: $devui-light-text;
+    }
+  }
+
   .icon {
     font-size: 16px;
     color: $devui-icon-bg;
@@ -145,12 +164,12 @@
       & + .icon-delete {
         display: block;
         z-index: 2;
-
-        & + .icon-running {
-          display: block;
-          z-index: 2;
-        }
       }
+    }
+
+    .customize-area-upload-icon {
+      display: block;
+      z-index: 2;
     }
   }
 }

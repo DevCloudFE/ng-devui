@@ -108,7 +108,11 @@ export class AvatarComponent implements OnChanges, OnInit {
       }
     }
     if (width < 30) {
-      this.nameDisplay = this.name.substr(0, 1).toUpperCase();
+      if (/^[\u4e00-\u9fa5]/.test(name)) {
+        this.nameDisplay = name.substr(name.length - 1, 1);
+      } else {
+        this.nameDisplay = this.name.substr(0, 1).toUpperCase();
+      }
     }
     this.getBackgroundColor(name.substr(0, 1));
   }

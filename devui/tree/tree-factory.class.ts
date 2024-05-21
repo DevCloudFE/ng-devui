@@ -204,6 +204,9 @@ export class TreeFactory {
 
   deleteNodeById(id: number | string, renderTree = true) {
     const node = this.nodes[id];
+    if (!node) {
+      return;
+    }
     const parentNode = this.nodes[node.parentId];
     this.removeChildNode(parentNode, node);
 
@@ -613,6 +616,9 @@ export class TreeFactory {
 
   public mergeTreeNodes(targetNode = this.treeRoot) {
     const mergeToNode = (node) => {
+      if (!node) {
+        return;
+      }
       if (node.data.children?.length === 1 && node.data.children[0]?.data?.children?.length !== 0) {
         node.data.title = node.data.title + ' / ' + node.data.children[0]?.data?.title;
         node.data.children = node.data.children[0]?.data?.children;

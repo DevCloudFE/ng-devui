@@ -61,20 +61,11 @@
 
     .devui-radio-material {
       border-color: $devui-shape-icon-fill;
-      background-color: $devui-shape-icon-fill-disabled;
+      background-color: $devui-disabled-bg;
     }
 
     &.active .devui-radio-material {
       border-color: $devui-icon-fill-active-disabled;
-    }
-  }
-
-  &:not(.disabled) {
-    &:hover,
-    &:active {
-      .devui-radio-material {
-        border-color: $devui-brand;
-      }
     }
   }
 }

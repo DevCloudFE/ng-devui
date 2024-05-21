@@ -23,7 +23,7 @@ In the page:
 
 <!-- DatePipe -->
 <div>
-  <p>{{ date | dDatePipe: 'y/MM/dd' }}</p>
+  <p>{{ date | dDatePipe: 'y-MM-dd' }}</p>
 </div>
 
 <!-- SimulateATag -->

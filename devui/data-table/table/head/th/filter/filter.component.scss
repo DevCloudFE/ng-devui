@@ -51,6 +51,16 @@
   margin-bottom: 4px;
 }
 
+.filter-operation {
+  text-align: center;
+  padding-bottom: 8px;
+  padding-top: 4px;
+
+  .reset-btn {
+    margin-right: 8px;
+  }
+}
+
 .checkbox-group {
   height: 30px;
 }

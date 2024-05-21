@@ -64,7 +64,7 @@
   bottom: 0 !important;
   left: 0;
   z-index: calc(#{$devui-z-index-modal} - 1);
-  background-color: $devui-shadow;
+  background-color: $devui-feedback-overlay-backdrop;
 }
 
 .modal-maximized {

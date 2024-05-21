@@ -1,7 +1,7 @@
 <div class="btn-group g-dropdown" dDropDown appendToBody [appendToBodyDirections]="['leftDown', 'leftUp']" (toggleEvent)="onToggle($event)">
   <d-button-group>
     <d-button icon="icon-add" bsStyle="primary">New</d-button>
-    <d-button class="more" icon="icon-select-arrow" dDropDownToggle bsStyle="primary"></d-button>
+    <d-button class="more" icon="icon-chevron-down-2" dDropDownToggle bsStyle="primary"></d-button>
   </d-button-group>
   <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
     <li role="menuitem" *ngFor="let item of items">

@@ -161,13 +161,13 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
    */
   @Input() showOperationArea = false;
   /**
-   * 【可选】是否显示排序未激活图标，默认不显示,
+   * 【可选】是否显示排序未激活图标，默认显示,
    */
-  @Input() showSortIcon = false;
+  @Input() showSortIcon = true;
   /**
-   * 【可选】是否显示筛选未激活图标，默认不显示,
+   * 【可选】是否显示筛选未激活图标，默认显示,
    */
-  @Input() showFilterIcon = false;
+  @Input() showFilterIcon = true;
   /**
    * 多列选择Change事件，用来更新多列选择数组, column param
    * */
@@ -383,6 +383,13 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
     if (this.innerHeader) {
       this.innerHeader.setHeaderCheckStatus({pageAllChecked: this._pageAllChecked, pageHalfChecked: this.halfChecked});
+    }
+
+    // 固定表头时，数据从无数据到有数据，需要更新滚动位置，避免对齐偏移
+    if (this.fixHeader) {
+      setTimeout(() => {
+        this.onBodyScroll();
+      });
     }
 
     if (this.virtualScroll) {
@@ -938,8 +945,10 @@ export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     });
   }
 
-  onBodyScroll(event: Event) {
-    const target = <HTMLElement>event.target;
+  onBodyScroll(event?: Event) {
+    const target = <HTMLElement>event?.target
+      || this.normalScrollElement.nativeElement
+      || this.virtualScrollViewport.elementRef.nativeElement;
 
     if (this.isCellEdit) {
       // Y轴滚动距离超过tr高度时取消目前编辑状态

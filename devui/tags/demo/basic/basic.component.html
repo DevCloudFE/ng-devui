@@ -15,6 +15,7 @@
   [tags]="tagList_custom"
   [titleProperty]="'name'"
   [mode]="'closeable'"
+  [size]="'lg'"
   (tagDelete)="getTagValue($event); deleteTagCustom($event.index)"
 >
   <ng-template let-tag="tag">

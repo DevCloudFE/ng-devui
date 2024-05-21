@@ -22,6 +22,10 @@ import { SplitterModule } from 'ng-devui/splitter';
 |  disabledBarSize   |          `string`          |    '1px'     | 可选，pane 设置不可调整宽度时生效                           | [垂直布局用法](demo#vertical-layout)              |
 | showCollapseButton |          `boolean`         |    true      | 可选，是否显示收起/展开按钮                                 | [折叠收缩显示菜单](demo#shrink-show-menu) |
 
+## d-splitter 实例方法
+
+提供主动折叠展开的方法toggleCollapsed(index: number),index为展开bar的序号。
+
 # d-splitter-pane
 
 ## d-splitter-pane 参数

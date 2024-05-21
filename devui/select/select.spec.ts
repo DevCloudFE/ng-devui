@@ -861,7 +861,7 @@ describe('Select', () => {
           fixture.detectChanges();
           clearIcon.nativeElement.click();
           fixture.detectChanges();
-          expect(component.option).toBe(null); // TODO: 空的时候到底为null/undefined还是'', 重构需要解决
+          expect(component.option).toBe(undefined);
         }));
 
         // js无法触发css的hover，所以该用例无法测试

@@ -2,7 +2,7 @@
 
 :host {
   display: flex;
-  -webkit-align-items: center;
+  align-items: center;
   min-height: 28px;
 
   ::ng-deep d-breadcrumb-item:last-child {

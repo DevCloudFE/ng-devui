@@ -117,7 +117,7 @@ export function createMouseEvent(type: string, x = 0, y = 0, button = 0): MouseE
   return event;
 }
 
-export function dateToStrWithArr(date: Date, arr = ['yy', 'mm', 'dd'], splitter = '/') {
+export function dateToStrWithArr(date: Date, arr = ['yy', 'mm', 'dd'], splitter = '-') {
   const padZero = (value) => {
     return (String(value)).padStart(2, '0');
   };

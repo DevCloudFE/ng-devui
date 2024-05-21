@@ -24,6 +24,11 @@
   position: relative;
   cursor: default;
 
+  &.lg-size {
+    min-height: 24px;
+    line-height: 22px;
+  }
+
   .content-wrapper {
     pointer-events: none;
     position: absolute;
@@ -119,6 +124,11 @@
   line-height: 18px;
   border-width: 1px;
   background-color: $devui-base-bg;
+}
+
+.lg-size .devui-colorful-tag {
+  height: 22px;
+  line-height: 22px;
 }
 
 .blue-w98 {
