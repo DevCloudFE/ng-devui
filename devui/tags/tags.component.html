@@ -4,6 +4,7 @@
     *ngFor="let tag of hideBeyondTags ? showTags : tags; let index = index"
     [tag]="displayProperty ? tag[displayProperty] : tag"
     [mode]="mode"
+    [size]="size"
     [deletable]="deletable"
     [checked]="tag['checked']"
     [labelStyle]="tag['labelStyle']"
@@ -23,8 +24,12 @@
     [controlled]="true"
     [tag]="'+ ' + beyondTags.length"
     [mode]="'checkable'"
+    [size]="size"
     [popoverStyle]="{ backgroundColor: 'var(--devui-base-bg)' }"
   ></d-tag>
+  <div #suffixElement class="devui-tags-suffix">
+    <ng-content select="[suffix]"></ng-content>
+  </div>
 </div>
 
 <ng-template #beyondTagsTpl>
@@ -34,6 +39,7 @@
       *ngFor="let tag of beyondTags; let index = index"
       [tag]="displayProperty ? tag[displayProperty] : tag"
       [mode]="mode"
+      [size]="size"
       [deletable]="deletable"
       [checked]="tag['checked']"
       [labelStyle]="tag['labelStyle']"

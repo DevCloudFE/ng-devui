@@ -1,8 +1,9 @@
 import {
   AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef,
-  HostBinding, Input, OnChanges, OnDestroy, QueryList, SimpleChanges
+  HostBinding, Input, OnChanges, OnDestroy, QueryList, SimpleChanges, ViewChildren
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { SplitterBarComponent } from './splitter-bar.component';
 import { SplitterPaneComponent } from './splitter-pane.component';
 import { SplitterService } from './splitter.service';
 import { SplitterOrientation } from './splitter.types';
@@ -35,6 +36,7 @@ export class SplitterComponent implements OnChanges, AfterContentInit, OnDestroy
   }
   // 内嵌面板
   @ContentChildren(SplitterPaneComponent) panes: QueryList<SplitterPaneComponent>;
+  @ViewChildren('bar') splitterBars: QueryList<SplitterBarComponent>;
   paneChangesSubscription: Subscription;
 
   constructor(private el: ElementRef, private splitter: SplitterService, private cdr: ChangeDetectorRef) {
@@ -54,6 +56,12 @@ export class SplitterComponent implements OnChanges, AfterContentInit, OnDestroy
       this.reconfigure();
       this.cdr.detectChanges();
     });
+  }
+
+  public toggleCollapsed(index = 0) {
+    const target = this.splitterBars.toArray()[index];
+    target.collapsePrePane();
+    this.cdr.detectChanges();
   }
 
   ngOnDestroy() {

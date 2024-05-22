@@ -17,7 +17,7 @@ import { CarouselModule } from './carousel.module';
     d-carousel-item {
       text-align: center;
       line-height: 200px;
-      background: var(--devui-global-bg, #f3f6f8);
+      background: var(--devui-global-bg, #f5f5f5);
     }
     `
   ]

@@ -1,9 +1,19 @@
 import {
   AfterViewInit,
-  Component, ContentChild, ElementRef, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild
+  Component,
+  ContentChild,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewChild
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { I18nInterface, I18nService } from 'ng-devui/i18n';
+import { I18nFormat, I18nInterface, I18nService } from 'ng-devui/i18n';
 import { DefaultDateConverter } from 'ng-devui/utils';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -58,19 +68,12 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
     if (this.mode === 'year') {
       return 'y';
     } else if (this.mode === 'month') {
-      return 'y-MM';
+      return this.i18nFormat.ultraShort;
     } else {
-      return this.showTime ? 'y/MM/dd HH:mm:ss' : 'y/MM/dd';
+      return this.showTime ? this.i18nFormat.long : this.i18nFormat.short;
     }
   }
 
-  constructor(
-    public pickerSrv: DatepickerProService,
-    private i18n: I18nService
-  ) {
-    this.i18nText = this.i18n.getI18nText().datePickerPro;
-    this.datepickerConvert = new DefaultDateConverter();
-  }
   @Input() isRangeType = false;
   @Input() showTime = false;
   @Input() mode: 'year' | 'month' | 'date' | 'week' = 'date';
@@ -115,9 +118,9 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
   @ViewChild('dateInputEnd') datepickerInputEnd: ElementRef;
 
   strWidth = 0;
-
   _dateValue = [];
-  i18nText;
+  i18nText: any;
+  i18nFormat: any;
   datepickerConvert: DefaultDateConverter;
   unsubscribe$ = new Subject<void>();
   private i18nLocale: I18nInterface['locale'];
@@ -125,14 +128,8 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
   private onChange = (_: any) => null;
   private onTouched = () => null;
 
-  private setI18nText() {
-    this.i18nLocale = this.i18n.getI18nText().locale;
-    this.i18n.langChange().pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe((data) => {
-      this.i18nLocale = data.locale;
-      this.i18nText = data.datePickerPro;
-    });
+  constructor(public pickerSrv: DatepickerProService, private i18n: I18nService) {
+    this.datepickerConvert = new DefaultDateConverter();
   }
 
   ngOnInit() {
@@ -143,6 +140,20 @@ export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, On
 
   ngAfterViewInit(): void {
     this.updateCurPosition();
+  }
+
+  private setI18nText() {
+    this.setI18nTextDetail(this.i18n.getI18nText());
+    this.i18n
+      .langChange()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((data) => this.setI18nTextDetail(data));
+  }
+
+  private setI18nTextDetail(data) {
+    this.i18nText = data.datePickerPro;
+    this.i18nLocale = data.locale;
+    this.i18nFormat = I18nFormat.localFormat[this.i18nLocale];
   }
 
   public updateCurPosition() {

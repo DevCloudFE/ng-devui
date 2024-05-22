@@ -14,6 +14,7 @@ import { DropDownDirective } from './dropdown.directive';
 @Component({
   /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dDropDown][appendToBody]',
+  exportAs: 'd-dropdown-append-to-body',
   template: `
     <ng-content></ng-content>
     <ng-template

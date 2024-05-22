@@ -30,7 +30,6 @@ function webpackConfigSassImporterAlias(config) {
               importer: [
                 getTsConfigAlias(tsconfigPath)
               ],
-              fiber: false,
               precision: 8,
               outputStyle: 'expanded',
             },

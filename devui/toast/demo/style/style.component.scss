@@ -1,14 +1,16 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
 :host ::ng-deep .custom-class {
   .devui-toast-item {
-    color: #252b3a;
-    background-color: #ffffff;
+    color: $devui-text;
+    background-color: $devui-base-bg;
 
     .devui-toast-icon-close {
       top: 10px;
       right: 13px;
 
       .devui-toast-close-icon {
-        fill: #252b3a;
+        fill: $devui-text;
       }
     }
 

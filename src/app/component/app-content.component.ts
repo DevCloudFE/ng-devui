@@ -11,7 +11,7 @@ import { newScopeList, sunsetScopeList } from './scope-list';
   selector: 'd-app-content',
   templateUrl: './app-content.component.html',
   encapsulation: ViewEncapsulation.None,
-  })
+})
 export class AppContentComponent implements OnDestroy, OnInit {
   routes: Routes = [];
   componentsData = [];
@@ -47,6 +47,7 @@ export class AppContentComponent implements OnDestroy, OnInit {
     const versionArr = this.version.split('.');
     this.versionOptions = [
       { name: this.version, link: '/components/get-start', target: '_self' },
+      { name: '16.2.0', link: '/16.2.0/', target: '_self' },
       { name: '15.1.0', link: '/15.1.0/', target: '_self' },
       { name: '14.1.0', link: '/14.1.0/', target: '_self' },
       { name: '13.3.0', link: '/13.3.0/', target: '_self' },

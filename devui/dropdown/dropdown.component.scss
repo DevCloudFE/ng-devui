@@ -9,23 +9,27 @@
 }
 
 .devui-dropdown span {
-  &.icon-chevron-down,
-  &.icon-select-arrow {
+  &.icon-chevron-down {
     display: inline-block;
     vertical-align: text-top;
+  }
+
+  &.icon-chevron-down2 {
+    display: inline-block;
+    vertical-align: middle;
   }
 }
 
 .devui-dropdown-animation span {
   &.icon-chevron-down,
-  &.icon-select-arrow {
+  &.icon-chevron-down-2 {
     transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
   }
 }
 
 .devui-dropdown.open span {
   &.icon-chevron-down,
-  &.icon-select-arrow {
+  &.icon-chevron-down-2 {
     transform: rotate(180deg);
   }
 }

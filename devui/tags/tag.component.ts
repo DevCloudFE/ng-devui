@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, Templ
 import { Observable } from 'rxjs';
 
 export type ITagMode = 'default' | 'checkable' | 'closeable';
+export type ITagSize = 'md' | 'lg';
 
 @Component({
   selector: 'd-tag',
@@ -21,8 +22,9 @@ export class TagComponent implements OnChanges {
   @Input() deletable = false;
   @Input() titleContent: string;
   @Input() mode: ITagMode = 'default';
+  @Input() size: ITagSize = 'md';
   @Input() checked = false;
-  @Input() maxWidth;
+  @Input() maxWidth: string;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() beforeDelete: (tag?: any) => boolean | Promise<boolean> | Observable<boolean>;
   /**

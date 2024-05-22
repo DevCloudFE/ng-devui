@@ -2,8 +2,12 @@
 @import '../../style/core/_font';
 @import '../../style/core/animation';
 
+:host {
+  display: inline-flex;
+}
+
 .devui-breadcrumb-font-style {
-  font-size: $devui-font-size-sm;
+  font-size: $devui-font-size;
   color: $devui-aide-text;
 }
 
@@ -136,6 +140,11 @@ d-search {
   ::ng-deep a,
   ::ng-deep span {
     transition: color $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 440px;
   }
 }
 

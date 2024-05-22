@@ -188,6 +188,11 @@ export class InputNumberComponent implements ControlValueAccessor, OnChanges, On
   ngOnChanges(changes: SimpleChanges): void {
     if (Object.prototype.hasOwnProperty.call(changes, 'min') || Object.prototype.hasOwnProperty.call(changes, 'max')) {
       this.checkRangeValues(this.min, this.max);
+      if (this.value < this.min) {
+        this.setValue(this.min);
+      } else if (this.value > this.max) {
+        this.setValue(this.max);
+      }
     }
   }
 

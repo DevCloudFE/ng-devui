@@ -34,7 +34,7 @@
 }
 
 .devui-input {
-  padding-right: 16px;
+  padding-right: 36px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -95,10 +95,10 @@
 }
 
 .devui-drop-icon {
-  width: 1em;
-  height: 1em;
+  width: 16px;
+  height: 16px;
   display: inline-block;
-  line-height: 1em;
+  line-height: 16px;
   vertical-align: middle;
 
   svg path {
@@ -142,9 +142,14 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 4px;
-  width: 1em;
+  right: 12px;
+  width: 16px;
   display: flex;
+
+  .devui-cascader-close-icon {
+    position: relative;
+    left: 2px;
+  }
 }
 
 :host:not(.devui-glow-style) .devui-tags-input-wrapper:hover {
@@ -172,8 +177,8 @@
   }
 
   .devui-drop-icon-wrapper {
-    flex: 0 0 20px;
-    padding: 0;
+    flex: 0 0 40px;
+    padding: 0 12px;
     display: inline-flex;
     align-items: center;
     justify-content: center;

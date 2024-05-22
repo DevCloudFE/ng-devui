@@ -47,4 +47,8 @@ export class AutoDemoDisableComponent {
   formatter(item) {
     return item.name;
   }
+
+  valueParser(item) {
+    return item.name;
+  }
 }

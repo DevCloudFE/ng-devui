@@ -95,10 +95,14 @@
       </cdk-virtual-scroll-viewport>
     </div>
     <div class="line"></div>
-    <div style="text-align: center; padding-bottom: 8px; padding-top: 4px">
-      <d-button bsStyle="common" style="margin-right: 8px" [disabled]="!isDirty" (btnClick)="resetFilterData(); closeFilter(dropdown)">{{
-        i18nCommonText?.reset
-      }}</d-button>
+    <div class="filter-operation">
+      <d-button
+        bsStyle="common"
+        class="reset-btn"
+        [disabled]="!isDirty && !filterHalfChecked && !filterAllChecked"
+        (btnClick)="resetFilterData(); closeFilter(dropdown)"
+        >{{ i18nCommonText?.reset }}</d-button
+      >
       <d-button class="button-style" (click)="getFilterDataMultiple(); closeFilter(dropdown)">{{ i18nCommonText?.btnOk }}</d-button>
     </div>
   </div>

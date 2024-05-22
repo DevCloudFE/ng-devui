@@ -432,7 +432,7 @@ body {
   color: var(--devui-text, #252b3a);
   font-size: 12px;
   font-size: var(--devui-font-size, 12px);
-  font-family: helvetica, arial, 'PingFang', 'Microsoft YaHei', 'Hiragino Sans GB', 'Microsoft JhengHei', sans-serif;
+  font-family: helvetica, arial, 'PingFang', 'Microsoft YaHei', 'HarmonyOS Sans SC', 'HarmonyOS Sans', 'Hiragino Sans GB', 'Microsoft JhengHei', sans-serif;
   font-variant: tabular-nums;
   line-height: 1.5;
 }

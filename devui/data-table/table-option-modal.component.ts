@@ -47,12 +47,12 @@ export class TableOptionModalComponent implements OnInit {
         this.halfCheck = true;
       }
     });
-
     this.halfCheck = (this.halfCheck && !this.allChecked) ? true : false;
   }
 
   onAllCheckChanges(checked: boolean) {
     this.halfCheck = false;
+    this.allChecked = checked;
     this.columnsCache.forEach(t => {
       if (t.disabled) {
         return;

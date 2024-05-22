@@ -7,6 +7,9 @@ section > div {
 :host ::ng-deep .devui-category-search-icon {
   &.reset {
     cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
 
   svg g path {

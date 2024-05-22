@@ -315,6 +315,14 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
         }
       }
 
+      th[colspan]:not([colspan='1']) {
+        text-align: center;
+
+        .header-container {
+          display: block;
+        }
+      }
+
       .sort-active {
         background: $devui-list-item-hover-bg;
         border-radius: $devui-border-radius 0 0 $devui-border-radius;
@@ -351,10 +359,11 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
         display: block;
         width: calc(100% - 32px);
         position: absolute;
-        height: calc(100% - 14px);
+        height: 32px;
         border: 1px solid $devui-line;
         left: 12px;
-        top: 8px;
+        top: 50%;
+        transform: translateY(-50%);
         border-radius: $devui-border-radius;
         pointer-events: none;
         background-color: $devui-base-bg;
@@ -407,30 +416,60 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
     margin: auto;
   }
 
-  svg.svg-icon rect {
-    stroke: $devui-disabled-text;
+  .childtable-toggler {
+    svg.svg-icon rect {
+      stroke: $devui-disabled-text;
+    }
+
+    svg.svg-icon.svg-icon-close rect:last-child {
+      stroke: none;
+      fill: $devui-disabled-text;
+    }
+
+    path:not(.devui-tick) {
+      fill: $devui-disabled-text;
+    }
+
+    svg.svg-icon:hover g path {
+      fill: $devui-icon-fill-active;
+    }
+
+    svg.svg-icon:hover g rect {
+      stroke: $devui-icon-fill-active;
+    }
+
+    svg.svg-icon.svg-icon-close:hover rect:last-child {
+      stroke: none;
+      fill: $devui-icon-fill-active;
+    }
   }
 
-  svg.svg-icon.svg-icon-close rect:last-child {
-    stroke: none;
-    fill: $devui-disabled-text;
-  }
+  .tree-table-icon {
+    &.svg-icon rect {
+      stroke: $devui-disabled-text;
+    }
 
-  path:not(.devui-tick) {
-    fill: $devui-disabled-text;
-  }
+    &.svg-icon.svg-icon-close rect:last-child {
+      stroke: none;
+      fill: $devui-disabled-text;
+    }
 
-  svg.svg-icon:hover g path {
-    fill: $devui-icon-fill-active;
-  }
+    path:not(.devui-tick) {
+      fill: $devui-disabled-text;
+    }
 
-  svg.svg-icon:hover g rect {
-    stroke: $devui-icon-fill-active;
-  }
+    &.svg-icon:hover g path {
+      fill: $devui-icon-fill-active;
+    }
 
-  svg.svg-icon.svg-icon-close:hover rect:last-child {
-    stroke: none;
-    fill: $devui-icon-fill-active;
+    &.svg-icon:hover g rect {
+      stroke: $devui-icon-fill-active;
+    }
+
+    &.svg-icon.svg-icon-close:hover rect:last-child {
+      stroke: none;
+      fill: $devui-icon-fill-active;
+    }
   }
 
   .resize-handle {
@@ -504,6 +543,7 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
   padding: 40px 0;
   background: $devui-base-bg;
   width: calc(100% - 8px);
+  border-radius: 0 0 $devui-border-radius-card $devui-border-radius-card;
 
   &.overlay-table-no-result {
     width: 100%;
@@ -715,6 +755,11 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
   }
 }
 
+.devui-fix-header.shadow-fix-header {
+  background-color: $devui-list-item-strip-bg;
+  border-radius: $devui-border-radius-card $devui-border-radius-card 0 0;
+}
+
 :host ::ng-deep .devui-toggle-childtable {
   cursor: pointer;
   margin-right: 5px;
@@ -917,5 +962,11 @@ $devui-table-inset-shadow-right: var(--devui-table-inset-shadow-right, -8px 0 8p
 
   tbody > tr > td.devui-checkable-cell {
     padding: 10px;
+  }
+
+  tbody > tr.child-table .devui-table {
+    margin-left: -1px;
+    width: calc(100% + 2px);
+    max-width: calc(100% + 2px);
   }
 }

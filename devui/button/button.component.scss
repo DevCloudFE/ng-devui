@@ -24,6 +24,9 @@ $devui-btn-sm-font-size: $devui-font-size-sm;
 $devui-btn-font-size: $devui-font-size-md;
 $devui-btn-lg-font-size: $devui-font-size-lg;
 $devui-btn-line-height: $devui-line-height-base;
+$devui-btn-border-radius: var(--devui-btn-border-radius, $devui-border-radius);
+$devui-btn-primary-bg-disabled: var(--devui-btn-primary-bg-disabled, $devui-primary-disabled);
+$devui-btn-primary-text-disabled: var(--devui-btn-primary-text-disabled, $devui-light-text);
 
 $devui-btn-normal-config: (
   text: (
@@ -148,7 +151,7 @@ $devui-btn-pseudo-config: (
   font-size: $devui-btn-font-size;
   height: $devui-btn-height;
   line-height: $devui-btn-line-height;
-  border-radius: $devui-border-radius;
+  border-radius: $devui-btn-border-radius;
   border-width: 1px;
   border-color: transparent;
   background-color: transparent;
@@ -176,25 +179,25 @@ $devui-btn-pseudo-config: (
 
   &.devui-btn-common {
     &:disabled {
-      color: $devui-disabled-text;
-      background: $devui-disabled-bg;
+      color: var(--devui-btn-common-text-disabled, $devui-disabled-text);
+      background: var(--devui-btn-common-bg-disabled, $devui-disabled-bg);
       border-color: var(--devui-btn-common-border-disabled, $devui-disabled-line);
     }
   }
 
   &.devui-btn-primary {
     &:disabled {
-      color: $devui-light-text;
-      background: $devui-primary-disabled;
+      color: $devui-btn-primary-text-disabled;
+      background: $devui-btn-primary-bg-disabled;
       border-color: transparent;
     }
   }
 
   &.devui-btn-danger {
     &:disabled {
-      color: $devui-disabled-text;
-      background: $devui-disabled-bg;
-      border: 1px solid $devui-disabled-line;
+      color: $devui-light-text;
+      background: $devui-red-20;
+      border: 1px solid $devui-red-20;
     }
   }
 

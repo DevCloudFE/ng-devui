@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { scrollAnimate } from 'ng-devui/utils';
-import { Subscription, fromEvent } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
 import { NavMenu, SpriteMode, SpriteOption } from './nav-sprite.type';
 
@@ -310,6 +310,31 @@ export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
     this.isOpen = true;
+  }
+
+  constrainPosition(userPointerPosition, dragRef, dimensions, pickupPositionInElement) {
+    const point = {
+      x: userPointerPosition.x - pickupPositionInElement.x,
+      y: userPointerPosition.y - pickupPositionInElement.y,
+    };
+
+    if (point.y < 0) {
+      point.y = 0;
+    }
+
+    if (point.x < 0) {
+      point.x = 0;
+    }
+
+    if (point.x > window.innerWidth - dimensions.width) {
+      point.x = window.innerWidth - dimensions.width;
+    }
+
+    if (point.y > window.innerHeight - dimensions.height) {
+      point.y = window.innerHeight - dimensions.height;
+    }
+
+    return point;
   }
 
   ngOnDestroy() {

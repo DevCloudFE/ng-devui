@@ -16,7 +16,8 @@ async function task() {
     '_shadow.scss',
     '_corner.scss',
     '_animation.scss',
-    '_z-index.scss'
+    '_z-index.scss',
+    '_export-var.scss'
   ], dir)).join('\n');
   const targetDir = "publish/styles-var/";
   const contentWithoutImport = content.replace(/@import[ 'a-z;./]*/ig, '')

@@ -77,12 +77,10 @@
 
 ::ng-deep .devui-icon-container:not(.disabled) span[iconPrefix] {
   color: $devui-text;
-  line-height: 1;
 }
 
 ::ng-deep .devui-icon-container:not(.disabled) span[iconSuffix] {
   color: $devui-text;
-  line-height: 1;
 }
 
 ::ng-deep .devui-icon-container [iconSuffix] {

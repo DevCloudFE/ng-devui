@@ -57,7 +57,7 @@
           </g>
         </svg>
 
-        <span *ngIf="column.extraOptions?.iconFoldTable" [innerHTML]="column.extraOptions?.iconFoldTable | safe: 'html'"></span>
+        <span *ngIf="column.extraOptions?.iconFoldTable" [innerHTML]="column.extraOptions?.iconFoldTable | safe : 'html'"></span>
       </ng-container>
       <ng-container *ngIf="!rowItem['$isChildTableOpen']">
         <svg
@@ -77,7 +77,7 @@
             ></path>
           </g>
         </svg>
-        <span *ngIf="column.extraOptions?.iconUnFoldTable" [innerHTML]="column.extraOptions?.iconUnFoldTable | safe: 'html'"></span>
+        <span *ngIf="column.extraOptions?.iconUnFoldTable" [innerHTML]="column.extraOptions?.iconUnFoldTable | safe : 'html'"></span>
       </ng-container>
     </span>
   </ng-container>
@@ -89,7 +89,7 @@
       column: column,
       rowItem: rowItem,
       cellItem: rowItem[column.field],
-      cellValue: rowItem | disPlayCellValuePipe: rowIndex:column,
+      cellValue: rowItem | disPlayCellValuePipe : rowIndex : column : lang,
       $implicit: this,
       row: rowComponent,
       tableLevel: tableLevel

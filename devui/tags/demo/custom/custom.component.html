@@ -11,6 +11,9 @@
 <d-tag [tag]="'label color9'" [labelStyle]="'purple-w98'"></d-tag>
 <d-tag [tag]="'custom color#F50'" [customColor]="'#f50'"></d-tag>
 <d-tag [tag]="'custom style'" [labelStyle]="'tag-custom'" [titleContent]="'hello'"></d-tag>
+<h4>large size</h4>
+<d-tag [tag]="'large size'" [size]="'lg'"></d-tag>
+<d-tag [tag]="'large custom color#F50'" [customColor]="'#f50'" [titleContent]="'large size'" [size]="'lg'"></d-tag>
 <h4>Deletable</h4>
 <d-tag [tag]="deleteTagName1" [mode]="'closeable'" (tagDelete)="getTagValue($event); deleteTag($event)"></d-tag>
 <d-tag [tag]="deleteTagName2" [mode]="'closeable'" [labelStyle]="'aqua-w98'" (tagDelete)="getTagValue($event); deleteTag($event)"></d-tag>

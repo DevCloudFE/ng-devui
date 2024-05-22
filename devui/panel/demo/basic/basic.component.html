@@ -1,7 +1,7 @@
 <section>
   <d-panel [type]="'primary'" #panel [isCollapsed]="isCollapsed" [showAnimation]="true">
     <d-panel-header>
-      <em class="icon icon-select-arrow" [ngClass]="{ open: panel.isCollapsed }"></em>
+      <em class="icon icon-chevron-down-2" [ngClass]="{ open: panel.isCollapsed }"></em>
       Panel with foldable
     </d-panel-header>
     <d-panel-body>This is body</d-panel-body>
@@ -9,7 +9,7 @@
   <br /><br />
   <d-panel #anotherPanel [isCollapsed]="isCollapsed" [hasLeftPadding]="false" [showAnimation]="true">
     <d-panel-header>
-      <em class="icon icon-select-arrow" [ngClass]="{ open: anotherPanel.isCollapsed }"></em>
+      <em class="icon icon-chevron-down-2" [ngClass]="{ open: anotherPanel.isCollapsed }"></em>
       Panel has no left padding
     </d-panel-header>
     <d-panel-body>This is body</d-panel-body>

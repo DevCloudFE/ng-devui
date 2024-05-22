@@ -1,7 +1,7 @@
 # 如何使用
 在 module 中引入：
 
-```ts
+```tsy-MM-dd
 import { DatepickerProModule } from 'ng-devui/datepicker-pro';
 ```
 
@@ -18,7 +18,7 @@ import { DatepickerProModule } from 'ng-devui/datepicker-pro';
 |     参数   |    类型     |     默认   |    说明   |   跳转 Demo   |
 | :-------:  | :-------: | :-------: | :-------: | :-------: |
 | cssClass   |  `string` |  -- |  可选，自定义 class   |  |
-| format   |  [ng 自定义日期格式](https://angular.cn/api/common/DatePipe#custom-format-options)  |  'y/MM/dd' \| 'y/MM/dd HH:mm:ss' |  可选，传入格式化，根据是否 showTime 区别不同默认值    | [基本用法](demo#basic-usage) |
+| format   |  [ng 自定义日期格式](https://angular.cn/api/common/DatePipe#custom-format-options)  |  'y-MM-dd' \| 'y-MM-dd HH:mm:ss' |  可选，传入格式化，根据是否 showTime 区别不同默认值    | [基本用法](demo#basic-usage) |
 | showTime   |  `boolean` |  false |  可选，是否显示时分秒   | [显示时间](demo#show-time) |
 | disabled   |  `boolean` |  false |  可选，选择器是否禁用   | [基本用法](demo#basic-usage) |
 | autoOpen   |  `boolean` |  false |  可选，初始化是否直接展开   | [显示时间](demo#show-time) |
@@ -48,7 +48,7 @@ import { DatepickerProModule } from 'ng-devui/datepicker-pro';
 |     参数   |    类型     |     默认   |    说明   |   跳转 Demo   |
 | :-------:  | :-------: | :-------: | :-------: | :-------: |
 | cssClass   |  `string` |  -- |  可选，自定义 class   |  |
-| format   |  [ng 自定义日期格式](https://angular.cn/api/common/DatePipe#custom-format-options)  |  'y/MM/dd' \| 'y/MM/dd HH:mm:ss' |  可选，传入格式化，根据是否 showTime 区别不同默认值    | [基本用法](demo#basic-usage) |
+| format   |  [ng 自定义日期格式](https://angular.cn/api/common/DatePipe#custom-format-options)  |  'y-MM-dd' \| 'y-MM-dd HH:mm:ss' |  可选，传入格式化，根据是否 showTime 区别不同默认值    | [基本用法](demo#basic-usage) |
 | showTime   |  `boolean` |  false |  可选，是否显示时分秒   | [范围选择器](demo#range-picker) |
 | disabled   |  `boolean` |  false |  可选，选择器是否禁用   | [基本用法](demo#basic-usage) |
 | autoOpen   |  `boolean` |  false |  可选，初始化是否直接展开   | [显示时间](demo#show-time) |

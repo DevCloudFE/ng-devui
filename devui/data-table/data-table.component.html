@@ -11,6 +11,9 @@
       *ngIf="fixHeader"
       #fixHeaderContainerRef
       class="table-wrap devui-fix-header"
+      [ngClass]="{
+        'shadow-fix-header': headerBg
+      }"
       [style.overflow-x]="'hidden'"
       [style.overflow-y]="'scroll'"
       [style.max-height]="maxHeight ? maxHeight : null"

@@ -16,18 +16,18 @@ import {
   SimpleChanges,
   TemplateRef,
   ViewChild,
-  ViewChildren,
+  ViewChildren
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DatepickerProCalendarComponent } from 'ng-devui/datepicker-pro';
-import { DropDownDirective } from 'ng-devui/dropdown';
+import { DropDownAppendToBodyComponent, DropDownDirective } from 'ng-devui/dropdown';
 import { DValidateRules } from 'ng-devui/form';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ITreeItem, OperableTreeComponent } from 'ng-devui/tree';
 import { DefaultIcons } from 'ng-devui/tree-select';
 import { DateConverter, DefaultDateConverter, DevConfigService, WithConfig } from 'ng-devui/utils';
 import { cloneDeep, intersectionBy, isEqual, merge, mergeWith } from 'lodash-es';
-import { Observable, Subject, fromEvent } from 'rxjs';
+import { fromEvent, Observable, Subject } from 'rxjs';
 import { debounceTime, takeUntil, tap } from 'rxjs/operators';
 import {
   COLORS,
@@ -38,7 +38,7 @@ import {
   SearchConfig,
   SearchEvent,
   SelectedTagsEvent,
-  TextConfig,
+  TextConfig
 } from './category-search.type';
 import { ContentTemplateDirective } from './content-template.directive';
 import { DefaultTemplateDirective } from './default-template.directive';
@@ -65,11 +65,13 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
    * @deprecated
    */
   @Input() allowShowMore = false;
+  @Input() disabled = false;
   @Input() extendedConfig: ExtendedConfig;
   @Input() toggleScrollToTail = false;
   @Input() searchKey = '';
   @Input() placeholderText: string;
   @Input() inputReadOnly = false;
+  @Input() dropdownBoundary = false;
   @Input() showSearchCategory: SearchConfig | boolean = true; // 配置是否显示搜索相关下拉选项
   @Input() categoryInGroup = false; // 是否按组别显示分类下拉列表
   @Input() groupOrderConfig: string[]; // 用户配置组顺序
@@ -155,7 +157,12 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
   private categoryOrder = [];
   private categoryDictionary = {};
 
-  constructor(private devConfigService: DevConfigService, @Inject(DOCUMENT) private doc: any, private i18n: I18nService) {
+  constructor(
+    @Inject(DOCUMENT) private doc: any,
+    private devConfigService: DevConfigService,
+    private i18n: I18nService,
+    private el: ElementRef
+  ) {
     this.document = this.doc;
     this.dateConverter = new DefaultDateConverter();
     this.id = CategorySearchComponent.ID_SEED++;
@@ -172,6 +179,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       allowSave,
       allowShowMore,
       defaultSearchField,
+      disabled,
       category,
       extendedConfig,
       selectedTags,
@@ -196,6 +204,9 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     }
     if (defaultSearchField || category || selectedTags) {
       this.init();
+    }
+    if (disabled) {
+      this.setDisabled();
     }
     if (showSearchCategory) {
       this.setSearchShow();
@@ -260,6 +271,16 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       this.selectedTags.forEach((tag) => {
         tag.customTemplate = this.customTemplates[tag.field];
       });
+    }
+  }
+
+  setDisabled() {
+    if (this.disabled) {
+      this.searchKey = '';
+      this.operationConfig.show = false;
+    } else {
+      this.operationConfig.show = undefined;
+      this.setExtendedConfig();
     }
   }
 
@@ -883,8 +904,22 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
     }
   }
 
+  checkDropdownBoundary(dropdown: DropDownDirective, dropdownMenu: DropDownAppendToBodyComponent) {
+    if (this.dropdownBoundary && dropdownMenu) {
+      const tagRect = dropdown.el.nativeElement.getBoundingClientRect();
+      const hostRect = this.el.nativeElement.getBoundingClientRect();
+      if (tagRect.left < hostRect.left) {
+        dropdownMenu.overlay.offsetX = hostRect.left - tagRect.left;
+        dropdownMenu.overlay.overlayRef.updatePosition();
+      } else if (tagRect.left + tagRect.width > hostRect.left + hostRect.width) {
+        dropdownMenu.overlay.offsetX = 0;
+        dropdownMenu.overlay.overlayRef.updatePosition();
+      }
+    }
+  }
+
   // checkbox | label 当下拉菜单展开重置多选的选中状态
-  resetContent(dropdown: DropDownDirective, tag?: ICategorySearchTagItem) {
+  resetContent(dropdown: DropDownDirective, tag?: ICategorySearchTagItem, dropdownMenu?: DropDownAppendToBodyComponent) {
     const tagItem = tag || this.currentSelectTag || { type: '', options: [] };
     if (this.blurTimer) {
       clearTimeout(this.blurTimer);
@@ -893,6 +928,7 @@ export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewI
       this.toggleEvent(dropdown, tag, this.currentSelectTag);
     }
     if (dropdown.isOpen) {
+      this.checkDropdownBoundary(dropdown, dropdownMenu);
       this.currentOpenDropdown = dropdown;
       if (tag?.type === 'keyword') {
         this.searchKey = this.searchKeyCache;

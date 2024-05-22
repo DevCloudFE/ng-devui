@@ -11,7 +11,7 @@
   <div #dropdownItem="d-dropdown" dDropDown appendToBody class="protocol-box" [class.disabled]="disabled">
     <span dDropDownToggle>
       <span>{{ disabled ? protocolDisabled : protocolValue }}</span>
-      <em class="icon icon-select-arrow" [ngClass]="{ open: dropdownItem.isOpen }"></em>
+      <em class="icon icon-chevron-down-2" [ngClass]="{ open: dropdownItem.isOpen }"></em>
     </span>
     <ul dDropDownMenu class="protocol-list">
       <li *ngFor="let protocolItem of protocolOptions" (click)="selectItem(protocolItem, dropdownItem)">

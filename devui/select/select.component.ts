@@ -281,7 +281,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   }
 
   get isClearIconShow() {
-    return this.allowClear && !this.multiple && !this.disabled && this.value;
+    const hasValue = this.multiple ? this.multiItems?.length : this.value;
+    return this.allowClear && !this.disabled && hasValue;
   }
 
   get showMoreTags() {
@@ -299,6 +300,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   isMouseEvent = false;
   showLoading = false;
   startAnimation = false;
+  limitMaxHeight = false;
   availableOptions = [];
   multiItems = [];
   value: any;
@@ -346,6 +348,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     private changeDetectorRef: ChangeDetectorRef,
     private i18n: I18nService,
     private ngZone: NgZone,
+    private el: ElementRef,
     private devConfigService: DevConfigService,
     private scrollStrategyOption: ScrollStrategyOptions
   ) {
@@ -382,6 +385,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
           preventScroll: this.notAutoScroll,
         });
       });
+    }
+    // 当d-select添加limit-max-height样式类时为devui-dropdown-menu-wrap容器添加最大高度限制样式，避免当窗口高度小于指定下拉最大高度时，下拉内容超出cdk容器
+    if (this.el.nativeElement?.className.includes('limit-max-height')) {
+      this.limitMaxHeight = true;
     }
   }
 
@@ -988,14 +995,20 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
   valueClear($event) {
     $event.stopPropagation();
-    this.value = null;
+    if (this.multiple) {
+      this.multiItems = [];
+      this.value = [];
+      this.setAllChecked();
+    } else {
+      this.value = undefined;
+    }
     this.resetStatus();
     this.onChange(this.value);
     this.valueChange.emit(this.value);
   }
 
   resetStatus() {
-    this.writeIntoInput('');
+    this.writeIntoInput(this.value);
     if (this.availableOptions && this.availableOptions[this.activeIndex]) {
       this.availableOptions[this.activeIndex].isChecked = false;
     }

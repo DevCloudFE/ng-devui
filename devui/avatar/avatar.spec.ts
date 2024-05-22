@@ -51,7 +51,7 @@ describe('avatar basic', () => {
         component.comp.setDisplayName(component.name, component.width);
         fixture.detectChanges();
 
-        expect(nativeEl.textContent).toBe(component.name.substr(0, 1));
+        expect(nativeEl.textContent).toBe(component.name.substr(component.name.length - 1, 1));
       });
 
       it('one word name pick first two character', () => {

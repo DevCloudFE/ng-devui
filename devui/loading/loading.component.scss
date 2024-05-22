@@ -37,6 +37,7 @@
 .devui-busy-default-sign {
   position: relative;
   display: inline-flex;
+  align-items: center;
   z-index: $devui-z-index-full-page-overlay;
   padding: 12px 12px;
   color: $devui-text;
@@ -52,56 +53,58 @@
 
 .devui-busy-default-spinner {
   position: relative;
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-  animation: devui-busy-spinner-anim 1s linear infinite;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  div {
+  svg {
     position: absolute;
-    left: 44.5%;
-    top: 37%;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
+    z-index: 2;
+    width: 28px;
+    height: 28px;
+    animation: animRotate 2s linear infinite;
+
+    circle {
+      animation: animDash 1.5s ease-in-out infinite;
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: 0;
+      stroke-linecap: round;
+      stroke-width: 4.5;
+      stroke: $devui-primary;
+    }
   }
 
-  .devui-loading-bar1 {
-    top: 0;
-    left: 0;
-    background: $devui-brand;
-  }
+  .devui-loading-dots {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    animation: animRotate 12s linear infinite;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 
-  .devui-loading-bar2 {
-    top: 0;
-    left: 9px;
-    background: $devui-brand-foil;
-  }
+    span {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      @for $i from 2 through 12 {
+        &:nth-child(#{$i}) {
+          transform: rotate(#{30 * ($i - 1)}deg);
+        }
+      }
 
-  .devui-loading-bar3 {
-    top: 9px;
-    left: 0;
-    background: $devui-brand-foil;
-  }
-
-  .devui-loading-bar4 {
-    top: 9px;
-    left: 9px;
-    background: $devui-brand;
-  }
-}
-
-@keyframes devui-busy-spinner-anim {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-
-  50% {
-    transform: rotate(180deg) scale(1.5);
-  }
-
-  100% {
-    transform: rotate(360deg) scale(1);
+      i {
+        width: 2px;
+        height: 2px;
+        display: block;
+        margin: 0 auto;
+        border-radius: 50%;
+        background-color: $devui-list-item-active-bg;
+      }
+    }
   }
 }
 
@@ -133,5 +136,28 @@ $time: 1800ms;
   100% {
     stroke-dasharray: -$len * 0.93, $len;
     stroke-dashoffset: -$len * 0.93;
+  }
+}
+
+@keyframes animDash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  66% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -40px;
+  }
+
+  to {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -120px;
+  }
+}
+
+@keyframes animRotate {
+  to {
+    transform: rotate(1turn);
   }
 }
