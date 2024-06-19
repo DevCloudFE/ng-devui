@@ -278,7 +278,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
       this.resizing = false;
 
       // destroy overlay
-      this.renderer2.removeChild(this.element, this.resizeOverlay);
+      this.renderer2.removeChild(this.element.firstElementChild, this.resizeOverlay);
 
       this.renderer2.removeClass(this.tableViewRefElement.nativeElement, 'table-view-selector');
 
