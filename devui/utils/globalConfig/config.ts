@@ -30,6 +30,7 @@ export type TagsinputConfig = IGlobalConfig;
 export type TimepickerConfig = IGlobalConfig;
 export type CheckboxConfig = IGlobalConfig;
 export type TypographyConfig = IGlobalConfig;
+export type SafeNullConfig = { placeholder: string };
 export interface DevUIGlobalConfig {
   tooltip?: TooltipConfig;
   dropdown?: DropdownConfig;
@@ -54,6 +55,7 @@ export interface DevUIGlobalConfig {
   checkboxgroup?: CheckboxConfig;
   panel?: PanelConfig;
   typography?: TypographyConfig;
+  safenull?: SafeNullConfig;
   global?: GlobalConfig;
 }
 
