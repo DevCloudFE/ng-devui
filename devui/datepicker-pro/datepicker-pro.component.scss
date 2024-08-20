@@ -1,8 +1,10 @@
 @import '../style/theme/color';
+@import '../style/theme/corner';
 
 .devui-datepicker-pro-wrapper {
   display: inline-block;
   background-color: $devui-base-bg;
+  border-radius: $devui-border-radius;
 
   .devui-single-picker {
     padding-left: 8px;
