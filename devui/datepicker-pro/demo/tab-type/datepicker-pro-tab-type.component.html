@@ -37,7 +37,7 @@
       <d-tab id="3" title="Relative Time">
         <div style="padding: 8px 16px">
           <span>last:</span>
-          <d-input-number style="width: 100px; margin: 0 8px" [(ngModel)]="relativeNumber"></d-input-number>
+          <d-input-number [min]="0" style="width: 100px; margin: 0 8px" [(ngModel)]="relativeNumber"></d-input-number>
 
           <div style="width: 100px; display: inline-block">
             <d-select [appendToBody]="true" [options]="options" [(ngModel)]="relativeUnit"></d-select>
