@@ -40,6 +40,7 @@ export class BadgeDemoComponent implements OnInit, OnDestroy {
 
   navItems = [];
   subs: Subscription = new Subscription();
+
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
@@ -63,8 +64,8 @@ export class BadgeDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'badge-count', value: values['badge-count'] },
       { dAnchorLink: 'badge-dot', value: values['badge-dot'] },
       { dAnchorLink: 'badge-status', value: values['badge-status'] },
-      { dAnchorLink: 'position', value: values['position'] },
-      { dAnchorLink: 'custom', value: values['custom'] }
+      { dAnchorLink: 'position', value: values.position },
+      { dAnchorLink: 'custom', value: values.custom },
     ];
   }
 

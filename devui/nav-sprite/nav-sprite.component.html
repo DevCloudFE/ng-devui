@@ -12,7 +12,7 @@
   >
     <ng-container *ngIf="isOpen; else minTemp">
       <div class="devui-nav-sprite-header" *ngIf="title !== undefined" [ngClass]="{ 'devui-nav-sprite-header-with-title': title }">
-        <div class="devui-nav-sprite-header-title">{{ title }}</div>
+        <div class="devui-nav-sprite-header-title" title="{{ title }}">{{ title }}</div>
         <d-icon [icon]="closeTemplate" [operable]="true" (click)="hide()"></d-icon>
         <ng-template #closeTemplate>
           <svg

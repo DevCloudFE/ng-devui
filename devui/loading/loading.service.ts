@@ -30,12 +30,12 @@ export class LoadingService {
     view,
     injector,
     zIndex,
-    loadingStyle = 'default'
+    loadingStyle = 'default',
   }: ILoadingOptions = {}) {
     const finalComponentFactoryResolver = this.componentFactoryResolver;
 
     let positionTypeOld = '';
-    positionTypeOld = '' || target['style']['position'];
+    positionTypeOld = '' || (target as any).style.position;
     let backdropRef: ComponentRef<LoadingBackdropComponent>;
     if (backdrop) {
       backdropRef = this.overlayContainerRef.createComponent(
@@ -64,7 +64,7 @@ export class LoadingService {
       left: view ? view.left : '50%',
       isCustomPosition: !!view,
       target: target ? target : this.document.body,
-      loadingStyle: loadingStyle
+      loadingStyle: loadingStyle,
     });
 
     this.renderer.setStyle(target, 'position', positionType);

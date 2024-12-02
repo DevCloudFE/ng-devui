@@ -3,73 +3,52 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'd-drop-scroll',
   templateUrl: './drop-scroll.component.html',
-  styleUrls: ['./drop-scroll.component.scss']
+  styleUrls: ['./drop-scroll.component.scss'],
 })
 export class DropScrollComponent {
   lists = [
     {
       name: 'IDE',
-      list:   [
-        { name: 'Visual Studio Code' },
-        { name: 'WebStorm' },
-        { name: 'Sublime Text' },
-        { name: 'Atom' },
-        { name: 'Notepad++' },
-      ]
+      list: [{ name: 'Visual Studio Code' }, { name: 'WebStorm' }, { name: 'Sublime Text' }, { name: 'Atom' }, { name: 'Notepad++' }],
     },
     {
       name: 'Browser',
-      list:   [
+      list: [
         { name: 'Chrome' },
         { name: 'Firefox' },
         { name: 'Opera' },
         { name: 'Edge' },
         { name: 'Internet Explorer' },
         { name: 'Safari' },
-      ]
+      ],
     },
     {
       name: 'OS',
-      list: [
-        {name: 'Linux'},
-        {name: 'Windows'},
-        {name: 'Mac OS'},
-        {name: 'DOS'},
-        {name: 'Chrome OS'},
-      ]
+      list: [{ name: 'Linux' }, { name: 'Windows' }, { name: 'Mac OS' }, { name: 'DOS' }, { name: 'Chrome OS' }],
     },
     {
       name: 'Mobile OS',
-      list:  [
-        {name: 'Android'},
-        {name: 'IOS'},
-        {name: 'BlackBerry'},
-        {name: 'Symbian'},
-      ]
+      list: [{ name: 'Android' }, { name: 'IOS' }, { name: 'BlackBerry' }, { name: 'Symbian' }],
     },
     {
       name: 'Website',
-      list: []
+      list: [],
     },
     {
       name: 'Search Engine',
-      list:   [
-      ]
+      list: [],
     },
     {
       name: 'Technology Stack',
-      list:   [
-      ]
+      list: [],
     },
     {
       name: 'Language',
-      list:   [
-      ]
+      list: [],
     },
     {
       name: 'Whatever',
-      list:   [
-      ]
+      list: [],
     },
   ];
   showDropScrollArea = false;
@@ -79,8 +58,10 @@ export class DropScrollComponent {
     const fromIndex = e.dragFromIndex;
     const parentArray = e.dragData.parent;
     const item = e.dragData.item;
-    if (-1 !== index) {
-      if (-1 !== fromIndex && index > fromIndex) { index--; }
+    if (index !== -1) {
+      if (fromIndex !== -1 && index > fromIndex) {
+        index--;
+      }
       targetArray.splice(index, 0, fromIndex === -1 ? item : targetArray.splice(fromIndex, 1)[0]);
     } else {
       targetArray.push(item);
@@ -91,9 +72,7 @@ export class DropScrollComponent {
   }
 
   removeItem(item: any, list: Array<any>) {
-    const index = list.map(function (e) {
-      return e.name;
-    }).indexOf(item.name);
+    const index = list.map((e) => e.name).indexOf(item.name);
     list.splice(index, 1);
   }
 }

@@ -38,7 +38,14 @@
   </button>
 
   <div class="devui-image-preview-toolbar">
-    <button [class.disabled]="disabledZoomIn" (click)="zoomIn()" dTooltip [position]="'top'" [content]="i18nText?.zoomIn">
+    <button
+      *ngIf="toolbar.zoomIn"
+      [class.disabled]="disabledZoomIn"
+      (click)="zoomIn()"
+      dTooltip
+      [position]="'top'"
+      [content]="i18nText?.zoomIn"
+    >
       <svg width="18px" height="18px" viewBox="0 0 16 16">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <g fill="#293040" fill-rule="nonzero">
@@ -49,7 +56,14 @@
         </g>
       </svg>
     </button>
-    <button [class.disabled]="disabledZoomOut" (click)="zoomOut()" dTooltip [position]="'top'" [content]="i18nText.zoomOut">
+    <button
+      *ngIf="toolbar.zoomOut"
+      [class.disabled]="disabledZoomOut"
+      (click)="zoomOut()"
+      dTooltip
+      [position]="'top'"
+      [content]="i18nText.zoomOut"
+    >
       <svg width="18px" height="18px" viewBox="0 0 16 16">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <g fill="#293040" fill-rule="nonzero">
@@ -60,7 +74,7 @@
         </g>
       </svg>
     </button>
-    <button (click)="rotate()" dTooltip [position]="'top'" [content]="i18nText.rotate">
+    <button *ngIf="toolbar.rotate" (click)="rotate()" dTooltip [position]="'top'" [content]="i18nText.rotate">
       <svg width="18px" height="18px" viewBox="0 0 16 16" version="1.1">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <path
@@ -70,7 +84,7 @@
         </g>
       </svg>
     </button>
-    <button (click)="pre()" dTooltip [position]="'top'" [content]="i18nText.pre">
+    <button *ngIf="toolbar.prev && toolbar.next" (click)="pre()" dTooltip [position]="'top'" [content]="i18nText.pre">
       <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <polygon
@@ -81,7 +95,7 @@
         </g>
       </svg>
     </button>
-    <span (click)="showInput = true" class="devui-image-preview-index">
+    <span *ngIf="toolbar.index" (click)="showInput = true" class="devui-image-preview-index">
       <d-input-number
         *ngIf="showInput"
         size="sm"
@@ -98,7 +112,7 @@
       <span *ngIf="!showInput">{{ targetImageIndex + 1 + ' ' }}</span>
       <span>{{ '/ ' + totalImageNum }}</span>
     </span>
-    <button class="devui-next" (click)="next()" dTooltip [position]="'top'" [content]="i18nText.next">
+    <button *ngIf="toolbar.prev && toolbar.next" class="devui-next" (click)="next()" dTooltip [position]="'top'" [content]="i18nText.next">
       <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <polygon
@@ -110,7 +124,7 @@
         </g>
       </svg>
     </button>
-    <button (click)="setScaleBest()" dTooltip [position]="'top'" [content]="i18nText.bestScale">
+    <button *ngIf="toolbar.scaleBest" (click)="setScaleBest()" dTooltip [position]="'top'" [content]="i18nText.bestScale">
       <svg width="18px" height="18px" viewBox="0 0 16 16">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <path
@@ -121,10 +135,10 @@
         </g>
       </svg>
     </button>
-    <button (click)="setScaleOriginal()" dTooltip [position]="'top'" [content]="i18nText.originScale">
+    <button *ngIf="toolbar.scaleOriginal" (click)="setScaleOriginal()" dTooltip [position]="'top'" [content]="i18nText.originScale">
       <span>1:1</span>
     </button>
-    <button (click)="getOriginalImage()" dTooltip [position]="'top'" [content]="i18nText.origin">
+    <button *ngIf="toolbar.originnalImage" (click)="getOriginalImage()" dTooltip [position]="'top'" [content]="i18nText.origin">
       <svg width="16px" height="16px" viewBox="0 0 16 16">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <g transform="translate(-1196.000000, -96.000000)" fill="#293040" fill-rule="nonzero">
@@ -142,7 +156,7 @@
         </g>
       </svg>
     </button>
-    <button (click)="getOriginalImage(true)" dTooltip [position]="'top'" [content]="i18nText.download">
+    <button *ngIf="toolbar.download" (click)="getOriginalImage(true)" dTooltip [position]="'top'" [content]="i18nText.download">
       <svg width="16px" height="16px" viewBox="0 0 16 16">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <g>

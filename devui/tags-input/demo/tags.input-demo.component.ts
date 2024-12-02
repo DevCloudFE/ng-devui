@@ -37,6 +37,7 @@ export class TagsInputDemoComponent implements OnInit, OnDestroy {
 
   navItems = [];
   subs: Subscription = new Subscription();
+
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
@@ -57,7 +58,7 @@ export class TagsInputDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
-      { dAnchorLink: 'customize', value: values['customize'] },
+      { dAnchorLink: 'customize', value: values.customize },
       { dAnchorLink: 'async-input', value: values['async-input'] },
       { dAnchorLink: 'virtual-scroll', value: values['virtual-scroll'] },
     ];

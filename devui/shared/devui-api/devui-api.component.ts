@@ -21,13 +21,16 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
       .replace(/<\/table>/g, `</table></div>`);
     this._api = newApi;
   }
+
   get api() {
     return this._api;
   }
+
   apiData: any;
   navSpriteInstance = null;
   document: Document;
   scrollContainer;
+
   constructor(
     private router: Router,
     private translate: TranslateService,
@@ -77,11 +80,10 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
     const that = this;
     Array.from(this.elementRef.nativeElement.querySelectorAll('a')).forEach((link: HTMLElement) => {
       let hrefValue = link.getAttribute('href');
-
       if (hrefValue && hrefValue.indexOf('demo') === 0) {
         hrefValue = this.baseUrl.replace(/\/((?!\/).)*$/, '/' + hrefValue);
         link.setAttribute('href', hrefValue);
-        link.onclick = function ($event) {
+        link.onclick = ($event) => {
           $event.preventDefault();
           that.router.navigateByUrl(hrefValue);
         };
@@ -93,12 +95,11 @@ export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   markdown() {
-    const md = this.api.replace(/[\[]{2}[^\]]*[\]]{2}/g, function (s) {
+    const md = this.api.replace(/[\[]{2}[^\]]*[\]]{2}/g, (s) => {
       let list = s.substr(2, s.length - 4);
       if (list.length <= 2) {
         return '';
       }
-
       if (list[0] === "'") {
         list = list.substr(1);
       }

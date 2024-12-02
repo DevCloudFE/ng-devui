@@ -1,5 +1,14 @@
 import {
-  AfterContentInit, Component, ContentChildren, EventEmitter, Input, OnChanges, OnDestroy, OnInit, QueryList, SimpleChanges
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  SimpleChanges,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TableCheckOptions, TableCheckStatusArg } from '../../data-table.model';
@@ -9,7 +18,7 @@ import { TableThComponent } from './th/th.component';
 @Component({
   /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dTableHead]',
-  templateUrl: './thead.component.html'
+  templateUrl: './thead.component.html',
 })
 export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy, OnChanges {
   @Input() checkable: boolean;
@@ -27,7 +36,7 @@ export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy,
   headerCheckStatusEvent = new EventEmitter<boolean>();
   headerChildrenTableToggleEvent = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
 
@@ -56,10 +65,11 @@ export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy,
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    const { checkable, checkDisabled, checkOptions } = changes;
     if (
-      (changes['checkable'] && !changes['checkable'].isFirstChange()) ||
-      (changes['checkDisabled'] && !changes['checkDisabled'].isFirstChange()) ||
-      (changes['checkOptions'] && !changes['checkOptions'].isFirstChange())
+      (checkable && !checkable.isFirstChange()) ||
+      (checkDisabled && !checkDisabled.isFirstChange()) ||
+      (checkOptions && !checkOptions.isFirstChange())
     ) {
       if (this.headerFirstRow) {
         this.headerFirstRow.headerRowspan = this.headerRowList.length;
@@ -72,7 +82,7 @@ export class TableTheadComponent implements OnInit, AfterContentInit, OnDestroy,
   }
 
   setNestedThToggle() {
-    this.nestedTh = this.thList.find(th => {
+    this.nestedTh = this.thList.find((th) => {
       return th.nestedColumn;
     });
 

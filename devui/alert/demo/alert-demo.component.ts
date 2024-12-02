@@ -49,7 +49,7 @@ export class AlertDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
       { dAnchorLink: 'tips-to-close', value: values['tips-to-close'] },
       { dAnchorLink: 'without-icon', value: values['without-icon'] },
-      { dAnchorLink: 'carousel', value: values['carousel'] },
+      { dAnchorLink: 'carousel', value: values.carousel },
     ];
   }
 

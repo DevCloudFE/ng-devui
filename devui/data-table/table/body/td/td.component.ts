@@ -1,9 +1,12 @@
-import {
-  Component, ElementRef, EventEmitter,
-  HostBinding, Input, OnChanges, OnDestroy, OnInit,
-  Output, SimpleChanges
-} from '@angular/core';
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import { Component,
+  ElementRef,
+  EventEmitter, HostBinding,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Output,
+  SimpleChanges, } from '@angular/core';
+import { Observable, Subscription, fromEvent } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { EditableTip } from '../../../data-table.model';
 import { TableTdService } from './td.service';
@@ -12,9 +15,9 @@ import { TableTdService } from './td.service';
   /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dTableCell]',
   templateUrl: './td.component.html',
-  styleUrls: ['./td.component.scss']
+  styleUrls: ['./td.component.scss'],
 })
-export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
+export class TableTdComponent implements OnChanges, OnDestroy {
   @HostBinding('class.devui-sticky-left-cell') stickyLeftClass: boolean;
   @HostBinding('class.devui-sticky-right-cell') stickyRightClass: boolean;
   @HostBinding('style.left') stickyLeftStyle: string;
@@ -50,12 +53,12 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
   private clickInTd: boolean;
   private tdClickSubscription: Subscription;
   private currentEditing = false;
-  constructor(private elementRef: ElementRef, private tdService: TableTdService) { }
 
-  ngOnInit() {}
+  constructor(private elementRef: ElementRef, private tdService: TableTdService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['fixedLeft']) {
+    const { fixedLeft, fixedRight, editing } = changes;
+    if (fixedLeft) {
       if (this.fixedLeft) {
         this.stickyLeftClass = true;
         this.stickyLeftStyle = this.fixedLeft;
@@ -65,7 +68,7 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
       }
     }
 
-    if (changes['fixedRight']) {
+    if (fixedRight) {
       if (this.fixedRight) {
         this.stickyRightClass = true;
         this.stickyRightStyle = this.fixedRight;
@@ -75,7 +78,7 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
       }
     }
 
-    if (changes['editing'] && changes['editing'].currentValue && !this.currentEditing) {
+    if (editing?.currentValue && !this.currentEditing) {
       this.bindEditClickEvent();
     }
   }
@@ -110,21 +113,23 @@ export class TableTdComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   bindEditClickEvent() {
-    this.documentClickSubscription = fromEvent(document, 'click').pipe(
+    this.documentClickSubscription = fromEvent(document, 'click')
+      .pipe(
       tap((e: Event) => {
         e.stopPropagation();
       })
-    ).subscribe((clickEvent) => {
+      )
+      .subscribe((clickEvent) => {
       if (!this.elementRef.nativeElement.contains(clickEvent.target) && !this.clickInTd) {
         this.finishCellEdit();
       }
       this.clickInTd = false;
     });
-    this.tdMousedownSubscription = fromEvent(this.elementRef.nativeElement, 'mousedown').subscribe(event => {
+    this.tdMousedownSubscription = fromEvent(this.elementRef.nativeElement, 'mousedown').subscribe((event) => {
       this.clickInTd = true;
     });
 
-    this.tdMouseupSubscription = fromEvent(this.elementRef.nativeElement, 'mouseup').subscribe(event => {
+    this.tdMouseupSubscription = fromEvent(this.elementRef.nativeElement, 'mouseup').subscribe((event) => {
       this.clickInTd = false;
     });
 

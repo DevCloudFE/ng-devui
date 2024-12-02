@@ -31,11 +31,11 @@ import { DropDownModule } from 'ng-devui/dropdown';
 
 If this command is used together with dDropDown, dDropDownMenu is attached to the body to prevent dropdown from being blocked in the scroll bar.
 
-| Parameter                  | Type                                                                                                          | Default                                           | Description                                                                                          | Jump to Demo                                                          |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| alignOrigin                | `ElementRef`                                                                                                  | --                                                | Optional. Specify the aligned object                                                                 | [Set the expansion position processing](demo#when-using-appendtobody) |
-| appendToBodyDirections     | `Array<`[`AppendToBodyDirection`](#appendtobodydirection)<br>`\|`[`ConnectedPosition`](#connectedposition)`>` | `['rightDown', 'leftDown', 'rightUp', 'leftUp']` | Optional. The direction array preferentially uses the position in the front of the array.            | [Set the expansion position processing](demo#when-using-appendtobody) |
-| appendToBodyScrollStrategy | `AppendToBodyScrollStrategyType`                                                                              | `reposition`                                      | Optional. Policy for processing pop-up windows during scrolling, see [AppendToBodyScrollStrategyType](#AppendToBodyScrollStrategyType) | [Set the expansion position processing](demo#when-using-appendtobody) |
+| Parameter                  | Type                                                                                                          | Default                                          | Description                                                                                                                            | Jump to Demo                                                          |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| alignOrigin                | `ElementRef`                                                                                                  | --                                               | Optional. Specify the aligned object                                                                                                   | [Set the expansion position processing](demo#when-using-appendtobody) |
+| appendToBodyDirections     | `Array<`[`AppendToBodyDirection`](#appendtobodydirection)<br>`\|`[`ConnectedPosition`](#connectedposition)`>` | `['rightDown', 'leftDown', 'rightUp', 'leftUp']` | Optional. The direction array preferentially uses the position in the front of the array.                                              | [Set the expansion position processing](demo#when-using-appendtobody) |
+| appendToBodyScrollStrategy | `AppendToBodyScrollStrategyType`                                                                              | `reposition`                                     | Optional. Policy for processing pop-up windows during scrolling, see [AppendToBodyScrollStrategyType](#AppendToBodyScrollStrategyType) | [Set the expansion position processing](demo#when-using-appendtobody) |
 
 Note: After appendToBody is used, use `cdkScrollable` where the scroll bar is available.
 
@@ -126,4 +126,8 @@ Used to expand and close menus. For details, see the demo.
 
 ## dDropDownMenuItem
 
-Used for drop-down list items. For details, see the demo.
+Used for drop-down list items. If the class contains disabled, the drop-down menu is not closed when the drop-down item is clicked. When the disabled attribute is set, the click event is not triggered.
+
+| Parameter | Type      | Default | Description                                                                          | Jump to Demo                    |
+| --------- | --------- | ------- | ------------------------------------------------------------------------------------ | ------------------------------- |
+| disabled  | `boolean` | false   | Optional. If it is set to true, the corresponding click event will not be triggered. | [Basic usage](demo#basic-usage) |

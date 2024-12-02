@@ -64,12 +64,12 @@ export class RadioDemoComponent implements OnInit, OnDestroy {
   setNavValues(values: any): void {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
-      { dAnchorLink: 'disabled', value: values['disabled'] },
+      { dAnchorLink: 'disabled', value: values.disabled },
       { dAnchorLink: 'condition-change', value: values['condition-change'] },
       { dAnchorLink: 'condition-radio-group', value: values['condition-radio-group'] },
-      { dAnchorLink: 'horizontal', value: values['horizontal'] },
-      { dAnchorLink: 'vertical', value: values['vertical'] },
-      { dAnchorLink: 'custom', value: values['custom'] },
+      { dAnchorLink: 'horizontal', value: values.horizontal },
+      { dAnchorLink: 'vertical', value: values.vertical },
+      { dAnchorLink: 'custom', value: values.custom },
     ];
   }
 }

@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./top.component.scss'],
 })
 export class LayoutTopComponent {
-  logoSrc = 'https://res.hc-cdn.com/x-roma-components/1.0.10/assets/devui/logo.svg';
+  logoSrc = '/assets/logo.svg';
 }

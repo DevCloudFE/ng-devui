@@ -68,6 +68,7 @@ export class DatepickerProDemoComponent implements OnInit, OnDestroy {
   ];
   navItems = [];
   subs: Subscription = new Subscription();
+
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
@@ -90,14 +91,14 @@ export class DatepickerProDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
       { dAnchorLink: 'date-marked', value: values['mark-type'] },
       { dAnchorLink: 'show-time', value: values['show-time'] },
-      { dAnchorLink: 'template', value: values['template'] },
-      { dAnchorLink: 'monthYear', value: values['monthYear'] },
-      { dAnchorLink: 'range-picker', value: values['rangePicker'] },
-      { dAnchorLink: 'range-template', value: values['rangeTemplate'] },
-      { dAnchorLink: 'host-template', value: values['host-template']  },
-      { dAnchorLink: 'datepicker-pro-static-panel', value: values['datepicker-pro-static-panel']},
-      { dAnchorLink: 'select-type', value: values['select-type']  },
-      { dAnchorLink: 'datepicker-pro-tab-type', value: values['tab-typeDemo']}
+      { dAnchorLink: 'template', value: values.template },
+      { dAnchorLink: 'monthYear', value: values.monthYear },
+      { dAnchorLink: 'range-picker', value: values.rangePicker },
+      { dAnchorLink: 'range-template', value: values.rangeTemplate },
+      { dAnchorLink: 'host-template', value: values['host-template'] },
+      { dAnchorLink: 'datepicker-pro-static-panel', value: values['datepicker-pro-static-panel'] },
+      { dAnchorLink: 'select-type', value: values['select-type'] },
+      { dAnchorLink: 'datepicker-pro-tab-type', value: values['tab-typeDemo'] },
     ];
   }
 

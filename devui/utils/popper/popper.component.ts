@@ -135,7 +135,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
 
     // Can't use bind(this) since it calls itself
     const that = this;
-    const handler = function (e) {
+    const handler = (e) => {
       if (!that.open && that.popper) {
         // Set final state of container to invisible
         that.renderer.setStyle(popperContainer, 'display', 'none');
@@ -184,7 +184,7 @@ export class PopperComponent implements AfterViewInit, OnDestroy {
       PopperComponent.nextTick(() => {
         this.setTransition('open');
         const that = this;
-        const handler = function (e) {
+        const handler = (e) => {
           // remove transition
           that.setTransition();
           e.currentTarget.removeEventListener(e.type, handler);

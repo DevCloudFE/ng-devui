@@ -8,45 +8,45 @@ export function resolveRoutesConfig(lang, routesConfig) {
     }
     return route;
   });
-  const groupedRoutesObj = groupBy(routesWithData,
-    (route) => {
-      if (lang === 'en-us') {
-        return (route as any).data.enType || 'General';
-      }
-      return (route as any).data.type || '通用';
-    });
+  const groupedRoutesObj = groupBy(routesWithData, (route) => {
+    if (lang === 'en-us') {
+      return (route as any).data.enType || 'General';
+    }
+    return (route as any).data.type || '通用';
+  });
   for (const key in groupedRoutesObj) {
     if (key) {
       let componentsNoDisplay = true;
-      const group = groupedRoutesObj[key].map((item) => {
-        if (item.data.name) {
-          const enType = item.data.enType || 'General';
-          const res: any = {
-            link: item.path,
-            enType: enType,
-            name: item.data.name,
-            lowerName: item.data.name.replace(/\W/g, '').toLocaleLowerCase(),
-            folderName: enType.replace(/\W/g, '-').toLocaleLowerCase(),
-            nodisplay: item.data.nodisplay || false,
-            banner: item.data.bannerName,
-          };
-          if (lang === 'en-us') {
-            res.title = item.data.name;
+      const group = groupedRoutesObj[key]
+        .map((item) => {
+          if (item.data.name) {
+            const enType = item.data.enType || 'General';
+            const res: any = {
+              link: item.path,
+              enType: enType,
+              name: item.data.name,
+              lowerName: item.data.name.replace(/\W/g, '').toLocaleLowerCase(),
+              folderName: enType.replace(/\W/g, '-').toLocaleLowerCase(),
+              nodisplay: item.data.nodisplay || false,
+              banner: item.data.bannerName,
+            };
+            if (lang === 'en-us') {
+              res.title = item.data.name;
+            } else {
+              res.title = item.data.name + ' ' + item.data.cnName;
+            }
+            if (!res.nodisplay && componentsNoDisplay) {
+              componentsNoDisplay = false;
+            }
+            return res;
           } else {
-            res.title = item.data.name + ' ' + item.data.cnName;
+            return {};
           }
-          if (!res.nodisplay && componentsNoDisplay) {
-            componentsNoDisplay = false;
-          }
-          return res;
-        } else {
-          return {};
-        }
-      }
-      ).filter((item) => Object.keys(item).length !== 0)
-        .sort(function (s1, s2) {
-          const prev = (s1.title).toUpperCase();
-          const next = (s2.title).toUpperCase();
+        })
+        .filter((item) => Object.keys(item).length !== 0)
+        .sort((s1, s2) => {
+          const prev = s1.title.toUpperCase();
+          const next = s2.title.toUpperCase();
           if (prev < next) {
             return -1;
           }
@@ -63,14 +63,11 @@ export function resolveRoutesConfig(lang, routesConfig) {
 }
 
 export function filterData(event, data) {
-  const res = cloneDeep(data).filter(catalog => {
-    catalog.children = catalog.children.filter((item) =>
-      typeof event === 'string'
-        ? item.title.toLowerCase().includes(event.toLowerCase())
-        : Array.isArray(event)
-          ? event.includes(item.title.toLowerCase())
-          : undefined
-    );
+  const res = cloneDeep(data).filter((catalog) => {
+    catalog.children = catalog.children.filter((item) => {
+      const result = Array.isArray(event) ? event.includes(item.title.toLowerCase()) : undefined;
+      return typeof event === 'string' ? item.title.toLowerCase().includes(event.toLowerCase()) : result;
+    });
     return catalog.children.length;
   });
   return res;

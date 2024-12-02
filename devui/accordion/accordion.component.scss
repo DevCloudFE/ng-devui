@@ -48,11 +48,13 @@
 :host ::ng-deep .devui-accordion-item-title {
   display: block;
   height: 40px;
-  width: 100%;
-  padding: 0 12px 0 20px;
+  width: calc(100% - 24px);
+  margin: 0 12px;
+  padding: 0 8px;
   font-weight: normal;
   line-height: 40px;
   color: $devui-text-weak;
+  border-radius: $devui-border-radius;
   background: transparent;
   cursor: pointer;
 
@@ -125,6 +127,8 @@
     width: 16px;
     height: 16px;
     line-height: 16px;
+    transform: rotate(-90deg);
+    transform-origin: center;
     transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
 
     & > svg {
@@ -146,8 +150,7 @@
   }
 
   &.open > .devui-accordion-open-icon {
-    transform: rotate(180deg);
-    transform-origin: center;
+    transform: none;
   }
 
   &.disabled > .devui-accordion-open-icon {
@@ -172,97 +175,10 @@
 /* 视觉融合灰线 */
 :host ::ng-deep .devui-accordion-item-title {
   position: relative;
-
-  .devui-accordion-splitter {
-    position: absolute;
-    display: inline-block;
-    left: 10px;
-    width: 2px;
-    height: 40px;
-    border-left: 2px solid $devui-dividing-line;
-    vertical-align: middle;
-
-    &.devui-parent-list {
-      border: transparent;
-    }
-  }
-
-  .devui-accordion-splitter::before {
-    content: '';
-    display: block;
-    width: 2px;
-    height: 18px;
-    border-left: 2px solid $devui-form-control-line-active;
-    position: absolute;
-    top: 11px;
-    left: -2px;
-    opacity: 0;
-  }
-
-  &.devui-router-active,
-  &.active {
-    &:not(.open) .devui-accordion-splitter::before {
-      opacity: 1;
-    }
-  }
 }
 
 :host ::ng-deep .devui-accordion-show-animate .devui-accordion-item-title {
   transition:
     font-weight $devui-animation-duration-fast $devui-animation-ease-in-out-smooth,
     background-color $devui-animation-duration-fast $devui-animation-ease-in-out-smooth;
-
-  .devui-accordion-splitter::before {
-    transform: scaleY(0);
-    transition: transform $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
-  }
-
-  &.devui-router-active,
-  &.active {
-    &:not(.open) .devui-accordion-splitter::before {
-      transform: scaleY(1);
-    }
-  }
-}
-
-:host ::ng-deep .devui-accordion-list > .devui-accordion-item:first-child {
-  & > .devui-accordion-item-title,
-  & > .devui-accordion-menu-item > .devui-accordion-item-title {
-    & > a > .devui-accordion-splitter,
-    & > .devui-accordion-splitter {
-      height: 28px;
-      top: 12px;
-
-      &::before {
-        top: 0;
-      }
-    }
-  }
-}
-
-:host ::ng-deep .devui-accordion-list > .devui-accordion-item:last-child {
-  & > .devui-accordion-item-title,
-  & > .devui-accordion-menu-item > .devui-accordion-item-title {
-    & > a > .devui-accordion-splitter,
-    & > .devui-accordion-splitter {
-      height: 28px;
-      top: 0;
-
-      &::before {
-        top: initial;
-        bottom: 0;
-      }
-    }
-  }
-}
-
-:host ::ng-deep .devui-accordion-list > .devui-accordion-item:last-child:first-child {
-  & > .devui-accordion-item-title,
-  & > .devui-accordion-menu-item > .devui-accordion-item-title {
-    & > a > .devui-accordion-splitter,
-    & > .devui-accordion-splitter {
-      height: 18px;
-      top: 11px;
-    }
-  }
 }

@@ -12,10 +12,10 @@ export class DragDropTouch {
   static readonly PRESS_HOLD_MARGIN = 25; // pixels that finger might shiver while pressing
   static readonly PRESS_HOLD_THRESHOLD = 0; // pixels to move before drag starts
   static readonly DRAG_HANDLE_ATTR = 'data-drag-handle-selector';
-
   static readonly rmvAttrs = 'id,class,style,draggable'.split(',');
   static readonly kbdProps = 'altKey,ctrlKey,metaKey,shiftKey'.split(',');
   static readonly ptProps = 'pageX,pageY,clientX,clientY,screenX,screenY'.split(',');
+
   private static instance: DragDropTouch = null;
 
   dataTransfer: DataTransfer;
@@ -25,7 +25,7 @@ export class DragDropTouch {
   lastTarget: HTMLElement;
   // touched draggble element
   dragSource: HTMLElement;
-  ptDown: {x: number; y: number};
+  ptDown: { x: number; y: number };
   isDragEnabled: boolean;
   isDropZone: boolean;
   pressHoldInterval;
@@ -54,7 +54,7 @@ export class DragDropTouch {
         get passive() {
           supportsPassive = true;
           return true;
-        }
+        },
       });
       // listen to touch events
       if (DragDropTouch.isTouchDevice()) {
@@ -64,7 +64,7 @@ export class DragDropTouch {
         const tmod = this.touchmoveOnDocument;
         const teod = this.touchendOnDocument;
         const opt = supportsPassive ? { passive: false, capture: false } : false;
-        const optPassive = supportsPassive ? {passive: true} : false;
+        const optPassive = supportsPassive ? { passive: true } : false;
         d.addEventListener('touchstart', ts, opt);
         d.addEventListener('touchmove', tmod, optPassive);
         d.addEventListener('touchend', teod);
@@ -91,11 +91,13 @@ export class DragDropTouch {
     const d: Document = document;
     const w: Window = window;
     let bool;
-    if ('ontouchstart' in d  // normal mobile device
-      || 'ontouchstart' in w
-      || navigator.maxTouchPoints > 0
-      || navigator['msMaxTouchPoints'] > 0
-      || window['DocumentTouch'] && document instanceof window['DocumentTouch']) {
+    if (
+      'ontouchstart' in d || // normal mobile device
+      'ontouchstart' in w ||
+      navigator.maxTouchPoints > 0 ||
+      (navigator as any).msMaxTouchPoints > 0 ||
+      ((window as any).DocumentTouch && document instanceof (window as any).DocumentTouch)
+    ) {
       bool = true;
     } else {
       const fakeBody = document.createElement('fakebody');
@@ -118,13 +120,13 @@ export class DragDropTouch {
     return bool;
   }
   // ** event listener binding
-  bindTouchmoveTouchend (e: TouchEvent) {
+  bindTouchmoveTouchend(e: TouchEvent) {
     this.touchTarget = e.target;
     e.target.addEventListener('touchmove', this.touchmoveListener, this.listenerOpt);
     e.target.addEventListener('touchend', this.touchendListener);
     e.target.addEventListener('touchcancel', this.touchendListener);
   }
-  removeTouchmoveTouchend () {
+  removeTouchmoveTouchend() {
     if (this.touchTarget) {
       this.touchTarget.removeEventListener('touchmove', this.touchmoveListener);
       this.touchTarget.removeEventListener('touchend', this.touchendListener);
@@ -235,9 +237,7 @@ export class DragDropTouch {
   // ** utilities
   // ignore events that have been handled or that involve more than one touch
   shouldHandle(e) {
-    return e &&
-    !e.defaultPrevented &&
-    e.touches && e.touches.length < 2;
+    return e && !e.defaultPrevented && e.touches && e.touches.length < 2;
   }
   // use regular condition outside of press & hold mode
   shouldHandleMove(e) {
@@ -245,13 +245,11 @@ export class DragDropTouch {
   }
   // allow to handle moves that involve many touches for press & hold
   shouldHandlePressHoldMove(e) {
-    return DragDropTouch.IS_PRESS_HOLD_MODE &&
-      this.isDragEnabled && e && e.touches && e.touches.length;
+    return DragDropTouch.IS_PRESS_HOLD_MODE && this.isDragEnabled && e && e.touches && e.touches.length;
   }
   // reset data if user drags without pressing & holding
   shouldCancelPressHoldMove(e) {
-    return DragDropTouch.IS_PRESS_HOLD_MODE && !this.isDragEnabled &&
-      this.getDelta(e) > DragDropTouch.PRESS_HOLD_MARGIN;
+    return DragDropTouch.IS_PRESS_HOLD_MODE && !this.isDragEnabled && this.getDelta(e) > DragDropTouch.PRESS_HOLD_MARGIN;
   }
   // start dragging when mouseover element matches drag handler selector and specified delta is detected
   shouldStartDragging(e) {
@@ -262,8 +260,7 @@ export class DragDropTouch {
     }
     // start dragging when specified delta is detected
     const delta = this.getDelta(e);
-    return delta > DragDropTouch.THRESHOLD ||
-        (DragDropTouch.IS_PRESS_HOLD_MODE && delta >= DragDropTouch.PRESS_HOLD_THRESHOLD);
+    return delta > DragDropTouch.THRESHOLD || (DragDropTouch.IS_PRESS_HOLD_MODE && delta >= DragDropTouch.PRESS_HOLD_THRESHOLD);
   }
   // find drag handler selector for dragstart only with partial element
   getDragHandle() {
@@ -275,22 +272,22 @@ export class DragDropTouch {
   // test if element matches selector
   matchSelector(element, selector) {
     if (selector) {
-      const proto = Element.prototype;
+      const proto: any = Element.prototype;
       const func =
-          proto['matches'] ||
-          proto['matchesSelector'] ||
-          proto['mozMatchesSelector'] ||
-          proto['msMatchesSelector'] ||
-          proto['oMatchesSelector'] ||
-          proto['webkitMatchesSelector'] ||
-          function (s) {
-            const matches = (this.document || this.ownerDocument).querySelectorAll(s);
-            let i = matches.length;
-            while (--i >= 0 && matches.item(i) !== this) {
-              // do nothing
-            }
-            return i > -1;
-          };
+        proto.matches ||
+        proto.matchesSelector ||
+        proto.mozMatchesSelector ||
+        proto.msMatchesSelector ||
+        proto.oMatchesSelector ||
+        proto.webkitMatchesSelector ||
+        function (s) {
+          const matches = (this.document || this.ownerDocument).querySelectorAll(s);
+          let i = matches.length;
+          while (--i >= 0 && matches.item(i) !== this) {
+            // do nothing
+          }
+          return i > -1;
+        };
       return func.call(element, selector);
     }
     return true;
@@ -318,7 +315,9 @@ export class DragDropTouch {
   }
   // get distance between the current touch event and the first one
   getDelta(e) {
-    if (DragDropTouch.IS_PRESS_HOLD_MODE && !this.ptDown) { return 0; }
+    if (DragDropTouch.IS_PRESS_HOLD_MODE && !this.ptDown) {
+      return 0;
+    }
     const p = this.getPoint(e);
     return Math.abs(p.x - this.ptDown.x) + Math.abs(p.y - this.ptDown.y);
   }
@@ -376,7 +375,7 @@ export class DragDropTouch {
     });
   }
   // copy properties from an object to another
-  copyProps (dst, src, props) {
+  copyProps(dst, src, props) {
     for (let i = 0; i < props.length; i++) {
       const p = props[i];
       dst[p] = src[p];
@@ -385,9 +384,7 @@ export class DragDropTouch {
   // copy styles/attributes from drag source to drag image element
   copyStyle(src, dst) {
     // remove potentially troublesome attributes
-    DragDropTouch.rmvAttrs.forEach(function (att) {
-      dst.removeAttribute(att);
-    });
+    DragDropTouch.rmvAttrs.forEach((att) => dst.removeAttribute(att));
     // copy canvas content
     if (src instanceof HTMLCanvasElement) {
       const canSrc = src;
@@ -431,11 +428,11 @@ export class DragDropTouch {
         button: 0,
         which: 0,
         buttons: 1,
-        dataTransfer: this.dataTransfer
+        dataTransfer: this.dataTransfer,
       };
       this.copyProps(evt, e, DragDropTouch.kbdProps);
       this.copyProps(evt, t, DragDropTouch.ptProps);
-      this.copyProps(evt, {fromTouch: true}, ['fromTouch']); // mark as from touch event
+      this.copyProps(evt, { fromTouch: true }, ['fromTouch']); // mark as from touch event
       this.copyProps(evt, obj, Object.keys(obj));
 
       target.dispatchEvent(evt);
@@ -470,20 +467,19 @@ export class DragDropTouch {
       this.dragoverTimer = undefined;
     }
   }
-
 }
 /* eslint-disable-next-line @typescript-eslint/no-namespace */
 export namespace DragDropTouch {
   /**
-     * Object used to hold the data that is being dragged during drag and drop operations.
-     *
-     * It may hold one or more data items of different types. For more information about
-     * drag and drop operations and data transfer objects, see
-     * <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer">HTML Drag and Drop API</a>.
-     *
-     * This object is created automatically by the @see:DragDropTouch singleton and is
-     * accessible through the @see:dataTransfer property of all drag events.
-     */
+   * Object used to hold the data that is being dragged during drag and drop operations.
+   *
+   * It may hold one or more data items of different types. For more information about
+   * drag and drop operations and data transfer objects, see
+   * <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer">HTML Drag and Drop API</a>.
+   *
+   * This object is created automatically by the @see:DragDropTouch singleton and is
+   * accessible through the @see:dataTransfer property of all drag events.
+   */
   export class DataTransfer implements DataTransfer {
     files;
     items;
@@ -519,21 +515,21 @@ export namespace DragDropTouch {
       return Object.keys(this._data);
     }
 
-    constructor () {
+    constructor() {
       this._dropEffect = 'move';
       this._effectAllowed = 'all';
       this._data = {};
     }
     /**
-       * Removes the data associated with a given type.
-       *
-       * The type argument is optional. If the type is empty or not specified, the data
-       * associated with all types is removed. If data for the specified type does not exist,
-       * or the data transfer contains no data, this method will have no effect.
-       *
-       * @param type Type of data to remove.
-       */
-    clearData (type) {
+     * Removes the data associated with a given type.
+     *
+     * The type argument is optional. If the type is empty or not specified, the data
+     * associated with all types is removed. If data for the specified type does not exist,
+     * or the data transfer contains no data, this method will have no effect.
+     *
+     * @param type Type of data to remove.
+     */
+    clearData(type) {
       if (type !== null) {
         delete this._data[type];
       } else {
@@ -546,7 +542,7 @@ export namespace DragDropTouch {
      *
      * @param type Type of data to retrieve.
      */
-    getData (type) {
+    getData(type) {
       return this._data[type] || '';
     }
 
@@ -559,7 +555,7 @@ export namespace DragDropTouch {
      * @param type Type of data to add.
      * @param value Data to add.
      */
-    setData (type, value) {
+    setData(type, value) {
       this._data[type] = value;
     }
     /**
@@ -569,11 +565,10 @@ export namespace DragDropTouch {
      * @param offsetX The horizontal offset within the image.
      * @param offsetY The vertical offset within the image.
      */
-    setDragImage (img, offsetX, offsetY) {
+    setDragImage(img, offsetX, offsetY) {
       const ddt = DragDropTouch.getInstance();
       ddt.imgCustom = img;
       ddt.imgOffset = { x: offsetX, y: offsetY };
     }
   }
-
 }

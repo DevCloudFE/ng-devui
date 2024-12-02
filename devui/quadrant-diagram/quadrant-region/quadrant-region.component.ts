@@ -1,10 +1,10 @@
-import { Component, Input,  OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
 import { IAxisConfigs, IQuadrantConfigs, IViewConfigs } from '../quadrant-diagram.type';
 
 @Component({
   selector: 'd-quadrant-region',
   templateUrl: './quadrant-region.component.html',
-  styleUrls: ['./quadrant-region.component.scss']
+  styleUrls: ['./quadrant-region.component.scss'],
 })
 export class QuadrantRegionComponent implements OnInit, OnChanges {
   @Input() quadrantConfigs: Array<IQuadrantConfigs>;
@@ -21,9 +21,9 @@ export class QuadrantRegionComponent implements OnInit, OnChanges {
   quadrantHeight: number;
   quadrantWidth: number;
 
-  constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && (changes['axisConfigs'] || changes['view'])) {
+    const { axisConfigs, view } = changes;
+    if (axisConfigs || view) {
       this.drawQuadrantRegion();
     }
   }
@@ -31,6 +31,7 @@ export class QuadrantRegionComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.drawQuadrantRegion();
   }
+
   drawQuadrantRegion() {
     if (this.view && this.view.height) {
       this.quadrantHeight = (this.view.height - this.axisConfigs.axisMargin - this.axisConfigs.originPosition.bottom) / 2;
@@ -47,6 +48,7 @@ export class QuadrantRegionComponent implements OnInit, OnChanges {
     }
     return this.axisConfigs.axisMargin + height;
   }
+
   getQuadrantLeftValue(index) {
     let width = 0;
     if (index + 1 === 1 || index + 1 === 4) {

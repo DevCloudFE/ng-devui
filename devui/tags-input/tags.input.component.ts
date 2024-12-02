@@ -1,5 +1,7 @@
+import { ConnectedPosition } from '@angular/cdk/overlay';
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -11,12 +13,12 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { ToggleMenuContainerComponent, ToggleMenuListComponent, ToggleMenuSearchComponent } from 'ng-devui/toggle-menu';
-import { DevConfigService, WithConfig } from 'ng-devui/utils';
+import { AppendToBodyDirection, AppendToBodyScrollStrategyType, DevConfigService, WithConfig } from 'ng-devui/utils';
 import { isEmpty } from 'lodash-es';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, map, switchMap } from 'rxjs/operators';
@@ -61,9 +63,9 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
    */
   @Input() minLength = 3;
   /**
-   * 【可选】输入标签的最大长度
+   * 【可选】输入标签的最大长度, 524288为 input 支持最大值
    */
-  @Input() maxLength: number = Number.MAX_SAFE_INTEGER;
+  @Input() maxLength = 524288;
   /**
    * 【可选】标签的最小个数
    */
@@ -80,6 +82,8 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
    * 【可选】是否appendToBody
    */
   @Input() appendToBody = false;
+  @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
+  @Input() @WithConfig() appendToBodyScrollStrategy: AppendToBodyScrollStrategyType;
   /**
    * 【可选】是否虚拟滚动
    */
@@ -111,6 +115,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   @Input() caseSensitivity = false;
   @Input() itemTemplate: TemplateRef<any>;
   @Input() tagTemplate: TemplateRef<any>;
+  @Input() noResultItemTemplate: TemplateRef<any>;
   @Input() checkBeforeGenerate: (newTag: string) => boolean;
   @Input() checkBeforeAdd: (newTag: string) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() @WithConfig() showAnimation = true;
@@ -119,6 +124,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
    * 输出函数，当选中某个选项项后，将会调用此函数，参数为当前选择项的值。如果需要获取所有选择状态的值，请参考(ngModelChange)方法
    */
   @Output() valueChange = new EventEmitter<any>();
+  @Output() searchChange = new EventEmitter<any>();
   @ViewChild('tagsInputWrapper', { static: true }) tagsInputWrapperItem: ElementRef;
   @ViewChild(ToggleMenuContainerComponent) selectBoxContainer: ToggleMenuContainerComponent;
   @ViewChild(ToggleMenuListComponent) selectBox: ToggleMenuListComponent;
@@ -166,7 +172,7 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   private onChange = (_: any) => null;
   private onTouch = () => null;
 
-  constructor(private i18n: I18nService, private devConfigService: DevConfigService) {}
+  constructor(private i18n: I18nService, private devConfigService: DevConfigService, private cdr: ChangeDetectorRef) {}
 
   private setI18nText() {
     this.i18nCommonText = this.i18n.getI18nText().common;
@@ -196,8 +202,11 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
 
   ngOnInit() {
     this.setI18nText();
-    this.valueParser = (item) =>
-      this.tagTemplate ? item : typeof item === 'object' ? item[this.displayProperty] || '' : String(item) ? item.toString() : '';
+    this.valueParser = (item) => {
+      const str = String(item) ? item.toString() : '';
+      const obj = typeof item === 'object' ? item[this.displayProperty] || '' : str;
+      return this.tagTemplate ? item : obj;
+    };
     this.newTag = '';
     this._suggestionList = [...this.suggestionList];
     this.searchFn = (term: any) => {
@@ -205,17 +214,13 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       const matchItem = data.find((item) =>
         this.caseSensitivity ? item[this.displayProperty] === term : item[this.displayProperty].toLowerCase() === term.toLowerCase()
       );
-      return of(
-        matchItem
-          ? [matchItem]
-          : data.filter((item) =>
-            term === ''
-              ? true
-              : this.caseSensitivity
-                ? item[this.displayProperty].indexOf(term) !== -1
-                : item[this.displayProperty].toLowerCase().indexOf(term.toLowerCase()) !== -1
-          )
-      );
+      const result = data.filter((item) => {
+        const str = this.caseSensitivity
+          ? item[this.displayProperty].indexOf(term) !== -1
+          : item[this.displayProperty].toLowerCase().indexOf(term.toLowerCase()) !== -1;
+        return term === '' ? true : str;
+      });
+      return of(matchItem ? [matchItem] : result);
     };
     this.registerFilterChange();
   }
@@ -484,12 +489,14 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
       this.selectBox.selectIndex = -1;
     }
     this.newTag = (event || '').trim();
+    this.searchChange.emit(this.newTag);
     this.sourceSubscription.next(this.newTag);
   }
 
   toggleChangeFn(event) {
     if (!event) {
       this.onTouch();
+      this.cdr.detectChanges();
     }
     this.isOpen = event;
   }

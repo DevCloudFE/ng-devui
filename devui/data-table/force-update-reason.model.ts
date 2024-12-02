@@ -1,3 +1,3 @@
 export enum ForceUpdateReason {
-  RowUpdate
+  RowUpdate = 0,
 }

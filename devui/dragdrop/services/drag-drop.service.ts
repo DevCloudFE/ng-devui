@@ -62,14 +62,14 @@ export class DragDropService {
     this.touchInstance = DragDropTouch.getInstance();
     // service not support OnInit, only support OnDestroy, so write in constructor
     // safari的img必须要有src
-    this.dragEmptyImage.src
-      = 'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==';
+    this.dragEmptyImage.src =
+      'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==';
     this.document = this.doc;
   }
   newSubscription() {
     this.subscription.unsubscribe();
     // eslint-disable-next-line no-return-assign
-    return this.subscription = new Subscription();
+    return (this.subscription = new Subscription());
   }
 
   enableDraggedCloneNodeFollowMouse() {
@@ -107,10 +107,14 @@ export class DragDropService {
       this.dragCloneNode.style.width = this.dragOffset.width + 'px';
       this.dragCloneNode.style.height = this.dragOffset.height + 'px';
 
-      if (!(this.dragPreviewDirective
-        && this.dragPreviewDirective.dragPreviewTemplate
-        && this.dragPreviewDirective.dragPreviewOptions
-        && this.dragPreviewDirective.dragPreviewOptions.skipBatchPreview)) {
+      if (
+        !(
+          this.dragPreviewDirective &&
+          this.dragPreviewDirective.dragPreviewTemplate &&
+          this.dragPreviewDirective.dragPreviewOptions &&
+          this.dragPreviewDirective.dragPreviewOptions.skipBatchPreview
+        )
+      ) {
         // 批量拖拽样式
         if (this.batchDragging && this.batchDragData && this.batchDragData.length > 1) {
           // 创建一个节点容器
@@ -135,7 +139,7 @@ export class DragDropService {
               lineHeight: '24px',
               textAlign: 'center',
               color: '#fff',
-              background: ['#5170ff', 'var(--brand-1, #5170ff)']
+              background: ['#5170ff', 'var(--brand-1, #5170ff)'],
             };
             Utils.addElStyles(badge, style);
             node.appendChild(badge);
@@ -153,11 +157,11 @@ export class DragDropService {
                 position: 'absolute',
                 left: -5 * (i + 1) + 'px',
                 top: -5 * (i + 1) + 'px',
-                zIndex: String(- (i + 1)),
+                zIndex: String(-(i + 1)),
                 width: this.dragOffset.width + 'px',
                 height: this.dragOffset.height + 'px',
                 background: '#fff',
-                border: ['1px solid #5170ff', '1px solid var(--brand-1, #5170ff)']
+                border: ['1px solid #5170ff', '1px solid var(--brand-1, #5170ff)'],
               };
               Utils.addElStyles(stackNode, stackStyle);
               node.appendChild(stackNode);
@@ -213,16 +217,16 @@ export class DragDropService {
 
   interceptChildNode(parentNode, childNodeList) {
     const interceptOptions = {
-      root: parentNode
+      root: parentNode,
     };
     this.intersectionObserver = new IntersectionObserver(this.setChildNodeHide, interceptOptions);
-    [].forEach.call(childNodeList, childNode => {
+    [].forEach.call(childNodeList, (childNode) => {
       this.intersectionObserver.observe(childNode);
     });
   }
 
   setChildNodeHide(entries) {
-    entries.forEach(element => {
+    entries.forEach((element) => {
       const { isIntersecting, target: childNode } = element;
       if (isIntersecting) {
         childNode.style.display = 'block';
@@ -236,20 +240,22 @@ export class DragDropService {
     const { offsetLeft, offsetTop } = this.dragOffset;
     const { clientX, clientY } = event;
     requestAnimationFrame(() => {
-      if (!this.dragCloneNode) { return; }
+      if (!this.dragCloneNode) {
+        return;
+      }
       this.dragCloneNode.style.left = clientX - offsetLeft + 'px';
       this.dragCloneNode.style.top = clientY - offsetTop + 'px';
     });
   };
 
   getBatchDragData(identity?, order: ((a: any, b: any) => number) | 'select' | 'draggedElFirst' = 'draggedElFirst') {
-    const result = this.batchDragData.map(dragData => dragData.dragData);
+    const result = this.batchDragData.map((dragData) => dragData.dragData);
     if (typeof order === 'function') {
-      result.sort(<((a: any, b: any) => number)>order);
+      result.sort(<(a: any, b: any) => number>order);
     } else if (order === 'draggedElFirst') {
       let dragData = this.dragData;
       if (identity) {
-        const realDragData = this.batchDragData.filter(dd => dd.identity === identity).pop().dragData;
+        const realDragData = this.batchDragData.filter((dd) => dd.identity === identity).pop().dragData;
         dragData = realDragData;
       }
       result.splice(result.indexOf(dragData), 1);
@@ -266,9 +272,11 @@ export class DragDropService {
     const batchDragData = this.batchDragData;
     if (this.batchDragData) {
       this.batchDragData
-        .filter(dragData => dragData.draggable)
-        .map(dragData => dragData.draggable)
-        .forEach(draggable => {draggable.batchDraggable.dragData = undefined;});
+        .filter((dragData) => dragData.draggable)
+        .map((dragData) => dragData.draggable)
+        .forEach((draggable) => {
+          draggable.batchDraggable.dragData = undefined;
+        });
       this.batchDragData = undefined;
       this.batchDragGroup = undefined;
     }
@@ -276,7 +284,7 @@ export class DragDropService {
   }
 
   public copyStyle(source, target) {
-    ['id', 'class', 'style', 'draggable'].forEach(function (att) {
+    ['id', 'class', 'style', 'draggable'].forEach((att) => {
       target.removeAttribute(att);
     });
 
@@ -294,5 +302,4 @@ export class DragDropService {
       this.copyStyle(source.children[i], target.children[i]);
     }
   }
-
 }

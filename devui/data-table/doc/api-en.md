@@ -518,6 +518,7 @@ Note: Empty cells also need to be indicated. Set rowspan/colspan to 0 based on t
 |        save         |  `EventEmitter<any>`  |               Returns the data after the operation is changed.               | [Tree table with a large amount of data Basic](demo#virtual-scroll-tree-table-basic) |
 |        allChecked         |  `EventEmitter<any>`  |               Return to Table Header Checkbox Status.               | [Tree table with a large amount of data Interaction](demo#virtual-scroll-tree-table-interaction) |
 |        dropRow         |  `EventEmitter<dataList: any[];dropIndex: number;>`  |               Placement event of dragging a table row               | [Dragging a tree table with a large amount of data](demo#virtual-scroll-tree-table-multi-drag) |
+| tableRenderEnd | `EventEmitter<void>` | Callback event indicating that rendering is complete after table data is changed. | |
 
 The original datatable events can be transparently transmitted. The multiSortChange, cellClick, cellDBClick, rowClick, rowDBClick, cellEditStart, cellEditEnd, and resize events are supported.
 

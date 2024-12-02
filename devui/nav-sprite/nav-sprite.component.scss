@@ -64,6 +64,12 @@
       border-bottom: 1px solid $devui-dividing-line;
     }
 
+    .devui-nav-sprite-header-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     .devui-nav-spiri-close {
       cursor: pointer;
     }

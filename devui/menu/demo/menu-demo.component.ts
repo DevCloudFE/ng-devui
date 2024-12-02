@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-menu-demo',
   templateUrl: './menu-demo.component.html',
-  })
+})
 export class MenuDemoComponent implements OnInit {
   DemoBasic: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./basic/basic.component.html?raw') },
@@ -41,7 +41,7 @@ export class MenuDemoComponent implements OnInit {
 
   navItems = [];
   subs: Subscription = new Subscription();
-  constructor(private translate: TranslateService) { }
+  constructor(private translate: TranslateService) {}
 
   ngOnInit() {
     this.subs.add(
@@ -63,7 +63,7 @@ export class MenuDemoComponent implements OnInit {
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
       { dAnchorLink: 'open-close', value: values['open-close'] },
       { dAnchorLink: 'open-one', value: values['open-one'] },
-      { dAnchorLink: 'loop', value: values['loop'] },
+      { dAnchorLink: 'loop', value: values.loop },
       { dAnchorLink: 'custom-node', value: values['custom-node'] },
     ];
   }

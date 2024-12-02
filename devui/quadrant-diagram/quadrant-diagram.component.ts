@@ -1,6 +1,14 @@
 import {
-  ChangeDetectionStrategy, Component, EventEmitter, HostBinding,
-  Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef,
 } from '@angular/core';
 import { QuadrantDiagramService } from './quadrant-diagram.service';
 import { IAxisConfigs, ILabelDataConfigs, IQuadrantConfigs, IViewConfigs, labelSize } from './quadrant-diagram.type';
@@ -18,7 +26,7 @@ export class QuadrantDiagramComponent implements OnInit, OnChanges {
   @Input() quadrantConfigs: Array<IQuadrantConfigs> = DEFAULT_QUADRANT_CONFIGS;
   @Input() view: IViewConfigs = {
     height: 900,
-    width: 950
+    width: 950,
   };
   @Input() normalLabelTemplate: TemplateRef<any>;
   @Input() largeLabelTemplate: TemplateRef<any>;
@@ -53,7 +61,8 @@ export class QuadrantDiagramComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && (changes['axisConfigs'] || changes['view'])) {
+    const { axisConfigs, view } = changes;
+    if (axisConfigs || view) {
       this.initAxisData();
       this.originHeight = this.view.height;
       this.originWidth = this.view.width;
@@ -65,14 +74,14 @@ export class QuadrantDiagramComponent implements OnInit, OnChanges {
       this.isFullScreen = isFullscreen;
       this.view = {
         height: window.screen.height,
-        width: window.screen.width
+        width: window.screen.width,
       };
       this.initAxisData();
     } else {
       this.isFullScreen = isFullscreen;
       this.view = {
         height: this.originHeight,
-        width: this.originWidth
+        width: this.originWidth,
       };
       this.initAxisData();
     }
@@ -96,7 +105,7 @@ export class QuadrantDiagramComponent implements OnInit, OnChanges {
     }
     this.axisConfigs.axisOrigin = {
       x: this.axisConfigs.originPosition.left,
-      y: this.view.height - this.axisConfigs.originPosition.bottom
+      y: this.view.height - this.axisConfigs.originPosition.bottom,
     };
     this.axisConfigs.axisTop = this.axisConfigs.axisMargin;
     this.axisConfigs.axisRight = this.view.width - this.axisConfigs.axisMargin;

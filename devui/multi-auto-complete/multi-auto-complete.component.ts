@@ -13,7 +13,7 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AutoCompleteDirective, AutoCompletePopupComponent } from 'ng-devui/auto-complete';
@@ -135,11 +135,12 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes && changes['overview']) {
-      this.multipleLabelClassNameSuffix = changes['overview'].currentValue;
+    const { overview, placeholder } = changes;
+    if (overview) {
+      this.multipleLabelClassNameSuffix = overview.currentValue;
     }
-    if (changes && changes['placeholder']) {
-      this.clonePlaceholder = changes['placeholder'].currentValue;
+    if (placeholder) {
+      this.clonePlaceholder = placeholder.currentValue;
     }
   }
 
@@ -186,7 +187,7 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
       this.multiItems = [];
       this.multiItems.push(item);
       this.inputEdit = false;
-      this.multipleLabelClassNameSuffix = this.multipleLabelClassNameConfig[this.overview]['blur'];
+      this.multipleLabelClassNameSuffix = this.multipleLabelClassNameConfig[this.overview].blur;
     }
     this.setSinglePlaceholder();
     this.autoSubmit.emit(this.multiItems);
@@ -208,13 +209,13 @@ export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlVal
     this.popupRef = $event.popupRef;
     this.setSinglePlaceholder();
     if ($event.focus) {
-      this.multipleLabelClassNameSuffix = this.multipleLabelClassNameConfig[this.overview]['focus'];
+      this.multipleLabelClassNameSuffix = this.multipleLabelClassNameConfig[this.overview].focus;
       setTimeout(() => {
         // 这里需要等待一会才能聚焦
         this.multiAutoCompleteInputElement.nativeElement.focus();
       }, 0);
     } else {
-      this.multipleLabelClassNameSuffix = this.multipleLabelClassNameConfig[this.overview]['blur'];
+      this.multipleLabelClassNameSuffix = this.multipleLabelClassNameConfig[this.overview].blur;
       this.clearInputValue();
       this.autoSubmit.emit(this.multiItems);
     }

@@ -5,7 +5,7 @@
   background-color: $devui-base-bg;
 
   .devui-range-picker {
-    padding: 0 8px;
+    padding-right: 8px;
     position: relative;
     box-sizing: border-box;
     width: 100%;
@@ -15,7 +15,7 @@
 
     .devui-input {
       padding: 4px 8px;
-      width: calc(50% - 18px);
+      width: calc(50% - 14px);
 
       &.devui-active-input {
         color: $devui-brand;
@@ -26,27 +26,27 @@
       display: block;
       max-width: calc(50% - 48px);
       height: 1px;
-      background-color: $devui-brand-foil;
+      background-color: $devui-brand;
       position: absolute;
       bottom: 0;
 
       &.devui-start-side {
-        left: 35px;
+        left: 9px;
       }
 
       &.devui-end-side {
-        left: calc(50% + 12px);
+        left: calc(50% + 4px);
       }
     }
 
     &-icon {
-      vertical-align: bottom;
+      vertical-align: text-bottom;
       height: 16px;
     }
 
     .close-icon-wrapper {
       padding: 0 8px;
-      visibility: hidden;
+      display: none;
       position: absolute;
       right: 0;
       top: 0;
@@ -76,8 +76,27 @@
       }
     }
 
-    &.devui-has-value:hover .close-icon-wrapper {
-      visibility: visible;
+    .date-icon-wrapper {
+      padding: 0 8px;
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      line-height: 25px;
+
+      path {
+        fill: $devui-icon-fill-weak;
+      }
+    }
+
+    &.devui-has-value.devui-allow-clear:hover {
+      .close-icon-wrapper {
+        display: block;
+      }
+
+      .date-icon-wrapper {
+        display: none;
+      }
     }
 
     &:not(.devui-disabled) .close-icon-wrapper {
@@ -87,7 +106,6 @@
 
   .devui-input-group > .devui-input {
     display: inline-block;
-    text-align: center;
 
     &::-ms-clear {
       display: none;

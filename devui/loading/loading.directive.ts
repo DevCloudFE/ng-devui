@@ -11,9 +11,9 @@ import {
   SimpleChanges,
   TemplateRef,
   ViewContainerRef,
-  ViewRef
+  ViewRef,
 } from '@angular/core';
-import { forkJoin, from, Observable, Subscription, throwError } from 'rxjs';
+import { Observable, Subscription, forkJoin, from, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LoadingBackdropComponent } from './loading-backdrop.component';
 import { LoadingComponent } from './loading.component';
@@ -51,7 +51,8 @@ export class LoadingDirective implements OnChanges {
     if (changeArr.find((item) => item !== undefined)) {
       // loading 兼容showLoading, 赋值类型为 boolean 时触发显示
       const isBoolean = typeof this.loading === 'boolean';
-      const isLoading = this.showLoading !== undefined ? this.showLoading : isBoolean ? this.loading : undefined;
+      const flag = isBoolean ? this.loading : undefined;
+      const isLoading = this.showLoading !== undefined ? this.showLoading : flag;
       if (isLoading !== undefined) {
         this.showLoadingChangeEvent(isLoading as boolean);
       }
@@ -101,9 +102,7 @@ export class LoadingDirective implements OnChanges {
     }
 
     if (!this.loadingRef) {
-      this.loadingRef = this.viewContainerRef.createComponent(
-        LoadingComponent, { index: null, injector: this.injector }
-      );
+      this.loadingRef = this.viewContainerRef.createComponent(LoadingComponent, { index: null, injector: this.injector });
 
       this.insert(this.loadingRef.hostView);
     }
@@ -135,10 +134,7 @@ export class LoadingDirective implements OnChanges {
 
   private createLoadingBackdrop(): void {
     this.backdropRef =
-      !this.backdropRef &&
-      this.viewContainerRef.createComponent(
-        LoadingBackdropComponent, { index: null, injector: this.injector }
-      );
+      !this.backdropRef && this.viewContainerRef.createComponent(LoadingBackdropComponent, { index: null, injector: this.injector });
 
     this.insert(this.backdropRef.hostView);
 

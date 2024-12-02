@@ -10,7 +10,7 @@ const enum Browser {
   Chrome = 'Chrome',
   Safari = 'Safari',
   Other = 'Other',
-};
+}
 declare type HttpObserve = 'body' | 'events' | 'response';
 declare type ResponseType = 'arraybuffer' | 'blob' | 'json' | 'text';
 export class HelperUtils {
@@ -30,29 +30,19 @@ export class HelperUtils {
   private static getBrowserInfo() {
     if (typeof navigator !== 'undefined') {
       const ua = navigator.userAgent.toLowerCase();
-      const isIE = ua.match(/rv:([\d.]+)\) like gecko/) || ua.match(/msie ([\d\.]+)/);
-      const isClassicEdge = ua.match(/edge\/([\d\.]+)/);
-      const isFirefox = ua.match(/firefox\/([\d\.]+)/);
-      const isOpera = ua.match(/(?:opera|opr).([\d\.]+)/);
-      const isEdge = ua.match(/edg\/([\d\.]+)/);
-      const isChrome = ua.match(/chrome\/([\d\.]+)/);
-      const isSafari = ua.match(/version\/([\d\.]+).*safari/);
-      const infos = isIE || isClassicEdge || isFirefox || isOpera || isEdge || isChrome || isSafari;
-      this._browserName = isIE
-        ? Browser.IE
-        : isClassicEdge
-          ? Browser.ClassicEdge
-          : isFirefox
-            ? Browser.Firefox
-            : isOpera
-              ? Browser.Opera
-              : isEdge
-                ? Browser.Edge
-                : isChrome
-                  ? Browser.Chrome
-                  : isSafari
-                    ? Browser.Safari
-                    : Browser.Other;
+      const results = [
+        ua.match(/rv:([\d.]+)\) like gecko/) || ua.match(/msie ([\d\.]+)/),
+        ua.match(/edge\/([\d\.]+)/),
+        ua.match(/firefox\/([\d\.]+)/),
+        ua.match(/(?:opera|opr).([\d\.]+)/),
+        ua.match(/edg\/([\d\.]+)/),
+        ua.match(/chrome\/([\d\.]+)/),
+        ua.match(/version\/([\d\.]+).*safari/),
+      ];
+      const index = results.findIndex((item) => item);
+      const infos = results[index];
+      const browserNames = [Browser.IE, Browser.ClassicEdge, Browser.Firefox, Browser.Opera, Browser.Edge, Browser.Chrome, Browser.Safari];
+      this._browserName = browserNames[index] || Browser.Other;
       this._browserVersion = infos ? parseInt(infos[1], 10) : 0;
     }
   }
@@ -60,7 +50,7 @@ export class HelperUtils {
   static jumpOuterUrl(url, target = '_blank') {
     if (url !== undefined && typeof document !== 'undefined') {
       const tempLink = document.createElement('a');
-      tempLink.style.display = 'none';     // for IE 11
+      tempLink.style.display = 'none'; // for IE 11
       tempLink.target = target;
       tempLink.href = url;
       document.body.appendChild(tempLink); // for IE 11, IE11需要append到document.body里面的a链接才会生效
@@ -74,9 +64,9 @@ export class HelperUtils {
   static downloadFile(
     url: string,
     option?: {
-      method?: 'POST'| 'GET' | 'post' | 'get';
-      params?: {[property: string]: string};
-      enctype?: 'application/x-www-form-urlencoded' | 'multipart/form-data'| 'text/plain';
+      method?: 'POST' | 'GET' | 'post' | 'get';
+      params?: { [property: string]: string };
+      enctype?: 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain';
       iframename?: string;
     },
     onError?: (response) => void
@@ -84,22 +74,22 @@ export class HelperUtils {
     if (typeof document === 'undefined') {
       return;
     }
-    if (document.querySelector('iframe[name=' + (option && option.iframename || 'download') + ']')) {
-      document.body.removeChild(document.querySelector('iframe[name=' + (option && option.iframename || 'download') + ']'));
+    if (document.querySelector(`iframe[name='${option?.iframename || 'download'}]`)) {
+      document.body.removeChild(document.querySelector(`iframe[name='${option?.iframename || 'download'}]`));
     }
     const tempiframe = document.createElement('iframe');
-    tempiframe.name = option && option.iframename || 'download';
+    tempiframe.name = (option && option.iframename) || 'download';
     tempiframe.style.display = 'none';
 
     const tempform = document.createElement('form');
     tempform.action = url;
-    tempform.method = option && option.method || 'post';
-    tempform.target = option && option.iframename || 'download';
-    tempform.enctype = option && option.enctype || 'application/x-www-form-urlencoded';
+    tempform.method = (option && option.method) || 'post';
+    tempform.target = (option && option.iframename) || 'download';
+    tempform.enctype = (option && option.enctype) || 'application/x-www-form-urlencoded';
     tempform.style.display = 'none';
 
     if (option && option.params) {
-      Object.keys(option.params).forEach(key => {
+      Object.keys(option.params).forEach((key) => {
         const opt = document.createElement('input');
         opt.name = key;
         opt.value = option.params[key];
@@ -117,7 +107,7 @@ export class HelperUtils {
     // 下载错误处理。下载成功并不会响应，因为响应头中带有Content-Disposition（下载头）的url，无法监听iframe的load事件，load事件不会触发
     tempiframe.addEventListener('load', (event) => {
       try {
-        const iframeDoc =  tempiframe.contentDocument;
+        const iframeDoc = tempiframe.contentDocument;
         if (onError !== undefined) {
           let response;
           try {
@@ -143,12 +133,14 @@ export class HelperUtils {
     url: string,
     option?: {
       method?: 'POST' | 'GET' | 'post' | 'get';
-      params?: {[property: string]: string};
+      params?: { [property: string]: string };
       enctype?: 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain';
       header?: {
         [header: string]: string | string[];
       };
+      observe?: 'events' | 'response';
       responseOption?: 'response' | 'body' | 'json';
+      responseType?: 'blob' | 'arraybuffer';
       reportProgress?: boolean;
       filename?: string;
       withCredentials?: boolean;
@@ -156,14 +148,15 @@ export class HelperUtils {
     },
     onError?: (response) => void,
     onSuccess?: (response) => void,
-    onProgress?: (response) => void,
+    onProgress?: (response) => void
   ) {
-
-    const requestMethod = option && option.method && option.method.toLowerCase() || 'post';
+    const requestMethod = (option && option.method && option.method.toLowerCase()) || 'post';
     const requestHeaderContentType = option.enctype || 'application/x-www-form-urlencoded';
-    const requestParams = option.params ? new HttpParams({
-      fromObject: option.params
-    }) : null;
+    const requestParams = option.params
+      ? new HttpParams({
+        fromObject: option.params,
+      })
+      : null;
 
     const requestUrl = url;
     const requestOptionParams = requestMethod === 'get' ? requestParams : undefined;
@@ -171,21 +164,25 @@ export class HelperUtils {
 
     const responseOption = option.responseOption;
     /* eslint-disable-next-line prefer-object-spread */
-    const requestOption = Object.assign({}, {
-      body: requestBody,
-      observe: (option.reportProgress ? 'events' : 'response') as HttpObserve,
-      params: requestOptionParams,
-      headers: {
-        'Content-Type': requestHeaderContentType
+    const requestOption = Object.assign(
+      {},
+      {
+        body: requestBody,
+        observe: (option.observe || option.reportProgress ? 'events' : 'response') as HttpObserve,
+        params: requestOptionParams,
+        headers: {
+          'Content-Type': requestHeaderContentType,
+        },
+        withCredentials: option.withCredentials,
+        reportProgress: option.reportProgress,
+        responseType: (option.responseType || option.reportProgress ? 'blob' : 'arraybuffer') as ResponseType,
       },
-      withCredentials: option.withCredentials,
-      reportProgress: option.reportProgress,
-      responseType: (option.reportProgress ? 'blob' : 'arraybuffer') as ResponseType
-    }, {
-      headers: option.header
-    });
+      {
+        headers: option.header,
+      }
+    );
 
-    const handleResponse = (resOption => {
+    const handleResponse = ((resOption) => {
       switch (resOption) {
       case 'response':
         return (res: HttpResponse<ArrayBuffer>) => res;
@@ -224,12 +221,14 @@ export class HelperUtils {
       if (typeof document === 'undefined' || typeof window === 'undefined') {
         return;
       }
-      if (window.navigator && window.navigator['msSaveOrOpenBlob']) { // IE11 support
-        const blob = new Blob([data], {type: contentType});
-        window.navigator['msSaveOrOpenBlob'](blob, filename);
-      } else {// other browsers
+      if ((window.navigator as any)?.msSaveOrOpenBlob) {
+        // IE11 support
+        const blob = new Blob([data], { type: contentType });
+        (window.navigator as any).msSaveOrOpenBlob(blob, filename);
+      } else {
+        // other browsers
         if ('download' in document.createElement('a')) {
-          const blob = new Blob([data], {type: contentType});
+          const blob = new Blob([data], { type: contentType });
           const link = document.createElement('a');
           link.href = URL.createObjectURL(blob);
           link.download = filename;
@@ -239,7 +238,7 @@ export class HelperUtils {
           URL.revokeObjectURL(link.href);
         } else {
           // not support tag a download attribute use file download, filename won't support
-          const file = new File([data], filename, {type: contentType});
+          const file = new File([data], filename, { type: contentType });
           const exportUrl = URL.createObjectURL(file);
           window.location.assign(exportUrl);
           URL.revokeObjectURL(exportUrl);
@@ -248,7 +247,10 @@ export class HelperUtils {
     };
 
     const getFilenameFromDisposition = (disposition: string) => {
-      const filenamePair =  disposition.split(';').filter(str => /^filename=/.test(str.trim())).pop();
+      const filenamePair = disposition
+        .split(';')
+        .filter((str) => /^filename=/.test(str.trim()))
+        .pop();
       if (filenamePair) {
         let str = filenamePair.trim();
         str = str.split('=')[1];
@@ -259,45 +261,48 @@ export class HelperUtils {
       }
     };
 
-    const subscriber = httpClient.request(requestMethod, requestUrl, requestOption).subscribe((res: HttpEvent<any>) => {
-      if (res.type === HttpEventType.DownloadProgress) {
-        if (onProgress) {
-          onProgress(res);
-        }
-      } else if (res.type === HttpEventType.Response) {
-        const httpResponse = res as HttpResponse<any>;
-        const disposition = (<HttpHeaders>httpResponse.headers).get('content-disposition');
-        const contentType = (<HttpHeaders>httpResponse.headers).get('content-type');
+    const subscriber = httpClient.request(requestMethod, requestUrl, requestOption).subscribe(
+      (res: HttpEvent<any>) => {
+        if (res.type === HttpEventType.DownloadProgress) {
+          if (onProgress) {
+            onProgress(res);
+          }
+        } else if (res.type === HttpEventType.Response) {
+          const httpResponse = res as HttpResponse<any>;
+          const disposition = (<HttpHeaders>httpResponse.headers).get('content-disposition');
+          const contentType = (<HttpHeaders>httpResponse.headers).get('content-type');
 
-        if (/^attachment/i.test(disposition) || option.downloadWithoutDispositionHeader) {
-          const downloadFilename = option.filename || disposition && getFilenameFromDisposition(disposition) || url ;
-          downloadFileFromArrayBuffer(httpResponse.body, downloadFilename, contentType);
-          if (onSuccess) {
-            onSuccess(httpResponse);
-          }
-        } else {
-          if (onError) {
-            let response;
-            try {
-              response = handleResponse(httpResponse);
-            } catch (e) {
-              response = httpResponse;
+          if (/^attachment/i.test(disposition) || option.downloadWithoutDispositionHeader) {
+            const downloadFilename = option.filename || (disposition && getFilenameFromDisposition(disposition)) || url;
+            downloadFileFromArrayBuffer(httpResponse.body, downloadFilename, contentType);
+            if (onSuccess) {
+              onSuccess(httpResponse);
             }
-            onError(response);
+          } else {
+            if (onError) {
+              let response;
+              try {
+                response = handleResponse(httpResponse);
+              } catch (e) {
+                response = httpResponse;
+              }
+              onError(response);
+            }
           }
         }
-      }
-    }, err => {
-      if (onError) {
-        let response;
-        try {
-          response = handleResponse(err);
-        } catch (e) {
-          response = err;
+      },
+      (err) => {
+        if (onError) {
+          let response;
+          try {
+            response = handleResponse(err);
+          } catch (e) {
+            response = err;
+          }
+          onError(response);
         }
-        onError(response);
       }
-    });
+    );
 
     return subscriber;
   }
@@ -322,11 +327,11 @@ export class HelperUtils {
 }
 
 @Directive({
-  selector: '[dSimulateATag]'
+  selector: '[dSimulateATag]',
 })
 export class SimulateATagDirective {
   @Input() href: string;
-  @Input() target: '_blank' | '_self' | '_parent' | '_top' | string   = '_blank';
+  @Input() target: '_blank' | '_self' | '_parent' | '_top' | string = '_blank';
   constructor() {}
   @HostListener('click') onClick() {
     HelperUtils.jumpOuterUrl(this.href, this.target);

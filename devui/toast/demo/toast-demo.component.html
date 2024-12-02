@@ -27,7 +27,13 @@
       <d-single demo></d-single>
     </d-codebox>
   </div>
-
+  <div class="devui-demo-example" [dAnchor]="'append'">
+    <div class="devui-demo-title">{{ 'components.toast.appendDemo.title' | translate }}</div>
+    <div class="devui-demo-text">{{ 'components.toast.appendDemo.description' | translate }}</div>
+    <d-codebox id="components-toast-append" [sourceData]="appendSource">
+      <d-append demo></d-append>
+    </d-codebox>
+  </div>
   <div class="devui-demo-example" [dAnchor]="'toast-service'">
     <div class="devui-demo-title">{{ 'components.toast.serviceDemo.title' | translate }}</div>
     <div class="devui-demo-text">{{ 'components.toast.serviceDemo.description' | translate }}</div>

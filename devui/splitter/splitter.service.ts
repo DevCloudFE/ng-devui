@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { SplitterBarComponent } from './splitter-bar.component';
 import { SplitterPaneComponent } from './splitter-pane.component';
 
 @Injectable()
 export class SplitterService {
-  panes: Array<SplitterPaneComponent>;
+  panes: SplitterPaneComponent[];
+  bars: SplitterBarComponent[];
   private containerSize: Function;
   paneCount = 0;
   paneChangeSubject = new Subject();
   // 配置pane信息，panes列表，方向，容器大小，方便后续计算使用
-  configPane({panes, orientation, containerSize}) {
+  configPane({ panes, orientation, containerSize }) {
     this.panes = panes;
     this.panes.forEach((pane, index) => {
       pane.order = index * 2;
@@ -31,14 +33,14 @@ export class SplitterService {
         // 设置有最小值，直接取值，如果没有设置就用两个pane总和减去相邻pane的最大值，都没设置（NAN）在取0
         minSize: this.toPixels(prev.minSize) || total - this.toPixels(next.maxSize) || 0,
         // 设置有最大值，直接取值，如果没有设置就用两个pane总和减去相邻pane的最小值，都没设置（NAN）在取两个pane总和
-        maxSize: this.toPixels(prev.maxSize) || total - this.toPixels(next.minSize) || total
+        maxSize: this.toPixels(prev.maxSize) || total - this.toPixels(next.minSize) || total,
       },
       next: {
         index: splitbarIndex + 1,
         initialSize: next.computedSize,
         minSize: this.toPixels(next.minSize) || total - this.toPixels(prev.maxSize) || 0,
-        maxSize: this.toPixels(next.maxSize) || total - this.toPixels(prev.minSize) || total
-      }
+        maxSize: this.toPixels(next.maxSize) || total - this.toPixels(prev.minSize) || total,
+      },
     };
   }
 
@@ -71,7 +73,7 @@ export class SplitterService {
     const newSize = this.clamp(paneState.minSize, paneState.maxSize, paneState.initialSize + moveSize);
     let size = '';
     if (this.isPercent(pane.size)) {
-      size = (100 * newSize / splitterSize) + '%';
+      size = (100 * newSize) / splitterSize + '%';
     } else {
       size = newSize + 'px';
     }
@@ -102,6 +104,13 @@ export class SplitterService {
     return this.panes[index];
   }
 
+  getBar(index) {
+    if (!this.bars || index < 0 || index >= this.bars.length) {
+      return;
+    }
+    return this.bars[index];
+  }
+
   // 判断是不是百分比设置宽度
   isPercent(size) {
     return /%$/.test(size);
@@ -112,7 +121,7 @@ export class SplitterService {
     // 值不满足转换时，result为NAN，方便计算最小、最大宽度判断
     let result = parseFloat(size);
     if (this.isPercent(size)) {
-      result = (this.containerSize() * result / 100);
+      result = (this.containerSize() * result) / 100;
     }
     return result;
   }

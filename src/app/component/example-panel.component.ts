@@ -9,13 +9,13 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
-  ViewChildren
+  ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IExampleData } from 'ng-devui/shared/helpers';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import * as hljs from 'highlight.js/lib/core';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ComponentDataService } from './component.data.service';
 
@@ -51,12 +51,7 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit, OnDestroy {
   footer: any;
   tabContainerWidth: string;
   showDesignTab = false;
-  showTabComponents = [
-    'button',
-    'auto-complete',
-    'select',
-    'text-input',
-  ];
+  showTabComponents = ['button', 'auto-complete', 'select', 'text-input'];
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private comDataService: ComponentDataService,
@@ -125,8 +120,8 @@ export class ExamplePanelComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getData(translations) {
-    if (translations && Object.prototype.hasOwnProperty.call(translations['components'], this.componentPath)) {
-      const component = translations['components'][this.componentPath];
+    if (translations && Object.prototype.hasOwnProperty.call(translations.components, this.componentPath)) {
+      const component = translations.components[this.componentPath];
       this.componentName = component.name;
       this.description = component.description;
       this.tmw = component.tmw;

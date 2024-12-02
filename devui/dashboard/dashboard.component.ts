@@ -137,7 +137,7 @@ export class DashboardComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.renderedWidgets = this.widgetComponents.toArray();
     setTimeout(() => {
       this.renderedWidgets.forEach((widget) =>
-        widget.handleChange(this.addGridStackNodeCompatible(widget.elem.nativeElement['gridstackNode']))
+        widget.handleChange(this.addGridStackNodeCompatible(widget.elem.nativeElement.gridstackNode))
       );
     });
     this.widgetComponents.changes.subscribe((changes) => {
@@ -223,7 +223,7 @@ export class DashboardComponent implements OnChanges, AfterViewInit, OnDestroy {
     if (!this.gridStack) {
       return;
     }
-    if (!this.gridStack['_oneColumnMode']) {
+    if (!(this.gridStack as any)._oneColumnMode) {
       setTimeout(() => {
         const all = items.map((item) => ({
           node: this.addGridStackNodeCompatible(item),

@@ -213,9 +213,9 @@ export class TreeFactory {
     const deleteItems = (nodeId) => {
       this.maintainCheckedNodeList(this.nodes[nodeId], false);
       const children = this.getChildrenById(nodeId);
-      this.nodes = omitBy<Dictionary<TreeNode>>(this.nodes, (_node) => {
+      this.nodes = omitBy(this.nodes, (_node) => {
         return _node.id === nodeId;
-      });
+      }) as Dictionary<TreeNode>;
       forEach(children, (child) => {
         deleteItems(child.id);
       });
@@ -332,7 +332,6 @@ export class TreeFactory {
     case 'none':
       break;
     default:
-      break;
     }
     this.maintainCheckedNodeList(this.nodes[id], checked);
     return this.getCheckedNodes();
@@ -507,11 +506,15 @@ export class TreeFactory {
 
   public addChildNode(parentNode: TreeNode, childNode: TreeNode, index?) {
     if (parentNode) {
-      Array.isArray(parentNode.data.children)
-        ? index !== undefined
-          ? parentNode.data.children.splice(index, 0, childNode)
-          : parentNode.data.children.push(childNode)
-        : (parentNode.data.children = [childNode]);
+      if (Array.isArray(parentNode.data.children)) {
+        if (index !== undefined) {
+          parentNode.data.children.splice(index, 0, childNode);
+        } else {
+          parentNode.data.children.push(childNode);
+        }
+      } else {
+        parentNode.data.children = [childNode];
+      }
     } else {
       index !== undefined ? this._treeRoot.splice(index, 0, childNode) : this._treeRoot.push(childNode);
     }

@@ -19,7 +19,7 @@ import { CategorySearchModule } from 'ng-devui/category-search';
 | category                   | `ICategorySearchTagItem`                                                            | --                                            | 必选，传入分类搜索源数据                                                                    | [基本用法](demo#basic-usage)            |
 | defaultSearchField         | `String[]`                                                                          | []                                            | 可选，配置输入关键字时可在哪些分类中筛选                                                    | [基本用法](demo#basic-usage)            |
 | selectedTags               | `ICategorySearchTagItem`                                                            | --                                            | 可选，传入需要默认选中的分类数据                                                            | [基本用法](demo#basic-usage)            |
-| placeholderText            | `string`                                                                            | --                                            | 可选， 自定义搜索输入框占位文字                                                             | [基本用法](demo#basic-usage)            |
+| placeholderText            | `string`                                                                            | --                                            | 可选，自定义搜索输入框占位文字                                                              | [基本用法](demo#basic-usage)            |
 | ~~allowSave~~              | `boolean`                                                                           | true                                          | 可选，是否显示保存当前过滤的按钮                                                            | [基本用法](demo#basic-usage)            |
 | ~~allowClear~~             | `boolean`                                                                           | true                                          | 可选，是否显示清除当前过滤的按钮                                                            | [基本用法](demo#basic-usage)            |
 | ~~allowShowMore~~          | `boolean`                                                                           | <span style="white-space:nowrap">false</span> | 可选，是否显示当前过滤条件下拉列表的按钮                                                    | [大数据量优化展示](demo#auto-scroll)    |
@@ -29,6 +29,7 @@ import { CategorySearchModule } from 'ng-devui/category-search';
 | beforeTagChange            | `(tag, searchKey, operation) => boolean \| Promise<boolean> \| Observable<boolean>` | --                                            | 可选，改变标签前调用的方法，返回 boolean 类型，返回 false 可以阻止分类值改变                |                                         |
 | toggleEvent                | `(dropdown, tag?, currentSelectTag?) => void`                                       | --                                            | 可选，已选分类的下拉菜单开关时调用的方法，可使用 return 阻止之后的默认方法执行              | [基本用法](demo#basic-usage)            |
 | inputReadOnly              | `boolean`                                                                           | false                                         | 可选，限制是否可通过搜索框输入关键字搜索,`true`则无法输入关键字，仅可根据提供的分类数据筛选 |                                         |
+| inputAutofocus             | `boolean`                                                                           | true                                          | 可选，是否允许自动聚焦搜索框，规避有滚动条场景下自动聚焦导致的位移                          |                                         |
 | disabled                   | `boolean`                                                                           | false                                         | 可选，是否禁用分类搜索                                                                      |                                         |
 | dropdownBoundary           | `boolean`                                                                           | false                                         | 可选，限制已选分类下拉菜单的左右边界，避免分类显示过长导致下拉菜单出现在组件范围以外        |                                         |
 | tagMaxWidth                | `number`                                                                            | --                                            | 可选，单个过滤条件的最大宽度，超过则显示省略号，不设置则不限制                              | [大数据量优化展示](demo#auto-scroll)    |
@@ -102,6 +103,10 @@ export interface ICategorySearchTagItem {
     cache: string | ITagOption | Array<ITagOption | number | string | Date>; // 下拉列表展开时用于重置选择值的缓存数据
   };
   /**
+   * checkbox | label 类型是否显示全选
+   */
+  showSelectAll?: boolean;
+  /**
    * dateRange 类型是否显示时分秒
    */
   showTime?: boolean;
@@ -110,13 +115,37 @@ export interface ICategorySearchTagItem {
    */
   activeRangeType?: 'start' | 'end';
   /**
-   * textInput 类型设置最大长度
+   * textInput | numberRange 类型设置最大长度，numberRange 需传入对象分别设置左右
    */
-  maxLength?: number;
+  maxLength?: number | { left?: number; right?: number };
   /**
-   * textInput | numberRange 类型设置占位符，numberRange需传入对象分别设置左右
+   * textInput | numberRange 类型设置占位符，numberRange 需传入对象分别设置左右
    */
-  placeholder?: string | { left: string; right: string };
+  placeholder?: string | { left?: string; right?: string };
+  /**
+   * numberRange 步进值，需传入对象分别设置左右
+   */
+  step?: { left?: number; right?: number };
+  /**
+   * numberRange 最大值，需传入对象分别设置左右
+   */
+  max?: { left?: number; right?: number };
+  /**
+   * numberRange 最小值，需传入对象分别设置左右
+   */
+  min?: { left?: number; right?: number };
+  /**
+   * numberRange 限制输入的正则或正则字符串，需传入对象分别设置左右
+   */
+  reg?: { left?: RegExp | string; right?: RegExp | string };
+  /**
+   * numberRange 限制小数点后的位数，需传入对象分别设置左右
+   */
+  decimalLimit?: { left?: number; right?: number };
+  /**
+   * numberRange 校验方法，点击确定时执行，返回 true 通过
+   */
+  validateFunc?: (start: number, end: number, tag: ICategorySearchTagItem) => boolean;
   /**
    * treeSelect 类型是否为多选，并显示已选择列表
    */
@@ -130,12 +159,13 @@ export interface ICategorySearchTagItem {
    */
   searchPlaceholder?: string;
   /**
-   * treeSelect 类型自定义搜索方法，参数为搜索关键字和d-operable-tree组件实例
+   * treeSelect 类型自定义搜索方法，参数为搜索关键字和 d-operable-tree 组件实例
    */
   searchFn?: (value: string, treeInstance: OperableTreeComponent) => boolean | Array<any>;
   /**
    * treeSelect 类型相关配置，请参考treeSelect组件API中同名配置
    */
+  checkableRelation?: 'upward' | 'downward' | 'both' | 'none';
   treeNodeIdKey?: string;
   treeNodeChildrenKey?: string;
   treeNodeTitleKey?: string;

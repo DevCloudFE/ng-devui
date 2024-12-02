@@ -4,6 +4,7 @@
 
 :host {
   display: inline-flex;
+  align-items: center;
 }
 
 .devui-breadcrumb-font-style {
@@ -88,6 +89,7 @@
       line-height: 36px;
       width: 170px;
       display: inline-block;
+      vertical-align: top;
 
       &:focus {
         text-decoration: none;
@@ -145,6 +147,7 @@ d-search {
     overflow: hidden;
     white-space: nowrap;
     max-width: 440px;
+    vertical-align: top;
   }
 }
 

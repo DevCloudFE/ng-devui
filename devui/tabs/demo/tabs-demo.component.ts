@@ -95,7 +95,7 @@ export class TabsDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'type-options', value: values['type-options'] },
       { dAnchorLink: 'type-slider', value: values['type-slider'] },
       { dAnchorLink: 'type-wrapped', value: values['type-wrapped'] },
-      { dAnchorLink: 'size', value: values['size'] },
+      { dAnchorLink: 'size', value: values.size },
       { dAnchorLink: 'no-set-content', value: values['no-set-content'] },
       { dAnchorLink: 'custom-template', value: values['custom-template'] },
       { dAnchorLink: 'intercept-tab-switch', value: values['intercept-tab-switch'] },

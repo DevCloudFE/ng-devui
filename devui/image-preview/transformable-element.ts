@@ -19,9 +19,9 @@ export class TransformableElement {
   }
 
   private zoom: number;
-  private turn: number;   // turn
-  private translateX: number;  // px
-  private translateY: number;  // px
+  private turn: number; // turn
+  private translateX: number; // px
+  private translateY: number; // px
 
   private eventSub: Subscription;
   private zoomSub: Subscription;
@@ -29,7 +29,7 @@ export class TransformableElement {
   MIN_SCALE = 0.2;
   MAX_SCALE = 2.5;
 
-  constructor(element: HTMLElement, { zoom= 1, turn= 0, translateX= 0, translateY= 0 }) {
+  constructor(element: HTMLElement, { zoom = 1, turn = 0, translateX = 0, translateY = 0 }) {
     this.element = element;
     this.zoom = zoom;
     this.turn = turn;
@@ -47,10 +47,10 @@ export class TransformableElement {
       this.eventSub.unsubscribe();
     }
     this.eventSub = new Subscription();
-    this.eventSub.add(fromEvent(this._element, 'mousewheel').subscribe($event => this.mouseZoom($event)));
-    this.eventSub.add(fromEvent(window, 'mousedown').subscribe($event => this.mouseDown($event)));
-    this.eventSub.add(fromEvent(window, 'mousemove').subscribe($event => this.mouseMove($event)));
-    this.eventSub.add(fromEvent(window, 'mouseup').subscribe($event => this.mouseUp($event)));
+    this.eventSub.add(fromEvent(this._element, 'mousewheel').subscribe(($event) => this.mouseZoom($event)));
+    this.eventSub.add(fromEvent(window, 'mousedown').subscribe(($event) => this.mouseDown($event)));
+    this.eventSub.add(fromEvent(window, 'mousemove').subscribe(($event) => this.mouseMove($event)));
+    this.eventSub.add(fromEvent(window, 'mouseup').subscribe(($event) => this.mouseUp($event)));
   }
 
   removeElementListener() {
@@ -66,33 +66,35 @@ export class TransformableElement {
     if (typeof document === 'undefined') {
       return;
     }
-    this.zoomSub = of($event).pipe(
-      throttleTime(300),
-      tap((event) => {
-        const value = -event.wheelDelta || event.deltaY || event.detail;
-        if (value < 0) {
-          if (this.zoom === this.MAX_SCALE) {
-            this.element.style.cursor = 'not-allowed';
-            return;
+    this.zoomSub = of($event)
+      .pipe(
+        throttleTime(300),
+        tap((event) => {
+          const value = -event.wheelDelta || event.deltaY || event.detail;
+          if (value < 0) {
+            if (this.zoom === this.MAX_SCALE) {
+              this.element.style.cursor = 'not-allowed';
+              return;
+            }
+            this.element.style.cursor = 'zoom-in';
+            document.body.style.cursor = 'zoom-in';
+            this.zoomIn(0.2);
+          } else {
+            if (this.zoom === this.MIN_SCALE) {
+              this.element.style.cursor = 'not-allowed';
+              return;
+            }
+            this.element.style.cursor = 'zoom-out';
+            document.body.style.cursor = 'zoom-out';
+            this.zoomOut(0.2);
           }
-          this.element.style.cursor = 'zoom-in';
-          document.body.style.cursor = 'zoom-in';
-          this.zoomIn(0.2);
-        } else {
-          if (this.zoom === this.MIN_SCALE) {
-            this.element.style.cursor = 'not-allowed';
-            return;
-          }
-          this.element.style.cursor = 'zoom-out';
-          document.body.style.cursor = 'zoom-out';
-          this.zoomOut(0.2);
-        }
-      }),
-      delay(400),
-    ).subscribe(() => {
-      this.element.style.cursor = 'grab';
-      document.body.style.cursor = 'default';
-    });
+        }),
+        delay(400)
+      )
+      .subscribe(() => {
+        this.element.style.cursor = 'grab';
+        document.body.style.cursor = 'default';
+      });
   }
 
   mouseDown($event) {
@@ -101,8 +103,8 @@ export class TransformableElement {
     }
 
     this._mouseDown = true;
-    this._originMouseX = $event['clientX'];
-    this._originMouseY = $event['clientY'];
+    this._originMouseX = $event.clientX;
+    this._originMouseY = $event.clientY;
     this._originTranslateX = this.translateX;
     this._originTranslateY = this.translateY;
   }
@@ -111,8 +113,8 @@ export class TransformableElement {
     if (this._mouseDown && typeof document !== 'undefined') {
       $event.stopPropagation();
       $event.preventDefault();
-      this.translateX = this._originTranslateX + ($event['clientX'] - this._originMouseX);
-      this.translateY = this._originTranslateY + ($event['clientY'] - this._originMouseY);
+      this.translateX = this._originTranslateX + ($event.clientX - this._originMouseX);
+      this.translateY = this._originTranslateY + ($event.clientY - this._originMouseY);
       this.setElementTransform();
       document.body.style.cursor = 'grabbing';
       this.element.style.cursor = 'grabbing';
@@ -160,13 +162,11 @@ export class TransformableElement {
     this.translateY = 1;
   }
 
-  setElementTransform(target?,
-                      zoom= this.zoom,
-                      translateX = this.translateX,
-                      translateY = this.translateY,
-                      turn = this.turn
-  ) {
-    if (!target) { target = this.element; }
+  setElementTransform(targetParam?, zoom = this.zoom, translateX = this.translateX, translateY = this.translateY, turn = this.turn) {
+    let target = targetParam;
+    if (!target) {
+      target = this.element;
+    }
     target.style.transform = `translate(${translateX}px, ${translateY}px) scale(${zoom}) rotate(${turn}turn)`;
   }
 }

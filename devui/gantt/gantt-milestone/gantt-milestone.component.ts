@@ -5,18 +5,18 @@ import { GanttService } from '../gantt.service';
 @Component({
   selector: 'd-gantt-milestone',
   templateUrl: './gantt-milestone.component.html',
-  styleUrls: ['./gantt-milestone.component.scss']
+  styleUrls: ['./gantt-milestone.component.scss'],
 })
 export class GanttMilestoneComponent implements OnInit, OnChanges, OnDestroy {
   @Input() startDate: Date;
-
   @Input() title: string;
   @Input() id: string;
 
-  private ganttScaleStatusHandler: Subscription;
   left = 0;
 
-  constructor(private ganttService: GanttService) { }
+  private ganttScaleStatusHandler: Subscription;
+
+  constructor(private ganttService: GanttService) {}
 
   ngOnInit() {
     this.ganttScaleStatusHandler = this.ganttService.ganttScaleConfigChange.subscribe((config) => {
@@ -27,7 +27,7 @@ export class GanttMilestoneComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['startDate']) {
+    if (changes.startDate) {
       this.left = this.ganttService.getDatePostionOffset(this.startDate);
     }
   }

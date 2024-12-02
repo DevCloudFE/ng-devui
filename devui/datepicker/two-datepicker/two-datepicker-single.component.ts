@@ -9,7 +9,7 @@ import {
   OnInit,
   Output,
   Renderer2,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nService } from 'ng-devui/i18n';
@@ -27,10 +27,9 @@ import { SimpleDate } from '../single-date-range-picker.component';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => TwoDatepickerSingleComponent),
       multi: true,
-    }
-  ]
+    },
+  ],
 })
-
 export class TwoDatepickerSingleComponent extends SingleDatepickerComponent implements OnChanges, OnInit {
   @Input() selectedRange: Date[] = Array(2);
   @Input() rangePicker = false;
@@ -71,7 +70,6 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
       this.initDatePicker();
       this.onNextMonth('init');
       this.selectedDate = new Date(this.currentYear, this.currentMonthIndex);
-
     } else if (!this.isAuxiliary && this.rangeStart) {
       // 主面板，已选择开始日期的情况
       this.selectedDate = this.rangeStart;
@@ -85,13 +83,12 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
       this.selectedDate = this.rangeEnd;
       super.ngOnInit();
       // 处理选择的日期范围开始和结束在同一个月的情况
-      if (rangeStart && rangeEnd && rangeStart.getFullYear() === rangeEnd.getFullYear() &&
-        rangeStart.getMonth() === rangeEnd.getMonth()) {
+      if (rangeStart && rangeEnd && rangeStart.getFullYear() === rangeEnd.getFullYear() && rangeStart.getMonth() === rangeEnd.getMonth()) {
         this.onNextMonth('init');
       }
       this.selectedDate = new Date(this.currentYear, this.currentMonthIndex);
     }
-    if (!this.selectedRange.every(curDate => !!curDate)) {
+    if (!this.selectedRange.every((curDate) => !!curDate)) {
       this.selectingRange = true;
     }
     this.availableMonths = this.onDisplayMonthsChange();
@@ -99,8 +96,8 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
   }
 
   /*
-  **  @param invocation:调用时机
-  */
+   **  @param invocation:调用时机
+   */
   onSelectDate($event, date, invocation?: any) {
     if ($event.stopPropagation) {
       $event.stopPropagation();
@@ -146,7 +143,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
         this.rangeSelecting.emit(this.rangeStart);
       }
     } else if (this.whichOpen === 'end') {
-      if (this.rangeStart && this.rangeEnd || (!this.rangeStart && !this.rangeEnd)) {
+      if ((this.rangeStart && this.rangeEnd) || (!this.rangeStart && !this.rangeEnd)) {
         this.selectingRange = false;
       } else {
         this.selectingRange = true;
@@ -178,7 +175,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
     this.onChange(selectedRange);
     this.rangeSelected.emit({
       reason: SelectDateRangeChangeReason.date,
-      selectedRange: selectedRange
+      selectedRange: selectedRange,
     });
   }
 
@@ -187,7 +184,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
     if (this.selectingRange) {
       rangeSource = [this.rangeStart || this.rangeEnd, this.previewEnd];
     }
-    if ((!Array.isArray(rangeSource))) {
+    if (!Array.isArray(rangeSource)) {
       return;
     }
     return rangeSource.some((selectedDate) => {
@@ -203,11 +200,9 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
   }
 
   isBetweenDay(date) {
-    if (Array.isArray(this.selectedRange) && this.selectedRange.every(day => !!day)) {
-      const index = this.selectedRange.findIndex(day => {
-        return date.getFullYear() === day.getFullYear() &&
-        date.getMonth() === day.getMonth() &&
-        date.getDate() === day.getDate();
+    if (Array.isArray(this.selectedRange) && this.selectedRange.every((day) => !!day)) {
+      const index = this.selectedRange.findIndex((day) => {
+        return date.getFullYear() === day.getFullYear() && date.getMonth() === day.getMonth() && date.getDate() === day.getDate();
       });
       return ['devui-day-start', 'devui-day-end'][index];
     } else {
@@ -217,14 +212,15 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
 
   ngOnChanges(changes: SimpleChanges) {
     if (Object.prototype.hasOwnProperty.call(changes, 'selectedRange')) {
-      [this.rangeStart, this.rangeEnd] = changes['selectedRange'].currentValue;
+      [this.rangeStart, this.rangeEnd] = changes.selectedRange.currentValue;
       if (this.rangeStart && this.rangeEnd) {
         this.selectingRange = false;
       }
     }
   }
 
-  isInRange(date) {
+  isInRange(dateParam) {
+    let date = dateParam;
     let rangeStart = this.rangeStart;
     let rangeEnd = this.rangeEnd;
     if (this.selectingRange) {
@@ -234,13 +230,15 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
         rangeEnd = this.previewEnd;
       }
     }
-    date = (new Date(date)).getTime();
-    return date < Math.max((new Date(rangeStart)).getTime(), (new Date(rangeEnd)).getTime())
-      && date > Math.min((new Date(rangeStart)).getTime(), (new Date(rangeEnd)).getTime());
+    date = new Date(date).getTime();
+    return (
+      date < Math.max(new Date(rangeStart).getTime(), new Date(rangeEnd).getTime()) &&
+      date > Math.min(new Date(rangeStart).getTime(), new Date(rangeEnd).getTime())
+    );
   }
 
   ensureRangeValueOrder(dateRange) {
-    if (Array.isArray(dateRange) && dateRange.length === 2 && dateRange.every(curDate => !!curDate)) {
+    if (Array.isArray(dateRange) && dateRange.length === 2 && dateRange.every((curDate) => !!curDate)) {
       if (dateRange[0].getTime() > dateRange[1].getTime()) {
         if (this.whichOpen === 'start') {
           return [dateRange[0], null];
@@ -256,7 +254,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
     if (this.hasNextMonth() || invocation === 'init') {
       let maxDateInRange;
       if (invocation === 'init') {
-        maxDateInRange = this.selectedRange.reduce((start, end) => new Date(end) > new Date(start) ? end : start);
+        maxDateInRange = this.selectedRange.reduce((start, end) => (new Date(end) > new Date(start) ? end : start));
       }
       super.onNextMonth(maxDateInRange, 'init');
       this.notifyCalenderChange();
@@ -300,15 +298,18 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
       if (!this.isAuxiliary) {
         hasPrevYear = this.nowMinYear > this.minDate.getFullYear();
       } else {
-        hasPrevYear = this.nowMinYear > this.minDate.getFullYear() &&
-          this.isBeforeMoreThanOneYear(this.currentCalendars[0], {year: this.nowMinYear, month: this.currentCalendars[1].month});
+        hasPrevYear =
+          this.nowMinYear > this.minDate.getFullYear() &&
+          this.isBeforeMoreThanOneYear(this.currentCalendars[0], { year: this.nowMinYear, month: this.currentCalendars[1].month });
       }
     } else if (this.currentCalendars[0] && this.currentCalendars[1]) {
       // 主面板只用考虑minDate的影响
       if (!this.isAuxiliary) {
         hasPrevYear = this.currentCalendars[0].year > this.minDate.getFullYear();
-      } else { // 副面板同时考虑minDate和日历的影响
-        hasPrevYear = this.currentCalendars[1].year > this.minDate.getFullYear() &&
+      } else {
+        // 副面板同时考虑minDate和日历的影响
+        hasPrevYear =
+          this.currentCalendars[1].year > this.minDate.getFullYear() &&
           this.isBeforeMoreThanOneYear(this.currentCalendars[0], this.currentCalendars[1]);
       }
     }
@@ -321,15 +322,18 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
       if (this.isAuxiliary) {
         hasNextYear = this.nowMaxYear < this.maxDate.getFullYear();
       } else {
-        hasNextYear = this.nowMaxYear < this.maxDate.getFullYear() &&
-          this.isAfterMoreThanOneYear(this.currentCalendars[1], {year: this.nowMaxYear, month: this.currentCalendars[0].month});
+        hasNextYear =
+          this.nowMaxYear < this.maxDate.getFullYear() &&
+          this.isAfterMoreThanOneYear(this.currentCalendars[1], { year: this.nowMaxYear, month: this.currentCalendars[0].month });
       }
     } else if (this.currentCalendars[0] && this.currentCalendars[1]) {
       // 副面板只用考虑maxDate的影响
       if (this.isAuxiliary) {
         hasNextYear = this.currentCalendars[1].year < this.maxDate.getFullYear();
-      } else { // 主面板同时考虑maxDate和日历的影响
-        hasNextYear = this.currentCalendars[0].year < this.maxDate.getFullYear() &&
+      } else {
+        // 主面板同时考虑maxDate和日历的影响
+        hasNextYear =
+          this.currentCalendars[0].year < this.maxDate.getFullYear() &&
           this.isAfterMoreThanOneYear(this.currentCalendars[1], this.currentCalendars[0]);
       }
     }
@@ -415,32 +419,37 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
     }
 
     // 处理A日期比B日期大1年同时A日期月份小于B日期月份的情况
-    return (!(dateA.year - dateB.year === 1 && dateA.month <= dateB.month));
+    return !(dateA.year - dateB.year === 1 && dateA.month <= dateB.month);
   }
 
   isYearDisable(year: number): boolean {
     if (this.isAuxiliary) {
       // 先判定主面板是否比附面板小一年以上，是的话disabled为false;
-      return !(this.isBeforeMoreThanOneYear(this.currentCalendars[0], { year: year + 1, month: this.currentCalendars[1].month}) ||
+      return !(
+        this.isBeforeMoreThanOneYear(this.currentCalendars[0], { year: year + 1, month: this.currentCalendars[1].month }) ||
         // 主附面板在同一年时，判断主附面板月是否在临界值；
-        (this.currentCalendars[0].year === year && this.currentCalendars[0].month !== 11));
+        (this.currentCalendars[0].year === year && this.currentCalendars[0].month !== 11)
+      );
     } else {
-      return !(this.isAfterMoreThanOneYear(this.currentCalendars[1], {year: year - 1, month: this.currentCalendars[0].month}) ||
-        (this.currentCalendars[1].year === year && this.currentCalendars[1].month !== 0));
+      return !(
+        this.isAfterMoreThanOneYear(this.currentCalendars[1], { year: year - 1, month: this.currentCalendars[0].month }) ||
+        (this.currentCalendars[1].year === year && this.currentCalendars[1].month !== 0)
+      );
     }
   }
 
   isMonthDisable(month: string): boolean {
     if (this.isAuxiliary) {
-      return !this.isBeforeMoreThanOneMonth(
-        this.currentCalendars[0], {year: this.currentCalendars[1].year, month: parseInt(month, 10) - 1 + 1}
-      );
+      return !this.isBeforeMoreThanOneMonth(this.currentCalendars[0], {
+        year: this.currentCalendars[1].year,
+        month: parseInt(month, 10) - 1 + 1,
+      });
     } else {
-      return !this.isAfterMoreThanOneMonth(
-        this.currentCalendars[1], {year: this.currentCalendars[0].year, month: parseInt(month, 10) - 1 - 1}
-      );
+      return !this.isAfterMoreThanOneMonth(this.currentCalendars[1], {
+        year: this.currentCalendars[0].year,
+        month: parseInt(month, 10) - 1 - 1,
+      });
     }
-
   }
 
   onSelectMonth(month) {
@@ -450,7 +459,9 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
     this.currentMonthIndex = month.index;
     this.onDisplayWeeksChange();
     this.openChooseMonth = false;
-    this.isAuxiliary ? this.currentCalendars[1].month = this.currentMonthIndex : this.currentCalendars[0].month = this.currentMonthIndex;
+    this.isAuxiliary
+      ? (this.currentCalendars[1].month = this.currentMonthIndex)
+      : (this.currentCalendars[0].month = this.currentMonthIndex);
   }
 
   onSelectYear(year, $event?: Event) {
@@ -467,7 +478,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
     this.availableMonths = this.onDisplayMonthsChange();
     this.openChooseYear = false;
     if (!$event) {
-      this.isAuxiliary ? this.currentCalendars[1].year = this.currentYear : this.currentCalendars[0].year = this.currentYear;
+      this.isAuxiliary ? (this.currentCalendars[1].year = this.currentYear) : (this.currentCalendars[0].year = this.currentYear);
       return;
     }
     this.openChooseMonth = true;
@@ -485,7 +496,7 @@ export class TwoDatepickerSingleComponent extends SingleDatepickerComponent impl
   protected notifyCalenderChange() {
     this.syncPickerPair.emit({
       year: this.currentYear,
-      month: this.currentMonthIndex
+      month: this.currentMonthIndex,
     });
   }
 

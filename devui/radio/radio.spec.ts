@@ -87,9 +87,11 @@ describe('radio', () => {
     it('should can be selected by click', fakeAsync(() => {
       secondRadioLabel.click();
       fixture.detectChanges();
-      flush();
+      tick();
       fixture.detectChanges();
       expect(firstRadioLabel.classList).not.toContain('active');
+      tick();
+      fixture.detectChanges();
       expect(secondRadioLabel.classList).toContain('active');
       expect(testComponent.choose).toBe('Item2');
       expect(testComponent.valueChange).toHaveBeenCalledTimes(1);

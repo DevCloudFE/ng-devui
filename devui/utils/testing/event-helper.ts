@@ -1,9 +1,9 @@
 enum keyBoardLocation {
   // 各个值的含义请参见: https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent/location
-  DOM_KEY_LOCATION_STANDARD,
-  DOM_KEY_LOCATION_LEFT,
-  DOM_KEY_LOCATION_RIGHT,
-  DOM_KEY_LOCATION_NUMPAD
+  DOM_KEY_LOCATION_STANDARD = 0,
+  DOM_KEY_LOCATION_LEFT = 1,
+  DOM_KEY_LOCATION_RIGHT = 2,
+  DOM_KEY_LOCATION_NUMPAD = 3,
 }
 
 interface KeyBoardParams {
@@ -44,13 +44,13 @@ export function createKeyBoardEvent(eventType: keyBoardEventType, params: KeyBoa
 
   const event = new KeyboardEvent(eventType, {
     key: params.key,
-    code: params.code
+    code: params.code,
   });
 
   Object.defineProperties(event, {
-    keyCode: {value: params.keyCode},
-    charCode: {value: params.charCode},
-    data: {value: params.data}
+    keyCode: { value: params.keyCode },
+    charCode: { value: params.charCode },
+    data: { value: params.data },
   });
 
   return event;
@@ -66,11 +66,11 @@ export function createDragEvent(type: dragEventType, params: MouseEventParams) {
     clientX: params.clientX,
     clientY: params.clientY,
     screenX: params.screenX,
-    screenY: params.screenY
+    screenY: params.screenY,
   });
 
   Object.defineProperties(event, {
-    buttons: { value: 1 }
+    buttons: { value: 1 },
   });
 
   return event;
@@ -85,13 +85,7 @@ export function mouseMoveTrigger(el: HTMLElement, from: { x: number; y: number }
   dispatchMouseEvent(window.document, 'mouseup');
 }
 
-export function dispatchMouseEvent(
-  node: Node,
-  type: string,
-  x = 0,
-  y = 0,
-  event: MouseEvent = createMouseEvent(type, x, y)
-) {
+export function dispatchMouseEvent(node: Node, type: string, x = 0, y = 0, event: MouseEvent = createMouseEvent(type, x, y)) {
   node.dispatchEvent(event);
 }
 
@@ -119,7 +113,7 @@ export function createMouseEvent(type: string, x = 0, y = 0, button = 0): MouseE
 
 export function dateToStrWithArr(date: Date, arr = ['yy', 'mm', 'dd'], splitter = '-') {
   const padZero = (value) => {
-    return (String(value)).padStart(2, '0');
+    return String(value).padStart(2, '0');
   };
   const newArr = [];
   arr.forEach((type) => {
@@ -133,6 +127,7 @@ export function dateToStrWithArr(date: Date, arr = ['yy', 'mm', 'dd'], splitter 
     case 'dd':
       newArr.push(padZero(date.getDate()));
       break;
+    default:
     }
   });
   return newArr.join(splitter);

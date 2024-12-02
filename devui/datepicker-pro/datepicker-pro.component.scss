@@ -5,7 +5,6 @@
   background-color: $devui-base-bg;
 
   .devui-single-picker {
-    padding-left: 8px;
     position: relative;
     box-sizing: border-box;
     width: 100%;
@@ -19,14 +18,14 @@
     }
 
     &-icon {
-      vertical-align: bottom;
+      vertical-align: text-bottom;
       height: 16px;
     }
 
     .close-icon-wrapper {
       padding: 0 8px;
       vertical-align: baseline;
-      visibility: hidden;
+      display: none;
 
       .close-icon {
         width: 16px;
@@ -52,8 +51,23 @@
       }
     }
 
-    &.devui-has-value:hover:not(.devui-disabled) .close-icon-wrapper {
-      visibility: visible;
+    .date-icon-wrapper {
+      padding: 0 8px;
+      display: block;
+
+      path {
+        fill: $devui-icon-fill-weak;
+      }
+    }
+
+    &.devui-has-value.devui-allow-clear:hover:not(.devui-disabled) {
+      .close-icon-wrapper {
+        display: block;
+      }
+
+      .date-icon-wrapper {
+        display: none;
+      }
     }
 
     &:not(.devui-disabled) .close-icon-wrapper {

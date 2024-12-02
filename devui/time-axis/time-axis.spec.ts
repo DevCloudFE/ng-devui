@@ -33,7 +33,7 @@ describe('time-axis base', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [TimeAxisModule],
-      declarations: [TestTimeAxisComponent]
+      declarations: [TestTimeAxisComponent],
     }).compileComponents();
   });
 
@@ -73,7 +73,7 @@ describe('time-axis base', () => {
     });
 
     it('should have different direction', () => {
-      testComponent.time_axis_data['direction'] = 'horizontal';
+      testComponent.time_axis_data.direction = 'horizontal';
       fixture.detectChanges();
       expect(timeAxisElement.querySelector('.devui-time-axis-item-horizontal')).not.toBeNull();
     });
@@ -115,7 +115,7 @@ describe('time-axis horizontal base', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [TimeAxisModule],
-      declarations: [TestTimeAxisHorizontalComponent]
+      declarations: [TestTimeAxisHorizontalComponent],
     }).compileComponents();
   });
 
@@ -145,7 +145,7 @@ describe('time-axis horizontal base', () => {
       fixture.detectChanges();
 
       for (let i = 0; i < timeAxisDataList.length; i++) {
-        if(timeAxisDataList[i]?.type) {
+        if (timeAxisDataList[i]?.type) {
           const type = timeAxisDataList[i].type === 'success' ? 'right' : timeAxisDataList[i].type;
           expect(lis[i].querySelector(`.devui-time-axis-item-type-${type}`)).not.toBeNull();
         }
@@ -154,23 +154,20 @@ describe('time-axis horizontal base', () => {
         expect(lis[i].querySelector(`.devui-time-axis-item-data-horizontal-${position}`)).not.toBeNull();
       }
     }));
-
   });
 });
 
 @Component({
   template: `
-  <d-time-axis direction="vertical" [mode]="'alternative'">
-    <d-time-axis-item direction="vertical" text="Start" time="2021-3-13"></d-time-axis-item>
-    <d-time-axis-item direction="vertical" text="Check" time="2021-4-14"></d-time-axis-item>
-    <d-time-axis-item direction="vertical" text="Debug" time="2021-4-21"></d-time-axis-item>
-    <d-time-axis-item direction="vertical" text="Display" time="2021-4-25"></d-time-axis-item>
-  </d-time-axis>
+    <d-time-axis direction="vertical" [mode]="'alternative'">
+      <d-time-axis-item direction="vertical" text="Start" time="2021-3-13"></d-time-axis-item>
+      <d-time-axis-item direction="vertical" text="Check" time="2021-4-14"></d-time-axis-item>
+      <d-time-axis-item direction="vertical" text="Debug" time="2021-4-21"></d-time-axis-item>
+      <d-time-axis-item direction="vertical" text="Display" time="2021-4-25"></d-time-axis-item>
+    </d-time-axis>
   `,
 })
-class TestTimeAxisHTMLComponent {
-
-}
+class TestTimeAxisHTMLComponent {}
 
 describe('time-axis HTML mode base', () => {
   let fixture: ComponentFixture<TestTimeAxisHTMLComponent>;
@@ -182,7 +179,7 @@ describe('time-axis HTML mode base', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [TimeAxisModule],
-      declarations: [TestTimeAxisHTMLComponent]
+      declarations: [TestTimeAxisHTMLComponent],
     }).compileComponents();
   });
 
@@ -212,6 +209,5 @@ describe('time-axis HTML mode base', () => {
     it('should have correct value number', () => {
       expect(lis.length).toEqual(4);
     });
-
   });
 });

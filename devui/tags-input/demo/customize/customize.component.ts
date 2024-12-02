@@ -9,6 +9,9 @@ export class TagsInputDemoCustomizeComponent implements OnInit {
   @ViewChild(TagsInputComponent) tagInputItem: TagsInputComponent;
   tagList = [];
   suggestionList = [];
+  maxLength = 12;
+  errorMsg = `A maximum of ${this.maxLength} characters are allowed.`;
+  isError = false;
   canGenerate = true;
 
   ngOnInit() {
@@ -33,6 +36,10 @@ export class TagsInputDemoCustomizeComponent implements OnInit {
     }
     return result;
   };
+
+  getSearchValue(value) {
+    this.isError = value.length === this.maxLength;
+  }
 
   getTagValue(value) {
     console.log(value);

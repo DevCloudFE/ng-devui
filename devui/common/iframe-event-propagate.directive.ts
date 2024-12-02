@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Directive, ElementRef, Inject, Input } from '@angular/core';
 @Directive({
-  selector: '[dIframeEventPropagate]'
+  selector: '[dIframeEventPropagate]',
 })
 export class IframeEventPropagateDirective implements AfterViewInit {
   @Input() event = 'click';
@@ -25,7 +25,7 @@ export class IframeEventPropagateDirective implements AfterViewInit {
       if (iframe.contentDocument !== null) {
         iframe.contentDocument.addEventListener(this.event, this.dispatchClickEvent);
       } else {
-        const loadHandler =  () => {
+        const loadHandler = () => {
           iframe.contentDocument.addEventListener(this.event, this.dispatchClickEvent);
           iframe.removeEventListener('load', loadHandler);
         };
@@ -37,9 +37,9 @@ export class IframeEventPropagateDirective implements AfterViewInit {
   };
 
   dispatchClickEvent = ($event) => {
-    const event = this.document.createEvent('MouseEvents');
+    const event: any = this.document.createEvent('MouseEvents');
     event.initEvent(this.event, true, true);
-    event['originEvent'] = $event;
+    event.originEvent = $event;
     this.element.dispatchEvent(event);
   };
 }

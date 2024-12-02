@@ -28,6 +28,7 @@ In the page
 | beforeTagChange            | `(tag, searchKey, operation) => boolean \| Promise<boolean> \| Observable<boolean>` | --      | Optional. Method called before changing the tag, returns the boolean type, and returns false to prevent the classification value from changing.                                   |                                                           |
 | toggleEvent                | `(dropdown, tag?, currentSelectTag?) => void`                                       | --      | Optional. Method called when the drop-down menu switch of the selected classification is enabled, which can be executed by the default method after being blocked by return.      | [Basic usage](demo#basic-usage)                           |
 | inputReadOnly              | `boolean`                                                                           | false   | Optional. Specifies whether to enter keywords in the search box. If it is `true`, you cannot enter keywords and can only filter data based on the provided classification data.   | [Basic usage](demo#basic-usage)                           |
+| inputAutofocus             | `boolean`                                                                           | true    | Optional. Indicates whether to allow the auto-focus search box to avoid displacement caused by auto-focus in the scenario with a scroll bar.                                      |                                                           |
 | disabled                   | `boolean`                                                                           | false   | Optional. indicating whether to disable the category search component.                                                                                                            |                                                           |
 | dropdownBoundary           | `boolean`                                                                           | false   | Optional. Limit left and right boundaries of the selected category dropdown to prevent it from being displayed out of category-search component.                                  |                                                           |
 | tagMaxWidth                | `number`                                                                            | --      | Optional. Maximum width of a single filter criterion. If the width exceeds the value, an ellipsis is displayed. If this parameter is not set, no restriction is imposed.          |                                                           |
@@ -101,6 +102,10 @@ export interface ICategorySearchTagItem {
     cache: string | ITagOption | Array<ITagOption | number | string | Date>; // Cached data used to reset the selection value when the drop-down list expands
   };
   /**
+   * checkbox | Indicates whether to display the select-all checkbox.
+   */
+  showSelectAll?: boolean;
+  /**
    * Indicates whether to display hour, minute, and second for the dateRange type.
    */
   showTime?: boolean;
@@ -109,13 +114,37 @@ export interface ICategorySearchTagItem {
    */
   activeRangeType?: 'start' | 'end';
   /**
-   * Set the maximum length of the textInput type.
+   * Set the maximum length for the textInput or numberRange type. The numberRange needs to be passed to the left and right of the object.
    */
-  maxLength?: number;
+  maxLength?: number | { left?: number; right?: number };
   /**
    * Sets a placeholder for the textInput or numberRange type. The numberRange needs to be passed to the left and right of the object.
    */
-  placeholder?: string | { left: string; right: string };
+  placeholder?: string | { left?: string; right?: string };
+  /**
+   * Sets the numberRange step value. The left and right values need to be set for the input object.
+   */
+  step?: { left?: number; right?: number };
+  /**
+   * Sets the maximum value of numberRange. The left and right values need to be set for the input object.
+   */
+  max?: { left?: number; right?: number };
+  /**
+   * Sets the minimum value of numberRange. The object needs to be input and the left and right sides need to be set.
+   */
+  min?: { left?: number; right?: number };
+  /**
+   * Regular expression or regular character string that restricts the numberRage value. The object needs to be input and the left and right sides need to be set.
+   */
+  reg?: { left?: RegExp | string; right?: RegExp | string };
+  /**
+   * Limit the number of decimal places. The object needs to be input and the left and right sides need to be set.
+   */
+  decimalLimit?: { left?: number; right?: number };
+  /**
+   * numberRange verification method, which is executed when OK is clicked. If true is returned, the verification is passed.
+   */
+  validateFunc?: (start: number, end: number, tag: ICategorySearchTagItem) => boolean;
   /**
    * Sets whether the treeSelect type is multi-select and displays the selected list.
    */
@@ -135,6 +164,7 @@ export interface ICategorySearchTagItem {
   /**
    * Sets the treeSelect type. For details, see the configuration of the same name in the tree-select component API.
    */
+  checkableRelation?: 'upward' | 'downward' | 'both' | 'none';
   treeNodeIdKey?: string;
   treeNodeChildrenKey?: string;
   treeNodeTitleKey?: string;

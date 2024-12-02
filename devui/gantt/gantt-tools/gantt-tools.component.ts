@@ -8,59 +8,48 @@ import { UnitRole } from '../gantt.model';
   templateUrl: './gantt-tools.component.html',
   styleUrls: ['./gantt-tools.component.scss'],
 })
-export class GanttToolsComponent implements OnInit{
-
+export class GanttToolsComponent implements OnInit {
   @Input('currentUnit') set currentUnit(val) {
     this._currentUnit = val;
-    const data = this.views.filter(i => i.value === val);
+    const data = this.views.filter((i) => i.value === val);
   }
 
-  get currentUnit () {
+  get currentUnit() {
     return this._currentUnit;
   }
 
-  @Input() isFullScreen = false;
-
-  @Output() goToday = new EventEmitter();
-
-  @Output() reduceUnit = new EventEmitter();
-
-  @Output() increaseUnit = new EventEmitter();
-
-  @Output() switchView = new EventEmitter();
-
-  unitRole = UnitRole;
-
   get currentUnitLabel() {
     return this._currentLabel || (this.views.length > 0 ? this.views[0].label : '');
-  };
+  }
+
+  @Input() isFullScreen = false;
+  @Output() goToday = new EventEmitter();
+  @Output() reduceUnit = new EventEmitter();
+  @Output() increaseUnit = new EventEmitter();
+  @Output() switchView = new EventEmitter();
 
   _currentLabel: string;
-
   _currentUnit = '';
-
+  unitRole = UnitRole;
   views = [
     {
       label: 'Day',
-      value: 'day'
+      value: 'day',
     },
     {
       label: 'Week',
-      value: 'week'
+      value: 'week',
     },
     {
       label: 'Month',
-      value: 'month'
-    }
+      value: 'month',
+    },
   ];
-
   i18nText: I18nInterface['gantt'];
   i18nLocale: I18nInterface['locale'];
   i18nSubscription: Subscription;
 
-  constructor(
-    private i18n: I18nService
-  ) {}
+  constructor(private i18n: I18nService) {}
 
   ngOnInit() {
     this.i18nText = this.i18n.getI18nText().gantt;
@@ -71,21 +60,21 @@ export class GanttToolsComponent implements OnInit{
       this.views = [
         {
           label: this.i18nText?.day,
-          value: 'day'
+          value: 'day',
         },
         {
           label: this.i18nText?.week,
-          value: 'week'
+          value: 'week',
         },
         {
           label: this.i18nText?.month,
-          value: 'month'
-        }
+          value: 'month',
+        },
       ];
     });
   }
 
-  avtionHandle (type) {
+  avtionHandle(type) {
     switch (type) {
     case 'today':
       this.goToday.emit();
@@ -96,10 +85,11 @@ export class GanttToolsComponent implements OnInit{
     case 'increase':
       this.increaseUnit.emit();
       break;
+    default:
     }
   }
 
-  selectView (menu) {
+  selectView(menu) {
     this._currentLabel = menu.label;
     this.switchView.emit(menu.value);
   }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'ng-devui/button';
+import { PopoverModule } from 'ng-devui/popover';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
 import { DevUIApiModule } from 'ng-devui/shared/devui-api/devui-api.module';
 import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.module';
@@ -26,6 +27,7 @@ import { TagsInputDemoVirtualScrollComponent } from './virtual-scroll/virtual-sc
     DevUICodeboxModule,
     DDemoNavModule,
     ButtonModule,
+    PopoverModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'demo', pathMatch: 'full' },
       {

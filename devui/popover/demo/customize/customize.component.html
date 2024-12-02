@@ -1,6 +1,6 @@
 <d-button
   dPopover
-  [content]="content"
+  [content]="contentTemplate"
   [popMaxWidth]="100"
   [zIndex]="100"
   [position]="'right'"
@@ -20,6 +20,11 @@
 >
   hover me!
 </d-button>
+
+<ng-template #contentTemplate>
+  <p>Custom Tips with Links</p>
+  <p><a class="devui-link-light" href="https://devui.design" target="_blank">Learn More</a></p>
+</ng-template>
 
 <ng-template #customTemplate>
   <h1>Custom Tips</h1>

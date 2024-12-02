@@ -44,6 +44,7 @@ export class TabsComponent implements OnChanges, AfterViewInit {
   @Input() closeableIds = [];
   @Input() addable = false;
   @Input() addTabTpl: TemplateRef<any>;
+  @Input() scrollModeOperationTpl: TemplateRef<any>;
   /**
    * @todo
    * 待重新设计
@@ -94,7 +95,7 @@ export class TabsComponent implements OnChanges, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.tabs.length) {
       if (this.activeTab === undefined) {
-        // 无选中选项卡则默认选择第一个未被禁用的选项卡
+        // 无选中页签则默认选择第一个未被禁用的页签
         const { id } = this.tabs.find((item) => !item.disabled);
         this.select(id);
       } else {
@@ -210,7 +211,9 @@ export class TabsComponent implements OnChanges, AfterViewInit {
         for (let i = 0; i < this.tabsWidth.length; i++) {
           width += this.tabsWidth[i];
           if (width >= distance) {
-            this.offsetIndex = i === 0 ? 0 : direction === 'next' ? (containerWidth - width < viewportWidth ? tabs.length - 1 : i) : i + 1;
+            const lastIndex = containerWidth - width < viewportWidth ? tabs.length - 1 : i;
+            const nexIndex = direction === 'next' ? lastIndex : i + 1;
+            this.offsetIndex = i === 0 ? 0 : nexIndex;
             break;
           }
         }
@@ -218,7 +221,8 @@ export class TabsComponent implements OnChanges, AfterViewInit {
       } else if (index >= 0 && tab) {
         const toIndexArr = this.tabsWidth.slice(0, index);
         const width = sum(toIndexArr);
-        const fixIndex = index === 0 ? 0 : containerWidth - width < viewportWidth ? tabs.length - 1 : index;
+        const lastIndex = containerWidth - width < viewportWidth ? tabs.length - 1 : index;
+        const fixIndex = index === 0 ? 0 : lastIndex;
         const dom = tabs[fixIndex];
         this.offsetIndex = fixIndex;
         if (isInitScrollMode) {

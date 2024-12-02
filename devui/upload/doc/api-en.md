@@ -126,7 +126,7 @@ Each value represents:
 
 `fileUploaders`: array of the FileUploader type. FileUploader contains the send() and cancel() methods.
 
-`UploadStatus`: upload status, which can be preLoad = 0,uploading,uploaded,failed'.
+`UploadStatus`: upload status, which can be preLoad, uploading, uploaded, failed'.
 
 `deleteFile`: transfer the file to be deleted.
 

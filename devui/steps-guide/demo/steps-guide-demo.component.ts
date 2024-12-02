@@ -27,6 +27,7 @@ export class StepsGuideDemoComponent implements OnInit, OnDestroy {
 
   navItems = [];
   subs: Subscription = new Subscription();
+
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
@@ -47,8 +48,8 @@ export class StepsGuideDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
-      { dAnchorLink: 'position', value: values['position'] },
-      { dAnchorLink: 'custom', value: values['custom'] },
+      { dAnchorLink: 'position', value: values.position },
+      { dAnchorLink: 'custom', value: values.custom },
     ];
   }
 

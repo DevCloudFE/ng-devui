@@ -31,11 +31,11 @@ import { DropDownModule } from 'ng-devui/dropdown';
 
 搭配 dDropDown 使用该指令后，dDropDownMenu 会被附加到 body，可以防止 dropdown 在滚动条内被遮挡。
 
-| 参数                       | 类型                                                                                                          | 默认                                             | 说明                                                                                                            | 跳转 Demo                                        |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| alignOrigin                | `ElementRef`                                                                                                  | --                                               | 可选，指定用于对齐的目标                                                                                        | [设置展开位置处理](demo#when-using-appendtobody) |
-| appendToBodyDirections     | `Array<`[`AppendToBodyDirection`](#appendtobodydirection)<br>`\|`[`ConnectedPosition`](#connectedposition)`>` | `['rightDown', 'leftDown', 'rightUp', 'leftUp']` | 可选，方向数组优先采用数组里靠前的位置                                                                          | [设置展开位置处理](demo#when-using-appendtobody) |
-| appendToBodyScrollStrategy | `AppendToBodyScrollStrategyType`                                                                              | `reposition`                                     | 可选，滚动时弹窗处理策略，参见[AppendToBodyScrollStrategyType说明](#AppendToBodyScrollStrategyType) | [设置展开位置处理](demo#when-using-appendtobody) |
+| 参数                       | 类型                                                                                                          | 默认                                             | 说明                                                                                                 | 跳转 Demo                                        |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| alignOrigin                | `ElementRef`                                                                                                  | --                                               | 可选，指定用于对齐的目标                                                                             | [设置展开位置处理](demo#when-using-appendtobody) |
+| appendToBodyDirections     | `Array<`[`AppendToBodyDirection`](#appendtobodydirection)<br>`\|`[`ConnectedPosition`](#connectedposition)`>` | `['rightDown', 'leftDown', 'rightUp', 'leftUp']` | 可选，方向数组优先采用数组里靠前的位置                                                               | [设置展开位置处理](demo#when-using-appendtobody) |
+| appendToBodyScrollStrategy | `AppendToBodyScrollStrategyType`                                                                              | `reposition`                                     | 可选，滚动时弹窗处理策略，参见[AppendToBodyScrollStrategyType 说明](#AppendToBodyScrollStrategyType) | [设置展开位置处理](demo#when-using-appendtobody) |
 
 注意： 使用 appendToBody 后需要在有滚动条的地方使用 `cdkScrollable`
 
@@ -127,4 +127,8 @@ export type AppendToBodyScrollStrategyType = 'close' | 'noop' | 'reposition';
 
 ## dDropDownMenuItem
 
-用在下拉选项上，参考 demo。
+用在下拉选项上，如 class 包含 disabled 则点击时不关闭下拉菜单，设置 disabled 属性时不触发点击事件
+
+| 参数     | 类型      | 默认  | 说明                                     | 跳转 Demo                    |
+| -------- | --------- | ----- | ---------------------------------------- | ---------------------------- |
+| disabled | `boolean` | false | 可选，设置为 true 时阻止该项点击事件触发 | [基本用法](demo#basic-usage) |

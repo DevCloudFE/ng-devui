@@ -3,7 +3,9 @@ import {
   CdkOverlayOrigin,
   ConnectedOverlayPositionChange,
   ConnectedPosition,
-  VerticalConnectionPos
+  ScrollStrategy,
+  ScrollStrategyOptions,
+  VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import {
@@ -22,17 +24,18 @@ import {
   Output,
   Renderer2,
   SimpleChanges,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import {
-  addClassToOrigin,
   AppendToBodyDirection,
   AppendToBodyDirectionsConfig,
+  AppendToBodyScrollStrategyType,
   DevConfigService,
+  WithConfig,
+  addClassToOrigin,
   fadeInOut,
   formWithDropDown,
   removeClassFromOrigin,
-  WithConfig
 } from 'ng-devui/utils';
 import { WindowRef } from 'ng-devui/window-ref';
 import { ToggleMenuListComponent } from './toggle-menu-list.component';
@@ -76,6 +79,7 @@ export class ToggleMenuContainerComponent implements OnInit, OnChanges {
    */
   @Input() appendToBody = false;
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
+  @Input() @WithConfig() appendToBodyScrollStrategy: AppendToBodyScrollStrategyType;
   /**
    * 【可选】cdk模式origin width
    */
@@ -123,21 +127,24 @@ export class ToggleMenuContainerComponent implements OnInit, OnChanges {
   labelMinHeight = 20; // position.top小于20px时候，表示光标在第一行
   popDirection: 'top' | 'bottom' = 'bottom';
   menuPosition: VerticalConnectionPos = 'bottom';
+  scrollStrategy: ScrollStrategy;
   cdkConnectedOverlayOrigin: CdkOverlayOrigin;
   overlayPositions: Array<ConnectedPosition>;
   dropDownWidth: number;
   document: Document;
 
   constructor(
+    @Inject(DOCUMENT) private doc: any,
     public element: ElementRef,
     private windowRef: WindowRef,
     private ngZone: NgZone,
     private renderer: Renderer2,
     private changeDetectorRef: ChangeDetectorRef,
     private devConfigService: DevConfigService,
-    @Inject(DOCUMENT) private doc: any
+    private scrollStrategyOption: ScrollStrategyOptions
   ) {
     this.document = this.doc;
+    this.scrollStrategy = this.scrollStrategyOption.reposition();
   }
 
   ngOnInit() {
@@ -146,8 +153,14 @@ export class ToggleMenuContainerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['appendToBodyDirections']) {
+    const { appendToBodyDirections, appendToBodyScrollStrategy } = changes;
+    const globalScrollStrategy = this.devConfigService.getConfigForApi('appendToBodyScrollStrategy');
+    if (appendToBodyDirections) {
       this.setPositions();
+    }
+    if (this.appendToBodyScrollStrategy && (appendToBodyScrollStrategy || globalScrollStrategy)) {
+      const func = this.scrollStrategyOption[this.appendToBodyScrollStrategy];
+      this.scrollStrategy = func();
     }
   }
 
@@ -273,7 +286,7 @@ export class ToggleMenuContainerComponent implements OnInit, OnChanges {
   isBottomRectEnough() {
     const selectMenuElement = this.selectWrapper.nativeElement;
     const selectInputElement = this.selectBoxElement;
-    const displayStyle = selectMenuElement.style['display'] || (<any>window).getComputedStyle(selectMenuElement).display;
+    const displayStyle = selectMenuElement.style.display || (<any>window).getComputedStyle(selectMenuElement).display;
     let tempStyle;
     if (displayStyle === 'none') {
       // 必要， 否则首次展开必有问题， 如果animationEnd之后设置为none也会有问题
@@ -301,9 +314,5 @@ export class ToggleMenuContainerComponent implements OnInit, OnChanges {
     if (this.selectWrapper?.nativeElement) {
       this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(formWithDropDown(this.selectWrapper) || this.selectWrapper.nativeElement);
     }
-  }
-
-  toggleChangeFn(event) {
-    this.isOpen = event;
   }
 }

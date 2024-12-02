@@ -10,7 +10,7 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
@@ -22,11 +22,13 @@ import { SelectDateRangeChangeEventArgs, SelectDateRangeChangeReason } from './d
 
 @Component({
   selector: 'd-date-range-picker',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => DateRangePickerComponent),
-    multi: true
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DateRangePickerComponent),
+      multi: true,
+    },
+  ],
   exportAs: 'dateRangePicker',
   templateUrl: './date-range-picker.component.html',
   styleUrls: ['./date-range-picker.component.scss'],
@@ -102,21 +104,23 @@ export class DateRangePickerComponent implements OnChanges, OnInit, ControlValue
   }
 
   constructor(private datePickerConfig: DatePickerConfig, private i18n: I18nService) {
-    this._dateConfig = datePickerConfig['dateConfig'];
-    this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
+    this._dateConfig = datePickerConfig.dateConfig;
+    this.dateConverter = datePickerConfig.dateConfig.dateConverter || new DefaultDateConverter();
     this.setI18nText();
   }
 
   checkDateConfig(dateConfig: any) {
-    if (!dateConfig) { return false; }
-    if (typeof(dateConfig.timePicker) !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
+    if (!dateConfig) {
+      return false;
+    }
+    if (typeof dateConfig.timePicker !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
       return false;
     }
     return true;
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes && changes['selectedRange'] && changes['selectedRange'].currentValue) {
+    if (changes?.selectedRange?.currentValue) {
       this.writeValue(this.selectedRange);
     }
   }
@@ -139,10 +143,10 @@ export class DateRangePickerComponent implements OnChanges, OnInit, ControlValue
     if (selectedRange) {
       this.selectedRange = selectedRange;
       if (this.leftPicker) {
-        this.leftPicker['selectedRange'] = selectedRange;
+        (this.leftPicker as any).selectedRange = selectedRange;
       }
       if (this.rightPicker) {
-        this.rightPicker['selectedRange'] = selectedRange;
+        (this.rightPicker as any).selectedRange = selectedRange;
       }
       [this.rangeStart, this.rangeEnd] = this.selectedRange;
     }
@@ -172,16 +176,14 @@ export class DateRangePickerComponent implements OnChanges, OnInit, ControlValue
   }
 
   subscribeHoverActions() {
-    this.hoverOnDate.pipe(
-      distinctUntilChanged()
-    ).subscribe((date) => {
+    this.hoverOnDate.pipe(distinctUntilChanged()).subscribe((date) => {
       this.previewRangeEnd(date);
     });
   }
 
   previewRangeEnd(date) {
-    this.leftPicker['previewEnd'] = date;
-    this.rightPicker['previewEnd'] = date;
+    (this.leftPicker as any).previewEnd = date;
+    (this.rightPicker as any).previewEnd = date;
   }
 
   syncRangeStart(rangeStart, picker: any) {
@@ -196,6 +198,7 @@ export class DateRangePickerComponent implements OnChanges, OnInit, ControlValue
     case 'right':
       this.currentCalendars[1] = currentCalender;
       break;
+    default:
     }
   }
 
@@ -204,19 +207,31 @@ export class DateRangePickerComponent implements OnChanges, OnInit, ControlValue
     this.onTouched();
     this.selectedRangeChange.emit({
       reason,
-      selectedRange: range
+      selectedRange: range,
     });
   }
 
   consolidateTime() {
     const rangeStart = this.rangeStart;
     const rangeEnd = this.rangeEnd;
-    const rangeStartTime = this.leftPicker['currentTime'];
-    const rangeEndTime = this.rightPicker['currentTime'];
-    this.rangeStart = new Date(rangeStart.getFullYear(), rangeStart.getMonth(), rangeStart.getDate(),
-      rangeStartTime.hour, rangeStartTime.minute, rangeStartTime.second);
-    this.rangeEnd = new Date(rangeEnd.getFullYear(), rangeEnd.getMonth(), rangeEnd.getDate(),
-      rangeEndTime.hour, rangeEndTime.minute, rangeEndTime.second);
+    const rangeStartTime = (this.leftPicker as any).currentTime;
+    const rangeEndTime = (this.rightPicker as any).currentTime;
+    this.rangeStart = new Date(
+      rangeStart.getFullYear(),
+      rangeStart.getMonth(),
+      rangeStart.getDate(),
+      rangeStartTime.hour,
+      rangeStartTime.minute,
+      rangeStartTime.second
+    );
+    this.rangeEnd = new Date(
+      rangeEnd.getFullYear(),
+      rangeEnd.getMonth(),
+      rangeEnd.getDate(),
+      rangeEndTime.hour,
+      rangeEndTime.minute,
+      rangeEndTime.second
+    );
     const newRange = [this.rangeStart, this.rangeEnd];
     this.onTouched();
     this.writeValue(newRange);
@@ -234,5 +249,4 @@ export class DateRangePickerComponent implements OnChanges, OnInit, ControlValue
     const currentReason = typeof reason === 'number' ? reason : SelectDateRangeChangeReason.custom;
     this.chooseDate([null, null], currentReason);
   };
-
 }

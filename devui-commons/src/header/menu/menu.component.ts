@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output, Inject, ChangeDetectorR
 import { DevuiCommonsService } from '../../devui-commons.service';
 import { I18nUtil } from '../../i18n/i18n.util';
 import { componentSvg, designSvg, ecologySvg, logoSvg, vueDevUISvg } from './icon';
+import { LinkMap } from 'devui-commons/src/constant';
 
 @Component({
   selector: "d-header-menu",
@@ -45,7 +46,7 @@ export class MenuComponent implements OnInit {
           enDescription:
             "Cross-End component library based on Vue3 and DevUI design style",
           enName: "Vue DevUI",
-          href: "https://vue-devui.github.io/",
+          href: LinkMap.vueDevuiLink,
           icon: vueDevUISvg,
           menuName: "vue",
         },

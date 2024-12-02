@@ -17,7 +17,7 @@ import {
   Output,
   QueryList,
   SimpleChanges,
-  SkipSelf
+  SkipSelf,
 } from '@angular/core';
 import { addClassToOrigin, DevConfigService, formWithDropDown, removeClassFromOrigin, WithConfig } from 'ng-devui/utils';
 import { fromEvent, merge, Observable, ReplaySubject, Subscription } from 'rxjs';
@@ -77,7 +77,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
    */
   @Input() closeScope: 'all' | 'blank' | 'none' = 'all';
   @Input() closeOnMouseLeaveMenu = false;
-
+  @Input() autofocusToggleElement = true;
   @Output() toggleEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   visibleSubject = new ReplaySubject<boolean>(1);
@@ -145,16 +145,14 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   }
 
   public focusToggleElement() {
-    if (this.toggleEl) {
+    if (this.toggleEl && this.autofocusToggleElement) {
       this.toggleEl.nativeElement.focus();
     }
   }
 
   updateCdkConnectedOverlayOrigin() {
     if (this.toggleEl && this.appendToBody === true) {
-      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(
-        formWithDropDown(this.toggleEl) || this.toggleEl.nativeElement
-      );
+      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(formWithDropDown(this.toggleEl) || this.toggleEl.nativeElement);
     } else {
       this.cdkConnectedOverlayOrigin = undefined;
     }
@@ -187,12 +185,12 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
         fromEvent(this.el.nativeElement, 'mouseenter').pipe(mapTo(true)),
         fromEvent(this.el.nativeElement, 'mouseleave').pipe(
           delay(200),
-          filter((event: MouseEvent) => {
+          filter((event: any) => {
             if (this.isOpen && this.appendToBody === true) {
               // 冒泡模拟的relatedTarget， 和作用于dropdown本身event.relatedTarget
               // menu（子） -> toggle（父） 冒泡模拟的用于离开菜单的时候判断不判断overlay的div层，即只判断menuEl.nativeElement
               // toggle（父） -> menu（子） 离开元素本身的需要判断是否落入了overlay的div层，即只判断menuEl.nativeElement.parentElement
-              const relatedTarget = event.relatedTarget || (event['originEvent'] && event['originEvent'].relatedTarget);
+              const relatedTarget = event.relatedTarget || (event.originEvent && event.originEvent.relatedTarget);
               return  !(this.menuEl?.nativeElement && relatedTarget &&
                   (this.menuEl?.nativeElement.parentElement?.contains(event.relatedTarget)
                   || this.menuEl?.nativeElement.parentElement?.parentElement?.contains(event.relatedTarget) // 套了两层div增加判断
@@ -223,9 +221,9 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   }
 
   simulateEventDispatch($event, target?) {
-    const event = this.document.createEvent('MouseEvents');
+    const event: any = this.document.createEvent('MouseEvents');
     event.initEvent($event.type, true, true);
-    event['originEvent'] = $event['originEvent'] || $event;
+    event.originEvent = $event.originEvent || $event;
 
     if (!target) {
       target = this.el.nativeElement;

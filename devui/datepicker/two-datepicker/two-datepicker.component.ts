@@ -11,10 +11,10 @@ import {
   OnInit,
   Output,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { DateConverter, DefaultDateConverter, DevConfigService, fadeInOut, WithConfig } from 'ng-devui/utils';
+import { DateConverter, DefaultDateConverter, DevConfigService, WithConfig, fadeInOut } from 'ng-devui/utils';
 import { Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { DatePickerConfigService as DatePickerConfig } from '../date-picker.config.service';
@@ -25,9 +25,7 @@ import { DatePickerConfigService as DatePickerConfig } from '../date-picker.conf
   exportAs: 'twoDatePicker',
   templateUrl: 'two-datepicker.component.html',
   styleUrls: ['./two-datepicker.component.scss'],
-  animations: [
-    fadeInOut
-  ]
+  animations: [fadeInOut],
 })
 export class TwoDatePickerComponent implements OnInit, OnDestroy {
   @Input() locale: string;
@@ -45,9 +43,9 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   @ViewChild('templateWrap') templateWrap: ElementRef;
 
   datePosition: VerticalConnectionPos = 'bottom';
-  selectDateSubject = new Subject<{side: string; date: Date; onlyWrite?: boolean}>();
+  selectDateSubject = new Subject<{ side: string; date: Date; onlyWrite?: boolean }>();
   hoverOnDate: Subject<object> = new Subject<object>();
-  switchOriginPositionSub: Subject<'start'|'end'|false> = new Subject<'start'|'end'|false>();
+  switchOriginPositionSub: Subject<'start' | 'end' | false> = new Subject<'start' | 'end' | false>();
   today = new Date();
   rangeStart;
   rangeEnd;
@@ -60,7 +58,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   public currentCalendars = [null, null];
   public cdkConnectedOverlayOrigin: CdkOverlayOrigin;
   private _isOpen = false;
-  private _whichOpen: 'start'|'end'|false;
+  private _whichOpen: 'start' | 'end' | false;
   private _dateConfig: any;
   private _dateFormat: string;
   private _maxDate: Date;
@@ -103,7 +101,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   get minDate() {
     return this._minDate;
   }
-  set whichOpen(side: 'start'|'end'|false) {
+  set whichOpen(side: 'start' | 'end' | false) {
     this._whichOpen = side;
     this.switchOriginPositionSub.next(side);
   }
@@ -135,15 +133,17 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     private devConfigService: DevConfigService,
     @Inject(DOCUMENT) private doc: any
   ) {
-    this._dateConfig = datePickerConfig['dateConfig'];
-    this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
+    this._dateConfig = datePickerConfig.dateConfig;
+    this.dateConverter = datePickerConfig.dateConfig.dateConverter || new DefaultDateConverter();
     this.setI18nText();
     this.document = this.doc;
   }
 
   checkDateConfig(dateConfig: any) {
-    if (!dateConfig) { return false; }
-    if (typeof(dateConfig.timePicker) !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
+    if (!dateConfig) {
+      return false;
+    }
+    if (typeof dateConfig.timePicker !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
       return false;
     }
     return true;
@@ -165,26 +165,29 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   }
 
   isDisableToday() {
-    if ((this.minDate.getTime() >= (this.today).getTime()) || (this.maxDate.getTime() <= (this.today).getTime())) {
+    if (this.minDate.getTime() >= this.today.getTime() || this.maxDate.getTime() <= this.today.getTime()) {
       this.disableToday = true;
     } else {
       this.disableToday = false;
     }
   }
 
-  toggle = (side: 'start'|'end' = 'start') => {
+  toggle = (side: 'start' | 'end' = 'start') => {
     if (this.isOpen) {
       if (side === 'start') {
         if (this.whichOpen === 'start') {
           this.whichOpen = false;
           this.isOpen = false;
-        } else { // this.whichOpen === 'end'
+        } else {
+          // this.whichOpen === 'end'
           this.whichOpen = 'start';
         }
-      } else { // side === 'end'
+      } else {
+        // side === 'end'
         if (this.whichOpen === 'start') {
           this.whichOpen = 'end';
-        } else { // this.whichOpen === 'end'
+        } else {
+          // this.whichOpen === 'end'
           this.whichOpen = false;
           this.isOpen = false;
         }
@@ -203,18 +206,18 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
       break;
     case 'bottom':
       this.datePosition = 'top';
+      break;
+    default:
     }
     this.switchOriginPositionSub.next(this.whichOpen);
   }
 
   convertDate(date) {
-    return date ?
-      this.dateConverter.parse(date, this.dateFormat) : null;
+    return date ? this.dateConverter.parse(date, this.dateFormat) : null;
   }
 
   formatDate(date) {
-    return date ?
-      this.dateConverter.format(date, this.dateFormat, this.locale || this.i18nLocale) : null;
+    return date ? this.dateConverter.format(date, this.dateFormat, this.locale || this.i18nLocale) : null;
   }
 
   updateCdkConnectedOverlayOrigin(el: ElementRef) {
@@ -233,13 +236,14 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     case 'right':
       this.currentCalendars[1] = currentCalender;
       break;
+    default:
     }
   }
 
   rangeChange(data) {
     this.chooseDate(data.selectedRange);
-    this.selectDateSubject.next({side: 'start', date: this.rangeStart, onlyWrite: true});
-    this.selectDateSubject.next({side: 'end', date: this.rangeEnd, onlyWrite: true});
+    this.selectDateSubject.next({ side: 'start', date: this.rangeStart, onlyWrite: true });
+    this.selectDateSubject.next({ side: 'end', date: this.rangeEnd, onlyWrite: true });
   }
 
   chooseDate = (range) => {
@@ -259,22 +263,21 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   }
 
   subscribeHoverActions() {
-    this.hoverOnDate.pipe(
-      distinctUntilChanged()
-    ).subscribe((date) => {
+    this.hoverOnDate.pipe(distinctUntilChanged()).subscribe((date) => {
       this.previewRangeEnd(date);
     });
   }
 
   previewRangeEnd(date) {
-    this.leftPicker['previewEnd'] = date;
-    this.rightPicker['previewEnd'] = date;
+    (this.leftPicker as any).previewEnd = date;
+    (this.rightPicker as any).previewEnd = date;
   }
 
   syncRangeStart(rangeStart, picker: any) {
     if (this.whichOpen === 'end') {
       this.selectEnd(rangeStart);
-    } else { // this.whichOpen === 'start'
+    } else {
+      // this.whichOpen === 'start'
       this.selectStart(rangeStart);
     }
     picker.selectRange(rangeStart, true);
@@ -285,7 +288,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     this.rangeStart = date;
     this.isDisableToday();
     if (!passive) {
-      this.selectDateSubject.next({side: 'start', date});
+      this.selectDateSubject.next({ side: 'start', date });
       this.whichOpen = 'end';
     }
   }
@@ -295,7 +298,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     this.rangeEnd = date;
     this.isDisableToday();
     if (!passive) {
-      this.selectDateSubject.next({side: 'end', date: date});
+      this.selectDateSubject.next({ side: 'end', date: date });
       if (!this.showTime && this.hideOnRangeSelected) {
         this.isOpen = false;
         this.whichOpen = false;
@@ -306,7 +309,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
   chooseToday(event) {
     event.preventDefault();
     event.stopPropagation();
-    if ((this.minDate.getTime() <= (this.today).getTime()) && (this.maxDate.getTime() >= (this.today).getTime())) {
+    if (this.minDate.getTime() <= this.today.getTime() && this.maxDate.getTime() >= this.today.getTime()) {
       if (this.whichOpen === 'start') {
         this.selectStart(this.today);
       } else if (this.whichOpen === 'end') {
@@ -324,7 +327,7 @@ export class TwoDatePickerComponent implements OnInit, OnDestroy {
     }
   }
 
-  clear = (side: 'start'|'end') => {
+  clear = (side: 'start' | 'end') => {
     if (this.disabled) {
       return;
     }

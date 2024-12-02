@@ -89,7 +89,8 @@ export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   updatePosition() {
-    const calcPosition = this.position === 'left' ? 'left-top' : this.position === 'right' ? 'right-top' : this.position;
+    const resPosition = this.position === 'right' ? 'right-top' : this.position;
+    const calcPosition = this.position === 'left' ? 'left-top' : resPosition;
     const rect = this.positionService.positionElements(this.triggerElement, this.elm.nativeElement, calcPosition, true);
     const targetRect = this.triggerElement.getBoundingClientRect();
     let left = rect.left;

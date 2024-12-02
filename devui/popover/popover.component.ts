@@ -13,11 +13,11 @@ import {
   OnInit,
   Renderer2,
   SimpleChanges,
-  TemplateRef
+  TemplateRef,
 } from '@angular/core';
 import { PositionService } from 'ng-devui/position';
 import { directionFadeInOut } from 'ng-devui/utils';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { PopoverType, PositionType } from './popover.types';
 
@@ -46,6 +46,7 @@ export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
   @Input() content: string | HTMLElement | TemplateRef<any>;
   @Input() showAnimation = true;
   @Input() scrollElement: Element;
+  @Input() autoHideCoefficient = 0;
   @Input() appendToBody: boolean;
   @Input() zIndex = 1060;
   @Input() popType: PopoverType;
@@ -105,7 +106,7 @@ export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
     this.updatePosition();
     if (this.appendToBody) {
       if (this.scrollElement) {
-        this.hasSetScrollElement = true;
+        this.hasSetScrollElement = this.autoHideCoefficient >= 0;
       } else {
         this.scrollElement = this.positionService.getScrollParent(this.triggerElementRef.nativeElement);
       }
@@ -127,7 +128,7 @@ export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['content']) {
+    if (changes.content) {
       if (this.content !== undefined) {
         this.updatePosition();
       }
@@ -187,25 +188,32 @@ export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnCha
     });
   }
 
-  checkBounds(rect): boolean {
+  checkBounds(rect: DOMRect): boolean {
     // 手动设置了scrollElement才执行自动隐藏逻辑，位置信息及判断排列顺序都遵循上右下左
     if (this.hasSetScrollElement) {
       const docElement = this.document.documentElement ? this.document.documentElement : this.document.body;
       const { scrollLeft, scrollTop } = docElement;
       const containerRect = this.scrollElement.getBoundingClientRect();
+      const rectFix = {
+        ...rect,
+        top: rect.top + rect.height * this.autoHideCoefficient,
+        right: rect.right - rect.width * this.autoHideCoefficient,
+        bottom: rect.bottom - rect.height * this.autoHideCoefficient,
+        left: rect.left + rect.width * this.autoHideCoefficient,
+      };
       const positionFix = {
-        top: [rect.height, 0, 0, 0],
-        right: [0, -1 * rect.width, 0, 0],
-        bottom: [0, 0, -1 * rect.height, 0],
-        left: [0, 0, 0, rect.width],
+        top: [rectFix.height, 0, 0, 0],
+        right: [0, -1 * rectFix.width, 0, 0],
+        bottom: [0, 0, -1 * rectFix.height, 0],
+        left: [0, 0, 0, rectFix.width],
       };
       const positionKeyword = this.currentPosition.split('-')[0];
       const positionFixArr = positionFix[positionKeyword] ?? [0, 0, 0, 0];
       const bounds = [
-        Math.round(rect.top + positionFixArr[0]) >= Math.round(containerRect.top + scrollTop),
-        Math.round(rect.right + positionFixArr[1]) <= Math.round(containerRect.left + containerRect.width + scrollLeft),
-        Math.round(rect.bottom + positionFixArr[2]) <= Math.round(containerRect.top + containerRect.height + scrollTop),
-        Math.round(rect.left + positionFixArr[3]) >= Math.round(containerRect.left + scrollLeft),
+        Math.round(rectFix.top + positionFixArr[0]) >= Math.round(containerRect.top + scrollTop),
+        Math.round(rectFix.right + positionFixArr[1]) <= Math.round(containerRect.left + containerRect.width + scrollLeft),
+        Math.round(rectFix.bottom + positionFixArr[2]) <= Math.round(containerRect.top + containerRect.height + scrollTop),
+        Math.round(rectFix.left + positionFixArr[3]) >= Math.round(containerRect.left + scrollLeft),
       ];
       if (bounds.includes(false)) {
         this.animateState = 'void';

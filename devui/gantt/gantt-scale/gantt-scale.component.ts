@@ -236,8 +236,8 @@ export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
         this.highlightEndText =
           this.prefixZero(parseInt(endData.monthLabel, 10)) + '-' + this.prefixZero(parseInt(endData.dayOfMonthLabel, 10));
         const highlightWidth = highlightData.length * this.ganttService.getScaleUnitPixel();
-        if (highlightWidth < 80) {
-          this.highlightMinWidth = 80;
+        if (highlightWidth < 84) {
+          this.highlightMinWidth = 84;
         } else {
           this.highlightMinWidth = highlightWidth;
         }

@@ -1,5 +1,5 @@
 import { Component, DebugElement, ElementRef, TemplateRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, flush, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,7 +17,6 @@ import { DatepickerModule } from './datepicker.module';
         [(ngModel)]="dateRange"
         #dateRangePicker="dateRangePicker"
         (selectedRangeChange)="getValue($event)"
-
         [cssClass]="cssClass"
         [showTime]="showTime"
         [disabled]="disabled"
@@ -34,7 +33,7 @@ import { DatepickerModule } from './datepicker.module';
       <div *ngIf="everyRange(dateRange)" class="devui-input-group-addon close-icon-wrapper" (click)="dateRangePicker.clearAll()">
         <i class="icon icon-close"></i>
       </div>
-      <div class="devui-input-group-addon" (click)="$event.stopPropagation();dateRangePicker.toggle(toggle);toggle=!toggle" #icon>
+      <div class="devui-input-group-addon" (click)="$event.stopPropagation(); dateRangePicker.toggle(toggle); toggle = !toggle" #icon>
         <i class="icon icon-calendar"></i>
       </div>
       <ng-template #myCustomView let-chooseDate="chooseDate">
@@ -64,13 +63,13 @@ class TestDateRangePickerComponent {
   getValue = jasmine.createSpy('get value');
   toggle = true;
   everyRange(range) {
-    return range.every(_ => !!_);
+    return range.every((_) => !!_);
   }
   chooseToday(fn) {
     fn([new Date(), new Date()], undefined, false);
   }
 
-  constructor() { }
+  constructor() {}
 }
 
 @Component({
@@ -78,7 +77,7 @@ class TestDateRangePickerComponent {
     <div [style.height]="placeHolderHeight ? '900px' : '0'">this is place holder</div>
     <input
       class="devui-input devui-form-control"
-      [ngClass]="{'devui-dropdown-origin' : isOrigin}"
+      [ngClass]="{ 'devui-dropdown-origin': isOrigin }"
       dDateRangePicker
       (focus)="dateRangePicker.toggle()"
       #dateRangePicker="dateRangePicker"
@@ -91,7 +90,7 @@ class TestDateRangePickerOriginComponent {
 
   placeHolderHeight = false;
   isOrigin = false;
-  constructor() { }
+  constructor() {}
 }
 
 @Component({
@@ -113,7 +112,7 @@ class TestDateRangePickerCmpComponent {
   customViewTemplate;
   reason;
   @ViewChild('myCustomView') myCustomView: TemplateRef<any>;
-  constructor() { }
+  constructor() {}
   today() {
     return [new Date(), new Date()];
   }
@@ -128,7 +127,7 @@ describe('dateRangePicker', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
-      declarations: [TestDateRangePickerComponent]
+      declarations: [TestDateRangePickerComponent],
     }).compileComponents();
   }));
 
@@ -145,10 +144,18 @@ describe('dateRangePicker', () => {
     it('should datePicker show, should hideOnRangeSelected works', fakeAsync(() => {
       openDatePicker(fixture);
       const classList = [
-        '.devui-date-range-wrapper', '.devui-date-range-picker', '.devui-date-picker',
-        '.devui-month-view', '.devui-month-view-table',
-        '.devui-calender-header', '.devui-week-header', '.devui-date-title',
-        '.devui-day', '.devui-out-of-month', '.devui-in-month-day', '.devui-calendar-date'
+        '.devui-date-range-wrapper',
+        '.devui-date-range-picker',
+        '.devui-date-picker',
+        '.devui-month-view',
+        '.devui-month-view-table',
+        '.devui-calender-header',
+        '.devui-week-header',
+        '.devui-date-title',
+        '.devui-day',
+        '.devui-out-of-month',
+        '.devui-in-month-day',
+        '.devui-calendar-date',
       ];
       expect(domHelper.judgeAppendToBodyStyleClasses(classList)).toBeTruthy();
 
@@ -229,8 +236,8 @@ describe('dateRangePicker', () => {
           max: 2020,
           format: {
             date: 'MM.dd.y',
-            time: 'MM.dd.y mm-ss-HH'
-          }
+            time: 'MM.dd.y mm-ss-HH',
+          },
         };
       });
 
@@ -263,7 +270,7 @@ describe('dateRangePicker', () => {
     describe('test wrong control', () => {
       beforeEach(() => {
         component.dateConfig = {
-          timePicker: true
+          timePicker: true,
         };
       });
 
@@ -286,7 +293,7 @@ describe('dateRangePickerOrigin', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
-      declarations: [TestDateRangePickerOriginComponent]
+      declarations: [TestDateRangePickerOriginComponent],
     }).compileComponents();
   }));
 
@@ -331,7 +338,7 @@ describe('dateRangePickerComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule, NoopAnimationsModule, FormsModule],
-      declarations: [TestDateRangePickerCmpComponent]
+      declarations: [TestDateRangePickerCmpComponent],
     }).compileComponents();
   }));
 
@@ -349,7 +356,6 @@ describe('dateRangePickerComponent', () => {
       component.selectedRange = [new Date(), new Date()];
       fixture.detectChanges();
       expect(debugEl.queryAll(By.css('.active.devui-in-month-day')).length).toBe(1);
-
     }));
 
     it('should template works', fakeAsync(() => {
@@ -392,8 +398,8 @@ describe('dateRangePickerComponent', () => {
           max: 2020,
           format: {
             date: 'MM.dd.y',
-            time: 'MM.dd.y mm-ss-HH'
-          }
+            time: 'MM.dd.y mm-ss-HH',
+          },
         };
       });
 
@@ -408,7 +414,7 @@ describe('dateRangePickerComponent', () => {
     describe('test wrong control', () => {
       beforeEach(() => {
         component.dateConfig = {
-          timePicker: true
+          timePicker: true,
         };
       });
 
@@ -423,7 +429,7 @@ describe('dateRangePickerComponent', () => {
 });
 
 function padZero(value) {
-  return (String(value)).padStart(2, '0');
+  return String(value).padStart(2, '0');
 }
 
 function resolveMonth(str) {
@@ -484,49 +490,49 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
     },
     monthShow: (ele) => {
       return resolveMonth(ele.textContent.trim());
-    }
+    },
   };
   const showEle = {
     left: {
       year: fun.showEles[0],
-      month: fun.showEles[1]
+      month: fun.showEles[1],
     },
     right: {
       year: fun.showEles[2],
-      month: fun.showEles[3]
-    }
+      month: fun.showEles[3],
+    },
   };
   const currentShowNum = {
     left: {
       year: fun.yearShow(showEle.left.year),
-      month: fun.monthShow(showEle.left.month)
+      month: fun.monthShow(showEle.left.month),
     },
     right: {
       year: fun.yearShow(showEle.right.year),
-      month: fun.monthShow(showEle.right.month)
-    }
+      month: fun.monthShow(showEle.right.month),
+    },
   };
   const btnEle = {
     left: {
       year: {
         last: fun.btnEles(0, 0),
-        next: fun.btnEles(0, 3)
+        next: fun.btnEles(0, 3),
       },
       month: {
         last: fun.btnEles(0, 1),
-        next: fun.btnEles(0, 2)
-      }
+        next: fun.btnEles(0, 2),
+      },
     },
     right: {
       year: {
         next: fun.btnEles(1, 3),
-        last: fun.btnEles(1, 0)
+        last: fun.btnEles(1, 0),
       },
       month: {
         next: fun.btnEles(1, 2),
-        last: fun.btnEles(1, 1)
-      }
-    }
+        last: fun.btnEles(1, 1),
+      },
+    },
   };
 
   for (const side in btnEle) {
@@ -536,7 +542,7 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
           let current = 0;
           for (const type in btnEle[side][time]) {
             if (type) {
-              current = type === 'next' ? (current + 1) : (current - 1);
+              current = type === 'next' ? current + 1 : current - 1;
               btnEle[side][time][type].dispatchEvent(new Event('click'));
               fixture.detectChanges();
               let currentMonth = Number(currentShowNum[side][time]) + current;
@@ -566,12 +572,10 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
   expect(component.inputEle.nativeElement.value).toBe(
     `${strDate(0, 0, 0, leftCurrentDay)}${component.splitter}${strDate(0, 1, 0, rightCurrentDay)}`
   );
-  expect(component.dateRange).toEqual(
-    [
-      new Date(new Date().getFullYear(), new Date().getMonth(), leftCurrentDay),
-      new Date(new Date().getFullYear(), new Date().getMonth() + 1, rightCurrentDay, 23, 59, 59)
-    ]
-  );
+  expect(component.dateRange).toEqual([
+    new Date(new Date().getFullYear(), new Date().getMonth(), leftCurrentDay),
+    new Date(new Date().getFullYear(), new Date().getMonth() + 1, rightCurrentDay, 23, 59, 59),
+  ]);
   closeDatePicker(fixture);
 
   component.dateRange = [new Date(), new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate())];
@@ -585,9 +589,7 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
   rightCurrentDayInListEle = rightDayListEle.querySelector('.active');
   leftCurrentDay = leftCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
   rightCurrentDay = rightCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
-  expect(component.inputEle.nativeElement.value).toBe(
-    `${strDate(0, 0, 0)}${component.splitter}${strDate(0, 1, 0)}`
-  );
+  expect(component.inputEle.nativeElement.value).toBe(`${strDate(0, 0, 0)}${component.splitter}${strDate(0, 1, 0)}`);
   expect(Number(leftCurrentDay)).toBe(new Date().getDate());
   expect(Number(rightCurrentDay)).toBe(new Date(strDate(0, 1, 0)).getDate());
   closeDatePicker(fixture);
@@ -602,12 +604,10 @@ function testNgModelAndYearMonth(fixture, wrapperEle, component) {
   rightCurrentDayInListEle = rightDayListEle.querySelector('.active');
   leftCurrentDay = leftCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
   rightCurrentDay = rightCurrentDayInListEle.querySelector('.devui-calendar-date').textContent.trim();
-  expect(component.dateRange).toEqual(
-    [
-      new Date(new Date().getFullYear(), new Date().getMonth(), 5),
-      new Date(new Date().getFullYear(), new Date().getMonth() + 1, 5)
-    ]
-  );
+  expect(component.dateRange).toEqual([
+    new Date(new Date().getFullYear(), new Date().getMonth(), 5),
+    new Date(new Date().getFullYear(), new Date().getMonth() + 1, 5),
+  ]);
   expect(leftCurrentDay).toBe('05');
   expect(rightCurrentDay).toBe('05');
   closeDatePicker(fixture);
@@ -678,11 +678,11 @@ function testInputParam(fixture, wrapperEle, component) {
   let rightCurrentDayInListEle;
   for (const dayEl of leftDayListEle.querySelectorAll('.devui-in-month-day')) {
     const dayNumber = Number(dayEl.querySelector('.devui-calendar-date').textContent.trim());
-    if (dayNumber === (minDate.getDate() - 1)) {
+    if (dayNumber === minDate.getDate() - 1) {
       expect(dayEl.classList).toContain('disabled');
       tickEvent(dayEl, new Event('mouseover'), fixture);
       dayEl.dispatchEvent(new Event('click'));
-    } else if (dayNumber === (minDate.getDate())) {
+    } else if (dayNumber === minDate.getDate()) {
       leftCurrentDayInListEle = dayEl;
     }
   }
@@ -693,11 +693,11 @@ function testInputParam(fixture, wrapperEle, component) {
   }
   for (const dayEl of rightDayListEle.querySelectorAll('.devui-in-month-day')) {
     const dayNumber = Number(dayEl.querySelector('.devui-calendar-date').textContent.trim());
-    if (dayNumber === (component.maxDate.getDate() + 1)) {
+    if (dayNumber === component.maxDate.getDate() + 1) {
       expect(dayEl.classList).toContain('disabled');
       tickEvent(dayEl, new Event('mouseover'), fixture);
       dayEl.dispatchEvent(new Event('click'));
-    } else if (dayNumber === (component.maxDate.getDate())) {
+    } else if (dayNumber === component.maxDate.getDate()) {
       rightCurrentDayInListEle = dayEl;
     }
   }
@@ -738,25 +738,23 @@ function testTimePicker(fixture, wrapperEle, component) {
 
   let picker = {
     left: wrapperEle.querySelectorAll('.devui-date-picker')[0],
-    right: wrapperEle.querySelectorAll('.devui-date-picker')[1]
+    right: wrapperEle.querySelectorAll('.devui-date-picker')[1],
   };
-  expect(picker['left'].querySelector('.devui-timepicker')).toBeTruthy();
-  expect(picker['right'].querySelector('.devui-timepicker')).toBeTruthy();
+  expect(picker.left.querySelector('.devui-timepicker')).toBeTruthy();
+  expect(picker.right.querySelector('.devui-timepicker')).toBeTruthy();
   closeDatePicker(fixture);
 
-  component.dateRange = [new Date(new Date().getFullYear(),
-    new Date().getMonth(),
-    new Date().getDate()),
-  new Date(new Date().getFullYear(),
-    new Date().getMonth() + 1,
-    new Date().getDate())];
+  component.dateRange = [
+    new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()),
+    new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()),
+  ];
   fixture.detectChanges();
   tick();
   fixture.detectChanges();
   openDatePicker(fixture);
   picker = {
     left: wrapperEle.querySelectorAll('.devui-date-picker')[0],
-    right: wrapperEle.querySelectorAll('.devui-date-picker')[1]
+    right: wrapperEle.querySelectorAll('.devui-date-picker')[1],
   };
   function timeEles(whichPicker, type) {
     const index = ['hours', 'minutes', 'seconds'].indexOf(type);
@@ -770,45 +768,45 @@ function testTimePicker(fixture, wrapperEle, component) {
   }
   const timeInputEle = {
     left: {
-      hours: timeInputEles(picker['left'], 'hours'),
-      minutes: timeInputEles(picker['left'], 'minutes'),
-      seconds: timeInputEles(picker['left'], 'seconds')
+      hours: timeInputEles(picker.left, 'hours'),
+      minutes: timeInputEles(picker.left, 'minutes'),
+      seconds: timeInputEles(picker.left, 'seconds'),
     },
     right: {
-      hours: timeInputEles(picker['right'], 'hours'),
-      minutes: timeInputEles(picker['right'], 'minutes'),
-      seconds: timeInputEles(picker['right'], 'seconds')
-    }
+      hours: timeInputEles(picker.right, 'hours'),
+      minutes: timeInputEles(picker.right, 'minutes'),
+      seconds: timeInputEles(picker.right, 'seconds'),
+    },
   };
   const timeBtnEle = {
     left: {
       hours: {
-        up: timeBtnEles(picker['left'], 'hours', 'up'),
-        down: timeBtnEles(picker['left'], 'hours', 'down')
+        up: timeBtnEles(picker.left, 'hours', 'up'),
+        down: timeBtnEles(picker.left, 'hours', 'down'),
       },
       minutes: {
-        up: timeBtnEles(picker['left'], 'minutes', 'up'),
-        down: timeBtnEles(picker['left'], 'minutes', 'down')
+        up: timeBtnEles(picker.left, 'minutes', 'up'),
+        down: timeBtnEles(picker.left, 'minutes', 'down'),
       },
       seconds: {
-        up: timeBtnEles(picker['left'], 'seconds', 'up'),
-        down: timeBtnEles(picker['left'], 'seconds', 'down')
-      }
+        up: timeBtnEles(picker.left, 'seconds', 'up'),
+        down: timeBtnEles(picker.left, 'seconds', 'down'),
+      },
     },
     right: {
       hours: {
-        up: timeBtnEles(picker['right'], 'hours', 'up'),
-        down: timeBtnEles(picker['right'], 'hours', 'down')
+        up: timeBtnEles(picker.right, 'hours', 'up'),
+        down: timeBtnEles(picker.right, 'hours', 'down'),
       },
       minutes: {
-        up: timeBtnEles(picker['right'], 'minutes', 'up'),
-        down: timeBtnEles(picker['right'], 'minutes', 'down')
+        up: timeBtnEles(picker.right, 'minutes', 'up'),
+        down: timeBtnEles(picker.right, 'minutes', 'down'),
       },
       seconds: {
-        up: timeBtnEles(picker['right'], 'seconds', 'up'),
-        down: timeBtnEles(picker['right'], 'seconds', 'down')
-      }
-    }
+        up: timeBtnEles(picker.right, 'seconds', 'up'),
+        down: timeBtnEles(picker.right, 'seconds', 'down'),
+      },
+    },
   };
 
   for (const side in timeBtnEle) {
@@ -852,8 +850,13 @@ function testTimePicker(fixture, wrapperEle, component) {
       for (const time in timeInputEle[side]) {
         if (time) {
           const arr = ['hours', 'minutes', 'seconds'];
-          testTimePickerBtn(picker[side].querySelectorAll('.devui-btn-nav')[arr.indexOf(time)],
-            fixture, timeEvent, timeInputEle[side][time], component);
+          testTimePickerBtn(
+            picker[side].querySelectorAll('.devui-btn-nav')[arr.indexOf(time)],
+            fixture,
+            timeEvent,
+            timeInputEle[side][time],
+            component
+          );
         }
       }
     }
@@ -865,24 +868,38 @@ function testTimePicker(fixture, wrapperEle, component) {
   expect(component.getValue).toHaveBeenCalled();
   expect(component.inputEle.nativeElement.value).toBe(
     /* eslint-disable-next-line max-len*/
-    `${strDate(0, 0, 0)} 0${timeEvent}:0${timeEvent}:0${timeEvent}${component.splitter}${strDate(0, 1, 0)} 0${timeEvent}:0${timeEvent}:0${timeEvent}`
+    `${strDate(0, 0, 0)} 0${timeEvent}:0${timeEvent}:0${timeEvent}${component.splitter}${strDate(
+      0,
+      1,
+      0
+    )} 0${timeEvent}:0${timeEvent}:0${timeEvent}`
   );
-  expect(component.dateRange).toEqual(
-    [
-      new Date(new Date().getFullYear(),
-        new Date().getMonth(),
-        new Date().getDate(), Number(timeEvent), Number(timeEvent), Number(timeEvent)),
-      new Date(new Date().getFullYear(),
-        new Date().getMonth() + 1,
-        new Date().getDate(), Number(timeEvent), Number(timeEvent), Number(timeEvent))
-    ]
-  );
+  expect(component.dateRange).toEqual([
+    new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate(),
+      Number(timeEvent),
+      Number(timeEvent),
+      Number(timeEvent)
+    ),
+    new Date(
+      new Date().getFullYear(),
+      new Date().getMonth() + 1,
+      new Date().getDate(),
+      Number(timeEvent),
+      Number(timeEvent),
+      Number(timeEvent)
+    ),
+  ]);
 }
 
 function testTimePickerInput(inputEle, fixture, timeEvent) {
   const backSpaceKeyboard = EventHelper.createKeyBoardEvent('keydown', { key: 'Backspace', keyCode: 8 });
   const keyBoardEvent = EventHelper.createKeyBoardEvent('keydown', {
-    key: timeEvent, code: `Digit${timeEvent}`, charCode: 48 + Number(timeEvent)
+    key: timeEvent,
+    code: `Digit${timeEvent}`,
+    charCode: 48 + Number(timeEvent),
   });
   const changeEvent = new Event('change');
   tickEvent(inputEle, backSpaceKeyboard, fixture);
@@ -913,8 +930,10 @@ function testTimePickerBtn(btnWrapperEle, fixture, timeEvent, inputEle, componen
 }
 
 function testDateConfig(fixture, wrapperEle, component) {
-  component.dateRange = [new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()),
-    new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate())];
+  component.dateRange = [
+    new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()),
+    new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()),
+  ];
   fixture.detectChanges();
   tick();
   fixture.detectChanges();

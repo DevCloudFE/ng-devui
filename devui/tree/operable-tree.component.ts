@@ -14,15 +14,16 @@ import {
   QueryList,
   TemplateRef,
   ViewChild,
-  ViewChildren
+  ViewChildren,
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { DevConfigService, expandCollapseForDomDestroy, WithConfig } from 'ng-devui/utils';
+import { DevConfigService, WithConfig, expandCollapseForDomDestroy } from 'ng-devui/utils';
 import { difference } from 'lodash-es';
 import { Subscription } from 'rxjs';
 import { Dictionary, ITreeItem, ITreeNodeData, TreeNode } from './tree-factory.class';
 import { TreeComponent } from './tree.component';
 import { ICheckboxInput, IDropType } from './tree.types';
+
 @Component({
   selector: 'd-operable-tree',
   templateUrl: './operable-tree.component.html',
@@ -32,6 +33,7 @@ import { ICheckboxInput, IDropType } from './tree.types';
   animations: [expandCollapseForDomDestroy],
 })
 export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
+  static ID_SEED = 0;
   @Input() tree: Array<ITreeItem>;
   @Input() treeNodeIdKey: string;
   @Input() treeNodeChildrenKey: string;
@@ -52,6 +54,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() addable = false;
   @Input() editable = false;
   @Input() draggable = false;
+  @Input() dropFromOutside = false;
   @Input() disableMouseEvent: boolean;
   @Input() checkboxInput: ICheckboxInput = {};
   @Input() beforeAddNode: (node: TreeNode) => Promise<any>;
@@ -89,7 +92,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() nodeEdited = new EventEmitter<TreeNode>();
   @Output() editValueChange = new EventEmitter<{ value: string; callback: Function }>();
   @Output() nodeDragStart = new EventEmitter<{ event: DragEvent; treeNode: TreeNode; treeNodes?: TreeNode[] }>();
-  @Output() nodeOnDrop = new EventEmitter<{ event: DragEvent; treeNode: TreeNode; dropType: IDropType }>();
+  @Output() nodeOnDrop = new EventEmitter<{ event: DragEvent; treeNode: TreeNode; dropType: IDropType; isFromOutside?: boolean }>();
   @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;
   @ViewChild('operableTreeContainer', { static: true }) operableTreeEle: ElementRef;
   @ViewChild('treeDropIndicator') treeDropIndicator: ElementRef;
@@ -109,6 +112,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     timeout: null,
   };
   @ViewChildren('treeNodeContent') treeNodeContent: QueryList<ElementRef>;
+  id: string;
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
   dragState = {
@@ -124,6 +128,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   isOpenedOonDragOver = [];
 
   constructor(@Inject(DOCUMENT) private doc: any, private i18n: I18nService, private devConfigService: DevConfigService) {
+    this.id = `d-operable-tree-${OperableTreeComponent.ID_SEED++}`;
     this.document = this.doc;
   }
 
@@ -195,6 +200,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     const result = { event, treeNode };
     const data = {
       type: 'operable-tree-node',
+      treeId: this.id,
       nodeId: treeNode.id,
       parentId: treeNode.parentId,
       nodeTitle: treeNode.data.title,
@@ -206,8 +212,8 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
       const activatedNodes = this.treeFactory.getActivatedNodes();
       // 存在无激活项，直接拖拽单个节点情况
       const availableNodes = activatedNodes.length ? activatedNodes : [treeNode];
-      data['multipleData'] = availableNodes;
-      result['treeNodes'] = availableNodes;
+      (data as any).multipleData = availableNodes;
+      (result as any).treeNodes = availableNodes;
       // 拖拽启用层叠样式，随拖拽个数变化
       this.multipleDragStyle(event, availableNodes, event.target);
     }
@@ -239,13 +245,17 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   handlerDragState(event, treeNode) {
+    let dropType;
     const dropPrev = this.dropType.dropPrev;
     const dropNext = this.dropType.dropNext;
     const dropInner = this.dropType.dropInner;
-    let dropType;
     const treePosition = this.operableTreeEle.nativeElement.getBoundingClientRect();
-    const prevPercent = dropPrev ? (dropInner ? 0.25 : dropNext ? 0.45 : 1) : -1;
-    const nextPercent = dropNext ? (dropInner ? 0.75 : dropPrev ? 0.55 : 0) : 1;
+    const nextRes = dropNext ? 0.45 : 1;
+    const innerNextRes = dropInner ? 0.25 : nextRes;
+    const prevPercent = dropPrev ? innerNextRes : -1;
+    const prevRes = dropPrev ? 0.55 : 0;
+    const innerPrevRes = dropInner ? 0.75 : prevRes;
+    const nextPercent = dropNext ? innerPrevRes : 1;
     const targetPosition = event.currentTarget.getBoundingClientRect();
     const dom =
       event.currentTarget.querySelector('.devui-tree-drag-handle') || event.currentTarget.querySelector('.devui-tree-node__title');
@@ -294,22 +304,22 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onDrop(event, dropNode) {
     this.removeDraggingStyle(event.currentTarget);
-    if (!this.draggable) {
+    if (!this.draggable && !this.dropFromOutside) {
       return;
     }
     event.preventDefault();
     const transferDataStr = event.dataTransfer.getData('Text');
-    const dropNodeId = dropNode.id;
     if (transferDataStr) {
       try {
         const transferData = JSON.parse(transferDataStr);
-        if (typeof transferData === 'object' && transferData.type === 'operable-tree-node') {
+        if (typeof transferData === 'object' && transferData.type === 'operable-tree-node' && transferData.treeId === this.id) {
           let dragResult = Promise.resolve(true);
-          const dragNodeId = transferData['nodeId'];
+          const dragNodeId = transferData.nodeId;
           const dragNodeIds: string[] = [];
+          const dropNodeId = dropNode.id;
           // 使用对象存储选择状态，因为节点id为数字，避免产生长索引数组影响性能
           const dragNodesCheckStatus = {};
-          const multipleData = transferData['multipleData'];
+          const multipleData = transferData.multipleData;
           if (this.canActivateMultipleNode && multipleData?.length > 1) {
             // 多选时遍历所有被激活的节点确认是否为目标节点或其父节点并储存可用节点的选择状态
             // 反序遍历用于先处理子节点以更新父子同时拖拽的状态
@@ -320,7 +330,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
               return;
             }
             this.treeFactory.checkNodesById(dragNodeId, false, 'upward');
-            dragNodesCheckStatus[dragNodeId] = { checked: transferData['isChecked'], halfChecked: transferData['halfChecked'] };
+            dragNodesCheckStatus[dragNodeId] = { checked: transferData.isChecked, halfChecked: transferData.halfChecked };
           }
           if (this.beforeNodeDrop) {
             dragResult = this.beforeNodeDrop(dragNodeId, dropNodeId, this.dragState.dropType, dragNodeIds);
@@ -335,10 +345,19 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
                 }
                 this.nodeOnDrop.emit({ event, treeNode: dropNode, dropType: this.dragState.dropType });
               }
-            })
-            .catch(() => {});
+            });
+        } else {
+          this.dropFormOutside(event, dropNode);
         }
-      } catch (e) {}
+      } catch (e) {
+        this.dropFormOutside(event, dropNode);
+      }
+    }
+  }
+
+  dropFormOutside(event, dropNode) {
+    if (this.dropFromOutside && this.nodeOnDrop.observers.length > 0) {
+      this.nodeOnDrop.emit({ event, treeNode: dropNode, dropType: this.dragState.dropType, isFromOutside: true });
     }
   }
 
@@ -397,6 +416,7 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
     case 'inner':
       this.handlerDropInner(movingNodeIndex, movingNode, dropNode, originalParentNode);
       break;
+    default:
     }
   }
 
@@ -512,9 +532,9 @@ export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
       const node = this.treeFactory.addNode(
         {
           parentId: treeNode.id,
-          title: nodeInfo['title'] ? nodeInfo['title'] : '新增节点',
-          isParent: nodeInfo['isParent'],
-          id: nodeInfo['id'] ? nodeInfo['id'] : undefined,
+          title: nodeInfo.title ? nodeInfo.title : '新增节点',
+          isParent: nodeInfo.isParent,
+          id: nodeInfo.id ? nodeInfo.id : undefined,
           data: nodeInfo.data,
         },
         nodeInfo.index,

@@ -7,7 +7,7 @@ import { AXIS_TITLE_SPACE } from '../quadrant.config';
   selector: 'd-quadrant-axis',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './quadrant-axis.component.html',
-  styleUrls: ['./quadrant-axis.component.scss']
+  styleUrls: ['./quadrant-axis.component.scss'],
 })
 export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
   @Input() axisConfigs: IAxisConfigs;
@@ -27,15 +27,19 @@ export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
   private AXIS_COLOR;
   private AXIS_LABEL_COLOR;
   themeService: ThemeService;
-  constructor(private elementRef: ElementRef) { }
+
+  constructor(private elementRef: ElementRef) {}
+
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && (changes['axisConfigs'] || changes['view'])) {
+    const { axisConfigs, view } = changes;
+    if (changes && (axisConfigs || view)) {
       this.resetAxis();
     }
   }
+
   ngOnInit(): void {
     if (typeof window !== 'undefined') {
-      this.themeService = window['devuiThemeService'];
+      this.themeService = (window as any).devuiThemeService;
       if (this.themeService && this.themeService.eventBus) {
         this.themeService.eventBus.add('themeChanged', this.refreshColor);
       }
@@ -62,7 +66,6 @@ export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
     this.quadrantAxis = this.elementRef.nativeElement.querySelector('d-quadrant-diagram#' + this.diagramId + ' canvas');
     this.quadrantAxis.width = this.view.width;
     this.quadrantAxis.height = this.view.height;
-
   }
   setAxisData() {
     this.context = this.quadrantAxis.getContext('2d');
@@ -76,6 +79,7 @@ export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
     this.xTickSpacing = this.axisConfigs.xTickSpacing;
     this.yTickSpacing = this.axisConfigs.yTickSpacing;
   }
+
   drawAxis() {
     this.context.save();
     this.context.fillStyle = this.AXIS_COLOR;
@@ -87,6 +91,7 @@ export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
     this.drawXAxisTicks();
     this.context.restore();
   }
+
   drawXAxisTicks() {
     let deltaY;
     for (let i = 1; i < this.xAxisTicksNum; i++) {
@@ -97,14 +102,12 @@ export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
       } else {
         deltaY = this.axisConfigs.tickWidth / 2;
       }
-      this.context.moveTo(this.axisOrigin.x + i * this.xTickSpacing,
-        this.axisOrigin.y - deltaY);
-      this.context.lineTo(this.axisOrigin.x + i * this.xTickSpacing,
-        this.axisOrigin.y + deltaY);
+      this.context.moveTo(this.axisOrigin.x + i * this.xTickSpacing, this.axisOrigin.y - deltaY);
+      this.context.lineTo(this.axisOrigin.x + i * this.xTickSpacing, this.axisOrigin.y + deltaY);
       this.context.stroke();
     }
-
   }
+
   drawYAxisTicks() {
     let deltaX;
     for (let i = 1; i < this.yAxisTicksNum; i++) {
@@ -114,13 +117,12 @@ export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
       } else {
         deltaX = this.axisConfigs.tickWidth / 2;
       }
-      this.context.moveTo(this.axisOrigin.x - deltaX,
-        this.axisOrigin.y - i * this.yTickSpacing);
-      this.context.lineTo(this.axisOrigin.x + deltaX,
-        this.axisOrigin.y - i * this.yTickSpacing);
+      this.context.moveTo(this.axisOrigin.x - deltaX, this.axisOrigin.y - i * this.yTickSpacing);
+      this.context.lineTo(this.axisOrigin.x + deltaX, this.axisOrigin.y - i * this.yTickSpacing);
       this.context.stroke();
     }
   }
+
   drawYAxis() {
     this.context.beginPath();
     this.context.moveTo(this.axisOrigin.x, this.axisOrigin.y);
@@ -130,8 +132,8 @@ export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
     this.context.lineTo(this.axisOrigin.x + 5, this.axisTop - this.axisConfigs.axisMargin + 10);
     this.context.lineTo(this.axisOrigin.x - 5, this.axisTop - this.axisConfigs.axisMargin + 10);
     this.context.fill();
-
   }
+
   drawXAxis() {
     this.context.beginPath();
     this.context.moveTo(this.axisOrigin.x, this.axisOrigin.y);
@@ -143,6 +145,7 @@ export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
     this.context.lineTo(this.axisRight + this.axisConfigs.axisMargin - 10, this.axisOrigin.y - 5);
     this.context.fill();
   }
+
   drawAxisLabels() {
     this.context.save();
     this.context.fillStyle = this.AXIS_LABEL_COLOR;
@@ -151,45 +154,51 @@ export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
     this.context.restore();
     this.drawAxisTitle();
   }
+
   drawAxisTitle() {
     this.context.font = '12px Microsoft YaHei';
     this.context.textAlign = 'left';
     this.context.fillStyle = this.AXIS_LABEL_COLOR;
     const xLabelWidth = this.context.measureText(this.axisConfigs.xAxisLabel).width;
-    this.rotateLabel(this.axisConfigs.xAxisLabel, this.axisRight + this.axisConfigs.axisMargin / 2,
-      this.axisOrigin.y - xLabelWidth - AXIS_TITLE_SPACE);
-    this.context.fillText(this.axisConfigs.yAxisLabel,
-      this.axisOrigin.x + AXIS_TITLE_SPACE, this.axisTop - this.axisConfigs.axisMargin / 2);
+    this.rotateLabel(
+      this.axisConfigs.xAxisLabel,
+      this.axisRight + this.axisConfigs.axisMargin / 2,
+      this.axisOrigin.y - xLabelWidth - AXIS_TITLE_SPACE
+    );
+    this.context.fillText(
+      this.axisConfigs.yAxisLabel,
+      this.axisOrigin.x + AXIS_TITLE_SPACE,
+      this.axisTop - this.axisConfigs.axisMargin / 2
+    );
   }
+
   drawXTicksLabels() {
     this.context.textAlign = 'center';
     this.context.textBaseline = 'top';
     for (let i = 0; i <= this.xAxisTicksNum; i++) {
       if (i % this.axisConfigs.xAxisRange.step === 0) {
-        this.context.fillText(i,
-          this.axisOrigin.x + i * this.xTickSpacing,
-          this.axisOrigin.y + this.axisConfigs.spaceBetweenLabelsAxis);
+        this.context.fillText(i, this.axisOrigin.x + i * this.xTickSpacing, this.axisOrigin.y + this.axisConfigs.spaceBetweenLabelsAxis);
       }
     }
   }
+
   drawYTicksLabels() {
     this.context.textAlign = 'center';
     this.context.textBaseline = 'middle';
     for (let i = 0; i <= this.yAxisTicksNum; i++) {
       if (i % this.axisConfigs.yAxisRange.step === 0) {
-        this.context.fillText(i,
-          this.axisOrigin.x - this.axisConfigs.spaceBetweenLabelsAxis,
-          this.axisOrigin.y - i * this.yTickSpacing);
+        this.context.fillText(i, this.axisOrigin.x - this.axisConfigs.spaceBetweenLabelsAxis, this.axisOrigin.y - i * this.yTickSpacing);
       }
     }
   }
+
   rotateLabel(name, x, y) {
     for (let i = 0; i < name.length; i++) {
       const str = name.slice(i, i + 1).toString();
       if (str.match(/[A-Za-z0-9]/)) {
         this.context.save();
         this.context.translate(x, y);
-        this.context.rotate(Math.PI / 180 * 90);
+        this.context.rotate((Math.PI / 180) * 90);
         this.context.textBaseline = 'bottom';
         this.context.fillText(str, 0, 0);
         this.context.restore();

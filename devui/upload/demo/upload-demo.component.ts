@@ -64,10 +64,10 @@ export class UploadDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
       { dAnchorLink: 'multi-files', value: values['multi-files'] },
       { dAnchorLink: 'auto-upload', value: values['auto-upload'] },
-      { dAnchorLink: 'custom', value: values['custom'] },
+      { dAnchorLink: 'custom', value: values.custom },
       { dAnchorLink: 'dynamic-upload-options', value: values['dynamic-upload-options'] },
       { dAnchorLink: 'customize-area-upload', value: values['customize-area-upload'] },
-      { dAnchorLink: 'upload-slice', value: values['upload-slice']},
+      { dAnchorLink: 'upload-slice', value: values['upload-slice'] },
     ];
   }
 

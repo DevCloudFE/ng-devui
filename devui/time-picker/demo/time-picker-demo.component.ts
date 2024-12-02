@@ -45,8 +45,8 @@ export class TimePickerDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
-      { dAnchorLink: 'format', value: values['format'] },
-      { dAnchorLink: 'custom', value: values['custom'] },
+      { dAnchorLink: 'format', value: values.format },
+      { dAnchorLink: 'custom', value: values.custom },
     ];
   }
 

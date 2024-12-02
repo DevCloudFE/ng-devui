@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -201,11 +201,11 @@ describe('anchor', () => {
         fixture.detectChanges();
         tick();
         const linkElement: HTMLElement = anchorLinkElements[0].nativeElement;
-        expect(anchorElements[0].classes['active']).toBeUndefined();
+        expect(anchorElements[0].classes.active).toBeUndefined();
         linkElement.click();
         fixture.detectChanges();
         tick(650);
-        expect(anchorElements[0].classes['active']).toBe(true);
+        expect(anchorElements[0].classes.active).toBe(true);
       }));
 
       it('should not set scrolling to target when there is no anchorblock', fakeAsync(() => {

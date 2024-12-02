@@ -32,18 +32,20 @@ export class DropDownService {
   }
 
   private closeDropdown(event: MouseEvent) {
-    if (!this.openScope) {
-      return;
+    if (event && this.openScope?.menuEl) {
+      const menuEl = this.openScope.menuEl.nativeElement;
+      const target = event.target as Element;
+      const className = target && typeof target.className === 'string' ? target.className : '';
+      const rules = [
+        className.indexOf('disabled') > -1,
+        /input|textarea/i.test(target.tagName) && menuEl.contains(target),
+        this.openScope.closeScope === 'none',
+        menuEl.contains(target) && this.openScope.closeScope === 'blank',
+        this.openScope.dropdownChildren.some((children) => children.toggleEl.nativeElement.contains(target)),
+      ];
+      if (!rules.includes(true)) {
+        this.openScope.isOpen = false;
+      }
     }
-    const menuEl = this.openScope.menuEl?.nativeElement;
-    if (event && this.openScope.menuEl &&
-      ((/input|textarea/i.test((<any>event.target).tagName) && menuEl.contains(event.target))
-        || this.openScope.closeScope === 'none'
-        || (menuEl.contains(event.target) && this.openScope.closeScope === 'blank')
-        || (this.openScope.dropdownChildren.some(children => children.toggleEl.nativeElement.contains(event.target)))
-      )) {
-      return;
-    }
-    this.openScope.isOpen = false;
   }
 }

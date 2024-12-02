@@ -16,7 +16,7 @@ import {
   SimpleChanges,
   TemplateRef,
   ViewContainerRef,
-  forwardRef
+  forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
@@ -28,7 +28,7 @@ import {
   addClassToOrigin,
   fadeInOut,
   formWithDropDown,
-  removeClassFromOrigin
+  removeClassFromOrigin,
 } from 'ng-devui/utils';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
@@ -38,38 +38,47 @@ import { DatePickerConfigService as DatePickerConfig } from './date-picker.confi
 @Component({
   /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dDatepicker][appendToBody]',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => DatePickerAppendToBodyComponent),
-    multi: true
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DatePickerAppendToBodyComponent),
+      multi: true,
+    },
+  ],
   exportAs: 'datepicker',
   template: `
-    <ng-template cdk-connected-overlay
-                 [cdkConnectedOverlayOrigin]="cdkConnectedOverlayOrigin"
-                 [cdkConnectedOverlayPositions]="positions"
-                 [cdkConnectedOverlayOpen]="isOpen"
-                 (backdropClick)="isOpen=false"
-                 (positionChange)="onPositionChange($event)">
-      <d-datepicker [@fadeInOut]="startAnimation ? datepickerPosition : 'void'"
-                      [locale]="locale || i18nLocale" [@.disabled]="!showAnimation"
-                      [showTime]="showTime" [cssClass]="cssClass" [selectedDate]="selectedDate"
-                      [disabled]="disabled" [dateConverter]="dateConverter" (selectedDateChange)="timeChange($event)"
-                      [dateConfig]="dateConfig"
-                      [customViewTemplate]="customViewTemplate" [maxDate]="maxDate"
-                      [minDate]="minDate" class="devui-datepicker"></d-datepicker>
+    <ng-template
+      cdk-connected-overlay
+      [cdkConnectedOverlayOrigin]="cdkConnectedOverlayOrigin"
+      [cdkConnectedOverlayPositions]="positions"
+      [cdkConnectedOverlayOpen]="isOpen"
+      (backdropClick)="isOpen = false"
+      (positionChange)="onPositionChange($event)"
+    >
+      <d-datepicker
+        [@fadeInOut]="startAnimation ? datepickerPosition : 'void'"
+        [locale]="locale || i18nLocale"
+        [@.disabled]="!showAnimation"
+        [showTime]="showTime"
+        [cssClass]="cssClass"
+        [selectedDate]="selectedDate"
+        [disabled]="disabled"
+        [dateConverter]="dateConverter"
+        (selectedDateChange)="timeChange($event)"
+        [dateConfig]="dateConfig"
+        [customViewTemplate]="customViewTemplate"
+        [maxDate]="maxDate"
+        [minDate]="minDate"
+        class="devui-datepicker"
+      ></d-datepicker>
     </ng-template>
   `,
-  animations: [
-    fadeInOut
-  ],
+  animations: [fadeInOut],
   styleUrls: ['./datepicker-cdk-overlay.component.scss'],
   preserveWhitespaces: false,
 })
 export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
-  @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = [
-    'rightDown', 'leftDown', 'rightUp', 'leftUp'
-  ];
+  @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
   @Input() locale: string;
   @Input() cssClass: string;
   @Input() disabled: boolean;
@@ -123,7 +132,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   @Input() set dateFormat(dateFormat: string) {
     if (dateFormat && this._dateFormat !== dateFormat) {
       this._dateFormat = dateFormat;
-      this.writeModelValue({selectedDate: this.selectedDate, reason: SelectDateChangeReason.format});
+      this.writeModelValue({ selectedDate: this.selectedDate, reason: SelectDateChangeReason.format });
     }
   }
 
@@ -173,12 +182,17 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     return this._isOpen;
   }
 
-  constructor(private elementRef: ElementRef, private viewContainerRef: ViewContainerRef,
-              private renderer2: Renderer2, private datePickerConfig: DatePickerConfig, private i18n: I18nService,
-              private cdr: ChangeDetectorRef,
-              @Inject(DOCUMENT) private doc: any) {
-    this._dateConfig = datePickerConfig['dateConfig'];
-    this.dateConverter = datePickerConfig['dateConfig'].dateConverter || new DefaultDateConverter();
+  constructor(
+    private elementRef: ElementRef,
+    private viewContainerRef: ViewContainerRef,
+    private renderer2: Renderer2,
+    private datePickerConfig: DatePickerConfig,
+    private i18n: I18nService,
+    private cdr: ChangeDetectorRef,
+    @Inject(DOCUMENT) private doc: any
+  ) {
+    this._dateConfig = datePickerConfig.dateConfig;
+    this.dateConverter = datePickerConfig.dateConfig.dateConverter || new DefaultDateConverter();
     this.setI18nText();
     this.document = this.doc;
   }
@@ -193,8 +207,10 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   }
 
   checkDateConfig(dateConfig: any) {
-    if (!dateConfig) { return false; }
-    if (typeof(dateConfig.timePicker) !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
+    if (!dateConfig) {
+      return false;
+    }
+    if (typeof dateConfig.timePicker !== 'boolean' || !dateConfig.max || !dateConfig.min || !dateConfig.format) {
       return false;
     }
     return true;
@@ -213,7 +229,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['appendToBodyDirections']) {
+    if (changes.appendToBodyDirections) {
       this.setPositions();
     }
   }
@@ -235,10 +251,8 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   }
 
   writeValue(obj: any): void {
-    this.selectedDate = obj ?
-      this.dateConverter.parse(obj, this.dateFormat, this.locale || this.i18nLocale) : null;
-    const value =
-      this.selectedDate ? this.dateConverter.format(this.selectedDate, this.dateFormat, this.locale || this.i18nLocale) : '';
+    this.selectedDate = obj ? this.dateConverter.parse(obj, this.dateFormat, this.locale || this.i18nLocale) : null;
+    const value = this.selectedDate ? this.dateConverter.format(this.selectedDate, this.dateFormat, this.locale || this.i18nLocale) : '';
     this.renderer2.setProperty(this.elementRef.nativeElement, 'value', value);
   }
 
@@ -250,19 +264,19 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   }
 
   timeChange(dateObj) {
-    this.writeValue(dateObj ? dateObj['selectedDate'] : null);
+    this.writeValue(dateObj ? dateObj.selectedDate : null);
     this.writeModelValue(dateObj);
-    if (dateObj && (dateObj['reason'] === SelectDateChangeReason.date && !this.showTime ||
-    dateObj['reason'] === SelectDateChangeReason.button)) {
+    if (
+      dateObj &&
+      ((dateObj.reason === SelectDateChangeReason.date && !this.showTime) || dateObj.reason === SelectDateChangeReason.button)
+    ) {
       this.isOpen = false;
     }
   }
 
   updateCdkConnectedOverlayOrigin() {
     if (this.elementRef.nativeElement) {
-      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(
-        formWithDropDown(this.elementRef) || this.elementRef.nativeElement
-      );
+      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(formWithDropDown(this.elementRef) || this.elementRef.nativeElement);
     }
   }
 
@@ -306,7 +320,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     this.onTouched();
     this.selectedDateChange.emit({
       reason: dateReason,
-      selectedDate: this.selectedDate
+      selectedDate: this.selectedDate,
     });
   }
 
@@ -325,18 +339,22 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
       break;
     case 'bottom':
       this.datepickerPosition = 'top';
+      break;
+    default:
     }
   }
 
   setPositions() {
     if (this.appendToBodyDirections && this.appendToBodyDirections.length > 0) {
-      this.positions = this.appendToBodyDirections.map(position => {
-        if (typeof position === 'string') {
-          return AppendToBodyDirectionsConfig[position];
-        } else {
-          return position;
-        }
-      }).filter(position => position !== undefined);
+      this.positions = this.appendToBodyDirections
+        .map((position) => {
+          if (typeof position === 'string') {
+            return AppendToBodyDirectionsConfig[position];
+          } else {
+            return position;
+          }
+        })
+        .filter((position) => position !== undefined);
     } else {
       this.positions = undefined;
     }
@@ -351,8 +369,8 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
       return;
     }
     const valueDate = new Date(value);
-    const valueFormat = valueDate && !isNaN(valueDate.getTime()) &&
-      this.dateConverter.format(valueDate, this.dateFormat, this.locale || this.i18nLocale);
+    const valueFormat =
+      valueDate && !isNaN(valueDate.getTime()) && this.dateConverter.format(valueDate, this.dateFormat, this.locale || this.i18nLocale);
     if (new Date(valueFormat).getTime() === new Date(this.selectedDate).getTime() || !this.validateDate(value)) {
       return;
     }
@@ -362,17 +380,18 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
       this.selectedDate = valueDate;
       this.writeModelValue({
         reason: SelectDateChangeReason.custom,
-        selectedDate: valueDate
+        selectedDate: valueDate,
       });
     }
   }
 
   validateDate(value: string) {
     const valueDate = new Date(value);
-    const valueFormat = valueDate && !isNaN(valueDate.getTime()) &&
-      this.dateConverter.format(valueDate, this.dateFormat, this.locale || this.i18nLocale);
+    const valueFormat =
+      valueDate && !isNaN(valueDate.getTime()) && this.dateConverter.format(valueDate, this.dateFormat, this.locale || this.i18nLocale);
     if (
-      !valueDate || value !== valueFormat ||
+      !valueDate ||
+      value !== valueFormat ||
       (value === valueFormat && (valueDate.getTime() < this.minDate.getTime() || valueDate.getTime() > this.maxDate.getTime()))
     ) {
       return false;
@@ -382,9 +401,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
   }
 
   resetValue() {
-    const resDate = this.selectedDate ?
-      this.dateConverter.format(this.selectedDate, this.dateFormat, this.locale || this.i18nLocale) :
-      '';
+    const resDate = this.selectedDate ? this.dateConverter.format(this.selectedDate, this.dateFormat, this.locale || this.i18nLocale) : '';
     this.elementRef.nativeElement.value = resDate;
   }
 
@@ -399,7 +416,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
     const currentReason = typeof reason === 'number' ? reason : SelectDateChangeReason.custom;
     this.selectedDateChange.emit({
       reason: currentReason,
-      selectedDate: null
+      selectedDate: null,
     });
   };
 

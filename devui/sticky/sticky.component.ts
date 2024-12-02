@@ -9,10 +9,10 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { WindowRef } from 'ng-devui/window-ref';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 import { filter, throttleTime } from 'rxjs/operators';
 
 export type StickyStatus = 'normal' | 'follow' | 'stay' | 'remain';
@@ -62,7 +62,7 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
   private scrollTimer;
   subscription: Subscription;
 
-  constructor(private el: ElementRef, private windowRef: WindowRef) { }
+  constructor(private el: ElementRef, private windowRef: WindowRef) {}
 
   ngOnInit() {
     this.parentNode = this.el.nativeElement.parentNode;
@@ -107,37 +107,33 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
       this.wrapper.nativeElement.style.left = 'auto';
       this.wrapper.nativeElement.style.position = 'static';
       break;
-    case 'follow':
-    {
-      const viewOffset = this.scrollTarget && this.scrollTarget !== this.windowRef.window ?
-        this.scrollTarget.getBoundingClientRect().top : 0;
+    case 'follow': {
+      const viewOffset =
+        this.scrollTarget && this.scrollTarget !== this.windowRef.window ? this.scrollTarget.getBoundingClientRect().top : 0;
       this.wrapper.nativeElement.style.top = Number(viewOffset) + ((this.view && this.view.top) || 0) + 'px';
       this.wrapper.nativeElement.style.left = this.wrapper.nativeElement.getBoundingClientRect().left + 'px';
       this.wrapper.nativeElement.style.position = 'fixed';
       break;
     }
-    case 'stay':
-    {
+    case 'stay': {
       this.wrapper.nativeElement.style.top = this.calculateRelativePosition(this.wrapper.nativeElement, this.parentNode, 'top') + 'px';
       this.wrapper.nativeElement.style.left = 'auto';
       this.wrapper.nativeElement.style.position = 'relative';
       break;
     }
-    case 'remain':
-    {
+    case 'remain': {
       if (this.wrapper.nativeElement.style.position !== 'fixed' || this.wrapper.nativeElement.style.position !== 'absolute') {
         this.wrapper.nativeElement.style.top = this.calculateRelativePosition(this.wrapper.nativeElement, this.parentNode, 'top') + 'px';
         this.wrapper.nativeElement.style.left = 'auto';
         this.wrapper.nativeElement.style.position = 'absolute'; // 要先转为absolute再计算，否则如果处于非fixed影响计算
       }
       this.wrapper.nativeElement.style.top =
-            this.calculateRemainPosition(this.wrapper.nativeElement, this.parentNode, this.container) + 'px';
+        this.calculateRemainPosition(this.wrapper.nativeElement, this.parentNode, this.container) + 'px';
       this.wrapper.nativeElement.style.left = this.calculateRelativePosition(this.wrapper.nativeElement, this.parentNode, 'left') + 'px';
       this.wrapper.nativeElement.style.position = 'relative';
       break;
     }
     default:
-      break;
     }
   }
 
@@ -173,27 +169,27 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
   };
 
   scrollHandler = () => {
-    const viewOffsetTop = this.scrollTarget && this.scrollTarget !== this.windowRef.window ?
-      this.scrollTarget.getBoundingClientRect().top : 0;
+    const viewOffsetTop =
+      this.scrollTarget && this.scrollTarget !== this.windowRef.window ? this.scrollTarget.getBoundingClientRect().top : 0;
     const computedStyle = this.windowRef.window.getComputedStyle(this.container);
     if (this.parentNode.getBoundingClientRect().top - viewOffsetTop > ((this.view && this.view.top) || 0)) {
       this.status = 'normal'; // 全局滑动（container!==parentNode）时候增加预判
     } else if (
       this.container.getBoundingClientRect().top +
-      parseInt(computedStyle.paddingTop, 10) +
-      parseInt(computedStyle.borderTopWidth, 10) -
-      viewOffsetTop >=
+        parseInt(computedStyle.paddingTop, 10) +
+        parseInt(computedStyle.borderTopWidth, 10) -
+        viewOffsetTop >=
       ((this.view && this.view.top) || 0)
     ) {
       this.status = 'normal';
     } else if (
       this.container.getBoundingClientRect().bottom -
-      parseInt(computedStyle.paddingBottom, 10) -
-      parseInt(computedStyle.borderBottomWidth, 10) <
+        parseInt(computedStyle.paddingBottom, 10) -
+        parseInt(computedStyle.borderBottomWidth, 10) <
       viewOffsetTop +
-      ((this.view && this.view.top) || 0) +
-      this.wrapper.nativeElement.getBoundingClientRect().height +
-      ((this.view && this.view.bottom) || 0)
+        ((this.view && this.view.top) || 0) +
+        this.wrapper.nativeElement.getBoundingClientRect().height +
+        ((this.view && this.view.bottom) || 0)
     ) {
       this.status = 'remain';
     } else if (
@@ -227,17 +223,17 @@ export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
         element.getBoundingClientRect().height +
         container.getBoundingClientRect().top -
         relativeElement.getBoundingClientRect().top -
-        parseInt(computedStyle['paddingTop'], 10) -
-        parseInt(computedStyle['borderTopWidth'], 10) -
-        parseInt(computedStyle['paddingBottom'], 10) -
-        parseInt(computedStyle['borderBottomWidth'], 10);
+        parseInt(computedStyle.paddingTop, 10) -
+        parseInt(computedStyle.borderTopWidth, 10) -
+        parseInt(computedStyle.paddingBottom, 10) -
+        parseInt(computedStyle.borderBottomWidth, 10);
       return result < 0 ? 0 : result;
     }
   }
 
   initScrollStatus(target) {
-    const scrollTargets = target === this.windowRef.window ?
-      [this.windowRef.document.documentElement, this.windowRef.document.body] : [target];
+    const scrollTargets =
+      target === this.windowRef.window ? [this.windowRef.document.documentElement, this.windowRef.document.body] : [target];
     let flag = false;
     scrollTargets.forEach((scrollTarget) => {
       if (scrollTarget.scrollTop && scrollTarget.scrollTop > 0) {

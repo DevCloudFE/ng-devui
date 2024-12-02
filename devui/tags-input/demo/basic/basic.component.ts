@@ -13,9 +13,9 @@ export class TagsInputDemoBasicComponent implements OnInit {
     this.tagList = [{ id: 1769, name: 'inputTag' }];
     this.taskTagConfig = {
       displayProperty: 'name',
-      maxLength: 25,
+      maxLength: 24,
       minLength: 1,
-      maxTags: 25,
+      maxTags: 4,
       maxHeight: '84px',
       multiline: false,
       placeholder: 'Add a tag',

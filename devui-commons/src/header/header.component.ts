@@ -4,6 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DevuiCommonsService } from '../devui-commons.service';
 import { I18nUtil } from '../i18n/i18n.util';
 import { LogoComponent } from './logo/logo.component';
+import { LinkMap } from '../constant';
 
 @Component({
   selector: 'd-common-header',
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
 
   repoLink!: SafeResourceUrl;
   githubLink;
+  gitcodeLink = LinkMap.gitcodeLink;
 
   @ContentChildren(LogoComponent) subLogo: QueryList<LogoComponent> = new QueryList<LogoComponent>();
 

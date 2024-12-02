@@ -42,6 +42,11 @@
     }
   }
 
+  &:focus-within,
+  &.container-active {
+    border-color: $devui-brand;
+  }
+
   &.devui-gray-style {
     background-color: $devui-gray-form-control-bg;
     border-color: transparent;
@@ -143,6 +148,10 @@
   .devui-input-container {
     display: flex;
     flex: 1;
+
+    .devui-input-box {
+      width: 100%;
+    }
   }
 
   .devui-category-search-extended-container {
@@ -344,6 +353,17 @@ d-tag {
   }
 }
 
+.devui-category-search-select-all {
+  margin: 8px 4px -8px 4px;
+  padding: 0 8px;
+  height: 28px;
+  line-height: 28px;
+
+  &:hover {
+    background-color: $devui-list-item-hover-bg;
+  }
+}
+
 .devui-dropdown-menu-template {
   max-width: 300px;
   max-height: 352px;
@@ -388,6 +408,7 @@ d-tag {
 
 :host ::ng-deep {
   .devui-tag-container {
+    line-height: 1;
     @include tag-item;
   }
 
@@ -464,7 +485,7 @@ d-tag {
       display: flex;
       flex-wrap: wrap;
       max-width: 300px;
-      padding: 8px;
+      padding: 8px 8px 0 8px;
 
       span {
         margin-right: 8px;

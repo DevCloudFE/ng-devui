@@ -19,8 +19,10 @@
       [cdkConnectedOverlayWidth]="dropDownWidth"
       [cdkConnectedOverlayOpen]="isOpen"
       [cdkConnectedOverlayPositions]="overlayPositions"
+      [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
       (positionChange)="onPositionChange($event)"
-      (backdropClick)="toggleChangeFn(false)"
+      (backdropClick)="isOpen = false"
+      (detach)="isOpen && (isOpen = false)"
     >
       <ng-template [ngTemplateOutlet]="selectDropdownTpl"></ng-template>
     </ng-template>

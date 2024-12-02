@@ -36,4 +36,10 @@ export class BigDataComponent {
       this.showLoading = false;
     }, 1000);
   }
+
+  clearAll() {
+    this.dynamicData = [{ id: 'tab1', title: 'Tab1', content: 'Tab1 Content' }];
+    this.autoTabActiveId = 'tab1';
+    this.toggle = false;
+  }
 }

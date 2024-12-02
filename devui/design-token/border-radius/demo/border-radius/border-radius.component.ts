@@ -13,11 +13,13 @@ export class BorderRadiusComponent implements OnInit, OnDestroy {
   borderRadius = [];
   i18nText: any;
 
-  constructor(private translate: TranslateService) { this.setI18n(); }
+  constructor(private translate: TranslateService) {
+    this.setI18n();
+  }
 
   ngOnInit() {
     if (typeof window !== undefined) {
-      this.themeService = window['devuiThemeService'];
+      this.themeService = (window as any).devuiThemeService;
       this.changeValueInTable();
       if (this.themeService.eventBus) {
         this.themeService.eventBus.add('themeChanged', this.changeValueInTable);
@@ -33,7 +35,7 @@ export class BorderRadiusComponent implements OnInit, OnDestroy {
         const obj = {
           name: '$' + key,
           value: theme.data[key],
-          description: this.i18nText ? this.i18nText[key] : ''
+          description: this.i18nText ? this.i18nText[key] : '',
         };
         this.borderRadius.push(obj);
       }
@@ -43,14 +45,14 @@ export class BorderRadiusComponent implements OnInit, OnDestroy {
   setI18n() {
     this.subs.add(
       this.translate.get('components.design-border-radius.cornerDemo.instance').subscribe((res) => {
-        this.i18nText = res['borderRadius'];
+        this.i18nText = res.borderRadius;
       })
     );
 
     this.subs.add(
       this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
         const values = this.translate.instant('components.design-border-radius.cornerDemo.instance');
-        this.i18nText = values['borderRadius'];
+        this.i18nText = values.borderRadius;
       })
     );
   }

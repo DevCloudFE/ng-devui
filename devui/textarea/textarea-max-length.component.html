@@ -1,0 +1,23 @@
+<div
+  class="devui-textarea-container"
+  [class.devui-glow-style]="showGlowStyle"
+  [class.devui-gray-style]="styleType === 'gray'"
+  [class.error]="error"
+  [style.resize]="disabled ? 'none' : resize"
+  [style.max-width]="maxWidth"
+  [style.max-height]="maxHeight"
+>
+  <textarea
+    dTextarea
+    [disabled]="disabled"
+    [error]="error"
+    [maxLength]="maxLength"
+    [maxLengthBlocker]="maxLengthBlocker"
+    [maxLengthCounter]="true"
+    [placeholder]="placeholder"
+    [rows]="rows"
+    [ngModel]="value"
+    (ngModelChange)="valueChanges($event)"
+    (blur)="blurEvent()"
+  ></textarea>
+</div>

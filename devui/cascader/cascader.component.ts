@@ -1,7 +1,18 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import {
-  Component, ElementRef, EventEmitter, forwardRef, HostBinding, Input,
-  OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef, ViewChild
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostBinding,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef,
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DropDownAppendToBodyComponent, DropDownDirective } from 'ng-devui/dropdown';
@@ -22,11 +33,11 @@ const DEBOUNCE_TIME = 200;
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CascaderComponent),
-      multi: true
+      multi: true,
     },
-    CascaderService
+    CascaderService,
   ],
-  preserveWhitespaces: false
+  preserveWhitespaces: false,
 })
 export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlValueAccessor {
   @ViewChild('mainDropdown') mainDropdown: DropDownDirective;
@@ -63,24 +74,26 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   @Output() toggleEvent = new EventEmitter<boolean>();
 
   @Input() @WithConfig() showGlowStyle = true;
-  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
     return this.showGlowStyle;
-  };
+  }
 
-  subMenuDirections: ConnectedPosition[] = [{
-    originX: 'start',
-    originY: 'bottom',
-    overlayX: 'start',
-    overlayY: 'top',
-    offsetX: 0
-  },
-  {
-    originX: 'start',
-    originY: 'top',
-    overlayX: 'start',
-    overlayY: 'bottom',
-    offsetX: 0,
-  }];
+  subMenuDirections: ConnectedPosition[] = [
+    {
+      originX: 'start',
+      originY: 'bottom',
+      overlayX: 'start',
+      overlayY: 'top',
+      offsetX: 0,
+    },
+    {
+      originX: 'start',
+      originY: 'top',
+      overlayX: 'start',
+      overlayY: 'bottom',
+      offsetX: 0,
+    },
+  ];
 
   isLazyLoad: boolean;
 
@@ -98,23 +111,18 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   onChange = Function.prototype;
   onTouched = Function.prototype;
 
-  get columnList () {
+  get columnList() {
     return this.cascaderSrv.columnList;
   }
 
-  get searchResultList () {
+  get searchResultList() {
     return this.cascaderSrv.searchResultList;
   }
 
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
 
-  constructor(
-    private cascaderSrv: CascaderService,
-    private i18n: I18nService,
-    private devConfigService: DevConfigService
-  ) {
-  }
+  constructor(private cascaderSrv: CascaderService, private i18n: I18nService, private devConfigService: DevConfigService) {}
 
   // 获取整颗树的公共方法
   public getOptionTree(): CascaderItem[] {
@@ -132,17 +140,18 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     this.initI18n();
   }
 
-  ngOnChanges(change: SimpleChanges) {
-    if (change && change['options'] && !change.options.firstChange) {
+  ngOnChanges(changes: SimpleChanges) {
+    const { options, canSelectParent } = changes;
+    if (options && !options.firstChange) {
       this.cascaderSrv.initOptions(this.options);
-    } else if (change && change['canSelectParent'] && !change.canSelectParent.firstChange) {
+    } else if (canSelectParent && !canSelectParent.firstChange) {
       this.cascaderSrv.canSelectParent = this.canSelectParent;
     }
   }
 
   initI18n(): void {
     this.i18nCommonText = this.i18n.getI18nText().common;
-    this.i18nSubscription = this.i18n.langChange().subscribe(data => {
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nCommonText = data.common;
     });
   }
@@ -155,7 +164,8 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     if (option.checked) {
       return;
     }
-    if (this.multiple) { // 多选模式下更新数据后需要刷新dropdown位置和重新聚焦input
+    if (this.multiple) {
+      // 多选模式下更新数据后需要刷新dropdown位置和重新聚焦input
       option.checked = true;
       this.writeValue([...this.cascaderSrv.multipleValue, option.valueList]);
       this.onChange(this.cascaderSrv.multipleValue);
@@ -171,32 +181,24 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   }
 
   initObservale(): void {
-    this.cascaderSrv.closeMianDropdown.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(res => {
+    this.cascaderSrv.closeMianDropdown.pipe(takeUntil(this.unsubscribe$)).subscribe((res) => {
       if (this.mainDropdown) {
         this.mainDropdown.isOpen = false;
       }
     });
 
-    this.cascaderSrv.currentValueChange.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(res => {
+    this.cascaderSrv.currentValueChange.pipe(takeUntil(this.unsubscribe$)).subscribe((res) => {
       this.writeValue(res);
       this.onChange(res);
     });
 
-    this.cascaderSrv.openDrawer.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(res => {
+    this.cascaderSrv.openDrawer.pipe(takeUntil(this.unsubscribe$)).subscribe((res) => {
       this.rePosition();
     });
 
     if (this.multiple) {
-      this.cascaderSrv.updateTagList.pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe(res => {
-        const targetIndex = this.multipleValueList.findIndex(t => t.value === res.option.value);
+      this.cascaderSrv.updateTagList.pipe(takeUntil(this.unsubscribe$)).subscribe((res) => {
+        const targetIndex = this.multipleValueList.findIndex((t) => t.value === res.option.value);
         if (res.isAdd) {
           if (targetIndex === -1) {
             this.multipleValueList.push(res.option);
@@ -218,36 +220,37 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     }
 
     if (this.allowSearch) {
-      this.searchValueChange.pipe(
-        takeUntil(this.unsubscribe$),
-        debounceTime(DEBOUNCE_TIME),
-        distinctUntilChanged(),
-        filter(t => t !== '')
-      ).subscribe(value => {
-        clearTimeout(this.timer);
-        if (this.mainDropdown && !this.mainDropdown.isOpen) {
-          this.mainDropdown.isOpen = true;
-        }
+      this.searchValueChange
+        .pipe(
+          takeUntil(this.unsubscribe$),
+          debounceTime(DEBOUNCE_TIME),
+          distinctUntilChanged(),
+          filter((t) => t !== '')
+        )
+        .subscribe((value) => {
+          clearTimeout(this.timer);
+          if (this.mainDropdown && !this.mainDropdown.isOpen) {
+            this.mainDropdown.isOpen = true;
+          }
 
-        if (this.multiple && this.innerInput) {
-          this.innerInput.nativeElement.focus();
-        }
-        this.cascaderSrv.searchResultList = [];
-        this.cascaderSrv.searchByString(value);
-        this.showSearchPanel = true;
-      });
+          if (this.multiple && this.innerInput) {
+            this.innerInput.nativeElement.focus();
+          }
+          this.cascaderSrv.searchResultList = [];
+          this.cascaderSrv.searchByString(value);
+          this.showSearchPanel = true;
+        });
     }
 
     if (this.isLazyLoad) {
-      this.cascaderSrv.updateShowText.pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe(() => {
+      this.cascaderSrv.updateShowText.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
         if (this.multiple) {
           this.multipleValueList = this.getMultipleValueFromValueList(this.lazyloadValue);
           this.cascaderSrv.multipleValue = this.lazyloadValue;
         } else {
-          this.showTextValue = this.showPath ?
-            this.getPathLabelFormValue(this.cascaderSrv._currentValue) : this.getLabelFromValue(this.cascaderSrv._currentValue);
+          this.showTextValue = this.showPath
+            ? this.getPathLabelFormValue(this.cascaderSrv._currentValue)
+            : this.getLabelFromValue(this.cascaderSrv._currentValue);
         }
       });
     }
@@ -256,7 +259,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   deleteTag(tagEvent, option: CascaderItem): void {
     tagEvent.event.stopPropagation();
     this.cascaderSrv.updateOptionCheckedStatus(option.value, false, this.checkboxRelation.upward, this.checkboxRelation.downward);
-    this.multipleValueList = this.multipleValueList.filter(t => t.value !== option.value);
+    this.multipleValueList = this.multipleValueList.filter((t) => t.value !== option.value);
     this.onChange(this.cascaderSrv.currentMultipleValue);
     // 当taglist变化导致input高度变化时，更新相对位置
     setTimeout(() => {
@@ -277,8 +280,9 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
       if (!value) {
         this.showTextValue = '';
       } else {
-        this.showTextValue = this.showPath ?
-          this.getPathLabelFormValue(value as Array<number | string>) : this.getLabelFromValue(value as Array<number | string>);
+        this.showTextValue = this.showPath
+          ? this.getPathLabelFormValue(value as Array<number | string>)
+          : this.getLabelFromValue(value as Array<number | string>);
         this.cascaderSrv._currentValue = value as Array<number | string>;
         this.cascaderSrv.updateOptionByValue();
       }
@@ -301,9 +305,9 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     const valueList = this.cascaderSrv.currentMultipleValue;
     valueList.forEach((item, index) => {
       const value = item[item.length - 1];
-      const target = this.multipleValueList.find(t => t.value === value);
+      const target = this.multipleValueList.find((t) => t.value === value);
       if (target) {
-        target['pathLabel'] = this.getPathLabelFormValue(item);
+        target.pathLabel = this.getPathLabelFormValue(item);
       }
     });
   }
@@ -311,12 +315,12 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   // 从路径数组中获取所有tag的值，并让对应checkbox激活
   getMultipleValueFromValueList(valueList: Array<number | string>[]): CascaderItem[] {
     const targetList = [];
-    valueList.forEach(value => {
+    valueList.forEach((value) => {
       let cur: CascaderItem;
       let cacheTarget: CascaderItem;
       let list = this.cascaderSrv.options;
       for (let i = 0; i < value.length; i++) {
-        cur = list.find(l => l.value === value[i]);
+        cur = list.find((l) => l.value === value[i]);
         cacheTarget = cur;
         if (this.isLazyLoad && cur && !cur.children?.length && !cur.isLeaf) {
           this.cascaderSrv.lazyloadMultipleChild(cur, i);
@@ -344,8 +348,8 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   getLabelFromValue(value: Array<number | string>): string {
     let cur;
     let list = this.cascaderSrv.options;
-    value.forEach(item => {
-      cur = list.find(t => t.value === item) || '';
+    value.forEach((item) => {
+      cur = list.find((t) => t.value === item) || '';
       list = cur.children || [];
     });
 
@@ -359,7 +363,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
     let list = this.cascaderSrv.options;
 
     value.forEach((item, index) => {
-      cur = list.find(t => t.value === item) || '';
+      cur = list.find((t) => t.value === item) || '';
       if (cur) {
         path = path === '' ? path + cur.label : path + ' / ' + cur.label;
       } else if (this.cascaderSrv.columnList.length === index + 1) {
@@ -386,7 +390,7 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
   onToggle(isOpen: boolean): void {
     this.toggleEvent.emit(isOpen);
     if (isOpen && this.multiple) {
-      this.cascaderSrv.clearTargetActive(this.cascaderSrv.options.find(t => t.active));
+      this.cascaderSrv.clearTargetActive(this.cascaderSrv.options.find((t) => t.active));
       this.cascaderSrv.columnList.splice(1);
       if (this.innerInput) {
         this.innerInput.nativeElement.focus();
@@ -424,7 +428,9 @@ export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlV
       const width = this.dropdownComp.overlay.overlayRef?.overlayElement.clientWidth;
       const offsetX = this.dropdownComp.overlay.overlayRef?.overlayElement.offsetLeft;
       const offsetRight = window.innerWidth - width - offsetX - 20;
-      this.subMenuDirections.forEach(t => {t.offsetX = offsetRight < 0 ? offsetRight : 0;});
+      this.subMenuDirections.forEach((t) => {
+        t.offsetX = offsetRight < 0 ? offsetRight : 0;
+      });
       this.dropdownComp.reposition();
     }, 0);
   }

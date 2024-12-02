@@ -4,11 +4,12 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'd-design-color-demo',
-  templateUrl: './design-color-demo.component.html'
+  templateUrl: './design-color-demo.component.html',
 })
 export class DesignColorDemoComponent implements OnInit, OnDestroy {
   navItems = [];
   subs: Subscription = new Subscription();
+
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
@@ -27,9 +28,7 @@ export class DesignColorDemoComponent implements OnInit, OnDestroy {
   }
 
   setNavValues(values) {
-    this.navItems = [
-      { dAnchorLink: 'color', value: values['color'] }
-    ];
+    this.navItems = [{ dAnchorLink: 'color', value: values.color }];
   }
 
   ngOnDestroy() {
@@ -37,5 +36,4 @@ export class DesignColorDemoComponent implements OnInit, OnDestroy {
       this.subs.unsubscribe();
     }
   }
-
 }

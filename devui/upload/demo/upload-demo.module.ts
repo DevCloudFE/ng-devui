@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -23,47 +23,39 @@ import { UploadSliceComponent } from './slice/upload-slice.component';
 import { UploadDemoComponent } from './upload-demo.component';
 import { UploadDesignComponent } from './upload-design.component';
 
-@NgModule({
-  imports: [
-    TranslateModule,
-    CommonModule,
-    UploadModule,
-    DevUIModule,
-    DevUICodeboxModule,
-    DevUIApiModule,
-    FormsModule,
-    HttpClientModule,
-    ButtonModule,
-    DDemoNavModule,
-    ToastModule,
-    ProgressModule,
-    RouterModule.forChild([
-      { path: '',  redirectTo: 'demo', pathMatch: 'full' },
-      {
-        path: 'design',
-        component: UploadDesignComponent,
-      },
-      { path: 'demo', component: UploadDemoComponent},
-      { path: 'api', component: DevUIApiComponent, data: {
-        'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
-        'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
-      }}
-    ])
-  ],
-  exports: [UploadDemoComponent],
-  declarations: [
-    UploadDemoComponent,
-    UploadDesignComponent,
-    BasicComponent,
-    MultiComponent,
-    CustomizeComponent,
-    UploadAutoComponent,
-    DynamicUploadOptionsComponent,
-    CustomizeAreaUploadComponent,
-    UploadSliceComponent
-  ],
-
-  providers: [],
-})
+@NgModule({ exports: [UploadDemoComponent],
+    declarations: [
+        UploadDemoComponent,
+        UploadDesignComponent,
+        BasicComponent,
+        MultiComponent,
+        CustomizeComponent,
+        UploadAutoComponent,
+        DynamicUploadOptionsComponent,
+        CustomizeAreaUploadComponent,
+        UploadSliceComponent
+    ], imports: [TranslateModule,
+        CommonModule,
+        UploadModule,
+        DevUIModule,
+        DevUICodeboxModule,
+        DevUIApiModule,
+        FormsModule,
+        ButtonModule,
+        DDemoNavModule,
+        ToastModule,
+        ProgressModule,
+        RouterModule.forChild([
+            { path: '', redirectTo: 'demo', pathMatch: 'full' },
+            {
+                path: 'design',
+                component: UploadDesignComponent,
+            },
+            { path: 'demo', component: UploadDemoComponent },
+            { path: 'api', component: DevUIApiComponent, data: {
+                    'zh-cn': require('!html-loader!markdown-loader!../doc/api-cn.md'),
+                    'en-us': require('!html-loader!markdown-loader!../doc/api-en.md')
+                } }
+        ])], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class UploadDemoModule {
 }

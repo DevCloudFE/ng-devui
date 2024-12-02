@@ -9,7 +9,7 @@ import {
   OnInit,
   Output,
   Renderer2,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nService } from 'ng-devui/i18n';
@@ -26,14 +26,15 @@ export interface SimpleDate {
   selector: 'd-datepicker-range-single',
   templateUrl: './single-date-range-picker.component.html',
   styleUrls: ['./single-date-range-picker.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => SingleDateRangePickerComponent),
-    multi: true
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SingleDateRangePickerComponent),
+      multi: true,
+    },
+  ],
   preserveWhitespaces: false,
 })
-
 export class SingleDateRangePickerComponent extends SingleDatepickerComponent implements OnChanges, OnInit {
   @Input() selectedRange: Date[] = Array(2);
   @Input() rangePicker = false;
@@ -64,10 +65,14 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   ngOnInit() {
     [this.rangeStart, this.rangeEnd] = this.selectedRange;
     const nowDate = this.selectedDate || new Date();
-    this.nowMinYear = (nowDate).getFullYear() - Math.floor(this._yearNumber / 2) < this.minDate.getFullYear() ?
-      this.minDate.getFullYear() : (nowDate).getFullYear() - Math.floor(this._yearNumber / 2);
-    this.nowMaxYear = (nowDate).getFullYear() + Math.floor(this._yearNumber / 2) > this.maxDate.getFullYear() ?
-      this.maxDate.getFullYear() : (nowDate).getFullYear() + Math.floor(this._yearNumber / 2);
+    this.nowMinYear =
+      nowDate.getFullYear() - Math.floor(this._yearNumber / 2) < this.minDate.getFullYear()
+        ? this.minDate.getFullYear()
+        : nowDate.getFullYear() - Math.floor(this._yearNumber / 2);
+    this.nowMaxYear =
+      nowDate.getFullYear() + Math.floor(this._yearNumber / 2) > this.maxDate.getFullYear()
+        ? this.maxDate.getFullYear()
+        : nowDate.getFullYear() + Math.floor(this._yearNumber / 2);
     if (!this.isAuxiliary && !this.rangeStart) {
       // 主面板，未选择开始日期的情况
       this.onSelectDateChanged();
@@ -94,8 +99,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
       this.selectedDate = new Date(this.currentYear, this.currentMonthIndex);
       super.ngOnInit();
       // 处理选择的日期范围开始和结束在同一个月的情况
-      if (rangeStart && rangeEnd && rangeStart.getFullYear() === rangeEnd.getFullYear() &&
-        rangeStart.getMonth() === rangeEnd.getMonth()) {
+      if (rangeStart && rangeEnd && rangeStart.getFullYear() === rangeEnd.getFullYear() && rangeStart.getMonth() === rangeEnd.getMonth()) {
         this.onNextMonth('init');
       }
       this.selectedDate = new Date(this.currentYear, this.currentMonthIndex);
@@ -105,8 +109,8 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   }
 
   /*
-  **  @param invocation:调用时机
-  */
+   **  @param invocation:调用时机
+   */
   onSelectDate($event, date, invocation?: any) {
     if ($event.stopPropagation) {
       $event.stopPropagation();
@@ -176,7 +180,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
     this.onChange(selectedRange);
     this.rangeSelected.emit({
       reason: currentReason,
-      selectedRange: selectedRange
+      selectedRange: selectedRange,
     });
   }
 
@@ -185,7 +189,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
     if (this.selectingRange) {
       rangeSource = [this.rangeStart, this.previewEnd];
     }
-    if ((!Array.isArray(rangeSource))) {
+    if (!Array.isArray(rangeSource)) {
       return;
     }
     return rangeSource.some((selectedDate) => {
@@ -201,11 +205,9 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   }
 
   isBetweenDay(date) {
-    if (Array.isArray(this.selectedRange) && this.selectedRange.every(day => !!day)) {
-      const index = this.selectedRange.findIndex(day => {
-        return date.getFullYear() === day.getFullYear() &&
-        date.getMonth() === day.getMonth() &&
-        date.getDate() === day.getDate();
+    if (Array.isArray(this.selectedRange) && this.selectedRange.every((day) => !!day)) {
+      const index = this.selectedRange.findIndex((day) => {
+        return date.getFullYear() === day.getFullYear() && date.getMonth() === day.getMonth() && date.getDate() === day.getDate();
       });
       return ['devui-day-start', 'devui-day-end'][index];
     } else {
@@ -221,17 +223,18 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   timeUp(type) {
     switch (type) {
     case 'h': {
-      Number(this.currentHour) < 23 ? this.currentHour = (Number(this.currentHour) + 1) : this.currentHour = 0;
+      Number(this.currentHour) < 23 ? (this.currentHour = Number(this.currentHour) + 1) : (this.currentHour = 0);
       break;
     }
     case 'm': {
-      Number(this.currentMinute) < 59 ? this.currentMinute = (Number(this.currentMinute) + 1) : this.currentMinute = 0;
+      Number(this.currentMinute) < 59 ? (this.currentMinute = Number(this.currentMinute) + 1) : (this.currentMinute = 0);
       break;
     }
     case 's': {
-      Number(this.currentSecond) < 59 ? this.currentSecond = (Number(this.currentSecond) + 1) : this.currentSecond = 0;
+      Number(this.currentSecond) < 59 ? (this.currentSecond = Number(this.currentSecond) + 1) : (this.currentSecond = 0);
       break;
     }
+    default:
     }
     this.timeChange();
   }
@@ -239,17 +242,18 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   timeDown(type) {
     switch (type) {
     case 'h': {
-      Number(this.currentHour) > 0 ? this.currentHour = (Number(this.currentHour) - 1) : this.currentHour = 23;
+      Number(this.currentHour) > 0 ? (this.currentHour = Number(this.currentHour) - 1) : (this.currentHour = 23);
       break;
     }
     case 'm': {
-      Number(this.currentMinute) > 0 ? this.currentMinute = (Number(this.currentMinute) - 1) : this.currentMinute = 59;
+      Number(this.currentMinute) > 0 ? (this.currentMinute = Number(this.currentMinute) - 1) : (this.currentMinute = 59);
       break;
     }
     case 's': {
-      Number(this.currentSecond) > 0 ? this.currentSecond = (Number(this.currentSecond) - 1) : this.currentSecond = 59;
+      Number(this.currentSecond) > 0 ? (this.currentSecond = Number(this.currentSecond) - 1) : (this.currentSecond = 59);
       break;
     }
+    default:
     }
     this.timeChange();
   }
@@ -275,18 +279,19 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
       timeType = 'currentSecond';
       break;
     }
+    default:
     }
-    let value = event.target['value'];
-    const selectionStart = event.target['selectionStart'];
-    const selectionEnd = event.target['selectionEnd'];
+    let value = event.target.value;
+    const selectionStart = event.target.selectionStart;
+    const selectionEnd = event.target.selectionEnd;
     // 是数字的时候再处理，分为小键盘和数字键
     if (/^(Digit|Numpad)\d$/.test(event.code)) {
       event.preventDefault();
       let input;
-      if (event['clipboardData']) {
-        input = event['clipboardData'].getData('text');
-      } else if (event['code']) {
-        input = event['code'].slice(event['code'].length - 1);
+      if (event.clipboardData) {
+        input = event.clipboardData.getData('text');
+      } else if (event.code) {
+        input = event.code.slice(event.code.length - 1);
       }
       value = value.substring(0, selectionStart) + input + value.substring(selectionEnd);
       if (value.length === 3 && value.indexOf('0') === 0) {
@@ -316,11 +321,23 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
 
   timeChange() {
     if (!this.isAuxiliary) {
-      this.rangeStart = new Date(this.rangeStart.getFullYear(), this.rangeStart.getMonth(), this.rangeStart.getDate(),
-        Number(this.currentHour), Number(this.currentMinute), Number(this.currentSecond));
+      this.rangeStart = new Date(
+        this.rangeStart.getFullYear(),
+        this.rangeStart.getMonth(),
+        this.rangeStart.getDate(),
+        Number(this.currentHour),
+        Number(this.currentMinute),
+        Number(this.currentSecond)
+      );
     } else {
-      this.rangeEnd = new Date(this.rangeEnd.getFullYear(), this.rangeEnd.getMonth(), this.rangeEnd.getDate(),
-        Number(this.currentHour), Number(this.currentMinute), Number(this.currentSecond));
+      this.rangeEnd = new Date(
+        this.rangeEnd.getFullYear(),
+        this.rangeEnd.getMonth(),
+        this.rangeEnd.getDate(),
+        Number(this.currentHour),
+        Number(this.currentMinute),
+        Number(this.currentSecond)
+      );
     }
     this.rangeChange(this.ensureRangeValueOrder([this.rangeStart, this.rangeEnd]));
   }
@@ -332,19 +349,22 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   ngOnChanges(changes: SimpleChanges) {
     if (Object.prototype.hasOwnProperty.call(changes, 'selectedRange')) {
       this.selectingRange = false;
-      [this.rangeStart, this.rangeEnd] = changes['selectedRange'].currentValue;
+      [this.rangeStart, this.rangeEnd] = changes.selectedRange.currentValue;
     }
   }
 
-  isInRange(date) {
+  isInRange(dateParam) {
+    let date = dateParam;
     const rangeStart = this.rangeStart;
     let rangeEnd = this.rangeEnd;
     if (this.selectingRange) {
       rangeEnd = this.previewEnd;
     }
-    date = (new Date(date)).getTime();
-    return date < Math.max((new Date(rangeStart)).getTime(), (new Date(rangeEnd)).getTime())
-      && date > Math.min((new Date(rangeStart)).getTime(), (new Date(rangeEnd)).getTime());
+    date = new Date(date).getTime();
+    return (
+      date < Math.max(new Date(rangeStart).getTime(), new Date(rangeEnd).getTime()) &&
+      date > Math.min(new Date(rangeStart).getTime(), new Date(rangeEnd).getTime())
+    );
   }
 
   ensureRangeValueOrder(dateRange: Date[], initTime = false) {
@@ -358,9 +378,9 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
         dateRange[0] = new Date(dateRange[0].setHours(23, 59, 59));
         dateRange[1] = new Date(dateRange[1].setHours(0, 0, 0));
       }
-      if (dateRange.every(day => !!day)) {
+      if (dateRange.every((day) => !!day)) {
         dateRange.sort((a, b) => {
-          return (new Date(a)).getTime() - (new Date(b).getTime());
+          return new Date(a).getTime() - new Date(b).getTime();
         });
       } else {
         if (!dateRange[0]) {
@@ -390,7 +410,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
     if (this.hasNextMonth() || invocation === 'init') {
       let maxDateInRange;
       if (invocation === 'init') {
-        maxDateInRange = this.selectedRange.reduce((start, end) => new Date(end) > new Date(start) ? end : start);
+        maxDateInRange = this.selectedRange.reduce((start, end) => (new Date(end) > new Date(start) ? end : start));
       }
       super.onNextMonth(maxDateInRange, 'init');
       this.notifyCalenderChange();
@@ -434,15 +454,18 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
       if (!this.isAuxiliary) {
         hasPrevYear = this.nowMinYear > this.minDate.getFullYear();
       } else {
-        hasPrevYear = this.nowMinYear > this.minDate.getFullYear() &&
-          this.isBeforeMoreThanOneYear(this.currentCalendars[0], {year: this.nowMinYear, month: this.currentCalendars[1].month});
+        hasPrevYear =
+          this.nowMinYear > this.minDate.getFullYear() &&
+          this.isBeforeMoreThanOneYear(this.currentCalendars[0], { year: this.nowMinYear, month: this.currentCalendars[1].month });
       }
     } else if (this.currentCalendars[0] && this.currentCalendars[1]) {
       // 主面板只用考虑minDate的影响
       if (!this.isAuxiliary) {
         hasPrevYear = this.currentCalendars[0].year > this.minDate.getFullYear();
-      } else { // 副面板同时考虑minDate和日历的影响
-        hasPrevYear = this.currentCalendars[1].year > this.minDate.getFullYear() &&
+      } else {
+        // 副面板同时考虑minDate和日历的影响
+        hasPrevYear =
+          this.currentCalendars[1].year > this.minDate.getFullYear() &&
           this.isBeforeMoreThanOneYear(this.currentCalendars[0], this.currentCalendars[1]);
       }
     }
@@ -455,15 +478,18 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
       if (this.isAuxiliary) {
         hasNextYear = this.nowMaxYear < this.maxDate.getFullYear();
       } else {
-        hasNextYear = this.nowMaxYear < this.maxDate.getFullYear() &&
-          this.isAfterMoreThanOneYear(this.currentCalendars[1], {year: this.nowMaxYear, month: this.currentCalendars[0].month});
+        hasNextYear =
+          this.nowMaxYear < this.maxDate.getFullYear() &&
+          this.isAfterMoreThanOneYear(this.currentCalendars[1], { year: this.nowMaxYear, month: this.currentCalendars[0].month });
       }
     } else if (this.currentCalendars[0] && this.currentCalendars[1]) {
       // 副面板只用考虑maxDate的影响
       if (this.isAuxiliary) {
         hasNextYear = this.currentCalendars[1].year < this.maxDate.getFullYear();
-      } else { // 主面板同时考虑maxDate和日历的影响
-        hasNextYear = this.currentCalendars[0].year < this.maxDate.getFullYear() &&
+      } else {
+        // 主面板同时考虑maxDate和日历的影响
+        hasNextYear =
+          this.currentCalendars[0].year < this.maxDate.getFullYear() &&
           this.isAfterMoreThanOneYear(this.currentCalendars[1], this.currentCalendars[0]);
       }
     }
@@ -473,26 +499,31 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   isYearDisable(year: number): boolean {
     if (this.isAuxiliary) {
       // 先判定主面板是否比附面板小一年以上，是的话disabled为false;
-      return !(this.isBeforeMoreThanOneYear(this.currentCalendars[0], { year: year + 1, month: this.currentCalendars[1].month}) ||
+      return !(
+        this.isBeforeMoreThanOneYear(this.currentCalendars[0], { year: year + 1, month: this.currentCalendars[1].month }) ||
         // 主附面板在同一年时，判断主附面板月是否在临界值；
-        (this.currentCalendars[0].year === year && this.currentCalendars[0].month !== 11));
+        (this.currentCalendars[0].year === year && this.currentCalendars[0].month !== 11)
+      );
     } else {
-      return !(this.isAfterMoreThanOneYear(this.currentCalendars[1], {year: year - 1, month: this.currentCalendars[0].month}) ||
-        (this.currentCalendars[1].year === year && this.currentCalendars[1].month !== 0));
+      return !(
+        this.isAfterMoreThanOneYear(this.currentCalendars[1], { year: year - 1, month: this.currentCalendars[0].month }) ||
+        (this.currentCalendars[1].year === year && this.currentCalendars[1].month !== 0)
+      );
     }
   }
 
   isMonthDisable(month: string): boolean {
     if (this.isAuxiliary) {
-      return !this.isBeforeMoreThanOneMonth(
-        this.currentCalendars[0], {year: this.currentCalendars[1].year, month: parseInt(month, 10) - 1 + 1}
-      );
+      return !this.isBeforeMoreThanOneMonth(this.currentCalendars[0], {
+        year: this.currentCalendars[1].year,
+        month: parseInt(month, 10) - 1 + 1,
+      });
     } else {
-      return !this.isAfterMoreThanOneMonth(
-        this.currentCalendars[1], {year: this.currentCalendars[0].year, month: parseInt(month, 10) - 1 - 1}
-      );
+      return !this.isAfterMoreThanOneMonth(this.currentCalendars[1], {
+        year: this.currentCalendars[0].year,
+        month: parseInt(month, 10) - 1 - 1,
+      });
     }
-
   }
 
   onPreYear() {
@@ -541,7 +572,9 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
     this.onDisplayWeeksChange();
     this.openChooseMonth = false;
 
-    this.isAuxiliary ? this.currentCalendars[1].month = this.currentMonthIndex : this.currentCalendars[0].month = this.currentMonthIndex;
+    this.isAuxiliary
+      ? (this.currentCalendars[1].month = this.currentMonthIndex)
+      : (this.currentCalendars[0].month = this.currentMonthIndex);
   }
 
   onSelectYear(year, $event?: Event) {
@@ -558,7 +591,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
     this.availableMonths = this.onDisplayMonthsChange();
     this.openChooseYear = false;
     if (!$event) {
-      this.isAuxiliary ? this.currentCalendars[1].year = this.currentYear : this.currentCalendars[0].year = this.currentYear;
+      this.isAuxiliary ? (this.currentCalendars[1].year = this.currentYear) : (this.currentCalendars[0].year = this.currentYear);
       return;
     }
     this.openChooseMonth = true;
@@ -614,13 +647,13 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
     }
 
     // 处理A日期比B日期大1年同时A日期月份小于B日期月份的情况
-    return (!(dateA.year - dateB.year === 1 && dateA.month <= dateB.month));
+    return !(dateA.year - dateB.year === 1 && dateA.month <= dateB.month);
   }
 
   protected notifyCalenderChange() {
     this.syncPickerPair.emit({
       year: this.currentYear,
-      month: this.currentMonthIndex
+      month: this.currentMonthIndex,
     });
   }
 
@@ -629,7 +662,7 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
   }
 
   private setTime(date: any) {
-    return (new Date(date.setHours(this.currentHour, this.currentMinute, this.currentSecond)));
+    return new Date(date.setHours(this.currentHour, this.currentMinute, this.currentSecond));
   }
 
   protected onSelectDateChanged() {
@@ -643,7 +676,9 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
     this.selectedDate = this.selectedDate || date;
     this.currentYear = date.getFullYear();
     this.currentMonthIndex = date.getMonth();
-    if (!this.showTime) { return; }
+    if (!this.showTime) {
+      return;
+    }
     switch (this.isAuxiliary) {
     case false:
       // Left panel
@@ -657,14 +692,15 @@ export class SingleDateRangePickerComponent extends SingleDatepickerComponent im
       this.currentMinute = this.rangeEnd ? this.rangeEnd.getMinutes() : 59;
       this.currentSecond = this.rangeEnd ? this.rangeEnd.getSeconds() : 59;
       break;
+    default:
     }
   }
 
-  get currentTime () {
+  get currentTime() {
     return {
       hour: this.currentHour,
       minute: this.currentMinute,
-      second: this.currentSecond
+      second: this.currentSecond,
     };
   }
 }

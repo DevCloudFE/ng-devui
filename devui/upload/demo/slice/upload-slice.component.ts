@@ -62,7 +62,7 @@ export class UploadSliceComponent implements OnInit {
     if (chunkedFileIndex) {
       /* 分片上传时分片序号从 1 开始，用于给不同分片添加自定义参数 */
       console.log(`this is slice : ${chunkedFileIndex}`);
-      uploadOptions['count'] = chunkedFileIndex;
+      uploadOptions.count = chunkedFileIndex;
     }
     return uploadOptions;
   }

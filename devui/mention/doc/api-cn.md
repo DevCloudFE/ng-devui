@@ -28,7 +28,8 @@ import { MentionModule } from 'ng-devui/mention';
 | mentionTrigger         | `string[]`                                      | `['@']`                            | 可选，触发组件的前缀符                               | [自定义前缀](demo#custom-prefix)     |
 | mentionSeparator       | `string`                                        | --                                 | 可选，用于分隔触发组件内容与其他内容，默认为半角空格 | [是否使用间隔符](demo#use-separator) |
 | mentionSeparatorToggle | `{ prefix: boolean,`<br>`suffix: boolean }`     | `{ prefix: false, suffix: false }` | 可选，控制是否用空格分隔组件与其他内容               | [是否使用间隔符](demo#use-separator) |
-|   showGlowStyle    |       `boolean`        |   true   |       可选，是否显示悬浮发光效果    |
+| showGlowStyle          | `boolean`                                       | true                               | 可选，是否显示悬浮发光效果                           |
+| endWithCursorPos       | `boolean`                                       | false                              | 可选，是否以光标位置为插入内容终点，不替换其后的内容 |
 
 ### mention 事件
 

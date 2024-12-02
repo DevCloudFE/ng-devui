@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, discardPeriodicTasks, fakeAsync, flush, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckBoxComponent } from '../checkbox';
@@ -11,21 +11,24 @@ import { TransferModule } from './transfer.module';
   selector: 'd-transfer-demo-base',
   template: `
     <section>
-    <div style="width:700px; ">
-      <d-transfer [disabled]="disabled" #comp
-      [isSearch]="true"
-      (transferToTarget)="transferToTarget($event)"
-      (transferToSource)="transferToSource($event)"
-      [sourceOption]="sourceOption"
-      [targetOption]="targetOption"
-      [isSearch]="true"
-      [isSourceDroppable]="true"
-      [isTargetDroppable]="true"
-      [titles]="title">
-      </d-transfer>
-    </div>
+      <div style="width:700px; ">
+        <d-transfer
+          [disabled]="disabled"
+          #comp
+          [isSearch]="true"
+          (transferToTarget)="transferToTarget($event)"
+          (transferToSource)="transferToSource($event)"
+          [sourceOption]="sourceOption"
+          [targetOption]="targetOption"
+          [isSearch]="true"
+          [isSourceDroppable]="true"
+          [isTargetDroppable]="true"
+          [titles]="title"
+        >
+        </d-transfer>
+      </div>
     </section>
-  `
+  `,
 })
 class TransferDemoBaseComponent {
   disabled = false;
@@ -50,7 +53,7 @@ class TransferDemoBaseComponent {
     { name: '选项18', value: 3, id: 18 },
   ];
 
-  title = {source: '源标题', target: '目标标题'};
+  title = { source: '源标题', target: '目标标题' };
 
   targetOption = [
     { name: '选项19', value: 3, id: 19 },
@@ -58,10 +61,9 @@ class TransferDemoBaseComponent {
     { name: '选项21', value: 6, id: 21, disabled: true },
   ];
 
-  transferToTarget =  jasmine.createSpy('transfer to target');
+  transferToTarget = jasmine.createSpy('transfer to target');
 
   transferToSource = jasmine.createSpy('transfer to source');
-
 }
 
 describe('transfer', () => {
@@ -74,7 +76,7 @@ describe('transfer', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [TransferModule, NoopAnimationsModule, ToggleModule],
-      declarations: [TransferDemoBaseComponent]
+      declarations: [TransferDemoBaseComponent],
     }).compileComponents();
   });
 
@@ -134,12 +136,12 @@ describe('transfer', () => {
       flush();
       fixture.detectChanges();
 
-      testComponent.sourceOption.forEach(t => {
+      testComponent.sourceOption.forEach((t) => {
         discardPeriodicTasks();
         if (t.disabled) {
-          expect(t['checked']).not.toBeTruthy();
+          expect((t as any).checked).not.toBeTruthy();
         } else {
-          expect(t['checked']).toBeTruthy();
+          expect((t as any).checked).toBeTruthy();
         }
       });
 
@@ -152,15 +154,14 @@ describe('transfer', () => {
       flush();
       fixture.detectChanges();
 
-      testComponent.targetOption.forEach(t => {
+      testComponent.targetOption.forEach((t) => {
         discardPeriodicTasks();
         if (t.disabled) {
-          expect(t['checked']).not.toBeTruthy();
+          expect((t as any).checked).not.toBeTruthy();
         } else {
-          expect(t['checked']).toBeTruthy();
+          expect((t as any).checked).toBeTruthy();
         }
       });
-
     }));
 
     it('click transfer button should work', fakeAsync(() => {
@@ -180,8 +181,8 @@ describe('transfer', () => {
 
       expect(testComponent.sourceOption.length).toEqual(17);
       expect(testComponent.targetOption.length).toEqual(4);
-      expect(testComponent.sourceOption.map(t => t.id)).not.toContain(1);
-      expect(testComponent.targetOption.map(t => t.id)).toContain(1);
+      expect(testComponent.sourceOption.map((t) => t.id)).not.toContain(1);
+      expect(testComponent.targetOption.map((t) => t.id)).toContain(1);
       expect(testComponent.transferToTarget).toHaveBeenCalledTimes(1);
 
       const targetOption = contents[1].queryAll(By.css('label'));
@@ -200,22 +201,18 @@ describe('transfer', () => {
 
       expect(testComponent.sourceOption.length).toEqual(18);
       expect(testComponent.targetOption.length).toEqual(3);
-      expect(testComponent.sourceOption.map(t => t.id)).toContain(19);
-      expect(testComponent.targetOption.map(t => t.id)).not.toContain(19);
+      expect(testComponent.sourceOption.map((t) => t.id)).toContain(19);
+      expect(testComponent.targetOption.map((t) => t.id)).not.toContain(19);
       expect(testComponent.transferToSource).toHaveBeenCalledTimes(1);
     }));
 
     it('disable param should work', () => {
       const checkboxList = debugEle.queryAll(By.css('.devui-checkbox'));
-      expect(
-        checkboxList.find(t => !t.nativeElement.classList.contains('disabled'))
-      ).toBeTruthy();
+      expect(checkboxList.find((t) => !t.nativeElement.classList.contains('disabled'))).toBeTruthy();
 
       testComponent.disabled = true;
       fixture.detectChanges();
-      expect(
-        checkboxList.find(t => !t.nativeElement.classList.contains('disabled'))
-      ).not.toBeTruthy();
+      expect(checkboxList.find((t) => !t.nativeElement.classList.contains('disabled'))).not.toBeTruthy();
     });
 
     it('isSearch param should work', () => {
@@ -240,12 +237,8 @@ describe('transfer', () => {
 
       expect(contents[0].queryAll(By.directive(CheckBoxComponent)).length).toEqual(1);
       expect(contents[1].queryAll(By.directive(CheckBoxComponent)).length).toEqual(1);
-      expect(
-        contents[0].query(By.directive(CheckBoxComponent)).query(By.css('label')).nativeElement.textContent
-      ).toEqual('选项11');
-      expect(
-        contents[1].query(By.directive(CheckBoxComponent)).query(By.css('label')).nativeElement.textContent
-      ).toEqual('选项20');
+      expect(contents[0].query(By.directive(CheckBoxComponent)).query(By.css('label')).nativeElement.textContent).toEqual('选项11');
+      expect(contents[1].query(By.directive(CheckBoxComponent)).query(By.css('label')).nativeElement.textContent).toEqual('选项20');
 
       sourceSearchInput.query(By.css('input')).nativeElement.value = '';
       targetSearchInput.query(By.css('input')).nativeElement.value = '';
@@ -266,14 +259,14 @@ describe('transfer', () => {
       const firstIconRect = iconList[0].nativeElement.getBoundingClientRect();
       const dropPlaceRect = dropPlace.getBoundingClientRect();
       fixture.detectChanges();
-      iconList[0].nativeElement.dispatchEvent((new MouseEvent('mouseover', { bubbles: true })));
+      iconList[0].nativeElement.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
       fixture.detectChanges();
 
       const dragstartEvent = createDragEvent('dragstart', {
         clientX: firstIconRect.left,
         clientY: firstIconRect.top,
         screenX: firstIconRect.left,
-        screenY: firstIconRect.top
+        screenY: firstIconRect.top,
       });
       iconList[0].nativeElement.dispatchEvent(dragstartEvent);
 
@@ -282,8 +275,8 @@ describe('transfer', () => {
       const dragoverEvent = createDragEvent('dragover', {
         clientX: dropPlaceRect.left,
         clientY: dropPlaceRect.top,
-        screenX:  dropPlaceRect.left,
-        screenY:  dropPlaceRect.top
+        screenX: dropPlaceRect.left,
+        screenY: dropPlaceRect.top,
       });
 
       dropPlace.dispatchEvent(dragoverEvent);
@@ -293,7 +286,7 @@ describe('transfer', () => {
         clientX: dropPlaceRect.left,
         clientY: dropPlaceRect.top,
         screenX: dropPlaceRect.left,
-        screenY: dropPlaceRect.top
+        screenY: dropPlaceRect.top,
       });
 
       dropPlace.dispatchEvent(dropEvent);
@@ -310,14 +303,14 @@ describe('transfer', () => {
       const firstIconRect = iconList[0].nativeElement.getBoundingClientRect();
       const dropPlaceRect = dropPlace.getBoundingClientRect();
       fixture.detectChanges();
-      iconList[0].nativeElement.dispatchEvent((new MouseEvent('mouseover', { bubbles: true })));
+      iconList[0].nativeElement.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
       fixture.detectChanges();
 
       const dragstartEvent = createDragEvent('dragstart', {
         clientX: firstIconRect.left,
         clientY: firstIconRect.top,
         screenX: firstIconRect.left,
-        screenY: firstIconRect.top
+        screenY: firstIconRect.top,
       });
       iconList[0].nativeElement.dispatchEvent(dragstartEvent);
 
@@ -326,8 +319,8 @@ describe('transfer', () => {
       const dragoverEvent = createDragEvent('dragover', {
         clientX: dropPlaceRect.left,
         clientY: dropPlaceRect.top,
-        screenX:  dropPlaceRect.left,
-        screenY:  dropPlaceRect.top
+        screenX: dropPlaceRect.left,
+        screenY: dropPlaceRect.top,
       });
 
       dropPlace.dispatchEvent(dragoverEvent);
@@ -337,7 +330,7 @@ describe('transfer', () => {
         clientX: dropPlaceRect.left,
         clientY: dropPlaceRect.top,
         screenX: dropPlaceRect.left,
-        screenY: dropPlaceRect.top
+        screenY: dropPlaceRect.top,
       });
 
       dropPlace.dispatchEvent(dropEvent);
@@ -345,6 +338,5 @@ describe('transfer', () => {
       expect(testComponent.targetOption[0].id).toEqual(20);
       expect(testComponent.targetOption[1].id).toEqual(19);
     });
-
   });
 });

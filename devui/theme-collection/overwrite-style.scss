@@ -255,7 +255,7 @@ d-select .devui-form-group {
 
 d-tree-select {
   .devui-tree-select .popper .popper-activator .devui-select-input.devui-tree-select-input {
-    padding: 4px 10px;
+    padding: 4px 8px;
     min-height: 32px;
     max-height: 64px;
 
@@ -536,6 +536,10 @@ d-datepicker-pro .devui-datepicker-pro-wrapper .devui-single-picker .devui-input
 }
 
 .devui-datepicker-pro-wrapper .devui-range-picker .close-icon-wrapper {
+  line-height: 28px !important;
+}
+
+.devui-datepicker-pro-wrapper .devui-range-picker .date-icon-wrapper {
   line-height: 28px !important;
 }
 

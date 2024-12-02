@@ -25,9 +25,9 @@ export class DisableDataWithSourceComponent {
       'LiveScript',
       'CoffeeScript',
     ].map((item) => {
-      const newItem = { label: item };
+      const newItem: any = { label: item };
       if (item.indexOf('Script') !== -1) {
-        newItem['disabled'] = true;
+        newItem.disabled = true;
       }
       return newItem;
     });

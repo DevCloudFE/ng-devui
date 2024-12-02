@@ -11,6 +11,7 @@ export interface IToastOptions {
   styleClass?: string;
   sticky?: boolean;
   injector?: Injector;
+  appendUpperLimit?: number;
   component?: Type<any>;
   componentFactoryResolver?: ComponentFactoryResolver;
 }
@@ -26,6 +27,7 @@ export class ToastService {
     sticky = false,
     style,
     styleClass,
+    appendUpperLimit,
     injector,
     /**
      * @deprecated
@@ -45,12 +47,13 @@ export class ToastService {
       styleClass: styleClass,
       value: value,
       life: life,
+      appendUpperLimit: appendUpperLimit,
     });
 
     toastRef.instance.close = (index?: number | Message) => {
-      if (index || index === 0) {
-        toastRef.instance.removeIndexThrottle(index as number);
-      } else if (index !== undefined) {
+      if (typeof index === 'number' && index > -1) {
+        toastRef.instance.removeIndexThrottle(index);
+      } else if (index) {
         toastRef.instance.removeMsgThrottle(index);
       } else {
         setTimeout(() => {

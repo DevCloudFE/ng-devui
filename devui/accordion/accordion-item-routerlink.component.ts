@@ -46,7 +46,7 @@ export class AccordionItemRouterlinkComponent extends AccordionBaseLinkComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['item']) {
+    if (changes.item) {
       if (this.link) {
         this.urlTree = this.router.parseUrl(this.link);
         const handelPath = (url: string) => {

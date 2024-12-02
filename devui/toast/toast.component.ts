@@ -8,7 +8,7 @@ import {
   OnInit,
   Output,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { isEqual } from 'lodash-es';
 import { Subject, Subscription } from 'rxjs';
@@ -30,14 +30,33 @@ export interface Message {
   preserveWhitespaces: false,
 })
 export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('container', { static: true }) containerViewChild: ElementRef;
+  @Input() set value(val: Array<Message>) {
+    if (val?.length) {
+      this._value = this.appendUpperLimit > 0 ? [...val, ...this._value].slice(0, this.appendUpperLimit) : val;
+      this.rest = this._value;
+      if (this.container) {
+        this.handleValueChange();
+      }
+    } else {
+      this._value = [];
+      this.rest = [];
+      this.onHidden();
+    }
+  }
+
+  get value(): Array<Message> {
+    return this._value;
+  }
+
   @Input() sticky: boolean;
   @Input() life: number;
   @Input() style: object;
   @Input() styleClass: string;
+  @Input() appendUpperLimit = 0;
   @Input() lifeMode: 'single' | 'global' = 'global';
   @Output() closeEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() valueChange: EventEmitter<Message[]> = new EventEmitter<Message[]>();
-  @ViewChild('container', { static: true }) containerViewChild: ElementRef;
 
   _value: Array<Message>;
   rest: Array<Message>; // 单个toast消失后需要保持上下位置不能从_value中移除，从rest中移除并发送valueChange
@@ -71,18 +90,16 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
     this.container = <HTMLDivElement>this.containerViewChild.nativeElement;
   }
 
-  @Input() get value(): Array<Message> {
-    return this._value;
-  }
-
-  set value(val: Array<Message>) {
-    this._value = val;
-    this.rest = val;
-    if (this.container) {
-      this.handleValueChange();
+  ngOnDestroy() {
+    if (!this.sticky) {
+      if (this.lifeMode === 'single') {
+        this.timeoutArr.forEach((item) => item && clearTimeout(item));
+      } else {
+        clearTimeout(this.timeout);
+      }
     }
-    if (val?.length === 0) {
-      this.onHidden();
+    if (this.subItem) {
+      this.subItem.unsubscribe();
     }
   }
 
@@ -150,6 +167,7 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
       dom.classList.remove('slide-in');
     }
     setTimeout(() => {
+      dom.style.display = 'none';
       this.closeEvent.emit({ message: msg });
       if (this.container.querySelectorAll('.slide-in').length === 0) {
         this.value = [];
@@ -253,19 +271,6 @@ export class ToastComponent implements OnInit, AfterViewInit, OnDestroy {
       this.timeoutArr[index] = setTimeout(() => this.singleModeRemove(msg, msgItem), remainTime);
     } else {
       this.resetDelay(() => this.removeAll());
-    }
-  }
-
-  ngOnDestroy() {
-    if (!this.sticky) {
-      if (this.lifeMode === 'single') {
-        this.timeoutArr.forEach((item) => item && clearTimeout(item));
-      } else {
-        clearTimeout(this.timeout);
-      }
-    }
-    if (this.subItem) {
-      this.subItem.unsubscribe();
     }
   }
 }

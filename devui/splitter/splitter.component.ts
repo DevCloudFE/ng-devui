@@ -1,6 +1,17 @@
 import {
-  AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef,
-  HostBinding, Input, OnChanges, OnDestroy, QueryList, SimpleChanges, ViewChildren
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChildren,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnChanges,
+  OnDestroy,
+  QueryList,
+  SimpleChanges,
+  ViewChildren,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SplitterBarComponent } from './splitter-bar.component';
@@ -13,12 +24,9 @@ import { SplitterOrientation } from './splitter.types';
   templateUrl: './splitter.component.html',
   styleUrls: ['./splitter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    SplitterService
-  ],
+  providers: [SplitterService],
   preserveWhitespaces: false,
 })
-
 export class SplitterComponent implements OnChanges, AfterContentInit, OnDestroy {
   // 指定Splitter中窗格的方向，默认水平分割。
   @Input() orientation: SplitterOrientation = 'horizontal';
@@ -39,9 +47,7 @@ export class SplitterComponent implements OnChanges, AfterContentInit, OnDestroy
   @ViewChildren('bar') splitterBars: QueryList<SplitterBarComponent>;
   paneChangesSubscription: Subscription;
 
-  constructor(private el: ElementRef, private splitter: SplitterService, private cdr: ChangeDetectorRef) {
-
-  }
+  constructor(private el: ElementRef, private splitter: SplitterService, private cdr: ChangeDetectorRef) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.orientation && !changes.orientation.isFirstChange()) {
@@ -82,6 +88,12 @@ export class SplitterComponent implements OnChanges, AfterContentInit, OnDestroy
         } else {
           return this.el.nativeElement.clientWidth;
         }
+      },
+    });
+    // 投影后获取panes才能循环渲染出bar
+    setTimeout(() => {
+      if (this.splitterBars.length) {
+        this.splitter.bars = this.splitterBars.toArray();
       }
     });
   }

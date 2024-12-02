@@ -1,27 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'd-follow',
   templateUrl: './follow.component.html',
-  styleUrls: ['./follow.component.scss']
+  styleUrls: ['./follow.component.scss'],
 })
-export class FollowComponent implements OnInit {
-  list1 = [
-    { name: 'Visual Studio Code' },
-    { name: 'WebStorm' },
-    { name: 'Sublime' },
-    { name: 'Atom' }
-  ];
-
+export class FollowComponent {
+  list1 = [{ name: 'Visual Studio Code' }, { name: 'WebStorm' }, { name: 'Sublime' }, { name: 'Atom' }];
   list2 = [];
   appendToBody = false;
-
-  constructor() {
-
-  }
-
-  ngOnInit() {
-  }
 
   onDrop(e: any) {
     let index = e.dropIndex;
@@ -41,10 +28,7 @@ export class FollowComponent implements OnInit {
   }
 
   removeItem(item: any, list: Array<any>) {
-    const index = list.map(function (e) {
-      return e.name;
-    }).indexOf(item.name);
+    const index = list.map((e) => e.name).indexOf(item.name);
     list.splice(index, 1);
   }
-
 }

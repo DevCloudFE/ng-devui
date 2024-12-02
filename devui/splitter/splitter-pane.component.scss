@@ -15,13 +15,13 @@
       flex-shrink: 0;
     }
 
+    &-grow {
+      flex-grow: 1 !important;
+    }
+
     &-hidden {
       flex: 0 !important;
       overflow: hidden !important;
-    }
-
-    &-grow {
-      flex-grow: 1 !important;
     }
   }
 }
