@@ -1,5 +1,5 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -570,14 +570,14 @@ describe('Select', () => {
         it('while true, should show search input', fakeAsync(() => {
           openMenu();
           const searchElement = debugEl.query(By.css('d-select input.devui-select-search')).parent.parent;
-          expect(searchElement.styles['display']).toBe('block');
+          expect(searchElement.styles.display).toBe('block');
         }));
         it('while false, should hide search input', fakeAsync(() => {
           component.isSearch = false;
           fixture.detectChanges();
           openMenu();
           const searchElement = debugEl.query(By.css('d-select input.devui-select-search')).parent.parent;
-          expect(searchElement.styles['display']).toBe('none');
+          expect(searchElement.styles.display).toBe('none');
         }));
         it('clear icon', fakeAsync(() => {
           openMenu();
@@ -677,7 +677,7 @@ describe('Select', () => {
           }));
           it('option should apply disabled class', fakeAsync(() => {
             const disabledOption = menuElement.queryAll(By.css('li.devui-dropdown-item'))[2];
-            expect(disabledOption.classes['disabled']).toBe(true); // 禁用类
+            expect(disabledOption.classes.disabled).toBe(true); // 禁用类
           }));
           it('option should not response to click', fakeAsync(() => {
             const disabledOption = menuElement.queryAll(By.css('li.devui-dropdown-item'))[2];
@@ -700,9 +700,9 @@ describe('Select', () => {
           }));
           it('option should apply disabled classes', fakeAsync(() => {
             const disabledOption = menuElement.queryAll(By.css('li.devui-dropdown-item'))[2];
-            expect(disabledOption.classes['disabled']).toBe(true); // 禁用类
+            expect(disabledOption.classes.disabled).toBe(true); // 禁用类
             const disabledOptionCheckbox = disabledOption.query(By.css('d-checkbox > div'));
-            expect(disabledOptionCheckbox.classes['disabled']).toBe(true); // checkbox禁用类
+            expect(disabledOptionCheckbox.classes.disabled).toBe(true); // checkbox禁用类
           }));
           it('option should not response to click', fakeAsync(() => {
             const disabledOption = menuElement.queryAll(By.css('li.devui-dropdown-item'))[2];
@@ -731,7 +731,7 @@ describe('Select', () => {
           }));
           it('option should not apply disabled class', fakeAsync(() => {
             const disabledOption = menuElement.queryAll(By.css('li.devui-dropdown-item'))[0];
-            expect(disabledOption.classes['disabled']).toBeFalsy(); // 禁用类
+            expect(disabledOption.classes.disabled).toBeFalsy(); // 禁用类
           }));
           it('option should not response to click', fakeAsync(() => {
             const disabledOption = menuElement.queryAll(By.css('li.devui-dropdown-item'))[0];
@@ -754,9 +754,9 @@ describe('Select', () => {
           }));
           it('option should apply disabled classes', fakeAsync(() => {
             const disabledOption = menuElement.queryAll(By.css('li.devui-dropdown-item'))[0];
-            expect(disabledOption.classes['disabled']).toBeFalsy(); // 禁用类
+            expect(disabledOption.classes.disabled).toBeFalsy(); // 禁用类
             const disabledOptionCheckbox = disabledOption.query(By.css('d-checkbox > div'));
-            expect(disabledOptionCheckbox.classes['disabled']).toBeFalsy(); // checkbox禁用类
+            expect(disabledOptionCheckbox.classes.disabled).toBeFalsy(); // checkbox禁用类
           }));
           it('option should not response to click', fakeAsync(() => {
             const disabledOption = menuElement.queryAll(By.css('li.devui-dropdown-item'))[2];
@@ -1104,25 +1104,25 @@ describe('Select', () => {
           }));
           it('option active', fakeAsync(() => {
             const optionElement = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'))[1];
-            expect(optionElement.classes['active']).toBeTruthy();
+            expect(optionElement.classes.active).toBeTruthy();
           }));
           it('keydown.ArrowDown & keydown.ArrowUp, expected option next to selected option to be navigated', fakeAsync(() => {
             const optionElementNext = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'))[2];
-            expect(optionElementNext.classes['selected']).toBeFalsy();
+            expect(optionElementNext.classes.selected).toBeFalsy();
             toggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
             fixture.detectChanges();
             tick();
             fixture.detectChanges();
-            expect(optionElementNext.classes['selected']).toBeTruthy();
+            expect(optionElementNext.classes.selected).toBeTruthy();
             toggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
             fixture.detectChanges();
             tick();
             fixture.detectChanges();
-            expect(optionElementNext.classes['selected']).toBeFalsy();
+            expect(optionElementNext.classes.selected).toBeFalsy();
           }));
           it('keydown.Enter', fakeAsync(() => {
             const optionElementNext = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'))[2];
-            expect(optionElementNext.classes['active']).toBeFalsy();
+            expect(optionElementNext.classes.active).toBeFalsy();
             toggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
             fixture.detectChanges();
             tick();
@@ -1132,7 +1132,7 @@ describe('Select', () => {
             tick();
             fixture.detectChanges();
             flush();
-            expect(optionElementNext.classes['active']).toBeTruthy();
+            expect(optionElementNext.classes.active).toBeTruthy();
             expect(component.option).toEqual(component.options[2]);
             expect(menuElement.nativeElement.getBoundingClientRect().height).toBe(0); // 选择完面板会关闭
           }));
@@ -1155,26 +1155,26 @@ describe('Select', () => {
           }));
           it('option active', fakeAsync(() => {
             const optionElement = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'))[1];
-            expect(optionElement.classes['active']).toBeTruthy();
+            expect(optionElement.classes.active).toBeTruthy();
           }));
           it('keydown.ArrowDown & keydown.ArrowUp, expected first option to be navigated', fakeAsync(() => {
             // 多选目前与单选不一样，多选键盘事件命中列表的第一项， 单选命中选中项的后一项
             const optionElementNext = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'))[0];
-            expect(optionElementNext.classes['selected']).toBeFalsy();
+            expect(optionElementNext.classes.selected).toBeFalsy();
             toggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
             fixture.detectChanges();
             tick();
             fixture.detectChanges();
-            expect(optionElementNext.classes['selected']).toBeTruthy();
+            expect(optionElementNext.classes.selected).toBeTruthy();
             toggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
             fixture.detectChanges();
             tick();
             fixture.detectChanges();
-            expect(optionElementNext.classes['selected']).toBeFalsy();
+            expect(optionElementNext.classes.selected).toBeFalsy();
           }));
           it('keydown.Enter', fakeAsync(() => {
             const optionElementNext = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'))[0];
-            expect(optionElementNext.classes['active']).toBeFalsy();
+            expect(optionElementNext.classes.active).toBeFalsy();
             toggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
             fixture.detectChanges();
             tick();
@@ -1183,7 +1183,7 @@ describe('Select', () => {
             fixture.detectChanges();
             tick();
             fixture.detectChanges();
-            expect(optionElementNext.classes['active']).toBeTruthy();
+            expect(optionElementNext.classes.active).toBeTruthy();
             expect(component.option).toEqual([component.options[1], component.options[0]]);
             expect(menuElement.nativeElement.getBoundingClientRect().height).toBeGreaterThan(0);
           }));
@@ -1195,12 +1195,12 @@ describe('Select', () => {
           it('keydown.ArrowDown & keydown.ArrowUp, expected first option to be navigated', fakeAsync(() => {
             openMenu();
             const optionElementNext = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'))[0];
-            expect(optionElementNext.classes['selected']).toBeFalsy();
+            expect(optionElementNext.classes.selected).toBeFalsy();
             toggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
             fixture.detectChanges();
             tick();
             fixture.detectChanges();
-            expect(optionElementNext.classes['selected']).toBeTruthy();
+            expect(optionElementNext.classes.selected).toBeTruthy();
           }));
         });
         describe('multiple', () => {
@@ -1209,12 +1209,12 @@ describe('Select', () => {
             fixture.detectChanges();
             openMenu();
             const optionElementNext = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'))[0];
-            expect(optionElementNext.classes['selected']).toBeFalsy();
+            expect(optionElementNext.classes.selected).toBeFalsy();
             toggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
             fixture.detectChanges();
             tick();
             fixture.detectChanges();
-            expect(optionElementNext.classes['selected']).toBeTruthy();
+            expect(optionElementNext.classes.selected).toBeTruthy();
           }));
         });
       });
@@ -1237,18 +1237,18 @@ describe('Select', () => {
           }));
           it('expected first option in search list to be navigated', fakeAsync(() => {
             const optionElementNext = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'))[0];
-            expect(optionElementNext.classes['selected']).toBeTruthy();
+            expect(optionElementNext.classes.selected).toBeTruthy();
           }));
           it('expected enter to select first option', fakeAsync(() => {
             const optionElementNext = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'))[0];
-            expect(optionElementNext.classes['active']).toBeFalsy();
+            expect(optionElementNext.classes.active).toBeFalsy();
             searchInputElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
             fixture.detectChanges();
             tick();
             fixture.detectChanges();
             tick();
             fixture.detectChanges();
-            expect(optionElementNext.classes['active']).toBeTruthy();
+            expect(optionElementNext.classes.active).toBeTruthy();
           }));
         });
         describe('multiple', () => {
@@ -1267,7 +1267,7 @@ describe('Select', () => {
           it('expect first option in search list to be not navigated', fakeAsync(() => {
             // 多选和单选不一样 搜索后不会自动导航到第一个项
             const optionElementNext = debugEl.queryAll(By.css('d-select > div > div.devui-dropdown-menu li.devui-dropdown-item'))[0];
-            expect(optionElementNext.classes['selected']).toBeFalsy();
+            expect(optionElementNext.classes.selected).toBeFalsy();
           }));
         });
       });
@@ -1592,11 +1592,12 @@ describe('Select', () => {
         fixture.detectChanges();
       };
       describe('big data', () => {
-        beforeEach(fakeAsync(() => {
+        beforeEach(fakeAsync(async () => {
           component.virtualScroll = true;
           component.options = component.optionsHundred;
           fixture.detectChanges();
           openMenu();
+          await fixture.whenStable();
           menuElement = debugEl.query(By.css('d-select > div >div.devui-dropdown-menu'));
         }));
         it('big data, few DOM', fakeAsync(() => {
@@ -1636,7 +1637,7 @@ describe('Select', () => {
       describe('templateItemSize', () => {
         const templateItemSize = 46;
         const listItemSpace = 4;
-        beforeEach(fakeAsync(() => {
+        beforeEach(fakeAsync(async () => {
           fixture = TestBed.createComponent(TestSelectVirtualScrollItemSizeComponent);
           debugEl = fixture.debugElement;
           component = debugEl.componentInstance;
@@ -1650,6 +1651,7 @@ describe('Select', () => {
           tick();
           fixture.detectChanges();
           openMenu();
+          await fixture.whenStable();
           menuElement = debugEl.query(By.css('d-select > div >div.devui-dropdown-menu'));
         }));
         it('scrollHeight correct', fakeAsync(() => {

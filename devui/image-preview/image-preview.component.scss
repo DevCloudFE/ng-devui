@@ -102,6 +102,10 @@ path {
   bottom: 0;
   left: 0;
 
+  &:empty {
+    display: none;
+  }
+
   button {
     display: inline-flex;
     width: 24px;

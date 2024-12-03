@@ -4,22 +4,6 @@
 @import '../style/core/animation';
 @import '../style/theme/z-index';
 
-.edge,
-.ie,
-.firefox {
-  &.devui-tree-select {
-    &:hover {
-      .clear {
-        right: 20px;
-      }
-    }
-
-    .devui-select-chevron-icon {
-      right: 20px;
-    }
-  }
-}
-
 .devui-tree-select {
   position: relative;
   width: 100%;
@@ -41,7 +25,7 @@
       text-indent: 8px;
 
       &.devui-select-no-label {
-        padding-left: 10px;
+        padding-left: 8px;
       }
 
       & > span.devui-tree-select-placeholder {
@@ -92,7 +76,7 @@
   }
 
   .devui-select-chevron-icon {
-    right: 12px;
+    right: 7px;
     top: calc((100% - 14px) / 2);
     position: absolute;
     user-select: none;

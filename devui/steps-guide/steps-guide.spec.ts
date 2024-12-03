@@ -1,5 +1,5 @@
 import { Component, DebugElement, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, flush, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { DomHelper } from '../utils/testing/dom-helper';
@@ -28,7 +28,7 @@ class CommonFunctions {
   }
 
   static event(str) {
-    let res = eventList.find(e => e.type === str);
+    let res = eventList.find((e) => e.type === str);
     if (!res) {
       res = new Event(str);
       eventList.push(res);
@@ -47,14 +47,7 @@ class TestFunctions {
 @Component({
   template: `
     <div class="place-holder" #placeHolder><div class="place-holder-sub"></div></div>
-    <div
-      class="devui-guide"
-      dStepsGuide
-      [pageName]="'basic'"
-      [steps]="steps"
-      [stepIndex]="0"
-      (operateChange)="operateChange($event)"
-    ></div>
+    <div class="devui-guide" dStepsGuide [pageName]="'basic'" [steps]="steps" [stepIndex]="0" (operateChange)="operateChange($event)"></div>
     <div
       class="devui-guide"
       dStepsGuide
@@ -123,57 +116,59 @@ class TestFunctions {
       (operateChange)="operateChange($event)"
     ></div>
   `,
-  styles: [`
-    .devui-guide {
-      width: 40px;
-      height: 20px;
-      background-color: #8a8e99;
-      display: inline-block;
-      margin: 0 10px;
-      border-radius: 2px;
-      vertical-align: middle;
-    }
+  styles: [
+    `
+      .devui-guide {
+        width: 40px;
+        height: 20px;
+        background-color: #8a8e99;
+        display: inline-block;
+        margin: 0 10px;
+        border-radius: 2px;
+        vertical-align: middle;
+      }
 
-    .place-holder {
-      width: 500px;
-      border: 1px solid #000;
-    }
-  `]
+      .place-holder {
+        width: 500px;
+        border: 1px solid #000;
+      }
+    `,
+  ],
 })
 class TestStepsGuideComponent implements OnInit {
   steps = [
     {
       title: 'default: top',
-      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向'
+      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向',
     },
     {
       title: 'top-left',
-      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向'
+      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向',
     },
     {
       title: 'top-right',
-      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向'
+      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向',
     },
     {
       title: 'bottom',
-      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向'
+      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向',
     },
     {
       title: 'bottom-left',
-      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向'
+      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向',
     },
     {
       title: 'bottom-right',
-      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向'
+      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向',
     },
     {
       title: 'left',
-      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向'
+      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向',
     },
     {
       title: 'right',
-      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向'
-    }
+      content: '引导信息位置一共有八个方向可选择，请根据业务需要选择不同方向',
+    },
   ];
   currentStep: number;
   currentStepOutPut: any;
@@ -187,7 +182,9 @@ class TestStepsGuideComponent implements OnInit {
   constructor(private stepsGuideService: StepsGuideService) {}
 
   ngOnInit() {
-    this.stepsGuideService.currentIndex.subscribe((index) => {this.currentStep = index;});
+    this.stepsGuideService.currentIndex.subscribe((index) => {
+      this.currentStep = index;
+    });
   }
 
   operateChange(e) {
@@ -219,7 +216,7 @@ describe('steps guide basic', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [StepsGuideModule, FormsModule],
-      declarations: [TestStepsGuideComponent]
+      declarations: [TestStepsGuideComponent],
     }).compileComponents();
   }));
 
@@ -243,19 +240,29 @@ describe('steps guide basic', () => {
       tick();
       fixture.detectChanges();
       // 检查stepsGuide是否正确出现
-      expect(domHelper.judgeAppendToBodyStyleClasses([
-        '.devui-step-item',
-        '.devui-shining-dot', '.devui-shining-plus', '.devui-arrow', '.devui-guide-container',
-        '.devui-title', '.icon-close', '.devui-content', '.devui-ctrl',
-        '.devui-guide-btn'
-      ])).toBeTruthy();
+      expect(
+        domHelper.judgeAppendToBodyStyleClasses([
+          '.devui-step-item',
+          '.devui-shining-dot',
+          '.devui-shining-plus',
+          '.devui-arrow',
+          '.devui-guide-container',
+          '.devui-title',
+          '.icon-close',
+          '.devui-content',
+          '.devui-ctrl',
+          '.devui-guide-btn',
+        ])
+      ).toBeTruthy();
       // 循环列表看每一项的上一步、下一步都是否正确处罚
       component.steps.forEach((step, index) => {
-        if (index <= 0) { // 第一步只有下一步
+        if (index <= 0) {
+          // 第一步只有下一步
           TestFunctions.guideCorrect(component.positions[index], step.title);
           CommonFunctions.tickEvent(document.querySelector('.devui-guide-btn').children[0], CommonFunctions.event('click'), fixture);
           TestFunctions.guideCorrect(component.positions[index + 1], component.steps[index + 1].title);
-        } else if (index >= component.steps.length - 1) { // 最后一步不点下一步
+        } else if (index >= component.steps.length - 1) {
+          // 最后一步不点下一步
           TestFunctions.guideCorrect(component.positions[index], step.title);
           CommonFunctions.tickEvent(document.querySelector('.devui-guide-btn').children[0], CommonFunctions.event('click'), fixture);
           TestFunctions.guideCorrect(component.positions[index - 1], component.steps[index - 1].title);
@@ -269,8 +276,11 @@ describe('steps guide basic', () => {
           if (document.querySelector('.devui-guide-btn').children.length === 1) {
             currentBtn = 0;
           }
-          CommonFunctions.tickEvent(document.querySelector('.devui-guide-btn').children[currentBtn],
-            CommonFunctions.event('click'), fixture);
+          CommonFunctions.tickEvent(
+            document.querySelector('.devui-guide-btn').children[currentBtn],
+            CommonFunctions.event('click'),
+            fixture
+          );
           CommonFunctions.tickEvent(document.querySelector('.devui-guide-btn').children[1], CommonFunctions.event('click'), fixture);
           TestFunctions.guideCorrect(component.positions[index + 1], component.steps[index + 1].title);
         }
@@ -300,11 +310,11 @@ describe('steps guide basic', () => {
       tick();
       fixture.detectChanges();
 
-      expect(document.querySelector('.devui-step-item')['style'].marginLeft).toBe('10px');
+      expect((document.querySelector('.devui-step-item') as any).style.marginLeft).toBe('10px');
       CommonFunctions.tickEvent(document.querySelector('.devui-guide-btn').children[1], CommonFunctions.event('click'), fixture);
-      expect(document.querySelector('.devui-step-item')['style'].marginTop).toBe('10px');
+      expect((document.querySelector('.devui-step-item') as any).style.marginTop).toBe('10px');
       CommonFunctions.tickEvent(document.querySelector('.devui-guide-btn').children[1], CommonFunctions.event('click'), fixture);
-      expect(document.querySelector('.devui-step-item')['style'].zIndex).toBe('1200');
+      expect((document.querySelector('.devui-step-item') as any).style.zIndex).toBe('1200');
     }));
 
     // TODO: 无法触发到MutationObserver的callback无法被触发，在用例外可以

@@ -1,15 +1,5 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import {
-  ChangeDetectionStrategy,
-
-  ChangeDetectorRef,
-
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { chunk } from 'lodash-es';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -20,7 +10,7 @@ import { DatepickerProService } from '../datepicker-pro.service';
   templateUrl: './year-panel.component.html',
   styleUrls: ['./year-panel.component.scss'],
   preserveWhitespaces: false,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class YearPanelComponent implements OnInit, OnDestroy {
   @ViewChild('scrollList') scrollListCmp: CdkVirtualScrollViewport;
@@ -62,11 +52,7 @@ export class YearPanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor(
-    private cdr: ChangeDetectorRef,
-    private pickerSrv: DatepickerProService
-  ) {
-  }
+  constructor(private cdr: ChangeDetectorRef, private pickerSrv: DatepickerProService) {}
 
   ngOnInit() {
     this.initYearList();
@@ -74,7 +60,7 @@ export class YearPanelComponent implements OnInit, OnDestroy {
   }
 
   initObservable() {
-    this.pickerSrv.toggleEvent.subscribe(isOpen => {
+    this.pickerSrv.toggleEvent.subscribe((isOpen) => {
       if (isOpen) {
         setTimeout(() => {
           this.goToYear(this.currentDate || new Date());
@@ -82,9 +68,7 @@ export class YearPanelComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.pickerSrv.updateDateValue.pipe(
-      takeUntil(this.unsubscribe$),
-    ).subscribe(res => {
+    this.pickerSrv.updateDateValue.pipe(takeUntil(this.unsubscribe$)).subscribe((res) => {
       if (res.type === 'range') {
         this.pickerSrv.curRangeDate = res.value as Date[];
       } else {
@@ -93,9 +77,7 @@ export class YearPanelComponent implements OnInit, OnDestroy {
       this.goToYear(this.currentDate || new Date());
     });
 
-    this.pickerSrv.activeInputChange.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(type => {
+    this.pickerSrv.activeInputChange.pipe(takeUntil(this.unsubscribe$)).subscribe((type) => {
       if (type === 'start') {
         this.goToYear(this.pickerSrv.curRangeDate[0] || this.pickerSrv.curRangeDate[1] || new Date());
       } else {
@@ -144,7 +126,7 @@ export class YearPanelComponent implements OnInit, OnDestroy {
   }
 
   isDateAbandon(yearIndex: number) {
-    if (!this.isRangeType || (!this.pickerSrv.curRangeDate[0] || !this.pickerSrv.curRangeDate[1])) {
+    if (!this.isRangeType || !this.pickerSrv.curRangeDate[0] || !this.pickerSrv.curRangeDate[1]) {
       return false;
     }
     const date = new Date(yearIndex, 0, 1);
@@ -180,7 +162,7 @@ export class YearPanelComponent implements OnInit, OnDestroy {
     if (this.isDisable(yearIndex)) {
       return;
     }
-    this.currentDate = new Date(yearIndex, 0 , 1);
+    this.currentDate = new Date(yearIndex, 0, 1);
 
     if (this.isRangeType) {
       this.pickerSrv.fixRangeDate();
@@ -199,7 +181,7 @@ export class YearPanelComponent implements OnInit, OnDestroy {
 
     this.pickerSrv.selectedDateChange.next({
       type: this.isRangeType ? 'range' : 'single',
-      value: this.isRangeType ? this.pickerSrv.curRangeDate : this.currentDate
+      value: this.isRangeType ? this.pickerSrv.curRangeDate : this.currentDate,
     });
 
     if (this.pickerSrv.closeAfterSelected) {
@@ -209,7 +191,7 @@ export class YearPanelComponent implements OnInit, OnDestroy {
 
   isDisable(yearIndex: number) {
     const date = new Date(yearIndex, 0, 1);
-    return this.pickerSrv.maxDate.getTime() <  date.getTime() || this.pickerSrv.minDate.getTime() >  date.getTime();
+    return this.pickerSrv.maxDate.getTime() < date.getTime() || this.pickerSrv.minDate.getTime() > date.getTime();
   }
 
   setHoverTarget(yearIndex: number) {

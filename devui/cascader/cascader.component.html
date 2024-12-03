@@ -9,6 +9,7 @@
   (toggleEvent)="onToggle($event)"
   [showAnimation]="showAnimation"
   [appendToBodyDirections]="subMenuDirections"
+  [ngClass]="{ 'dropdown-show-clear': allowClear && (showTextValue || multipleValueList.length) }"
 >
   <div dDropDownToggle (focus)="showSearchInput = true" [class.devui-gray-style]="styleType === 'gray'">
     <ng-template
@@ -52,7 +53,7 @@
         />
         <span *ngIf="!multipleValueList.length && !allowSearch" class="devui-dropdown-placeholder">{{ placeholder }}</span>
       </div>
-      <div class="devui-drop-icon-wrapper" [ngClass]="{ 'dropdown-show-clear': allowClear }">
+      <div class="devui-drop-icon-wrapper">
         <span class="devui-drop-icon" [ngClass]="{ 'devui-drop-icon-animation': showAnimation }">
           <svg
             width="16px"
@@ -88,7 +89,7 @@
         </span>
       </div>
     </div>
-    <div class="devui-single-drop-icon-wrapper" *ngIf="!multiple" [ngClass]="{ 'dropdown-show-clear': allowClear }">
+    <div class="devui-single-drop-icon-wrapper" *ngIf="!multiple">
       <span class="devui-drop-icon" [ngClass]="{ 'devui-drop-icon-animation': showAnimation }">
         <svg
           width="16px"
@@ -226,7 +227,7 @@
         />
         <span *ngIf="!multipleValueList.length && !allowSearch" class="devui-dropdown-placeholder">{{ placeholder }}</span>
       </div>
-      <div class="devui-drop-icon-wrapper" [ngClass]="{ 'dropdown-show-clear': allowClear }">
+      <div class="devui-drop-icon-wrapper">
         <span class="devui-drop-icon" [ngClass]="{ 'devui-drop-icon-animation': showAnimation }">
           <svg
             width="16px"
@@ -262,7 +263,7 @@
         </span>
       </div>
     </div>
-    <div class="devui-single-drop-icon-wrapper" *ngIf="!multiple" [ngClass]="{ 'dropdown-show-clear': allowClear }">
+    <div class="devui-single-drop-icon-wrapper" *ngIf="!multiple">
       <span class="devui-drop-icon" [ngClass]="{ 'devui-drop-icon-animation': showAnimation }">
         <svg
           width="16px"

@@ -9,7 +9,7 @@ import {
   Input,
   NgZone,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
 import { DATA_TABLE_ROW } from './data-table-row.token';
 import { DATA_TABLE } from './data-table.token';
@@ -21,10 +21,12 @@ import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.comp
   templateUrl: './data-table-row.component.html',
   styleUrls: ['./data-table-row.component.scss'],
   preserveWhitespaces: false,
-  providers: [{
-    provide: DATA_TABLE_ROW,
-    useExisting: forwardRef(() => DataTableRowComponent)
-  }],
+  providers: [
+    {
+      provide: DATA_TABLE_ROW,
+      useExisting: forwardRef(() => DataTableRowComponent),
+    },
+  ],
 })
 export class DataTableRowComponent implements OnInit {
   @Input() rowItem: any;
@@ -50,29 +52,20 @@ export class DataTableRowComponent implements OnInit {
   clickCount = 0; // 记录点击次数
   timeoutId; // 延时id
 
-  constructor(@Inject(DATA_TABLE) public dt: any, private changeDetectorRef: ChangeDetectorRef,
-              private rowRef: ElementRef, private ngZone: NgZone) {
-  }
+  constructor(
+    @Inject(DATA_TABLE) public dt: any,
+    private changeDetectorRef: ChangeDetectorRef,
+    private rowRef: ElementRef,
+    private ngZone: NgZone
+  ) {}
 
   ngOnInit(): void {
     this.ngZone.runOutsideAngular(() => {
-      this.rowRef.nativeElement.addEventListener(
-        'mouseup',
-        this.onRowClick.bind(this)
-      );
-      this.rowRef.nativeElement.addEventListener(
-        'dblclick',
-        this.onRowDBClick.bind(this)
-      );
+      this.rowRef.nativeElement.addEventListener('mouseup', this.onRowClick.bind(this));
+      this.rowRef.nativeElement.addEventListener('dblclick', this.onRowDBClick.bind(this));
       if (this.generalRowHoveredData) {
-        this.rowRef.nativeElement.addEventListener(
-          'mouseenter',
-          this.onRowMouseEnter.bind(this)
-        );
-        this.rowRef.nativeElement.addEventListener(
-          'mouseleave',
-          this.onRowMouseLeave.bind(this)
-        );
+        this.rowRef.nativeElement.addEventListener('mouseenter', this.onRowMouseEnter.bind(this));
+        this.rowRef.nativeElement.addEventListener('mouseleave', this.onRowMouseLeave.bind(this));
       }
     });
   }
@@ -88,7 +81,11 @@ export class DataTableRowComponent implements OnInit {
       this.timeoutId = setTimeout(() => {
         if (this.clickCount === 1) {
           this.dt.onRowClick({
-            rowIndex: this.rowIndex, nestedIndex: this.nestedIndex, rowItem: this.rowItem, rowComponent: this, event: $event
+            rowIndex: this.rowIndex,
+            nestedIndex: this.nestedIndex,
+            rowItem: this.rowItem,
+            rowComponent: this,
+            event: $event,
           });
         }
         this.clickCount = 0;
@@ -120,15 +117,15 @@ export class DataTableRowComponent implements OnInit {
   }
 
   toggle() {
-    if (this.rowItem['$isDetailOpen'] === undefined) {
-      this.rowItem['$isDetailOpen'] = !!this.rowItem.$expandConfig?.expand;
+    if (this.rowItem.$isDetailOpen === undefined) {
+      this.rowItem.$isDetailOpen = !!this.rowItem.$expandConfig?.expand;
     }
-    this.rowItem['$isDetailOpen'] = !this.rowItem['$isDetailOpen'];
+    this.rowItem.$isDetailOpen = !this.rowItem.$isDetailOpen;
     if (this.rowItem.$expandConfig) {
       this.rowItem.$expandConfig.expand = !this.rowItem.$expandConfig.expand;
     }
-    this.detailChange.emit({ state: this.rowItem['$isDetailOpen'], index: this.rowIndex });
-    this.dt.onDetailToggle({ state: this.rowItem['$isDetailOpen'], index: this.rowIndex });
+    this.detailChange.emit({ state: this.rowItem.$isDetailOpen, index: this.rowIndex });
+    this.dt.onDetailToggle({ state: this.rowItem.$isDetailOpen, index: this.rowIndex });
   }
 
   trackByFn(index, item) {

@@ -19,7 +19,6 @@ import { Observable } from 'rxjs';
 })
 export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   static ID_SEED = 0;
-
   @Input() name: string;
   @Input() itemWidth: number;
   @Input() color;
@@ -36,9 +35,11 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   options_display = [];
   private onChange = (_: any) => null;
   private onTouch = () => null;
+
   constructor(private devConfigService: DevConfigService) {}
+
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['options']) {
+    if (changes.options) {
       this.values = this.values ?? [];
       this.checkType();
     }
@@ -56,15 +57,15 @@ export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
       }
     });
     this.options.forEach((item) => {
-      const option = { isChecked: false };
-      option['value'] = item;
+      const option: any = { isChecked: false };
+      option.value = item;
       if (this.filterKey && item[this.filterKey]) {
         if (checkedArray[item[this.filterKey]] === true) {
-          option['isChecked'] = true;
+          option.isChecked = true;
         }
       } else {
         if (checkedArray[item] === true) {
-          option['isChecked'] = true;
+          option.isChecked = true;
         }
       }
       this.options_display.push(option);

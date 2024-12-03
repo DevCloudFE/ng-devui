@@ -5,7 +5,7 @@ import { LARGE_LABEL_SIZE_CENTER_POINT, NORMAL_LABEL_SIZE_CENTER_POINT, SMALL_LA
 @Component({
   selector: 'd-quadrant-label',
   templateUrl: './quadrant-label.component.html',
-  styleUrls: ['./quadrant-label.component.scss']
+  styleUrls: ['./quadrant-label.component.scss'],
 })
 export class QuadrantLabelComponent implements OnChanges {
   @Input() currentLabelSize;
@@ -19,9 +19,11 @@ export class QuadrantLabelComponent implements OnChanges {
   @Input() diagramId;
   currentCenterPoint;
   currentLabelTemplate;
-  constructor(private quadrantDiagramService: QuadrantDiagramService) { }
+
+  constructor(private quadrantDiagramService: QuadrantDiagramService) {}
+
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes['currentLabelSize']) {
+    if (changes?.currentLabelSize) {
       switch (this.currentLabelSize) {
       case 'small':
         this.currentCenterPoint = SMALL_LABEL_SIZE_CENTER_POINT;

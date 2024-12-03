@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DEVUI_LANG, EN_US, I18nService, ZH_CN } from 'ng-devui/i18n';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { VERSION } from '../../devui/version';
+import { LinkMap } from '../../devui-commons/src/constant';
 
 @Component({
   selector: 'd-app-root',
@@ -30,7 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
     {
       name: '版本历程',
       enName: 'Changelog',
-      href: 'https://github.com/DevCloudFE/ng-devui/releases'
+      href: LinkMap.versionRelease
     },
   ];
   constructor(private renderer2: Renderer2, private ngZone: NgZone, private router: Router, private translate: TranslateService,

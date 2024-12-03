@@ -25,6 +25,10 @@ export class ToastDemoComponent implements OnInit, OnDestroy {
     { title: 'HTML', language: 'xml', code: require('./single/single.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./single/single.component.ts?raw') },
   ];
+  appendSource: Array<DevuiSourceData> = [
+    { title: 'HTML', language: 'xml', code: require('./append/append.component.html?raw') },
+    { title: 'TS', language: 'typescript', code: require('./append/append.component.ts?raw') },
+  ];
 
   ToastDemoService: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./service/toast-service.component.html?raw') },
@@ -33,6 +37,7 @@ export class ToastDemoComponent implements OnInit, OnDestroy {
   ];
   navItems = [];
   subs: Subscription = new Subscription();
+
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
@@ -53,10 +58,11 @@ export class ToastDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
-      { dAnchorLink: 'life', value: values['life'] },
-      { dAnchorLink: 'style', value: values['style'] },
-      { dAnchorLink: 'single', value: values['single'] },
-      { dAnchorLink: 'toast-service', value: values['toast-service']},
+      { dAnchorLink: 'life', value: values.life },
+      { dAnchorLink: 'style', value: values.style },
+      { dAnchorLink: 'single', value: values.single },
+      { dAnchorLink: 'append', value: values.append },
+      { dAnchorLink: 'toast-service', value: values['toast-service'] },
     ];
   }
 

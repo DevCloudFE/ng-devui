@@ -115,11 +115,11 @@ export class AppContentComponent implements OnDestroy, OnInit {
     return Array.from(new Set(scopeList.map((scope) => scope.replace(/(\W|_|[0-9])*/g, ''))));
   }
 
-  generateSideMenuList(values) {
-    this.sideMenuList[0].name = values['overview']?.title;
-    this.sideMenuList[1].name = values['start'];
-    this.sideMenuList[2].name = values['themeDoc'];
-    this.sideMenuList[3].name = values['globalDoc'];
+  generateSideMenuList(values: any) {
+    this.sideMenuList[0].name = values.overview?.title;
+    this.sideMenuList[1].name = values.start;
+    this.sideMenuList[2].name = values.themeDoc;
+    this.sideMenuList[3].name = values.globalDoc;
   }
 
   ngOnDestroy(): void {

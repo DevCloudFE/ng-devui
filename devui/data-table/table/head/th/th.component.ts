@@ -1,8 +1,21 @@
 import { DOCUMENT } from '@angular/common';
 import {
-  ChangeDetectorRef, Component, ElementRef, EventEmitter,
-  forwardRef, HostBinding, HostListener, Inject, Input,
-  NgZone, OnChanges, OnDestroy, Output, Renderer2, SimpleChanges, TemplateRef
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostBinding,
+  HostListener,
+  Inject,
+  Input,
+  NgZone,
+  OnChanges,
+  OnDestroy,
+  Output,
+  Renderer2,
+  SimpleChanges,
+  TemplateRef
 } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { FilterConfig, SortDirection, SortEventArg } from '../../../data-table.model';
@@ -13,10 +26,12 @@ import { TABLE_TH } from './th.token';
   selector: '[dHeadCell]',
   templateUrl: './th.component.html',
   styleUrls: ['./th.component.scss'],
-  providers: [{
+  providers: [
+    {
     provide: TABLE_TH,
-    useExisting: forwardRef(() => TableThComponent)
-  }],
+      useExisting: forwardRef(() => TableThComponent),
+    },
+  ],
 })
 export class TableThComponent implements OnChanges, OnDestroy {
   @HostBinding('class.resizeable') resizeEnabledClass = false;
@@ -57,7 +72,13 @@ export class TableThComponent implements OnChanges, OnDestroy {
   @Input() colDraggable: boolean;
 
   @Input() nestedColumn: boolean;
+  /**
+   * @depreted 存在xxs风险，使用方需根据自身场景做好防护
+   */
   @Input() iconFoldTable: string;
+  /**
+   * @depreted 存在xxs风险，使用方需根据自身场景做好防护
+   */
   @Input() iconUnFoldTable: string;
 
   @Input() tableViewRefElement: ElementRef;
@@ -98,14 +119,20 @@ export class TableThComponent implements OnChanges, OnDestroy {
   @Input() column: any; // 为配置column方式兼容自定义过滤模板context
   document: Document;
 
-  constructor(element: ElementRef, private renderer2: Renderer2, private zone: NgZone, private cdr: ChangeDetectorRef,
-              @Inject(DOCUMENT) private doc: any) {
+  constructor(
+    element: ElementRef,
+    private renderer2: Renderer2,
+    private zone: NgZone,
+    private cdr: ChangeDetectorRef,
+    @Inject(DOCUMENT) private doc: any
+  ) {
     this.element = element.nativeElement;
     this.document = this.doc;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['resizeEnabled']) {
+    const { resizeEnabled, filterable, sortable, colDraggable, filterIconActive, sortDirection, fixedLeft, fixedRight } = changes;
+    if (resizeEnabled) {
       if (this.resizeEnabled) {
         this.resizeEnabledClass = true;
         if (!this.resizeHandleElement) {
@@ -119,7 +146,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
       }
     }
 
-    if (changes['filterable'] || changes['sortable'] || changes['resizeEnabled'] || changes['colDraggable']) {
+    if (filterable || sortable || resizeEnabled || colDraggable) {
       if (this.filterable || this.sortable || this.resizeEnabled || this.colDraggable) {
         this.operableClass = true;
       } else {
@@ -127,7 +154,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
       }
     }
 
-    if (changes['filterIconActive']) {
+    if (filterIconActive) {
       if (this.filterIconActive) {
         this.filterActiveClass = true;
       } else {
@@ -135,7 +162,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
       }
     }
 
-    if (changes['sortDirection']) {
+    if (sortDirection) {
       if (this.sortDirection === SortDirection.ASC || this.sortDirection === SortDirection.DESC) {
         this.sortActiveClass = true;
       } else {
@@ -143,7 +170,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
       }
     }
 
-    if (changes['fixedLeft']) {
+    if (fixedLeft) {
       if (this.fixedLeft) {
         this.stickyLeftClass = true;
         this.stickyLeftStyle = this.fixedLeft;
@@ -152,7 +179,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
         this.stickyLeftStyle = null;
       }
     }
-    if (changes['fixedRight']) {
+    if (fixedRight) {
       if (this.fixedRight) {
         this.stickyRightClass = true;
         this.stickyRightStyle = this.fixedRight;
@@ -187,10 +214,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
     this.filterChange.emit(filterData);
   }
 
-  emitFilterToggle(data: {
-    isOpen: boolean;
-    checklist: FilterConfig[];
-  }) {
+  emitFilterToggle(data: { isOpen: boolean; checklist: FilterConfig[] }) {
     this.filterToggle.emit(data);
   }
 
@@ -278,7 +302,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
       this.resizing = false;
 
       // destroy overlay
-      this.renderer2.removeChild(this.element.firstElementChild, this.resizeOverlay);
+      this.renderer2.removeChild(this.element, this.resizeOverlay);
 
       this.renderer2.removeClass(this.tableViewRefElement.nativeElement, 'table-view-selector');
 
@@ -289,7 +313,7 @@ export class TableThComponent implements OnChanges, OnDestroy {
         this.renderer2.removeChild(this.tableElement, this.resizeBarRefElement);
       }
 
-      if(this.tableHeaderElement) {
+      if (this.tableHeaderElement) {
         this.renderer2.removeChild(this.tableHeaderElement, this.resizeBarRefElement);
       }
 
@@ -325,7 +349,8 @@ export class TableThComponent implements OnChanges, OnDestroy {
     const overMinWidth = !this.minWidth || newWidth >= minWidth;
     const underMaxWidth = !this.maxWidth || newWidth <= maxWidth;
 
-    const finalWidth = !overMinWidth ? minWidth : !underMaxWidth ? maxWidth : newWidth;
+    const result = !underMaxWidth ? maxWidth : newWidth;
+    const finalWidth = !overMinWidth ? minWidth : result;
     return finalWidth;
   }
 

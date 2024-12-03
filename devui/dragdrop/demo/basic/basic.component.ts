@@ -3,16 +3,10 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'd-basic',
   templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.scss']
+  styleUrls: ['./basic.component.scss'],
 })
 export class BasicComponent {
-  list1 = [
-    { name: 'Visual Studio Code' },
-    { name: 'WebStorm' },
-    { name: 'Sublime' },
-    { name: 'Atom (disable dragging)', disabled: true }
-  ];
-
+  list1 = [{ name: 'Visual Studio Code' }, { name: 'WebStorm' }, { name: 'Sublime' }, { name: 'Atom (disable dragging)', disabled: true }];
   list2 = [];
   list3 = [];
 
@@ -36,11 +30,10 @@ export class BasicComponent {
   }
 
   removeItem(item: any, list: Array<any>) {
-    const index = list.map(function (e) {
-      return e.name;
-    }).indexOf(item.name);
+    const index = list.map((e) => e.name).indexOf(item.name);
     list.splice(index, 1);
   }
+
   log(...v) {
     console.log(...v);
   }

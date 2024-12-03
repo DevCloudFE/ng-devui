@@ -56,17 +56,20 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
   onRadioChange(event) {
     const target = event.target;
     if (target.tagName.toLowerCase() === 'input') {
-      let value = target.value;
+      event.preventDefault();
       if (this.disabled) {
-        event.preventDefault();
+        return;
       }
+      let value = target.value;
       if (this.radios.length) {
         const result = this.radios.find((item) => item.id === target.id);
         value = result?.value || value;
       }
       this.canChange(value).then((change) => {
-        if (!change) {
-          event.preventDefault();
+        if (change) {
+          this._value = value;
+          this.onChange(value);
+          this.change.emit(value);
         }
       });
     }

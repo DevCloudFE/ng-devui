@@ -14,7 +14,7 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AutoCompleteDirective } from 'ng-devui/auto-complete';
@@ -39,7 +39,7 @@ import { Observable, Subscription } from 'rxjs';
 export class EditableSelectComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
   @Input() appendToBody = false;
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
-  @Input() appendToBodyScrollStrategy: AppendToBodyScrollStrategyType;
+  @Input() @WithConfig() appendToBodyScrollStrategy: AppendToBodyScrollStrategyType;
   @Input() disabled = false;
   @Input() placeholder = '';
   @Input() source: any[] = [];
@@ -112,7 +112,7 @@ export class EditableSelectComponent implements ControlValueAccessor, OnInit, On
   constructor(private cdr: ChangeDetectorRef, private i18n: I18nService, private devConfigService: DevConfigService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes['searchFn'] && typeof this.searchFn === 'function') {
+    if (changes?.searchFn && typeof this.searchFn === 'function') {
       if (this.subscription) {
         this.subscription.unsubscribe();
       }

@@ -66,6 +66,10 @@ export interface ICategorySearchTagItem {
     [propName: string]: any;
   };
   /**
+   * checkbox | label 类型是否显示全选
+   */
+  showSelectAll?: boolean;
+  /**
    * dateRange 类型是否显示时分秒
    */
   showTime?: boolean;
@@ -74,13 +78,37 @@ export interface ICategorySearchTagItem {
    */
   activeRangeType?: 'start' | 'end';
   /**
-   * textInput 类型设置最大长度
+   * textInput | numberRange 类型设置最大长度，numberRange 需传入对象分别设置左右
    */
-  maxLength?: number;
+  maxLength?: number | { left?: number; right?: number };
   /**
-   * textInput | numberRange 类型设置占位符，numberRange需传入对象分别设置左右
+   * textInput | numberRange 类型设置占位符，numberRange 需传入对象分别设置左右
    */
-  placeholder?: string | { left: string; right: string };
+  placeholder?: string | { left?: string; right?: string };
+  /**
+   * numberRange 步进值，需传入对象分别设置左右
+   */
+  step?: { left?: number; right?: number };
+  /**
+   * numberRange 最大值，需传入对象分别设置左右
+   */
+  max?: { left?: number; right?: number };
+  /**
+   * numberRange 最小值，需传入对象分别设置左右
+   */
+  min?: { left?: number; right?: number };
+  /**
+   * numberRange 限制输入的正则或正则字符串，需传入对象分别设置左右
+   */
+  reg?: { left?: RegExp | string; right?: RegExp | string };
+  /**
+   * numberRange 限制小数点后的位数，需传入对象分别设置左右
+   */
+  decimalLimit?: { left?: number; right?: number };
+  /**
+   * numberRange 校验方法，点击确定时执行，返回 true 通过
+   */
+  validateFunc?: (start: number, end: number, tag: ICategorySearchTagItem) => boolean;
   /**
    * treeSelect 类型是否为多选，并显示已选择列表
    */
@@ -94,12 +122,13 @@ export interface ICategorySearchTagItem {
    */
   searchPlaceholder?: string;
   /**
-   * treeSelect 类型自定义搜索方法，参数为搜索关键字和d-operable-tree组件实例
+   * treeSelect 类型自定义搜索方法，参数为搜索关键字和 d-operable-tree 组件实例
    */
   searchFn?: (value: string, treeInstance: OperableTreeComponent) => boolean | Array<any>;
   /**
    * treeSelect 类型相关配置，请参考treeSelect组件API中同名配置
    */
+  checkableRelation?: 'upward' | 'downward' | 'both' | 'none';
   treeNodeIdKey?: string;
   treeNodeChildrenKey?: string;
   treeNodeTitleKey?: string;

@@ -1,4 +1,4 @@
-import {  AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { DragDropService } from '../services/drag-drop.service';
 
 @Component({
@@ -11,15 +11,11 @@ export class DragPreviewCloneDomRefComponent implements AfterViewInit, OnChanges
   @Input() domRef: HTMLElement;
   @Input() copyStyle = true;
   cloneNode;
-  constructor(private el: ElementRef, private cdr: ChangeDetectorRef, private dragDropService: DragDropService) {
-  }
-  ngAfterViewInit() {
-    if (!this.cloneNode) {
-      this.createView();
-    }
-  }
+
+  constructor(private el: ElementRef, private cdr: ChangeDetectorRef, private dragDropService: DragDropService) {}
+
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['domRef']) {
+    if (changes.domRef) {
       if (this.cloneNode) {
         this.destroyView();
         this.createView();
@@ -28,6 +24,13 @@ export class DragPreviewCloneDomRefComponent implements AfterViewInit, OnChanges
       }
     }
   }
+
+  ngAfterViewInit() {
+    if (!this.cloneNode) {
+      this.createView();
+    }
+  }
+
   ngOnDestroy() {
     if (this.cloneNode) {
       this.destroyView();

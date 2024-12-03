@@ -1,5 +1,5 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Directive({ selector: '[dLazyLoad]' })
@@ -26,7 +26,7 @@ export class LazyLoadDirective implements OnDestroy, OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     const element = this.target ? this.target : this.el.nativeElement;
-    if (changes && changes['enableLazyLoad']) {
+    if (changes?.enableLazyLoad) {
       if (changes.enableLazyLoad.currentValue) {
         const scrollEvent = fromEvent(element, 'scroll');
         let scrollEventFormat = scrollEvent;

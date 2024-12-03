@@ -1,11 +1,22 @@
 import { DOCUMENT } from '@angular/common';
 import {
-  ChangeDetectorRef, Component, EventEmitter, HostBinding, Inject, Input, OnChanges, OnDestroy, OnInit,
-  Output, SimpleChanges, TemplateRef, ViewChild
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Inject,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef,
+  ViewChild,
 } from '@angular/core';
 import { DropDownDirective } from 'ng-devui/dropdown';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { FilterConfig } from '../../../../data-table.model';
 import { TABLE_TH } from '../th.token';
@@ -13,7 +24,7 @@ import { TABLE_TH } from '../th.token';
 @Component({
   selector: 'd-table-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss']
+  styleUrls: ['./filter.component.scss'],
 })
 export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   @Input() beforeFilter: (value) => boolean | Promise<boolean> | Observable<boolean>;
@@ -65,8 +76,13 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   DEBONCE_TIME = 300;
   document: Document;
   filterPadding = 26;
-  constructor(private ref: ChangeDetectorRef, private i18n: I18nService, @Inject(TABLE_TH) private thComponent: any,
-              @Inject(DOCUMENT) private doc: any) {
+
+  constructor(
+    private ref: ChangeDetectorRef,
+    private i18n: I18nService,
+    @Inject(TABLE_TH) private thComponent: any,
+    @Inject(DOCUMENT) private doc: any
+  ) {
     this.i18nCommonText = this.i18n.getI18nText().common;
     this.document = this.doc;
   }
@@ -74,10 +90,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     if (!this.searchFn) {
       this.searchFn = (item) => {
-        return of(
-          (this.filterList ? this.filterList : [])
-            .filter(value => value.name.toLowerCase().includes(item.toLowerCase()))
-        );
+        return of((this.filterList ? this.filterList : []).filter((value) => value.name.toLowerCase().includes(item.toLowerCase())));
       };
     }
     this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
@@ -86,14 +99,17 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['filterList'] || changes['filterMultiple'] || changes['filterIconActive']) {
-      if (this.filterIconActive !== undefined) { return; }
+    const { filterList, filterMultiple, filterIconActive } = changes;
+    if (filterList || filterMultiple || filterIconActive) {
+      if (this.filterIconActive !== undefined) {
+        return;
+      }
       if (this.filterList) {
         if (!this.filterMultiple) {
-          this.selectedItem = this.filterList.filter(item => item.selected)[0];
-          this.filterIconActiveInner = (this.selectedItem !== undefined && !!Object.keys(this.selectedItem).length);
+          this.selectedItem = this.filterList.filter((item) => item.selected)[0];
+          this.filterIconActiveInner = this.selectedItem !== undefined && !!Object.keys(this.selectedItem).length;
         } else {
-          const checkedList = this.filterList.filter(item => item.checked);
+          const checkedList = this.filterList.filter((item) => item.checked);
           if (checkedList.length) {
             this.filterIconActiveInner = true;
           } else {
@@ -111,19 +127,21 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
 
   getFilterDataMultiple() {
     // 兼容当前当用户未传入id时，使用name做重名判断
-    const keyValue = this.checkedListForFilter.length
-      ? Object.prototype.hasOwnProperty.call(this.checkedListForFilter[0], 'id') ? 'id' : 'name' : '';
-    const checkedList = this.removeDuplication(this.checkedListForFilter, keyValue).filter(item => item.checked);
+    let keyValue = '';
+    if (this.checkedListForFilter.length) {
+      keyValue = Object.prototype.hasOwnProperty.call(this.checkedListForFilter[0], 'id') ? 'id' : 'name';
+    }
+    const checkedList = this.removeDuplication(this.checkedListForFilter, keyValue).filter((item) => item.checked);
     this.setFilterIconActive(checkedList);
     this.filterChange.emit(checkedList);
   }
 
   resetFilterData() {
     this.isDirty = false;
-    this.filterList.forEach(t => {
+    this.filterList.forEach((t) => {
       t.checked = false;
     });
-    this.filterListDisplay.forEach(t => {
+    this.filterListDisplay.forEach((t) => {
       t.checked = false;
     });
     this.setFilterIconActive([]);
@@ -194,10 +212,14 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
       const tableViewElement = this.thComponent.tableViewRefElement.nativeElement.querySelector('.devui-scrollbar.scroll-view');
       if ($event) {
         this.document.addEventListener('scroll', this.onContainerScroll);
-        if (tableViewElement) { tableViewElement.addEventListener('scroll', this.onContainerScroll); }
+        if (tableViewElement) {
+          tableViewElement.addEventListener('scroll', this.onContainerScroll);
+        }
       } else {
         this.document.removeEventListener('scroll', this.onContainerScroll);
-        if (tableViewElement) { tableViewElement.removeEventListener('scroll', this.onContainerScroll); }
+        if (tableViewElement) {
+          tableViewElement.removeEventListener('scroll', this.onContainerScroll);
+        }
       }
     }
     this.searchText = '';
@@ -215,12 +237,14 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
         this.registerFilterChange();
       }
     });
-    const keyValue = this.checkedListForFilter.length
-      ? Object.prototype.hasOwnProperty.call(this.checkedListForFilter[0], 'id') ? 'id' : 'name' : '';
-    const checkedList = this.removeDuplication(this.checkedListForFilter, keyValue).filter(item => item.checked);
+    let keyValue = '';
+    if (this.checkedListForFilter.length) {
+      keyValue = Object.prototype.hasOwnProperty.call(this.checkedListForFilter[0], 'id') ? 'id' : 'name';
+    }
+    const checkedList = this.removeDuplication(this.checkedListForFilter, keyValue).filter((item) => item.checked);
     this.filterToggle.emit({
       isOpen: $event,
-      checklist: checkedList
+      checklist: checkedList,
     });
   }
 
@@ -229,15 +253,15 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
     this.isDirty = true;
     // 全选时只针对当前面板操作，全不选时针对所有数据
     if ($event) {
-      this.filterListDisplay.forEach(item => {
+      this.filterListDisplay.forEach((item) => {
         item.checked = $event;
         this.checkedListForFilter.push(item);
       });
     } else {
-      this.filterListDisplay.forEach(item => {
+      this.filterListDisplay.forEach((item) => {
         item.checked = $event;
       });
-      this.filterList.forEach(item => {
+      this.filterList.forEach((item) => {
         item.checked = $event;
         this.checkedListForFilter.push(item);
       });
@@ -246,7 +270,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
 
   setHalfChecked() {
     this.filterHalfChecked = false;
-    const checked = this.filterListDisplay.filter(item => item.checked);
+    const checked = this.filterListDisplay.filter((item) => item.checked);
     if (checked.length && checked.length === this.filterListDisplay.length) {
       this.filterAllChecked = true;
     } else if (checked.length > 0) {
@@ -269,9 +293,9 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
 
   registerFilterChange(): void {
     this.sourceSubject = new BehaviorSubject<any>('');
-    this.sourceSubscription = this.sourceSubject.pipe(switchMap(term => this.searchFn(term))).subscribe(options => {
+    this.sourceSubscription = this.sourceSubject.pipe(switchMap((term) => this.searchFn(term))).subscribe((options) => {
       this.filterListDisplay = options;
-      this.checkedListForFilter.push(...options.filter(item => item.checked));
+      this.checkedListForFilter.push(...options.filter((item) => item.checked));
       this.setHalfChecked();
       this.ref.markForCheck();
     });

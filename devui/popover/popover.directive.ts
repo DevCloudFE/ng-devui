@@ -66,15 +66,16 @@ export class PopoverDirective implements OnInit, OnDestroy {
    */
   @Input() scrollElement: Element;
   /**
+   * 自动隐藏系数，弹出框超出已设置的 scrollELment 边界时会自动隐藏，该值与弹出框的宽或高乘积控制超出边界多少后自动隐藏，为负数时不隐藏
+   */
+  @Input() autoHideCoefficient = 0;
+  /**
    * `appendToBody`默认可以不传，仅当popover绑定元素外层宽高不够时，overflow为hidden，不想popover的弹出框被一并隐藏掉。
    */
   @Input() appendToBody = true;
   @Input() zIndex = 1060;
-
   @Input() popType: PopoverType = 'default';
-
   @Input() popMaxWidth: number;
-
   // 触发 popover 的方式（点击/鼠标悬停等）
   @Input() trigger: TriggerType = 'click';
 
@@ -162,6 +163,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
       zIndex: this.zIndex,
       showAnimation: this.showAnimation,
       popoverStyle: this.popoverStyle,
+      autoHideCoefficient: this.autoHideCoefficient,
     });
 
     // 对创建的ToolTip组件添加鼠标移入和移出的监听事件

@@ -13,12 +13,12 @@ import {
   Renderer2,
   TemplateRef,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import { ResizeDirective } from 'ng-devui/splitter';
 import { backdropFadeInOut, flyInOut } from 'ng-devui/utils';
 import { isNumber, parseInt, trim } from 'lodash-es';
-import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 @Directive({
@@ -172,8 +172,8 @@ export class DrawerComponent implements OnInit, OnDestroy {
     }
     this.animateState = 'in';
     const activeElement = this.document.activeElement;
-    if (activeElement && typeof activeElement['blur'] === 'function') {
-      activeElement['blur']();
+    if (activeElement && typeof (activeElement as any).blur === 'function') {
+      (activeElement as any).blur();
     }
     setTimeout(() => {
       this.handleResizeWidth();

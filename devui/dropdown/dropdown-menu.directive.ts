@@ -134,7 +134,7 @@ export class DropDownMenuDirective implements OnInit, OnDestroy {
         if (this.dropdown.trigger === 'hover') {
           this.dropdown.simulateEventDispatch(event);
         } else {
-          const relatedTarget = event['originEvent'] && event['originEvent'].relatedTarget;
+          const relatedTarget = (event as any).originEvent?.relatedTarget;
           if (relatedTarget && (
             this.dropdown.toggleEl?.nativeElement.contains(relatedTarget)
             || this.dropdown.dropdownChildren.some(children => children.menuEl?.nativeElement.contains(relatedTarget))

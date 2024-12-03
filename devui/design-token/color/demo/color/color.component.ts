@@ -46,7 +46,7 @@ export class ColorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (typeof window !== undefined) {
-      this.themeService = window['devuiThemeService'];
+      this.themeService = (window as any).devuiThemeService;
       this.changeValueInTable();
       if (this.themeService.eventBus) {
         this.themeService.eventBus.add('themeChanged', this.changeValueInTable);
@@ -141,14 +141,14 @@ export class ColorComponent implements OnInit, OnDestroy {
   setI18n() {
     this.subs.add(
       this.translate.get('components.design-color.colorDemo.instance').subscribe((res) => {
-        this.i18nText = res['colorSource'];
+        this.i18nText = res.colorSource;
       })
     );
 
     this.subs.add(
       this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
         const values = this.translate.instant('components.design-color.colorDemo.instance');
-        this.i18nText = values['colorSource'];
+        this.i18nText = values.colorSource;
       })
     );
   }

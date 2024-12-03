@@ -8,7 +8,7 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  TemplateRef
+  TemplateRef,
 } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { DevConfigService, WithConfig } from 'ng-devui/utils';
@@ -20,10 +20,12 @@ import { AccordionItemClickEvent, AccordionMenuToggleEvent, AccordionMenuType, A
   templateUrl: './accordion.component.html',
   styleUrls: ['./accordion.component.scss'],
   preserveWhitespaces: false,
-  providers: [{
-    provide: ACCORDION,
-    useExisting: forwardRef(() => AccordionComponent)
-  }]
+  providers: [
+    {
+      provide: ACCORDION,
+      useExisting: forwardRef(() => AccordionComponent),
+    },
+  ],
 })
 export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, OnDestroy {
   @Input() data: Array<any> | AccordionMenuType;
@@ -52,7 +54,7 @@ export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, 
   @Input() innerListTemplate: TemplateRef<any>; // 可折叠菜单内容完全自定义，用做折叠面板
 
   /* 内置路由/链接/动态判断路由或链接类型 */
-  @Input() linkType: 'routerLink' | 'hrefLink' | 'dependOnLinkTypeKey' | '' | string  = '';
+  @Input() linkType: 'routerLink' | 'hrefLink' | 'dependOnLinkTypeKey' | '' | string = '';
   @Input() linkTypeKey = 'linkType'; // linkType为'dependOnLinkTypeKey'时指定对象linkType定义区
   @Input() linkKey = 'link'; // 链接内容的key
   @Input() linkTargetKey = 'target'; // 链接目标窗口的key
@@ -64,15 +66,16 @@ export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, 
   activeItem; // 记录用户点击的激活菜单项
   i18nCommonText: I18nInterface['common'];
   i18nSubscription: Subscription;
-  constructor(private i18n: I18nService, private devConfigService: DevConfigService) {
-  }
+
+  constructor(private i18n: I18nService, private devConfigService: DevConfigService) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['data']) {
+    const { data, autoOpenActiveMenu } = changes;
+    if (data) {
       this.initActiveItem();
     }
-    if (changes['autoOpenActiveMenu']) {
-      if (this.autoOpenActiveMenu && changes['autoOpenActiveMenu'].previousValue === false) {
+    if (autoOpenActiveMenu) {
+      if (this.autoOpenActiveMenu && autoOpenActiveMenu.previousValue === false) {
         this.cleanOpenData();
       }
     }
@@ -83,7 +86,7 @@ export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, 
       this.initActiveItem();
     }
     this.i18nCommonText = this.i18n.getI18nText().common;
-    this.i18nSubscription = this.i18n.langChange().subscribe(data => {
+    this.i18nSubscription = this.i18n.langChange().subscribe((data) => {
       this.i18nCommonText = data.common;
     });
   }
@@ -114,14 +117,15 @@ export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, 
   }
 
   private cleanOpenData() {
-    this.flatten(this.data, this.childrenKey, true, false).forEach(
-      item => {item[this.openKey] = undefined;}
-    );
+    this.flatten(this.data, this.childrenKey, true, false).forEach((item) => {
+      item[this.openKey] = undefined;
+    });
   }
   // 默认激活
   initActiveItem() {
     const activeItem = this.flatten(this.data, this.childrenKey)
-      .filter(item => item[this.activeKey]).pop();
+      .filter((item) => item[this.activeKey])
+      .pop();
     if (activeItem) {
       if (!this.activeItem) {
         this.activeItemFn(activeItem);
@@ -135,13 +139,13 @@ export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, 
   public itemClickFn = (itemEvent: AccordionItemClickEvent) => {
     const prevActiveItem = this.activeItem;
     this.activeItemFn(itemEvent.item);
-    this.itemClick.emit({...itemEvent, prevActiveItem: prevActiveItem});
+    this.itemClick.emit({ ...itemEvent, prevActiveItem: prevActiveItem });
   };
 
   linkItemClickFn = (itemEvent: AccordionItemClickEvent) => {
     const prevActiveItem = this.activeItem;
     this.activeItem = itemEvent.item;
-    this.itemClick.emit({...itemEvent, prevActiveItem: prevActiveItem});
+    this.itemClick.emit({ ...itemEvent, prevActiveItem: prevActiveItem });
   };
 
   // 打开或关闭可折叠菜单
@@ -163,7 +167,9 @@ export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, 
   // 打开或关闭一级菜单，如果有限制只能展开一项则关闭其他一级菜单
   openMenuFn(item, open) {
     if (open && this.restrictOneOpen) {
-      (<Array<any>>(this.data)).forEach(itemtemp => { itemtemp[this.openKey] = false; });
+      (this.data as any[]).forEach((itemtemp) => {
+        itemtemp[this.openKey] = false;
+      });
     }
     item[this.openKey] = open;
   }

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component, ElementRef, OnDestroy, OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -20,10 +16,9 @@ interface TimeObj {
   templateUrl: './timepicker-panel.component.html',
   styleUrls: ['./timepicker-panel.component.scss'],
   preserveWhitespaces: false,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimepickerPanelComponent implements OnInit, OnDestroy {
-
   firstList: Array<TimeObj> = [];
   secondList: Array<TimeObj> = [];
   thirdList: Array<TimeObj> = [];
@@ -38,12 +33,7 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
   i18nText: I18nInterface['datePickerPro'];
   i18nSubscription: Subscription;
 
-  constructor(
-    private el: ElementRef,
-    private pickSrv: DatepickerProService,
-    protected i18n: I18nService,
-    private cdr: ChangeDetectorRef
-  ) {}
+  constructor(private el: ElementRef, private pickSrv: DatepickerProService, protected i18n: I18nService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.initDateList();
@@ -59,9 +49,7 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
   }
 
   initObservable() {
-    this.pickSrv.toggleEvent.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(isOpen => {
+    this.pickSrv.toggleEvent.pipe(takeUntil(this.unsubscribe$)).subscribe((isOpen) => {
       if (isOpen) {
         setTimeout(() => {
           this.initDateList(true);
@@ -70,9 +58,7 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.pickSrv.updateTimeChange.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(value => {
+    this.pickSrv.updateTimeChange.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
       if (this.hourIndex !== value.hour) {
         this.chooseTime('hour', value.hour);
       }
@@ -88,11 +74,8 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
     });
 
     if (this.pickSrv.isRange) {
-      this.pickSrv.activeInputChange.pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe(type => {
-        const isNull = (type === 'start' && !this.pickSrv.curRangeDate[0]) ||
-          (type === 'end' && !this.pickSrv.curRangeDate[1]);
+      this.pickSrv.activeInputChange.pipe(takeUntil(this.unsubscribe$)).subscribe((type) => {
+        const isNull = (type === 'start' && !this.pickSrv.curRangeDate[0]) || (type === 'end' && !this.pickSrv.curRangeDate[1]);
         if (this.hourIndex !== this.pickSrv.curHour || isNull) {
           this.chooseTime('hour', isNull ? null : this.pickSrv.curHour);
         }
@@ -104,13 +87,10 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
         if (this.secIndex !== this.pickSrv.curSec || isNull) {
           this.chooseTime('sec', isNull ? null : this.pickSrv.curSec);
         }
-
       });
     }
 
-    this.pickSrv.selectedDateChange.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(() => {
+    this.pickSrv.selectedDateChange.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       const isFixTime = this.fixTime();
 
       this.cdr.detectChanges();
@@ -121,7 +101,7 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
             activeInput: this.pickSrv.currentActiveInput,
             hour: this.hourIndex,
             min: this.minIndex,
-            seconds: this.secIndex
+            seconds: this.secIndex,
           });
         });
       }
@@ -134,7 +114,7 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
       this.minIndex = this.pickSrv.curDate.getMinutes();
       this.secIndex = this.pickSrv.curDate.getSeconds();
     }
-    this.typeList.forEach(type => {
+    this.typeList.forEach((type) => {
       this.chooseTime(type, this[`${type}Index`], false, justScroll);
     });
   }
@@ -142,7 +122,7 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
   chooseTime(type: string, index: number, handle = false, justScroll = false) {
     if (this.itemIsDisabled(type, index)) {
       return;
-    };
+    }
     let fixed: boolean;
     switch (type) {
     case 'hour':
@@ -155,9 +135,9 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
           active: this.hourIndex === i,
         };
       });
-      if(!fixed) {
+      if (!fixed) {
         this.setScroll('first', this.hourIndex, justScroll);
-      };
+      }
       break;
     case 'min':
       this.minIndex = index;
@@ -169,9 +149,9 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
           active: this.minIndex === i,
         };
       });
-      if(!fixed) {
+      if (!fixed) {
         this.setScroll('second', this.minIndex, justScroll);
-      };
+      }
       break;
     case 'sec':
       this.secIndex = index;
@@ -183,6 +163,8 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
         };
       });
       this.setScroll('third', this.secIndex, justScroll);
+      break;
+    default:
     }
 
     this.cdr.detectChanges();
@@ -192,7 +174,7 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
         activeInput: this.pickSrv.currentActiveInput,
         hour: this.hourIndex,
         min: this.minIndex,
-        seconds: this.secIndex
+        seconds: this.secIndex,
       });
     }
   }
@@ -228,7 +210,7 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
       isFixTime = true;
     }
 
-    if(isFixTime) {
+    if (isFixTime) {
       this.initDateList(justScroll);
     }
 
@@ -277,6 +259,7 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
       curTime.setMinutes(this.minIndex);
       time = curTime.setSeconds(index);
       break;
+    default:
     }
     flag = time > maxTime || time < minTime;
 
@@ -307,10 +290,11 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
     }
     const difference = to - element.scrollTop;
     const perTick = (difference / duration) * 10;
-    const reqAnimFrame = window['requestAnimationFrame'] ||
-      window['mozRequestAnimationFrame'] ||
-      window['msRequestAnimationFrame'] ||
-      window['oRequestAnimationFrame'];
+    const reqAnimFrame =
+      (window as any).requestAnimationFrame ||
+      (window as any).mozRequestAnimationFrame ||
+      (window as any).msRequestAnimationFrame ||
+      (window as any).oRequestAnimationFrame;
     reqAnimFrame(() => {
       element.scrollTop = element.scrollTop + perTick;
       if (element.scrollTop === to) {
@@ -324,5 +308,4 @@ export class TimepickerPanelComponent implements OnInit, OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
 }

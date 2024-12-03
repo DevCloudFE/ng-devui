@@ -11,9 +11,9 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, fromEvent } from 'rxjs';
 import { distinctUntilChanged, map, pluck, takeUntil, tap } from 'rxjs/operators';
 import { GanttRailStatus, GanttTaskInfo } from '../gantt.model';
 import { GanttService } from '../gantt.service';
@@ -153,27 +153,30 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (Object.prototype.hasOwnProperty.call(changes, 'min')
-      || Object.prototype.hasOwnProperty.call(changes, 'max')
-      || Object.prototype.hasOwnProperty.call(changes, 'step')) {
+    const { progressRate, startDate, endDate, barMoveDisabled, barResizeDisabled, progressDisabled } = changes;
+    if (
+      Object.prototype.hasOwnProperty.call(changes, 'min') ||
+      Object.prototype.hasOwnProperty.call(changes, 'max') ||
+      Object.prototype.hasOwnProperty.call(changes, 'step')
+    ) {
       this.checkRangeValues(this.min, this.max);
       this.checkStepValue();
     }
 
-    if (changes['progressRate'] && this.progressRate >= 0) {
+    if (progressRate && this.progressRate >= 0) {
       this.updateTrackAndHandle();
     }
 
-    if (changes['startDate']) {
+    if (startDate) {
       this.left = this.ganttService.getDatePostionOffset(this.startDate);
       this.width = this.ganttService.getDurationWidth(this.startDate, this.endDate);
     }
 
-    if (changes['endDate']) {
+    if (endDate) {
       this.width = this.ganttService.getDurationWidth(this.startDate, this.endDate);
     }
 
-    if (changes['barMoveDisabled']) {
+    if (barMoveDisabled) {
       if (this.barMoveDisabled) {
         this.unsubscribeMouseActions(['start'], ['barMove']);
       } else {
@@ -181,7 +184,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
       }
     }
 
-    if (changes['barResizeDisabled']) {
+    if (barResizeDisabled) {
       if (this.barResizeDisabled) {
         this.unsubscribeMouseActions(['start'], ['barResize']);
       } else {
@@ -189,7 +192,7 @@ export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDe
       }
     }
 
-    if (changes['progressDisabled']) {
+    if (progressDisabled) {
       if (this.progressDisabled) {
         this.unsubscribeMouseActions(['start'], ['progress']);
       } else {

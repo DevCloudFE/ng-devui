@@ -2,21 +2,21 @@ import { AfterViewInit, Directive, EventEmitter, Input, OnChanges, OnDestroy, On
 import { DragDropService } from '../services/drag-drop.service';
 import { DraggableDirective } from './draggable.directive';
 export type BatchDragStyle = 'badge' | 'stack' | string;
+
 @Directive({
   selector: '[dDraggable][batchDrag]',
-  exportAs: 'dBatchDraggable'
+  exportAs: 'dBatchDraggable',
 })
-
 export class BatchDraggableDirective implements OnInit, OnChanges, OnDestroy, AfterViewInit {
   @Input() batchDragGroup = 'default';
   @Input() batchDragActive = false;
   @Input() batchDragLastOneAutoActiveEventKeys = ['ctrlKey'];
+  @Input() batchDragStyle: Array<BatchDragStyle> = ['badge', 'stack'];
   @Output() batchDragActiveEvent = new EventEmitter<any>();
   dragData;
   needToRestore = false;
-  @Input() batchDragStyle: Array<BatchDragStyle> = ['badge', 'stack'];
 
-  constructor(@Self() private draggable: DraggableDirective,  private dragDropService: DragDropService) {
+  constructor(@Self() private draggable: DraggableDirective, private dragDropService: DragDropService) {
     this.draggable.batchDraggable = this;
   }
 
@@ -34,11 +34,10 @@ export class BatchDraggableDirective implements OnInit, OnChanges, OnDestroy, Af
         }
       }
     }
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['batchDragActive'])  {
+    if (changes.batchDragActive) {
       if (!this.initDragDataByIdentity()) {
         if (this.batchDragActive) {
           if (!this.dragData && this.allowAddToBatchGroup()) {
@@ -72,8 +71,11 @@ export class BatchDraggableDirective implements OnInit, OnChanges, OnDestroy, Af
   }
 
   registerRestoreDragDataViewAfterViewInitWhiteDragging() {
-    if (this.dragDropService.draggedEl && this.dragDropService.draggedElIdentity &&
-      this.dragDropService.draggedEl !== this.draggable.el.nativeElement) {
+    if (
+      this.dragDropService.draggedEl &&
+      this.dragDropService.draggedElIdentity &&
+      this.dragDropService.draggedEl !== this.draggable.el.nativeElement
+    ) {
       this.needToRestore = true;
     }
   }
@@ -102,7 +104,7 @@ export class BatchDraggableDirective implements OnInit, OnChanges, OnDestroy, Af
       this.dragData = this.dragData || {
         identity: this.draggable.dragIdentity || undefined,
         draggable: this.draggable,
-        dragData: this.draggable.dragData
+        dragData: this.draggable.dragData,
       };
       this.dragDropService.batchDragData = this.addToArrayIfNotExist(this.dragDropService.batchDragData, this.dragData);
     }
@@ -124,7 +126,9 @@ export class BatchDraggableDirective implements OnInit, OnChanges, OnDestroy, Af
   }
 
   private deleteFromArrayIfExist(array: any[], target: any) {
-    if (!array) { return; }
+    if (!array) {
+      return;
+    }
     if (array.length > 0) {
       const index = array.indexOf(target);
       if (index > -1) {
@@ -140,22 +144,24 @@ export class BatchDraggableDirective implements OnInit, OnChanges, OnDestroy, Af
     } else if (!this.dragDropService.batchDragData) {
       return undefined;
     } else {
-      return this.dragDropService.batchDragData.filter(dragData => dragData.identity === this.draggable.dragIdentity).pop();
+      return this.dragDropService.batchDragData.filter((dragData) => dragData.identity === this.draggable.dragIdentity).pop();
     }
   }
 
   active() {
-    this.batchDragActiveEvent.emit({el: this.draggable.el.nativeElement, data: this.draggable.dragData});
+    this.batchDragActiveEvent.emit({ el: this.draggable.el.nativeElement, data: this.draggable.dragData });
   }
 
   public updateDragData() {
     // 选中状态才更新
-    if (!this.dragData) {return; }
+    if (!this.dragData) {
+      return;
+    }
     // 需要维持内存地址不变
     Object.assign(this.dragData, {
       identity: this.draggable.dragIdentity || undefined,
       draggable: this.draggable,
-      dragData: this.draggable.dragData
+      dragData: this.draggable.dragData,
     });
   }
 }

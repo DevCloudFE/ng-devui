@@ -8,9 +8,9 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
-import { fromEvent, Observable, of, Subscription } from 'rxjs';
+import { Observable, Subscription, fromEvent, of } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 
 @Component({
@@ -26,6 +26,7 @@ export class ToggleMenuSearchComponent implements OnInit, AfterViewInit, OnDestr
   @Input() inputValue: string;
   @Input() inputWidth: string;
   @Input() filterKey: string;
+  @Input() maxLength: number;
   @Input() disabled = false;
   @Input() spellcheck = false;
   @Input() options = [];
@@ -57,7 +58,10 @@ export class ToggleMenuSearchComponent implements OnInit, AfterViewInit, OnDestr
   filterSubscription: Subscription;
 
   constructor(public el: ElementRef) {
-    this.formatter = (item) => (typeof item === 'object' ? item[this.filterKey] || '' : String(item) ? item.toString() : '');
+    this.formatter = (item) => {
+      const str = String(item) ? item.toString() : '';
+      return typeof item === 'object' ? item[this.filterKey] || '' : str;
+    };
   }
 
   ngOnInit() {

@@ -10,12 +10,14 @@
 ></d-accordion>
 
 <ng-template #menutemplate let-item="item">
-  {{ item.title }}
-  <span class="badge" *ngIf="item.children?.length">{{ item.children.length }}</span>
-  <span class="operation-clear" *ngIf="item.needLoadChildren === false" (click)="clearChildrenData($event, item)"
-    >reset
-    <!--重置--></span
-  >
+  <div class="title-container">
+    <span class="title-content">{{ item.title }}</span>
+    <span class="operation-clear" *ngIf="item.needLoadChildren === false" (click)="clearChildrenData($event, item)"
+      >reset
+      <!--重置--></span
+    >
+    <span class="badge" *ngIf="item.children?.length">{{ item.children.length }}</span>
+  </div>
 </ng-template>
 <ng-template #itemtemplate let-item="item">
   {{ item.title }}<span class="info">(Click Count: {{ item.clicktimes || '0' }})</span>

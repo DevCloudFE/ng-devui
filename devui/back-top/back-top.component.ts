@@ -14,9 +14,9 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  TemplateRef
+  TemplateRef,
 } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 @Component({
@@ -56,7 +56,7 @@ export class BackTopComponent implements OnChanges, OnInit, OnDestroy, AfterView
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['scrollTarget']) {
+    if (changes.scrollTarget) {
       if (this.subs) {
         this.subs.unsubscribe();
       }
@@ -223,8 +223,10 @@ export class BackTopComponent implements OnChanges, OnInit, OnDestroy, AfterView
       const isRight = left > this.dragBoundary.maxLeft;
       const isTop = top < this.dragBoundary.minTop;
       const isBottom = top > this.dragBoundary.maxTop;
-      this.dragBoundary.dom.style.left = `${isRight ? this.dragBoundary.maxLeft : isLeft ? this.dragBoundary.minLeft : left}px`;
-      this.dragBoundary.dom.style.top = `${isBottom ? this.dragBoundary.maxTop : isTop ? this.dragBoundary.minTop : top}px`;
+      const leftResult = isLeft ? this.dragBoundary.minLeft : left;
+      const topResult = isTop ? this.dragBoundary.minTop : top;
+      this.dragBoundary.dom.style.left = `${isRight ? this.dragBoundary.maxLeft : leftResult}px`;
+      this.dragBoundary.dom.style.top = `${isBottom ? this.dragBoundary.maxTop : topResult}px`;
       // 如到达边界释放拖拽动作，避免鼠标偏移较大距离后返回主视窗仍可拖拽
       if ([isLeft, isRight, isTop, isBottom].includes(true)) {
         this.onMouseUp();

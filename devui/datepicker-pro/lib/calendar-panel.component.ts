@@ -139,6 +139,8 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
     ).subscribe(isOpen => {
       if (isOpen) {
         setTimeout(() => {
+          this.scrollBodyCmp.checkViewportSize();
+          this.scrollListCmp.checkViewportSize();
           this.goToDate(this.curDate || new Date(), 'auto');
         });
 

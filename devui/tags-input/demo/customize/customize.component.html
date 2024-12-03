@@ -1,4 +1,4 @@
-<div>
+<div dPopover [content]="errorMsg" [position]="'top'" [popType]="'error'" [visible]="isError">
   <d-tags-input
     [appendToBody]="true"
     [checkBeforeAdd]="customCheck"
@@ -9,6 +9,8 @@
     [suggestionList]="suggestionList"
     [placeholder]="'Add a tag containing \'item\' '"
     [(ngModel)]="tagList"
+    [maxLength]="maxLength"
+    (searchChange)="getSearchValue($event)"
     (valueChange)="getTagValue($event)"
   >
   </d-tags-input>

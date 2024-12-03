@@ -16,7 +16,7 @@ export class PopoverDemoComponent implements OnInit, OnDestroy {
   positionSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./position/position.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./position/position.component.ts?raw') },
-    { title: 'SCSS', language: 'css', code: require('./position/position.component.scss?raw') }
+    { title: 'SCSS', language: 'css', code: require('./position/position.component.scss?raw') },
   ];
 
   manualSource: Array<DevuiSourceData> = [
@@ -41,6 +41,7 @@ export class PopoverDemoComponent implements OnInit, OnDestroy {
 
   navItems = [];
   subs: Subscription = new Subscription();
+
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
@@ -61,7 +62,7 @@ export class PopoverDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
-      { dAnchorLink: 'position', value: values['position']},
+      { dAnchorLink: 'position', value: values.position },
       { dAnchorLink: 'manual-control-display', value: values['manual-control-display'] },
       { dAnchorLink: 'custom-prompt-content', value: values['custom-prompt-content'] },
       { dAnchorLink: 'parent-container-settings', value: values['parent-container-settings'] },

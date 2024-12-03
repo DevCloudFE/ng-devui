@@ -26,10 +26,10 @@ export interface TableStyleData {
   styleUrls: ['./table-option-toggle.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableOptionToggleComponent implements OnInit, OnDestroy{
+export class TableOptionToggleComponent implements OnInit, OnDestroy {
   @Input() set columnsData(value: Array<ColData>) {
     this._columnsData = cloneDeep(value);
-  };
+  }
   @Input() showCategory: boolean;
   @Input() colSort = true;
   @Input() styleSetting: TableStyleData = {};
@@ -52,21 +52,17 @@ export class TableOptionToggleComponent implements OnInit, OnDestroy{
   }
 
   set sizeStatus(value) {
-    if(!this.styleSetting) {
+    if (!this.styleSetting) {
       this.styleSetting = {};
     }
-    this.styleSetting['size'] = value;
+    this.styleSetting.size = value;
   }
 
   i18nText: I18nInterface['datatable'];
   i18nLocale: I18nInterface['locale'];
   i18nSubscription: Subscription;
 
-  constructor(
-    private modalService: ModalService,
-    private cdr: ChangeDetectorRef,
-    private i18n: I18nService
-  ){}
+  constructor(private modalService: ModalService, private cdr: ChangeDetectorRef, private i18n: I18nService) {}
 
   ngOnInit(): void {
     this.i18nText = this.i18n.getI18nText().datatable;
@@ -113,6 +109,7 @@ export class TableOptionToggleComponent implements OnInit, OnDestroy{
     case 'striped':
       this.styleSetting.striped = checked;
       break;
+    default:
     }
 
     this.emitStyles();

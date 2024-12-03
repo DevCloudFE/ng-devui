@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,10 +13,7 @@ import { ImagePreviewModule } from './image-preview.module';
   `,
 })
 class TestImagePreviewComponent {
-  imgUrls = [
-    'https://www-file.huawei.com/-/media/corp2020/banner/matepad-pro-pc.jpg',
-    'https://www-file.huawei.com/-/media/corp2020/home/box/1/p40pro-5g-m2.jpg',
-  ];
+  imgUrls = ['/components/assets/overview/banner/18.png', '/components/assets/overview/banner/19.png'];
 }
 
 describe('image-preview', () => {
@@ -74,7 +71,7 @@ describe('image-preview', () => {
       fixture.detectChanges();
       tick();
       const modalEle = document.querySelector('div.modal-backdrop') as HTMLElement;
-      expect(getComputedStyle(modalEle, null)['opacity']).toEqual('0');
+      expect(getComputedStyle(modalEle, null).opacity).toEqual('0');
     }));
 
     it('should click the opt buttons to operate preview image', () => {
@@ -94,19 +91,19 @@ describe('image-preview', () => {
       const zoomInBtnEle = buttons[0];
       zoomInBtnEle.dispatchEvent(new Event('click'));
       fixture.detectChanges();
-      expect((previewImgEle as HTMLElement).style['transform'].indexOf('scale(1.25)')).not.toEqual(-1);
+      expect((previewImgEle as HTMLElement).style.transform.indexOf('scale(1.25)')).not.toEqual(-1);
 
       // zoom-out
       const zoomOutBtnEle = buttons[1];
       zoomOutBtnEle.dispatchEvent(new Event('click'));
       fixture.detectChanges();
-      expect((previewImgEle as HTMLElement).style['transform'].indexOf('scale(1)')).not.toEqual(-1);
+      expect((previewImgEle as HTMLElement).style.transform.indexOf('scale(1)')).not.toEqual(-1);
 
       // rotate
       const rotateBtnEle = buttons[2];
       rotateBtnEle.dispatchEvent(new Event('click'));
       fixture.detectChanges();
-      expect((previewImgEle as HTMLElement).style['transform'].indexOf('rotate(-0.25turn)')).not.toEqual(-1);
+      expect((previewImgEle as HTMLElement).style.transform.indexOf('rotate(-0.25turn)')).not.toEqual(-1);
 
       // pre
       const preBtnEle = buttons[3];
@@ -134,12 +131,12 @@ describe('image-preview', () => {
       // mouse zoom-in
       previewImgEle.dispatchEvent(new WheelEvent('mousewheel', { deltaY: 10 }));
       fixture.detectChanges();
-      expect((previewImgEle as HTMLElement).style['transform'].indexOf('scale(1.2)')).not.toEqual(-1);
+      expect((previewImgEle as HTMLElement).style.transform.indexOf('scale(1.2)')).not.toEqual(-1);
 
       // mouse zoom-out
       previewImgEle.dispatchEvent(new WheelEvent('mousewheel', { deltaY: -10 }));
       fixture.detectChanges();
-      expect((previewImgEle as HTMLElement).style['transform'].indexOf('scale(1)')).not.toEqual(-1);
+      expect((previewImgEle as HTMLElement).style.transform.indexOf('scale(1)')).not.toEqual(-1);
 
       // mouse drag to move the image
       previewImgEle.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));

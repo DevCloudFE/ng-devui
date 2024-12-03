@@ -39,7 +39,7 @@ const properties = [
 ];
 
 const isBrowser = typeof window !== 'undefined';
-const isFirefox = isBrowser && window['mozInnerScreenX'] !== undefined;
+const isFirefox = isBrowser && (window as any).mozInnerScreenX !== undefined;
 function _parseInt(value) {
   return parseInt(value, 10);
 }
@@ -76,7 +76,7 @@ export function getCaretCoordinates(element, position, options?) {
     style.visibility = 'hidden';
   }
 
-  properties.forEach(function (prop) {
+  properties.forEach((prop) => {
     if (isInput && prop === 'lineHeight') {
       if (computed.boxSizing === 'border-box') {
         const height = _parseInt(computed.height);
@@ -119,9 +119,9 @@ export function getCaretCoordinates(element, position, options?) {
   div.appendChild(span);
 
   const coordinates = {
-    top: span.offsetTop + _parseInt(computed['borderTopWidth']),
-    left: span.offsetLeft + _parseInt(computed['borderLeftWidth']),
-    height: _parseInt(computed['lineHeight']),
+    top: span.offsetTop + _parseInt(computed.borderTopWidth),
+    left: span.offsetLeft + _parseInt(computed.borderLeftWidth),
+    height: _parseInt(computed.lineHeight),
   };
 
   if (isDebugMode) {

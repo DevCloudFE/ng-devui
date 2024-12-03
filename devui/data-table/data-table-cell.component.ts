@@ -11,7 +11,7 @@ import {
   OnDestroy,
   OnInit,
   SimpleChange,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { I18nFormat, I18nService } from 'ng-devui/i18n';
 import { InputNumberComponent } from 'ng-devui/input-number';
@@ -95,14 +95,14 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-    const rowItem = changes['rowItem'];
+    const rowItem = changes.rowItem;
     if (rowItem) {
       this.updateEditable(rowItem);
     }
   }
 
   updateEditable(rowItem) {
-    const currentConfig = rowItem.currentValue['$editDeniedConfig'];
+    const currentConfig = rowItem.currentValue.$editDeniedConfig;
     if (!currentConfig) {
       if (this.fieldEditDenied) {
         this.fieldEditDenied = false;
@@ -131,7 +131,7 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
       rowItem: this.rowItem,
       cellComponent: this,
       rowComponent: this.rowComponent,
-      event: $event
+      event: $event,
     };
 
     this.clickCount++;
@@ -153,7 +153,7 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
       column: this.column,
       rowItem: this.rowItem,
       cellComponent: this,
-      rowComponent: this.rowComponent
+      rowComponent: this.rowComponent,
     };
     this.dt.onCellDBClick(cellSelectedEventArg);
   }
@@ -187,7 +187,7 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
       column: this.column,
       rowItem: this.rowItem,
       cellComponent: this,
-      rowComponent: this.rowComponent
+      rowComponent: this.rowComponent,
     });
   }
 
@@ -246,7 +246,6 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
       break;
     default:
       this.templateEditorActive = true;
-      break;
     }
 
     if (editorComponent) {
@@ -291,32 +290,28 @@ export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
         column: this.column,
         rowItem: this.rowItem,
         cellComponent: this,
-        rowComponent: this.rowComponent
+        rowComponent: this.rowComponent,
       };
       if (this.column.editable && this.editModel === 'cell') {
         this.isCellEdit = true;
         this.creatCellEditor();
-        this.documentClickSubscription = this.dt.documentClickEvent.subscribe(
-          event => {
-            const containTarget = !this.cellRef.nativeElement.contains(event.target) && !this.clickInTd;
-            const flag = this.dt.beforeCellEditEnd && containTarget ? this.dt.beforeCellEditEnd(this.rowItem, this.column) : true;
-            if ((event === 'cancel' || containTarget) && flag) {
-              this.ngZone.run(() => {
-                this.finishCellEdit();
-              });
-            }
-            this.clickInTd = false;
-          }
-        );
-        this.cellEditorClickSubscription = this.dt.cellEditorClickEvent.subscribe(
-          event => {
-            const containTarget = this.cellRef.nativeElement.contains(event.target);
-            const flag = (this.dt.beforeCellEditEnd && !containTarget) ? this.dt.beforeCellEditEnd(this.rowItem, this.column) : true;
-            if (!containTarget && flag) {
+        this.documentClickSubscription = this.dt.documentClickEvent.subscribe((event) => {
+          const containTarget = !this.cellRef.nativeElement.contains(event.target) && !this.clickInTd;
+          const flag = this.dt.beforeCellEditEnd && containTarget ? this.dt.beforeCellEditEnd(this.rowItem, this.column) : true;
+          if ((event === 'cancel' || containTarget) && flag) {
+            this.ngZone.run(() => {
               this.finishCellEdit();
-            }
+            });
           }
-        );
+          this.clickInTd = false;
+        });
+        this.cellEditorClickSubscription = this.dt.cellEditorClickEvent.subscribe((event) => {
+          const containTarget = this.cellRef.nativeElement.contains(event.target);
+          const flag = this.dt.beforeCellEditEnd && !containTarget ? this.dt.beforeCellEditEnd(this.rowItem, this.column) : true;
+          if (!containTarget && flag) {
+            this.finishCellEdit();
+          }
+        });
         this.dt.onCellEditStart(cellSelectedEventArg);
       }
     });

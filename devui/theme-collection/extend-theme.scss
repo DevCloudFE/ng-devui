@@ -19,6 +19,52 @@ body[ui-theme='deep-theme'] {
   .devui-table {
     --devui-dividing-line: var(--devui-zinc-30, #d5d5db);
   }
+
+  d-radio,
+  d-radio-group,
+  d-checkbox,
+  d-toggle {
+    --devui-brand: var(--devui-blue-50, #5e7ce0);
+    --devui-icon-fill-active-disabled: var(--devui-blue-20, #beccfa);
+  }
+
+  d-button .devui-btn.devui-btn-text {
+    --devui-brand-active: var(--devui-blue-60, #526ecc);
+  }
+
+  d-select {
+    --devui-list-item-active-bg: var(--devui-blue-10, #e9edfa);
+  }
+
+  d-editable-select .devui-match-highlight {
+    color: var(--devui-blue-50, #5e7ce0);
+  }
+
+  d-tabs {
+    --devui-tab-options-bg: var(--devui-blue-60, #526ecc);
+  }
+
+  d-progress {
+    --devui-brand: var(--devui-lime-50, #5cb300);
+  }
+
+  .devui-datepicker-pro-panel,
+  .devui-calendar-panel {
+    --devui-list-item-active-bg: var(--devui-blue-50, #5e7ce0);
+    --devui-list-item-active-text: var(--devui-white-5, #ffffff);
+    --devui-list-item-hover-bg: var(--devui-blue-5, #f2f5fc);
+  }
+
+  d-slider .devui-slider {
+    .devui-slider-track,
+    .devui-slider-handle {
+      --devui-brand: var(--devui-blue-50, #5e7ce0);
+    }
+  }
+
+  .editor-container .ql-editor a {
+    --devui-brand: var(--devui-blue-50, #5e7ce0);
+  }
 }
 
 body[ui-theme='infinity-theme'] {
@@ -36,6 +82,14 @@ body[ui-theme='infinity-theme'] {
   .devui-table,
   .devui-fix-header {
     --devui-list-item-strip-bg: #f8f8fa;
+  }
+}
+
+body[ui-theme='newInfinity-theme'],
+body[ui-theme='infinity-theme'] {
+  * ::-webkit-scrollbar-thumb {
+    --devui-line: #dbdbdb;
+    --devui-placeholder: #c2c2c2;
   }
 }
 
@@ -78,5 +132,18 @@ body[ui-theme='provence-theme'],
 body[ui-theme='deep-theme'] {
   .devui-form-item .devui-form-label .devui-form-span {
     color: $devui-aide-text;
+  }
+}
+
+body[ui-theme='newInfinity-theme'] {
+  d-accordion {
+    .devui-accordion-item-title:not(.disabled) {
+      &.devui-router-active > a,
+      &.active:not(.open) {
+        color: $devui-text-weak;
+        background: $devui-list-item-selected-bg;
+        font-weight: normal;
+      }
+    }
   }
 }

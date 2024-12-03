@@ -1,70 +1,64 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TableWidthConfig } from 'ng-devui/data-table';
-import { originSource, SourceType } from '../mock-data';
+import { SourceType, originSource } from '../mock-data';
 
 @Component({
   selector: 'd-drag-row',
   templateUrl: './drag-row.component.html',
-  styleUrls: ['./drag-row.component.scss']
+  styleUrls: ['./drag-row.component.scss'],
 })
-export class DragRowComponent implements OnInit {
+export class DragRowComponent {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   dataTableOptions = {
     columns: [
       {
         field: 'firstName',
         header: 'First Name',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'lastName',
         header: 'Last Name',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'gender',
         header: 'Gender',
-        fieldType: 'text'
+        fieldType: 'text',
       },
       {
         field: 'dob',
         header: 'Date of birth',
-        fieldType: 'date'
-      }
-    ]
+        fieldType: 'date',
+      },
+    ],
   };
 
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'drag',
-      width: '4%'
+      width: '4%',
     },
     {
       field: 'firstName',
-      width: '24%'
+      width: '24%',
     },
     {
       field: 'lastName',
-      width: '24%'
+      width: '24%',
     },
     {
       field: 'gender',
-      width: '24%'
+      width: '24%',
     },
     {
       field: 'dob',
-      width: '24%'
-    }
+      width: '24%',
+    },
   ];
 
-  constructor() { }
-  ngOnInit() {
-  }
-
   removeItem(item: any, list: Array<any>) {
-    const index = list.map(function (e) {
-      return e.name;
-    }).indexOf(item.name);
+    const index = list.map((e) => e.name).indexOf(item.name);
     list.splice(index, 1);
   }
 

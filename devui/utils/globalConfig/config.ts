@@ -1,10 +1,12 @@
 import { InjectionToken } from '@angular/core';
+import { AppendToBodyScrollStrategyType } from '../cdk-overlay-config.type';
 export interface IGlobalConfig {
   showAnimation?: boolean;
   showGlowStyle?: boolean;
   bodyScrollable?: boolean;
   styleType?: 'default' | 'gray';
   size?: 'xs' | 'sm' | 'md' | 'lg';
+  appendToBodyScrollStrategy?: AppendToBodyScrollStrategyType;
 }
 export type GlobalConfig = IGlobalConfig;
 export interface TooltipConfig extends IGlobalConfig {
@@ -56,8 +58,6 @@ export interface DevUIGlobalConfig {
   typography?: TypographyConfig;
   global?: GlobalConfig;
 }
-
 export type DevUIGlobalConfigKey = keyof DevUIGlobalConfig;
 export type DevUIGlobalInsideConfigKey = keyof DevUIGlobalConfig['global'];
-
 export const DevUIGlobalConfigToken = new InjectionToken<DevUIGlobalConfig>('DevUI_global_config');

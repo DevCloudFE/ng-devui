@@ -20,4 +20,8 @@
 
 ul {
   white-space: nowrap;
+
+  li.disabled {
+    cursor: not-allowed;
+  }
 }

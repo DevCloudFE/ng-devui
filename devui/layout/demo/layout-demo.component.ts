@@ -5,9 +5,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'd-demo-input-number',
   templateUrl: './layout-demo.component.html',
-  styleUrls: [
-    './layout-demo.component.scss'
-  ]
+  styleUrls: ['./layout-demo.component.scss'],
 })
 export class LayoutDemoComponent implements OnInit, OnDestroy {
   GridBasic: Array<DevuiSourceData> = [
@@ -92,15 +90,15 @@ export class LayoutDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
-      { dAnchorLink: 'gutter', value: values['gutter'] },
-      { dAnchorLink: 'space', value: values['space'] },
-      { dAnchorLink: 'offset', value: values['offset'] },
+      { dAnchorLink: 'gutter', value: values.gutter },
+      { dAnchorLink: 'space', value: values.space },
+      { dAnchorLink: 'offset', value: values.offset },
       { dAnchorLink: 'align-justify', value: values['align-justify'] },
-      { dAnchorLink: 'order', value: values['order'] },
-      { dAnchorLink: 'flex', value: values['flex'] },
+      { dAnchorLink: 'order', value: values.order },
+      { dAnchorLink: 'flex', value: values.flex },
       { dAnchorLink: 'space-gutter', value: values['space-gutter'] },
-      { dAnchorLink: 'class', value: values['class'] },
-      { dAnchorLink: 'style', value: values['style'] },
+      { dAnchorLink: 'class', value: values.class },
+      { dAnchorLink: 'style', value: values.style },
       { dAnchorLink: 'layout-container', value: values['layout-container'] },
       { dAnchorLink: 'layout-container-scenario1', value: values['layout-container-scenario1'] },
       { dAnchorLink: 'layout-container-scenario2', value: values['layout-container-scenario2'] },

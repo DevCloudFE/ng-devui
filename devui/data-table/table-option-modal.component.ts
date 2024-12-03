@@ -15,7 +15,7 @@ export class TableOptionModalComponent implements OnInit {
   }
 
   get selectedCols() {
-    return this._columnsData.filter(t => t.checked);
+    return this._columnsData.filter((t) => t.checked);
   }
 
   _columnsData: Array<ColData> = [];
@@ -27,9 +27,7 @@ export class TableOptionModalComponent implements OnInit {
   allChecked = false;
   halfCheck = false;
 
-  constructor(
-    private cdr: ChangeDetectorRef
-  ) {}
+  constructor(private cdr: ChangeDetectorRef) {}
 
   judgeNameFIlter(name: string) {
     return name.toUpperCase().includes(this.filterKey.toUpperCase());
@@ -38,7 +36,7 @@ export class TableOptionModalComponent implements OnInit {
   onCheckedChanges() {
     this.allChecked = true;
     this.halfCheck = false;
-    this.columnsCache.forEach(t => {
+    this.columnsCache.forEach((t) => {
       if (!t.checked) {
         this.allChecked = false;
       }
@@ -47,13 +45,13 @@ export class TableOptionModalComponent implements OnInit {
         this.halfCheck = true;
       }
     });
-    this.halfCheck = (this.halfCheck && !this.allChecked) ? true : false;
+    this.halfCheck = this.halfCheck && !this.allChecked ? true : false;
   }
 
   onAllCheckChanges(checked: boolean) {
     this.halfCheck = false;
     this.allChecked = checked;
-    this.columnsCache.forEach(t => {
+    this.columnsCache.forEach((t) => {
       if (t.disabled) {
         return;
       }
@@ -74,7 +72,7 @@ export class TableOptionModalComponent implements OnInit {
   }
 
   searchIndex(col) {
-    return this.data.columnsData.findIndex(t => t.header === col?.header);
+    return this.data.columnsData.findIndex((t) => t.header === col?.header);
   }
 
   onDrop(e) {
@@ -91,20 +89,21 @@ export class TableOptionModalComponent implements OnInit {
   }
 
   onCardActiveChanges(active: boolean, status: 'xs' | 'sm' | 'md') {
-    this._styleSetting['size'] = active ? status : 'none';
+    this._styleSetting.size = active ? status : 'none';
   }
 
   styleSettingChanges(checked, type: 'border' | 'striped' | 'shadow') {
     switch (type) {
     case 'border':
-      this._styleSetting['borderType'] = checked ? '' : 'borderless';
+      this._styleSetting.borderType = checked ? '' : 'borderless';
       break;
     case 'shadow':
-      this._styleSetting['shadowType'] = checked ? 'normal' : 'embed';
+      this._styleSetting.shadowType = checked ? 'normal' : 'embed';
       break;
     case 'striped':
-      this._styleSetting['striped'] = checked;
+      this._styleSetting.striped = checked;
       break;
+    default:
     }
   }
 

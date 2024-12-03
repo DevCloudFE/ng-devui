@@ -1,45 +1,45 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
 
 // Block application conditions are to be determined and are not open in APIs.
-export type AppendToBodyScrollStrategyType= 'block' | 'close' | 'noop' | 'reposition';
-export type AppendToBodyDirection= 'rightDown'| 'rightUp' | 'leftUp'| 'leftDown' | 'centerDown' | 'centerUp';
+export type AppendToBodyScrollStrategyType = 'block' | 'close' | 'noop' | 'reposition';
+export type AppendToBodyDirection = 'rightDown' | 'rightUp' | 'leftUp' | 'leftDown' | 'centerDown' | 'centerUp';
 export const AppendToBodyDirectionsConfig: {
-  [p in AppendToBodyDirection]: ConnectedPosition
+  [p in AppendToBodyDirection]: ConnectedPosition;
 } = {
-  'rightDown': {
+  rightDown: {
     originX: 'start',
     originY: 'bottom',
     overlayX: 'start',
-    overlayY: 'top'
+    overlayY: 'top',
   },
-  'rightUp': {
+  rightUp: {
     originX: 'start',
     originY: 'top',
     overlayX: 'start',
-    overlayY: 'bottom'
+    overlayY: 'bottom',
   },
-  'leftUp': {
+  leftUp: {
     originX: 'end',
     originY: 'top',
     overlayX: 'end',
-    overlayY: 'bottom'
+    overlayY: 'bottom',
   },
-  'leftDown': {
+  leftDown: {
     originX: 'end',
     originY: 'bottom',
     overlayX: 'end',
-    overlayY: 'top'
+    overlayY: 'top',
   },
-  'centerDown': {
+  centerDown: {
     originX: 'center',
     originY: 'bottom',
     overlayX: 'center',
-    overlayY: 'top'
+    overlayY: 'top',
   },
-  'centerUp': {
+  centerUp: {
     originX: 'center',
     originY: 'top',
     overlayX: 'center',
-    overlayY: 'bottom'
-  }
+    overlayY: 'bottom',
+  },
 };

@@ -9,6 +9,8 @@
   <d-toggle-menu-container
     [isOpen]="isOpen"
     [appendToBody]="appendToBody"
+    [appendToBodyDirections]="appendToBodyDirections"
+    [appendToBodyScrollStrategy]="appendToBodyScrollStrategy"
     [selectWrapper]="tagsInputWrapperItem"
     [disabled]="disabled || selectedItems?.length >= maxTags"
     [paused]="!showSuggestion"
@@ -20,7 +22,6 @@
   >
     <d-toggle-menu-label
       [multiItems]="selectedItems"
-      [mode]="'multiple-line'"
       [valueParser]="valueParser"
       [disabled]="disabled"
       [maxHeight]="maxHeight"
@@ -32,6 +33,7 @@
     <d-toggle-menu-search
       *ngIf="!disabled || selectedItems?.length === 0"
       [inputValue]="newTag"
+      [maxLength]="maxLength"
       [searchPlaceholder]="getPlaceHolder"
       [searchFn]="searchFn"
       [spellcheck]="spellcheck"
@@ -48,6 +50,7 @@
       [hasSelectIndex]="true"
       [isFiltering]="newTag?.length > 0"
       [listItemTemplate]="listItem"
+      [noResultItemTemplate]="noResultItemTemplate"
       [closeScope]="'blank'"
       (toggleChange)="toggleChangeFn($event)"
       (valueChange)="setValue($event)"

@@ -95,9 +95,10 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
   }
 
   setTheme() {
-    if (typeof window !== 'undefined' && window['devuiThemeService']) {
-      this.themeService = window['devuiThemeService'];
-      if (window['devuiCurrentTheme']) {
+    const { devuiThemeService, devuiCurrentTheme } = typeof window !== 'undefined' && (window as any);
+    if (devuiThemeService) {
+      this.themeService = devuiThemeService;
+      if (devuiCurrentTheme) {
         this.themeChange();
       }
       if (this.themeService.eventBus) {
@@ -120,7 +121,7 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
   }
 
   themeChange = () => {
-    if (typeof window !== 'undefined' && window['devuiCurrentTheme'] === 'devui-dark-theme') {
+    if (typeof window !== 'undefined' && (window as any).devuiCurrentTheme === 'devui-dark-theme') {
       this.darkMode = '-dark';
     } else {
       this.darkMode = '';
@@ -181,7 +182,6 @@ export class ComponentsOverviewComponent implements OnInit, OnDestroy {
   jumpToChangeLog(e) {
     if (!this.isOpensource) {
       e.stopPropagation();
-      window.open('http://3ms.huawei.com/hi/group/3945390/wiki_6319622.html', '_blank'); // TODO: 开源版本要改成changelog的链接
     }
   }
 

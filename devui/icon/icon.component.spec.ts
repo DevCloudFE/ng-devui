@@ -1,26 +1,19 @@
-import { Component, DebugElement, TemplateRef, ViewChild } from "@angular/core";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { By } from "@angular/platform-browser";
-import { IconGroupComponent } from "./icon-group.component";
-import { IconComponent } from "./icon.component";
-import { IconModule } from "./icon.module";
+import { Component, DebugElement, TemplateRef, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { IconGroupComponent } from './icon-group.component';
+import { IconComponent } from './icon.component';
+import { IconModule } from './icon.module';
 
 @Component({
-  template: `
-    <d-icon-group>
-        <d-icon 
-            [icon]="icon"
-            [operable]="operable"
-            [disabled]="disabled"
-            [rotate]="rotate"
-            [color]="color"
-        ></d-icon>
+  template: ` <d-icon-group>
+      <d-icon [icon]="icon" [operable]="operable" [disabled]="disabled" [rotate]="rotate" [color]="color"></d-icon>
     </d-icon-group>
     <ng-template #iconTemplate>
-        <svg></svg>
+      <svg></svg>
     </ng-template>`,
   standalone: true,
-  imports: [IconModule]
+  imports: [IconModule],
 })
 class TestIconComponent {
   icon: string | TemplateRef<any> = '';
@@ -39,9 +32,8 @@ describe('dIcon', () => {
   let iconContainerElement: DebugElement;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TestIconComponent]
-    })
-      .compileComponents();
+      imports: [TestIconComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TestIconComponent);
     component = fixture.componentInstance;
@@ -70,7 +62,7 @@ describe('dIcon', () => {
     });
 
     it('icon should have apply class', () => {
-      expect(iconContainerElement.classes['disabled']).toBeTrue();
+      expect(iconContainerElement.classes.disabled).toBeTrue();
     });
   });
 

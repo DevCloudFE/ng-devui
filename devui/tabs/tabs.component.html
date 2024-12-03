@@ -115,6 +115,9 @@
         </g>
       </svg>
     </span>
+    <span *ngIf="scrollModeOperationTpl">
+      <ng-template [ngTemplateOutlet]="scrollModeOperationTpl"></ng-template>
+    </span>
     <ul dDropDownMenu class="devui-nav-dropdown devui-dropdown-menu devui-dropdown-overlay">
       <li
         *ngFor="let tab of tabs; index as i"

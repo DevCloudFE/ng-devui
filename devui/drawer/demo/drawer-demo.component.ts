@@ -25,16 +25,17 @@ export class DrawerDemoComponent implements OnInit, OnDestroy {
 
   templateSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./template/template.component.html?raw') },
-    { title: 'TS', language: 'typescript', code: require('./template/template.component.ts?raw') }
+    { title: 'TS', language: 'typescript', code: require('./template/template.component.ts?raw') },
   ];
 
   resizeSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./resize/resize.component.html?raw') },
-    { title: 'TS', language: 'typescript', code: require('./resize/resize.component.ts?raw') }
+    { title: 'TS', language: 'typescript', code: require('./resize/resize.component.ts?raw') },
   ];
 
   navItems = [];
   subs: Subscription = new Subscription();
+
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
@@ -56,8 +57,8 @@ export class DrawerDemoComponent implements OnInit, OnDestroy {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
       { dAnchorLink: 'do-not-destroy-after-closing', value: values['do-not-destroy-after-closing'] },
-      { dAnchorLink: 'template', value: values['template'] },
-      { dAnchorLink: 'resize', value: values['resize'] }
+      { dAnchorLink: 'template', value: values.template },
+      { dAnchorLink: 'resize', value: values.resize },
     ];
   }
 

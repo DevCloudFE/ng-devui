@@ -1,8 +1,10 @@
-import { ElementRef } from "@angular/core";
+import { ElementRef } from '@angular/core';
 import { TableWidthConfig } from '../data-table.model';
 
-export const simDeepClone = obj => {
-  if (obj === null) { return null; }
+export const simDeepClone = (obj) => {
+  if (obj === null) {
+    return null;
+  }
   if (typeof obj === 'object') {
     return JSON.parse(JSON.stringify(obj));
   } else if (typeof obj === 'string') {
@@ -28,7 +30,7 @@ export function tableResizeFunc(tableWidthConfig: TableWidthConfig[], ele: Eleme
       if (firstResize) {
         firstResize = false;
         const ratio = beforeWidth / parseInt(tableWidthConfig[index].width, 10);
-        tableWidthConfig.forEach(t => {
+        tableWidthConfig.forEach((t) => {
           t.width = parseInt(t.width, 10) * ratio + 'px';
         });
         _totalWidth = ele.nativeElement.querySelector('.table-wrap').offsetWidth - 8;
@@ -37,7 +39,7 @@ export function tableResizeFunc(tableWidthConfig: TableWidthConfig[], ele: Eleme
       tableWidthConfig[index].width = width + 'px';
 
       let newWidthTotal = 0;
-      tableWidthConfig.forEach(t => {
+      tableWidthConfig.forEach((t) => {
         newWidthTotal += parseInt(t.width, 10);
       });
 
@@ -47,7 +49,7 @@ export function tableResizeFunc(tableWidthConfig: TableWidthConfig[], ele: Eleme
       if (changeValue < 0) {
         lastCol.width = lastColWidth + _totalWidth - newWidthTotal + 'px';
       } else if (lastColWidth > lastWidth) {
-        const lastChange = (lastColWidth - lastWidth) > changeValue ? changeValue : (lastColWidth - lastWidth);
+        const lastChange = lastColWidth - lastWidth > changeValue ? changeValue : lastColWidth - lastWidth;
         lastCol.width = lastColWidth - lastChange + 'px';
       }
     }
@@ -60,7 +62,7 @@ export const highPerformanceFilter = (arr, func) => {
   // 经过调查，在小于10000或大于99999条数据的时候，for循环速度比filter速度会快7至8倍左右
   if (arrLength < 10000 || arrLength > 99999) {
     for (let a = 0; a < arrLength; a++) {
-      if (func(arr[a],a)) {
+      if (func(arr[a], a)) {
         res.push(arr[a]);
       }
     }
@@ -70,27 +72,26 @@ export const highPerformanceFilter = (arr, func) => {
   return res;
 };
 
-
 // 生成随机Id
 export const generateId = () => {
   let timeStamp = new Date().getTime();
-  if (window.performance && typeof window.performance.now === "function") {
+  if (window.performance && typeof window.performance.now === 'function') {
     timeStamp += performance.now();
   }
-  const id = 'aaaaaaaaaaaaaaabaaaaaaaaaaaaaaa'.replace(/[ab]/g, function (item) {
+  const id = 'aaaaaaaaaaaaaaabaaaaaaaaaaaaaaa'.replace(/[ab]/g, (item) => {
     const res = (timeStamp + Math.random() * 16) % 16 | 0;
     timeStamp = Math.floor(timeStamp / 16);
-    return (item === 'a' ? res : (res & 0x3 | 0x8)).toString(16);
+    return (item === 'a' ? res : (res & 0x3) | 0x8).toString(16);
   });
   return id;
 };
 
 export const highPerformanceExpandObjectInArray = (oldObj, attr) => {
-  oldObj[Symbol.iterator] = function() {
+  oldObj[Symbol.iterator] = () => {
     return {
-      next:function() {
+      next: function next() {
         const array = Reflect.ownKeys(oldObj);
-        if (this.index < array.length-1) {
+        if (this.index < array.length - 1) {
           const key = array[this.index];
           this.index++;
           return { value: oldObj[key] };
@@ -98,13 +99,13 @@ export const highPerformanceExpandObjectInArray = (oldObj, attr) => {
           return { done: true };
         }
       },
-      index:0
+      index: 0,
     };
   };
-  if(attr) {
-    const newObj=[];
-    for(let i=0;i<attr.length;i++) {
-      if(Object.prototype.hasOwnProperty.call(oldObj, attr[i])) {
+  if (attr) {
+    const newObj = [];
+    for (let i = 0; i < attr.length; i++) {
+      if (Object.prototype.hasOwnProperty.call(oldObj, attr[i])) {
         newObj.push(oldObj[attr[i]]);
       }
     }
@@ -113,21 +114,24 @@ export const highPerformanceExpandObjectInArray = (oldObj, attr) => {
   return [...oldObj];
 };
 
-
 // 将一些公共方法拆分出来
-export const getNodeIndex = (nodeId, treeTableArray) => { // 找到节点在总数据中的位置的方法
+export const getNodeIndex = (nodeId, treeTableArray) => {
+  // 找到节点在总数据中的位置的方法
   return treeTableArray.findIndex((v) => v.node_id === nodeId);
 };
 
-export class FindChild { // 寻找子节点
+export class FindChild {
+  // 寻找子节点
   allChildCol: any = [];
 
-  getChildrenOfItem(node, treeTableArray) { // 找到节点下的子节点的方法
-    const data: any = highPerformanceFilter(treeTableArray, item => item.parent_node_id === node.node_id);
+  getChildrenOfItem(node, treeTableArray) {
+    // 找到节点下的子节点的方法
+    const data: any = highPerformanceFilter(treeTableArray, (item) => item.parent_node_id === node.node_id);
     return data;
   }
 
-  getAllChildrenOfItem(node, treeTableArray) { // 找到节点下所有子集的方法
+  getAllChildrenOfItem(node, treeTableArray) {
+    // 找到节点下所有子集的方法
     this.allChildCol = [];
     this.getAllChildrenData(node, treeTableArray);
     return this.allChildCol;
@@ -138,20 +142,21 @@ export class FindChild { // 寻找子节点
     const newArray = [...childData];
     newArray.push(node);
     this.allChildCol = [...this.allChildCol, ...newArray];
-    for(let i=0; i<childData.length; i++) {
-      if(childData[i].node_type) {
+    for (let i = 0; i < childData.length; i++) {
+      if (childData[i].node_type) {
         this.getAllChildrenData(childData[i], treeTableArray);
       }
     }
   }
 }
 
-export const distinct = (recordArr, nodeArr) => { // 数组去重的方法
+export const distinct = (recordArr, nodeArr) => {
+  // 数组去重的方法
   const arr = recordArr.concat(nodeArr);
   const result = [];
   const obj = {};
-  for(const i of arr) {
-    if(!obj[i.node_id]) {
+  for (const i of arr) {
+    if (!obj[i.node_id]) {
       result.push(i);
       obj[i.node_id] = 1;
     }
@@ -164,7 +169,7 @@ export const highPerformanceMap = (arr, func) => {
   const arrLength = arr.length;
   if (arrLength < 10000 || arrLength > 99999) {
     for (let a = 0; a < arrLength; a++) {
-      const rs=func(arr[a],a);
+      const rs = func(arr[a], a);
       if (rs) {
         res.push(rs);
       }
@@ -177,16 +182,15 @@ export const highPerformanceMap = (arr, func) => {
 
 export const flatTreeData = (dataSource: any[]) => {
   const flatData = [];
-
   const travelObj = (arr, parentId) => {
-    arr.forEach(item => {
+    arr.forEach((item) => {
       if (item.children) {
         const obj = {
           id: generateId(),
           node_id: generateId(),
           node_type: 1,
           parent_node_id: parentId,
-          ...item
+          ...item,
         };
         const children = obj.children;
         delete obj.children;
@@ -198,7 +202,7 @@ export const flatTreeData = (dataSource: any[]) => {
           node_id: generateId(),
           node_type: 0,
           parent_node_id: parentId,
-          ...item
+          ...item,
         };
         flatData.push(obj);
       }

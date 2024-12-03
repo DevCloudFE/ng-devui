@@ -47,6 +47,7 @@ export class RateDemoComponent implements OnInit, OnDestroy {
 
   navItems = [];
   subs: Subscription = new Subscription();
+
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
@@ -69,10 +70,10 @@ export class RateDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'read-only-mode', value: values['read-only-mode'] },
       { dAnchorLink: 'dynamic-mode', value: values['dynamic-mode'] },
       { dAnchorLink: 'dynamic-mode-Custom', value: values['dynamic-mode-Custom'] },
-      { dAnchorLink: 'half-demo', value: values['half-demo']},
-      { dAnchorLink: 'clear-demo', value: values['clear-demo']},
+      { dAnchorLink: 'half-demo', value: values['half-demo'] },
+      { dAnchorLink: 'clear-demo', value: values['clear-demo'] },
       { dAnchorLink: 'using-the-type-parameter', value: values['using-the-type-parameter'] },
-      { dAnchorLink: 'template', value: values['template'] },
+      { dAnchorLink: 'template', value: values.template },
     ];
   }
 

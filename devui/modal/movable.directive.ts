@@ -1,7 +1,7 @@
 import { Directive, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Directive({
-  selector: '[dMovable]'
+  selector: '[dMovable]',
 })
 export class MovableDirective implements OnInit, OnChanges {
   topStart = 0;
@@ -23,10 +23,11 @@ export class MovableDirective implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['moveEl']) {
+    const { moveEl, handle } = changes;
+    if (moveEl) {
       this.element = this.moveEl || this.el.nativeElement;
     }
-    if (changes['handle']) {
+    if (handle) {
       this.allowDrag = this._allowDrag;
     }
   }
@@ -55,9 +56,9 @@ export class MovableDirective implements OnInit, OnChanges {
       // 判断边界条件
       const modalRect = this.element.getBoundingClientRect();
       const parentRect = this.element.parentNode.getBoundingClientRect();
-      const [translateX, translateY] = this.element.style.transform.match(/\d+/g)?.map(item => Number(item)) || [0, 0];
+      const [translateX, translateY] = this.element.style.transform.match(/\d+/g)?.map((item) => Number(item)) || [0, 0];
       // 当前偏移量
-      let currentTop = event.clientY - this.topStart ;
+      let currentTop = event.clientY - this.topStart;
       let currentLeft = event.clientX - this.leftStart;
       // 计算上下距离，按照parentNode的位置计算偏移量，后续parentNode存在偏移量，需要考虑偏移量
       const maxTop = window.innerHeight - parentRect.top - modalRect.height;
@@ -92,8 +93,8 @@ export class MovableDirective implements OnInit, OnChanges {
   @HostListener('document:touchmove', ['$event'])
   onTouchMove(event: any) {
     if (this.md && this._allowDrag) {
-      this.element.style.top = (event.changedTouches[0].clientY - this.topStart) + 'px';
-      this.element.style.left = (event.changedTouches[0].clientX - this.leftStart) + 'px';
+      this.element.style.top = `${event.changedTouches[0].clientY - this.topStart}px`;
+      this.element.style.left = `${event.changedTouches[0].clientX - this.leftStart}px`;
     }
     event.stopPropagation();
   }

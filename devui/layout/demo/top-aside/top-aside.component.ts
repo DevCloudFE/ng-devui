@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./top-aside.component.scss'],
 })
 export class LayoutTopAsideComponent {
-  logoSrc = 'https://res.hc-cdn.com/x-roma-components/1.0.10/assets/devui/logo.svg';
+  logoSrc = '/assets/logo.svg';
   menu = [
     {
       title: '内容一',

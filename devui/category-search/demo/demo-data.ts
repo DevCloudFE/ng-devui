@@ -58,20 +58,20 @@ export const demoData: ICategorySearchTagItem[] = [
     showTime: false,
   },
   {
-    label: 'IP address',
-    field: 'ip',
+    label: 'role',
+    field: 'role',
     type: 'radio',
     group: 'User-defined',
-    filterKey: 'ip',
+    filterKey: 'role',
     options: [
       {
-        ip: '110.110.110.1',
+        role: 'Admin',
       },
       {
-        ip: '110.110.110.2',
+        role: 'User',
       },
       {
-        ip: '110.110.110.3',
+        role: 'Guest',
       },
     ],
   },
@@ -81,6 +81,7 @@ export const demoData: ICategorySearchTagItem[] = [
     type: 'checkbox',
     group: 'Personnel-related',
     filterKey: 'name',
+    showSelectAll: true,
     options: [
       {
         name: 'Jack',

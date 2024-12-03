@@ -12,27 +12,28 @@ In the page:
 <d-toast></d-toast>
 ```
 
-# d-toast
+## d-toast
 
-## d-toast Parameter
+### d-toast Parameter
 
-| Parameter  |             Type             | Default | Description                                                                                                                                                                                                                                                                                                             | Jump to Demo                                                  |Global Config| 
-| :----------------: | :--------: | :--------------------------: | :-----: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-|   value    | [`Array<Message>`](#message) |   --    | Required. Message content array. For details about the message object definition, see the following description.                                                                                                                                                                                                        | [Basic usage](demo#basic-usage)                               |
-|    life    |           `number`           |  5000   | Optional. Timeout interval, in milliseconds. The timeout interval disappears automatically. You can move the mouse to stop the timeout interval. The default value is 5000 milliseconds for common, success, and info , and 10000 milliseconds for error and warn.                                                      | [Timeout interval](demo#life)                                 |
-|  lifeMode  |           `string`           | global  | Optional. The default value is global or single. The default value is global, indicating that all messages use the preset timeout interval of life or the first message in a group. If this parameter is set to single, each message uses its own timeout interval. For details, see the definition of life in Message. | [Each message uses a separate timeout interval.](demo#single) |
-|   sticky   |          `boolean`           |  false  | Optional. Indicating whether the database is permanently configured. This parameter is automatically disabled by default.                                                                                                                                                                                               |
-|   style    |           `{[klass:string]:any;}`          |   --    | Optional. Style. Refer to [ngStyle](https://angular.io/api/common/NgStyle)                                                                                                                                                                                                                                                                                                           |[Custom Style](demo#style) 
-| styleClass |           `string`           |   --    | Optional. Class name                                                                                                                                                                                                                                                                                                    |[Custom Style](demo#style) 
+| Parameter                                                 | Type                         | Default | Description                                                                                                                                                                                                                                                                                                             | Jump to Demo                                                  | Global Config |
+| --------------------------------------------------------- | ---------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------- |
+| value                                                     | [`Array<Message>`](#message) | --      | Required. Message content array. For details about the message object definition, see the following description.                                                                                                                                                                                                        | [Basic usage](demo#basic-usage)                               |
+| life                                                      | `number`                     | 5000    | Optional. Timeout interval, in milliseconds. The timeout interval disappears automatically. You can move the mouse to stop the timeout interval. The default value is 5000 milliseconds for common, success, and info , and 10000 milliseconds for error and warn.                                                      | [Timeout interval](demo#life)                                 |
+| lifeMode                                                  | `string`                     | global  | Optional. The default value is global or single. The default value is global, indicating that all messages use the preset timeout interval of life or the first message in a group. If this parameter is set to single, each message uses its own timeout interval. For details, see the definition of life in Message. | [Each message uses a separate timeout interval.](demo#single) |
+| sticky                                                    | `boolean`                    | false   | Optional. Indicating whether the database is permanently configured. This parameter is automatically disabled by default.                                                                                                                                                                                               |
+| style                                                     | `{[klass:string]:any;}`      | --      | Optional. Style. Refer to [ngStyle](https://angular.io/api/common/NgStyle)                                                                                                                                                                                                                                              | [Custom Style](demo#style)                                    |
+| styleClass                                                | `string`                     | --      | Optional. Class name                                                                                                                                                                                                                                                                                                    | [Custom Style](demo#style)                                    |
+| <span style="white-space:nowrap;">appendUpperLimit</span> | `number`                     | 0       | Optional. Adds a new message within the value range instead of clearing the original message. Note that the duration of the existing message is reset after the new message is inserted. Set to 0 to disable.                                                                                                           | [Display in appending mode](demo#append)                      |
 
 ## d-toast event
 
-|  Parameter  |           Type            | Description                                                                                                                                                                                                |
-| :---------: | :-----------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| closeEvent  |    `EventEmitter<any>`    | Optional. Indicates the content of a message that is manually closed or disappears automatically. This parameter is optional.                                                                              |
+| Parameter   | Type                      | Description                                                                                                                                                                                                |
+| ----------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| closeEvent  | `EventEmitter<any>`       | Optional. Indicates the content of a message that is manually closed or disappears automatically. This parameter is optional.                                                                              |
 | valueChange | `EventEmitter<Message[]>` | Optional. Indicates the array of remaining message content after the change (manually closed or automatically disappears). For details about the Message object definition, see the following description. |
 
-# 接口 & 类型定义
+## Interface & Type Definition
 
 ### Message
 
@@ -45,12 +46,13 @@ export interface Message {
   id?: any; // Message ID.
 }
 ```
-# ToastService
+
+## ToastService
 
 The following information is added to the component:
 
 ```ts
-import {ToastService} from 'ng-devui/toast';
+import { ToastService } from 'ng-devui/toast';
 ```
 
 In the constructor of the component, declare the following:
@@ -62,54 +64,52 @@ constructor(private toastService: ToastService) {}
 Use in the page:
 
 ```html
-<d-button (click)="openToast()">click me show simplest toast!</d-button>
-Invoke toastService.open() in the openToast function to enable global toast notifications and obtain an instance. The sticky value of this instance is false by default, indicating that the instance is automatically disabled. If sticky is set to true, it is resident, close() of the instance is called,
-Disable global toast notification.
+<d-button (click)="openToast()">click me show simplest toast!</d-button> Invoke toastService.open() in the openToast function to enable
+global toast notifications and obtain an instance. The sticky value of this instance is false by default, indicating that the instance is
+automatically disabled. If sticky is set to true, it is resident, close() of the instance is called, Disable global toast notification.
 ```
 
 ```ts
 this.toastService.open({
-value: [{severity:'info', summary:'summary', content:'details'}],
+  value: [{ severity: 'info', summary: 'summary', content: 'details' }],
 });
 ```
 
+### ToastService Parameters
 
-## ToastService Parameters
-
-| Parameter | Type | Default | Description | Jump to Demo |
-| :--------: | :--------------------------: | :----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-|   value    | [`Array<Message>`](#message) |   --    | Required. Message content array. For details about the message object definition, see the following description.                                                                                                                                                                                                        | [Service Function](demo#toast-service)                              |
-|    life    |           `number`           |  5000   | Optional. Timeout interval, in milliseconds. The timeout interval disappears automatically. You can move the mouse to stop the timeout interval. The default value is 5000 milliseconds for common, success, and info , and 10000 milliseconds for error and warn.                                                      | [Service Function](demo#toast-service)                                 |
-|  lifeMode  |           `string`           | global  | Optional. The default value is global or single. The default value is global, indicating that all messages use the preset timeout interval of life or the first message in a group. If this parameter is set to single, each message uses its own timeout interval. For details, see the definition of life in Message. | [Service Function](demo#toast-service) |
-|   sticky   |          `boolean`           |  false  | Optional. Indicating whether the database is permanently configured. This parameter is automatically disabled by default.                                                                                                                                                                                               |[Service Function](demo#toast-service)|
-|   style    |           `{[klass:string]:any;}`          |   --    | Optional. Style. Refer to [ngStyle](https://angular.io/api/common/NgStyle)                                                                                                                                                                                                                                                                                                           |[Service Function](demo#toast-service)
-| styleClass |           `string`           |   --    | Optional. Class name     |[Service Function](demo#toast-service)   |
-| injector | `Injector` | -- | Optional. You can specify the syringe that will be used as the parent of the component.   |
-| componentFactoryResolver | `ComponentFactoryResolver` | -- | Optional. Customized dynamic rendering component parser. |
-
+| Parameter                | Type                         | Default | Description                                                                                                                                                                                                                                                                                                             | Jump to Demo                           |
+| ------------------------ | ---------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| value                    | [`Array<Message>`](#message) | --      | Required. Message content array. For details about the message object definition, see the following description.                                                                                                                                                                                                        | [Service Function](demo#toast-service) |
+| life                     | `number`                     | 5000    | Optional. Timeout interval, in milliseconds. The timeout interval disappears automatically. You can move the mouse to stop the timeout interval. The default value is 5000 milliseconds for common, success, and info , and 10000 milliseconds for error and warn.                                                      | [Service Function](demo#toast-service) |
+| lifeMode                 | `string`                     | global  | Optional. The default value is global or single. The default value is global, indicating that all messages use the preset timeout interval of life or the first message in a group. If this parameter is set to single, each message uses its own timeout interval. For details, see the definition of life in Message. | [Service Function](demo#toast-service) |
+| sticky                   | `boolean`                    | false   | Optional. Indicating whether the database is permanently configured. This parameter is automatically disabled by default.                                                                                                                                                                                               | [Service Function](demo#toast-service) |
+| style                    | `{[klass:string]:any;}`      | --      | Optional. Style. Refer to [ngStyle](https://angular.io/api/common/NgStyle)                                                                                                                                                                                                                                              | [Service Function](demo#toast-service) |
+| styleClass               | `string`                     | --      | Optional. Class name                                                                                                                                                                                                                                                                                                    | [Service Function](demo#toast-service) |
+| injector                 | `Injector`                   | --      | Optional. You can specify the syringe that will be used as the parent of the component.                                                                                                                                                                                                                                 |
+| componentFactoryResolver | `ComponentFactoryResolver`   | --      | Optional. Customized dynamic rendering component parser.                                                                                                                                                                                                                                                                |
 
 Receives sent data. CloseEvent returns the content of a single message that is manually closed or automatically disappeared. ValueChange returns the content array of the remaining message after the change (manually closed or automatically disappeared). For the definition of the [`Array<Message>`](#message) object, see the definition of the interface and type.
 
 ```ts
 const results = this.toastService.open({
-value: [
-{severity: 'info', summary: 'summary', content:'details in the first line'},
-{severity: 'error', summary: 'summary', content:'details in the second line'},
-{severity: 'error', summary: 'summary', content:'details in the third line'},
-],
-sticky: true,
-style: {width: '600px', color: 'red'},
-styleClass:'myCustom-toast',
-life: 5000,
-lifeMode:'single',
+  value: [
+    { severity: 'info', summary: 'summary', content: 'details in the first line' },
+    { severity: 'error', summary: 'summary', content: 'details in the second line' },
+    { severity: 'error', summary: 'summary', content: 'details in the third line' },
+  ],
+  sticky: true,
+  style: { width: '600px', color: 'red' },
+  styleClass: 'myCustom-toast',
+  life: 5000,
+  lifeMode: 'single',
 });
 //Receive the data sent by closeEvent.
 results.toastInstance.closeEvent.subscribe((value: any) => {
-console.log('closeEvent', value);
+  console.log('closeEvent', value);
 });
 //Receive the data transmitted by valueChange.
 results.toastInstance.valueChange.subscribe((value: any) => {
-console.log('valueChange', value);
+  console.log('valueChange', value);
 });
 this.results = results;
 console.log('results', this.results);

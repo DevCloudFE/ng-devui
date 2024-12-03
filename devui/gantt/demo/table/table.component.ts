@@ -181,7 +181,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   launchFullscreen({ isFullscreen }) {
     this.isFullScreen = isFullscreen;
-    this.ganttService.setScaleConfig({viewChange: true});
+    this.ganttService.setScaleConfig({ viewChange: true });
   }
 
   onGanttBarMoveStart() {
@@ -223,8 +223,10 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onTableScroll(event: Event) {
-    const target = <HTMLElement>event.target;
-    this.tableScrollLeft = target.scrollLeft;
+    const target = <HTMLElement>event?.target;
+    if (target) {
+      this.tableScrollLeft = target.scrollLeft;
+    }
   }
 
   onResizeStart(event) {

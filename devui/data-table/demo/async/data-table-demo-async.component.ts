@@ -1,18 +1,16 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { LoadingType } from 'ng-devui/loading';
-import { Observable, timer } from 'rxjs';
-import { originSource, SourceType } from '../mock-data';
+import { timer } from 'rxjs';
+import { SourceType, originSource } from '../mock-data';
 
 @Component({
   selector: 'd-datatable-demo-async',
-  templateUrl: './data-table-demo-async.component.html'
+  templateUrl: './data-table-demo-async.component.html',
 })
 export class DatatableDemoAsyncComponent implements OnInit {
 
   /* get Async DataSource*/
   remoteDataSource: Array<SourceType> = [];
   showLoading = false;
-  loading: LoadingType;
   colChanged = false;
 
   columns = [
@@ -39,19 +37,12 @@ export class DatatableDemoAsyncComponent implements OnInit {
       header: 'Date of birth',
       fieldType: 'date',
       sortable: true,
-    }
+    },
   ];
 
   colDataOptions = this.columns.slice(0, 3);
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
-    this.loading = new Observable((function (observer) {
-      if (this.complete) {
-        observer.onNext(this.complete);
-        observer.onCompleted();
-      }
-    }).bind(this));
-  }
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   getRemoteData() {
     this.remoteDataSource = [];
@@ -72,6 +63,5 @@ export class DatatableDemoAsyncComponent implements OnInit {
     this.colChanged = !this.colChanged;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

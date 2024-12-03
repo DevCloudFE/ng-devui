@@ -85,7 +85,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
 
   @Input() appendToBody = false;
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
-  @Input() appendToBodyScrollStrategy: AppendToBodyScrollStrategyType;
+  @Input() @WithConfig() appendToBodyScrollStrategy: AppendToBodyScrollStrategyType;
   @Input() cdkOverlayOffsetY = 0; // 内部使用不开放
   @Input() dAutoCompleteWidth: number;
   @Input() formatter: (item: any) => string;
@@ -197,13 +197,14 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
 
   ngOnChanges(changes: SimpleChanges) {
     const { appendToBodyDirections, appendToBodyScrollStrategy, source } = changes;
+    const globalScrollStrategy = this.devConfigService.getConfigForApi('appendToBodyScrollStrategy');
     if (source && this.popupRef) {
       this.fillPopup(this.source);
     }
     if (appendToBodyDirections) {
       this.setPositions();
     }
-    if (appendToBodyScrollStrategy && this.appendToBodyScrollStrategy) {
+    if (this.appendToBodyScrollStrategy && (appendToBodyScrollStrategy || globalScrollStrategy)) {
       const func = this.scrollStrategyOption[this.appendToBodyScrollStrategy];
       this.scrollStrategy = func();
       if (this.popupRef) {

@@ -57,7 +57,8 @@ export class TreeSelectDemoComponent implements OnInit, OnDestroy {
   ];
   navItems = [];
   subs: Subscription = new Subscription();
-  constructor(private translate: TranslateService) { }
+
+  constructor(private translate: TranslateService) {}
 
   ngOnInit() {
     this.subs.add(
@@ -77,16 +78,16 @@ export class TreeSelectDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
-      { dAnchorLink: 'labelization', value: values['labelization'] },
+      { dAnchorLink: 'labelization', value: values.labelization },
       { dAnchorLink: 'leaf-only', value: values['leaf-only'] },
       { dAnchorLink: 'init-hooks', value: values['init-hooks'] },
       { dAnchorLink: 'simple-search', value: values['simple-search'] },
       { dAnchorLink: 'append-to-element', value: values['append-to-element'] },
       { dAnchorLink: 'custom-icon', value: values['custom-icon'] },
-      { dAnchorLink: 'keys', value: values['keys'] },
+      { dAnchorLink: 'keys', value: values.keys },
       { dAnchorLink: 'custom-template', value: values['custom-template'] },
       { dAnchorLink: 'icon-parent', value: values['icon-parent'] },
-      { dAnchorLink: 'virtual-scroll', value: values['virtual-scroll'] }
+      { dAnchorLink: 'virtual-scroll', value: values['virtual-scroll'] },
     ];
   }
 

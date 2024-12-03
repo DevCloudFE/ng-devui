@@ -9,6 +9,7 @@ import { DevUICodeboxModule } from 'ng-devui/shared/devui-codebox/devui-codebox.
 import { ToastModule } from 'ng-devui/toast';
 import { TranslateModule } from '@ngx-translate/core';
 import { DDemoNavModule } from 'devui-commons/src/demo-nav/d-demo-nav.module';
+import { AppendComponent } from './append/append.component';
 import { BasicComponent } from './basic/basic.component';
 import { LifeComponent } from './life/life.component';
 import { ToastServiceComponent } from './service/toast-service.component';
@@ -52,6 +53,7 @@ import { ToastDesignComponent } from './toast-design.component';
     LifeComponent,
     SingleComponent,
     StyleComponent,
+    AppendComponent,
     ToastServiceComponent,
   ],
 

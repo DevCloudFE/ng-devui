@@ -38,8 +38,8 @@ import { TreeModule } from 'ng-devui/tree';
 | minBufferPx         | `number`                             | 600             | 可选，设置虚拟滚动时的最小 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](demo#virtual-scroll) |
 | maxBufferPx         | `number`                             | 900             | 可选，设置虚拟滚动时的最大 buffer 尺寸，参考https://material.angular.io/cdk/scrolling/overview#scrolling-over-fixed-size-items | [大数据量可操作树](demo#virtual-scroll) |
 | showAnimation       | `boolean`                            | true            | 可选，是否展示动画                                                                                                             | [无动画](demo#without-animation)        | ✔          |
-| indent       | `string`                            | '16px'            | 可选，设置树各层级之间的缩进                                                                                                             | [基本用法](demo#basic-usage)        |          |
-| operatorAlign       | `'start'\|'end'`                            | 'start'            | 可选，设置树节点操作按钮的对齐方式                                                                                                             | [自定义图标](demo#custom-icon)        |          |
+| indent              | `string`                             | '16px'          | 可选，设置树各层级之间的缩进                                                                                                   | [基本用法](demo#basic-usage)            |            |
+| operatorAlign       | `'start'\|'end'`                     | 'start'         | 可选，设置树节点操作按钮的对齐方式                                                                                             | [自定义图标](demo#custom-icon)          |            |
 
 ## d-tree 事件
 
@@ -96,7 +96,7 @@ import { TreeModule } from 'ng-devui/tree';
 | showAnimation           | `boolean`                                    | true            | 可选，是否展示动画                                                                                                             | [无动画](demo#without-animation)               | ✔          |
 | loadingTemplateRef      | `TemplateRef<any>`                           | --              | 可选，自定义加载中的模板                                                                                                       |
 | treeNodesRef            | `TemplateRef<any>`                           | --              | 可选，自定义节点的显示模板                                                                                                     |
-| indent       | `string`                            | '16px'            | 可选，设置树各层级之间的缩进                                                                                                             | [基本用法](demo#basic-usage)        |      |
+| indent                  | `string`                                     | '16px'          | 可选，设置树各层级之间的缩进                                                                                                   | [基本用法](demo#basic-usage)                   |            |
 
 ## d-operable-tree 事件
 

@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { backdropFadeInOut, wipeInOutAnimation } from 'ng-devui/utils';
 import { isUndefined } from 'lodash-es';
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, fromEvent } from 'rxjs';
 import { ModalContainerDirective } from './modal.directive';
 
 @Component({
@@ -53,8 +53,8 @@ export class ModalComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.escapable) {
       this.pressEscToClose.add(
-        fromEvent(window, 'keydown').subscribe((event) => {
-          if (event['keyCode'] === 27) {
+        fromEvent(window, 'keydown').subscribe((event: any) => {
+          if (event.keyCode === 27) {
             this.hide();
           }
         })

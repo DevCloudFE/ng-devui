@@ -9,10 +9,14 @@ import { SplitterService } from './splitter.service';
   template: `
     <section>
       <d-splitter [orientation]="orientation" [splitBarSize]="splitBarSize" style="height: 300px; border: 1px solid #E3E5E9;">
-        <d-splitter-pane [size]="size" [minSize]="minSize" [maxSize]="maxSize"
-        [collapsible]="collapsible"
-        [collapsed]="collapsed"
-        (sizeChange)="sizeChange($event)">
+        <d-splitter-pane
+          [size]="size"
+          [minSize]="minSize"
+          [maxSize]="maxSize"
+          [collapsible]="collapsible"
+          [collapsed]="collapsed"
+          (sizeChange)="sizeChange($event)"
+        >
           <div class="pane-content">
             <h2>左侧面板</h2>
             <div>左侧内容区域，宽度30%, 最小宽度20%</div>
@@ -87,11 +91,10 @@ class TestVerticalSplitterComponent {
 }
 
 describe('splitter', () => {
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [SplitterModule],
-      declarations: [ TestSplitterComponent, TestVerticalSplitterComponent]
+      declarations: [TestSplitterComponent, TestVerticalSplitterComponent],
     }).compileComponents();
   });
 
@@ -123,21 +126,23 @@ describe('splitter', () => {
     });
 
     it('should collapse left pane when collapseButton clicked', () => {
-      const  handleButton = fixture.debugElement.query(By.css('.prev.devui-collapse'));
+      const handleButton = fixture.debugElement.query(By.css('.prev.devui-collapse'));
       handleButton.triggerEventHandler('click', null);
       fixture.detectChanges();
       expect(splitterElement.querySelectorAll('d-splitter-pane')[0].clientWidth).toBe(0);
     });
 
     it('should add collapsed class when collapseButton clicked', () => {
-      const  handleButton = fixture.debugElement.query(By.css('.prev.devui-collapse'));
+      const handleButton = fixture.debugElement.query(By.css('.prev.devui-collapse'));
       handleButton.triggerEventHandler('click', null);
       fixture.detectChanges();
       expect(handleButton.nativeElement.classList).toContain('collapsed');
     });
 
     it('service should throw error ', () => {
-      expect(function() {service.getPane(3); }).toThrow(new Error('no pane can return.'));
+      expect(() => {
+        service.getPane(3);
+      }).toThrow(new Error('no pane can return.'));
     });
 
     it('should change collapse state', () => {
@@ -184,9 +189,7 @@ describe('splitter', () => {
       const rect = leftPaneElement.getBoundingClientRect();
       const spliterBarElement = splitterElement.querySelectorAll('d-splitter-bar')[0] as HTMLElement;
       // 模拟鼠标事件
-      mouseMoveTrigger(spliterBarElement,
-        {x: rect.right, y: rect.height },
-        {x: rect.right - 2000, y: rect.height});
+      mouseMoveTrigger(spliterBarElement, { x: rect.right, y: rect.height }, { x: rect.right - 2000, y: rect.height });
       fixture.detectChanges();
       expect(leftPaneElement.clientWidth).toEqual(Math.round(service.toPixels('20%')));
     }));
@@ -197,9 +200,7 @@ describe('splitter', () => {
       const rect = leftPaneElement.getBoundingClientRect();
       const spliterBarElement = splitterElement.querySelectorAll('d-splitter-bar')[0] as HTMLElement;
       // 模拟鼠标事件
-      mouseMoveTrigger(spliterBarElement,
-        {x: rect.right, y: rect.height },
-        {x: rect.right + 5000, y: rect.height});
+      mouseMoveTrigger(spliterBarElement, { x: rect.right, y: rect.height }, { x: rect.right + 5000, y: rect.height });
       fixture.detectChanges();
       expect(leftPaneElement.clientWidth).toEqual(Math.round(service.toPixels('60%')));
     }));
@@ -210,9 +211,7 @@ describe('splitter', () => {
       const rect = leftPaneElement.getBoundingClientRect();
       const spliterBarElement = splitterElement.querySelectorAll('d-splitter-bar')[0] as HTMLElement;
       // 模拟鼠标事件
-      touchEventTrigger(spliterBarElement,
-        {x: rect.right, y: rect.height },
-        {x: rect.right - 2000, y: rect.height});
+      touchEventTrigger(spliterBarElement, { x: rect.right, y: rect.height }, { x: rect.right - 2000, y: rect.height });
       fixture.detectChanges();
       expect(leftPaneElement.clientWidth).toEqual(Math.round(service.toPixels('20%')));
     }));
@@ -223,16 +222,12 @@ describe('splitter', () => {
       const rect = leftPaneElement.getBoundingClientRect();
       const spliterBarElement = splitterElement.querySelectorAll('d-splitter-bar')[0] as HTMLElement;
       // 模拟鼠标事件
-      touchEventTrigger(spliterBarElement,
-        {x: rect.right, y: rect.height },
-        {x: rect.right - 2000, y: rect.height},
-        2);
+      touchEventTrigger(spliterBarElement, { x: rect.right, y: rect.height }, { x: rect.right - 2000, y: rect.height }, 2);
       fixture.detectChanges();
       expect(leftPaneElement.clientWidth).toEqual(Math.round(service.toPixels('30%')));
     }));
 
     // TODO 目前所有覆盖率80%+，待提供部分只有if分支的代码分支覆盖
-
   });
 
   describe('vertical', () => {
@@ -261,14 +256,11 @@ describe('splitter', () => {
       const rect = leftPaneElement.getBoundingClientRect();
       const spliterBarElement = splitterElement.querySelectorAll('d-splitter-bar')[0] as HTMLElement;
       // 模拟鼠标事件
-      mouseMoveTrigger(spliterBarElement,
-        {x: rect.right, y: rect.height },
-        {x: rect.right, y: rect.height - 200});
+      mouseMoveTrigger(spliterBarElement, { x: rect.right, y: rect.height }, { x: rect.right, y: rect.height - 200 });
       fixture.detectChanges();
       expect((<HTMLElement>rightPaneElement).style.flexBasis).toEqual('200px');
     }));
   });
-
 });
 
 function touchEventTrigger(el: HTMLElement, from: { x: number; y: number }, to: { x: number; y: number }, toucheNum?: number): void {
@@ -299,7 +291,7 @@ function createTouchEvent(type: string, pageX = 0, pageY = 0, toucheNum?: number
   Object.defineProperties(event, {
     touches,
     targetTouches: { value: [touchDetails] },
-    changedTouches: { value: [touchDetails] }
+    changedTouches: { value: [touchDetails] },
   });
   return event;
 }

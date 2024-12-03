@@ -4,17 +4,30 @@
   width: 400px;
 }
 
-.badge {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border-radius: 8px;
-  font-size: $devui-font-size;
-  line-height: 16px;
-  color: $devui-light-text;
-  text-align: center;
-  background: $devui-brand;
-  font-weight: normal;
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .title-content {
+    flex: 1;
+    padding-right: 8px;
+  }
+
+  .badge {
+    display: block;
+    width: fit-content;
+    height: 16px;
+    border-radius: 16px;
+    font-size: $devui-font-size-sm;
+    line-height: $devui-font-size-sm;
+    color: $devui-aide-text;
+    text-align: center;
+    background: $devui-label-bg;
+    font-weight: normal;
+    margin: 0 4px 0 8px;
+    padding: 2px 4px;
+  }
 }
 
 .loading {

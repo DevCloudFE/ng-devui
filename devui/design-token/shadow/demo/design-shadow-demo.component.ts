@@ -4,11 +4,12 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'd-design-shadow-demo',
-  templateUrl: './design-shadow-demo.component.html'
+  templateUrl: './design-shadow-demo.component.html',
 })
 export class DesignShadowDemoComponent implements OnInit, OnDestroy {
   navItems = [];
   subs: Subscription = new Subscription();
+
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
@@ -27,9 +28,7 @@ export class DesignShadowDemoComponent implements OnInit, OnDestroy {
   }
 
   setNavValues(values) {
-    this.navItems = [
-      { dAnchorLink: 'shadow', value: values['shadow'] }
-    ];
+    this.navItems = [{ dAnchorLink: 'shadow', value: values.shadow }];
   }
 
   ngOnDestroy() {
@@ -37,5 +36,4 @@ export class DesignShadowDemoComponent implements OnInit, OnDestroy {
       this.subs.unsubscribe();
     }
   }
-
 }

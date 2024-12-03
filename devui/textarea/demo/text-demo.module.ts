@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FormModule } from 'ng-devui/form';
 import { DevUIApiComponent } from 'ng-devui/shared/devui-api/devui-api.component';
@@ -21,6 +22,7 @@ import { TextDesignComponent } from './text-design.component';
     TextareaModule,
     DevUICodeboxModule,
     DevUIApiModule,
+    FormsModule,
     DDemoNavModule,
     FormModule,
     RouterModule.forChild([

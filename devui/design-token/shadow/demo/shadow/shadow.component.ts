@@ -17,16 +17,17 @@ export class ShadowComponent implements OnInit, OnDestroy {
   shadowColorKey = ['shadow'];
   i18nText: any;
 
-  constructor(private translate: TranslateService) { this.setI18n(); }
+  constructor(private translate: TranslateService) {
+    this.setI18n();
+  }
 
   ngOnInit() {
     if (typeof window !== undefined) {
-      this.themeService = window['devuiThemeService'];
+      this.themeService = (window as any).devuiThemeService;
       this.changeValueInTable();
       if (this.themeService.eventBus) {
         this.themeService.eventBus.add('themeChanged', this.changeValueInTable);
       }
-
     }
   }
 
@@ -36,24 +37,23 @@ export class ShadowComponent implements OnInit, OnDestroy {
     const theme = this.themeService.currentTheme;
     for (const key in theme.data) {
       if (Object.prototype.hasOwnProperty.call(theme.data, key)) {
-        if (this.shadowKey.some(item => key.includes(item))) {
+        if (this.shadowKey.some((item) => key.includes(item))) {
           const obj = {
             name: '$' + key,
             value: theme.data[key],
-            description: this.i18nText ? this.i18nText['shadows'][key] : ''
+            description: this.i18nText ? this.i18nText.shadows[key] : '',
           };
           this.shadows.push(obj);
         }
-        if (this.shadowColorKey.some(item => key.includes(item)) && theme.data[key].startsWith('rgba')) {
+        if (this.shadowColorKey.some((item) => key.includes(item)) && theme.data[key].startsWith('rgba')) {
           const obj = {
             name: '$' + key,
             value: theme.data[key],
-            description: this.i18nText ? this.i18nText['shadowColor'][key] : ''
+            description: this.i18nText ? this.i18nText.shadowColor[key] : '',
           };
           this.shadowColor.push(obj);
         }
       }
-
     }
   };
 

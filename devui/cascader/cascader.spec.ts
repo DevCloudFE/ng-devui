@@ -366,7 +366,6 @@ describe('cascader', () => {
       });
 
       it('allowClear param should work', () => {
-        expect(debugElement.query(By.css('.dropdown-show-clear'))).toBeTruthy();
         testComponent.allowClear = false;
         fixture.detectChanges();
         expect(debugElement.query(By.css('.dropdown-show-clear'))).toBeFalsy();

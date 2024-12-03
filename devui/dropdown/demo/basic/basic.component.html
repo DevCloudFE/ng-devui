@@ -3,32 +3,32 @@
     <d-icon dDropDownToggle [icon]="'icon-chevron-down-2'" [operable]="true" [rotate]="rotateDegrees">
       <span iconPrefix>more</span>
     </d-icon>
-    <ul dDropDownMenu class="devui-dropdown-menu" role="menu">
-      <li role="menuitem">
+    <ul dDropDownMenu class="devui-dropdown-menu">
+      <li>
         <input type="text" class="devui-input devui-input-sm devui-search-in-dropdown" placeholder="input box" />
         <div class="icon-in-search">
           <i class="icon icon-search"></i>
         </div>
       </li>
-      <li class="disabled" role="menuitem">
-        <a dDropDownMenuItem class="disabled">Disabled Option</a>
+      <li class="disabled">
+        <a dDropDownMenuItem class="disabled" [disabled]="true" (click)="showClickEvent($event)">Disabled Option</a>
       </li>
-      <li role="menuitem">
+      <li>
         <a dDropDownMenuItem>New</a>
       </li>
-      <li role="menuitem">
+      <li>
         <a dDropDownMenuItem>Delete</a>
       </li>
-      <li role="menuitem">
+      <li>
         <a dDropDownMenuItem>Item 1</a>
       </li>
-      <li class="disabled" role="menuitem">
-        <a dDropDownMenuItem class="disabled">Item 2</a>
+      <li class="disabled">
+        <a dDropDownMenuItem class="disabled" (click)="showClickEvent($event)">Item 2</a>
       </li>
-      <li role="menuitem">
+      <li>
         <a dDropDownMenuItem>Item 3</a>
       </li>
-      <li role="menuitem">
+      <li>
         <a dDropDownMenuItem>Item 4</a>
       </li>
     </ul>
@@ -40,32 +40,32 @@
     <d-icon dDropDownToggle class="devui-dropdown-default devui-dropdown-origin" [icon]="'icon-chevron-down-2'" [rotate]="rotateDegrees">
       <span iconPrefix>more</span>
     </d-icon>
-    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar" role="menu">
-      <li role="menuitem">
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar">
+      <li>
         <input type="text" class="devui-input devui-input-sm devui-search-in-dropdown" placeholder="input box" />
         <div class="icon-in-search">
           <i class="icon icon-search"></i>
         </div>
       </li>
-      <li class="disabled" role="menuitem">
+      <li class="disabled">
         <a dDropDownMenuItem class="disabled">Disabled Option</a>
       </li>
-      <li role="menuitem">
+      <li>
         <a dDropDownMenuItem>New</a>
       </li>
-      <li role="menuitem">
+      <li>
         <a dDropDownMenuItem>Delete</a>
       </li>
-      <li role="menuitem">
+      <li>
         <a dDropDownMenuItem>Item 1</a>
       </li>
-      <li class="disabled" role="menuitem">
+      <li class="disabled">
         <a dDropDownMenuItem class="disabled">Item 2</a>
       </li>
-      <li role="menuitem">
+      <li>
         <a dDropDownMenuItem>Item 3</a>
       </li>
-      <li role="menuitem">
+      <li>
         <a dDropDownMenuItem>Item 4</a>
       </li>
     </ul>

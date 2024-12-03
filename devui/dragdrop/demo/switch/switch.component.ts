@@ -3,19 +3,11 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'd-switch',
   templateUrl: './switch.component.html',
-  styleUrls: ['./switch.component.scss']
+  styleUrls: ['./switch.component.scss'],
 })
 export class SwitchComponent {
-  list1 = [
-
-  ];
-
-  list2 = [
-    { name: 'Visual Studio Code' },
-    { name: 'WebStorm' },
-    { name: 'Sublime' },
-    { name: 'Atom' }
-  ];
+  list1 = [];
+  list2 = [{ name: 'Visual Studio Code' }, { name: 'WebStorm' }, { name: 'Sublime' }, { name: 'Atom' }];
 
   onDrop(e: any) {
     console.log(e);
@@ -36,9 +28,7 @@ export class SwitchComponent {
   }
 
   removeItem(item: any, list: Array<any>) {
-    const index = list.map(function (e) {
-      return e.name;
-    }).indexOf(item.name);
+    const index = list.map((e) => e.name).indexOf(item.name);
     list.splice(index, 1);
   }
 }

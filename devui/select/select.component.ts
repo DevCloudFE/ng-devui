@@ -119,7 +119,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
    * 【可选】cdk模式overlay Positions的控制
    */
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
-  @Input() appendToBodyScrollStrategy: AppendToBodyScrollStrategyType;
+  @Input() @WithConfig() appendToBodyScrollStrategy: AppendToBodyScrollStrategyType;
   /**
    * 【可选】cdk模式origin width
    */
@@ -407,6 +407,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
 
   ngOnChanges(changes: SimpleChanges): void {
     const { searchFn, options, appendToBodyDirections, appendToBodyScrollStrategy, disabled } = changes;
+    const globalScrollStrategy = this.devConfigService.getConfigForApi('appendToBodyScrollStrategy');
     if (searchFn || options) {
       this.resetSource();
       if (this.virtualScroll && this.virtualScrollViewport) {
@@ -417,7 +418,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
     if (appendToBodyDirections) {
       this.setPositions();
     }
-    if (appendToBodyScrollStrategy && this.appendToBodyScrollStrategy) {
+    if (this.appendToBodyScrollStrategy && (appendToBodyScrollStrategy || globalScrollStrategy)) {
       const func = this.scrollStrategyOption[this.appendToBodyScrollStrategy];
       this.scrollStrategy = func();
     }
@@ -572,7 +573,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   }
 
   setAvailableOptions() {
-    if (!this.value || !Array.isArray(this.availableOptions)) {
+    const hasNoValue = this.value === undefined || this.value === '';
+    if (hasNoValue || !Array.isArray(this.availableOptions)) {
       return;
     }
     let _value = this.value;
@@ -599,7 +601,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
       ? this.getOption(this.availableOptions, this.value)
       : this.availableOptions.find((item) => this.formatter(item.option) === this.formatter(this.value));
     this.activeIndex = selectedItem ? selectedItem.id : -1;
-    this.selectIndex = this.activeIndex ? this.activeIndex : -1;
+    this.selectIndex = this.activeIndex >= 0 ? this.activeIndex : -1;
   }
 
   getOption(data, value, hasOption?) {
@@ -794,7 +796,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, AfterViewI
   isBottomRectEnough() {
     const selectMenuElement = this.selectMenuElement.nativeElement;
     const selectInputElement = this.selectInputElement || this.selectInputWithLabelElement || this.selectInputWithTemplateElement;
-    const displayStyle = selectMenuElement.style['display'] || (<any>window).getComputedStyle(selectMenuElement).display;
+    const displayStyle = selectMenuElement.style.display || (<any>window).getComputedStyle(selectMenuElement).display;
     let tempStyle;
     if (displayStyle === 'none') {
       // 必要， 否则首次展开必有问题， 如果animationEnd之后设置为none也会有问题

@@ -1198,8 +1198,8 @@
       },
       "pipeDemo": {
         "dDatePipe": {
-          "title": "日期解析器"
-        },
+        "title": "日期解析器"
+      },
         "dSafeNullPipe": {
           "title": "空值占位管道",
           "description": "当数据为 ''、null、undefined时可指定任意字符进行占位展示，默认为：'--'"
@@ -3623,17 +3623,17 @@
       }
     },
     "tabs": {
-      "name": "Tabs 选项卡切换",
+      "name": "Tabs 页签",
       "type": "导航",
       "path": "tabs",
-      "description": "选项卡切换组件。",
+      "description": "页签组件。",
       "tmw": "用户需要通过平级的区域将大块内容进行收纳和展现，保持界面整洁。",
       "basicDemo": {
         "title": "基本用法",
         "description": ""
       },
       "withoutContentDemo": {
-        "title": "禁用选项卡",
+        "title": "禁用页签",
         "description": "",
         "activeID:": "activeID:"
       },
@@ -3658,16 +3658,16 @@
         "description": ""
       },
       "sizeDemo": {
-        "title": "选项卡尺寸",
-        "description": "选项卡有4种大小，可以根据业务场景选择合适大小的尺寸。"
+        "title": "页签尺寸",
+        "description": "页签有4种大小，可以根据业务场景选择合适大小的尺寸。"
       },
       "beforeChangeDemo": {
         "title": "拦截tab切换",
-        "description": "使用beforeChange拦截选项卡切换。"
+        "description": "使用beforeChange拦截页签切换。"
       },
       "addDeleteDemo": {
         "title": "添加 / 删除",
-        "description": "添加和删除选项卡。"
+        "description": "添加和删除页签。"
       },
       "bigDataDemo": {
         "title": "大数据展示",
@@ -3679,13 +3679,13 @@
       },
       "anchorLinkValues": {
         "basic-usage": "基本用法",
-        "no-set-content": "禁用选项卡",
+        "no-set-content": "禁用页签",
         "custom-template": "自定义模板",
         "type-pills": "Pills类型",
         "type-options": "Options类型",
         "type-slider": "Slider类型",
         "type-wrapped": "Wrapped类型",
-        "size": "选项卡尺寸",
+        "size": "页签尺寸",
         "intercept-tab-switch": "拦截tab切换",
         "add-delete": "添加 / 删除",
         "big-data": "大数据展示",
@@ -3812,6 +3812,10 @@
         "title": "每个消息使用单独的超时时间",
         "description": "当设置超时时间模式为single时，每个消息使用自身的life作为超时时间，如果未设置则按severity判断，severity也未设置时默认超时时间为5000毫秒。"
       },
+      "appendDemo": {
+        "title": "追加显示",
+        "description": "在指定数量范围内追加显示新消息，而不是清空原有消息，需注意新消息插入后会重置已有消息的持续时间"
+      },
       "serviceDemo": {
         "title": "服务方式调用",
         "description": "使用服务的方式创建toast全局通知。"
@@ -3821,7 +3825,8 @@
         "life": "超时时间",
         "style": "自定义样式",
         "toast-service": "服务方式调用",
-        "single": "每个消息使用单独的超时时间"
+        "single": "每个消息使用单独的超时时间",
+        "append": "追加显示"
       }
     },
     "tooltip": {

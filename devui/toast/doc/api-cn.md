@@ -12,27 +12,28 @@ import { ToastModule } from 'ng-devui/toast';
 <d-toast></d-toast>
 ```
 
-# d-toast
+## d-toast
 
-## d-toast 参数
+### d-toast 参数
 
-|    参数    |             类型             |  默认  | 说明                                                                                                                                                                                         | 跳转 Demo                                 |
-| :--------: | :--------------------------: | :----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-|   value    | [`Array<Message>`](#message) |   --   | 必选，消息内容数组，Message 对象定义见下文                                                                                                                                                   | [基本用法](demo#basic-usage)              |
-|    life    |           `number`           |  5000  | 可选，超时时间，超时后自动消失，鼠标悬停可以阻止消失，单位毫秒。普通、成功、提示类默认为 5000 毫秒，错误、警告类默认为 10000 毫秒                                                            | [超时时间](demo#life)                     |
-|  lifeMode  |           `string`           | global | 可选，超时时间模式，预设值为 global 和 single 。默认为 global，所有消息使用 life 或群组第一个消息的预设超时时间； 设置为 single 时， 每个消息使用自身的超时时间，参见 Message 中的 life 定义 | [每个消息使用单独的超时时间](demo#single) |
-|   sticky   |          `boolean`           | false  | 可选，是否常驻，默认自动关闭                                                                                                                                                                 |
-|   style    |   `{[klass:string]:any;}`    |   --   | 可选，样式。参见 [ngStyle](https://angular.cn/api/common/NgStyle)                                                                                                                            | [自定义样式](demo#style)                  |
-| styleClass |           `string`           |   --   | 可选，类名。                                                                                                                                                                                 | [自定义样式](demo#style)                  |
+| 参数                                                      | 类型                         | 默认   | 说明                                                                                                                                                                                         | 跳转 Demo                                 |
+| --------------------------------------------------------- | ---------------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| value                                                     | [`Array<Message>`](#message) | --     | 必选，消息内容数组，Message 对象定义见下文                                                                                                                                                   | [基本用法](demo#basic-usage)              |
+| life                                                      | `number`                     | 5000   | 可选，超时时间，超时后自动消失，鼠标悬停可以阻止消失，单位毫秒。普通、成功、提示类默认为 5000 毫秒，错误、警告类默认为 10000 毫秒                                                            | [超时时间](demo#life)                     |
+| lifeMode                                                  | `string`                     | global | 可选，超时时间模式，预设值为 global 和 single 。默认为 global，所有消息使用 life 或群组第一个消息的预设超时时间； 设置为 single 时， 每个消息使用自身的超时时间，参见 Message 中的 life 定义 | [每个消息使用单独的超时时间](demo#single) |
+| sticky                                                    | `boolean`                    | false  | 可选，是否常驻，默认自动关闭                                                                                                                                                                 |
+| style                                                     | `{[klass:string]:any;}`      | --     | 可选，样式。参见 [ngStyle](https://angular.cn/api/common/NgStyle)                                                                                                                            |                                           |
+| styleClass                                                | `string`                     | --     | 可选，类名。                                                                                                                                                                                 |                                           |
+| <span style="white-space:nowrap;">appendUpperLimit</span> | `number`                     | 0      | 可选，在该值范围内追加显示新消息，而不是清空原有消息，需注意新消息插入后会重置已有消息的持续时间。设置为 0 时不启用。                                                                        | [追加显示](demo#append)                   |
 
-## d-toast 事件
+### d-toast 事件
 
-|    参数     |           类型            | 说明                                                                           |
-| :---------: | :-----------------------: | :----------------------------------------------------------------------------- |
-| closeEvent  |    `EventEmitter<any>`    | 可选，返回被手动关闭或自动消失的单条消息内容                                   |
+| 参数        | 类型                      | 说明                                                                           |
+| ----------- | ------------------------- | ------------------------------------------------------------------------------ |
+| closeEvent  | `EventEmitter<any>`       | 可选，返回被手动关闭或自动消失的单条消息内容                                   |
 | valueChange | `EventEmitter<Message[]>` | 可选，返回变化（手动关闭或自动消失）后剩余消息内容数组，Message 对象定义见下文 |
 
-# 接口 & 类型定义
+## 接口 & 类型定义
 
 ### Message
 
@@ -46,7 +47,7 @@ export interface Message {
 }
 ```
 
-# ToastService
+## ToastService
 
 在 component 中引入:
 
@@ -74,19 +75,18 @@ this.toastService.open({
 });
 ```
 
-## ToastService 参数
+### ToastService 参数
 
-|    参数    |             类型             |  默认  | 说明                                                                                                                                                                                         | 跳转 Demo                          |
-| :--------: | :--------------------------: | :----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-|   value    | [`Array<Message>`](#message) |   --   | 必选，消息内容数组，Message 对象定义见下文                                                                                                                                                   | [服务方式调用](demo#toast-service) |
-|    life    |           `number`           |  5000  | 可选，超时时间，超时后自动消失，鼠标悬停可以阻止消失，单位毫秒。普通、成功、提示类默认为 5000 毫秒，错误、警告类默认为 10000 毫秒                                                            | [服务方式调用](demo#toast-service) |
-|  lifeMode  |           `string`           | global | 可选，超时时间模式，预设值为 global 和 single 。默认为 global，所有消息使用 life 或群组第一个消息的预设超时时间； 设置为 single 时， 每个消息使用自身的超时时间，参见 Message 中的 life 定义 | [服务方式调用](demo#toast-service) |
-|   sticky   |          `boolean`           | false  | 可选，是否常驻，默认自动关闭                                                                                                                                                                 | [服务方式调用](demo#toast-service) |
-|   style    |   `{[klass:string]:any;}`    |   --   | 可选，样式。参见 [ngStyle](https://angular.cn/api/common/NgStyle)                                                                                                                            | [服务方式调用](demo#toast-service) |
-| styleClass |           `string`           |   --   | 可选，类名。                                                                                                                                                                                 | [服务方式调用](demo#toast-service) |
-| injector | `Injector` | -- | 可选，可以选择指定将用作组件的父级的注射器。   |
-| componentFactoryResolver | `ComponentFactoryResolver` | -- | 可选，可以选择指定将用作组件的父级的注射器。   |
-
+| 参数                     | 类型                         | 默认   | 说明                                                                                                                                                                                         | 跳转 Demo                          |
+| ------------------------ | ---------------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| value                    | [`Array<Message>`](#message) | --     | 必选，消息内容数组，Message 对象定义见下文                                                                                                                                                   | [服务方式调用](demo#toast-service) |
+| life                     | `number`                     | 5000   | 可选，超时时间，超时后自动消失，鼠标悬停可以阻止消失，单位毫秒。普通、成功、提示类默认为 5000 毫秒，错误、警告类默认为 10000 毫秒                                                            | [服务方式调用](demo#toast-service) |
+| lifeMode                 | `string`                     | global | 可选，超时时间模式，预设值为 global 和 single 。默认为 global，所有消息使用 life 或群组第一个消息的预设超时时间； 设置为 single 时， 每个消息使用自身的超时时间，参见 Message 中的 life 定义 | [服务方式调用](demo#toast-service) |
+| sticky                   | `boolean`                    | false  | 可选，是否常驻，默认自动关闭                                                                                                                                                                 | [服务方式调用](demo#toast-service) |
+| style                    | `{[klass:string]:any;}`      | --     | 可选，样式。参见 [ngStyle](https://angular.cn/api/common/NgStyle)                                                                                                                            | [服务方式调用](demo#toast-service) |
+| styleClass               | `string`                     | --     | 可选，类名。                                                                                                                                                                                 | [服务方式调用](demo#toast-service) |
+| injector                 | `Injector`                   | --     | 可选，可以选择指定将用作组件的父级的注射器。                                                                                                                                                 |
+| componentFactoryResolver | `ComponentFactoryResolver`   | --     | 可选，可以选择指定将用作组件的父级的注射器。                                                                                                                                                 |
 
 接收发射过来的数据，closeEvent 返回被手动关闭或自动消失的单条消息内容，valueChange 返回变化（手动关闭或自动消失）后剩余消息内容数组，[`Array<Message>`](#message) 对象定义见接口 & 类型定义:
 

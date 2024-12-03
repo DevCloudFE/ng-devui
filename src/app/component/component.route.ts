@@ -657,7 +657,7 @@ export const routesConfig: Routes = [
       type: '导航',
       enType: 'Navigation',
       name: 'Tabs',
-      cnName: '选项卡切换',
+      cnName: '页签',
       bannerName: "16",
     },
   },

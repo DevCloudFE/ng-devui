@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DropDownMenuDirective } from './dropdown-menu.directive';
@@ -289,11 +289,11 @@ describe('dropdown', () => {
     });
     describe('dropdown trigger', () => {
       it('click show menu', fakeAsync(() => {
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
         dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time, NOTICE：NoopAnimation animation squash to 0 million second
-        expect(dropdownMenuElement.styles['display']).toBe('block');
+        expect(dropdownMenuElement.styles.display).toBe('block');
       }));
       describe('after click show menu', () => {
         beforeEach(fakeAsync(() => {
@@ -305,26 +305,26 @@ describe('dropdown', () => {
           dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
-          expect(dropdownMenuElement.styles['display']).toBe('none');
+          expect(dropdownMenuElement.styles.display).toBe('none');
         }));
         it('click outside hide', fakeAsync(() => {
           document.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
-          expect(dropdownMenuElement.styles['display']).toBe('none');
+          expect(dropdownMenuElement.styles.display).toBe('none');
         }));
       });
       it('hover show menu', fakeAsync(() => {
         component.trigger = 'hover';
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
         dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', { bubbles: false, cancelable: false }));
         fixture.detectChanges();
         tick(250); // debounce time
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('block');
+        expect(dropdownMenuElement.styles.display).toBe('block');
       }));
       describe('after hover show menu', () => {
         beforeEach(fakeAsync(() => {
@@ -350,7 +350,7 @@ describe('dropdown', () => {
           fixture.detectChanges();
           tick(); // animation time
           fixture.detectChanges();
-          expect(dropdownMenuElement.styles['display']).toBe('none');
+          expect(dropdownMenuElement.styles.display).toBe('none');
         }));
       });
       describe('complete manually control', () => {
@@ -359,49 +359,49 @@ describe('dropdown', () => {
           fixture.detectChanges();
         }));
         it('click should not show menu', fakeAsync(() => {
-          expect(dropdownMenuElement.styles['display']).toBe('none');
+          expect(dropdownMenuElement.styles.display).toBe('none');
           dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
-          expect(dropdownMenuElement.styles['display']).toBe('none');
+          expect(dropdownMenuElement.styles.display).toBe('none');
         }));
         it('set isOpen should show menu', fakeAsync(() => {
           component.defaultOpen = true;
           fixture.detectChanges();
           tick(); // animation time
           fixture.detectChanges();
-          expect(dropdownMenuElement.styles['display']).toBe('block');
+          expect(dropdownMenuElement.styles.display).toBe('block');
           component.defaultOpen = false;
           fixture.detectChanges();
           tick(); // animation time
           fixture.detectChanges();
-          expect(dropdownMenuElement.styles['display']).toBe('none');
+          expect(dropdownMenuElement.styles.display).toBe('none');
         }));
       });
     });
     describe('dropdown isOpen', () => {
       it('isOpen true, should open menu, set to false should close', fakeAsync(() => {
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
         component.defaultOpen = true;
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('block');
+        expect(dropdownMenuElement.styles.display).toBe('block');
         component.defaultOpen = false;
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
       }));
       it('disabled, isOpen true, should not toggle', fakeAsync(() => {
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
         component.disabled = true;
         fixture.detectChanges();
         component.defaultOpen = true;
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
       }));
     });
     describe('dropdown disabled', () => {
@@ -413,7 +413,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
         expect(component.count).toBe(count);
 
         component.disabled = false;
@@ -422,7 +422,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('block');
+        expect(dropdownMenuElement.styles.display).toBe('block');
         expect(component.count).toBe(count + 1);
         expect(component.isOpen).toBe(true);
       }));
@@ -442,14 +442,14 @@ describe('dropdown', () => {
           fixture.detectChanges();
           tick(); // animation time
           fixture.detectChanges();
-          expect(dropdownMenuElement.styles['display']).toBe('block');
+          expect(dropdownMenuElement.styles.display).toBe('block');
 
           const textarea = dropdownMenuElement.nativeElement.querySelector('textarea');
           textarea.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
           fixture.detectChanges();
-          expect(dropdownMenuElement.styles['display']).toBe('block');
+          expect(dropdownMenuElement.styles.display).toBe('block');
         }));
       });
       describe('closeScope = all, same as default', () => {
@@ -462,14 +462,14 @@ describe('dropdown', () => {
           fixture.detectChanges();
           tick(); // animation time
           fixture.detectChanges();
-          expect(dropdownMenuElement.styles['display']).toBe('block');
+          expect(dropdownMenuElement.styles.display).toBe('block');
 
           const textarea = dropdownMenuElement.nativeElement.querySelector('textarea');
           textarea.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
           fixture.detectChanges();
-          expect(dropdownMenuElement.styles['display']).toBe('block');
+          expect(dropdownMenuElement.styles.display).toBe('block');
         }));
       });
       describe('closeScope = blank, click outside to close', () => {
@@ -483,13 +483,13 @@ describe('dropdown', () => {
           dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
-          expect(dropdownMenuElement.styles['display']).toBe('block');
+          expect(dropdownMenuElement.styles.display).toBe('block');
         }));
         it('click outside to close', fakeAsync(() => {
           document.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
-          expect(dropdownMenuElement.styles['display']).toBe('none');
+          expect(dropdownMenuElement.styles.display).toBe('none');
         }));
       });
       describe('closeScope = none, manually handle close', () => {
@@ -502,20 +502,20 @@ describe('dropdown', () => {
           dropdownMenuElement.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
-          expect(dropdownMenuElement.styles['display']).toBe('block');
+          expect(dropdownMenuElement.styles.display).toBe('block');
         }));
         it('click outside not to close', fakeAsync(() => {
           document.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
-          expect(dropdownMenuElement.styles['display']).toBe('block');
+          expect(dropdownMenuElement.styles.display).toBe('block');
         }));
         it('manually handle close', fakeAsync(() => {
           const closeBtn = dropdownMenuElement.nativeElement.querySelector('#close');
           closeBtn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
           fixture.detectChanges();
           tick(); // animation time
-          expect(dropdownMenuElement.styles['display']).toBe('none');
+          expect(dropdownMenuElement.styles.display).toBe('none');
         }));
       });
     });
@@ -532,7 +532,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
       }));
       it('trigger = click && closeOnMouseLeaveMenu = true, menu should close after leaving menu', fakeAsync(() => {
-        expect(dropdownMenuElement.styles['display']).toBe('block');
+        expect(dropdownMenuElement.styles.display).toBe('block');
         dropdownMenuElement.nativeElement.dispatchEvent(
           new MouseEvent('mouseleave', {
             relatedTarget: document,
@@ -545,7 +545,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
       }));
     });
     describe('dropdown toggleEvent', () => {
@@ -567,23 +567,23 @@ describe('dropdown', () => {
     });
     describe('dropdown public api function toggle', () => {
       it('toggle api should toggle dropdown', fakeAsync(() => {
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
         const toggleElement = debugEl.nativeElement.querySelector('.toggle');
 
         toggleElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('block');
+        expect(dropdownMenuElement.styles.display).toBe('block');
 
         toggleElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
       }));
       it('disabled, toggle api should not toggle dropdown', fakeAsync(() => {
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
         component.disabled = true;
         fixture.detectChanges();
         const toggleElement = debugEl.nativeElement.querySelector('.toggle');
@@ -591,7 +591,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
       }));
     });
   });
@@ -617,7 +617,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         expect(dropdownMenuElement).toBeTruthy();
-        expect(dropdownMenuElement.styles['display']).toBe('block');
+        expect(dropdownMenuElement.styles.display).toBe('block');
       }));
     });
     describe('dropdownToggle autoFocus', () => {
@@ -651,7 +651,7 @@ describe('dropdown', () => {
         expect(document.activeElement).toEqual(dropdownToggleElement.nativeElement);
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         expect(dropdownMenuElement).toBeTruthy();
-        expect(dropdownMenuElement.styles['display']).toBe('block'); // 这行不稳定，需要浏览器处于激活状态
+        expect(dropdownMenuElement.styles.display).toBe('block'); // 这行不稳定，需要浏览器处于激活状态
       }));
     });
   });
@@ -679,7 +679,7 @@ describe('dropdown', () => {
         tick();
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         expect(dropdownMenuElement).toBeTruthy();
-        expect(dropdownMenuElement.styles['display']).toBe('block');
+        expect(dropdownMenuElement.styles.display).toBe('block');
       }));
       describe('after click show menu', () => {
         beforeEach(fakeAsync(() => {
@@ -716,7 +716,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         expect(dropdownMenuElement).toBeTruthy();
-        expect(dropdownMenuElement.styles['display']).toBe('block');
+        expect(dropdownMenuElement.styles.display).toBe('block');
         expect(document.contains(dropdownMenuElement.nativeElement)).toBe(true);
       }));
       describe('after hover show menu', () => {
@@ -762,7 +762,7 @@ describe('dropdown', () => {
           fixture.detectChanges();
           dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
           expect(dropdownMenuElement).toBeTruthy();
-          expect(dropdownMenuElement.styles['display']).toBe('block');
+          expect(dropdownMenuElement.styles.display).toBe('block');
           expect(document.contains(dropdownMenuElement.nativeElement)).toBe(true);
         }));
         describe('after mouseleave toggle to menu show', () => {
@@ -813,7 +813,7 @@ describe('dropdown', () => {
             fixture.detectChanges();
             dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
             expect(dropdownMenuElement).toBeTruthy();
-            expect(dropdownMenuElement.styles['display']).toBe('block');
+            expect(dropdownMenuElement.styles.display).toBe('block');
             expect(document.contains(dropdownMenuElement.nativeElement)).toBe(true);
           }));
         });
@@ -834,7 +834,7 @@ describe('dropdown', () => {
       it('trigger = click && closeOnMouseLeaveMenu = true, menu should close after leaving menu', fakeAsync(() => {
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         expect(dropdownMenuElement).toBeTruthy();
-        expect(dropdownMenuElement.styles['display']).toBe('block');
+        expect(dropdownMenuElement.styles.display).toBe('block');
         expect(document.contains(dropdownMenuElement.nativeElement)).toBe(true);
         // appendToBody的 需要mouseleave dropdown menu
         dropdownMenuElement.nativeElement.dispatchEvent(
@@ -854,7 +854,7 @@ describe('dropdown', () => {
       it('trigger = click && closeOnMouseLeaveMenu = true, menu should not close after leaving menu to toggle', fakeAsync(() => {
         dropdownMenuElement = debugEl.query(By.directive(DropDownMenuDirective));
         expect(dropdownMenuElement).toBeTruthy();
-        expect(dropdownMenuElement.styles['display']).toBe('block');
+        expect(dropdownMenuElement.styles.display).toBe('block');
         expect(document.contains(dropdownMenuElement.nativeElement)).toBe(true);
         dropdownMenuElement.nativeElement.dispatchEvent(
           new MouseEvent('mouseleave', {
@@ -1366,7 +1366,7 @@ describe('dropdown', () => {
         expect(originRect.x === menuRect.x).toBe(true);
         expect(originRect.y + originRect.height + verticalBorderOverlayWidth === menuRect.y).toBe(true);
         clickToggle();
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
       }));
       it('bottom not enough, render up', fakeAsync(() => {
         component.expand = true;
@@ -1379,7 +1379,7 @@ describe('dropdown', () => {
         expect(originRect.x === menuRect.x).toBe(true);
         expect(originRect.y === menuRect.y + menuRect.height + verticalBorderOverlayWidth).toBe(true);
         clickToggle(); // to test fadeout function (Branches coverage)
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
       }));
     });
     describe('dropdown keyboard event', () => {
@@ -1399,29 +1399,29 @@ describe('dropdown', () => {
         fixture.detectChanges();
       });
       it('toggle Element focus，press enter toggle menu open', fakeAsync(() => {
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
         dropdownToggleElement.nativeElement.dispatchEvent(new MouseEvent('focus', { bubbles: false, cancelable: false }));
         fixture.detectChanges();
         dropdownToggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
         fixture.detectChanges();
         tick();
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('block');
+        expect(dropdownMenuElement.styles.display).toBe('block');
         dropdownToggleElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
         fixture.detectChanges();
         tick();
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
       }));
       it('menu open， press escape close menu', fakeAsync(() => {
         clickToggle();
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('block');
+        expect(dropdownMenuElement.styles.display).toBe('block');
         document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
         fixture.detectChanges();
         tick(); // animation time
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
       }));
     });
 
@@ -1446,7 +1446,7 @@ describe('dropdown', () => {
         fixture.detectChanges();
         tick();
         fixture.detectChanges();
-        expect(dropdownMenuElement.styles['display']).toBe('none');
+        expect(dropdownMenuElement.styles.display).toBe('none');
       }));
     });
   });

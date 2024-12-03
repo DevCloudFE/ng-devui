@@ -4,11 +4,12 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'd-design-animation-demo',
-  templateUrl: './design-animation-demo.component.html'
+  templateUrl: './design-animation-demo.component.html',
 })
 export class DesignAnimationDemoComponent implements OnInit, OnDestroy {
   navItems = [];
   subs: Subscription = new Subscription();
+
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
@@ -27,9 +28,7 @@ export class DesignAnimationDemoComponent implements OnInit, OnDestroy {
   }
 
   setNavValues(values) {
-    this.navItems = [
-      { dAnchorLink: 'animation', value: values['animation'] }
-    ];
+    this.navItems = [{ dAnchorLink: 'animation', value: values.animation }];
   }
 
   ngOnDestroy() {
@@ -37,5 +36,4 @@ export class DesignAnimationDemoComponent implements OnInit, OnDestroy {
       this.subs.unsubscribe();
     }
   }
-
 }

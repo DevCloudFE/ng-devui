@@ -6,7 +6,6 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  OnInit,
   Output,
   SimpleChanges,
   TemplateRef,
@@ -22,16 +21,14 @@ import { DataTableHeadCellTmplComponent } from './data-table-head-cell-tmpl.comp
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnInit {
+export class DataTableColumnTmplComponent implements OnChanges, OnDestroy {
   @Input() advancedHeader: Array<{
     header: string;
     rowspan: number;
     colspan: number;
     [prop: string]: any;
   }>;
-
   @Input() headCellApplyAll = false;
-
   @Input() maxWidth: string;
   @Input() minWidth: string;
   @Input() field: string;
@@ -79,15 +76,13 @@ export class DataTableColumnTmplComponent implements OnChanges, OnDestroy, OnIni
   // @deprecated
   @Input() fieldType = 'text';
 
-  constructor() {}
-  ngOnInit(): void {}
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['order']) {
-      this.orderChange.emit(changes['order'].currentValue);
+    const { order, width } = changes;
+    if (order) {
+      this.orderChange.emit(order.currentValue);
     }
-
-    if (changes['width']) {
-      this.widthChange.emit(changes['width'].currentValue);
+    if (width) {
+      this.widthChange.emit(width.currentValue);
     }
   }
 

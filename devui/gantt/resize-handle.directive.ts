@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Directive, ElementRef, EventEmitter, HostListener, Inject, Input, NgZone, Output, Renderer2 } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 
 @Directive({
   selector: '[dResizeHandle]',
@@ -159,7 +159,8 @@ export class ResizeHandleDirective {
     const overMinWidth = !this.minWidth || newWidth >= minWidth;
     const underMaxWidth = !this.maxWidth || newWidth <= maxWidth;
 
-    const finalWidth = !overMinWidth ? minWidth : !underMaxWidth ? maxWidth : newWidth;
+    const result = !underMaxWidth ? maxWidth : newWidth;
+    const finalWidth = !overMinWidth ? minWidth : result;
     return finalWidth;
   }
 

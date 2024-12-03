@@ -8,7 +8,6 @@ import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.comp
   templateUrl: './data-table-body.component.html',
   styleUrls: ['./data-table-body.component.scss'],
   preserveWhitespaces: false,
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataTableBodyComponent implements OnChanges {
   @Input() checkable: boolean;
@@ -31,12 +30,11 @@ export class DataTableBodyComponent implements OnChanges {
   @Input() headerExpandConfig: TableExpandConfig;
   @Input() generalRowHoveredData: boolean;
   childTdColspan: number;
-  constructor(@Inject(DATA_TABLE) public dt: any) {
 
-  }
+  constructor(@Inject(DATA_TABLE) public dt: any) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['columns'] && this.columns) {
+    if (changes.columns && this.columns) {
       let columnSpan = this.columns.length;
       if (this.showExpandToggle) {
         columnSpan += 1;

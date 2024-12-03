@@ -126,7 +126,7 @@ import { UploadModule } from 'ng-devui/upload';
 
 `fileUploaders`：FileUploader 类型的数组，FileUploader 中包含 send()， cancel()方法
 
-`UploadStatus`：上传状态，存在 preLoad = 0，uploading，uploaded，failed 四种状态
+`UploadStatus`：上传状态，存在 preLoad，uploading，uploaded，failed 四种状态
 
 `deleteFile`: 传入需要删除的上传文件
 

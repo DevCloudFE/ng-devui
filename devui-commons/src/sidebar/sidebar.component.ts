@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { DevuiCommonsService } from '../devui-commons.service';
 import { I18nUtil } from '../i18n/i18n.util';
+import { LinkMap } from '../constant';
 
 interface navItem {
   name: string;
@@ -70,7 +71,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   rotateDegrees = 0;
   docLinkMap = {
-    'opensource': 'https://github.com/DevCloudFE/ng-devui/releases',
+    'opensource': LinkMap.versionRelease,
   };
   get navData() {
     return this._navData;
@@ -86,7 +87,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.commonsService.on<any>('searchEvent').subscribe((term) => {
       this.filterData(term);
     });
-    this.changelogLink = this.docLinkMap['opensource'];
+    this.changelogLink = this.docLinkMap.opensource;
     if(this.showVersions){
       this.currentOption = this.versionOptions[0];
     }

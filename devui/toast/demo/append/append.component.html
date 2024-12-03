@@ -1,0 +1,7 @@
+<section>
+  <d-toast [lifeMode]="'single'" [value]="msgs" [appendUpperLimit]="8"></d-toast>
+  <d-button bsStyle="common" (click)="showToast('success')">Success</d-button>
+  <d-button bsStyle="common" (click)="showToast('warn')">Warn</d-button>
+  <d-button bsStyle="common" (click)="showToast('error')">Error</d-button>
+  <d-button bsStyle="common" (click)="showToast('info')">Info</d-button>
+</section>

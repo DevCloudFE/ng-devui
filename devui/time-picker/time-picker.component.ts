@@ -5,7 +5,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  forwardRef,
   HostListener,
   Inject,
   Input,
@@ -17,19 +16,23 @@ import {
   SimpleChanges,
   TemplateRef,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
+  forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import {
-  addClassToOrigin,
   AppendToBodyDirection,
-  AppendToBodyDirectionsConfig, DevConfigService, fadeInOut,
+  AppendToBodyDirectionsConfig,
+  DevConfigService,
+  WithConfig,
+  addClassToOrigin,
+  fadeInOut,
   formWithDropDown,
   removeClassFromOrigin,
-  unshiftString, WithConfig
+  unshiftString,
 } from 'ng-devui/utils';
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 
 interface TimeObj {
@@ -42,22 +45,20 @@ interface TimeObj {
 @Component({
   /* eslint-disable-next-line @angular-eslint/component-selector*/
   selector: '[dTimePicker]',
-  providers: [{
+  providers: [
+    {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => TimePickerComponent),
-    multi: true
-  }],
+      multi: true,
+    },
+  ],
   exportAs: 'timePicker',
   templateUrl: 'time-picker.component.html',
-  animations: [
-    fadeInOut
-  ],
-  styleUrls: ['./time-picker.component.scss']
+  animations: [fadeInOut],
+  styleUrls: ['./time-picker.component.scss'],
 })
 export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, ControlValueAccessor {
-  @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = [
-    'rightDown', 'leftDown', 'rightUp', 'leftUp'
-  ];
+  @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
   @Input() disabled: boolean;
   @Input() customViewTemplate: TemplateRef<any>;
   @Input() autoOpen = false;
@@ -222,16 +223,14 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
   }
 
   onDocumentClick = ($event) => {
-    if (this.elementRef.nativeElement !== $event.target &&
-      (this.timePicker && !this.timePicker.nativeElement.contains($event.target))
-    ) {
+    if (this.elementRef.nativeElement !== $event.target && this.timePicker && !this.timePicker.nativeElement.contains($event.target)) {
       this.isOpen = false;
       this.cdr.markForCheck();
     }
   };
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['appendToBodyDirections']) {
+    if (changes.appendToBodyDirections) {
       this.setTimePickerPositions();
     }
   }
@@ -286,7 +285,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
 
   isMinuteInRange(minute: string) {
     const curTime = this.elementRef.nativeElement.value;
-    const hourIndex = this.format.split(':').findIndex(t => t === 'hh');
+    const hourIndex = this.format.split(':').findIndex((t) => t === 'hh');
     const curHour = hourIndex !== -1 ? curTime.split(':')[hourIndex] : null;
 
     // 不存在小时时直接依据最值判定
@@ -308,8 +307,8 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
 
   isSecondInRange(second: string) {
     const curTime = this.elementRef.nativeElement.value;
-    const hourIndex = this.format.split(':').findIndex(t => t === 'hh');
-    const minIndex = this.format.split(':').findIndex(t => t === 'mm');
+    const hourIndex = this.format.split(':').findIndex((t) => t === 'hh');
+    const minIndex = this.format.split(':').findIndex((t) => t === 'mm');
     const curHour = hourIndex !== -1 ? curTime.split(':')[hourIndex] : null;
     const curMin = minIndex !== -1 ? curTime.split(':')[minIndex] : null;
 
@@ -332,8 +331,10 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
 
   // 判断当前的分钟是否在范围内但不在边界上
   isMinuteInRangeNotBoundary(hour: string, min: string): boolean {
-    return (hour && hour < this._maxTimeHour && hour > this._minTimeHour) // 小时在范围内
-      || (min < this._maxTimeMin && min > this._minTimeMin); // 分钟在范围内
+    return (
+      (hour && hour < this._maxTimeHour && hour > this._minTimeHour) || // 小时在范围内
+      (min < this._maxTimeMin && min > this._minTimeMin)
+    ); // 分钟在范围内
   }
 
   validateTime(time: string, type?: string) {
@@ -345,7 +346,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
       let valid;
       switch (type) {
       case 'hh':
-        valid = (time <= this._maxTimeHour && time >= this._minTimeHour);
+        valid = time <= this._maxTimeHour && time >= this._minTimeHour;
         break;
       case 'mm':
         valid = this.isMinuteInRange(time);
@@ -353,28 +354,29 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
       case 'ss':
         valid = this.isSecondInRange(time);
         break;
+      default:
       }
       return valid;
     }
 
     if (
-      timeArr.some(
-        (t, i) => {
+      timeArr.some((t, i) => {
           return Number(t) > Number(this.maxTime.split(':')[i]) || Number(t) < Number(this.minTime.split(':')[i]);
-        }
-      )
+      })
     ) {
       return false;
     }
 
     if (timeArr.length !== 3) {
-      if (timeArr.length === this.format.split(':').length &&
-        !timeArr.some(t => t.length > 2 || t !== unshiftString(String(Number(t)), 2, '0'))) {
+      if (
+        timeArr.length === this.format.split(':').length &&
+        !timeArr.some((t) => t.length > 2 || t !== unshiftString(String(Number(t)), 2, '0'))
+      ) {
         return true;
       } else {
         return false;
       }
-    } else if (timeArr.some(t => t !== unshiftString(String(Number(t)), 2, '0'))) {
+    } else if (timeArr.some((t) => t !== unshiftString(String(Number(t)), 2, '0'))) {
       return false;
     }
 
@@ -440,18 +442,22 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
       break;
     case 'bottom':
       this.dropdownPosition = 'top';
+      break;
+    default:
     }
   }
 
   setTimePickerPositions() {
     if (this.appendToBodyDirections && this.appendToBodyDirections.length > 0) {
-      this.pickerPositions = this.appendToBodyDirections.map(position => {
+      this.pickerPositions = this.appendToBodyDirections
+        .map((position) => {
         if (typeof position === 'string') {
           return AppendToBodyDirectionsConfig[position];
         } else {
           return position;
         }
-      }).filter(position => position !== undefined);
+        })
+        .filter((position) => position !== undefined);
     } else {
       this.pickerPositions = undefined;
     }
@@ -498,37 +504,34 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
     case 2:
       whichList = 'third';
       break;
+    default:
     }
     const type = this.format.split(':')[index];
     const arr = ['hh', 'mm', 'ss'];
     const len = type === 'hh' ? 24 : 60;
     if (!this[`${whichList}List`] || !this[`${whichList}List`].length) {
-      this[`${whichList}List`] = new Array(len).fill(0).map(
-        (item, i) => {
-          const time =  unshiftString(String(i), 2, '0');
+      this[`${whichList}List`] = new Array(len).fill(0).map((item, i) => {
+        const time = unshiftString(String(i), 2, '0');
           const disabled = this.disabled || !this.validateTime(time, type);
           return {
             time,
             active: selectedTimeArr[arr.indexOf(type)] === time,
             type: index,
-            disabled
+          disabled,
           };
-        }
-      );
+      });
     } else {
-      this[`${whichList}List`].forEach(
-        (item, i) => {
+      this[`${whichList}List`].forEach((item, i) => {
           if (!justScroll) {
-            const time =  unshiftString(String(i), 2, '0');
+          const time = unshiftString(String(i), 2, '0');
             const disabled = this.disabled || !this.validateTime(time, type);
             item.active = selectedTimeArr[arr.indexOf(type)] === time;
             item.disabled = disabled;
           }
           if (item.active && this.isOpen) {
             this.setScroll(whichList, i, justScroll);
-          }
         }
-      );
+      });
     }
     if (!this.disabled) {
       this.fixTimeInRange(this[`${whichList}List`]);
@@ -537,15 +540,15 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
 
   // 当存在值选中的是不可选选项时，进行修正
   fixTimeInRange(list) {
-    const curActive = list.find(item => item.active);
+    const curActive = list.find((item) => item.active);
     if (curActive?.disabled) {
-      this.selectTime(list.find(item => !item.disabled));
+      this.selectTime(list.find((item) => !item.disabled));
     }
   }
 
   setScroll(whichList, index, justScroll?) {
     const scroll = (24 + 8) * index;
-    const duration = (justScroll || !this.showAnimation) ? 0 : 150;
+    const duration = justScroll || !this.showAnimation ? 0 : 150;
     if (this.timePicker) {
       this.scrollTo(this.timePicker.nativeElement.querySelector(`.devui-${whichList}-list`), scroll, duration);
     }
@@ -561,11 +564,12 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
     }
     const difference = to - element.scrollTop;
     const perTick = (difference / duration) * 10;
-    const reqAnimFrame = window['webkitRequestAnimationFrame'] ||
-      window['mozRequestAnimationFrame'] ||
-      window['msRequestAnimationFrame'] ||
-      window['oRequestAnimationFrame'] ||
-      window['requestAnimationFrame'];
+    const reqAnimFrame =
+      (window as any).webkitRequestAnimationFrame ||
+      (window as any).mozRequestAnimationFrame ||
+      (window as any).msRequestAnimationFrame ||
+      (window as any).oRequestAnimationFrame ||
+      (window as any).requestAnimationFrame;
     reqAnimFrame(() => {
       element.scrollTop = element.scrollTop + perTick;
       if (element.scrollTop === to) {
@@ -590,7 +594,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
 
   getCurrent(which) {
     const res = [];
-    this.correct.forEach(t => res.push(this[`_${which}${t}`]));
+    this.correct.forEach((t) => res.push(this[`_${which}${t}`]));
     return res.join(':');
   }
 
@@ -607,6 +611,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
       case 'ss':
         this[`_${which}Sec`] = timeArr[i];
         break;
+      default:
       }
     });
   }
@@ -614,7 +619,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
   getFormatCurrent(which) {
     const formatArr = this.format.split(':');
     const res = [];
-    formatArr.forEach(t => {
+    formatArr.forEach((t) => {
       switch (t) {
       case 'hh':
         res.push(this[`_${which}Hour`]);
@@ -625,6 +630,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
       case 'ss':
         res.push(this[`_${which}Sec`]);
         break;
+      default:
       }
     });
     return res.join(':');
@@ -658,6 +664,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
         case 'ss':
           this._selectedTimeSec = unshiftString(timeArr[i], 2, '0');
           break;
+        default:
         }
       });
     }

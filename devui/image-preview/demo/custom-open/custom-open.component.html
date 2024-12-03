@@ -1,4 +1,4 @@
 <d-button (btnClick)="open()" style="margin-bottom: 20px">Image Preview</d-button>
-<div dImagePreview [customSub]="customSub" [disableDefault]="true">
-  <img *ngFor="let item of images" [attr.src]="item | safe: 'url'" style="max-width: 800px" />
+<div dImagePreview [customSub]="customSub" [toolbar]="toolbar" [disableDefault]="true">
+  <img *ngFor="let item of images" [attr.src]="item | safe : 'url'" style="max-width: 800px" />
 </div>

@@ -2,7 +2,7 @@ import { Directive, ElementRef, Input, OnChanges, OnDestroy, Renderer2, SimpleCh
 import { GanttScaleUnit } from './gantt.model';
 
 @Directive({
-  selector: '[dGanttMarker]'
+  selector: '[dGanttMarker]',
 })
 export class GanttMarkerDirective implements OnChanges, OnDestroy {
   @Input() ganttBarContainerElement: HTMLElement;
@@ -28,7 +28,8 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.showDaySplitLine && changes['index']) {
+    const { index, ganttBarContainerElement, ganttScaleContainerOffsetLeft, monthMark, weekend, last, today, milestone, unit } = changes;
+    if (this.showDaySplitLine && index) {
       if (this.index >= 0 && !this.daySplitLineElement && this.unit === GanttScaleUnit.day) {
         this.drawSplitLine();
       } else if (this.index >= 0 && this.daySplitLineElement && this.unit === GanttScaleUnit.day) {
@@ -36,15 +37,15 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
       }
     }
 
-    if (changes['ganttBarContainerElement'] && this.ganttBarContainerElement) {
+    if (ganttBarContainerElement && this.ganttBarContainerElement) {
       this.initMarkElement();
     }
 
-    if (changes['ganttScaleContainerOffsetLeft'] && this.ganttScaleContainerOffsetLeft) {
+    if (ganttScaleContainerOffsetLeft && this.ganttScaleContainerOffsetLeft) {
       this.setElementsStyle();
     }
 
-    if (changes['monthMark']) {
+    if (monthMark) {
       if (this.monthMark) {
         this.initMarkElement();
       } else {
@@ -52,7 +53,7 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
       }
     }
 
-    if (changes['weekend'] || changes['last']) {
+    if (weekend || last) {
       if (this.weekend && !this.last) {
         this.initMarkElement();
       } else {
@@ -60,7 +61,7 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
       }
     }
 
-    if (changes['today']) {
+    if (today) {
       if (this.today) {
         this.initMarkElement();
       } else {
@@ -68,7 +69,7 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
       }
     }
 
-    if (changes['milestone']) {
+    if (milestone) {
       if (this.milestone) {
         this.initMarkElement();
       } else {
@@ -76,8 +77,8 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
       }
     }
 
-    if (changes['unit'] && this.unit) {
-      if(this.unit !== GanttScaleUnit.day) {
+    if (unit && this.unit) {
+      if (this.unit !== GanttScaleUnit.day) {
         this.destorySplitLine();
       }
       this.setElementsStyle();
@@ -133,13 +134,13 @@ export class GanttMarkerDirective implements OnChanges, OnDestroy {
   updateSplitLine() {
     this.ganttScaleContainerOffsetLeft = this.ganttScaleContainerOffsetLeft ? this.ganttScaleContainerOffsetLeft : 0;
     const leftOffset = this.hostElement.offsetLeft + this.ganttScaleContainerOffsetLeft + 'px';
-    if(!this.weekend && this.index && this.daySplitLineElement) {
+    if (!this.weekend && this.index && this.daySplitLineElement) {
       this.renderer.setStyle(this.daySplitLineElement, 'left', leftOffset);
     }
   }
 
   destorySplitLine() {
-    if(this.showDaySplitLine && this.daySplitLineElement) {
+    if (this.showDaySplitLine && this.daySplitLineElement) {
       this.renderer.removeChild(this.ganttBarContainerElement, this.daySplitLineElement);
       this.daySplitLineElement = null;
     }

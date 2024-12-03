@@ -12,7 +12,7 @@ import {
   OnInit,
   Output,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EN_US, I18nFormat, I18nInterface, I18nService } from 'ng-devui/i18n';
@@ -31,8 +31,8 @@ import { DateConfig } from './lib/datepicker-pro.type';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => RangeDatepickerProComponent),
-      multi: true
-    }
+      multi: true,
+    },
   ],
   preserveWhitespaces: false,
 })
@@ -50,7 +50,7 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
   @Input() appendToBody = true;
   @Input() placeholder: string[];
   @Input() allowClear = true;
-  @Input() set calenderRange (value) {
+  @Input() set calenderRange(value) {
     this.pickerSrv.calendarRange = value || [1970, 2099];
   }
   @Input() set minDate(value: Date) {
@@ -69,14 +69,14 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
   }
   @Input() set markedRangeDateList(value: Date[][]) {
     this.pickerSrv.markedRangeDateList = value;
-  };
+  }
   @Input() set markedDateList(value: Date[]) {
     this.pickerSrv.markedDateList = value;
   }
   @Input() @WithConfig() showGlowStyle = true;
-  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
     return this.showGlowStyle;
-  };
+  }
   @Output() dropdownToggle = new EventEmitter<boolean>();
   @Output() confirmEvent = new EventEmitter<Date[]>();
   @ContentChild('customTemplate') customTemplate: TemplateRef<any>;
@@ -84,7 +84,7 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
   @ContentChild('hostTemplate') hostTemplate: TemplateRef<any>;
   @ContentChild('markDateInfoTemplate') set markDateInfoTemplate(tmp: TemplateRef<any>) {
     this.pickerSrv.markDateInfoTemplate = tmp;
-  };
+  }
   @ViewChild('dateInputStart') datepickerInputStart: ElementRef;
   @ViewChild('dateInputEnd') datepickerInputEnd: ElementRef;
 
@@ -179,17 +179,13 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
   }
 
   private initObservable() {
-    this.pickerSrv.selectedDateChange.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(change => {
+    this.pickerSrv.selectedDateChange.pipe(takeUntil(this.unsubscribe$)).subscribe((change) => {
       this.pickerSrv.curRangeDate = change.value as Date[];
-      this.dateValue = (change.value as Date[]).map(d => this.formatDateToString(d));
+      this.dateValue = (change.value as Date[]).map((d) => this.formatDateToString(d));
       this.onChange(change.value);
     });
 
-    this.pickerSrv.closeDropdownEvent.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(isConfirm => {
+    this.pickerSrv.closeDropdownEvent.pipe(takeUntil(this.unsubscribe$)).subscribe((isConfirm) => {
       this.isOpen = false;
       this.dropdownToggle.emit(false);
       if (isConfirm) {
@@ -197,50 +193,54 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
         if (this.dateValue.length !== this.pickerSrv.curRangeDate.length) {
           this.onChange(this.pickerSrv.curRangeDate);
         }
-        this.dateValue = this.pickerSrv.curRangeDate.map(d => this.formatDateToString(d));
+        this.dateValue = this.pickerSrv.curRangeDate.map((d) => this.formatDateToString(d));
       }
     });
 
-    this.pickerSrv.activeInputChange.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(() => {
+    this.pickerSrv.activeInputChange.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       this.getStrWidth();
     });
 
     if (!this.hostTemplate) {
-      fromEvent(this.datepickerInputStart.nativeElement, 'input').pipe(
-        takeUntil(this.unsubscribe$),
-        map(t => {
-          this.getStrWidth();
-          return 'start';
-        }),
-        debounceTime(300)
-      ).subscribe(this.inputChangeCallback);
+      fromEvent(this.datepickerInputStart.nativeElement, 'input')
+        .pipe(
+          takeUntil(this.unsubscribe$),
+          map((t) => {
+            this.getStrWidth();
+            return 'start';
+          }),
+          debounceTime(300)
+        )
+        .subscribe(this.inputChangeCallback);
 
-      fromEvent(this.datepickerInputEnd.nativeElement, 'input').pipe(
-        takeUntil(this.unsubscribe$),
-        map(t => {
-          this.getStrWidth();
-          return 'end';
-        }),
-        debounceTime(300)
-      ).subscribe(this.inputChangeCallback);
+      fromEvent(this.datepickerInputEnd.nativeElement, 'input')
+        .pipe(
+          takeUntil(this.unsubscribe$),
+          map((t) => {
+            this.getStrWidth();
+            return 'end';
+          }),
+          debounceTime(300)
+        )
+        .subscribe(this.inputChangeCallback);
 
-      fromEvent(this.datepickerInputStart.nativeElement, 'blur').pipe(
-        takeUntil(this.unsubscribe$),
-        map(t => 'start'),
-      ).subscribe(this.inputBlurCallback);
+      fromEvent(this.datepickerInputStart.nativeElement, 'blur')
+        .pipe(
+          takeUntil(this.unsubscribe$),
+          map((t) => 'start')
+        )
+        .subscribe(this.inputBlurCallback);
 
-      fromEvent(this.datepickerInputEnd.nativeElement, 'blur').pipe(
-        takeUntil(this.unsubscribe$),
-        map(t => 'end'),
-      ).subscribe(this.inputBlurCallback);
+      fromEvent(this.datepickerInputEnd.nativeElement, 'blur')
+        .pipe(
+          takeUntil(this.unsubscribe$),
+          map((t) => 'end')
+        )
+        .subscribe(this.inputBlurCallback);
     }
 
     if (this.showTime) {
-      this.pickerSrv.selectedTimeChange.pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe(change => {
+      this.pickerSrv.selectedTimeChange.pipe(takeUntil(this.unsubscribe$)).subscribe((change) => {
         const curTime = new Date(this.curActiveDate.getTime()).setHours(change.hour, change.min, change.seconds);
         const curDate = new Date(curTime);
         if (change.activeInput === 'start') {
@@ -322,7 +322,7 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
 
       this.pickerSrv.updateDateValue.next({
         type: 'range',
-        value: this.pickerSrv.curRangeDate
+        value: this.pickerSrv.curRangeDate,
       });
       this.onChange(this.pickerSrv.curRangeDate);
 
@@ -331,11 +331,10 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
           activeInput: type,
           hour: inputDate.getHours(),
           min: inputDate.getMinutes(),
-          seconds: inputDate.getSeconds()
+          seconds: inputDate.getSeconds(),
         });
       }
     }
-
   };
 
   inputBlurCallback = (type) => {
@@ -379,12 +378,9 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
 
   validateDate(value: string) {
     const valueDate = this.datepickerConvert.parse(value, this.curFormat);
-    const valueFormat = valueDate && !isNaN(valueDate.getTime()) &&
-      this.datepickerConvert.format(valueDate, this.curFormat, this.locale || this.i18nLocale);
-    if (
-      !valueDate || value !== valueFormat ||
-      (value === valueFormat && !this.pickerSrv.dateInRange(valueDate))
-    ) {
+    const valueFormat =
+      valueDate && !isNaN(valueDate.getTime()) && this.datepickerConvert.format(valueDate, this.curFormat, this.locale || this.i18nLocale);
+    if (!valueDate || value !== valueFormat || (value === valueFormat && !this.pickerSrv.dateInRange(valueDate))) {
       return false;
     } else {
       return true;
@@ -420,13 +416,13 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
     }
     this.pickerSrv.updateDateValue.next({
       type: 'range',
-      value: []
+      value: [],
     });
 
     this.pickerSrv.updateTimeChange.next({
       hour: null,
       min: null,
-      seconds: null
+      seconds: null,
     });
     this.dateValue = [];
     this.pickerSrv.curRangeDate = [];
@@ -442,13 +438,13 @@ export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterView
       return;
     }
 
-    this.dateValue = value.map(d => {
+    this.dateValue = value.map((d) => {
       return d ? this.datepickerConvert.format(d, this.curFormat) : '';
     });
     this.pickerSrv.curRangeDate = value;
     this.pickerSrv.updateDateValue.next({
       type: 'range',
-      value
+      value,
     });
   }
 

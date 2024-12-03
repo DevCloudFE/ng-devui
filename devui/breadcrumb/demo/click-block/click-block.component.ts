@@ -1,42 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BreadCrumbService, MenuConfig } from 'ng-devui/breadcrumb';
 import { HelperUtils } from 'ng-devui/common';
 import { DialogService } from 'ng-devui/modal';
 
 @Component({
   selector: 'd-click-block',
-  templateUrl: './click-block.component.html'
+  templateUrl: './click-block.component.html',
 })
-export class ClickBlockComponent implements OnInit {
-
-  constructor(private breadCrumbService: BreadCrumbService, private dialogService: DialogService) { }
-
-  ngOnInit() {
-  }
+export class ClickBlockComponent {
   breadItem: Array<MenuConfig> = [
     {
       linkType: 'hrefLink',
-      link: 'https://angular.cn/',
-      name: 'Home'
+      link: '//angular.cn/',
+      name: 'Home',
     },
     {
       linkType: 'routerLink',
       link: './home',
-      name: 'DevUI'
+      name: 'DevUI',
     },
     {
       linkType: 'routerLink',
       link: '/components/zh-cn/button/demo#button-common',
-      name: 'Profile'
-    }
+      name: 'Profile',
+    },
   ];
+
+  constructor(private breadCrumbService: BreadCrumbService, private dialogService: DialogService) {}
 
   navigate($event, item) {
     this.canNavigate(item).then((can) => {
       if (!can) {
         return;
       }
-      if(item.linkType === 'routerLink') {
+      if (item.linkType === 'routerLink') {
         this.breadCrumbService.navigateTo($event, item);
       } else {
         HelperUtils.jumpOuterUrl(item.link, '_self');
@@ -62,7 +59,7 @@ export class ClickBlockComponent implements OnInit {
             handler: ($event: Event) => {
               results.modalInstance.hide();
               resolve(true);
-            }
+            },
           },
           {
             id: 'btn-cancel',
@@ -71,9 +68,9 @@ export class ClickBlockComponent implements OnInit {
             handler: ($event: Event) => {
               results.modalInstance.hide();
               resolve(false);
-            }
+            },
           },
-        ]
+        ],
       });
     });
   }

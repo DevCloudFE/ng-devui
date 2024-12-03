@@ -12,7 +12,7 @@ export class GridStackService {
   lastStyleSheet: CSSStyleSheet;
 
   getDD() {
-    return (DDGridStack.get() as DDGridStack);
+    return DDGridStack.get() as DDGridStack;
   }
 
   static cleanDragIn(el: HTMLElement) {
@@ -52,8 +52,10 @@ export class GridStackService {
   }
   _itemRemoving = (el: GridItemHTMLElement, remove: boolean) => {
     const node = el ? el.gridstackNode : undefined;
-    if (!node || !node.grid) { return; }
-    remove ? node['_isAboutToRemove'] = true : delete node['_isAboutToRemove'];
+    if (!node || !node.grid) {
+      return;
+    }
+    remove ? ((node as any)._isAboutToRemove = true) : delete (node as any)._isAboutToRemove;
     remove ? el.classList.add('grid-stack-item-removing') : el.classList.remove('grid-stack-item-removing');
   };
   resetAcceptWidget(dashboard: DashboardComponent) {
@@ -72,14 +74,18 @@ export class GridStackService {
         accept: (el: GridItemHTMLElement) => {
           const node: GridStackNode = el.gridstackNode;
           // set accept drop to true on ourself (which we ignore) so we don't get "can't drop" icon in HTML5 mode while moving
-          if (node && node.grid === that) { return true; }
-          if (!that.opts.acceptWidgets) { return false; }
+          if (node && node.grid === that) {
+            return true;
+          }
+          if (!that.opts.acceptWidgets) {
+            return false;
+          }
           // check for accept method or class matching
           let canAccept = true;
           if (typeof that.opts.acceptWidgets === 'function') {
             canAccept = that.opts.acceptWidgets(el);
           } else {
-            const selector = (that.opts.acceptWidgets === true ? '.grid-stack-item' : that.opts.acceptWidgets as string);
+            const selector = that.opts.acceptWidgets === true ? '.grid-stack-item' : (that.opts.acceptWidgets as string);
             canAccept = el.matches(selector);
           }
           // finally check to make sure we actually have space left #1571
@@ -95,10 +101,10 @@ export class GridStackService {
       .off(this.gridStack.el, 'dropout')
       .on(this.gridStack.el, 'dropout', (event, el: GridItemHTMLElement, helper) => {
         // 覆盖这个方法是因为 float模式下 dropout影响了原来的布局
-        const that = this.gridStack;
+        const that: any = this.gridStack;
         const node = el.gridstackNode;
         if (!node.grid || node.grid === that) {
-          that['_leave'](el, helper);
+          that._leave(el, helper);
         }
         this.getDD().off(el, 'drag');
         return false;
@@ -106,23 +112,26 @@ export class GridStackService {
       .off(this.gridStack.el, 'drop')
       .on(this.gridStack.el, 'drop', (event, el: GridItemHTMLElement, helper: GridItemHTMLElement) => {
         // 覆盖这个方法是因为 drop的情况不想让它放进去而是只发射通知
-        const that = this.gridStack;
+        const that: any = this.gridStack;
 
         const node: GridStackNode = el.gridstackNode;
-        if (node && node.grid === that && !node['_isExternal']) { return false; }
+        if (node && node.grid === that && !(node as any)._isExternal) {
+          return false;
+        }
 
-        const wasAdded = !!that['placeholder'].parentElement;
-        that['placeholder'].remove();
+        const wasAdded = !!that.placeholder.parentElement;
+        that.placeholder.remove();
 
-        const origNode = el['_gridstackNodeOrig'];
-        delete el['_gridstackNodeOrig'];
+        const origNode = (el as any)._gridstackNodeOrig;
+        delete (el as any)._gridstackNodeOrig;
 
-        if (!node) { return false; }
+        if (!node) {
+          return false;
+        }
         if (wasAdded) {
           that.engine.cleanupNode(node); // 好像没用
           node.grid = that;
         }
-
 
         if (helper !== el) {
           helper.remove();
@@ -134,7 +143,7 @@ export class GridStackService {
         this.getDD().off(el, 'drag');
         that.engine.removeNode(node);
 
-        that['_updateContainerHeight']();
+        that._updateContainerHeight();
 
         dashboard.handleDragInNode(node, origNode, this.dragInWidget);
       });
@@ -198,7 +207,8 @@ export class GridStackService {
       return;
     }
     const trashEl = trashZone;
-    this.getDD().droppable(trashEl, this.gridStack.opts.removableOptions)
+    this.getDD()
+      .droppable(trashEl, this.gridStack.opts.removableOptions)
       .on(trashEl, 'dropover', (event, el) => this._itemRemoving(el, true))
       .on(trashEl, 'dropout', (event, el) => this._itemRemoving(el, false));
   }
@@ -221,7 +231,7 @@ export class GridStackService {
     if (this.gridStack) {
       if (!this.lastStyleSheet) {
         this.lastStyleSheet = Utils.createStylesheet(
-          'd-dashboard-' + this.gridStack.opts['_styleSheetClass'],
+          `d-dashboard-${(this.gridStack.opts as any)._styleSheetClass}`,
           this.gridStack.el.parentElement
         );
       } else {
@@ -232,7 +242,7 @@ export class GridStackService {
       const marginUnit = this.gridStack.opts.marginUnit;
       const cellHeight = this.gridStack.opts.cellHeight as number;
       const cellHeightUnit = this.gridStack.opts.cellHeightUnit;
-      const prefix = `.${this.gridStack.opts['_styleSheetClass']}`;
+      const prefix = `.${(this.gridStack.opts as any)._styleSheetClass}`;
       if (!this.lastStyleSheet) {
         return;
       }
@@ -269,7 +279,7 @@ export class GridStackService {
 
   removeBackgroundGridBlockStyleSheet() {
     if (this.lastStyleSheet) {
-      Utils.removeStylesheet('d-dashboard-' + this.gridStack.opts['_class']);
+      Utils.removeStylesheet(`d-dashboard-${(this.gridStack.opts as any)._class}`);
     }
   }
 }

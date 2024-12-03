@@ -42,8 +42,8 @@ export class TextDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
-      { dAnchorLink: 'resize', value: values['resize'] },
-      { dAnchorLink: 'count', value: values['count'] },
+      { dAnchorLink: 'resize', value: values.resize },
+      { dAnchorLink: 'count', value: values.count },
     ];
   }
 

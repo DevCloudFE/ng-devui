@@ -39,9 +39,9 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (typeof window !== 'undefined') {
-      this.themeService = window['devuiThemeService'];
-      this.themes = window['devuiThemes'];
-      this.theme = window['devuiCurrentTheme'];
+      this.themeService = (window as any).devuiThemeService;
+      this.themes = (window as any).devuiThemes;
+      this.theme = (window as any).devuiCurrentTheme;
     }
     const themeName = localStorage.getItem('user-custom-theme')?.split('-')[0];
     this.currentAdvancedTheme = this.advancedThemeList.find(theme => theme.value === themeName) ? themeName : 'infinity';
@@ -115,7 +115,7 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
 
   themeFontSizeChange() {
     if (typeof window !== 'undefined' && this.largeFontSizeMode) {
-      this.largeFontTheme.data = { ...this.themes[window['devuiCurrentTheme']].data, ...LargeFontSize};
+      this.largeFontTheme.data = { ...this.themes[(window as any).devuiCurrentTheme].data, ...LargeFontSize};
       this.theme = `devui-large-font-theme`;
     } else {
       this.theme = `${this.themePrefix}-${this.themeMode}-theme`;

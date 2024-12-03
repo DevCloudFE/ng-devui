@@ -100,11 +100,11 @@ export class AutoScrollComponent {
       },
     },
     {
-      label: 'IP address',
-      field: 'ip',
+      label: 'role',
+      field: 'role',
       value: {
-        ip: '110.110.110.3',
-        value: { ip: '110.110.110.3' },
+        role: 'Guest',
+        value: { role: 'Guest' },
       },
     },
     {

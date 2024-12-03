@@ -5,10 +5,17 @@ import {
   ConnectedPosition,
   ScrollStrategy,
   ScrollStrategyOptions,
-  VerticalConnectionPos
+  VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { Component, ElementRef, Host, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
-import { AppendToBodyDirection, AppendToBodyDirectionsConfig, AppendToBodyScrollStrategyType, fadeInOut } from 'ng-devui/utils';
+import {
+  AppendToBodyDirection,
+  AppendToBodyDirectionsConfig,
+  AppendToBodyScrollStrategyType,
+  DevConfigService,
+  WithConfig,
+  fadeInOut,
+} from 'ng-devui/utils';
 import { DropDownDirective } from './dropdown.directive';
 
 @Component({
@@ -42,26 +49,31 @@ export class DropDownAppendToBodyComponent implements OnInit, OnChanges {
   @ViewChild(CdkConnectedOverlay, { static: true }) overlay: CdkConnectedOverlay;
   @Input() alignOrigin: ElementRef<any>;
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
-  @Input() appendToBodyScrollStrategy: AppendToBodyScrollStrategyType;
+  @Input() @WithConfig() appendToBodyScrollStrategy: AppendToBodyScrollStrategyType;
   menuPosition: VerticalConnectionPos = 'bottom';
   origin: CdkOverlayOrigin;
   positions;
   scrollStrategy: ScrollStrategy;
 
-  constructor(@Host() public dropDown: DropDownDirective, private scrollStrategyOption: ScrollStrategyOptions) {
+  constructor(
+    @Host() public dropDown: DropDownDirective,
+    private scrollStrategyOption: ScrollStrategyOptions,
+    private devConfigService: DevConfigService
+  ) {
     this.dropDown.appendToBody = true;
     this.scrollStrategy = this.scrollStrategyOption.reposition();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     const { alignOrigin, appendToBodyDirections, appendToBodyScrollStrategy } = changes;
+    const globalScrollStrategy = this.devConfigService.getConfigForApi('appendToBodyScrollStrategy');
     if (appendToBodyDirections) {
       this.setPositions();
     }
     if (alignOrigin) {
       this.setOrigin();
     }
-    if (appendToBodyScrollStrategy && this.appendToBodyScrollStrategy) {
+    if (this.appendToBodyScrollStrategy && (appendToBodyScrollStrategy || globalScrollStrategy)) {
       const func = this.scrollStrategyOption[this.appendToBodyScrollStrategy];
       this.scrollStrategy = func();
     }
@@ -112,6 +124,8 @@ export class DropDownAppendToBodyComponent implements OnInit, OnChanges {
       break;
     case 'bottom':
       this.menuPosition = 'top';
+      break;
+    default:
     }
   }
 }

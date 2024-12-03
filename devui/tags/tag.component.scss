@@ -48,7 +48,7 @@
   &:hover:not(.devui-colorful-tag):not(.devui-selected-tag).devui-checkable-tag {
     color: $devui-aide-text-hover;
 
-    .remove-button svg polygon {
+    .remove-button svg path {
       fill: $devui-brand-hover;
     }
   }
@@ -62,7 +62,7 @@
   &.devui-selected-tag {
     color: $devui-aide-text-hover;
 
-    .remove-button svg polygon {
+    .remove-button svg path {
       fill: $devui-brand-active;
     }
   }
@@ -74,43 +74,14 @@
     width: 12px;
     height: 12px;
     line-height: 12px;
-    border-radius: 50%;
     display: inline-block;
     text-align: center;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 
-    svg polygon {
-      fill: $devui-icon-fill;
-    }
-
-    &:hover {
-      text-decoration: none;
-      font-size: $devui-font-size-icon;
-    }
-  }
-
-  .default-button {
-    margin-left: 12px;
-    font-size: $devui-font-size-icon;
-    cursor: pointer;
-    width: 12px;
-    height: 12px;
-    line-height: 12px;
-    background-color: $devui-shape-icon-fill;
-    border-radius: 50%;
-    display: inline-block;
-    text-align: center;
-    transition: background-color $devui-animation-ease-in-out-smooth $devui-animation-duration-slow;
-
     svg path {
-      fill: $devui-light-text;
-    }
-
-    &:hover {
-      text-decoration: none;
-      background-color: $devui-shape-icon-fill-hover;
+      fill: $devui-icon-fill;
     }
   }
 }
@@ -137,7 +108,7 @@
   border-width: 1px;
   border-color: #0b81f6;
 
-  .remove-button svg polygon {
+  .remove-button svg path {
     fill: #0b81f6;
   }
 
@@ -152,7 +123,7 @@
   border-width: 1px;
   border-color: #39afcc;
 
-  .remove-button svg polygon {
+  .remove-button svg path {
     fill: #39afcc;
   }
 
@@ -167,7 +138,7 @@
   border-width: 1px;
   border-color: #2fa898;
 
-  .remove-button svg polygon {
+  .remove-button svg path {
     fill: #2fa898;
   }
 
@@ -182,7 +153,7 @@
   border-width: 1px;
   border-color: #4eb15e;
 
-  .remove-button svg polygon {
+  .remove-button svg path {
     fill: #4eb15e;
   }
 
@@ -197,7 +168,7 @@
   border-width: 1px;
   border-color: #b08d1a;
 
-  .remove-button svg polygon {
+  .remove-button svg path {
     fill: #b08d1a;
   }
 
@@ -212,7 +183,7 @@
   border-width: 1px;
   border-color: #d47f35;
 
-  .remove-button svg polygon {
+  .remove-button svg path {
     fill: #d47f35;
   }
 
@@ -227,7 +198,7 @@
   border-width: 1px;
   border-color: #e05a46;
 
-  .remove-button svg polygon {
+  .remove-button svg path {
     fill: #e05a46;
   }
 
@@ -242,7 +213,7 @@
   border-width: 1px;
   border-color: #f3689a;
 
-  .remove-button svg polygon {
+  .remove-button svg path {
     fill: #f3689a;
   }
 
@@ -257,7 +228,7 @@
   border-width: 1px;
   border-color: #b05bc1;
 
-  .remove-button svg polygon {
+  .remove-button svg path {
     fill: #b05bc1;
   }
 
@@ -269,7 +240,7 @@
 .devui-selected-tag.devui-colorful-tag {
   color: $devui-base-bg;
 
-  .remove-button svg polygon {
+  .remove-button svg path {
     fill: $devui-base-bg;
   }
 }
@@ -286,7 +257,7 @@
       transition: opacity $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
     }
 
-    .remove-button svg polygon {
+    .remove-button svg path {
       transition: fill $devui-animation-duration-slow $devui-animation-ease-in-out-smooth;
     }
   }

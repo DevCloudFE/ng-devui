@@ -1,6 +1,7 @@
 export const devuiInitialThemeData = {
   'devui-global-bg': '#f6f6f8',
-  'devui-glass-morphism-bg': 'rgba(245, 246, 248, 0.9)',
+  'devui-glass-morphism-bg': 'rgba(245, 245, 245, 0.9)',
+  'devui-glass-morphism-floating-container-bg': 'rgba(255, 255, 255, 0.9)',
   'devui-global-bg-normal': '#ffffff',
   'devui-base-bg': '#ffffff',
   'devui-base-bg-dark': '#252b3a',

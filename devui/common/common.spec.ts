@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { AfterViewInit, Component, DebugElement, ElementRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ import { IframeEventPropagateDirective } from './iframe-event-propagate.directiv
 
 @Component({
   template: `
-    <button dSimulateATag [href]="'https://angular.io'" [target]="target">Open Angualr website</button>
+    <button dSimulateATag [href]="'//angular.io'" [target]="target">Open Angualr website</button>
     <button class="btn-func" (click)="goto()">Open Angualr website</button>
   `,
 })
@@ -23,7 +23,7 @@ class TestSimulateTagComponent {
   target = '_blank';
 
   goto() {
-    HelperUtils.jumpOuterUrl('https://angular.io');
+    HelperUtils.jumpOuterUrl('//angular.io');
   }
 }
 
@@ -234,9 +234,10 @@ describe('download file', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule, DCommonModule, HttpClientModule, HttpClientTestingModule],
-      declarations: [TestDownloadComponent],
-    });
+    declarations: [TestDownloadComponent],
+    imports: [CommonModule, DCommonModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
 
     fixture = TestBed.createComponent(TestDownloadComponent);
     component = fixture.debugElement.componentInstance;

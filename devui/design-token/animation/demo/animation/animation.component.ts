@@ -13,12 +13,13 @@ export class AnimationComponent implements OnInit, OnDestroy {
   animation = [];
   i18nText: any;
 
-  constructor(private translate: TranslateService) { this.setI18n(); }
-
+  constructor(private translate: TranslateService) {
+    this.setI18n();
+  }
 
   ngOnInit() {
     if (typeof window !== undefined) {
-      this.themeService = window['devuiThemeService'];
+      this.themeService = (window as any).devuiThemeService;
       this.changeValueInTable();
       if (this.themeService.eventBus) {
         this.themeService.eventBus.add('themeChanged', this.changeValueInTable);
@@ -34,7 +35,7 @@ export class AnimationComponent implements OnInit, OnDestroy {
         const obj = {
           name: '$' + key,
           value: theme.data[key],
-          description: this.i18nText ? this.i18nText[key] : ''
+          description: this.i18nText ? this.i18nText[key] : '',
         };
         this.animation.push(obj);
       }
@@ -44,14 +45,14 @@ export class AnimationComponent implements OnInit, OnDestroy {
   setI18n() {
     this.subs.add(
       this.translate.get('components.design-animation.AnimationDemo.instance').subscribe((res) => {
-        this.i18nText = res['animation'];
+        this.i18nText = res.animation;
       })
     );
 
     this.subs.add(
       this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
         const values = this.translate.instant('components.design-animation.AnimationDemo.instance');
-        this.i18nText = values['animation'];
+        this.i18nText = values.animation;
       })
     );
   }

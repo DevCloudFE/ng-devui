@@ -19,44 +19,19 @@
   <div class="content-wrapper" [ngStyle]="{ 'background-color': colorMap[labelStyle] || customColor }"></div>
   <span *ngIf="!customViewTemplate" [class.devui-max-width-tag]="maxWidth" [style.maxWidth]="maxWidth || ''">{{ currentTag }}</span>
   <ng-template *ngIf="customViewTemplate" [ngTemplateOutlet]="customViewTemplate" [ngTemplateOutletContext]="{ tag: tag }"></ng-template>
-  <a
-    class="remove-button"
-    [ngClass]="{ 'default-button': !isColorfulTag }"
-    *ngIf="mode === 'closeable' || deletable"
-    (click)="removeTag($event, tag)"
-  >
-    <svg
-      *ngIf="isColorfulTag"
-      width="12px"
-      height="12px"
-      viewBox="0 0 16 16"
-      version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-    >
+  <a class="remove-button" *ngIf="mode === 'closeable' || deletable" (click)="removeTag($event, tag)">
+    <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon
-          [ngStyle]="{ fill: isColorfulTag ? (checked ? '#fff' : customColor) : '' }"
-          fill="#293040"
-          fill-rule="nonzero"
-          points="8 6.58578644 12.2426407 2.34314575 13.6568542 3.75735931 9.41421356 8 13.6568542 12.2426407 12.2426407 13.6568542 8 9.41421356 3.75735931 13.6568542 2.34314575 12.2426407 6.58578644 8 2.34314575 3.75735931 3.75735931 2.34314575"
-        ></polygon>
-      </g>
-    </svg>
-    <svg
-      *ngIf="!isColorfulTag"
-      width="12px"
-      height="12px"
-      viewBox="0 0 12 12"
-      version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-    >
-      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path
-          d="M8.86785321,3.13214679 C9.02624037,3.29053395 9.02624037,3.54733027 8.86785321,3.70571743 L6.573,6 L8.86785321,8.29428257 C9.02624037,8.45266973 9.02624037,8.70946605 8.86785321,8.86785321 C8.70946605,9.02624037 8.45266973,9.02624037 8.29428257,8.86785321 L6,6.573 L3.70571743,8.86785321 C3.54733027,9.02624037 3.29053395,9.02624037 3.13214679,8.86785321 C2.97375963,8.70946605 2.97375963,8.45266973 3.13214679,8.29428257 L5.427,6 L3.13214679,3.70571743 C2.97375963,3.54733027 2.97375963,3.29053395 3.13214679,3.13214679 C3.29053395,2.97375963 3.54733027,2.97375963 3.70571743,3.13214679 L6,5.427 L8.29428257,3.13214679 C8.45266973,2.97375963 8.70946605,2.97375963 8.86785321,3.13214679 Z"
-          fill-rule="nonzero"
-        ></path>
+        <g transform="translate(3.000000, 3.000000)" fill="#71757F" fill-rule="nonzero">
+          <path
+            [ngStyle]="{ fill: isColorfulTag ? (checked ? '#fff' : customColor) : '' }"
+            d="M-0.353553391,-0.353553391 C-0.179987039,-0.527119742 0.0894373624,-0.546404893 0.284305503,-0.411408841 L0.353553391,-0.353553391 L10.3535534,9.64644661 C10.5488155,9.84170876 10.5488155,10.1582912 10.3535534,10.3535534 C10.179987,10.5271197 9.91056264,10.5464049 9.7156945,10.4114088 L9.64644661,10.3535534 L-0.353553391,0.353553391 C-0.548815536,0.158291245 -0.548815536,-0.158291245 -0.353553391,-0.353553391 Z"
+          ></path>
+          <path
+            [ngStyle]="{ fill: isColorfulTag ? (checked ? '#fff' : customColor) : '' }"
+            d="M9.64644661,-0.353553391 C9.84170876,-0.548815536 10.1582912,-0.548815536 10.3535534,-0.353553391 C10.5271197,-0.179987039 10.5464049,0.0894373624 10.4114088,0.284305503 L10.3535534,0.353553391 L0.353553391,10.3535534 C0.158291245,10.5488155 -0.158291245,10.5488155 -0.353553391,10.3535534 C-0.527119742,10.179987 -0.546404893,9.91056264 -0.411408841,9.7156945 L-0.353553391,9.64644661 L9.64644661,-0.353553391 Z"
+          ></path>
+        </g>
       </g>
     </svg>
   </a>

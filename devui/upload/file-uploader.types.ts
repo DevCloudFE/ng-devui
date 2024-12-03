@@ -39,7 +39,7 @@ export class IFileOptions {
 
 export enum UploadStatus {
   preLoad = 0,
-  uploading,
-  uploaded,
-  failed
+  uploading = 1,
+  uploaded = 2,
+  failed = 3,
 }

@@ -1,4 +1,7 @@
-export enum TransferDirection { SOURCE, TARGET }
+export enum TransferDirection {
+  SOURCE = 0,
+  TARGET = 1,
+}
 
 export interface TransferDataFormat {
   name: string;

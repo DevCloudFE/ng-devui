@@ -98,6 +98,7 @@ export class SelectDemoComponent implements OnInit, OnDestroy {
 
   navItems = [];
   subs: Subscription = new Subscription();
+
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
@@ -122,8 +123,8 @@ export class SelectDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'custom-search', value: values['custom-search'] },
       { dAnchorLink: 'select-all', value: values['select-all'] },
       { dAnchorLink: 'select-template', value: values['select-template'] },
-      { dAnchorLink: 'labelization', value: values['labelization'] },
-      { dAnchorLink: 'disabled', value: values['disabled'] },
+      { dAnchorLink: 'labelization', value: values.labelization },
+      { dAnchorLink: 'disabled', value: values.disabled },
       { dAnchorLink: 'allow-clear-value', value: values['allow-clear-value'] },
       { dAnchorLink: 'append-to-body', value: values['append-to-body'] },
       { dAnchorLink: 'lazy-load-virtual-scroll', value: values['lazy-load-virtual-scroll'] },

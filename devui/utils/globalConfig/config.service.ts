@@ -6,33 +6,38 @@ import { DevUIGlobalConfig, DevUIGlobalConfigKey, DevUIGlobalConfigToken, DevUIG
 const isDefined = function (value?: any): boolean {
   return value !== undefined;
 };
+
 @Injectable({
   providedIn: 'root',
 })
 export class DevConfigService {
   private configUpdated$ = new Subject<keyof DevUIGlobalConfig>();
   private config: DevUIGlobalConfig;
+
   constructor(@Optional() @Inject(DevUIGlobalConfigToken) defaultConfig?: DevUIGlobalConfig) {
     this.config = defaultConfig || {};
   }
+
   getConfigForComponent<T extends DevUIGlobalConfigKey>(componentName: T): DevUIGlobalConfig[T] {
     return this.config[componentName];
   }
+
   getConfigForApi<T extends DevUIGlobalInsideConfigKey>(api: T): DevUIGlobalConfig['global'][T] {
-    const globalConfig = this.config['global'] || {};
+    const globalConfig = this.config.global || {};
     const apiConfig = globalConfig[api];
     return apiConfig;
   }
+
   getConfigChangeEventForComponent(componentName: DevUIGlobalConfigKey): Observable<void> {
     return this.configUpdated$.pipe(
       filter((n) => n === componentName),
       mapTo(undefined)
     );
   }
+
   set<T extends DevUIGlobalConfigKey>(componentName: T, value: DevUIGlobalConfig[T]): void {
     this.config[componentName] = { ...this.config[componentName], ...value };
     this.configUpdated$.next(componentName);
-
   }
 }
 
@@ -65,9 +70,10 @@ export function WithConfig<T>(propertyKey?: T | string) {
 
         const componentConfig = this.devConfigService.config[name] || {};
         const configValue = componentConfig[propName];
-        const globalConfig = this.devConfigService.config['global'] || {};
+        const globalConfig = this.devConfigService.config.global || {};
         const apiConfig = globalConfig[propName];
-        const ret = isDefined(configValue) ? configValue : isDefined(apiConfig) ? apiConfig : originalValue;
+        const result = isDefined(apiConfig) ? apiConfig : originalValue;
+        const ret = isDefined(configValue) ? configValue : result;
         return ret;
       },
       set(value?: T): void {

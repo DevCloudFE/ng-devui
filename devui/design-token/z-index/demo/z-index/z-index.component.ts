@@ -13,31 +13,31 @@ export class ZIndexComponent implements OnInit, OnDestroy {
   zIndex = [];
   i18nText: any;
 
-  constructor(private translate: TranslateService) { this.setI18n(); }
+  constructor(private translate: TranslateService) {
+    this.setI18n();
+  }
 
   ngOnInit() {
     if (typeof window !== undefined) {
-      if (typeof window !== undefined) {
-        this.themeService = window['devuiThemeService'];
+      this.themeService = (window as any).devuiThemeService;
         this.changeValueInTable();
         if (this.themeService.eventBus) {
           this.themeService.eventBus.add('themeChanged', this.changeValueInTable);
         }
-      }
     }
   }
 
   setI18n() {
     this.subs.add(
       this.translate.get('components.design-z-index.ZIndexDemo.instance').subscribe((res) => {
-        this.i18nText = res['zIndex'];
+        this.i18nText = res.zIndex;
       })
     );
 
     this.subs.add(
       this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
         const values = this.translate.instant('components.design-z-index.ZIndexDemo.instance');
-        this.i18nText = values['zIndex'];
+        this.i18nText = values.zIndex;
       })
     );
   }
@@ -49,7 +49,7 @@ export class ZIndexComponent implements OnInit, OnDestroy {
         const obj = {
           name: '$' + key,
           value: theme.data[key],
-          description: this.i18nText ? this.i18nText[key] : ''
+          description: this.i18nText ? this.i18nText[key] : '',
         };
         this.zIndex.push(obj);
       }

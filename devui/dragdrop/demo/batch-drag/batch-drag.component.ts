@@ -14,7 +14,7 @@ export class BatchDragComponent {
         { name: 'WebStorm', isSelected: false },
         { name: 'Sublime Text', isSelected: false },
         { name: 'Atom', isSelected: false },
-        { name: 'Notepad++', isSelected: false }
+        { name: 'Notepad++', isSelected: false },
       ],
     },
     {
@@ -35,7 +35,7 @@ export class BatchDragComponent {
         { name: 'Windows', isSelected: false },
         { name: 'Mac OS', isSelected: false },
         { name: 'DOS', isSelected: false },
-        { name: 'Chrome OS', isSelected: false }
+        { name: 'Chrome OS', isSelected: false },
       ],
     },
     {
@@ -44,7 +44,7 @@ export class BatchDragComponent {
         { name: 'Android', isSelected: false },
         { name: 'IOS', isSelected: false },
         { name: 'BlackBerry', isSelected: false },
-        { name: 'Symbian', isSelected: false }
+        { name: 'Symbian', isSelected: false },
       ],
     },
     {
@@ -104,6 +104,7 @@ export class BatchDragComponent {
     const index = list.indexOf(item);
     list.splice(index, 1);
   }
+
   batchSelect(item) {
     item.isSelected = !(item.isSelected || false);
     this.cdr.detectChanges();
@@ -116,6 +117,10 @@ export class BatchDragComponent {
   }
 
   cleanBatch() {
-    this.lists.forEach((list) => list.list.forEach((item) => {item['isSelected'] = false;}));
+    this.lists.forEach((list) =>
+      list.list.forEach((item) => {
+        item.isSelected = false;
+      })
+    );
   }
 }

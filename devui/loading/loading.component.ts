@@ -90,7 +90,7 @@ export class LoadingComponent implements OnInit, OnChanges {
   targetName: string;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['target'] && this.target) {
+    if (changes.target && this.target) {
       this.targetName = this.target.nodeName;
     }
   }

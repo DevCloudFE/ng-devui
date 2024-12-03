@@ -1,5 +1,5 @@
 import { Component, DebugElement, ElementRef, TemplateRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, flush, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DomHelper } from '../utils/testing/dom-helper';
@@ -39,7 +39,7 @@ class CommonFunctions {
   }
 
   static padZero(value) {
-    return (String(value)).padStart(2, '0');
+    return String(value).padStart(2, '0');
   }
 }
 
@@ -48,7 +48,7 @@ class TestFunctions {
     // 下面要根据第几列选择类名
     const whichListMap = ['first', 'second', 'third'];
     // 当前input框的值，用于在disabled的时候抽离默认值
-    const inputValueList = inputEle.nativeElement.value.split(':').map(time => time.trim());
+    const inputValueList = inputEle.nativeElement.value.split(':').map((time) => time.trim());
     // 循环列表,对每一列列表进行处理
     const resList = list.map((timeList, whichList) => {
       // 根据第几列拿到类名和列中元素的类名
@@ -58,33 +58,33 @@ class TestFunctions {
         // 把默认值保存
         return {
           ...timeList,
-          res: inputValueList[whichList]
+          res: inputValueList[whichList],
         };
       } else {
-        expect(timeEle.textContent.trim()).toBe((String(timeList.index)).padStart(2, '0'));
+        expect(timeEle.textContent.trim()).toBe(String(timeList.index).padStart(2, '0'));
         CommonFunctions.flushEvent(timeEle, new Event('click'), fixture);
         expect(fixture.debugElement.componentInstance.model).toHaveBeenCalled();
         // 把元素展示的值保存
         return {
           ...timeList,
-          res: timeEle.textContent.trim()
+          res: timeEle.textContent.trim(),
         };
       }
     });
     // 点击完之后看整个input框的值展示是否正确
-    expect(inputEle.nativeElement.value).toBe(resList.map(timeList => timeList.res).join(':'));
+    expect(inputEle.nativeElement.value).toBe(resList.map((timeList) => timeList.res).join(':'));
   }
 
   static inputValue(value: string, inputEle: ElementRef, fixture) {
     const whichListMap = ['first', 'second', 'third'];
-    const defaultValueList = inputEle.nativeElement.value.split(':').map(time => time.trim());
-    const inputValueList = value.split(':').map(time => time.trim());
+    const defaultValueList = inputEle.nativeElement.value.split(':').map((time) => time.trim());
+    const inputValueList = value.split(':').map((time) => time.trim());
     const valueArr = value.split('');
     inputEle.nativeElement.value = '';
     CommonFunctions.flushEvent(inputEle.nativeElement, new Event('input'), fixture);
     CommonFunctions.tickEvent(inputEle.nativeElement, new Event('keyup'), fixture, 300);
     let curValue = '';
-    valueArr.forEach(singleValue => {
+    valueArr.forEach((singleValue) => {
       curValue = curValue + singleValue;
       inputEle.nativeElement.value = curValue;
       CommonFunctions.flushEvent(inputEle.nativeElement, new Event('input'), fixture);
@@ -99,18 +99,18 @@ class TestFunctions {
         return {
           disabled: true,
           index: index,
-          res: defaultValueList[whichList]
+          res: defaultValueList[whichList],
         };
       } else {
         return {
           disabled: false,
           index: index,
-          res: inputValueList[whichList]
+          res: inputValueList[whichList],
         };
       }
     });
     expect(fixture.debugElement.componentInstance.model).toHaveBeenCalled();
-    expect(inputEle.nativeElement.value).toBe(resList.map(timeList => timeList.res).join(':'));
+    expect(inputEle.nativeElement.value).toBe(resList.map((timeList) => timeList.res).join(':'));
   }
 }
 
@@ -173,7 +173,7 @@ describe('timePicker', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TimePickerModule, NoopAnimationsModule, FormsModule],
-      declarations: [TestTimePickerComponent]
+      declarations: [TestTimePickerComponent],
     }).compileComponents();
   }));
 
@@ -199,13 +199,21 @@ describe('timePicker', () => {
       CommonFunctions.openTimePicker(fixture);
       expect(document.querySelector('.devui-time-picker-wrapper')).toBeTruthy();
       // 并且该有的都有
-      expect(domHelper.judgeAppendToBodyStyleClasses([
-        '.devui-time-picker-wrapper',
-        '.devui-time-picker',
-        '.devui-time-list', '.devui-first-list', '.devui-second-list', '.devui-third-list',
-        '.devui-time-item', '.devui-first-item', '.devui-second-item', '.devui-third-item',
-        '.devui-time-footer'
-      ])).toBeTruthy();
+      expect(
+        domHelper.judgeAppendToBodyStyleClasses([
+          '.devui-time-picker-wrapper',
+          '.devui-time-picker',
+          '.devui-time-list',
+          '.devui-first-list',
+          '.devui-second-list',
+          '.devui-third-list',
+          '.devui-time-item',
+          '.devui-first-item',
+          '.devui-second-item',
+          '.devui-third-item',
+          '.devui-time-footer',
+        ])
+      ).toBeTruthy();
       // 关闭隐藏
       CommonFunctions.closeTimePicker(fixture);
       expect(document.querySelector('.devui-time-picker-wrapper')).toBeFalsy();
@@ -216,15 +224,15 @@ describe('timePicker', () => {
       // 拿到12点12分12秒的元素
       const curHour: TimeList = {
         disabled: false,
-        index: 11
+        index: 11,
       };
       const curMin: TimeList = {
         disabled: false,
-        index: 11
+        index: 11,
       };
       const curSec: TimeList = {
         disabled: false,
-        index: 11
+        index: 11,
       };
       // 测试点击是否正确
       TestFunctions.clickList([curHour, curMin, curSec], component.inputEle, fixture);
@@ -271,15 +279,15 @@ describe('timePicker', () => {
       // 拿到12点12分12秒的元素
       const curHour: TimeList = {
         disabled: false,
-        index: 11
+        index: 11,
       };
       const curMin: TimeList = {
         disabled: false,
-        index: 11
+        index: 11,
       };
       const curSec: TimeList = {
         disabled: false,
-        index: 11
+        index: 11,
       };
       TestFunctions.clickList([curHour, curMin, curSec], component.inputEle, fixture);
       expect(component.inputEle.nativeElement.value).toBeTruthy('12:12:12');
@@ -339,15 +347,15 @@ describe('timePicker', () => {
         // 拿到12点12分12秒的元素
         const curHour: TimeList = {
           disabled: true,
-          index: 11
+          index: 11,
         };
         const curMin: TimeList = {
           disabled: true,
-          index: 11
+          index: 11,
         };
         const curSec: TimeList = {
           disabled: true,
-          index: 11
+          index: 11,
         };
         // 测试点击是否正确
         TestFunctions.clickList([curHour, curMin, curSec], component.inputEle, fixture);
@@ -375,30 +383,30 @@ describe('timePicker', () => {
         // 拿到12点12分12秒的元素
         let curHour: TimeList = {
           disabled: true,
-          index: 12
+          index: 12,
         };
         let curMin: TimeList = {
           disabled: false,
-          index: 12
+          index: 12,
         };
         let curSec: TimeList = {
           disabled: false,
-          index: 12
+          index: 12,
         };
         // 测试点击是否正确
         TestFunctions.clickList([curHour, curMin, curSec], component.inputEle, fixture);
 
         curHour = {
           disabled: false,
-          index: 11
+          index: 11,
         };
         curMin = {
           disabled: false,
-          index: 11
+          index: 11,
         };
         curSec = {
           disabled: false,
-          index: 10
+          index: 10,
         };
         // 测试点击是否正确
         TestFunctions.clickList([curHour, curMin, curSec], component.inputEle, fixture);
@@ -426,21 +434,21 @@ describe('timePicker', () => {
 
         let curMin: TimeList = {
           disabled: false,
-          index: 11
+          index: 11,
         };
         let curSec: TimeList = {
           disabled: true,
-          index: 12
+          index: 12,
         };
         TestFunctions.clickList([curMin, curSec], component.inputEle, fixture);
 
         curMin = {
           disabled: false,
-          index: 10
+          index: 10,
         };
         curSec = {
           disabled: false,
-          index: 7
+          index: 7,
         };
         TestFunctions.clickList([curMin, curSec], component.inputEle, fixture);
 
@@ -449,11 +457,11 @@ describe('timePicker', () => {
         CommonFunctions.tickEvent(component.inputEle.nativeElement, new Event('keyup'), fixture, 300);
         curMin = {
           disabled: false,
-          index: 9
+          index: 9,
         };
         curSec = {
           disabled: true,
-          index: 7
+          index: 7,
         };
         TestFunctions.clickList([curMin, curSec], component.inputEle, fixture);
 
@@ -474,7 +482,7 @@ describe('timePicker', () => {
       it('should timePickerWidth works', fakeAsync(() => {
         fixture.detectChanges();
         CommonFunctions.openTimePicker(fixture);
-        expect(document.querySelector('.cdk-overlay-pane')['style'].width).toBe('300px');
+        expect((document.querySelector('.cdk-overlay-pane') as any).style.width).toBe('300px');
         CommonFunctions.closeTimePicker(fixture);
       }));
     });

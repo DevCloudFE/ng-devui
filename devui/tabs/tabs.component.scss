@@ -11,6 +11,12 @@
   --devui-tab-options-bg: var(--devui-brand, #5e7ce0);
 }
 
+body[ui-theme='infinity-theme'] {
+  :host {
+    --devui-tab-slider-bg: rgba(25, 25, 25, 0.05);
+  }
+}
+
 .devui-nav-container {
   display: flex;
   align-items: stretch;
@@ -20,7 +26,7 @@
 
   li {
     cursor: pointer;
-    color: $devui-aide-text;
+    color: $devui-text;
     float: left;
     transition: text-shadow $devui-animation-duration-slow $devui-animation-ease-in-out;
 
@@ -51,7 +57,7 @@
     }
 
     &:not(.active):not(.disabled) > a {
-      color: $devui-aide-text;
+      color: $devui-text;
     }
 
     &.active,
@@ -430,12 +436,8 @@
       }
     }
 
-    .devui-nav-more-operate {
-      padding-left: 0;
-
-      svg {
-        transform: rotate(90deg);
-      }
+    .devui-nav-more-operate svg {
+      transform: rotate(90deg);
     }
   }
 

@@ -7,9 +7,8 @@ import { HelperUtils } from 'ng-devui/common';
 })
 export class HelperJumpDemoComponent {
   downError: string;
-  constructor() {}
 
   goto() {
-    HelperUtils.jumpOuterUrl('https://angular.io');
+    HelperUtils.jumpOuterUrl('//angular.io');
   }
 }

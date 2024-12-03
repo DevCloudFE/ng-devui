@@ -12,9 +12,13 @@
   <br />
   <h3>Scroll mode: auto</h3>
   <d-button id="auto" [showLoading]="showLoading" bsStyle="common" (btnClick)="getData()">Load Data</d-button>
-  <d-tabs [type]="'wrapped'" [scrollMode]="'auto'" [(activeTab)]="autoTabActiveId">
+  <d-tabs [type]="'wrapped'" [scrollMode]="'auto'" [scrollModeOperationTpl]="clear" [(activeTab)]="autoTabActiveId">
     <d-tab *ngFor="let item of dynamicData" [id]="item.id">
       <ng-template dTabTitle>{{ item.title }}</ng-template>
     </d-tab>
   </d-tabs>
 </section>
+
+<ng-template #clear>
+  <i class="clear-button icon-clearup" (click)="clearAll()"></i>
+</ng-template>

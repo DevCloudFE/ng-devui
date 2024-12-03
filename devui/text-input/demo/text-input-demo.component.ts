@@ -20,10 +20,11 @@ export class TextInputDemoComponent implements OnInit, OnDestroy {
 
   sizeSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'xml', code: require('./size/text-input-size.component.html?raw') },
-    { title: 'TS', language: 'typescript', code: require('./size/text-input-size.component.ts?raw') }
+    { title: 'TS', language: 'typescript', code: require('./size/text-input-size.component.ts?raw') },
   ];
   navItems = [];
   subs: Subscription = new Subscription();
+
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
@@ -44,7 +45,7 @@ export class TextInputDemoComponent implements OnInit, OnDestroy {
   setNavValues(values) {
     this.navItems = [
       { dAnchorLink: 'basic-usage', value: values['basic-usage'] },
-      { dAnchorLink: 'size', value: values['size']},
+      { dAnchorLink: 'size', value: values.size },
       {
         dAnchorLink: 'password-input',
         value: values['password-input'],

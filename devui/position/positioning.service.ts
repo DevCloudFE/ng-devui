@@ -3,9 +3,7 @@ import { DocumentRef, WindowRef } from 'ng-devui/window-ref';
 
 @Injectable()
 export class PositionService {
-
-  constructor(private documentRef: DocumentRef, private windowRef: WindowRef) {
-  }
+  constructor(private documentRef: DocumentRef, private windowRef: WindowRef) {}
 
   position(element: HTMLElement, round = true) {
     let elPosition;
@@ -45,7 +43,7 @@ export class PositionService {
     const elBcr = element.getBoundingClientRect();
     const viewportOffset = {
       top: this.windowRef.pageYOffset - this.documentRef.documentElement.clientTop,
-      left: this.windowRef.pageXOffset - this.documentRef.documentElement.clientLeft
+      left: this.windowRef.pageXOffset - this.documentRef.documentElement.clientLeft,
     };
 
     const elOffset = {
@@ -54,7 +52,7 @@ export class PositionService {
       top: elBcr.top + viewportOffset.top,
       bottom: elBcr.bottom + viewportOffset.top,
       left: elBcr.left + viewportOffset.left,
-      right: elBcr.right + viewportOffset.left
+      right: elBcr.right + viewportOffset.left,
     };
 
     if (round) {
@@ -95,12 +93,12 @@ export class PositionService {
     const shiftWidth: any = {
       left: hostElPosition.left,
       center: hostElPosition.left + hostElPosition.width / 2 - targetElement.offsetWidth / 2,
-      right: hostElPosition.left + hostElPosition.width
+      right: hostElPosition.left + hostElPosition.width,
     };
     const shiftHeight: any = {
       top: hostElPosition.top,
       center: hostElPosition.top + hostElPosition.height / 2 - targetElement.offsetHeight / 2,
-      bottom: hostElPosition.top + hostElPosition.height
+      bottom: hostElPosition.top + hostElPosition.height,
     };
     const targetElBCR = targetElement.getBoundingClientRect();
 
@@ -110,7 +108,7 @@ export class PositionService {
       top: 0,
       bottom: targetElBCR.height || targetElement.offsetHeight,
       left: 0,
-      right: targetElBCR.width || targetElement.offsetWidth
+      right: targetElBCR.width || targetElement.offsetWidth,
     };
 
     let placementPrimary: string;
@@ -129,31 +127,32 @@ export class PositionService {
     case 'top':
       targetElPosition.top = hostElPosition.top - targetElement.offsetHeight;
       targetElPosition.bottom += hostElPosition.top - targetElement.offsetHeight;
-      targetElPosition.left = placementSecondary === 'right'
-        ? shiftWidth[placementSecondary] - targetElement.offsetWidth : shiftWidth[placementSecondary];
+      targetElPosition.left =
+        placementSecondary === 'right' ? shiftWidth[placementSecondary] - targetElement.offsetWidth : shiftWidth[placementSecondary];
       targetElPosition.right += shiftWidth[placementSecondary];
       break;
     case 'bottom':
       targetElPosition.top = shiftHeight[placementPrimary];
       targetElPosition.bottom += shiftHeight[placementPrimary];
-      targetElPosition.left = placementSecondary === 'right'
-        ? shiftWidth[placementSecondary] - targetElement.offsetWidth : shiftWidth[placementSecondary];
+      targetElPosition.left =
+        placementSecondary === 'right' ? shiftWidth[placementSecondary] - targetElement.offsetWidth : shiftWidth[placementSecondary];
       targetElPosition.right += shiftWidth[placementSecondary];
       break;
     case 'left':
-      targetElPosition.top = placementSecondary === 'bottom'
-        ? shiftHeight[placementSecondary] - targetElement.offsetHeight : shiftHeight[placementSecondary];
+      targetElPosition.top =
+        placementSecondary === 'bottom' ? shiftHeight[placementSecondary] - targetElement.offsetHeight : shiftHeight[placementSecondary];
       targetElPosition.bottom += shiftHeight[placementSecondary];
       targetElPosition.left = hostElPosition.left - targetElement.offsetWidth;
       targetElPosition.right += hostElPosition.left - targetElement.offsetWidth;
       break;
     case 'right':
-      targetElPosition.top = placementSecondary === 'bottom'
-        ? shiftHeight[placementSecondary] - targetElement.offsetHeight : shiftHeight[placementSecondary];
+      targetElPosition.top =
+        placementSecondary === 'bottom' ? shiftHeight[placementSecondary] - targetElement.offsetHeight : shiftHeight[placementSecondary];
       targetElPosition.bottom += shiftHeight[placementSecondary];
       targetElPosition.left = shiftWidth[placementPrimary];
       targetElPosition.right += shiftWidth[placementPrimary];
       break;
+    default:
     }
 
     targetElPosition.top = Math.round(targetElPosition.top);
@@ -168,17 +167,16 @@ export class PositionService {
 
   // 根据传入数组选取第一个合适的位置
   private getPlacement(hostElement: HTMLElement, targetElement: HTMLElement, placement: string[]) {
-
     const hostElPosition = this.offset(hostElement, false);
     const shiftWidth: any = {
       left: hostElPosition.left,
       center: hostElPosition.left + hostElPosition.width / 2 - targetElement.offsetWidth / 2,
-      right: hostElPosition.left + hostElPosition.width
+      right: hostElPosition.left + hostElPosition.width,
     };
     const shiftHeight: any = {
       top: hostElPosition.top,
       center: hostElPosition.top + hostElPosition.height / 2 - targetElement.offsetHeight / 2,
-      bottom: hostElPosition.top + hostElPosition.height
+      bottom: hostElPosition.top + hostElPosition.height,
     };
 
     let placementPrimary = placement[0].split('-')[0] || 'top';
@@ -188,30 +186,40 @@ export class PositionService {
       const placementPrimaryTemp = placement[i].split('-')[0] || 'top';
       const placementSecondaryTemp = placement[i].split('-')[1] || 'center';
 
-      let top; let left;
+      let top;
+      let left;
       switch (placementPrimaryTemp) {
       case 'top':
         top = hostElPosition.top - targetElement.offsetHeight;
-        left = placementSecondaryTemp === 'right'
-          ? shiftWidth[placementSecondaryTemp] - targetElement.offsetWidth : shiftWidth[placementSecondary];
+        left =
+          placementSecondaryTemp === 'right'
+            ? shiftWidth[placementSecondaryTemp] - targetElement.offsetWidth
+            : shiftWidth[placementSecondary];
         break;
       case 'bottom':
         top = shiftHeight[placementPrimaryTemp];
-        left = placementSecondaryTemp === 'right'
-          ? shiftWidth[placementSecondaryTemp] - targetElement.offsetWidth : shiftWidth[placementSecondary];
+        left =
+          placementSecondaryTemp === 'right'
+            ? shiftWidth[placementSecondaryTemp] - targetElement.offsetWidth
+            : shiftWidth[placementSecondary];
         break;
       case 'left':
-        top = placementSecondaryTemp === 'bottom'
-          ? shiftHeight[placementSecondaryTemp] - targetElement.offsetHeight : shiftHeight[placementSecondary];
+        top =
+          placementSecondaryTemp === 'bottom'
+            ? shiftHeight[placementSecondaryTemp] - targetElement.offsetHeight
+            : shiftHeight[placementSecondary];
         left = hostElPosition.left - targetElement.offsetWidth;
         break;
       case 'right':
-        top = placementSecondaryTemp === 'bottom'
-          ? shiftHeight[placementSecondaryTemp] - targetElement.offsetHeight : shiftHeight[placementSecondary];
+        top =
+          placementSecondaryTemp === 'bottom'
+            ? shiftHeight[placementSecondaryTemp] - targetElement.offsetHeight
+            : shiftHeight[placementSecondary];
         left = shiftWidth[placementPrimaryTemp];
         break;
+      default:
       }
-      if (this.isInViewPort(targetElement, {offsetLeft: left, offsetTop: top})) {
+      if (this.isInViewPort(targetElement, { offsetLeft: left, offsetTop: top })) {
         placementPrimary = placement[i].split('-')[0] || 'top';
         placementSecondary = placement[i].split('-')[1] || 'center';
         return [placementPrimary, placementSecondary];
@@ -220,10 +228,10 @@ export class PositionService {
     return [placementPrimary, placementSecondary];
   }
 
-  private isInViewPort(ele, {offsetLeft, offsetTop}) {
+  private isInViewPort(ele, { offsetLeft, offsetTop }) {
     const targetElBCR = ele.getBoundingClientRect();
-    const viewPortHeight = this.windowRef.innerHeight || this.documentRef.documentElement.clientHeight
-    || this.documentRef.body.clientHeight;
+    const viewPortHeight =
+      this.windowRef.innerHeight || this.documentRef.documentElement.clientHeight || this.documentRef.body.clientHeight;
     const viewPortWidth = this.windowRef.innerWidth || this.documentRef.documentElement.clientWidth || this.documentRef.body.clientWidth;
     const height = targetElBCR.height || targetElBCR.offsetHeight;
     const width = targetElBCR.width || targetElBCR.offsetWidth;
@@ -254,5 +262,4 @@ export class PositionService {
 
     return offsetParentEl || this.documentRef.documentElement;
   }
-
 }

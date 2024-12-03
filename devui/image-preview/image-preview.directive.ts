@@ -1,20 +1,14 @@
 import { Directive, ElementRef, HostBinding, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { ModalService } from 'ng-devui/modal';
 import { Subject } from 'rxjs';
-import { DImagePreviewComponent } from './image-preview.component';
+import { DImagePreviewComponent, IImagePreviewToolbar } from './image-preview.component';
 @Directive({
   selector: '[dImagePreview]',
 })
 export class ImagePreviewDirective implements OnInit, OnDestroy {
-
-  constructor(
-    private elementRef: ElementRef,
-    private modalService: ModalService
-  ) { }
-
   @Input() customSub: Subject<HTMLElement>;
   @Input() disableDefault = false;
-  // TODO: 提供用户可定制选择器
+  @Input() toolbar: IImagePreviewToolbar;
   @Input() zIndex: number;
   @Input() backDropZIndex: number;
 
@@ -22,6 +16,7 @@ export class ImagePreviewDirective implements OnInit, OnDestroy {
   get defaultClasses() {
     return !this.disableDefault;
   }
+
   @HostListener('click', ['$event'])
   onClick($event) {
     if (this.disableDefault) {
@@ -32,6 +27,8 @@ export class ImagePreviewDirective implements OnInit, OnDestroy {
       this.imagePreView(target as HTMLElement);
     }
   }
+
+  constructor(private elementRef: ElementRef, private modalService: ModalService) {}
 
   ngOnInit(): void {
     if (this.customSub) {
@@ -56,6 +53,7 @@ export class ImagePreviewDirective implements OnInit, OnDestroy {
       showAnimation: false,
       data: {
         targetImage: imageHTMLElement,
+        toolbar: this.toolbar,
         images: Array.from(this.elementRef.nativeElement.querySelectorAll('img')),
         onClose: () => {
           modalRef.modalInstance.hide();
@@ -63,5 +61,4 @@ export class ImagePreviewDirective implements OnInit, OnDestroy {
       },
     });
   }
-
 }

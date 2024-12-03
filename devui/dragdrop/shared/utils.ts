@@ -8,9 +8,8 @@ export class Utils {
    */
   public static matches(element: any, selectorName: string): boolean {
     const proto: any = Element.prototype;
-
     const func =
-      proto['matches'] ||
+      proto.matches ||
       proto.matchesSelector ||
       proto.mozMatchesSelector ||
       proto.msMatchesSelector ||
@@ -34,7 +33,9 @@ export class Utils {
    * className
    */
   public static addClass(elementRef: ElementRef | any, className: string) {
-    if (className === undefined) {return; }
+    if (className === undefined) {
+      return;
+    }
     const e = this.getElementWithValidClassList(elementRef);
 
     if (e) {
@@ -48,7 +49,9 @@ export class Utils {
    * className
    */
   public static removeClass(elementRef: ElementRef | any, className: string) {
-    if (className === undefined) {return; }
+    if (className === undefined) {
+      return;
+    }
     const e = this.getElementWithValidClassList(elementRef);
 
     if (e) {
@@ -76,16 +79,14 @@ export class Utils {
     const ret = [];
     let len = args.length;
 
-    if (len === 0) { return ret; }
+    if (len === 0) {
+      return ret;
+    }
 
-    const start = slice < 0
-      ? Math.max(0, slice + len)
-      : slice || 0;
+    const start = slice < 0 ? Math.max(0, slice + len) : slice || 0;
 
     if (sliceEnd !== undefined) {
-      len = sliceEnd < 0
-        ? sliceEnd + len
-        : sliceEnd;
+      len = sliceEnd < 0 ? sliceEnd + len : sliceEnd;
     }
 
     while (len-- > start) {
@@ -101,7 +102,7 @@ export class Utils {
         if (Object.prototype.hasOwnProperty.call(styles, s)) {
           if (Array.isArray(styles[s])) {
             // 用于支持兼容渐退
-            styles[s].forEach(val => {
+            styles[s].forEach((val) => {
               el.style[s] = val;
             });
           } else {
@@ -112,19 +113,32 @@ export class Utils {
     }
   }
   public static dispatchEventToUnderElement(event: DragEvent, target?: HTMLElement, eventType?: string) {
-    const up = target || <HTMLElement>(event.target);
+    const up = target || <HTMLElement>event.target;
     up.style.display = 'none';
-    const {x, y} = {x: event.clientX, y: event.clientY};
+    const { x, y } = { x: event.clientX, y: event.clientY };
     const under = document.elementFromPoint(x, y);
     up.style.display = '';
     if (!under) {
       return event;
     }
     const ev = document.createEvent('DragEvent');
-    ev.initMouseEvent(eventType || event.type, true, true, window, 0,
-      event.screenX, event.screenY, event.clientX, event.clientY,
-      event.ctrlKey, event.altKey, event.shiftKey, event.metaKey,
-      event.button, event.relatedTarget);
+    ev.initMouseEvent(
+      eventType || event.type,
+      true,
+      true,
+      window,
+      0,
+      event.screenX,
+      event.screenY,
+      event.clientX,
+      event.clientY,
+      event.ctrlKey,
+      event.altKey,
+      event.shiftKey,
+      event.metaKey,
+      event.button,
+      event.relatedTarget
+    );
     if (ev.dataTransfer !== null) {
       ev.dataTransfer.setData('text', '');
       ev.dataTransfer.effectAllowed = event.dataTransfer.effectAllowed;

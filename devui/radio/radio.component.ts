@@ -54,18 +54,19 @@ export class RadioComponent implements ControlValueAccessor {
 
   @Input() beforeChange: (value) => boolean | Promise<boolean> | Observable<boolean>;
   @Input() @WithConfig() showGlowStyle = true;
-  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
     return this.showGlowStyle;
-  };
+  }
   @HostListener('click', ['$event'])
   onRadioChange(event) {
+    event.preventDefault();
     if (this.disabled) {
-      event.preventDefault();
+      return;
     }
-
     this.canChange().then((change) => {
-      if (!change) {
-        event.preventDefault();
+      if (change) {
+        this._value = this.value;
+        this.onChange(this.value);
       }
     });
   }

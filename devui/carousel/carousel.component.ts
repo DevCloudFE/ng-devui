@@ -125,7 +125,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, OnChanges, O
       this.translatePosition(this.itemCount);
       this.adjustTransition(targetEl);
     } else {
-      this.activeIndex = index < 0 ? 0 : index > this.itemCount - 1 ? this.itemCount - 1 : index;
+      const idx = index > this.itemCount - 1 ? this.itemCount - 1 : index;
+      this.activeIndex = index < 0 ? 0 : idx;
       this.translatePosition(this.activeIndex);
     }
     this.activeIndexChange.emit(this.activeIndex);

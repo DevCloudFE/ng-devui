@@ -534,6 +534,7 @@ advancedHeader: Array < {
 |        save         |  `EventEmitter<any>`  |               返回操作改变之后的数据               | [大数据量树形表格基本用法](demo#virtual-scroll-tree-table-basic) |
 |        allChecked         |  `EventEmitter<any>`  |               返回表头复选框状态               | [大数据量树形表格交互](demo#virtual-scroll-tree-table-interaction) |
 |        dropRow         |  `EventEmitter<dataList: any[];dropIndex: number;>`  |               表格行拖拽的投放事件               | [大数据量树形表格拖拽](demo#virtual-scroll-tree-table-multi-drag) |
+|        tableRenderEnd         |  `EventEmitter<void>`  |               表格数据变更后渲染完成的回调事件               | |
 
 原datatable事件都可以透传，支持multiSortChange，cellClick，cellDBClick，rowClick，rowDBClick，cellEditStart，cellEditEnd，resize事件。
 

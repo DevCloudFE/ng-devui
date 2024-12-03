@@ -20,11 +20,11 @@ import {
   Self,
   SimpleChanges,
   TemplateRef,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { DevConfigService, WithConfig } from 'ng-devui/utils';
-import { fromEvent, Subject } from 'rxjs';
+import { Subject, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MentionComponent } from './mention.component';
 import { Mention, MentionOnSearchTypes, MentionPositionType } from './mention.types';
@@ -45,15 +45,16 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() mentionPosition: MentionPositionType = 'bottom';
   @Input() mentionHeaderTemplate: TemplateRef<any>;
   @Input() mentionItemTemplate: TemplateRef<any>;
+  @Input() endWithCursorPos = false;
   @Input() mentionValueParse: (value: string) => string = (value) => value;
   @Output() mentionSelectItem = new EventEmitter();
   @Output() mentionSearchChange: EventEmitter<MentionOnSearchTypes> = new EventEmitter();
   @Output() mentionAfterMentionInit: EventEmitter<MentionDirective> = new EventEmitter();
 
   @Input() @WithConfig() showGlowStyle = true;
-  @HostBinding('class.devui-glow-style') get hasGlowStyle () {
+  @HostBinding('class.devui-glow-style') get hasGlowStyle() {
     return this.showGlowStyle;
-  };
+  }
 
   isOpen = false;
   activeIndex = -1;
@@ -186,8 +187,9 @@ export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDes
     let i = this.mentionTrigger.length;
     while (i >= 0) {
       const startPos = value.lastIndexOf(this.mentionTrigger[i], selectionStart);
-      const endPos =
+      const resPos =
         value.indexOf(this.mentionSeparator, selectionStart) > -1 ? value.indexOf(this.mentionSeparator, selectionStart) : value.length;
+      const endPos = this.endWithCursorPos ? selectionStart : resPos;
       const mention = value.substring(startPos, selectionStart);
       if (
         (this.mentionSeparatorToggle.prefix && startPos > 0 && value[startPos - 1] !== this.mentionSeparator) ||

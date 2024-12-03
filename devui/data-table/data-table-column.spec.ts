@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, DebugElement, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,7 +15,7 @@ import { LoadingType } from '..';
 import { I18nModule } from '../i18n';
 import { createMouseEvent } from '../utils/testing/event-helper';
 import { DataTableModule } from './data-table.module';
-import { editableOriginSource, genderSource, originSource, SourceType, treeDataSource } from './demo/mock-data';
+import { SourceType, editableOriginSource, genderSource, originSource, treeDataSource } from './demo/mock-data';
 const dataTableOptions = {
   columns: [
     {
@@ -23,28 +23,28 @@ const dataTableOptions = {
       header: 'First Name',
       fieldType: 'text',
       sortable: true,
-      order: 1
+      order: 1,
     },
     {
       field: 'lastName',
       header: 'Last Name',
       fieldType: 'text',
       sortable: true,
-      order: 2
+      order: 2,
     },
     {
       field: 'gender',
       header: 'gender',
       fieldType: 'text',
       sortable: true,
-      order: 3
+      order: 3,
     },
     {
       field: 'dob',
       header: 'Date of birth',
       fieldType: 'date',
       sortable: true,
-      order: 4
+      order: 4,
     },
   ],
 };
@@ -52,8 +52,14 @@ const dataTableOptions = {
 // column: basic & checkable
 @Component({
   template: `
-    <d-data-table #datatable [checkable]="checkable" [dataSource]="basicDataSource" [type]="'striped'"
-    [checkOptions]="checkOptions" [generalRowHoveredData]="true">
+    <d-data-table
+      #datatable
+      [checkable]="checkable"
+      [dataSource]="basicDataSource"
+      [type]="'striped'"
+      [checkOptions]="checkOptions"
+      [generalRowHoveredData]="true"
+    >
       <d-column field="$index" header="#" [width]="'50px'"></d-column>
       <d-column
         *ngFor="let colOption of dataTableOptions.columns"
@@ -77,12 +83,12 @@ class TestDataTableColumnBasicComponent {
   checkOptions: TableCheckOptions[] = [
     {
       label: '全选所有数据',
-      onChecked: this.checkTotalData.bind(this)
+      onChecked: this.checkTotalData.bind(this),
     },
     {
       label: '全选当前页数据',
-      onChecked: undefined
-    }
+      onChecked: undefined,
+    },
   ];
 }
 
@@ -269,9 +275,9 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
   }
 
   filterChangeMultiple($event) {
-    const filterList = $event.map(item => item.name);
+    const filterList = $event.map((item) => item.name);
     const dataDisplay = [];
-    JSON.parse(JSON.stringify(originSource.slice(0, 6))).forEach(item => {
+    JSON.parse(JSON.stringify(originSource.slice(0, 6))).forEach((item) => {
       if (filterList.includes(item.firstName)) {
         dataDisplay.push(item);
       }
@@ -279,7 +285,7 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
     this.sortableDataSource = dataDisplay;
   }
 
-  beforeFilter = currentValue => {
+  beforeFilter = (currentValue) => {
     this.filterListMulti = this.filterList;
     this.ref.detectChanges();
     return true;
@@ -295,7 +301,7 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
 
   setHalfChecked() {
     this.halfChecked = false;
-    const chosen = this.checkboxList.filter(item => item.chosen);
+    const chosen = this.checkboxList.filter((item) => item.chosen);
     if (chosen.length === this.checkboxList.length) {
       this.allChecked = true;
     } else if (chosen.length > 0) {
@@ -330,7 +336,7 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
       <d-column field="dob" header="Date of birth" [editable]="true" [width]="'150px'">
         <d-cell>
           <ng-template let-cellItem="cellItem">
-            {{ cellItem | i18nDate: 'full':false }}
+            {{ cellItem | i18nDate : 'full' : false }}
           </ng-template>
         </d-cell>
         <d-cell-edit>
@@ -344,7 +350,7 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
                     [(ngModel)]="rowItem[column.field]"
                     dDatepicker
                     appendToBody
-                    [dateFormat]="yyyy-MM-DD"
+                    [dateFormat]="yyyy - MM - DD"
                     #datePicker="datepicker"
                     [showTime]="true"
                     [autoOpen]="true"
@@ -551,28 +557,28 @@ class TestDataTableColumnDragComponent {
 @Component({
   template: `
     <d-data-table
-    #dataTable
-    [dataSource]="basicDataSource"
-    [checkable]="true"
-    [showExpandToggle]="true"
-    [scrollable]="true"
-    (detialToggle)="toggleChange($event)"
-  >
-    <d-column field="$index" header="#" [width]="'50px'"></d-column>
-    <d-column field="firstName" header="First Name" [width]="'150px'"></d-column>
-    <d-column field="lastName" header="Last Name" [width]="'150px'"></d-column>
-    <d-column field="gender" header="Gender" [width]="'100px'"></d-column>
-  </d-data-table>
-  <ng-template #addSubRowContent let-rowIndex="rowIndex" let-rowItem="rowItem">
-    <div class="edit-padding-fix">
-      <div class="input-block">
-        <input class="devui-form-control" [(ngModel)]="defaultRowData.firstName" placeholder="firstName" type="text" />
+      #dataTable
+      [dataSource]="basicDataSource"
+      [checkable]="true"
+      [showExpandToggle]="true"
+      [scrollable]="true"
+      (detialToggle)="toggleChange($event)"
+    >
+      <d-column field="$index" header="#" [width]="'50px'"></d-column>
+      <d-column field="firstName" header="First Name" [width]="'150px'"></d-column>
+      <d-column field="lastName" header="Last Name" [width]="'150px'"></d-column>
+      <d-column field="gender" header="Gender" [width]="'100px'"></d-column>
+    </d-data-table>
+    <ng-template #addSubRowContent let-rowIndex="rowIndex" let-rowItem="rowItem">
+      <div class="edit-padding-fix">
+        <div class="input-block">
+          <input class="devui-form-control" [(ngModel)]="defaultRowData.firstName" placeholder="firstName" type="text" />
+        </div>
+        <div class="input-block">
+          <input class="devui-form-control" [(ngModel)]="defaultRowData.lastName" placeholder="lastName" type="text" />
+        </div>
       </div>
-      <div class="input-block">
-        <input class="devui-form-control" [(ngModel)]="defaultRowData.lastName" placeholder="lastName" type="text" />
-      </div>
-    </div>
-  </ng-template>
+    </ng-template>
   `,
 })
 class TestDataTableExpandComponent implements OnInit {
@@ -587,7 +593,7 @@ class TestDataTableExpandComponent implements OnInit {
   toggleChange = jasmine.createSpy('detail content toggle change');
   ngOnInit() {
     this.basicDataSource[0].$expandConfig = { expand: false, expandTemplateRef: this.addSubRowContent };
-    this.basicDataSource[1]['$isDetailOpen'] = true;
+    (this.basicDataSource[1] as any).$isDetailOpen = true;
     this.basicDataSource[1].detail = 'show detail';
   }
 }
@@ -705,7 +711,7 @@ describe('data-table column', () => {
       component.checkable = true;
       fixture.detectChanges();
       const dropdownElement = debugEl.query(By.css('table .devui-checkable-cell .select-options'));
-      dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', {'bubbles': false, 'cancelable': false}));
+      dropdownElement.nativeElement.dispatchEvent(new MouseEvent('mouseenter', { bubbles: false, cancelable: false }));
       fixture.detectChanges();
       tick(50); // debounce time
       fixture.detectChanges();
@@ -729,7 +735,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule, FormsModule, CheckBoxModule, TooltipModule, AvatarModule, NoopAnimationsModule],
-        declarations: [TestDataTableAdvancedColumnComponent]
+        declarations: [TestDataTableAdvancedColumnComponent],
       });
     });
 
@@ -1009,7 +1015,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [FormsModule, DataTableModule, I18nModule, DatepickerModule, InputNumberModule, SelectModule, NoopAnimationsModule],
-        declarations: [TestDataTableColumnEditComponent]
+        declarations: [TestDataTableColumnEditComponent],
       });
     });
 
@@ -1031,7 +1037,7 @@ describe('data-table column', () => {
 
       const inputDebugEl = debugEl.query(By.css('.customized-editor.edit-padding-fix > input'));
       expect(inputDebugEl).toBeTruthy();
-      expect(inputDebugEl.nativeElement.value).toEqual(component.basicDataSource[0]['lastName']);
+      expect(inputDebugEl.nativeElement.value).toEqual(component.basicDataSource[0].lastName);
       inputDebugEl.nativeElement.value = 'testLastName';
       inputDebugEl.nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
@@ -1148,7 +1154,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule],
-        declarations: [TestDataTableColumnWithChildrenComponent]
+        declarations: [TestDataTableColumnWithChildrenComponent],
       });
     });
 
@@ -1166,7 +1172,7 @@ describe('data-table column', () => {
     it('should set row child toggle status function work', fakeAsync(() => {
       let checkBoxes = debugEl.queryAll(By.css('tbody .devui-checkbox.unchecked'));
       let togglers = debugEl.queryAll(By.css('.childtable-toggler'));
-      let togglersShow = togglers.filter(item => item.nativeElement.style.visibility === 'visible');
+      let togglersShow = togglers.filter((item) => item.nativeElement.style.visibility === 'visible');
       expect(checkBoxes.length).toBe(component.basicDataSource.length);
       expect(togglersShow.length).toBe(2);
 
@@ -1177,7 +1183,7 @@ describe('data-table column', () => {
       fixture.detectChanges();
       checkBoxes = debugEl.queryAll(By.css('tbody .devui-checkbox.unchecked'));
       togglers = debugEl.queryAll(By.css('.childtable-toggler'));
-      togglersShow = togglers.filter(item => item.nativeElement.style.visibility === 'visible');
+      togglersShow = togglers.filter((item) => item.nativeElement.style.visibility === 'visible');
       expect(checkBoxes.length).toBe(component.basicDataSource.length + 2); // 展开的子元素2个
       expect(togglersShow.length).toBe(3);
     }));
@@ -1191,7 +1197,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule, I18nModule, NoopAnimationsModule],
-        declarations: [TestDataTableColumnFixHeaderComponent]
+        declarations: [TestDataTableColumnFixHeaderComponent],
       });
     });
 
@@ -1282,7 +1288,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule, I18nModule, NoopAnimationsModule],
-        declarations: [TestDataTableColumnMultiHeaderComponent]
+        declarations: [TestDataTableColumnMultiHeaderComponent],
       });
     });
 
@@ -1394,7 +1400,7 @@ describe('data-table column', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [DataTableModule, NoopAnimationsModule],
-        declarations: [TestDataTableColumnDragComponent]
+        declarations: [TestDataTableColumnDragComponent],
       });
     });
 

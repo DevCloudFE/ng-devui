@@ -13,12 +13,13 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { DropDownAppendToBodyComponent } from 'ng-devui/dropdown';
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { AppendToBodyDirection } from 'ng-devui/utils';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
+
 @Component({
   selector: 'd-pagination',
   styleUrls: ['./pagination.component.scss'],
@@ -56,10 +57,12 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
    */
   @Input() maxItems = 10;
   /**
+   * @depreted 存在xxs风险，后续将替换为模板，使用方需根据自身场景做好防护
    * 【可选】前一页按钮文字，默认为左箭头图标
    */
   @Input() preLink: string;
   /**
+   * @depreted 存在xxs风险，后续将替换为模板，使用方需根据自身场景做好防护
    * 【可选】后一页按钮文字，默认为左箭头图标
    */
   @Input() nextLink: string;
@@ -347,7 +350,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy,
   private adjustPaginatorWidth() {
     if (this.litePaginator && this.litePaginator.nativeElement && this.litePaginatorOptions.length > 0) {
       const lastOption = this.litePaginatorOptions[this.litePaginatorOptions.length - 1];
-      const lastLabel = lastOption ? lastOption['label'] : '';
+      const lastLabel = lastOption ? lastOption.label : '';
       const minWidth = 100;
       const width = lastLabel.length * 4 + 80;
       this.litePaginator.nativeElement.style.width = `${Math.max(minWidth, width)}px`;

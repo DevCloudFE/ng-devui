@@ -946,8 +946,8 @@
       },
       "pipeDemo": {
         "dDatePipe": {
-          "title": "DatePipe"
-        },
+        "title": "DatePipe"
+      },
         "dSafeNullPipe": {
           "title": "SafeNullPipe",
           "description": "When the data is '', null, undefined can be specified any character placeholder display, the default is: '--'"
@@ -3463,12 +3463,17 @@
         "title": "Service Function",
         "description": "Create a toast global notification using services."
       },
+      "appendDemo": {
+        "title": "Display in appending mode",
+        "description": "Appends new messages within the specified number range instead of clearing the original messages. Note that the duration of existing messages is reset after new messages are inserted."
+      },
       "anchorLinkValues": {
         "basic-usage": "Basic Usage",
         "life": "Timeout interval",
         "style": "Custom Style",
         "toast-service": "Service Function",
-        "single": "Each message uses a separate timeout interval"
+        "single": "Each message uses a separate timeout interval",
+        "append": "Display in appending mode"
       }
     },
     "tooltip": {

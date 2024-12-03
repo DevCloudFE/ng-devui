@@ -56,6 +56,7 @@ export class CommonDemoComponent implements OnInit, OnDestroy {
 
   navItems = [];
   subs: Subscription = new Subscription();
+
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
@@ -81,8 +82,8 @@ export class CommonDemoComponent implements OnInit, OnDestroy {
       { dAnchorLink: 'open-url', value: values['open-url'] },
       { dAnchorLink: 'download-file', value: values['download-file'] },
       { dAnchorLink: 'iframe-propagate', value: values['iframe-propagate'] },
-      { dAnchorLink: 'clipboard', value: values['clipboard'] },
-      { dAnchorLink: 'shapeIconHoverable', value: values['shapeIconHoverable'] },
+      { dAnchorLink: 'clipboard', value: values.clipboard },
+      { dAnchorLink: 'shapeIconHoverable', value: values.shapeIconHoverable },
       { dAnchorLink: 'lazy-load', value: values['lazy-load'] },
     ];
   }

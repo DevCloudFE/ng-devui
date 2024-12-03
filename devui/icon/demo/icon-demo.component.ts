@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 @Component({
   templateUrl: './icon-demo.component.html',
 })
-export class IconDemoComponent implements OnInit,OnDestroy {
+export class IconDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [
     { title: 'HTML', language: 'html', code: require('./basic/basic.component.html?raw') },
     { title: 'TS', language: 'typescript', code: require('./basic/basic.component.ts?raw') },
@@ -18,11 +18,11 @@ export class IconDemoComponent implements OnInit,OnDestroy {
     { title: 'CSS', language: 'css', code: require('./icon-group/icon-group.component.scss?raw') },
   ];
 
-  navItems = [
-    { dAnchorLink: 'basic', value: '基本用法' }
-  ];
+  navItems = [{ dAnchorLink: 'basic', value: '基本用法' }];
   subs: Subscription = new Subscription();
-  constructor(private translate: TranslateService){}
+
+  constructor(private translate: TranslateService) {}
+
   ngOnInit() {
     this.subs.add(
       this.translate.get('components.icon.anchorLinkValues').subscribe((res) => {
@@ -40,7 +40,7 @@ export class IconDemoComponent implements OnInit,OnDestroy {
 
   setNavValues(values) {
     this.navItems = [
-      { dAnchorLink: 'basic', value: values['basic'] },
+      { dAnchorLink: 'basic', value: values.basic },
       { dAnchorLink: 'icon-group', value: values['icon-group'] },
     ];
   }

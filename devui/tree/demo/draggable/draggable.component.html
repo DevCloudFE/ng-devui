@@ -2,9 +2,8 @@
 <d-operable-tree
   [tree]="data"
   [draggable]="true"
-  (nodeOnDrop)="onDrop($event)"
-  (nodeDragStart)="dragStart($event)"
   [beforeNodeDrop]="beforeNodeDrop"
+  (nodeDragStart)="dragStart($event)"
   (nodeOnDrop)="onDrop($event)"
   (nodeToggled)="showNode($event)"
 >
@@ -15,9 +14,8 @@
   [draggable]="true"
   [canActivateMultipleNode]="true"
   [dropType]="dropType"
-  (nodeOnDrop)="onDrop($event)"
-  (nodeDragStart)="dragStart($event)"
   [beforeNodeDrop]="beforeNodeDrop"
+  (nodeDragStart)="dragStart($event)"
   (nodeOnDrop)="onDrop($event)"
   (nodeToggled)="showNode($event)"
 >
