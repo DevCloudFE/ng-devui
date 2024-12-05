@@ -9,7 +9,7 @@ const isDefined = function (value?: any): boolean {
 
 @Injectable({
   providedIn: 'root',
-})
+  })
 export class DevConfigService {
   private configUpdated$ = new Subject<keyof DevUIGlobalConfig>();
   private config: DevUIGlobalConfig;
@@ -66,6 +66,7 @@ export function WithConfig<T>(propertyKey?: T | string) {
         let name = this.constructor.name;
         name = name.replace('Directive', '');
         name = name.replace('Component', '');
+        name = name.replace('Pipe', '');
         name = name.toLowerCase();
 
         const componentConfig = this.devConfigService.config[name] || {};
