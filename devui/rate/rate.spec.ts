@@ -5,19 +5,21 @@ import { By } from '@angular/platform-browser';
 import { RateComponent } from './rate.component';
 import { RateModule } from './rate.module';
 @Component({
-  template: `
+    template: `
     <d-rate [(ngModel)]="value" [icon]="'icon-star-o'"></d-rate>
     <div>当前有{{ value }}颗星</div>
-  `
+  `,
+    standalone: false
 })
 class TestRateComponent {
   value = 2;
 }
 
 @Component({
-  template: `
+    template: `
     <d-rate [(ngModel)]="value" [icon]="'icon-star-o'" [read]="true"></d-rate>
-  `
+  `,
+    standalone: false
 })
 class TestRateReadOnlyComponent {
   value = 2.5;

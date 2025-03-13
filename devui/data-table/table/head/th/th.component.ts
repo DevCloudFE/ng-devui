@@ -22,16 +22,17 @@ import { FilterConfig, SortDirection, SortEventArg } from '../../../data-table.m
 import { TABLE_TH } from './th.token';
 
 @Component({
-  /* eslint-disable-next-line @angular-eslint/component-selector*/
-  selector: '[dHeadCell]',
-  templateUrl: './th.component.html',
-  styleUrls: ['./th.component.scss'],
-  providers: [
-    {
-    provide: TABLE_TH,
-      useExisting: forwardRef(() => TableThComponent),
-    },
-  ],
+    /* eslint-disable-next-line @angular-eslint/component-selector*/
+    selector: '[dHeadCell]',
+    templateUrl: './th.component.html',
+    styleUrls: ['./th.component.scss'],
+    providers: [
+        {
+            provide: TABLE_TH,
+            useExisting: forwardRef(() => TableThComponent),
+        },
+    ],
+    standalone: false
 })
 export class TableThComponent implements OnChanges, OnDestroy {
   @HostBinding('class.resizeable') resizeEnabledClass = false;

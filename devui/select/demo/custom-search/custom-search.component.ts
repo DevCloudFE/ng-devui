@@ -4,8 +4,9 @@ import { SelectComponent } from 'ng-devui/select';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'd-custom-search',
-  templateUrl: './custom-search.component.html',
+    selector: 'd-custom-search',
+    templateUrl: './custom-search.component.html',
+    standalone: false
 })
 export class CustomSearchComponent {
   @ViewChild('networkSearchSelect') selectComponent: SelectComponent;

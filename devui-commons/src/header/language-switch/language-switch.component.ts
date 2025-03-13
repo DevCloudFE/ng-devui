@@ -3,9 +3,10 @@ import { DevuiCommonsService } from '../../devui-commons.service';
 import { I18nUtil } from '../../i18n/i18n.util';
 
 @Component({
-  selector: 'd-header-language-switch',
-  templateUrl: './language-switch.component.html',
-  styleUrls: ['./language-switch.component.scss']
+    selector: 'd-header-language-switch',
+    templateUrl: './language-switch.component.html',
+    styleUrls: ['./language-switch.component.scss'],
+    standalone: false
 })
 export class LanguageSwitchComponent implements OnInit {
   @Input() languageArr: string[] = ['CN', 'EN'];

@@ -19,9 +19,10 @@ import { GanttRailStatus, GanttTaskInfo } from '../gantt.model';
 import { GanttService } from '../gantt.service';
 
 @Component({
-  selector: 'd-gantt-bar',
-  templateUrl: './gantt-bar.component.html',
-  styleUrls: ['./gantt-bar.component.scss'],
+    selector: 'd-gantt-bar',
+    templateUrl: './gantt-bar.component.html',
+    styleUrls: ['./gantt-bar.component.scss'],
+    standalone: false
 })
 export class GanttBarComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   private moveBarStartListener: Observable<number>;

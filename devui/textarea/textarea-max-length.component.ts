@@ -4,17 +4,18 @@ import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { TextareaDirective } from './textarea.directive';
 
 @Component({
-  selector: 'd-textarea-max-length',
-  templateUrl: './textarea-max-length.component.html',
-  styleUrls: ['./textarea-max-length.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TextareaMaxLengthComponent),
-      multi: true,
-    },
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-textarea-max-length',
+    templateUrl: './textarea-max-length.component.html',
+    styleUrls: ['./textarea-max-length.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TextareaMaxLengthComponent),
+            multi: true,
+        },
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class TextareaMaxLengthComponent implements ControlValueAccessor, AfterViewInit {
   @ViewChild(TextareaDirective) textareaInstance: TextareaDirective;

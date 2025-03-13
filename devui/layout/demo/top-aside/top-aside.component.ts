@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-layout-top-aside',
-  templateUrl: './top-aside.component.html',
-  styleUrls: ['./top-aside.component.scss'],
+    selector: 'd-layout-top-aside',
+    templateUrl: './top-aside.component.html',
+    styleUrls: ['./top-aside.component.scss'],
+    standalone: false
 })
 export class LayoutTopAsideComponent {
   logoSrc = '/assets/logo.svg';

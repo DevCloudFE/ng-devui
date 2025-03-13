@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-disable-data-with-source',
-  templateUrl: './disable-data-with-source.component.html',
+    selector: 'd-disable-data-with-source',
+    templateUrl: './disable-data-with-source.component.html',
+    standalone: false
 })
 export class DisableDataWithSourceComponent {
   selectItem: any;

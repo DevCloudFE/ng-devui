@@ -7,8 +7,9 @@ import { DragDropService } from '../services/drag-drop.service';
 import { DraggableDirective } from './draggable.directive';
 
 @Directive({
-  selector: '[dDragSync]',
-  exportAs: 'dDragSync'
+    selector: '[dDragSync]',
+    exportAs: 'dDragSync',
+    standalone: false
 })
 export class DragSyncDirective extends DescendantChildren<DragSyncDirective> implements OnInit, OnDestroy {
   @Input('dDragSync') dragSyncGroup = '';

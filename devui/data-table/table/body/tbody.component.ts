@@ -3,10 +3,11 @@ import { TableWidthConfig } from '../../data-table.model';
 import { TableTrComponent } from '../row/tr.component';
 
 @Component({
-  /* eslint-disable-next-line @angular-eslint/component-selector*/
-  selector: '[dTableBody]',
-  templateUrl: './tbody.component.html',
-  styleUrls: ['./tbody.component.scss']
+    /* eslint-disable-next-line @angular-eslint/component-selector*/
+    selector: '[dTableBody]',
+    templateUrl: './tbody.component.html',
+    styleUrls: ['./tbody.component.scss'],
+    standalone: false
 })
 export class TableTbodyComponent implements OnInit {
   @Input() dataSource: any[] = [];

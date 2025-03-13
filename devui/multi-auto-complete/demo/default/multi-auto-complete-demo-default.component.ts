@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-multi-auto-complete-default',
-  templateUrl: './multi-auto-complete-demo-default.component.html'
+    selector: 'd-multi-auto-complete-default',
+    templateUrl: './multi-auto-complete-demo-default.component.html',
+    standalone: false
 })
 export class MultiAutoCompleteDemoDefaultComponent {
   multiItems: string[] = ['C#', 'C', 'C++', 'CPython', 'Java'];

@@ -2,7 +2,8 @@ import { Directive, ElementRef, Input, OnChanges, OnDestroy, Renderer2, SimpleCh
 import { GanttScaleUnit } from './gantt.model';
 
 @Directive({
-  selector: '[dGanttMarker]',
+    selector: '[dGanttMarker]',
+    standalone: false
 })
 export class GanttMarkerDirective implements OnChanges, OnDestroy {
   @Input() ganttBarContainerElement: HTMLElement;

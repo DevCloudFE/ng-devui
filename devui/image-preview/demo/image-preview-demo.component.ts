@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-image-preview-demo',
-  templateUrl: './image-preview-demo.component.html',
+    selector: 'd-image-preview-demo',
+    templateUrl: './image-preview-demo.component.html',
+    standalone: false
 })
 export class DImagePreviewDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

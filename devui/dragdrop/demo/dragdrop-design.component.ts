@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-dragdrop-design',
-  templateUrl: './dragdrop-design.component.html',
+    selector: 'd-dragdrop-design',
+    templateUrl: './dragdrop-design.component.html',
+    standalone: false
 })
 
 export class DragdropDesignComponent implements OnInit {

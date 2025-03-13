@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-input-number-empty',
-  templateUrl: './input-number-empty.component.html',
-  styleUrls: ['./input-number-empty.component.css']
+    selector: 'd-input-number-empty',
+    templateUrl: './input-number-empty.component.html',
+    styleUrls: ['./input-number-empty.component.css'],
+    standalone: false
 })
 export class InputNumberEmptyComponent {
   min = -100;

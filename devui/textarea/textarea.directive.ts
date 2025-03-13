@@ -4,8 +4,9 @@ import { NgModel } from '@angular/forms';
 import { DevConfigService, WithConfig } from 'ng-devui/utils';
 
 @Directive({
-  selector: '[dTextarea]',
-  exportAs: 'dTextarea',
+    selector: '[dTextarea]',
+    exportAs: 'dTextarea',
+    standalone: false
 })
 export class TextareaDirective implements AfterViewInit, OnDestroy {
   @Input() maxLengthBlocker = false;

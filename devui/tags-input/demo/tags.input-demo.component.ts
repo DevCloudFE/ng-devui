@@ -3,16 +3,17 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-demo-basic',
-  templateUrl: './tags.input-demo.component.html',
-  styles: [
-    `
+    selector: 'd-demo-basic',
+    templateUrl: './tags.input-demo.component.html',
+    styles: [
+        `
       :host ::ng-deep pre {
         margin: 8px 0;
         border: none;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class TagsInputDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

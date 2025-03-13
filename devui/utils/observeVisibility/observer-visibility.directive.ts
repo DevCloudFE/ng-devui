@@ -3,7 +3,8 @@ import { Subject } from 'rxjs';
 import { delay, filter } from 'rxjs/operators';
 
 @Directive({
-  selector: '[dObserveVisibility]',
+    selector: '[dObserveVisibility]',
+    standalone: false
 })
 export class ObserveVisibilityDirective
 implements OnDestroy, OnInit, AfterViewInit {

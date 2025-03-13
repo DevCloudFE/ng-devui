@@ -4,9 +4,10 @@ import { LoadingType } from 'ng-devui/loading';
 import { SourceType, originSource } from '../mock-data';
 
 @Component({
-  selector: 'd-interaction-column',
-  templateUrl: './interaction-column.component.html',
-  styleUrls: ['./interaction-column.component.scss'],
+    selector: 'd-interaction-column',
+    templateUrl: './interaction-column.component.html',
+    styleUrls: ['./interaction-column.component.scss'],
+    standalone: false
 })
 export class InteractionColumnComponent implements OnInit {
 

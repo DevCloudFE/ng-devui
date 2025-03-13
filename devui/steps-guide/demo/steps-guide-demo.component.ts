@@ -4,7 +4,8 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  templateUrl: './steps-guide-demo.component.html',
+    templateUrl: './steps-guide-demo.component.html',
+    standalone: false
 })
 export class StepsGuideDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

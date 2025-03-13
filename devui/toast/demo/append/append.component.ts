@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-append',
-  templateUrl: './append.component.html',
-  styles: [
-    `
+    selector: 'd-append',
+    templateUrl: './append.component.html',
+    styles: [
+        `
       d-button {
         margin-right: 4px;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class AppendComponent {
   msgs: Array<Object> = [];

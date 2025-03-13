@@ -57,10 +57,11 @@ const MENUS: MenuItemType[] = [
 
 
 @Component({
-  selector: 'd-basic',
-  templateUrl: './basic.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  })
+    selector: 'd-basic',
+    templateUrl: './basic.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
+})
 export class BasicComponent {
   menus = MENUS;
   disabledKeys = ['c-1', 'c-2', 'c-3-1'];

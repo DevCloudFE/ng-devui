@@ -3,9 +3,10 @@ import { DataTableComponent, SortDirection, SortEventArg, TableWidthConfig, tabl
 import { SourceType, originSource } from '../mock-data';
 
 @Component({
-  selector: 'd-interaction',
-  templateUrl: './interaction.component.html',
-  styleUrls: ['./interaction.component.scss'],
+    selector: 'd-interaction',
+    templateUrl: './interaction.component.html',
+    styleUrls: ['./interaction.component.scss'],
+    standalone: false
 })
 export class InteractionComponent implements OnInit {
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;

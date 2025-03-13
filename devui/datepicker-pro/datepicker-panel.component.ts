@@ -3,10 +3,11 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'd-datepicker-panel',
-  templateUrl: './datepicker-panel.component.html',
-  styleUrls: ['./datepicker-panel.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-datepicker-panel',
+    templateUrl: './datepicker-panel.component.html',
+    styleUrls: ['./datepicker-panel.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class DatepickerPanelComponent {
   @Input() isRangeType: boolean;

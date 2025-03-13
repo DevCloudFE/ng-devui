@@ -4,10 +4,11 @@ import { AccordionBaseLinkComponent } from './accordion-base-link-component.clas
 import { ACCORDION } from './accordion-token';
 
 @Component({
-  selector: 'd-accordion-item-routerlink',
-  templateUrl: './accordion-item-routerlink.component.html',
-  encapsulation: ViewEncapsulation.None,
-  preserveWhitespaces: false,
+    selector: 'd-accordion-item-routerlink',
+    templateUrl: './accordion-item-routerlink.component.html',
+    encapsulation: ViewEncapsulation.None,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class AccordionItemRouterlinkComponent extends AccordionBaseLinkComponent implements OnChanges {
   @ViewChild(RouterLinkActive) routerLinkActiveDirective: RouterLinkActive;

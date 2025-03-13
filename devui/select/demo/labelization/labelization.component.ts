@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-labelization',
-  templateUrl: './labelization.component.html',
-  styleUrls: ['./labelization.component.css'],
+    selector: 'd-labelization',
+    templateUrl: './labelization.component.html',
+    styleUrls: ['./labelization.component.css'],
+    standalone: false
 })
 export class LabelizationComponent {
   options = [

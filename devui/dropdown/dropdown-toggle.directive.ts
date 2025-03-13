@@ -2,8 +2,9 @@ import { AfterViewInit, Directive, ElementRef, Host, HostBinding, HostListener, 
 import { DropDownDirective } from './dropdown.directive';
 
 @Directive({
-  selector: '[dDropDownToggle]',
-  exportAs: 'd-dropdown-toggle',
+    selector: '[dDropDownToggle]',
+    exportAs: 'd-dropdown-toggle',
+    standalone: false
 })
 export class DropDownToggleDirective implements OnInit, AfterViewInit {
   @HostBinding('attr.tabIndex') get tabIndex() {

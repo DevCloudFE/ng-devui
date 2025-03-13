@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-life',
-  templateUrl: './life.component.html',
-  styles: [
-    `
+    selector: 'd-life',
+    templateUrl: './life.component.html',
+    styles: [
+        `
       d-button {
         margin-right: 4px;
       }
@@ -17,7 +17,8 @@ import { Component } from '@angular/core';
         color: #fff;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class LifeComponent {
   msgs: Array<Object> = [];

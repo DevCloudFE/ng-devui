@@ -12,11 +12,12 @@ import { fadeInOut } from 'ng-devui/utils';
 import { AutoCompleteConfig } from './auto-complete-config';
 
 @Component({
-  selector: 'd-auto-complete-popup',
-  templateUrl: './auto-complete-popup.component.html',
-  styleUrls: ['auto-complete-popup.component.scss'],
-  animations: [fadeInOut],
-  preserveWhitespaces: false,
+    selector: 'd-auto-complete-popup',
+    templateUrl: './auto-complete-popup.component.html',
+    styleUrls: ['auto-complete-popup.component.scss'],
+    animations: [fadeInOut],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class AutoCompletePopupComponent implements ControlValueAccessor {
   @Input() width: number;

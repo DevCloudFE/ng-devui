@@ -3,9 +3,10 @@ import { DatepickerProCalendarComponent } from 'ng-devui/datepicker-pro';
 import { padStart } from 'lodash-es';
 
 @Component({
-  selector: 'd-demo-datepicker-pro-tab-type',
-  templateUrl: './datepicker-pro-tab-type.component.html',
-  styleUrls: ['./datepicker-pro-tab-type.component.scss'],
+    selector: 'd-demo-datepicker-pro-tab-type',
+    templateUrl: './datepicker-pro-tab-type.component.html',
+    styleUrls: ['./datepicker-pro-tab-type.component.scss'],
+    standalone: false
 })
 export class DatepickerProTabTypeComponent implements OnInit {
   @ViewChild('calendar') calendarCmp: DatepickerProCalendarComponent;

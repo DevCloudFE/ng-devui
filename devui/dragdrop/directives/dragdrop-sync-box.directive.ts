@@ -7,13 +7,14 @@ import { DragSyncDirective } from './drag-sync.directive';
 import { DropSortSyncDirective } from './drop-sort-sync.directive';
 
 @Directive({
-  selector: '[dDragDropSyncBox]',
-  exportAs: 'dDragDropSyncBox',
-  providers: [
-    DragDropSyncService,
-    DragSyncDescendantRegisterService,
-    DropSortSyncDescendantRegisterService,
-  ]
+    selector: '[dDragDropSyncBox]',
+    exportAs: 'dDragDropSyncBox',
+    providers: [
+        DragDropSyncService,
+        DragSyncDescendantRegisterService,
+        DropSortSyncDescendantRegisterService,
+    ],
+    standalone: false
 })
 export class DragDropSyncBoxDirective implements OnInit, AfterViewInit, OnDestroy {
   sub = new Subscription();

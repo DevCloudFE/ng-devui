@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-demo-cascader',
-  templateUrl: './cascader-demo.component.html',
+    selector: 'd-demo-cascader',
+    templateUrl: './cascader-demo.component.html',
+    standalone: false
 })
 export class CascaderDemoComponent implements OnInit, OnDestroy {
   cascaderBasicComponent = [

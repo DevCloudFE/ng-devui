@@ -26,18 +26,19 @@ import { CascaderItem } from './cascader.type';
 const DEBOUNCE_TIME = 200;
 
 @Component({
-  selector: 'd-cascader',
-  templateUrl: './cascader.component.html',
-  styleUrls: ['./cascader.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CascaderComponent),
-      multi: true,
-    },
-    CascaderService,
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-cascader',
+    templateUrl: './cascader.component.html',
+    styleUrls: ['./cascader.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => CascaderComponent),
+            multi: true,
+        },
+        CascaderService,
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class CascaderComponent implements OnInit, OnDestroy, OnChanges, ControlValueAccessor {
   @ViewChild('mainDropdown') mainDropdown: DropDownDirective;

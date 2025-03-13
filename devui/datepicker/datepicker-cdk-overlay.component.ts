@@ -36,17 +36,17 @@ import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change
 import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
 
 @Component({
-  /* eslint-disable-next-line @angular-eslint/component-selector*/
-  selector: '[dDatepicker][appendToBody]',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DatePickerAppendToBodyComponent),
-      multi: true,
-    },
-  ],
-  exportAs: 'datepicker',
-  template: `
+    /* eslint-disable-next-line @angular-eslint/component-selector*/
+    selector: '[dDatepicker][appendToBody]',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => DatePickerAppendToBodyComponent),
+            multi: true,
+        },
+    ],
+    exportAs: 'datepicker',
+    template: `
     <ng-template
       cdk-connected-overlay
       [cdkConnectedOverlayOrigin]="cdkConnectedOverlayOrigin"
@@ -73,9 +73,10 @@ import { DatePickerConfigService as DatePickerConfig } from './date-picker.confi
       ></d-datepicker>
     </ng-template>
   `,
-  animations: [fadeInOut],
-  styleUrls: ['./datepicker-cdk-overlay.component.scss'],
-  preserveWhitespaces: false,
+    animations: [fadeInOut],
+    styleUrls: ['./datepicker-cdk-overlay.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
@@ -276,7 +277,7 @@ export class DatePickerAppendToBodyComponent implements OnInit, OnChanges, OnDes
 
   updateCdkConnectedOverlayOrigin() {
     if (this.elementRef.nativeElement) {
-      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(formWithDropDown(this.elementRef) || this.elementRef.nativeElement);
+      this.cdkConnectedOverlayOrigin = formWithDropDown(this.elementRef) || this.elementRef.nativeElement;
     }
   }
 

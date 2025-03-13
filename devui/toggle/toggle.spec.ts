@@ -6,9 +6,10 @@ import { ToggleComponent } from './toggle.component';
 import { ToggleModule } from './toggle.module';
 
 @Component({
-  template: `
+    template: `
     <d-toggle #comp [disabled]="disabled" [size]="'sm'" [checked]="checked" (change)="onChange()" [beforeChange]="beforeChange"></d-toggle>
-  `
+  `,
+    standalone: false
 })
 class TestToggleComponent {
   @ViewChild('comp') comp;

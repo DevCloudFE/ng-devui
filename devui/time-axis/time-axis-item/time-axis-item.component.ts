@@ -2,9 +2,10 @@ import { Component, EventEmitter, HostBinding, Input, OnInit, Output, TemplateRe
 import { TimeAxisMode } from '../time-axis.type';
 
 @Component({
-  selector: 'd-time-axis-item',
-  templateUrl: './time-axis-item.component.html',
-  styleUrls: ['./time-axis-item.component.scss']
+    selector: 'd-time-axis-item',
+    templateUrl: './time-axis-item.component.html',
+    styleUrls: ['./time-axis-item.component.scss'],
+    standalone: false
 })
 export class TimeAxisItemComponent implements OnInit {
   @Input() model;

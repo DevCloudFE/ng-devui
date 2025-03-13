@@ -5,8 +5,9 @@ import { JPGTESTIMG, JPGTESTIMG2 } from '../fakedata';
 import { images } from '../image-mock';
 
 @Component({
-  selector: 'd-image-preview-custom-open',
-  templateUrl: './custom-open.component.html',
+    selector: 'd-image-preview-custom-open',
+    templateUrl: './custom-open.component.html',
+    standalone: false
 })
 export class CustomOpenComponent {
   customSub = new Subject<HTMLElement>();

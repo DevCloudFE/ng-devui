@@ -8,9 +8,10 @@ import { themePicker } from './theme-picker-i18n.type';
 import { themePickerImg } from './theme-picker-img';
 
 @Component({
-  selector: 'theme-picker',
-  templateUrl: './theme-picker.component.html',
-  styleUrls: ['./theme-picker.component.scss'],
+    selector: 'theme-picker',
+    templateUrl: './theme-picker.component.html',
+    styleUrls: ['./theme-picker.component.scss'],
+    standalone: false
 })
 export class ThemePickerComponent implements OnInit, OnDestroy {
   themeService!: ThemeService;

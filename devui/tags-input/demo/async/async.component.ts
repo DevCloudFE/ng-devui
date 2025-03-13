@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-tags-input-async',
-  templateUrl: './async.component.html',
+    selector: 'd-tags-input-async',
+    templateUrl: './async.component.html',
+    standalone: false
 })
 export class TagsInputDemoAsyncComponent implements OnInit {
   tagList: any = [];

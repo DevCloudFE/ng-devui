@@ -3,9 +3,10 @@ import { QuadrantDiagramService } from '../quadrant-diagram.service';
 import { IAxisConfigs, IViewConfigs } from '../quadrant-diagram.type';
 import { LARGE_LABEL_SIZE_CENTER_POINT, NORMAL_LABEL_SIZE_CENTER_POINT, SMALL_LABEL_SIZE_CENTER_POINT } from '../quadrant.config';
 @Component({
-  selector: 'd-quadrant-label',
-  templateUrl: './quadrant-label.component.html',
-  styleUrls: ['./quadrant-label.component.scss'],
+    selector: 'd-quadrant-label',
+    templateUrl: './quadrant-label.component.html',
+    styleUrls: ['./quadrant-label.component.scss'],
+    standalone: false
 })
 export class QuadrantLabelComponent implements OnChanges {
   @Input() currentLabelSize;

@@ -18,10 +18,11 @@ import { AlertCarouselItemComponent } from './alert-carousel-item.component';
 import { AlertType } from './alert.types';
 
 @Component({
-  selector: 'd-alert',
-  templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-alert',
+    templateUrl: './alert.component.html',
+    styleUrls: ['./alert.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class AlertComponent implements OnChanges, OnDestroy, AfterViewInit {
   @Input() type: AlertType = 'info';

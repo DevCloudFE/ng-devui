@@ -3,9 +3,10 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'd-widgets',
-  templateUrl: './widgets.component.html',
-  styleUrls: ['./widgets.component.css']
+    selector: 'd-widgets',
+    templateUrl: './widgets.component.html',
+    styleUrls: ['./widgets.component.css'],
+    standalone: false
 })
 export class WidgetsComponent {
   pager = {

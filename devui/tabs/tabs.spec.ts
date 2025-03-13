@@ -6,7 +6,7 @@ import { DomHelper } from '../utils/testing/dom-helper';
 import { TabsComponent } from './tabs.component';
 import { TabsModule } from './tabs.module';
 @Component({
-  template: `<d-tabs #tabs [type]="'tabs'" [(activeTab)]="activeTab" [beforeChange]="beforeChange"
+    template: `<d-tabs #tabs [type]="'tabs'" [(activeTab)]="activeTab" [beforeChange]="beforeChange"
     (activeTabChange)="activeTabChange($event)">
     <d-tab [id]="Tab1.id" [title]="Tab1.title">
       <p>
@@ -31,6 +31,7 @@ import { TabsModule } from './tabs.module';
       </p>
     </d-tab>
   </d-tabs>`,
+    standalone: false
 })
 
 class TestTabsComponent {
@@ -59,7 +60,7 @@ class TestTabsComponent {
 }
 
 @Component({
-  template: `<d-tabs #pills [(activeTab)]="tabActiveId" [type]="type">
+    template: `<d-tabs #pills [(activeTab)]="tabActiveId" [type]="type">
     <d-tab *ngFor="let item of tabItems" [id]="item.id">
       <ng-template dTabTitle>
         {{ item.title }}
@@ -67,6 +68,7 @@ class TestTabsComponent {
       {{ item.content }}
     </d-tab>
   </d-tabs>`,
+    standalone: false
 })
 
 class TestTabsTypeComponent {

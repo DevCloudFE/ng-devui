@@ -1,5 +1,5 @@
 import { Component, Inject, NgZone, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, Event, NavigationError } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DEVUI_LANG, EN_US, I18nService, ZH_CN } from 'ng-devui/i18n';
 import { fromEvent, Observable, Subscription } from 'rxjs';
@@ -7,11 +7,12 @@ import { VERSION } from '../../devui/version';
 import { LinkMap } from '../../devui-commons/src/constant';
 
 @Component({
-  selector: 'd-app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  encapsulation: ViewEncapsulation.None
-  })
+    selector: 'd-app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
+})
 export class AppComponent implements OnInit, OnDestroy {
   version;
   clickSub: Subscription = new Subscription();
@@ -38,19 +39,19 @@ export class AppComponent implements OnInit, OnDestroy {
               private i18n: I18nService, @Inject(DEVUI_LANG) private appLang) {
     translate.addLangs([ZH_CN, EN_US]);
     translate.setDefaultLang(this.appLang ? this.appLang : ZH_CN);
-    const oldHandler = this.router.errorHandler;
-    this.router.errorHandler = (err: any) => {
-      // 加载失败的时候刷新重试一次
-      if (err.stack && err.stack.indexOf('Error: Loading chunk') >= 0) {
-        if (localStorage.getItem('lastChunkError') !== err.stack) {
-          localStorage.setItem('lastChunkError', err.stack);
-          window.location.reload();
-        } else {
-          console.error(`We really don't find the chunk...`);
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationError) {
+           // 加载失败的时候刷新重试一次
+        if (event.error.stack && event.error.stack.indexOf('Error: Loading chunk') >= 0) {
+          if (localStorage.getItem('lastChunkError') !== event.error.stack) {
+            localStorage.setItem('lastChunkError', event.error.stack);
+            window.location.reload();
+          } else {
+            console.error(`We really don't find the chunk...`);
+          }
         }
       }
-      oldHandler(err);
-    };
+    })
   }
   ngOnInit(): void {
     this.currentLang = localStorage.getItem('lang') || this.appLang;

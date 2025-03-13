@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-basic',
-  templateUrl: './basic.component.html',
+    selector: 'd-basic',
+    templateUrl: './basic.component.html',
+    standalone: false
 })
 export class BasicComponent {
   tagList: any = ['label1', 'label2', 'label3', 'label4', 'label5', 'label6', 'label7'];

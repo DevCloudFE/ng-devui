@@ -8,7 +8,7 @@ import { PaginationComponent } from './pagination.component';
 import { PaginationModule } from './pagination.module';
 
 @Component({
-  template: ` <d-pagination
+    template: ` <d-pagination
     #pagination
     [size]="'sm'"
     [total]="pager.total"
@@ -20,6 +20,7 @@ import { PaginationModule } from './pagination.module';
     [maxItems]="5"
   >
   </d-pagination>`,
+    standalone: false
 })
 class TestPaginationComponent {
   @ViewChild('pagination') pagination: PaginationComponent;
@@ -31,7 +32,7 @@ class TestPaginationComponent {
 }
 
 @Component({
-  template: ` <d-pagination
+    template: ` <d-pagination
     [total]="pager3.total"
     [(pageSize)]="pager3.pageSize"
     [totalItemText]="'总条数'"
@@ -41,6 +42,7 @@ class TestPaginationComponent {
     [lite]="true"
   >
   </d-pagination>`,
+    standalone: false
 })
 class TestLitePaginationComponent {
   @ViewChild('pagination') pagination: PaginationComponent;

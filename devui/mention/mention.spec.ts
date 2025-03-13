@@ -10,8 +10,9 @@ import { MentionDirective } from './mention.directive';
 import { MentionModule } from './mention.module';
 
 @Component({
-  template: ` <textarea dTextarea placeholder="Please Enter" id="textArea" dMention [mentionSuggestions]="suggestions" 
+    template: ` <textarea dTextarea placeholder="Please Enter" id="textArea" dMention [mentionSuggestions]="suggestions" 
   [mentionTrigger]="prefixes" [mentionPosition]="mentionPosition"></textarea> `,
+    standalone: false
 })
 class TestMentionComponent {
   @ViewChild(MentionDirective, { static: false }) trigger!: MentionDirective;

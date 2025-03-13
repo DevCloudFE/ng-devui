@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-datepicker-button',
-  styleUrls: [`./button.component.css`],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './button.component.html'
+    selector: 'd-datepicker-button',
+    styleUrls: [`./button.component.css`],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './button.component.html',
+    standalone: false
 })
 export class DatepickerButtonComponent implements OnInit {
   datePicker1: any;

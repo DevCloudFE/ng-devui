@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-demo-back-top',
-  templateUrl: './back-top-demo.component.html',
+    selector: 'd-demo-back-top',
+    templateUrl: './back-top-demo.component.html',
+    standalone: false
 })
 export class BackTopDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

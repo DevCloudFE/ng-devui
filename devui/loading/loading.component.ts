@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
 import { LoadingStyle } from './loading.types';
 @Component({
-  selector: 'd-loading',
-  template: `<div class="devui-loading-wrapper" [ngClass]="{ 'devui-loading-full': targetName === 'BODY' }" [style.zIndex]="zIndex">
+    selector: 'd-loading',
+    template: `<div class="devui-loading-wrapper" [ngClass]="{ 'devui-loading-full': targetName === 'BODY' }" [style.zIndex]="zIndex">
     <ng-container *ngTemplateOutlet="loadingTemplateRef ? loadingTemplateRef : default"> </ng-container>
     <ng-template #default>
       <div
@@ -74,8 +74,9 @@ import { LoadingStyle } from './loading.types';
       </div>
     </ng-template>
   </div>`,
-  styleUrls: ['./loading.component.scss'],
-  preserveWhitespaces: false,
+    styleUrls: ['./loading.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class LoadingComponent implements OnInit, OnChanges {
   @Input() loadingTemplateRef: TemplateRef<any>;

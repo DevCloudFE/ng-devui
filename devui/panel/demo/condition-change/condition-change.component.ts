@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-condition-change',
-  templateUrl: './condition-change.component.html',
-  styleUrls: ['./condition-change.component.scss']
+    selector: 'd-condition-change',
+    templateUrl: './condition-change.component.html',
+    styleUrls: ['./condition-change.component.scss'],
+    standalone: false
 })
 export class ConditionChangeComponent {
   isCollapsed = true;

@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-badge-demo',
-  templateUrl: './badge-demo.component.html',
+    selector: 'd-badge-demo',
+    templateUrl: './badge-demo.component.html',
+    standalone: false
 })
 export class BadgeDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

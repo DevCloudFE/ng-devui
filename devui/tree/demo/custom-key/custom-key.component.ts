@@ -2,8 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { OperableTreeComponent } from 'ng-devui/tree';
 
 @Component({
-  selector: 'd-custom-key',
-  templateUrl: './custom-key.component.html',
+    selector: 'd-custom-key',
+    templateUrl: './custom-key.component.html',
+    standalone: false
 })
 export class CustomKeyComponent {
 

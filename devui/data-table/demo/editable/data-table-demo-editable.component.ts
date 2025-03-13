@@ -4,8 +4,9 @@ import { cloneDeep } from 'lodash-es';
 import { editableOriginSource, genderSource } from '../mock-data';
 
 @Component({
-  selector: 'd-editable',
-  templateUrl: './data-table-demo-editable.component.html'
+    selector: 'd-editable',
+    templateUrl: './data-table-demo-editable.component.html',
+    standalone: false
 })
 export class DatatableDemoEditableComponent implements OnInit {
   genderSource = genderSource;

@@ -3,15 +3,16 @@ import { DataTableComponent, TableCheckOptions, TableWidthConfig } from 'ng-devu
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
-  selector: 'd-check-options-column',
-  templateUrl: './check-options-column.component.html',
-  styles: [`
+    selector: 'd-check-options-column',
+    templateUrl: './check-options-column.component.html',
+    styles: [`
   .page-nation {
     position: absolute;
     right: 12px;
     margin-top: 4px;
   }
-  `]
+  `],
+    standalone: false
 })
 export class CheckOptionsColumnComponent implements OnInit {
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;

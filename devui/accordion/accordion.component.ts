@@ -16,16 +16,17 @@ import { Subscription } from 'rxjs';
 import { ACCORDION } from './accordion-token';
 import { AccordionItemClickEvent, AccordionMenuToggleEvent, AccordionMenuType, AccordionOptions } from './accordion.type';
 @Component({
-  selector: 'd-accordion',
-  templateUrl: './accordion.component.html',
-  styleUrls: ['./accordion.component.scss'],
-  preserveWhitespaces: false,
-  providers: [
-    {
-      provide: ACCORDION,
-      useExisting: forwardRef(() => AccordionComponent),
-    },
-  ],
+    selector: 'd-accordion',
+    templateUrl: './accordion.component.html',
+    styleUrls: ['./accordion.component.scss'],
+    preserveWhitespaces: false,
+    providers: [
+        {
+            provide: ACCORDION,
+            useExisting: forwardRef(() => AccordionComponent),
+        },
+    ],
+    standalone: false
 })
 export class AccordionComponent implements AccordionOptions, OnChanges, OnInit, OnDestroy {
   @Input() data: Array<any> | AccordionMenuType;

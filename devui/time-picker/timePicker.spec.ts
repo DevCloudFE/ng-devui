@@ -115,7 +115,7 @@ class TestFunctions {
 }
 
 @Component({
-  template: `
+    template: `
     <div class="place-holder" (click)="timePicker.toggle()" [style.height]="placeHolderHeight ? '900px' : '0'">this is place holder</div>
     <div class="devui-input-group devui-dropdown-origin-wrapper devui-dropdown-origin">
       <input
@@ -142,6 +142,7 @@ class TestFunctions {
       <div class="test-template" (click)="timePicker.clearAll()">test template</div>
     </ng-template>
   `,
+    standalone: false
 })
 class TestTimePickerComponent {
   placeHolderHeight = false;

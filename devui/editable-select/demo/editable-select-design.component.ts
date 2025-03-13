@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-editable-select-design',
-  templateUrl: './editable-select-design.component.html',
+    selector: 'd-editable-select-design',
+    templateUrl: './editable-select-design.component.html',
+    standalone: false
 })
 
 export class EditableSelectDesignComponent implements OnInit {

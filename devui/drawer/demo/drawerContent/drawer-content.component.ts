@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  templateUrl: './drawer-content.component.html',
-  styleUrls: ['./drawer-content.component.scss']
+    templateUrl: './drawer-content.component.html',
+    styleUrls: ['./drawer-content.component.scss'],
+    standalone: false
 })
 export class DrawerContentComponent {
   @Input() items;

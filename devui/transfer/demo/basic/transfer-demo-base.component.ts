@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-transfer-demo-base',
-  templateUrl: './transfer-demo-base.component.html'
+    selector: 'd-transfer-demo-base',
+    templateUrl: './transfer-demo-base.component.html',
+    standalone: false
 })
 export class TransferDemoBaseComponent {
   disabled = false;

@@ -6,10 +6,11 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { EditableSelectModule } from './editable-select.module';
 @Component({
-  template: `
+    template: `
     <d-editable-select [source]="languages" [searchFn]="onSearchLocal" [maxHeight]="300" [(ngModel)]="selectItem1" name="multiple-auto">
     </d-editable-select>
   `,
+    standalone: false
 })
 class TestEditableSelectComponent {
   selectItem1;

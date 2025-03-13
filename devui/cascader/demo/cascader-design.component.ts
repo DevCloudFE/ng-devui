@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-cascader-design',
-  templateUrl: './cascader-design.component.html',
+    selector: 'd-cascader-design',
+    templateUrl: './cascader-design.component.html',
+    standalone: false
 })
 
 export class CascaderDesignComponent implements OnInit {

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-custom-area',
-  templateUrl: './custom-area.component.html',
+    selector: 'd-custom-area',
+    templateUrl: './custom-area.component.html',
+    standalone: false
 })
 export class CustomAreaComponent {
   options = [

@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-demo-sticky',
-  templateUrl: './sticky-demo.component.html',
+    selector: 'd-demo-sticky',
+    templateUrl: './sticky-demo.component.html',
+    standalone: false
 })
 export class StickyDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

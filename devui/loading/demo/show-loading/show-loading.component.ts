@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-show-loading',
-  templateUrl: './show-loading.component.html',
-  styleUrls: ['./show-loading.component.scss']
+    selector: 'd-show-loading',
+    templateUrl: './show-loading.component.html',
+    styleUrls: ['./show-loading.component.scss'],
+    standalone: false
 })
 export class ShowLoadingComponent {
   showLoading = false;

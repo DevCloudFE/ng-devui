@@ -4,7 +4,8 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  templateUrl: './checkbox-demo.component.html',
+    templateUrl: './checkbox-demo.component.html',
+    standalone: false
 })
 export class CheckBoxDemoComponent implements OnInit, OnDestroy {
   checkboxDemoBasic: Array<DevuiSourceData> = [

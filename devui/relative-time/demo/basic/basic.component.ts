@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { I18nFormat } from 'ng-devui/i18n';
 
 @Component({
-  selector: 'd-basic',
-  templateUrl: './basic.component.html'
+    selector: 'd-basic',
+    templateUrl: './basic.component.html',
+    standalone: false
 })
 export class BasicComponent implements OnInit {
   limit = 3 * 12 * 30 * 24 * 60 * 60; // tree years

@@ -3,7 +3,8 @@ import { DashboardComponent } from '../dashboard.component';
 import { GridStackService } from '../grid-stack.service';
 
 @Directive({
-  selector: '[dDashboardLibraryTrash]',
+    selector: '[dDashboardLibraryTrash]',
+    standalone: false
 })
 export class DashboardLibraryTrashDirective implements OnChanges, OnDestroy, AfterViewInit {
   @Input() targetDashboard: DashboardComponent;

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-carousel-with-transition-progress',
-  templateUrl: './with-transition-progress.component.html',
-  styleUrls: ['../demo-common.scss'],
+    selector: 'd-carousel-with-transition-progress',
+    templateUrl: './with-transition-progress.component.html',
+    styleUrls: ['../demo-common.scss'],
+    standalone: false
 })
 export class WithTransitionProgressComponent implements OnInit {
   array = [1, 2, 3, 4];

@@ -3,9 +3,10 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-demo-progress',
-  templateUrl: './progress-demo.component.html',
-  styleUrls: ['./progress-demo.component.scss'],
+    selector: 'd-demo-progress',
+    templateUrl: './progress-demo.component.html',
+    styleUrls: ['./progress-demo.component.scss'],
+    standalone: false
 })
 export class ProgressDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

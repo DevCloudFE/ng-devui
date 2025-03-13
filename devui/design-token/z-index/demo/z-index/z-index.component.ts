@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-z-index',
-  templateUrl: './z-index.component.html',
+    selector: 'd-z-index',
+    templateUrl: './z-index.component.html',
+    standalone: false
 })
 export class ZIndexComponent implements OnInit, OnDestroy {
   themeService: ThemeService;

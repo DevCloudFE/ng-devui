@@ -35,7 +35,7 @@ export class LoadingService {
     const finalComponentFactoryResolver = this.componentFactoryResolver;
 
     let positionTypeOld = '';
-    positionTypeOld = '' || (target as any).style.position;
+    positionTypeOld = (target as any).style.position || '';
     let backdropRef: ComponentRef<LoadingBackdropComponent>;
     if (backdrop) {
       backdropRef = this.overlayContainerRef.createComponent(

@@ -3,9 +3,10 @@ import { ReadTipOptions } from 'ng-devui/read-tip';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'd-demo-async',
-  templateUrl: './readtip-async.component.html',
-  styleUrls: ['./readtip-async.component.scss'],
+    selector: 'd-demo-async',
+    templateUrl: './readtip-async.component.html',
+    styleUrls: ['./readtip-async.component.scss'],
+    standalone: false
 })
 export class ReadtipAsyncComponent implements OnInit {
   readTipOptions: ReadTipOptions = {

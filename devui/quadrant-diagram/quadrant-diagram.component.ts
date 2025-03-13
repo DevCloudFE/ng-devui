@@ -15,10 +15,11 @@ import { IAxisConfigs, ILabelDataConfigs, IQuadrantConfigs, IViewConfigs, labelS
 import { DEFAULT_AXIS_CONFIGS, DEFAULT_QUADRANT_CONFIGS, LABEL_SIZE } from './quadrant.config';
 
 @Component({
-  selector: 'd-quadrant-diagram',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './quadrant-diagram.component.html',
-  styleUrls: ['./quadrant-diagram.component.scss'],
+    selector: 'd-quadrant-diagram',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './quadrant-diagram.component.html',
+    styleUrls: ['./quadrant-diagram.component.scss'],
+    standalone: false
 })
 export class QuadrantDiagramComponent implements OnInit, OnChanges {
   static ID_SEED = 0;

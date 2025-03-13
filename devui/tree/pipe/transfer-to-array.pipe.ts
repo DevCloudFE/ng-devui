@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'transferToArrayPipe' })
+@Pipe({
+    name: 'transferToArrayPipe',
+    standalone: false
+})
 export class TransferToArrayPipe implements PipeTransform {
 
   constructor() {

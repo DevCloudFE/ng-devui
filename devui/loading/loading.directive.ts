@@ -19,8 +19,9 @@ import { LoadingBackdropComponent } from './loading-backdrop.component';
 import { LoadingComponent } from './loading.component';
 import { ILoadingViewPosition, LoadingStyle, LoadingType } from './loading.types';
 @Directive({
-  selector: '[dLoading]',
-  exportAs: 'dLoading',
+    selector: '[dLoading]',
+    exportAs: 'dLoading',
+    standalone: false
 })
 export class LoadingDirective implements OnChanges {
   @Input() backdrop: boolean;

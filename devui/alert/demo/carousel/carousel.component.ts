@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-alert-carousel',
-  templateUrl: './carousel.component.html',
-  styles: [
-    `
+    selector: 'd-alert-carousel',
+    templateUrl: './carousel.component.html',
+    styles: [
+        `
       .not-show {
         cursor: pointer;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class CarouselComponent {
   data = [

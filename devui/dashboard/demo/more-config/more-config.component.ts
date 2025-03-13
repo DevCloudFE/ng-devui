@@ -3,9 +3,10 @@ import { DashboardWidget } from 'ng-devui/dashboard';
 import { FormLayout } from 'ng-devui/form';
 
 @Component({
-  selector: 'd-more-config',
-  templateUrl: './more-config.component.html',
-  styleUrls: ['./more-config.component.scss'],
+    selector: 'd-more-config',
+    templateUrl: './more-config.component.html',
+    styleUrls: ['./more-config.component.scss'],
+    standalone: false
 })
 export class MoreConfigComponent {
   layoutDirection: FormLayout = FormLayout.Horizontal;

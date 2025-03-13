@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-card-design',
-  templateUrl: './card-design.component.html',
+    selector: 'd-card-design',
+    templateUrl: './card-design.component.html',
+    standalone: false
 })
 
 export class CardDesignComponent implements OnInit {

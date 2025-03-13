@@ -5,10 +5,11 @@ import { ACCORDION } from './accordion-token';
 import { AccordionService } from './accordion.service';
 import { AccordionBaseMenu, AccordionMenuItem } from './accordion.type';
 @Component({
-  selector: 'd-accordion-menu',
-  templateUrl: './accordion-menu.component.html',
-  encapsulation: ViewEncapsulation.None,
-  preserveWhitespaces: false,
+    selector: 'd-accordion-menu',
+    templateUrl: './accordion-menu.component.html',
+    encapsulation: ViewEncapsulation.None,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class AccordionMenuComponent extends AccordionBaseComponent<AccordionBaseMenu<AccordionMenuItem>> implements OnInit, OnDestroy {
   childListSub: Subscription;

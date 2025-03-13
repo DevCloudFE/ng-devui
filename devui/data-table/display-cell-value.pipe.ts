@@ -3,7 +3,10 @@ import { I18nFormat } from 'ng-devui/i18n';
 import { formatDate } from 'ng-devui/utils';
 import type { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
-@Pipe({ name: 'disPlayCellValuePipe' })
+@Pipe({
+    name: 'disPlayCellValuePipe',
+    standalone: false
+})
 export class DisPlayCellValuePipe implements PipeTransform {
   datePicker = {
     format: {

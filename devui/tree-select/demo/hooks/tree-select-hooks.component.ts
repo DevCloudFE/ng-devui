@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'd-tree-select-hooks',
-  templateUrl: './tree-select-hooks.component.html',
+    selector: 'd-tree-select-hooks',
+    templateUrl: './tree-select-hooks.component.html',
+    standalone: false
 })
 export class TreeSelectHooksComponent {
 

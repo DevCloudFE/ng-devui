@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-demo-time-axis-alternative-mode',
-  templateUrl: './alternative-mode.component.html',
+    selector: 'd-demo-time-axis-alternative-mode',
+    templateUrl: './alternative-mode.component.html',
+    standalone: false
 })
 export class AlternativeModeComponent {
   dataHorizontal = {

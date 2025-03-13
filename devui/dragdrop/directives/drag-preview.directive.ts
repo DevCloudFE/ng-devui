@@ -4,8 +4,9 @@ import { DragDropService } from '../services/drag-drop.service';
 import { DragPreviewComponent } from './drag-preview.component';
 
 @Directive({
-  selector: '[dDraggable][dDragPreview]',
-  exportAs: 'dDragPreview'
+    selector: '[dDraggable][dDragPreview]',
+    exportAs: 'dDragPreview',
+    standalone: false
 })
 
 export class DragPreviewDirective {

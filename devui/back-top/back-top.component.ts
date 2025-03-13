@@ -20,11 +20,12 @@ import { Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 @Component({
-  selector: 'd-back-top',
-  templateUrl: './back-top.component.html',
-  styleUrls: ['./back-top.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  preserveWhitespaces: false,
+    selector: 'd-back-top',
+    templateUrl: './back-top.component.html',
+    styleUrls: ['./back-top.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class BackTopComponent implements OnChanges, OnInit, OnDestroy, AfterViewInit {
   @Input() customTemplate: TemplateRef<any>;

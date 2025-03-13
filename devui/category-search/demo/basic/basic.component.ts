@@ -4,8 +4,9 @@ import { cloneDeep } from 'lodash-es';
 import { demoData } from '../demo-data';
 
 @Component({
-  selector: 'd-basic',
-  templateUrl: './basic.component.html',
+    selector: 'd-basic',
+    templateUrl: './basic.component.html',
+    standalone: false
 })
 export class BasicComponent {
   category = cloneDeep(demoData.slice(0, -2));

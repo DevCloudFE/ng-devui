@@ -1,7 +1,8 @@
 import { Directive, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Directive({
-  selector: '[dMovable]',
+    selector: '[dMovable]',
+    standalone: false
 })
 export class MovableDirective implements OnInit, OnChanges {
   topStart = 0;

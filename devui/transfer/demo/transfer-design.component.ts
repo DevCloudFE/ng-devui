@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-transfer-design',
-  templateUrl: './transfer-design.component.html',
+    selector: 'd-transfer-design',
+    templateUrl: './transfer-design.component.html',
+    standalone: false
 })
 
 export class TransferDesignComponent implements OnInit {

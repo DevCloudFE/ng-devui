@@ -3,8 +3,9 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-demo-search',
-  templateUrl: './search-demo.component.html',
+    selector: 'd-demo-search',
+    templateUrl: './search-demo.component.html',
+    standalone: false
 })
 export class SearchDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

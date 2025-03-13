@@ -2,9 +2,10 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, V
 import { DataTableComponent } from 'ng-devui/data-table';
 import { originSource } from './../mock-data';
 @Component({
-  selector: 'd-datatable-demo-lazyloaddata',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './data-table-demo-lazyloaddata.component.html'
+    selector: 'd-datatable-demo-lazyloaddata',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './data-table-demo-lazyloaddata.component.html',
+    standalone: false
 })
 export class DatatableDemoLazyloadDataComponent implements AfterViewInit {
   @ViewChild('tableInstance') tableInstance: DataTableComponent;

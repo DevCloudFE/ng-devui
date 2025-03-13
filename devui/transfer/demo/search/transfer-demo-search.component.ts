@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { TransferDirection } from 'ng-devui';
 
 @Component({
-  selector: 'd-transfer-demo-search',
-  templateUrl: './transfer-demo-search.component.html',
-  styleUrls: ['./transfer-demo-search.component.scss']
+    selector: 'd-transfer-demo-search',
+    templateUrl: './transfer-demo-search.component.html',
+    styleUrls: ['./transfer-demo-search.component.scss'],
+    standalone: false
 })
 export class TransferDemoSearchComponent {
   disabled = false;

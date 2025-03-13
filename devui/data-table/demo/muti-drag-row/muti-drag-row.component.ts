@@ -3,9 +3,10 @@ import { TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
-  selector: 'd-muti-drag-row',
-  templateUrl: './muti-drag-row.component.html',
-  styleUrls: ['./muti-drag-row.component.scss']
+    selector: 'd-muti-drag-row',
+    templateUrl: './muti-drag-row.component.html',
+    styleUrls: ['./muti-drag-row.component.scss'],
+    standalone: false
 })
 export class MutiDragRowComponent implements OnInit {
 

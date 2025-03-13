@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-border-radius',
-  templateUrl: './border-radius.component.html',
+    selector: 'd-border-radius',
+    templateUrl: './border-radius.component.html',
+    standalone: false
 })
 export class BorderRadiusComponent implements OnInit, OnDestroy {
   themeService: ThemeService;

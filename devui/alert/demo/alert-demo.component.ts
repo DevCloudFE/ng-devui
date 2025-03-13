@@ -3,8 +3,9 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-alert-demo',
-  templateUrl: './alert-demo.component.html',
+    selector: 'd-alert-demo',
+    templateUrl: './alert-demo.component.html',
+    standalone: false
 })
 export class AlertDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'd-user-mail-search',
-  templateUrl: './user-mail-search.component.html',
+    selector: 'd-user-mail-search',
+    templateUrl: './user-mail-search.component.html',
+    standalone: false
 })
 export class UserMailSearchComponent {
   currentOption: any;

@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { TabComponent } from './tab.component';
 
 @Pipe({
-  name: 'dTabCloseablePipe',
+    name: 'dTabCloseablePipe',
+    standalone: false
 })
 export class TabCloseablePipe implements PipeTransform {
   transform(tab: TabComponent, closeable: boolean, closeableIds: any[]): boolean {

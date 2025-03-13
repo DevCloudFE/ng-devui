@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-fullscreen-demo-normal',
-  templateUrl: './normal.component.html',
+    selector: 'd-fullscreen-demo-normal',
+    templateUrl: './normal.component.html',
+    standalone: false
 })
 export class FullscreenDemoNormalComponent {
   btnIcon = 'icon-frame-expand';

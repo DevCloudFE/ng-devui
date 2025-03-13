@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-tags-design',
-  templateUrl: './tags-design.component.html',
+    selector: 'd-tags-design',
+    templateUrl: './tags-design.component.html',
+    standalone: false
 })
 
 export class TagsDesignComponent implements OnInit {

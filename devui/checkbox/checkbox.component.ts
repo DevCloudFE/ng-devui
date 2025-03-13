@@ -16,18 +16,19 @@ import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'd-checkbox',
-  templateUrl: './checkbox.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./checkbox.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CheckBoxComponent),
-      multi: true,
-    },
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-checkbox',
+    templateUrl: './checkbox.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./checkbox.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => CheckBoxComponent),
+            multi: true,
+        },
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class CheckBoxComponent implements ControlValueAccessor, AfterViewInit {
   static ID_SEED = 0;

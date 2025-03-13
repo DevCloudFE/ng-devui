@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { FormLayout } from 'ng-devui/form';
 @Component({
-  selector: 'd-modal-cases',
-  templateUrl: './modal-cases.component.html',
-  styles: ['textarea { height: 100px; resize: none }'],
+    selector: 'd-modal-cases',
+    templateUrl: './modal-cases.component.html',
+    styles: ['textarea { height: 100px; resize: none }'],
+    standalone: false
 })
 export class ModalCasesComponent {
   @Input() data: any;

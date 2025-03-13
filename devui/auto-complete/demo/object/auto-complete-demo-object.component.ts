@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'd-auto-complete-demo-object',
-  templateUrl: './auto-complete-demo-object.component.html',
+    selector: 'd-auto-complete-demo-object',
+    templateUrl: './auto-complete-demo-object.component.html',
+    standalone: false
 })
 export class AutoDemoObjectComponent {
   selectItem3: any;

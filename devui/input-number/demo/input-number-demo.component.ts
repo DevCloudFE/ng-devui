@@ -3,8 +3,9 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-demo-input-number',
-  templateUrl: './input-number-demo.component.html',
+    selector: 'd-demo-input-number',
+    templateUrl: './input-number-demo.component.html',
+    standalone: false
 })
 export class InputNumberDemoComponent implements OnInit, OnDestroy {
   InputNumberBasic: Array<DevuiSourceData> = [

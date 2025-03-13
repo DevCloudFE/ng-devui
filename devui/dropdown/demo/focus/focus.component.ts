@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-dropdown-demo-focus',
-  templateUrl: './focus.component.html',
-  styleUrls: ['./focus.component.scss']
+    selector: 'd-dropdown-demo-focus',
+    templateUrl: './focus.component.html',
+    styleUrls: ['./focus.component.scss'],
+    standalone: false
 })
 export class DropDownDemoFocusComponent {
   showExample = false;

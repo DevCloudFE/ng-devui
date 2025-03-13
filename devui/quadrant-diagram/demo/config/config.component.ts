@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { IAxisConfigs, ILabelDataConfigs, IQuadrantConfigs, IViewConfigs } from 'ng-devui/quadrant-diagram';
 
 @Component({
-  selector: 'd-config',
-  templateUrl: './config.component.html',
-  styleUrls: ['./config.component.scss'],
+    selector: 'd-config',
+    templateUrl: './config.component.html',
+    styleUrls: ['./config.component.scss'],
+    standalone: false
 })
 export class ConfigComponent {
   xWeight = 2;

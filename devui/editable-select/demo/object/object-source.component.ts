@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-object-source',
-  templateUrl: './object-source.component.html',
+    selector: 'd-object-source',
+    templateUrl: './object-source.component.html',
+    standalone: false
 })
 export class ObjectSourceComponent {
   lang = {

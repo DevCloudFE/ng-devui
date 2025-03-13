@@ -19,16 +19,17 @@ import { DatepickerComponent as SingleDatepickerComponent } from '../datepicker.
 import { SimpleDate } from '../single-date-range-picker.component';
 
 @Component({
-  selector: 'd-two-datepicker-single',
-  templateUrl: '../single-date-range-picker.component.html',
-  styleUrls: ['../single-date-range-picker.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TwoDatepickerSingleComponent),
-      multi: true,
-    },
-  ],
+    selector: 'd-two-datepicker-single',
+    templateUrl: '../single-date-range-picker.component.html',
+    styleUrls: ['../single-date-range-picker.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TwoDatepickerSingleComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class TwoDatepickerSingleComponent extends SingleDatepickerComponent implements OnChanges, OnInit {
   @Input() selectedRange: Date[] = Array(2);

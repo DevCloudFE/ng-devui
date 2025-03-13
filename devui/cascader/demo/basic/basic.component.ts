@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-demo-basic',
-  templateUrl: './basic.component.html',
+    selector: 'd-demo-basic',
+    templateUrl: './basic.component.html',
+    standalone: false
 })
 export class BasicComponent {
   options = [

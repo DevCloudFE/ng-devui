@@ -4,10 +4,11 @@ import { Subscription } from 'rxjs';
 import { basicData, curYear } from './../mock-data';
 
 @Component({
-  selector: 'd-basic',
-  templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.scss'],
-  providers: [GanttService],
+    selector: 'd-basic',
+    templateUrl: './basic.component.html',
+    styleUrls: ['./basic.component.scss'],
+    providers: [GanttService],
+    standalone: false
 })
 export class BasicComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('ganttContainer', { static: true }) ganttContainer: ElementRef;

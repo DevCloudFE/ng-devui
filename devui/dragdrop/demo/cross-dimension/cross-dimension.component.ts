@@ -1,9 +1,10 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 
 @Component({
-  selector: 'd-cross-dimension',
-  templateUrl: './cross-dimension.component.html',
-  styleUrls: ['./cross-dimension.component.scss'],
+    selector: 'd-cross-dimension',
+    templateUrl: './cross-dimension.component.html',
+    styleUrls: ['./cross-dimension.component.scss'],
+    standalone: false
 })
 export class CrossDimensionComponent {
   lists = {

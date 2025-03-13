@@ -7,11 +7,12 @@ import { AccordionService } from './accordion.service';
 import { AccordionMenuItem } from './accordion.type';
 
 @Component({
-  selector: 'd-accordion-list',
-  templateUrl: './accordion-list.component.html',
-  encapsulation: ViewEncapsulation.None,
-  animations: [expandCollapse, expandCollapseForDomDestroy],
-  preserveWhitespaces: false,
+    selector: 'd-accordion-list',
+    templateUrl: './accordion-list.component.html',
+    encapsulation: ViewEncapsulation.None,
+    animations: [expandCollapse, expandCollapseForDomDestroy],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class AccordionListComponent implements OnInit, OnDestroy {
   @Input() data: Array<AccordionMenuItem>;

@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormLayout } from 'ng-devui/form';
 
 @Component({
-  selector: 'd-form-demo-multi-col',
-  templateUrl: './multi-col.component.html',
-  styleUrls: ['./multi-col.component.css']
-
+    selector: 'd-form-demo-multi-col',
+    templateUrl: './multi-col.component.html',
+    styleUrls: ['./multi-col.component.css'],
+    standalone: false
 })
 export class MultiColComponent implements OnInit {
   layoutDirection: FormLayout = FormLayout.Columns;

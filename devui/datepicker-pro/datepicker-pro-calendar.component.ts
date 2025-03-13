@@ -20,18 +20,19 @@ import { takeUntil } from 'rxjs/operators';
 import { DatepickerProService } from './datepicker-pro.service';
 
 @Component({
-  selector: 'd-datepicker-calendar',
-  templateUrl: './datepicker-pro-calendar.component.html',
-  styleUrls: ['./datepicker-pro-calendar.component.scss'],
-  providers: [
-    DatepickerProService,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DatepickerProCalendarComponent),
-      multi: true
-    }
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-datepicker-calendar',
+    templateUrl: './datepicker-pro-calendar.component.html',
+    styleUrls: ['./datepicker-pro-calendar.component.scss'],
+    providers: [
+        DatepickerProService,
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => DatepickerProCalendarComponent),
+            multi: true
+        }
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class DatepickerProCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() set activeRangeType(type: 'start' | 'end') {

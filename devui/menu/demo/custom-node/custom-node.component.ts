@@ -57,10 +57,11 @@ const MENUS: MenuItemType[] = [
 
 
 @Component({
-  selector: 'd-custom-node',
-  templateUrl: './custom-node.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  })
+    selector: 'd-custom-node',
+    templateUrl: './custom-node.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
+})
 export class CustomNodeComponent {
   menus = MENUS;
   openKeys: string[] = [];

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-tags-input-basic',
-  templateUrl: './basic.component.html',
+    selector: 'd-tags-input-basic',
+    templateUrl: './basic.component.html',
+    standalone: false
 })
 export class TagsInputDemoBasicComponent implements OnInit {
   taskTagConfig: any;

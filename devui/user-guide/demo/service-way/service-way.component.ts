@@ -3,9 +3,10 @@ import { IStep, UserGuideService } from 'ng-devui/user-guide';
 import { mockSteps } from '../mock-steps';
 
 @Component({
-  selector: 'd-user-guide-service-way',
-  templateUrl: './service-way.component.html',
-  styleUrls: ['./service-way.component.scss']
+    selector: 'd-user-guide-service-way',
+    templateUrl: './service-way.component.html',
+    styleUrls: ['./service-way.component.scss'],
+    standalone: false
 })
 export class ServiceWayComponent implements OnInit {
   steps: Array<IStep> = mockSteps;

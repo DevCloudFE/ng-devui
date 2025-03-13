@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-mention-basic',
-  templateUrl: './basic.component.html',
+    selector: 'd-mention-basic',
+    templateUrl: './basic.component.html',
+    standalone: false
 })
 export class BasicComponent {
   suggestions = [

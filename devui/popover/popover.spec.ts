@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from '../button';
 import { PopoverModule } from './popover.module';
 @Component({
-  template: `
+    template: `
     <d-button
       dPopover
       [popType]="'default'"
@@ -31,7 +31,8 @@ import { PopoverModule } from './popover.module';
     >
       warning
     </d-button>
-  `
+  `,
+    standalone: false
 })
 class TestPopoverBasicComponent {
   direction = 'left';

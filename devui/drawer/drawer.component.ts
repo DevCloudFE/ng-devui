@@ -22,18 +22,20 @@ import { Observable, Subject, Subscription, fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 @Directive({
-  selector: '[dDrawerContentHost]',
+    selector: '[dDrawerContentHost]',
+    standalone: false
 })
 export class DrawerContentDirective {
   constructor(public viewContainerRef: ViewContainerRef) {}
 }
 
 @Component({
-  selector: 'd-drawer',
-  templateUrl: './drawer.component.html',
-  styleUrls: ['./drawer.component.scss'],
-  animations: [backdropFadeInOut, flyInOut],
-  preserveWhitespaces: false,
+    selector: 'd-drawer',
+    templateUrl: './drawer.component.html',
+    styleUrls: ['./drawer.component.scss'],
+    animations: [backdropFadeInOut, flyInOut],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class DrawerComponent implements OnInit, OnDestroy {
   animateState = 'void';

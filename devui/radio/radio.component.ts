@@ -4,17 +4,18 @@ import { DevConfigService, WithConfig } from 'ng-devui/utils';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'd-radio',
-  templateUrl: './radio.component.html',
-  styleUrls: ['./radio.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => RadioComponent),
-      multi: true,
-    },
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-radio',
+    templateUrl: './radio.component.html',
+    styleUrls: ['./radio.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => RadioComponent),
+            multi: true,
+        },
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class RadioComponent implements ControlValueAccessor {
   private _name: string;

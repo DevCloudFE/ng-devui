@@ -18,7 +18,7 @@ import { PanelComponent } from './panel.component';
 import { PanelModule } from './panel.module';
 
 @Component({
-  template: `
+    template: `
     <d-panel
       #panel
       [type]="type"
@@ -32,6 +32,7 @@ import { PanelModule } from './panel.module';
     <d-panel-footer>This is footer</d-panel-footer>
   </d-panel>
   `,
+    standalone: false
 })
 class TestPanelComponent {
   type = 'primary';

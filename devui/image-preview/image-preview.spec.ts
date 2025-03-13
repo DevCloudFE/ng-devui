@@ -6,11 +6,12 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { createMouseEvent } from '../utils/testing/event-helper';
 import { ImagePreviewModule } from './image-preview.module';
 @Component({
-  template: `
+    template: `
     <div dImagePreview>
       <img *ngFor="let imgUrl of imgUrls" src="{{ imgUrl }}" />
     </div>
   `,
+    standalone: false
 })
 class TestImagePreviewComponent {
   imgUrls = ['/components/assets/overview/banner/18.png', '/components/assets/overview/banner/19.png'];

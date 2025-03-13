@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'd-tree-select-custom-icon',
-  templateUrl: './tree-select-custom-icon.component.html',
-  styleUrls: ['./tree-select-custom-icon.component.scss']
+    selector: 'd-tree-select-custom-icon',
+    templateUrl: './tree-select-custom-icon.component.html',
+    styleUrls: ['./tree-select-custom-icon.component.scss'],
+    standalone: false
 })
 export class TreeSelectCustomIconComponent {
 

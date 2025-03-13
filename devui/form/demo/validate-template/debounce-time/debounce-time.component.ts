@@ -3,8 +3,9 @@ import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 @Component({
-  selector: 'd-form-demo-debounce-time',
-  templateUrl: './debounce-time.component.html'
+    selector: 'd-form-demo-debounce-time',
+    templateUrl: './debounce-time.component.html',
+    standalone: false
 })
 export class DebounceTimeComponent {
   singleInputData = '';

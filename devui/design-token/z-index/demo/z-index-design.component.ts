@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-z-index-design',
-  templateUrl: './z-index-design.component.html',
+    selector: 'd-z-index-design',
+    templateUrl: './z-index-design.component.html',
+    standalone: false
 })
 
 export class ZIndexDesignComponent implements OnInit {

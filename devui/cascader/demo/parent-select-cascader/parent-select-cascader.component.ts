@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-demo-parent-select-cascader',
-  templateUrl: './parent-select-cascader.component.html',
+    selector: 'd-demo-parent-select-cascader',
+    templateUrl: './parent-select-cascader.component.html',
+    standalone: false
 })
 export class ParentSelectCascaderComponent {
   options = [

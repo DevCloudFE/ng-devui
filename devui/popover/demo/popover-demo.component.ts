@@ -4,7 +4,8 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  templateUrl: './popover-demo.component.html',
+    templateUrl: './popover-demo.component.html',
+    standalone: false
 })
 export class PopoverDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

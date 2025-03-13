@@ -1,15 +1,16 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'd-basic',
-  templateUrl: './basic.component.html',
-  styles: [
-    `
+    selector: 'd-basic',
+    templateUrl: './basic.component.html',
+    styles: [
+        `
       d-button {
         margin-right: 4px;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class BasicComponent {
   @ViewChild('customTemplate') customTemplate: TemplateRef<any>;

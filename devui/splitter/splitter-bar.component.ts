@@ -20,11 +20,12 @@ import { SplitterService } from './splitter.service';
 import { SplitterOrientation } from './splitter.types';
 
 @Component({
-  selector: 'd-splitter-bar',
-  templateUrl: './splitter-bar.component.html',
-  styleUrls: ['./splitter-bar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  preserveWhitespaces: false,
+    selector: 'd-splitter-bar',
+    templateUrl: './splitter-bar.component.html',
+    styleUrls: ['./splitter-bar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class SplitterBarComponent implements OnInit, AfterViewInit, OnDestroy {
   // 当前pane索引

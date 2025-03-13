@@ -91,10 +91,11 @@ const MENUS: MenuItemType[] = [
 
 
 @Component({
-  selector: 'd-loop',
-  templateUrl: './loop.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  })
+    selector: 'd-loop',
+    templateUrl: './loop.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
+})
 export class LoopComponent {
   menus = MENUS;
   collapsed = false;

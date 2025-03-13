@@ -25,7 +25,8 @@ import {
 } from './steps-guide.types';
 
 @Directive({
-  selector: '[dStepsGuide]',
+    selector: '[dStepsGuide]',
+    standalone: false
 })
 export class StepsGuideDirective implements OnInit, OnDestroy {
   // 引导页面标示，用于记录不同页面的引导状态

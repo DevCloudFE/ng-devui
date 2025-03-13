@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-format-demo',
-  styleUrls: ['./format.component.scss'],
-  templateUrl: './format.component.html'
+    selector: 'd-format-demo',
+    styleUrls: ['./format.component.scss'],
+    templateUrl: './format.component.html',
+    standalone: false
 })
 export class FormatComponent {
   selectedTime1 = '12:27:50';

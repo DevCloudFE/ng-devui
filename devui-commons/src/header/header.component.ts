@@ -7,9 +7,10 @@ import { LogoComponent } from './logo/logo.component';
 import { LinkMap } from '../constant';
 
 @Component({
-  selector: 'd-common-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'd-common-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    standalone: false
 })
 export class HeaderComponent implements OnInit {
   @Input() showShadow = false;

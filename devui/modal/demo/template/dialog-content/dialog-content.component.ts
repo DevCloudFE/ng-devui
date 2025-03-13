@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalComponent } from 'ng-devui/modal';
 @Component({
-  selector: 'd-dialog-content',
-  templateUrl: './dialog-content.component.html',
+    selector: 'd-dialog-content',
+    templateUrl: './dialog-content.component.html',
+    standalone: false
 })
 export class DialogContentComponent implements OnInit {
   @Input() data: any;

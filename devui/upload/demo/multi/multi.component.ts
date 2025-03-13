@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
 
 @Component({
-  selector: 'd-multi',
-  templateUrl: './multi.component.html',
-  styleUrls: ['./multi.component.scss']
+    selector: 'd-multi',
+    templateUrl: './multi.component.html',
+    styleUrls: ['./multi.component.scss'],
+    standalone: false
 })
 export class MultiComponent {
 

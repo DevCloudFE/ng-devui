@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-demo-time-axis-single',
-  templateUrl: './single.component.html'
+    selector: 'd-demo-time-axis-single',
+    templateUrl: './single.component.html',
+    standalone: false
 })
 export class TimeAxisSingleComponent {
   dataBottom = {

@@ -8,9 +8,10 @@ import { DataTableComponent, TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
-  selector: 'd-fix-column',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './fix-column.component.html'
+    selector: 'd-fix-column',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './fix-column.component.html',
+    standalone: false
 })
 export class FixColumnComponent implements OnInit {
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;

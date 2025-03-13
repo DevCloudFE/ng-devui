@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/co
 import { ToggleMenuListItem } from './toggle-menu.type';
 
 @Component({
-  selector: 'd-toggle-menu-label',
-  templateUrl: './toggle-menu-label.component.html',
-  styleUrls: [`./toggle-menu-label.component.scss`],
+    selector: 'd-toggle-menu-label',
+    templateUrl: './toggle-menu-label.component.html',
+    styleUrls: [`./toggle-menu-label.component.scss`],
+    standalone: false
 })
 export class ToggleMenuLabelComponent {
   @Input() mode: 'normal' | 'scroll-y' | 'multiple-line' | string;

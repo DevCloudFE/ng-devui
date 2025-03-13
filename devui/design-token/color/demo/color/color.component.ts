@@ -12,9 +12,10 @@ export interface colorItemConfig {
 }
 
 @Component({
-  selector: 'd-color',
-  templateUrl: './color.component.html',
-  styleUrls: ['./color.component.scss'],
+    selector: 'd-color',
+    templateUrl: './color.component.html',
+    styleUrls: ['./color.component.scss'],
+    standalone: false
 })
 export class ColorComponent implements OnInit, OnDestroy {
   themeService: ThemeService;

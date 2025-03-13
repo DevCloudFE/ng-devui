@@ -3,8 +3,9 @@ import { DropScrollEnhancedDirective } from './drop-scroll-enhance.directive';
 import { DropScrollDirection } from './drop-scroll-enhance.type';
 
 @Directive({
-  selector: '[dDropScrollEnhancedSide]',
-  exportAs: 'dDropScrollEnhancedSide'
+    selector: '[dDropScrollEnhancedSide]',
+    exportAs: 'dDropScrollEnhancedSide',
+    standalone: false
 })
 export class DropScrollEnhancedSideDirective extends DropScrollEnhancedDirective implements OnInit {
   @Input('direction') sideDirection: DropScrollDirection = 'v';

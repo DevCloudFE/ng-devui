@@ -20,8 +20,9 @@ import { PopoverComponent } from './popover.component';
 import { PopoverType, PositionType, TriggerType } from './popover.types';
 
 @Directive({
-  selector: '[dPopover]',
-  exportAs: 'dPopover',
+    selector: '[dPopover]',
+    exportAs: 'dPopover',
+    standalone: false
 })
 export class PopoverDirective implements OnInit, OnDestroy {
   popoverComponentRef: ComponentRef<PopoverComponent>;

@@ -3,8 +3,9 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-drawer-demo',
-  templateUrl: './drawer-demo.component.html',
+    selector: 'd-drawer-demo',
+    templateUrl: './drawer-demo.component.html',
+    standalone: false
 })
 export class DrawerDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

@@ -3,8 +3,9 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-demo-pagination',
-  templateUrl: './pagination-demo.component.html',
+    selector: 'd-demo-pagination',
+    templateUrl: './pagination-demo.component.html',
+    standalone: false
 })
 export class PaginationDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

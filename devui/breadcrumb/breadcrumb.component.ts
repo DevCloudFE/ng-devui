@@ -4,15 +4,16 @@ import { BREADCRUMB } from './breadcrumb.token';
 import { SourceConfig } from './breadcrumb.type';
 
 @Component({
-  selector: 'd-breadcrumb',
-  exportAs: 'dBreadcrumb',
-  templateUrl: './breadcrumb.component.html',
-  styleUrls: ['./breadcrumb.component.scss'],
-  preserveWhitespaces: false,
-  providers: [{
-    provide: BREADCRUMB,
-    useExisting: forwardRef(() => BreadCrumbComponent)
-  }],
+    selector: 'd-breadcrumb',
+    exportAs: 'dBreadcrumb',
+    templateUrl: './breadcrumb.component.html',
+    styleUrls: ['./breadcrumb.component.scss'],
+    preserveWhitespaces: false,
+    providers: [{
+            provide: BREADCRUMB,
+            useExisting: forwardRef(() => BreadCrumbComponent)
+        }],
+    standalone: false
 })
 export class BreadCrumbComponent {
   @Input() separatorIcon: TemplateRef<any>;

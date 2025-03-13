@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-disabled',
-  templateUrl: './disabled.component.html',
+    selector: 'd-disabled',
+    templateUrl: './disabled.component.html',
+    standalone: false
 })
 export class DisabledComponent implements OnInit {
   options = [

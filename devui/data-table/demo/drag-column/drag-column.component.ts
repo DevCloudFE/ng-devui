@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
-  selector: 'd-drag-column',
-  templateUrl: 'drag-column.component.html'
+    selector: 'd-drag-column',
+    templateUrl: 'drag-column.component.html',
+    standalone: false
 })
 export class DragColumnComponent {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));

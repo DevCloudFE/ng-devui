@@ -6,9 +6,10 @@ import {
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
-  selector: 'd-fix-column-old',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './fix-column-old.component.html'
+    selector: 'd-fix-column-old',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './fix-column-old.component.html',
+    standalone: false
 })
 export class FixColumnOldComponent implements OnInit {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));

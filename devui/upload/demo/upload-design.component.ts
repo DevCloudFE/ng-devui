@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-upload-design',
-  templateUrl: './upload-design.component.html',
+    selector: 'd-upload-design',
+    templateUrl: './upload-design.component.html',
+    standalone: false
 })
 
 export class UploadDesignComponent implements OnInit {

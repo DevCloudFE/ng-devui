@@ -21,11 +21,12 @@ export type IButtonPosition = 'left' | 'right' | 'default';
 export type IButtonSize = 'lg' | 'md' | 'sm' | 'xs';
 
 @Component({
-  selector: 'd-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  preserveWhitespaces: false,
+    selector: 'd-button',
+    templateUrl: './button.component.html',
+    styleUrls: ['./button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class ButtonComponent implements AfterContentChecked {
   @Input() id: string;

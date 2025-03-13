@@ -19,17 +19,18 @@ import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 @Component({
-  selector: 'd-read-tip',
-  templateUrl: './read-tip.component.html',
-  styleUrls: ['./read-tip.component.scss'],
-  animations: [
-    trigger('state', [
-      state('void', style({ opacity: 0 })),
-      state('visible', style({ opacity: 1 })),
-      transition('* => visible', animate('150ms cubic-bezier(0.0, 0.0, 0.2, 1)')),
-      transition('visible => *', animate('150ms cubic-bezier(0.4, 0.0, 1, 1)')),
-    ]),
-  ],
+    selector: 'd-read-tip',
+    templateUrl: './read-tip.component.html',
+    styleUrls: ['./read-tip.component.scss'],
+    animations: [
+        trigger('state', [
+            state('void', style({ opacity: 0 })),
+            state('visible', style({ opacity: 1 })),
+            transition('* => visible', animate('150ms cubic-bezier(0.0, 0.0, 0.2, 1)')),
+            transition('visible => *', animate('150ms cubic-bezier(0.4, 0.0, 1, 1)')),
+        ]),
+    ],
+    standalone: false
 })
 export class ReadTipComponent implements OnInit, AfterViewInit, AfterContentChecked, OnDestroy {
   @Input() triggerElementRef: ElementRef;

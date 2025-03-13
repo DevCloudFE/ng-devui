@@ -4,8 +4,9 @@ import { ModalAlertComponent } from './modal-alert.component';
 import { ModalNoBtnComponent } from './modal-no-btn.component';
 
 @Component({
-  selector: 'd-customize',
-  templateUrl: './customize.component.html',
+    selector: 'd-customize',
+    templateUrl: './customize.component.html',
+    standalone: false
 })
 export class CustomizeComponent {
   constructor(private modalService: ModalService) {}

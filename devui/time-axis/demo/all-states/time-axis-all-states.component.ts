@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { TimeAxisData } from 'ng-devui/time-axis';
 
 @Component({
-  selector: 'd-demo-time-axis-all-states',
-  templateUrl: './time-axis-all-states.component.html',
-  styleUrls: ['./time-axis-all-states.component.scss'],
+    selector: 'd-demo-time-axis-all-states',
+    templateUrl: './time-axis-all-states.component.html',
+    styleUrls: ['./time-axis-all-states.component.scss'],
+    standalone: false
 })
 export class TimeAxisAllStatesComponent implements OnInit {
   timeAxisDataLeft: TimeAxisData;

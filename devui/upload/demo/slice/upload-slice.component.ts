@@ -5,9 +5,10 @@ import { IFileOptions, IUploadOptions, SingleUploadComponent } from 'ng-devui/up
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'd-demo-upload-slice',
-  templateUrl: './upload-slice.component.html',
-  styleUrls: ['./upload-slice.component.scss'],
+    selector: 'd-demo-upload-slice',
+    templateUrl: './upload-slice.component.html',
+    styleUrls: ['./upload-slice.component.scss'],
+    standalone: false
 })
 export class UploadSliceComponent implements OnInit {
   @ViewChild('singleuploadDrag', { static: true }) singleuploadDrag: SingleUploadComponent;

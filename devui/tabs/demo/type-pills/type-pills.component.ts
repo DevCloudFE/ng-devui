@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 @Component({
-  selector: 'd-type-pills',
-  templateUrl: './type-pills.component.html',
+    selector: 'd-type-pills',
+    templateUrl: './type-pills.component.html',
+    standalone: false
 })
 export class TypePillsComponent {
   tabActiveId: string | number = 'tab1';

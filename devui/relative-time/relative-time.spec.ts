@@ -4,9 +4,10 @@ import { By } from '@angular/platform-browser';
 import { I18nService } from 'ng-devui/i18n';
 import { RelativeTimeModule } from './relative-time.module';
 @Component({
-  template: `
+    template: `
     <span class="display">{{ source | dRelativeTime: limit: compareTime | async }}</span>
   `,
+    standalone: false
 })
 class TestRelativeTimePipeComponent {
   limit = 3 * 12 * 30 * 24 * 60 * 60; // 转换阈值设为三年

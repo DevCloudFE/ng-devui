@@ -14,11 +14,12 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 import { DatepickerProService } from './../datepicker-pro.service';
 
 @Component({
-  selector: 'd-month-panel',
-  templateUrl: './month-panel.component.html',
-  styleUrls: ['./month-panel.component.scss'],
-  preserveWhitespaces: false,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'd-month-panel',
+    templateUrl: './month-panel.component.html',
+    styleUrls: ['./month-panel.component.scss'],
+    preserveWhitespaces: false,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class MonthPanelComponent implements OnInit, OnDestroy {
   @ViewChild('scrollBody') scrollBodyCmp: CdkVirtualScrollViewport;

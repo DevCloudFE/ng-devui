@@ -7,10 +7,11 @@ import * as hljs from 'highlight.js/lib/core';
 import { marked } from 'marked';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-api',
-  templateUrl: './devui-api.component.html',
-  styleUrls: ['./devui-api.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-api',
+    templateUrl: './devui-api.component.html',
+    styleUrls: ['./devui-api.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class DevUIApiComponent implements OnInit, AfterViewInit, OnDestroy {
   subs: Subscription = new Subscription();

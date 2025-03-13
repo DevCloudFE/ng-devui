@@ -3,8 +3,9 @@ import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 @Component({
-  selector: 'd-form-demo-error-strategy',
-  templateUrl: './error-strategy.component.html'
+    selector: 'd-form-demo-error-strategy',
+    templateUrl: './error-strategy.component.html',
+    standalone: false
 })
 export class ErrorStrategyComponent {
 

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-template',
-  templateUrl: './template.component.html',
-  styleUrls: ['./template.component.scss'],
+    selector: 'd-template',
+    templateUrl: './template.component.html',
+    styleUrls: ['./template.component.scss'],
+    standalone: false
 })
 export class TemplateComponent {
   menu = [{

@@ -6,7 +6,7 @@ import { TagComponent } from './tag.component';
 import { TagsModule } from './tags.module';
 
 @Component({
-  template: `
+    template: `
     <section>
       <d-tag
         [tag]="tagName"
@@ -23,6 +23,7 @@ import { TagsModule } from './tags.module';
       </ng-template>
     </section>
   `,
+    standalone: false
 })
 class TestTagComponent {
   tagName = 'bug';

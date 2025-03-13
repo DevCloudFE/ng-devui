@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-mention-demo',
-  templateUrl: './mention-demo.component.html',
+    selector: 'd-mention-demo',
+    templateUrl: './mention-demo.component.html',
+    standalone: false
 })
 export class MentionDemoComponent implements OnInit, OnDestroy {
   navItems = [];

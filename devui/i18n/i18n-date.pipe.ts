@@ -1,7 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { I18nFormat } from './i18n.format';
 
-@Pipe({name: 'i18nDate'})
+@Pipe({
+    name: 'i18nDate',
+    standalone: false
+})
 export class I18nDatePipe implements PipeTransform {
   /**
    * 使用方式参考：{{dateObj | i18nDate:'full':false}} 参数可选

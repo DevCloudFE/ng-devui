@@ -5,9 +5,10 @@ import { cloneDeep } from 'lodash-es';
 import { demoData } from '../demo-data';
 
 @Component({
-  selector: 'd-extend',
-  templateUrl: './extend.component.html',
-  styleUrls: ['./extend.component.scss'],
+    selector: 'd-extend',
+    templateUrl: './extend.component.html',
+    styleUrls: ['./extend.component.scss'],
+    standalone: false
 })
 export class ExtendComponent implements AfterViewInit {
   @ViewChild('extendTemplate') extendTemplate: TemplateRef<any>;

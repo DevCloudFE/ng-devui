@@ -5,12 +5,13 @@ import { BREADCRUMB } from '../breadcrumb.token';
 import { MenuConfig } from '../breadcrumb.type';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'd-breadcrumb-item',
-  exportAs: 'dBreadcrumbItem',
-  templateUrl: './breadcrumb-item.component.html',
-  styleUrls: ['./breadcrumb-item.component.scss'],
-  preserveWhitespaces: false,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'd-breadcrumb-item',
+    exportAs: 'dBreadcrumbItem',
+    templateUrl: './breadcrumb-item.component.html',
+    styleUrls: ['./breadcrumb-item.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class BreadCrumbItemComponent implements OnInit {
 

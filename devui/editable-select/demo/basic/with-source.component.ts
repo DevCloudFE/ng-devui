@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-with-source',
-  templateUrl: './with-source.component.html',
+    selector: 'd-with-source',
+    templateUrl: './with-source.component.html',
+    standalone: false
 })
 export class WithSourceComponent {
   associationListLang = 'Python';

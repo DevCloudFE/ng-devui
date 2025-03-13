@@ -23,9 +23,10 @@ interface ExtraSetConfig {
 }
 
 @Component({
-  selector: 'd-popper-component',
-  templateUrl: './popper.component.html',
-  styleUrls: [`./popper.component.scss`],
+    selector: 'd-popper-component',
+    templateUrl: './popper.component.html',
+    styleUrls: [`./popper.component.scss`],
+    standalone: false
 })
 export class PopperComponent implements AfterViewInit, OnDestroy {
 

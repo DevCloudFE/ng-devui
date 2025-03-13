@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 @Component({
-  selector: 'd-custom',
-  templateUrl: './custom.component.html',
-  styleUrls: ['./custom.component.scss']
+    selector: 'd-custom',
+    templateUrl: './custom.component.html',
+    styleUrls: ['./custom.component.scss'],
+    standalone: false
 })
 export class CustomComponent {
   breadData = [{ label: 'DevUI', showMenu: false, link: '/components/zh-cn/get-start' },

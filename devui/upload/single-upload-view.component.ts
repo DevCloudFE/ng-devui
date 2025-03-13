@@ -15,10 +15,11 @@ import { UploadComponent } from './upload.class';
 import { UploadedFilesComponent } from './uploaded-files.component';
 
 @Component({
-  selector: 'd-single-upload-view',
-  exportAs: 'dSingleUploadView',
-  templateUrl: './single-upload-view.component.html',
-  preserveWhitespaces: false,
+    selector: 'd-single-upload-view',
+    exportAs: 'dSingleUploadView',
+    templateUrl: './single-upload-view.component.html',
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class SingleUploadViewComponent extends UploadComponent {
   @Input() uploadOptions: IUploadOptions;

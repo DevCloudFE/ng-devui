@@ -27,10 +27,11 @@ import { TableThComponent } from './table/head/th/th.component';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
 @Component({
-  selector: 'd-data-table-head,[dDataTableHead]',
-  templateUrl: './data-table-head.component.html',
-  styleUrls: ['./data-table-head.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-data-table-head,[dDataTableHead]',
+    templateUrl: './data-table-head.component.html',
+    styleUrls: ['./data-table-head.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class DataTableHeadComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy, DoCheck {
   @Input() checkable: boolean;

@@ -7,16 +7,17 @@ import { AnimationNumberDuration } from 'ng-devui/utils';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'd-toggle',
-  templateUrl: './toggle.component.html',
-  styleUrls: [`./toggle.component.scss`],
-  exportAs: 'toggle',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ToggleComponent),
-    multi: true
-  }],
-  preserveWhitespaces: false,
+    selector: 'd-toggle',
+    templateUrl: './toggle.component.html',
+    styleUrls: [`./toggle.component.scss`],
+    exportAs: 'toggle',
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ToggleComponent),
+            multi: true
+        }],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class ToggleComponent implements ControlValueAccessor {
   private _checked: boolean;

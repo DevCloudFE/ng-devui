@@ -24,12 +24,13 @@ import { map } from 'rxjs/operators';
 import { SubMenuService } from './submenu.service';
 
 @Component({
-  selector: 'd-sub-menu, [dSubMenu]',
-  templateUrl: './sub-menu.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [collapseMotion, scaleInOut],
-  providers: [SubMenuService],
-  })
+    selector: 'd-sub-menu, [dSubMenu]',
+    templateUrl: './sub-menu.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [collapseMotion, scaleInOut],
+    providers: [SubMenuService],
+    standalone: false
+})
 export class SubMenuComponent implements OnInit, AfterContentInit {
   @ContentChildren(MenuItemDirective) menuItemDirectives: QueryList<MenuItemDirective>;
   @HostBinding('class.devui-sub-menu') subMenuClass = true;

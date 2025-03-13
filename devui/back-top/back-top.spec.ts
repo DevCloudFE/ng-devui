@@ -4,16 +4,17 @@ import { By } from '@angular/platform-browser';
 import { BackTopModule } from 'ng-devui/back-top';
 import { BackTopComponent } from './back-top.component';
 @Component({
-  template: `
+    template: `
     <div class="container"></div>
     <d-back-top #basicBackTop [bottom]="bottom" [right]="right" [visibleHeight]="visibleHeight"></d-back-top>
   `,
-  styles: [
-    `.container {
+    styles: [
+        `.container {
       height: 1500px;
       width: 300px;
     }`
-  ]
+    ],
+    standalone: false
 })
 class TestBackTopComponent {
   @ViewChild('basicBackTop') basicBackTop: BackTopComponent;
@@ -23,7 +24,7 @@ class TestBackTopComponent {
 }
 
 @Component({
-  template: `
+    template: `
   <div class="scroll-container">
     <d-back-top #targetBackTop [scrollTarget]="target" [visibleHeight]="visibleHeight"></d-back-top>
     <div class="scroll-content">
@@ -31,8 +32,8 @@ class TestBackTopComponent {
     </div>
   </div>
   `,
-  styles: [
-    `.scroll-container {
+    styles: [
+        `.scroll-container {
         width: 600px;
       }
       .scroll-content {
@@ -44,7 +45,8 @@ class TestBackTopComponent {
         height: 1900px;
       }
     `
-  ]
+    ],
+    standalone: false
 })
 class TestTargetBackTopComponent {
   @ViewChild('targetBackTop') targetBackTop: BackTopComponent;
@@ -53,7 +55,7 @@ class TestTargetBackTopComponent {
 }
 
 @Component({
-  template: `
+    template: `
   <d-back-top [customTemplate]="customTemplate">
     <ng-template #customTemplate>
       <div class="devui-backtop-custom">
@@ -62,8 +64,8 @@ class TestTargetBackTopComponent {
     </ng-template>
   </d-back-top>
   `,
-  styles: [
-    `.devui-backtop-custom {
+    styles: [
+        `.devui-backtop-custom {
       text-align: center;
       border-radius: 50%;
       background-color: #859bff;
@@ -76,7 +78,8 @@ class TestTargetBackTopComponent {
       line-height: 40px;
     }
     `
-  ]
+    ],
+    standalone: false
 })
 class TestCustomBackTopComponent {
 }

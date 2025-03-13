@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'd-multi-auto-complete-disabled',
-  templateUrl: './multi-auto-complete-demo-disabled.component.html',
-  styles: [
-    `
+    selector: 'd-multi-auto-complete-disabled',
+    templateUrl: './multi-auto-complete-demo-disabled.component.html',
+    styles: [
+        `
       section {
         display: flex;
         align-items: center;
@@ -16,7 +16,8 @@ import { of } from 'rxjs';
         margin-right: 8px;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class MultiAutoCompleteDemoDisabledComponent {
   toggle: boolean;

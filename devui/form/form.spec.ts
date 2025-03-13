@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { FormDirective } from './form.directive';
 import { FormModule } from './form.module';
 @Component({
-  template: `
+    template: `
     <form dForm [layout]="layout" [labelSize]="labelSize">
       <d-form-item>
         <d-form-label [required]="required" [hasHelp]="hasHelp" [helpTips]="'这是计划名'">计划名</d-form-label>
@@ -19,7 +19,8 @@ import { FormModule } from './form.module';
         </d-form-control>
       </d-form-item>
     </form>
-  `
+  `,
+    standalone: false
 })
 class TestFormComponent {
   layout = 'horizontal';

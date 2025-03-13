@@ -4,8 +4,9 @@ import { By } from '@angular/platform-browser';
 import { ProgressComponent } from './progress.component';
 import { ProgressModule } from './progress.module';
 @Component({
-  template: `<d-progress #progress [percentage]="percentage" [percentageText]="percentageText" [showContent]="showContentConfig">
+    template: `<d-progress #progress [percentage]="percentage" [percentageText]="percentageText" [showContent]="showContentConfig">
   </d-progress>`,
+    standalone: false
 })
 class TestProgressComponent {
   @ViewChild('progress') progress: ProgressComponent;
@@ -19,8 +20,9 @@ class TestProgressComponent {
 }
 
 @Component({
-  template: ` <d-progress #progress [isCircle]="true" [percentage]="percentage" [strokeColor]="strokeColor" [strokeWidth]="strokeWidth">
+    template: ` <d-progress #progress [isCircle]="true" [percentage]="percentage" [strokeColor]="strokeColor" [strokeWidth]="strokeWidth">
   </d-progress>`,
+    standalone: false
 })
 class TestCircleProgressComponent {
   @ViewChild('progress') progress: ProgressComponent;

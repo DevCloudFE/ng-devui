@@ -3,7 +3,8 @@ import { DevuiSourceData } from "ng-devui/shared/devui-codebox/devui-source-data
 import { TranslateService, TranslationChangeEvent } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
 @Component({
-  templateUrl: "./fullscreen-demo.component.html",
+    templateUrl: "./fullscreen-demo.component.html",
+    standalone: false
 })
 export class FullscreenDemoComponent implements OnInit, OnDestroy {
   FullscreenDemoNormal: DevuiSourceData[] = [

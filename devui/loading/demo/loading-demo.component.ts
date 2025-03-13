@@ -3,8 +3,9 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-demo-loading',
-  templateUrl: './loading-demo.component.html',
+    selector: 'd-demo-loading',
+    templateUrl: './loading-demo.component.html',
+    standalone: false
 })
 export class LoadingDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

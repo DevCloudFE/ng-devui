@@ -19,9 +19,10 @@ import {
 import { UploadComponent } from './upload.class';
 import { UploadedFilesComponent } from './uploaded-files.component';
 @Component({
-  selector: 'd-multiple-upload-view',
-  templateUrl: './multiple-upload-view.component.html',
-  preserveWhitespaces: false,
+    selector: 'd-multiple-upload-view',
+    templateUrl: './multiple-upload-view.component.html',
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class MultipleUploadViewComponent extends UploadComponent implements OnDestroy , OnInit {
   @ViewChild('dUploadedFiles', { static: true }) uploadedFilesComponent: UploadedFilesComponent;

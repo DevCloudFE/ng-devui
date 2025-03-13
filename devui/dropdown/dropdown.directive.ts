@@ -25,9 +25,10 @@ import { debounceTime, delay, filter, mapTo, tap } from 'rxjs/operators';
 import { DropDownService } from './dropdown.service';
 
 @Directive({
-  selector: '[dDropDown]',
-  exportAs: 'd-dropdown',
-  providers: [DropDownService],
+    selector: '[dDropDown]',
+    exportAs: 'd-dropdown',
+    providers: [DropDownService],
+    standalone: false
 })
 export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit {
   @ContentChildren(forwardRef(() => DropDownDirective), { descendants: true }) dropdownChildren: QueryList<DropDownDirective>;
@@ -152,7 +153,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
 
   updateCdkConnectedOverlayOrigin() {
     if (this.toggleEl && this.appendToBody === true) {
-      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(formWithDropDown(this.toggleEl) || this.toggleEl.nativeElement);
+      this.cdkConnectedOverlayOrigin = formWithDropDown(this.toggleEl) || this.toggleEl.nativeElement;
     } else {
       this.cdkConnectedOverlayOrigin = undefined;
     }

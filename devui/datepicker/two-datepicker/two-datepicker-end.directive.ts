@@ -6,13 +6,14 @@ import { debounceTime, map } from 'rxjs/operators';
 import { TwoDatePickerComponent } from './two-datepicker.component';
 
 @Directive({
-  selector: '[dTwoDatePickerEnd]',
-  exportAs: 'twoDatePickerEnd',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => TwoDatePickerEndDirective),
-    multi: true
-  }]
+    selector: '[dTwoDatePickerEnd]',
+    exportAs: 'twoDatePickerEnd',
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TwoDatePickerEndDirective),
+            multi: true
+        }],
+    standalone: false
 })
 export class TwoDatePickerEndDirective implements OnInit, OnDestroy, ControlValueAccessor {
 

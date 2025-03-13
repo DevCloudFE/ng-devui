@@ -12,9 +12,10 @@ interface SourceType {
 }
 
 @Component({
-  selector: 'd-transfer-demo-custom',
-  templateUrl: './transfer-demo-custom.component.html',
-  styleUrls: ['./transfer-demo-custom.component.scss']
+    selector: 'd-transfer-demo-custom',
+    templateUrl: './transfer-demo-custom.component.html',
+    styleUrls: ['./transfer-demo-custom.component.scss'],
+    standalone: false
 })
 export class TransferDemoCustomComponent {
   originSource: Array<SourceType> = [

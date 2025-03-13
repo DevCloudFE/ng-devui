@@ -3,9 +3,10 @@ import { TabContentDirective } from './tab-content.directive';
 import { TabTitleDirective } from './tab-title.directive';
 
 @Component({
-  selector: 'd-tab',
-  template: `<ng-template #innerContent><ng-content></ng-content></ng-template>`,
-  preserveWhitespaces: false,
+    selector: 'd-tab',
+    template: `<ng-template #innerContent><ng-content></ng-content></ng-template>`,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class TabComponent {
   /**

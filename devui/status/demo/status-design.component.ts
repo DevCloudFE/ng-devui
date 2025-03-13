@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-status-design',
-  templateUrl: './status-design.component.html',
+    selector: 'd-status-design',
+    templateUrl: './status-design.component.html',
+    standalone: false
 })
 
 export class StatusDesignComponent implements OnInit {

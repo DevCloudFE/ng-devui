@@ -4,11 +4,12 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-auto-complete-demo',
-  templateUrl: './auto-complete-demo.component.html',
-  styleUrls: [
-    './auto-complete-demo.component.scss'
-  ]
+    selector: 'd-auto-complete-demo',
+    templateUrl: './auto-complete-demo.component.html',
+    styleUrls: [
+        './auto-complete-demo.component.scss'
+    ],
+    standalone: false
 })
 export class AutoCompleteDemoComponent implements OnInit, OnDestroy {
   AutoCompleteDemoBasic: Array<DevuiSourceData> = [

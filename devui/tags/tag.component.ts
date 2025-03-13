@@ -5,11 +5,12 @@ export type ITagMode = 'default' | 'checkable' | 'closeable';
 export type ITagSize = 'md' | 'lg';
 
 @Component({
-  selector: 'd-tag',
-  templateUrl: './tag.component.html',
-  styleUrls: ['./tag.component.scss'],
-  exportAs: 'Tag',
-  preserveWhitespaces: false,
+    selector: 'd-tag',
+    templateUrl: './tag.component.html',
+    styleUrls: ['./tag.component.scss'],
+    exportAs: 'Tag',
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class TagComponent implements OnChanges {
   /**

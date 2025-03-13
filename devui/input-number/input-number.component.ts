@@ -29,11 +29,12 @@ const INPUT_NUMBER_CONTROL_VALUE_ACCESSOR: any = {
 export type InputSizeType = '' | 'sm' | 'lg';
 
 @Component({
-  selector: 'd-input-number',
-  templateUrl: './input-number.component.html',
-  styleUrls: ['./input-number.component.scss'],
-  providers: [INPUT_NUMBER_CONTROL_VALUE_ACCESSOR],
-  preserveWhitespaces: false,
+    selector: 'd-input-number',
+    templateUrl: './input-number.component.html',
+    styleUrls: ['./input-number.component.scss'],
+    providers: [INPUT_NUMBER_CONTROL_VALUE_ACCESSOR],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class InputNumberComponent implements ControlValueAccessor, OnChanges, OnDestroy, AfterViewInit {
   @Input() step = 1;

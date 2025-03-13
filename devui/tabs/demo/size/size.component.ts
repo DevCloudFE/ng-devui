@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 @Component({
-  selector: 'd-size',
-  templateUrl: './size.component.html',
+    selector: 'd-size',
+    templateUrl: './size.component.html',
+    standalone: false
 })
 export class SizeComponent {
   tabActiveId: string | number = 'tab1';

@@ -23,17 +23,18 @@ export interface SimpleDate {
 }
 
 @Component({
-  selector: 'd-datepicker-range-single',
-  templateUrl: './single-date-range-picker.component.html',
-  styleUrls: ['./single-date-range-picker.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SingleDateRangePickerComponent),
-      multi: true,
-    },
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-datepicker-range-single',
+    templateUrl: './single-date-range-picker.component.html',
+    styleUrls: ['./single-date-range-picker.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => SingleDateRangePickerComponent),
+            multi: true,
+        },
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class SingleDateRangePickerComponent extends SingleDatepickerComponent implements OnChanges, OnInit {
   @Input() selectedRange: Date[] = Array(2);

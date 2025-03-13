@@ -4,10 +4,11 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'd-datepicker-range-time',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: `./date-range-picker-time.component.html`,
-  styleUrls: [`./date-range-picker-time.component.scss`]
+    selector: 'd-datepicker-range-time',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: `./date-range-picker-time.component.html`,
+    styleUrls: [`./date-range-picker-time.component.scss`],
+    standalone: false
 })
 export class DateRangePickerTimeComponent {
   dateRange = [null, null];

@@ -1,7 +1,8 @@
 import { Directive, ElementRef, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
 
 @Directive({
-  selector: '[dResize]'
+    selector: '[dResize]',
+    standalone: false
 })
 export class ResizeDirective implements OnInit, OnDestroy {
   // 是否允许拖动

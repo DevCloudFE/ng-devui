@@ -6,7 +6,7 @@ import { LoadingComponent } from './../loading/loading.component';
 import { ButtonComponent } from './button.component';
 
 @Component({
-  template: `
+    template: `
     <d-button
       [bsStyle]="bsStyle"
       [bsPosition]="bsPosition"
@@ -17,7 +17,8 @@ import { ButtonComponent } from './button.component';
     >
       {{text}}
     </d-button>
-  `
+  `,
+    standalone: false
 })
 class TestButtonComponent {
   bsStyle = 'primary';
@@ -34,9 +35,10 @@ class TestButtonComponent {
   }
 }
 @Component({
-  template: `
+    template: `
     <d-button [autofocus]="true" *ngIf="show">{{text}}</d-button>
-  `
+  `,
+    standalone: false
 })
 class TestButtonAutoFocusComponent {
   show = false;

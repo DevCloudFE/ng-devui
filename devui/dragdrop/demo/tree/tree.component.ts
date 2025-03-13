@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-tree',
-  templateUrl: './tree.component.html',
-  styleUrls: ['./tree.component.scss']
+    selector: 'd-tree',
+    templateUrl: './tree.component.html',
+    styleUrls: ['./tree.component.scss'],
+    standalone: false
 })
 export class TreeComponent implements OnInit {
   list1 = [

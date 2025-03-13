@@ -26,10 +26,11 @@ interface PopoverStyle {
 }
 
 @Component({
-  selector: 'd-popover',
-  templateUrl: './popover.component.html',
-  styleUrls: [`./popover.component.scss`],
-  animations: [directionFadeInOut],
+    selector: 'd-popover',
+    templateUrl: './popover.component.html',
+    styleUrls: [`./popover.component.scss`],
+    animations: [directionFadeInOut],
+    standalone: false
 })
 export class PopoverComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @Input() triggerElementRef: ElementRef;

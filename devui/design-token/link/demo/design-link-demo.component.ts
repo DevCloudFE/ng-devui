@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-design-link-demo',
-  templateUrl: './design-link-demo.component.html'
+    selector: 'd-design-link-demo',
+    templateUrl: './design-link-demo.component.html',
+    standalone: false
 })
 export class DesignLinkDemoComponent implements OnInit, OnDestroy {
   LinkSource: Array<DevuiSourceData> = [

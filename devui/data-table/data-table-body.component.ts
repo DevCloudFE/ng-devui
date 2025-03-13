@@ -4,10 +4,11 @@ import { DATA_TABLE } from './data-table.token';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
 @Component({
-  selector: 'd-data-table-body, [dDataTableBody]',
-  templateUrl: './data-table-body.component.html',
-  styleUrls: ['./data-table-body.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-data-table-body, [dDataTableBody]',
+    templateUrl: './data-table-body.component.html',
+    styleUrls: ['./data-table-body.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class DataTableBodyComponent implements OnChanges {
   @Input() checkable: boolean;

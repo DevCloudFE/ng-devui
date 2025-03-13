@@ -9,10 +9,11 @@ import {
 } from './tree-factory.class';
 
 @Component({
-  selector: 'd-tree-nodes',
-  templateUrl: './tree-nodes.component.html',
-  styleUrls: ['./tree-nodes.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-tree-nodes',
+    templateUrl: './tree-nodes.component.html',
+    styleUrls: ['./tree-nodes.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class TreeNodesComponent {
   @Input() treeList: Array<TreeNode>;

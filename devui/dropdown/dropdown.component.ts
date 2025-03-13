@@ -19,10 +19,10 @@ import {
 import { DropDownDirective } from './dropdown.directive';
 
 @Component({
-  /* eslint-disable-next-line @angular-eslint/component-selector*/
-  selector: '[dDropDown][appendToBody]',
-  exportAs: 'd-dropdown-append-to-body',
-  template: `
+    /* eslint-disable-next-line @angular-eslint/component-selector*/
+    selector: '[dDropDown][appendToBody]',
+    exportAs: 'd-dropdown-append-to-body',
+    template: `
     <ng-content></ng-content>
     <ng-template
       cdk-connected-overlay
@@ -39,10 +39,11 @@ import { DropDownDirective } from './dropdown.directive';
       </div>
     </ng-template>
   `,
-  styleUrls: ['dropdown.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  animations: [fadeInOut],
-  preserveWhitespaces: false,
+    styleUrls: ['dropdown.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: [fadeInOut],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class DropDownAppendToBodyComponent implements OnInit, OnChanges {
   @ViewChild('dropDownWrapper') dropDownWrapper: ElementRef;
@@ -86,7 +87,7 @@ export class DropDownAppendToBodyComponent implements OnInit, OnChanges {
 
   setOrigin() {
     if (this.alignOrigin) {
-      this.origin = new CdkOverlayOrigin(this.alignOrigin);
+      this.origin = this.alignOrigin.nativeElement;
     } else {
       this.origin = undefined;
     }

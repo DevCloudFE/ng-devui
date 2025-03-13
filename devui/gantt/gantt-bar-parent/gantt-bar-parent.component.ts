@@ -14,9 +14,10 @@ import { Subscription } from 'rxjs';
 import { GanttService } from '../gantt.service';
 
 @Component({
-  selector: 'd-gantt-bar-parent',
-  templateUrl: './gantt-bar-parent.component.html',
-  styleUrls: ['./gantt-bar-parent.component.scss'],
+    selector: 'd-gantt-bar-parent',
+    templateUrl: './gantt-bar-parent.component.html',
+    styleUrls: ['./gantt-bar-parent.component.scss'],
+    standalone: false
 })
 export class GanttBarParentComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
   @ViewChild('ganttBarProgress') ganttBarProgress: ElementRef;

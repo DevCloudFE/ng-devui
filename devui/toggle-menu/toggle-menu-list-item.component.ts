@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Templa
 import { ToggleMenuListItem } from './toggle-menu.type';
 
 @Component({
-  selector: 'd-toggle-menu-list-item',
-  templateUrl: './toggle-menu-list-item.component.html',
-  styleUrls: ['./toggle-menu-list-item.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'd-toggle-menu-list-item',
+    templateUrl: './toggle-menu-list-item.component.html',
+    styleUrls: ['./toggle-menu-list-item.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ToggleMenuListItemComponent {
   @Input() item: ToggleMenuListItem;

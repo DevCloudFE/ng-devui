@@ -5,10 +5,11 @@ import {
 import { SelectDateChangeReason } from 'ng-devui/datepicker';
 
 @Component({
-  selector: 'd-clear-button',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './clear-button.component.html',
-  styleUrls: ['./clear-button.component.scss']
+    selector: 'd-clear-button',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './clear-button.component.html',
+    styleUrls: ['./clear-button.component.scss'],
+    standalone: false
 })
 export class DatepickerClearButtonComponent implements OnInit {
   datePicker1: any;

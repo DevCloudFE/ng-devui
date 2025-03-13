@@ -2,9 +2,10 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { LoadingService } from 'ng-devui/loading';
 @Component({
-  selector: 'd-full-screen',
-  templateUrl: './full-screen.component.html',
-  styleUrls: ['./full-screen.component.scss'],
+    selector: 'd-full-screen',
+    templateUrl: './full-screen.component.html',
+    styleUrls: ['./full-screen.component.scss'],
+    standalone: false
 })
 export class FullScreenComponent {
   resultTarget: any;

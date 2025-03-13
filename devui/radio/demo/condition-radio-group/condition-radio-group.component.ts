@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-condition-radio-group',
-  templateUrl: './condition-radio-group.component.html',
+    selector: 'd-condition-radio-group',
+    templateUrl: './condition-radio-group.component.html',
+    standalone: false
 })
 export class ConditionRadioGroupComponent {
   items = ['Item1', 'Item2', 'Item3'];

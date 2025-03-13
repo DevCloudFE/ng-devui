@@ -3,8 +3,9 @@ import { DialogService } from 'ng-devui/modal';
 import { ModalFormComponent } from './modal-form.component';
 
 @Component({
-  selector: 'd-hide',
-  templateUrl: './hide.component.html',
+    selector: 'd-hide',
+    templateUrl: './hide.component.html',
+    standalone: false
 })
 export class HideComponent {
   constructor(private dialogService: DialogService) {}

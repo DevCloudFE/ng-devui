@@ -4,8 +4,9 @@ import { HelperUtils } from 'ng-devui/common';
 import { DialogService } from 'ng-devui/modal';
 
 @Component({
-  selector: 'd-click-block',
-  templateUrl: './click-block.component.html',
+    selector: 'd-click-block',
+    templateUrl: './click-block.component.html',
+    standalone: false
 })
 export class ClickBlockComponent {
   breadItem: Array<MenuConfig> = [

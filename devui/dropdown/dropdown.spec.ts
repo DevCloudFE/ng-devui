@@ -8,7 +8,7 @@ import { DropDownToggleDirective } from './dropdown-toggle.directive';
 import { DropDownDirective } from './dropdown.directive';
 import { DropDownModule } from './dropdown.module';
 @Component({
-  template: `
+    template: `
     <div class="height-expand" *ngIf="expand"></div>
     <div
       dDropDown
@@ -53,13 +53,14 @@ import { DropDownModule } from './dropdown.module';
     </div>
     <div class="toggle" (click)="dropdown.toggle()">打开/关闭</div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .height-expand {
         height: calc(100vh - 100px);
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 class TestDropdownComponent {
   trigger: 'hover' | 'click' | 'manually' = 'click';
@@ -77,7 +78,7 @@ class TestDropdownComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <div class="area" #areaItem [ngClass]="{ 'devui-dropdown-origin': alignOriginFlag }">
       <div
         dDropDown
@@ -108,14 +109,15 @@ class TestDropdownComponent {
       </div>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .area {
         width: 500px;
         height: 600px;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 class TestDropdownAppendToBodyComponent {
   @ViewChild('areaItem', { static: true }) area: ElementRef;
@@ -126,7 +128,7 @@ class TestDropdownAppendToBodyComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <div class="area" *ngIf="init">
       <div dDropDown>
         <a dDropDownToggle class="devui-dropdown-default devui-dropdown-origin" [autoFocus]="autoFocus" [toggleOnFocus]="toggleOnFocus">
@@ -150,6 +152,7 @@ class TestDropdownAppendToBodyComponent {
       </div>
     </div>
   `,
+    standalone: false
 })
 class TestDropdownToggleComponent {
   autoFocus = false;
@@ -158,7 +161,7 @@ class TestDropdownToggleComponent {
 }
 
 @Component({
-  template: `<section>
+    template: `<section>
     <div class="btn-group g-dropdown" dDropDown appendToBody [trigger]="trigger1" [closeOnMouseLeaveMenu]="closeOnMouseLeaveMenu">
       <a id="item-0" dDropDownToggle class="devui-dropdown-default devui-dropdown-origin">
         更多选择
@@ -210,6 +213,7 @@ class TestDropdownToggleComponent {
       </ul>
     </div>
   </section> `,
+    standalone: false
 })
 class TestMultiLevelComponent {
   trigger1 = 'click';

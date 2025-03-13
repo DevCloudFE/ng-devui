@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-origin-placeholder',
-  templateUrl: './origin-placeholder.component.html',
-  styleUrls: ['./origin-placeholder.component.scss']
+    selector: 'd-origin-placeholder',
+    templateUrl: './origin-placeholder.component.html',
+    styleUrls: ['./origin-placeholder.component.scss'],
+    standalone: false
 })
 export class OriginPlaceholderComponent {
   list1 =  [

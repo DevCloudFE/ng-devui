@@ -14,10 +14,11 @@ import { HelperUtils } from './helper-utils';
 import { IframeEventPropagateDirective } from './iframe-event-propagate.directive';
 
 @Component({
-  template: `
+    template: `
     <button dSimulateATag [href]="'//angular.io'" [target]="target">Open Angualr website</button>
     <button class="btn-func" (click)="goto()">Open Angualr website</button>
   `,
+    standalone: false
 })
 class TestSimulateTagComponent {
   target = '_blank';
@@ -28,10 +29,11 @@ class TestSimulateTagComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <button class="btn-1" (click)="download()">Download File</button>
     <button class="btn-2" (click)="download2()">Download File with Header</button>
   `,
+    standalone: false
 })
 class TestDownloadComponent {
   downError: string;
@@ -68,7 +70,7 @@ class TestDownloadComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <div>
       <div class="input-group">
         <input dTextInput type="text" [(ngModel)]="value" />
@@ -83,6 +85,7 @@ class TestDownloadComponent {
       </div>
     </div>
   `,
+    standalone: false
 })
 class TestClipBoardComponent {
   value = 'Copied Content';
@@ -95,12 +98,13 @@ class TestClipBoardComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <div class="host-box" (click)="hostClick($event)" dIframeEventPropagate>
       <div><h2>Parent container</h2></div>
       <iframe class="content-box"></iframe>
     </div>
   `,
+    standalone: false
 })
 class TestIframeComponent implements AfterViewInit {
   constructor(private el: ElementRef) {}

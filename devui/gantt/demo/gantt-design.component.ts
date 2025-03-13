@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-gantt-design',
-  templateUrl: './gantt-design.component.html',
+    selector: 'd-gantt-design',
+    templateUrl: './gantt-design.component.html',
+    standalone: false
 })
 
 export class GanttDesignComponent implements OnInit {

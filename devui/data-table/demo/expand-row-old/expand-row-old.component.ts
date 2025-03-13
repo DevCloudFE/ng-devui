@@ -3,10 +3,10 @@ import { TableExpandConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
-  selector: 'd-expand-row-old',
-  templateUrl: './expand-row-old.component.html',
-  styles: [
-    `
+    selector: 'd-expand-row-old',
+    templateUrl: './expand-row-old.component.html',
+    styles: [
+        `
   .input-block {
     width: 200px;
     display: inline-block;
@@ -24,7 +24,8 @@ import { originSource, SourceType } from '../mock-data';
     margin-right: 5px;
   }
   `
-  ]
+    ],
+    standalone: false
 })
 export class ExpandRowOldComponent implements OnInit, AfterContentInit {
   @ViewChild('quickAddRowTip', { static: true }) quickAddRowTip: TemplateRef<any>;

@@ -3,8 +3,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-slider-demo',
-  templateUrl: './slider-demo.component.html',
+    selector: 'd-slider-demo',
+    templateUrl: './slider-demo.component.html',
+    standalone: false
 })
 export class SliderDemoComponent implements OnInit, OnDestroy {
   SliderBasicComponent = [

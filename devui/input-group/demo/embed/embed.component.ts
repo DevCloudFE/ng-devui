@@ -3,9 +3,10 @@ import { DropDownDirective } from 'ng-devui/dropdown';
 import { InputGroupComponent } from 'ng-devui/input-group';
 
 @Component({
-  selector: 'd-input-group-embed',
-  templateUrl: './embed.component.html',
-  styleUrls: ['./embed.component.scss'],
+    selector: 'd-input-group-embed',
+    templateUrl: './embed.component.html',
+    styleUrls: ['./embed.component.scss'],
+    standalone: false
 })
 export class EmbedComponent {
   @ViewChild('protocolItem') protocolItem: InputGroupComponent;

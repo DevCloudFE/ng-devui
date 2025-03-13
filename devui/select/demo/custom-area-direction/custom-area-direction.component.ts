@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-custom-area-direction',
-  templateUrl: './custom-area-direction.component.html',
-  styleUrls: ['./custom-area-direction.component.scss'],
+    selector: 'd-custom-area-direction',
+    templateUrl: './custom-area-direction.component.html',
+    styleUrls: ['./custom-area-direction.component.scss'],
+    standalone: false
 })
 export class CustomAreaDirectionComponent {
   options = [

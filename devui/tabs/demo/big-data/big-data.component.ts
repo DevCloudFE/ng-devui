@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 @Component({
-  selector: 'd-big-data',
-  templateUrl: './big-data.component.html',
-  styleUrls: ['./big-data.component.scss'],
+    selector: 'd-big-data',
+    templateUrl: './big-data.component.html',
+    styleUrls: ['./big-data.component.scss'],
+    standalone: false
 })
 export class BigDataComponent {
   toggle = false;

@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-tree-select-demo',
-  templateUrl: './tree-select-demo.component.html',
+    selector: 'd-tree-select-demo',
+    templateUrl: './tree-select-demo.component.html',
+    standalone: false
 })
 export class TreeSelectDemoComponent implements OnInit, OnDestroy {
   TreeSelectBasicComponent: Array<DevuiSourceData> = [

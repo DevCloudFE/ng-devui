@@ -2,10 +2,11 @@ import { ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnInit, R
 import { DFormControlStatus } from './validator-directive/validate.type';
 
 @Component({
-  selector: 'd-form-control',
-  templateUrl: './form-control.component.html',
-  styleUrls: ['./form-control.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-form-control',
+    templateUrl: './form-control.component.html',
+    styleUrls: ['./form-control.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class FormControlComponent implements OnInit {
   @Input() extraInfo: string | TemplateRef<any>;

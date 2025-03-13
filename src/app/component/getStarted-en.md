@@ -10,7 +10,7 @@ For details about how to use this function, see the following StackBlitz demonst
  
 ### Angular version
  
-The supported Angular version is <font color=red>`^18.0.0`</font>.
+The supported Angular version is <font color=red>`^19.0.0`</font>.
  
 
 ### 1. Create a project

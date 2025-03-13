@@ -17,10 +17,11 @@ import { Observable, Subscription } from 'rxjs';
 import { TransferDataFormat, TransferDirection } from './transfer.types';
 
 @Component({
-  selector: 'd-transfer',
-  templateUrl: './transfer.component.html',
-  styleUrls: ['./transfer.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-transfer',
+    templateUrl: './transfer.component.html',
+    styleUrls: ['./transfer.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class TransferComponent implements OnInit, OnChanges, OnDestroy {
   static ID_SEED = 0;

@@ -4,8 +4,9 @@ import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'd-form-demo-validate-sync',
-  templateUrl: './validate-sync.component.html',
+    selector: 'd-form-demo-validate-sync',
+    templateUrl: './validate-sync.component.html',
+    standalone: false
 })
 export class ValidateSyncComponent {
   layoutDirection: FormLayout = FormLayout.Vertical;

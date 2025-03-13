@@ -9,7 +9,7 @@ import { TagsInputComponent } from './tags.input.component';
 import { TagsInputModule } from './tags.input.module';
 
 @Component({
-  template: `
+    template: `
     <d-tags-input
       #comp
       [tags]="tagList"
@@ -19,6 +19,7 @@ import { TagsInputModule } from './tags.input.module';
     >
     </d-tags-input>
   `,
+    standalone: false
 })
 class TestTagsInputComponent implements OnInit {
   @ViewChild('comp') comp: TagsInputComponent;

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
-  selector: 'd-virtual-scroll',
-  templateUrl: './virtual-scroll.component.html'
+    selector: 'd-virtual-scroll',
+    templateUrl: './virtual-scroll.component.html',
+    standalone: false
 })
 export class VirtualScrollComponent implements OnInit {
 

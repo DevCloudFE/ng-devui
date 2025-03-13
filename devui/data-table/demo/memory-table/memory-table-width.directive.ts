@@ -2,7 +2,8 @@ import { AfterContentInit, Directive, Host, Input, OnChanges, OnDestroy, Optiona
 import { DataTableComponent } from 'ng-devui';
 import { Subscription } from 'rxjs';
 @Directive({
-  selector: '[dMemoryTableWidth]'
+    selector: '[dMemoryTableWidth]',
+    standalone: false
 })
 export class MemoryTableWidthDirective implements OnChanges, OnDestroy, AfterContentInit {
   @Input() tableWidthConfig: Array<any>;
