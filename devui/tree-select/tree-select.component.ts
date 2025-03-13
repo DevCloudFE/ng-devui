@@ -28,18 +28,19 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import DefaultIcons from './tree-default-icons';
 
 @Component({
-  selector: 'd-tree-select',
-  templateUrl: './tree-select.component.html',
-  styleUrls: [`./tree-select.component.scss`],
-  exportAs: 'select',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TreeSelectComponent),
-      multi: true,
-    },
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-tree-select',
+    templateUrl: './tree-select.component.html',
+    styleUrls: [`./tree-select.component.scss`],
+    exportAs: 'select',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TreeSelectComponent),
+            multi: true,
+        },
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class TreeSelectComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, OnChanges {
   @Input() checkableRelation: 'upward' | 'downward' | 'both' | 'none' = 'both';

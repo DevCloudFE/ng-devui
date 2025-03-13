@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-before-change',
-  templateUrl: './before-change.component.html',
+    selector: 'd-before-change',
+    templateUrl: './before-change.component.html',
+    standalone: false
 })
 export class CustomizeTmpComponent {
   tabActiveId: string | number = 'tab2';

@@ -6,9 +6,10 @@ import { UserGuideCoreService } from './user-guide-core.service';
 import { IUserGuideExtraConfig } from './user-guide.types';
 
 @Component({
-  selector: 'd-user-guide-ui',
-  templateUrl: './user-guide-ui.component.html',
-  styleUrls: ['./user-guide-ui.component.scss']
+    selector: 'd-user-guide-ui',
+    templateUrl: './user-guide-ui.component.html',
+    styleUrls: ['./user-guide-ui.component.scss'],
+    standalone: false
 })
 export class UserGuideUIComponent implements OnInit, OnDestroy {
   i18nCommonText: I18nInterface['userGuide'];

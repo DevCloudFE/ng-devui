@@ -2,9 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { TreeComponent } from 'ng-devui/tree';
 
 @Component({
-  selector: 'd-customize',
-  templateUrl: './customize.component.html',
-  styleUrls: ['./customize.component.scss']
+    selector: 'd-customize',
+    templateUrl: './customize.component.html',
+    styleUrls: ['./customize.component.scss'],
+    standalone: false
 })
 export class CustomizeComponent {
   @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;

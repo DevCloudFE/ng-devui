@@ -3,7 +3,8 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  templateUrl: './text-input-demo.component.html',
+    templateUrl: './text-input-demo.component.html',
+    standalone: false
 })
 export class TextInputDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

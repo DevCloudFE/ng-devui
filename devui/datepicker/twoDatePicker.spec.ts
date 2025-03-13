@@ -417,7 +417,7 @@ class TestFunctions {
 }
 
 @Component({
-  template: `
+    template: `
     <div class="place-holder" (click)="twoDatePicker.toggle()" [style.height]="placeHolderHeight ? '900px' : '0'">this is place holder</div>
     <div
       class="two-date-wrapper"
@@ -472,6 +472,7 @@ class TestFunctions {
       </div>
     </div>
   `,
+    standalone: false
 })
 class TestTwoDatePickerComponent {
   rangeStart = null;
@@ -494,7 +495,7 @@ class TestTwoDatePickerComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <div
       class="two-date-wrapper"
       dTwoDatePicker
@@ -519,6 +520,7 @@ class TestTwoDatePickerComponent {
       >{{rangeEnd || 'End'}}</div>
     </div>
   `,
+    standalone: false
 })
 class TestTwoDatePickerDivComponent {
   rangeStart = null;

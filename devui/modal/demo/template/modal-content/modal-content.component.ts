@@ -2,9 +2,10 @@ import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { ModalComponent } from 'ng-devui/modal';
 
 @Component({
-  selector: 'd-modal-content',
-  templateUrl: './modal-content.component.html',
-  styleUrls: ['./modal-content.component.scss'],
+    selector: 'd-modal-content',
+    templateUrl: './modal-content.component.html',
+    styleUrls: ['./modal-content.component.scss'],
+    standalone: false
 })
 export class ModalContentComponent implements OnInit {
   @Input() data: any;

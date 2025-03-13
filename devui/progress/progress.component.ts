@@ -4,10 +4,11 @@ import { ProgressTemplateDirective } from './progress-template.directive';
 import { IGradientColor, IProgressItem, ShowContentConfig } from './progress.types';
 
 @Component({
-  selector: 'd-progress',
-  templateUrl: './progress.component.html',
-  styleUrls: ['./progress.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-progress',
+    templateUrl: './progress.component.html',
+    styleUrls: ['./progress.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class ProgressComponent implements OnChanges, AfterViewInit {
   static ID_SEED = 0;

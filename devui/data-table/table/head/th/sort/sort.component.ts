@@ -2,9 +2,10 @@ import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@an
 import { SortDirection, SortEventArg } from '../../../../data-table.model';
 
 @Component({
-  selector: 'd-table-sort',
-  templateUrl: './sort.component.html',
-  styleUrls: ['./sort.component.scss']
+    selector: 'd-table-sort',
+    templateUrl: './sort.component.html',
+    styleUrls: ['./sort.component.scss'],
+    standalone: false
 })
 export class SortComponent implements OnInit {
   @Input() sortDirection: SortDirection;

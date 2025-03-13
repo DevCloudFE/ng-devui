@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-tooltip-design',
-  templateUrl: './tooltip-design.component.html',
+    selector: 'd-tooltip-design',
+    templateUrl: './tooltip-design.component.html',
+    standalone: false
 })
 
 export class TooltipDesignComponent implements OnInit {

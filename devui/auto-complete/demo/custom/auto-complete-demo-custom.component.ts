@@ -3,8 +3,9 @@ import { of, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'd-auto-complete-demo-custom',
-  templateUrl: './auto-complete-demo-custom.component.html'
+    selector: 'd-auto-complete-demo-custom',
+    templateUrl: './auto-complete-demo-custom.component.html',
+    standalone: false
 })
 export class AutoDemoCustomComponent {
   selectItem4: any;

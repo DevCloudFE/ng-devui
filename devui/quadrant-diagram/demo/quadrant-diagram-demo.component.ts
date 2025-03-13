@@ -6,8 +6,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-quadrant-diagram-demo',
-  templateUrl: './quadrant-diagram-demo.component.html'
+    selector: 'd-quadrant-diagram-demo',
+    templateUrl: './quadrant-diagram-demo.component.html',
+    standalone: false
 })
 
 export class QuadrantDiagramDemoComponent implements OnInit, OnDestroy {

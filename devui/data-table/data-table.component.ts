@@ -48,18 +48,19 @@ import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.comp
 const SCROLL_BAR_WIDTH = 8;
 
 @Component({
-  selector: 'd-data-table',
-  templateUrl: './data-table.component.html',
-  styleUrls: ['./data-table.component.scss', './data-table.component.color.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
-  exportAs: 'dataTable',
-  preserveWhitespaces: false,
-  providers: [
-    {
-    provide: DATA_TABLE,
-      useExisting: forwardRef(() => DataTableComponent),
-    },
-  ],
+    selector: 'd-data-table',
+    templateUrl: './data-table.component.html',
+    styleUrls: ['./data-table.component.scss', './data-table.component.color.scss'],
+    // changeDetection: ChangeDetectionStrategy.OnPush,
+    exportAs: 'dataTable',
+    preserveWhitespaces: false,
+    providers: [
+        {
+            provide: DATA_TABLE,
+            useExisting: forwardRef(() => DataTableComponent),
+        },
+    ],
+    standalone: false
 })
 export class DataTableComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit, AfterViewInit {
   /**

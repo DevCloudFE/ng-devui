@@ -5,7 +5,8 @@ import { DevuiCommonsService } from '../../src/devui-commons.service';
 import { I18nUtil } from '../i18n/i18n.util';
 import { ReadTipOption, StrCopySVG } from './codecopy.types';
 @Directive({
-  selector: '[dCodeCopy]',
+    selector: '[dCodeCopy]',
+    standalone: false
 })
 export class CodeCopyDirective implements OnInit, AfterViewInit, OnDestroy {
   @Output('copied') copied: EventEmitter<any> = new EventEmitter<any>();

@@ -6,7 +6,7 @@ import { CardModule } from 'ng-devui/card/card.module';
 import { DomHelper } from '../utils/testing/dom-helper';
 import { CardComponent } from './card.component';
 @Component({
-  template: `
+    template: `
     <d-card>
       <img dCardMeta />
       <d-card-header>
@@ -18,7 +18,8 @@ import { CardComponent } from './card.component';
       <d-card-actions [align]="align">actions</d-card-actions>
       <!-- <d-card-extend></d-card-extend> -->
     </d-card>
-  `
+  `,
+    standalone: false
 })
 class TestCardComponent {
   align = 'start';

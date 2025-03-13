@@ -3,8 +3,9 @@ import { DevuiSourceData } from "ng-devui/shared/devui-codebox";
 import { TranslateService, TranslationChangeEvent } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
 @Component({
-  selector: "d-nav-sprite-demo",
-  templateUrl: "./nav-sprite-demo.component.html",
+    selector: "d-nav-sprite-demo",
+    templateUrl: "./nav-sprite-demo.component.html",
+    standalone: false
 })
 export class NavSpriteDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

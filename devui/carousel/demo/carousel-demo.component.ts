@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-demo-carousel',
-  templateUrl: './carousel-demo.component.html',
+    selector: 'd-demo-carousel',
+    templateUrl: './carousel-demo.component.html',
+    standalone: false
 })
 export class CarouselDemoComponent implements OnInit, OnDestroy {
   withTransitionProgressSourceData: Array<DevuiSourceData> = [

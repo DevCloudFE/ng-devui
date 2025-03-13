@@ -6,11 +6,12 @@ import { Observable, Subscription, fromEvent } from 'rxjs';
 import { ModalContainerDirective } from './modal.directive';
 
 @Component({
-  selector: 'd-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss'],
-  animations: [backdropFadeInOut, wipeInOutAnimation],
-  preserveWhitespaces: false,
+    selector: 'd-modal',
+    templateUrl: './modal.component.html',
+    styleUrls: ['./modal.component.scss'],
+    animations: [backdropFadeInOut, wipeInOutAnimation],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class ModalComponent implements OnInit, OnDestroy {
   @Input() id: string;

@@ -4,7 +4,8 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
-  templateUrl: './icon-demo.component.html',
+    templateUrl: './icon-demo.component.html',
+    standalone: false
 })
 export class IconDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

@@ -3,8 +3,9 @@ import { SelectComponent } from 'ng-devui/select';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'd-user-search-n-lazyload',
-  templateUrl: './user-search-n-lazyload.component.html',
+    selector: 'd-user-search-n-lazyload',
+    templateUrl: './user-search-n-lazyload.component.html',
+    standalone: false
 })
 export class UserSearchNLazyLoadComponent {
   @ViewChild('selectComponent', { static: true }) selectComponent: SelectComponent;

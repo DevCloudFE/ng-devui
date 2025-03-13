@@ -3,10 +3,11 @@ import { AccordionBaseLinkComponent } from './accordion-base-link-component.clas
 import { ACCORDION } from './accordion-token';
 
 @Component({
-  selector: 'd-accordion-item-hreflink',
-  templateUrl: './accordion-item-hreflink.component.html',
-  encapsulation: ViewEncapsulation.None,
-  preserveWhitespaces: false,
+    selector: 'd-accordion-item-hreflink',
+    templateUrl: './accordion-item-hreflink.component.html',
+    encapsulation: ViewEncapsulation.None,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class AccordionItemHreflinkComponent extends AccordionBaseLinkComponent {
   constructor(@Inject(ACCORDION) protected accordion: any) {

@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'mapTo' })
+@Pipe({
+    name: 'mapTo',
+    standalone: false
+})
 export class MapToPipe implements PipeTransform {
   transform(data, identifyKey): any {
     if (!data) {return data; }

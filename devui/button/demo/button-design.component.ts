@@ -4,9 +4,10 @@ import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-button-design',
-  templateUrl: './button-design.component.html',
-  styleUrls: ['./button-design.component.scss'],
+    selector: 'd-button-design',
+    templateUrl: './button-design.component.html',
+    styleUrls: ['./button-design.component.scss'],
+    standalone: false
 })
 
 export class ButtonDesignComponent implements OnInit {

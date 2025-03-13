@@ -4,11 +4,12 @@ import { By } from '@angular/platform-browser';
 import { BadgeModule } from 'ng-devui/badge/badge.module';
 import { BadgeComponent } from './badge.component';
 @Component({
-  template: `
+    template: `
         <d-badge [count]="count" [status]="status" [badgePos]="badgePos" [showDot]="showDot" [maxCount]="maxCount">
             <div>未读消息</div>
         </d-badge>
-    `
+    `,
+    standalone: false
 })
 class HasContentBadgeComponent {
   count = 8;
@@ -19,10 +20,11 @@ class HasContentBadgeComponent {
 }
 
 @Component({
-  template: `
+    template: `
         <d-badge [count]="count" [status]="status" [showDot]="showDot">
         </d-badge>
-    `
+    `,
+    standalone: false
 })
 class NoContentBadgeComponent {
   count = 6;

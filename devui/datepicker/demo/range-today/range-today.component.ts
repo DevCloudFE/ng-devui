@@ -5,10 +5,11 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'd-range-today',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './range-today.component.html',
-  styleUrls: ['./range-today.component.scss']
+    selector: 'd-range-today',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './range-today.component.html',
+    styleUrls: ['./range-today.component.scss'],
+    standalone: false
 })
 export class RangePickerTodayComponent {
   dateRange = [null, null];

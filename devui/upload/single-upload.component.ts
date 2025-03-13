@@ -24,18 +24,19 @@ import { SingleUploadViewComponent } from './single-upload-view.component';
 import { SliceUploadService } from './slice-upload.service';
 
 @Component({
-  selector: 'd-single-upload',
-  templateUrl: './single-upload.component.html',
-  exportAs: 'dSingleUpload',
-  styleUrls: ['./upload-view.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SingleUploadComponent),
-      multi: true,
-    },
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-single-upload',
+    templateUrl: './single-upload.component.html',
+    exportAs: 'dSingleUpload',
+    styleUrls: ['./upload-view.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => SingleUploadComponent),
+            multi: true,
+        },
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class SingleUploadComponent implements OnDestroy, OnInit, ControlValueAccessor {
   dSingleUploadView;

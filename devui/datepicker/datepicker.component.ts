@@ -22,17 +22,18 @@ import { SelectDateChangeEventArgs, SelectDateChangeReason } from './date-change
 import { DatePickerConfigService as DatePickerConfig } from './date-picker.config.service';
 
 @Component({
-  selector: 'd-datepicker',
-  templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DatepickerComponent),
-      multi: true,
-    },
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-datepicker',
+    templateUrl: './datepicker.component.html',
+    styleUrls: ['./datepicker.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => DatepickerComponent),
+            multi: true,
+        },
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class DatepickerComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
   static DAY_DURATION = 24 * 60 * 60 * 1000;

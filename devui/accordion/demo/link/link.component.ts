@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-link',
-  templateUrl: './link.component.html',
-  styleUrls: ['./link.component.css']
+    selector: 'd-link',
+    templateUrl: './link.component.html',
+    styleUrls: ['./link.component.css'],
+    standalone: false
 })
 export class LinkComponent {
   menu = [{

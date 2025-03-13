@@ -6,11 +6,12 @@ import { ButtonModule } from '../button';
 import { TooltipModule } from './tooltip.module';
 
 @Component({
-  template: `
+    template: `
     <d-button dTooltip [content]="direction" [position]="direction">
       {{ direction }}
     </d-button>
-  `
+  `,
+    standalone: false
 })
 class TestTooltipBasicComponent {
   direction = 'left';

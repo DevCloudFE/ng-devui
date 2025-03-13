@@ -21,17 +21,18 @@ import { addClassToOrigin, AppendToBodyDirection, DevConfigService, removeClassF
 import { Observable, of } from 'rxjs';
 
 @Component({
-  selector: 'd-multi-auto-complete',
-  templateUrl: './multi-auto-complete.component.html',
-  styleUrls: ['multi-auto-complete.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MultiAutoCompleteComponent),
-      multi: true,
-    },
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-multi-auto-complete',
+    templateUrl: './multi-auto-complete.component.html',
+    styleUrls: ['multi-auto-complete.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => MultiAutoCompleteComponent),
+            multi: true,
+        },
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class MultiAutoCompleteComponent implements OnInit, OnChanges, ControlValueAccessor {
   static ID_SEED = 0;

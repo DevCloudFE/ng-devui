@@ -25,12 +25,13 @@ import { TreeComponent } from './tree.component';
 import { ICheckboxInput, IDropType } from './tree.types';
 
 @Component({
-  selector: 'd-operable-tree',
-  templateUrl: './operable-tree.component.html',
-  styleUrls: ['./operable-tree.component.scss'],
-  exportAs: 'dOperableTreeComponent',
-  preserveWhitespaces: false,
-  animations: [expandCollapseForDomDestroy],
+    selector: 'd-operable-tree',
+    templateUrl: './operable-tree.component.html',
+    styleUrls: ['./operable-tree.component.scss'],
+    exportAs: 'dOperableTreeComponent',
+    preserveWhitespaces: false,
+    animations: [expandCollapseForDomDestroy],
+    standalone: false
 })
 export class OperableTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   static ID_SEED = 0;

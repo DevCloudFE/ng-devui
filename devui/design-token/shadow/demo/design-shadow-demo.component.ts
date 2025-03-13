@@ -3,8 +3,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-design-shadow-demo',
-  templateUrl: './design-shadow-demo.component.html',
+    selector: 'd-design-shadow-demo',
+    templateUrl: './design-shadow-demo.component.html',
+    standalone: false
 })
 export class DesignShadowDemoComponent implements OnInit, OnDestroy {
   navItems = [];

@@ -4,10 +4,11 @@ import { FormLabelComponent } from './form-label.component';
 import { DFormControlStatus } from './validator-directive/validate.type';
 
 @Component({
-  selector: 'd-form-item',
-  template: ` <ng-content></ng-content> `,
-  styleUrls: ['./form-item.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-form-item',
+    template: ` <ng-content></ng-content> `,
+    styleUrls: ['./form-item.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class FormItemComponent implements OnInit {
   @HostBinding('class.devui-form-has-error-msg') _hasErrorMsg = false;

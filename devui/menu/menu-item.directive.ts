@@ -16,9 +16,10 @@ import { MenuComponent } from './menu.component';
 import { SubMenuService } from './submenu.service';
 
 @Directive({
-  selector: '[dMenuItem]',
-  exportAs: 'dMenuItem',
-  })
+    selector: '[dMenuItem]',
+    exportAs: 'dMenuItem',
+    standalone: false
+})
 export class MenuItemDirective implements OnInit, OnChanges {
   @Input() subMenuHost = false;
   @HostBinding('class.no-style') @Input() noStyle = false;

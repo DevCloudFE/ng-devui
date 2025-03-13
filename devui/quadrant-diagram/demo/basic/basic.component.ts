@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { ILabelDataConfigs } from 'ng-devui/quadrant-diagram';
 
 @Component({
-  selector: 'd-basic',
-  templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.scss'],
+    selector: 'd-basic',
+    templateUrl: './basic.component.html',
+    styleUrls: ['./basic.component.scss'],
+    standalone: false
 })
 export class BasicComponent {
   labelData: Array<ILabelDataConfigs> = [];

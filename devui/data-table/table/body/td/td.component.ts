@@ -12,10 +12,11 @@ import { EditableTip } from '../../../data-table.model';
 import { TableTdService } from './td.service';
 
 @Component({
-  /* eslint-disable-next-line @angular-eslint/component-selector*/
-  selector: '[dTableCell]',
-  templateUrl: './td.component.html',
-  styleUrls: ['./td.component.scss'],
+    /* eslint-disable-next-line @angular-eslint/component-selector*/
+    selector: '[dTableCell]',
+    templateUrl: './td.component.html',
+    styleUrls: ['./td.component.scss'],
+    standalone: false
 })
 export class TableTdComponent implements OnChanges, OnDestroy {
   @HostBinding('class.devui-sticky-left-cell') stickyLeftClass: boolean;

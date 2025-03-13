@@ -3,7 +3,8 @@ import { ModalService } from 'ng-devui/modal';
 import { Subject } from 'rxjs';
 import { DImagePreviewComponent, IImagePreviewToolbar } from './image-preview.component';
 @Directive({
-  selector: '[dImagePreview]',
+    selector: '[dImagePreview]',
+    standalone: false
 })
 export class ImagePreviewDirective implements OnInit, OnDestroy {
   @Input() customSub: Subject<HTMLElement>;

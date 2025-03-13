@@ -4,11 +4,12 @@ import { By } from '@angular/platform-browser';
 import { AlertComponent } from './alert.component';
 import { AlertModule } from './alert.module';
 @Component({
-  template: `
+    template: `
   <d-alert [type]="type" [showIcon]= "showIcon" (closeEvent)="handleClose($event)" [cssClass]="cssClass">
     <span>成功。消息提示成功。</span>
   </d-alert>
-  `
+  `,
+    standalone: false
 })
 class TestAlertComponent {
   type = 'success';
@@ -21,11 +22,12 @@ class TestAlertComponent {
 }
 
 @Component({
-  template: `
+    template: `
   <d-alert [type]="'success'" [closeable]="false" [dismissTime]="3000">
     success
   </d-alert>
-  `
+  `,
+    standalone: false
 })
 class TestAlertDissmissTimeComponent {
 

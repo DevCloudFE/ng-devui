@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-animation',
-  templateUrl: './animation.component.html',
+    selector: 'd-animation',
+    templateUrl: './animation.component.html',
+    standalone: false
 })
 export class AnimationComponent implements OnInit, OnDestroy {
   themeService: ThemeService;

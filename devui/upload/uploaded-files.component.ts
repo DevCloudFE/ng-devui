@@ -11,10 +11,11 @@ import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-uploaded-files',
-  exportAs: 'dUploadFiles',
-  templateUrl: './uploaded-files.component.html',
-  preserveWhitespaces: false,
+    selector: 'd-uploaded-files',
+    exportAs: 'dUploadFiles',
+    templateUrl: './uploaded-files.component.html',
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class UploadedFilesComponent implements OnDestroy, OnInit {
   @Input() uploadedFiles: Array<Object> = [];

@@ -41,12 +41,13 @@ import { WindowRef } from 'ng-devui/window-ref';
 import { ToggleMenuListComponent } from './toggle-menu-list.component';
 
 @Component({
-  selector: 'd-toggle-menu-container',
-  templateUrl: './toggle-menu-container.component.html',
-  styleUrls: [`./toggle-menu-container.component.scss`],
-  animations: [fadeInOut],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  preserveWhitespaces: false,
+    selector: 'd-toggle-menu-container',
+    templateUrl: './toggle-menu-container.component.html',
+    styleUrls: [`./toggle-menu-container.component.scss`],
+    animations: [fadeInOut],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class ToggleMenuContainerComponent implements OnInit, OnChanges {
   @Input() set isOpen(value) {
@@ -312,7 +313,7 @@ export class ToggleMenuContainerComponent implements OnInit, OnChanges {
 
   updateCdkConnectedOverlayOrigin() {
     if (this.selectWrapper?.nativeElement) {
-      this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(formWithDropDown(this.selectWrapper) || this.selectWrapper.nativeElement);
+      this.cdkConnectedOverlayOrigin = formWithDropDown(this.selectWrapper) || this.selectWrapper.nativeElement;
     }
   }
 }

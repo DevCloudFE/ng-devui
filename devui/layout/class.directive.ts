@@ -5,7 +5,8 @@ import { DBreakpoints, DResponseParameter } from './layout.types';
 import { DScreenMediaQueryService } from './screen-media-query.service';
 
 @Directive({
-  selector: `[dClass]`,
+    selector: `[dClass]`,
+    standalone: false
 })
 export class DClassDirective implements OnDestroy, AfterViewInit {
   @Input() dClass: DResponseParameter<string[]>;

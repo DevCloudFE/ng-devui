@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-animations-demo',
-  templateUrl: './animations-demo.component.html'
+    selector: 'd-animations-demo',
+    templateUrl: './animations-demo.component.html',
+    standalone: false
 })
 export class AnimationsDemoComponent implements OnInit, OnDestroy {
   collapseSource: Array<DevuiSourceData> = [

@@ -20,12 +20,13 @@ import { Subscription } from 'rxjs';
 import { ToggleMenuListItem } from './toggle-menu.type';
 
 @Component({
-  selector: 'd-toggle-menu-list',
-  templateUrl: './toggle-menu-list.component.html',
-  styleUrls: [`./toggle-menu-list.component.scss`],
-  animations: [fadeInOut],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  preserveWhitespaces: false,
+    selector: 'd-toggle-menu-list',
+    templateUrl: './toggle-menu-list.component.html',
+    styleUrls: [`./toggle-menu-list.component.scss`],
+    animations: [fadeInOut],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class ToggleMenuListComponent implements OnInit, OnChanges, OnDestroy {
   /**

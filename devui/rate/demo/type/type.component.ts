@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 @Component({
-  selector: 'd-type',
-  templateUrl: './type.component.html'
+    selector: 'd-type',
+    templateUrl: './type.component.html',
+    standalone: false
 })
 export class TypeComponent {
   value1 = 5;

@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'd-auto-complete-demo-disable',
-  templateUrl: './auto-complete-demo-disable.component.html',
-  styles: [
-    `
+    selector: 'd-auto-complete-demo-disable',
+    templateUrl: './auto-complete-demo-disable.component.html',
+    styles: [
+        `
       .disabled-container {
         white-space: nowrap;
       }
@@ -16,7 +16,8 @@ import { of } from 'rxjs';
         float: left;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class AutoDemoDisableComponent {
   selectItem1: any;

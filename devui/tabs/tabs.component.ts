@@ -23,11 +23,12 @@ export interface ITabOperation {
 }
 
 @Component({
-  selector: 'd-tabs',
-  templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.scss'],
-  exportAs: 'tabs',
-  preserveWhitespaces: false,
+    selector: 'd-tabs',
+    templateUrl: './tabs.component.html',
+    styleUrls: ['./tabs.component.scss'],
+    exportAs: 'tabs',
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class TabsComponent implements OnChanges, AfterViewInit {
   static ID_SEED = 0;

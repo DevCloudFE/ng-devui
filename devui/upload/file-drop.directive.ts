@@ -1,8 +1,9 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
 @Directive({
-  /* eslint-disable-next-line @angular-eslint/directive-selector*/
-  selector: '[d-file-drop]'
+    /* eslint-disable-next-line @angular-eslint/directive-selector*/
+    selector: '[d-file-drop]',
+    standalone: false
 })
 export class FileDropDirective {
   @Input() enableDrop = false;

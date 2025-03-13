@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, TemplateRef, ViewChild } from '@angular/core';
 @Component({
-  selector: 'd-demo-time-axis-template-content',
-  templateUrl: './time-axis-template-content.component.html'
+    selector: 'd-demo-time-axis-template-content',
+    templateUrl: './time-axis-template-content.component.html',
+    standalone: false
 })
 export class TimeAxisTemplateContentComponent implements AfterViewInit {
   @ViewChild('yearShow') yearShow: TemplateRef<any>;

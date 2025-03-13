@@ -7,7 +7,7 @@ import { CheckBoxComponent } from './checkbox.component';
 import { CheckBoxModule } from './checkbox.module';
 
 @Component({
-  template: `
+    template: `
   <d-checkbox-group
       [(ngModel)]="values"
       [name]="'City'"
@@ -17,6 +17,7 @@ import { CheckBoxModule } from './checkbox.module';
     >
   </d-checkbox-group>
   `,
+    standalone: false
 })
 class TestCheckBoxGroupComponent {
   options = ['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'data7'];
@@ -26,7 +27,7 @@ class TestCheckBoxGroupComponent {
 }
 
 @Component({
-  template: `
+    template: `
   <d-checkbox-group
       [(ngModel)]="values"
       [name]="'City'"
@@ -37,6 +38,7 @@ class TestCheckBoxGroupComponent {
     >
   </d-checkbox-group>
   `,
+    standalone: false
 })
 class TestCheckBoxGroupObjComponent {
   options = [

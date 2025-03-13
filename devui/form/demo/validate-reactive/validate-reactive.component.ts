@@ -5,9 +5,10 @@ import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'd-form-demo-validate-reactive',
-  templateUrl: './validate-reactive.component.html',
-  styleUrls: ['./validate-reactive.component.scss'],
+    selector: 'd-form-demo-validate-reactive',
+    templateUrl: './validate-reactive.component.html',
+    styleUrls: ['./validate-reactive.component.scss'],
+    standalone: false
 })
 export class ValidateReactiveComponent implements OnInit {
   layoutDirection: FormLayout = FormLayout.Vertical;

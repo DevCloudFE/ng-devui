@@ -44,9 +44,10 @@ import { ContentTemplateDirective } from './content-template.directive';
 import { DefaultTemplateDirective } from './default-template.directive';
 
 @Component({
-  selector: 'd-category-search',
-  templateUrl: './category-search.component.html',
-  styleUrls: ['./category-search.component.scss'],
+    selector: 'd-category-search',
+    templateUrl: './category-search.component.html',
+    styleUrls: ['./category-search.component.scss'],
+    standalone: false
 })
 export class CategorySearchComponent implements OnChanges, OnDestroy, AfterViewInit, AfterContentInit {
   static ID_SEED = 0;

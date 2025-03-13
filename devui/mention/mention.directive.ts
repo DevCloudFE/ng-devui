@@ -32,8 +32,9 @@ import { DEFAULT_MENTION_BOTTOM_POSITIONS } from './position';
 import { getCaretCoordinates } from './utils';
 
 @Directive({
-  selector: '[dMention]',
-  exportAs: 'dMention',
+    selector: '[dMention]',
+    exportAs: 'dMention',
+    standalone: false
 })
 export class MentionDirective implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Input() mentionNotFoundContent = 'No suggestion matched';

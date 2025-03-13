@@ -19,8 +19,9 @@ import { ReadTipComponent } from './read-tip.component';
 import { ReadTipOptions, ReadTipRule } from './read-tip.types';
 
 @Directive({
-  selector: '[dReadTip]',
-  exportAs: 'dReadTip',
+    selector: '[dReadTip]',
+    exportAs: 'dReadTip',
+    standalone: false
 })
 export class ReadTipDirective implements OnInit, OnDestroy {
   readTipComponentRef: ComponentRef<ReadTipComponent>;

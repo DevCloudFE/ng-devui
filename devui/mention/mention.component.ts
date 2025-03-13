@@ -3,9 +3,10 @@ import { MentionDirective } from './mention.directive';
 import { MentionPositionType } from './mention.types';
 
 @Component({
-  selector: 'd-mention',
-  templateUrl: './mention.component.html',
-  styleUrls: ['./mention.component.scss'],
+    selector: 'd-mention',
+    templateUrl: './mention.component.html',
+    styleUrls: ['./mention.component.scss'],
+    standalone: false
 })
 export class MentionComponent {
   @ViewChildren('items', { read: ElementRef }) items!: QueryList<ElementRef>;

@@ -4,7 +4,8 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  templateUrl: './time-picker-demo.component.html',
+    templateUrl: './time-picker-demo.component.html',
+    standalone: false
 })
 export class TimePickerDemoComponent implements OnInit, OnDestroy {
   TimePickerDemoBasicComponent: DevuiSourceData[] = [

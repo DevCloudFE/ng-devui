@@ -10,7 +10,7 @@ import { SliderComponent } from './slider.component';
 import { SliderModule } from './slider.module';
 
 @Component({
-  template: `
+    template: `
     <d-slider
       #sliderCmp
       class="slider"
@@ -24,11 +24,12 @@ import { SliderModule } from './slider.module';
     >
     </d-slider>
   `,
-  styles: [`
+    styles: [`
     .slider {
       width: 300px;
     }
-  `]
+  `],
+    standalone: false
 })
 class TestSliderBasicComponent {
   @ViewChild('sliderCmp') sliderCmp: SliderComponent;

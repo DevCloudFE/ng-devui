@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-set-mode',
-  templateUrl: './set-mode.component.html',
-  styleUrls: ['./set-mode.component.scss']
+    selector: 'd-set-mode',
+    templateUrl: './set-mode.component.html',
+    styleUrls: ['./set-mode.component.scss'],
+    standalone: false
 })
 export class SetModeComponent {
   selectedDate1 = null;

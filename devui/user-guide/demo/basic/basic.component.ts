@@ -4,9 +4,10 @@ import { IStep } from 'ng-devui/user-guide';
 import { mockSteps } from '../mock-steps';
 
 @Component({
-  selector: 'd-user-guide-basic',
-  templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.scss']
+    selector: 'd-user-guide-basic',
+    templateUrl: './basic.component.html',
+    styleUrls: ['./basic.component.scss'],
+    standalone: false
 })
 export class BasicComponent implements OnInit {
   @ViewChild('contentTemplate') contentTemplate: TemplateRef<any>;

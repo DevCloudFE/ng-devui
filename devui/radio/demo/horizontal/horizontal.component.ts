@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-horizontal',
-  templateUrl: './horizontal.component.html',
+    selector: 'd-horizontal',
+    templateUrl: './horizontal.component.html',
+    standalone: false
 })
 export class HorizontalComponent {
   weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];

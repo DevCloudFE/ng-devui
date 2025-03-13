@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-header-version-switch',
-  templateUrl: './version-switch.component.html',
-  styleUrls: ['./version-switch.component.scss']
+    selector: 'd-header-version-switch',
+    templateUrl: './version-switch.component.html',
+    styleUrls: ['./version-switch.component.scss'],
+    standalone: false
 })
 export class VersionSwitchComponent implements OnInit {
   @Input() versionOptions = [];

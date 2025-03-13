@@ -3,8 +3,9 @@ import { TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
-  selector: 'd-basic',
-  templateUrl: './data-table-demo-basic.component.html'
+    selector: 'd-basic',
+    templateUrl: './data-table-demo-basic.component.html',
+    standalone: false
 })
 export class DatatableDemoBasicComponent implements OnInit {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));

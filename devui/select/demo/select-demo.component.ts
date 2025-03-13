@@ -4,9 +4,10 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-select-demo',
-  templateUrl: './select-demo.component.html',
-  styleUrls: ['./select-demo.component.scss'],
+    selector: 'd-select-demo',
+    templateUrl: './select-demo.component.html',
+    styleUrls: ['./select-demo.component.scss'],
+    standalone: false
 })
 export class SelectDemoComponent implements OnInit, OnDestroy {
   SelectBasicComponent: Array<DevuiSourceData> = [

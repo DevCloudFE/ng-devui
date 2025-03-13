@@ -17,9 +17,10 @@ import { DataTableCellViewTmplComponent } from './data-table-cell-view-tmpl.comp
 import { DataTableHeadCellTmplComponent } from './data-table-head-cell-tmpl.component';
 
 @Component({
-  selector: 'd-column',
-  template: '',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'd-column',
+    template: '',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DataTableColumnTmplComponent implements OnChanges, OnDestroy {
   @Input() advancedHeader: Array<{

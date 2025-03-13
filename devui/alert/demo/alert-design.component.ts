@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-alert-design',
-  templateUrl: './alert-design.component.html',
+    selector: 'd-alert-design',
+    templateUrl: './alert-design.component.html',
+    standalone: false
 })
 export class AlertDesignComponent implements OnInit {
   imgSrc: string;

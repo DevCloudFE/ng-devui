@@ -2,7 +2,8 @@ import { Directive, EmbeddedViewRef, Input, OnChanges, SimpleChanges, TemplateRe
 import { isEqual } from 'lodash-es';
 
 @Directive({
-  selector: '[dStrTplOutlet]'
+    selector: '[dStrTplOutlet]',
+    standalone: false
 })
 export class StrTplOutletDirective<T = Record<string, any>> implements OnChanges {
   private embeddedViewRef: EmbeddedViewRef<T> | null = null;

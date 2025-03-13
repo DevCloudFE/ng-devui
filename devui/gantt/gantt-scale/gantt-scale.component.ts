@@ -12,9 +12,10 @@ import { fromEvent, Subscription } from 'rxjs';
 import { GanttBarStatus, GanttMilestone, GanttScaleDateInfo, GanttScaleUnit } from '../gantt.model';
 import { GanttService } from '../gantt.service';
 @Component({
-  selector: 'd-gantt-scale',
-  templateUrl: './gantt-scale.component.html',
-  styleUrls: ['./gantt-scale.component.scss'],
+    selector: 'd-gantt-scale',
+    templateUrl: './gantt-scale.component.html',
+    styleUrls: ['./gantt-scale.component.scss'],
+    standalone: false
 })
 export class GanttScaleComponent implements OnInit, OnChanges, OnDestroy {
   scaleData: GanttScaleDateInfo[];

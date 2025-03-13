@@ -6,11 +6,12 @@ import { takeUntil } from 'rxjs/operators';
 import { DatepickerProService } from '../datepicker-pro.service';
 
 @Component({
-  selector: 'd-year-panel',
-  templateUrl: './year-panel.component.html',
-  styleUrls: ['./year-panel.component.scss'],
-  preserveWhitespaces: false,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'd-year-panel',
+    templateUrl: './year-panel.component.html',
+    styleUrls: ['./year-panel.component.scss'],
+    preserveWhitespaces: false,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class YearPanelComponent implements OnInit, OnDestroy {
   @ViewChild('scrollList') scrollListCmp: CdkVirtualScrollViewport;

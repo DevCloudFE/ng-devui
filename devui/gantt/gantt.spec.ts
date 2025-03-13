@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 import { DomHelper } from '../utils/testing/dom-helper';
 
 @Component({
-  template: `
+    template: `
     <div #ganttContainer class="gantt-container">
     <div class="header" [style.width]="ganttScaleWidth">
     <d-gantt-scale [ganttBarContainerElement]="ganttBody"></d-gantt-scale>
@@ -45,11 +45,12 @@ import { DomHelper } from '../utils/testing/dom-helper';
     </div>
     </ng-template>
   `,
-  styles: [`.gantt-container {padding: 0 30px 0 30px; overflow: scroll;}
+    styles: [`.gantt-container {padding: 0 30px 0 30px; overflow: scroll;}
     .gantt-container .header {position: relative;border-bottom: 1px solid #adb0b8;}
     .gantt-container .body {position: relative;min-height: 400px;}.gantt-container .body .item {height: 40px;padding-top: 8px;}
     ::ng-deep .devui-gantt-tips .title {font-size: 14px;color: #252b3a;line-height: 24px;font-weight: bold;margin-bottom: 15px;}
-    ::ng-deep .devui-gantt-tips .content {font-size: 12px;color: #252b3a;line-height: 24px;}`]
+    ::ng-deep .devui-gantt-tips .content {font-size: 12px;color: #252b3a;line-height: 24px;}`],
+    standalone: false
 })
 class TestGanttComponent implements OnInit, OnDestroy {
   @ViewChild('ganttContainer') ganttContainer: ElementRef;

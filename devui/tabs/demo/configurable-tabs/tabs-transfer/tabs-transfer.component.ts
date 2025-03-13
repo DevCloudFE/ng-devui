@@ -10,7 +10,8 @@ export interface TabsDataFormat {
   checked?: boolean;
 }
 @Component({
-  templateUrl: './tabs-transfer.component.html',
+    templateUrl: './tabs-transfer.component.html',
+    standalone: false
 })
 export class TabsTransferComponent implements OnInit {
   @Input() data: any;

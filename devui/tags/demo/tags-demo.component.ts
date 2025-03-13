@@ -3,8 +3,9 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-demo-tags',
-  templateUrl: './tags-demo.component.html',
+    selector: 'd-demo-tags',
+    templateUrl: './tags-demo.component.html',
+    standalone: false
 })
 export class TagsDemoComponent implements OnDestroy, OnInit {
   basicSource: Array<DevuiSourceData> = [

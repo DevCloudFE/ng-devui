@@ -2,9 +2,10 @@ import { Component, ElementRef, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'd-anchor-hash',
-  templateUrl: './hash.component.html',
-  styleUrls: ['./hash.component.scss']
+    selector: 'd-anchor-hash',
+    templateUrl: './hash.component.html',
+    styleUrls: ['./hash.component.scss'],
+    standalone: false
 })
 export class HashComponent {
   updateUrlWhenAnchorActive = true;

@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-form-design',
-  templateUrl: './form-design.component.html',
+    selector: 'd-form-design',
+    templateUrl: './form-design.component.html',
+    standalone: false
 })
 
 export class FormDesignComponent implements OnInit {

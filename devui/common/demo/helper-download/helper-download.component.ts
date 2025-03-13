@@ -4,8 +4,9 @@ import { HelperUtils } from 'ng-devui';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-common-helper-download',
-  templateUrl: './helper-download.component.html',
+    selector: 'd-common-helper-download',
+    templateUrl: './helper-download.component.html',
+    standalone: false
 })
 export class HelperDownloadDemoComponent {
   downError: string;

@@ -24,18 +24,19 @@ import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, map, switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'd-tags-input',
-  templateUrl: './tags.input.component.html',
-  styleUrls: ['./tags.input.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TagsInputComponent),
-      multi: true,
-    },
-  ],
-  exportAs: 'TagsInput',
-  preserveWhitespaces: false,
+    selector: 'd-tags-input',
+    templateUrl: './tags.input.component.html',
+    styleUrls: ['./tags.input.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TagsInputComponent),
+            multi: true,
+        },
+    ],
+    exportAs: 'TagsInput',
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges, AfterViewInit {
   /**

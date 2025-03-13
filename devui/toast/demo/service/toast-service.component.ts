@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ToastService } from 'ng-devui/toast';
 @Component({
-  selector: 'd-demo-toast-service',
-  templateUrl: './toast-service.component.html',
-  styleUrls: ['./toast-service.component.scss'],
+    selector: 'd-demo-toast-service',
+    templateUrl: './toast-service.component.html',
+    styleUrls: ['./toast-service.component.scss'],
+    standalone: false
 })
 export class ToastServiceComponent {
   constructor(private toastService: ToastService) {}

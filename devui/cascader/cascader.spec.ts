@@ -114,7 +114,7 @@ const OPTION = [
 ];
 
 @Component({
-  template: `
+    template: `
     <d-cascader
       #cascaderCmp
       [options]="options"
@@ -129,7 +129,8 @@ const OPTION = [
       [allowSearch]="allowSearch"
       [canSelectParent]="canSelectParent"
     ></d-cascader>
-  `
+  `,
+    standalone: false
 })
 class BasicComponent {
   @ViewChild('cascaderCmp', {static: true}) cascaderCmp: CascaderComponent;
@@ -149,7 +150,7 @@ class BasicComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <d-cascader
       #cascaderCmp
       [options]="options"
@@ -157,7 +158,8 @@ class BasicComponent {
       (ngModelChange)="onChanges($event)"
       [allowSearch]="allowSearch"
     ></d-cascader>
-  `
+  `,
+    standalone: false
 })
 class SearchComponent {
   @ViewChild('cascaderCmp', {static: true}) cascaderCmp: CascaderComponent;
@@ -169,7 +171,7 @@ class SearchComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <d-cascader
       #cascaderCmp
       [options]="options"
@@ -180,7 +182,8 @@ class SearchComponent {
       [allowClear]="true"
       [loadChildrenFn]="null"
     ></d-cascader>
-  `
+  `,
+    standalone: false
 })
 class MultipleComponent {
   @ViewChild('cascaderCmp', {static: true}) cascaderCmp: CascaderComponent;
@@ -192,7 +195,7 @@ class MultipleComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <d-cascader
       [options]="options"
       [placeholder]="'请选择'"
@@ -204,7 +207,8 @@ class MultipleComponent {
       [dropdownWidth]="120"
       [loadChildrenFn]="loadChildren"
     ></d-cascader>
-  `
+  `,
+    standalone: false
 })
 class LazyLoadComponent {
   options = [

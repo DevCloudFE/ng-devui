@@ -3,7 +3,8 @@ import { Directive, ElementRef, EventEmitter, HostListener, Inject, Input, NgZon
 import { Subscription, fromEvent } from 'rxjs';
 
 @Directive({
-  selector: '[dResizeHandle]',
+    selector: '[dResizeHandle]',
+    standalone: false
 })
 export class ResizeHandleDirective {
   @Input() containerElement: Element;

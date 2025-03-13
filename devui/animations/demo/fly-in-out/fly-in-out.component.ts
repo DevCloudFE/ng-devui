@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { flyInOut } from 'ng-devui/utils';
 
 @Component({
-  selector: 'd-fly-in-out',
-  templateUrl: './fly-in-out.component.html',
-  styleUrls: ['./fly-in-out.component.scss'],
-  animations: [flyInOut]
+    selector: 'd-fly-in-out',
+    templateUrl: './fly-in-out.component.html',
+    styleUrls: ['./fly-in-out.component.scss'],
+    animations: [flyInOut],
+    standalone: false
 })
 export class FlyInOutComponent implements OnInit {
   open = false;

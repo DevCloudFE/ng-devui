@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-carousel-demo-basic',
-  templateUrl: './carousel-demo-basic.component.html',
-  styleUrls: ['../demo-common.scss']
+    selector: 'd-carousel-demo-basic',
+    templateUrl: './carousel-demo-basic.component.html',
+    styleUrls: ['../demo-common.scss'],
+    standalone: false
 })
 export class CarouselDemoBasicComponent {
   array = [1, 2, 3, 4];

@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 
 @Component({
-  selector: 'd-demo',
-  templateUrl: './demo.component.html',
+    selector: 'd-demo',
+    templateUrl: './demo.component.html',
+    standalone: false
 })
 export class DemoComponent {
   basicSource: Array<DevuiSourceData> = [

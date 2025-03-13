@@ -9,7 +9,7 @@ import { SingleUploadComponent } from './single-upload.component';
 import { SliceUploadService } from './slice-upload.service';
 import { UploadModule } from './upload.module';
 @Component({
-  template: `
+    template: `
     <d-single-upload
       #singleupload
       [fileOptions]="fileOptions"
@@ -25,6 +25,7 @@ import { UploadModule } from './upload.module';
     >
     </d-single-upload>
   `,
+    standalone: false
 })
 class TestUploadComponent {
   @ViewChild('singleupload') singleupload: SingleUploadComponent;

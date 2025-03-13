@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'd-input-number-reg',
-  templateUrl: './input-number-reg.component.html',
-  styleUrls: ['./input-number-reg.component.css']
+    selector: 'd-input-number-reg',
+    templateUrl: './input-number-reg.component.html',
+    styleUrls: ['./input-number-reg.component.css'],
+    standalone: false
 })
 export class InputNumberRegComponent {
   reg = /^(-|\+)?\d*$/;

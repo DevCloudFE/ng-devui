@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { TimeAxisData } from 'ng-devui/time-axis';
 
 @Component({
-  selector: 'd-demo-time-axis-html-content',
-  templateUrl: './time-axis-html-content.component.html',
-  styleUrls: ['./time-axis-html-content.component.scss'],
+    selector: 'd-demo-time-axis-html-content',
+    templateUrl: './time-axis-html-content.component.html',
+    styleUrls: ['./time-axis-html-content.component.scss'],
+    standalone: false
 })
 export class TimeAxisHtmlContentComponent implements OnInit {
   timeAxisHtml: TimeAxisData;

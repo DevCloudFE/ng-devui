@@ -8,7 +8,8 @@ import { GridStackService } from '../grid-stack.service';
 import { DashboardLibraryPanelDirective } from '../widget-library/library-panel.directive';
 
 @Directive({
-  selector: '[dDashboardLibraryWidget]',
+    selector: '[dDashboardLibraryWidget]',
+    standalone: false
 })
 export class DashboardLibraryWidgetDirective implements OnChanges, AfterViewInit, OnDestroy {
   @HostBinding('attr.gs-w')

@@ -6,16 +6,17 @@ import { ButtonModule } from 'ng-devui/button';
 import { DrawerModule, DrawerService, IDrawerOpenResult, IDrawerOptions } from 'ng-devui/drawer';
 import { DrawerContentComponent } from './demo/drawerContent/drawer-content.component';
 @Component({
-  selector: 'd-basic',
-  template: `
+    selector: 'd-basic',
+    template: `
     <div class="placeHolder"></div>
     <d-button>close</d-button>
   `,
-  styles: [`
+    styles: [`
     .placeHolder {
       height: 2000px;
     }
-  `]
+  `],
+    standalone: false
 })
 class TestDrawerComponent {
   onClose = jasmine.createSpy('onClose');

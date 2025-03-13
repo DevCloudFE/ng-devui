@@ -3,8 +3,9 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-category-search-demo',
-  templateUrl: './category-search-demo.component.html',
+    selector: 'd-category-search-demo',
+    templateUrl: './category-search-demo.component.html',
+    standalone: false
 })
 export class CategorySearchDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

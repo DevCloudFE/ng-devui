@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-alert-without-icon',
-  templateUrl: './withoutIcon.component.html',
-  styles: [
-    `
+    selector: 'd-alert-without-icon',
+    templateUrl: './withoutIcon.component.html',
+    styles: [
+        `
       d-alert {
         margin-bottom: 20px;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class WithoutIconComponent {}

@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TagsInputComponent } from 'ng-devui/tags-input';
 
 @Component({
-  selector: 'd-tags-input-customize',
-  templateUrl: './customize.component.html',
+    selector: 'd-tags-input-customize',
+    templateUrl: './customize.component.html',
+    standalone: false
 })
 export class TagsInputDemoCustomizeComponent implements OnInit {
   @ViewChild(TagsInputComponent) tagInputItem: TagsInputComponent;

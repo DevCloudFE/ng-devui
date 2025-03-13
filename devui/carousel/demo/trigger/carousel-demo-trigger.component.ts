@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { ArrowTrigger, DotTrigger } from 'ng-devui/carousel';
 
 @Component({
-  selector: 'd-carousel-demo-trigger',
-  templateUrl: './carousel-demo-trigger.component.html',
-  styleUrls: ['../demo-common.scss']
+    selector: 'd-carousel-demo-trigger',
+    templateUrl: './carousel-demo-trigger.component.html',
+    styleUrls: ['../demo-common.scss'],
+    standalone: false
 })
 export class CarouselDemoTriggerComponent {
   array = [1, 2, 3, 4];

@@ -4,9 +4,10 @@ import { Subscription } from 'rxjs';
 import { UnitRole } from '../gantt.model';
 
 @Component({
-  selector: 'd-gantt-tools',
-  templateUrl: './gantt-tools.component.html',
-  styleUrls: ['./gantt-tools.component.scss'],
+    selector: 'd-gantt-tools',
+    templateUrl: './gantt-tools.component.html',
+    styleUrls: ['./gantt-tools.component.scss'],
+    standalone: false
 })
 export class GanttToolsComponent implements OnInit {
   @Input('currentUnit') set currentUnit(val) {

@@ -23,18 +23,19 @@ import { AppendToBodyDirection, AppendToBodyScrollStrategyType, DevConfigService
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-editable-select',
-  templateUrl: './editable-select.component.html',
-  styleUrls: ['./editable-select.component.scss'],
-  exportAs: 'editable-select',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => EditableSelectComponent),
-      multi: true,
-    },
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-editable-select',
+    templateUrl: './editable-select.component.html',
+    styleUrls: ['./editable-select.component.scss'],
+    exportAs: 'editable-select',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => EditableSelectComponent),
+            multi: true,
+        },
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class EditableSelectComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
   @Input() appendToBody = false;

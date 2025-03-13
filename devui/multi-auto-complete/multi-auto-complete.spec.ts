@@ -9,7 +9,7 @@ import { MultiAutoCompleteComponent } from './multi-auto-complete.component';
 import { MultiAutoCompleteModule } from './multi-auto-complete.module';
 
 @Component({
-  template: `
+    template: `
     <d-multi-auto-complete
       #multiAutoComplete
       [placeholder]="'请选择...'"
@@ -19,6 +19,7 @@ import { MultiAutoCompleteModule } from './multi-auto-complete.module';
       name="multiple-auto"
     ></d-multi-auto-complete>
   `,
+    standalone: false
 })
 class TestMultiAutoCompleteComponent {
   @ViewChild('multiAutoComplete') multiAutoComplete: MultiAutoCompleteComponent;

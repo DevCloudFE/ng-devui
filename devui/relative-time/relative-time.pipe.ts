@@ -5,7 +5,8 @@ import { Observable, Subject, of } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
 @Pipe({
-  name: 'dRelativeTime',
+    name: 'dRelativeTime',
+    standalone: false
 })
 export class RelativeTimePipe implements PipeTransform, OnDestroy {
   private _destroyed$ = new Subject<void>();

@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { DevConfigService, WithConfig } from 'ng-devui/utils';
 
 @Component({
-  selector: 'd-toggle-menu-operation',
-  templateUrl: './toggle-menu-operation.component.html',
-  styleUrls: [`./toggle-menu-operation.component.scss`],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'd-toggle-menu-operation',
+    templateUrl: './toggle-menu-operation.component.html',
+    styleUrls: [`./toggle-menu-operation.component.scss`],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ToggleMenuOperationComponent {
   @Input() controlConfig: {

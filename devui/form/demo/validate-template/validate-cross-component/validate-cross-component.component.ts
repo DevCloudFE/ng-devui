@@ -4,8 +4,9 @@ import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'd-form-demo-template-cross-component',
-  templateUrl: './validate-cross-component.component.html'
+    selector: 'd-form-demo-template-cross-component',
+    templateUrl: './validate-cross-component.component.html',
+    standalone: false
 })
 export class CrossComponentComponent {
   layoutDirection: FormLayout = FormLayout.Vertical;

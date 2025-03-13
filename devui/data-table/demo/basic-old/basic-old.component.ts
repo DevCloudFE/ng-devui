@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
-  selector: 'd-basic-old',
-  templateUrl: './basic-old.component.html'
+    selector: 'd-basic-old',
+    templateUrl: './basic-old.component.html',
+    standalone: false
 })
 export class BasicOldComponent implements OnInit {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));

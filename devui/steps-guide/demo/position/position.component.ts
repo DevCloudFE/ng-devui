@@ -3,9 +3,10 @@ import { StepsGuideService } from 'ng-devui/steps-guide';
 import { customData, positionData } from '../fakeData';
 
 @Component({
-  selector: 'd-position',
-  templateUrl: './position.component.html',
-  styleUrls: ['./position.component.scss'],
+    selector: 'd-position',
+    templateUrl: './position.component.html',
+    styleUrls: ['./position.component.scss'],
+    standalone: false
 })
 export class PositionComponent {
   currentStep: any;

@@ -5,9 +5,10 @@ import { DevuiCommonsService } from '../../src/devui-commons.service';
 import { I18nUtil } from '../i18n/i18n.util';
 
 @Component({
-  selector: 'd-demo-nav',
-  templateUrl: './d-demo-nav.component.html',
-  styleUrls: ['./d-demo-nav.component.scss'],
+    selector: 'd-demo-nav',
+    templateUrl: './d-demo-nav.component.html',
+    styleUrls: ['./d-demo-nav.component.scss'],
+    standalone: false
 })
 export class DDemoNavComponent implements OnInit {
   @Input() navItems: any;

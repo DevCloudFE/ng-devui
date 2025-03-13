@@ -2,9 +2,10 @@ import { Component, Directive, ElementRef, HostBinding, Input, NgZone, OnDestroy
 import { fromEvent, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 @Component({
-  selector: 'd-icon',
-  templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.scss'],
+    selector: 'd-icon',
+    templateUrl: './icon.component.html',
+    styleUrls: ['./icon.component.scss'],
+    standalone: false
 })
 export class IconComponent implements OnInit, OnDestroy {
 
@@ -39,7 +40,8 @@ export class IconComponent implements OnInit, OnDestroy {
 }
 
 @Directive({
-  selector: `d-icon-link, [dIconLink]`,
+    selector: `d-icon-link, [dIconLink]`,
+    standalone: false
 })
 export class IconLinkDirective {
   @HostBinding('class.devui-icon-link') default = true;
@@ -47,7 +49,8 @@ export class IconLinkDirective {
 
 
 @Directive({
-  selector: `d-icon-hover, [dIconHover]`,
+    selector: `d-icon-hover, [dIconHover]`,
+    standalone: false
 })
 export class IconHoverDirective {
   @HostBinding('class.devui-icon-hover') default = true;

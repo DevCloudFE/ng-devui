@@ -4,7 +4,8 @@ import { AnchorService } from './anchor.service';
 import { AnchorActiveChangeSource, IAnchorBox } from './anchor.type';
 
 @Directive({
-  selector: '[dAnchor]',
+    selector: '[dAnchor]',
+    standalone: false
 })
 export class AnchorDirective implements AfterViewInit, OnDestroy {
   @Input('dAnchor') anchor: string;

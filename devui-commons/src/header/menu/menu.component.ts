@@ -6,9 +6,10 @@ import { componentSvg, designSvg, ecologySvg, logoSvg, vueDevUISvg } from './ico
 import { LinkMap } from 'devui-commons/src/constant';
 
 @Component({
-  selector: "d-header-menu",
-  templateUrl: "./menu.component.html",
-  styleUrls: ["./menu.component.scss"],
+    selector: "d-header-menu",
+    templateUrl: "./menu.component.html",
+    styleUrls: ["./menu.component.scss"],
+    standalone: false
 })
 export class MenuComponent implements OnInit {
   @Input() menuList = [];

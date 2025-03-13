@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-slider-design',
-  templateUrl: './slider-design.component.html',
+    selector: 'd-slider-design',
+    templateUrl: './slider-design.component.html',
+    standalone: false
 })
 
 export class SliderDesignComponent implements OnInit {

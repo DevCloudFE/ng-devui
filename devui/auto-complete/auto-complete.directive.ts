@@ -41,15 +41,16 @@ import { AutoCompletePopupComponent } from './auto-complete-popup.component';
 export type autoCompleteSceneType = '' | 'select' | 'select-extend' | 'suggest';
 
 @Directive({
-  selector: '[dAutoComplete]',
-  exportAs: 'autoComplete',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => AutoCompleteDirective),
-      multi: true,
-    },
-  ],
+    selector: '[dAutoComplete]',
+    exportAs: 'autoComplete',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => AutoCompleteDirective),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, ControlValueAccessor {
   @HostBinding('attr.autocomplete') autocomplete = 'off';
@@ -485,7 +486,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy, OnChanges, Cont
     pop.hidePopup = this.hidePopup;
     if (this.appendToBody) {
       pop.appendToBody = true;
-      pop.origin = new CdkOverlayOrigin(this.elementRef);
+      pop.origin = this.elementRef.nativeElement;
       pop.width = this.dAutoCompleteWidth ? this.dAutoCompleteWidth : this.elementRef.nativeElement.offsetWidth;
       pop.cdkOverlayOffsetY = this.cdkOverlayOffsetY;
     } else {

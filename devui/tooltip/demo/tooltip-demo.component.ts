@@ -4,7 +4,8 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  templateUrl: './tooltip-demo.component.html',
+    templateUrl: './tooltip-demo.component.html',
+    standalone: false
 })
 export class TooltipDemoComponent implements OnInit, OnDestroy {
   message = 'I have animation!';

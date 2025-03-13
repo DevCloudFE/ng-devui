@@ -4,10 +4,11 @@ import { IAxisConfigs, IViewConfigs } from '../quadrant-diagram.type';
 import { AXIS_TITLE_SPACE } from '../quadrant.config';
 
 @Component({
-  selector: 'd-quadrant-axis',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './quadrant-axis.component.html',
-  styleUrls: ['./quadrant-axis.component.scss'],
+    selector: 'd-quadrant-axis',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './quadrant-axis.component.html',
+    styleUrls: ['./quadrant-axis.component.scss'],
+    standalone: false
 })
 export class QuadrantDiagramAxisComponent implements OnInit, OnChanges {
   @Input() axisConfigs: IAxisConfigs;

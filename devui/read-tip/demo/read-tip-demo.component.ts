@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-read-tip-demo',
-  templateUrl: './read-tip-demo.component.html'
+    selector: 'd-read-tip-demo',
+    templateUrl: './read-tip-demo.component.html',
+    standalone: false
 })
 export class ReadTipDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

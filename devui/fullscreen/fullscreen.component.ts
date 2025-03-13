@@ -5,10 +5,11 @@ import { DEFAULT_MODE, DEFAULT_ZINDEX, ESC_KEYCODE } from './fullscreen.config';
 import { FullscreenMode } from './fullscreen.type';
 
 @Component({
-  selector: 'd-fullscreen',
-  templateUrl: './fullscreen.component.html',
-  styleUrls: ['./fullscreen.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-fullscreen',
+    templateUrl: './fullscreen.component.html',
+    styleUrls: ['./fullscreen.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class FullscreenComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() mode: FullscreenMode = DEFAULT_MODE;

@@ -21,12 +21,13 @@ export type ArrowTrigger = 'hover' | 'never' | 'always';
 export type DotTrigger = 'click' | 'hover';
 export type DotPosition = 'bottom' | 'top';
 @Component({
-  selector: 'd-carousel',
-  exportAs: 'dCarousel',
-  templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  preserveWhitespaces: false,
+    selector: 'd-carousel',
+    exportAs: 'dCarousel',
+    templateUrl: './carousel.component.html',
+    styleUrls: ['./carousel.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class CarouselComponent implements OnInit, AfterContentInit, OnChanges, OnDestroy {
   // 切换箭头的显示方式

@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { MapToPipe } from './map-to.pipe';
 
 @Component({
-  selector: 'd-model-value',
-  templateUrl: './model-value.component.html',
+    selector: 'd-model-value',
+    templateUrl: './model-value.component.html',
+    standalone: false
 })
 export class ModelValueComponent {
   options = [

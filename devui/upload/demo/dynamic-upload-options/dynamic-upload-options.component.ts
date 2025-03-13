@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
 @Component({
-  selector: 'd-dynamic-upload-options',
-  templateUrl: './dynamic-upload-options.component.html'
+    selector: 'd-dynamic-upload-options',
+    templateUrl: './dynamic-upload-options.component.html',
+    standalone: false
 })
 export class DynamicUploadOptionsComponent implements OnInit {
   additionalParameter = {

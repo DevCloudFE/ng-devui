@@ -21,12 +21,13 @@ import { AppendToBodyDirection } from 'ng-devui/utils';
 import { Subscription, fromEvent } from 'rxjs';
 
 @Component({
-  selector: 'd-pagination',
-  styleUrls: ['./pagination.component.scss'],
-  templateUrl: './pagination.component.html',
-  exportAs: 'pagination',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  preserveWhitespaces: false,
+    selector: 'd-pagination',
+    styleUrls: ['./pagination.component.scss'],
+    templateUrl: './pagination.component.html',
+    exportAs: 'pagination',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy, OnInit {
   static EFFECT_PAGE_RANGE_KEYS = ['total', 'pageSize', 'pageIndex', 'maxItems', 'pageSizeOptions'];

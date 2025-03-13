@@ -2,9 +2,10 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-back-top-scroll-container',
-  templateUrl: './scroll-container.component.html',
-  styleUrls: ['./scroll-container.component.scss']
+    selector: 'd-back-top-scroll-container',
+    templateUrl: './scroll-container.component.html',
+    styleUrls: ['./scroll-container.component.scss'],
+    standalone: false
 })
 
 export class ScrollContainerComponent implements OnInit {

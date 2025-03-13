@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-change-key',
-  templateUrl: './change-key.component.html',
-  styleUrls: ['./change-key.component.css']
+    selector: 'd-change-key',
+    templateUrl: './change-key.component.html',
+    styleUrls: ['./change-key.component.css'],
+    standalone: false
 })
 export class ChangeKeyComponent {
   key = {

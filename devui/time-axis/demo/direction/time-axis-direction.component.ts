@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-demo-time-axis-direction',
-  templateUrl: './time-axis-direction.component.html',
+    selector: 'd-demo-time-axis-direction',
+    templateUrl: './time-axis-direction.component.html',
+    standalone: false
 })
 export class TimeAxisDirectionComponent {
   dataHorizontal = {

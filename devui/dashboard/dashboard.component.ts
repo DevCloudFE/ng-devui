@@ -35,12 +35,13 @@ export type DashboardWidgetEvent = Array<{
 }>;
 
 @Component({
-  selector: 'd-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  providers: [GridStackService],
-  exportAs: 'dDashboard',
-  preserveWhitespaces: false,
+    selector: 'd-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    providers: [GridStackService],
+    exportAs: 'dDashboard',
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class DashboardComponent implements OnChanges, AfterViewInit, OnDestroy {
   public get gridStack() {

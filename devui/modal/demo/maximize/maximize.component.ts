@@ -3,8 +3,9 @@ import { DialogService } from 'ng-devui/modal';
 import { ModalTestComponent } from '../modal-test.component';
 
 @Component({
-  selector: 'd-maximize',
-  templateUrl: './maximize.component.html',
+    selector: 'd-maximize',
+    templateUrl: './maximize.component.html',
+    standalone: false
 })
 export class MaximizeComponent {
   config = {

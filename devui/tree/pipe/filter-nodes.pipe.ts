@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'filterNodesPipe' })
+@Pipe({
+    name: 'filterNodesPipe',
+    standalone: false
+})
 export class FilterNodesPipe implements PipeTransform {
 
   constructor() {

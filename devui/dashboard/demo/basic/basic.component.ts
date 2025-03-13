@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { DashboardWidget } from 'ng-devui/dashboard';
 
 @Component({
-  selector: 'd-basic',
-  templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.scss']
+    selector: 'd-basic',
+    templateUrl: './basic.component.html',
+    styleUrls: ['./basic.component.scss'],
+    standalone: false
 })
 export class BasicComponent {
   widgets: Array<DashboardWidget> = [{

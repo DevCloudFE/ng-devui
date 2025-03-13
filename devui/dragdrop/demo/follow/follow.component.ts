@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-follow',
-  templateUrl: './follow.component.html',
-  styleUrls: ['./follow.component.scss'],
+    selector: 'd-follow',
+    templateUrl: './follow.component.html',
+    styleUrls: ['./follow.component.scss'],
+    standalone: false
 })
 export class FollowComponent {
   list1 = [{ name: 'Visual Studio Code' }, { name: 'WebStorm' }, { name: 'Sublime' }, { name: 'Atom' }];

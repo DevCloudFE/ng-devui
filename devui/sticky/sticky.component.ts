@@ -18,13 +18,14 @@ import { filter, throttleTime } from 'rxjs/operators';
 export type StickyStatus = 'normal' | 'follow' | 'stay' | 'remain';
 
 @Component({
-  selector: 'd-sticky',
-  template: `
+    selector: 'd-sticky',
+    template: `
     <div #stickyWrapper [style.zIndex]="zIndex">
       <ng-content></ng-content>
     </div>
   `,
-  preserveWhitespaces: false,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class StickyComponent implements OnInit, AfterViewInit, OnDestroy {
   @HostBinding('style.position') hostPosition = 'relative';

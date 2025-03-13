@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-card-demo',
-  templateUrl: './card-demo.component.html',
+    selector: 'd-card-demo',
+    templateUrl: './card-demo.component.html',
+    standalone: false
 })
 export class CardDemoComponent implements OnInit, OnDestroy {
   cardInteractiveSourceData: Array<DevuiSourceData> = [

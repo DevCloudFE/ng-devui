@@ -3,8 +3,9 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-datepicker-pro-demo',
-  templateUrl: './datepicker-pro-demo.component.html',
+    selector: 'd-datepicker-pro-demo',
+    templateUrl: './datepicker-pro-demo.component.html',
+    standalone: false
 })
 export class DatepickerProDemoComponent implements OnInit, OnDestroy {
   BasicSource: Array<DevuiSourceData> = [

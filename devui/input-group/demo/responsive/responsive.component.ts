@@ -3,9 +3,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-input-group-responsive',
-  templateUrl: './responsive.component.html',
-  styleUrls: ['./responsive.component.scss'],
+    selector: 'd-input-group-responsive',
+    templateUrl: './responsive.component.html',
+    styleUrls: ['./responsive.component.scss'],
+    standalone: false
 })
 export class ResponsiveComponent implements OnInit {
   width = '100%';

@@ -8,12 +8,13 @@ import * as HighLight from 'highlight.js/lib/core';
 });
 
 @Component({
-  selector     : 'd-highlight',
-  encapsulation: ViewEncapsulation.None,
-  template     : `
+    selector: 'd-highlight',
+    encapsulation: ViewEncapsulation.None,
+    template: `
     <pre [ngClass]="'language-'+language"><code #codeEl [innerText]="code"></code></pre>
   `,
-  preserveWhitespaces: false,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class DevUIHighlightComponent implements OnInit, AfterViewInit {
   // response: HighlightResult;

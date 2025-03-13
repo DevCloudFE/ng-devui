@@ -2,9 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { TooltipDirective } from 'ng-devui/tooltip';
 
 @Component({
-  selector: 'd-back-top-customize',
-  templateUrl: './customize.component.html',
-  styleUrls: ['./customize.component.scss'],
+    selector: 'd-back-top-customize',
+    templateUrl: './customize.component.html',
+    styleUrls: ['./customize.component.scss'],
+    standalone: false
 })
 export class CustomizeComponent {
   @ViewChild('tooltipItem', { read: TooltipDirective }) tooltipItem: TooltipDirective;

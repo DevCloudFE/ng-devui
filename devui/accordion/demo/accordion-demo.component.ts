@@ -3,8 +3,9 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-accordion-demo',
-  templateUrl: './accordion-demo.component.html',
+    selector: 'd-accordion-demo',
+    templateUrl: './accordion-demo.component.html',
+    standalone: false
 })
 export class AccordionDemoComponent implements OnInit, OnDestroy {
   AccordionDemoBasic: Array<DevuiSourceData> = [

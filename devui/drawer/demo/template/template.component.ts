@@ -2,8 +2,9 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DrawerService, IDrawerOpenResult } from 'ng-devui/drawer';
 
 @Component({
-  selector: 'd-template',
-  templateUrl: './template.component.html'
+    selector: 'd-template',
+    templateUrl: './template.component.html',
+    standalone: false
 })
 export class TemplateComponent implements OnInit {
   @ViewChild('drawerContent', { static: true }) drawerContent: TemplateRef<any>;

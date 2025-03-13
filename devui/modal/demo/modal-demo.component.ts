@@ -4,9 +4,10 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-modal-demo',
-  templateUrl: './modal-demo.component.html',
-  styles: [':host ::ng-deep d-button:not(first-child) { margin-left: 8px }'],
+    selector: 'd-modal-demo',
+    templateUrl: './modal-demo.component.html',
+    styles: [':host ::ng-deep d-button:not(first-child) { margin-left: 8px }'],
+    standalone: false
 })
 export class ModalDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

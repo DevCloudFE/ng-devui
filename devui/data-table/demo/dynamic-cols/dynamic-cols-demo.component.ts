@@ -3,8 +3,9 @@ import { TableStyleData, TableWidthConfig } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
-  selector: 'd-dynamic-cols-demo',
-  templateUrl: './dynamic-cols-demo.component.html'
+    selector: 'd-dynamic-cols-demo',
+    templateUrl: './dynamic-cols-demo.component.html',
+    standalone: false
 })
 export class DynamicColsDemoComponent implements OnInit {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));

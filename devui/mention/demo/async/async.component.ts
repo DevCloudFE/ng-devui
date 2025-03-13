@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-mention-async',
-  templateUrl: './async.component.html',
+    selector: 'd-mention-async',
+    templateUrl: './async.component.html',
+    standalone: false
 })
 export class AsyncComponent {
   loading = true;

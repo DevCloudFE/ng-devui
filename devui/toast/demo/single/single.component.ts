@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-single',
-  templateUrl: './single.component.html',
+    selector: 'd-single',
+    templateUrl: './single.component.html',
+    standalone: false
 })
 export class SingleComponent {
   msgs: Array<Object> = [];

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-user-limit-selected-number',
-  templateUrl: './user-limit-selected-number.component.html',
+    selector: 'd-user-limit-selected-number',
+    templateUrl: './user-limit-selected-number.component.html',
+    standalone: false
 })
 export class UserLimitSelectedNumberComponent {
   currentOption: any;

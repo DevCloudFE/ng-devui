@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-modal-design',
-  templateUrl: './modal-design.component.html',
+    selector: 'd-modal-design',
+    templateUrl: './modal-design.component.html',
+    standalone: false
 })
 
 export class ModalDesignComponent implements OnInit {

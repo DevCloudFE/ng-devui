@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform, TemplateRef } from '@angular/core';
 
 @Pipe({
-  name: 'dIsTemplatePipe',
+    name: 'dIsTemplatePipe',
+    standalone: false
 })
 export class IsTemplatePipe implements PipeTransform {
   transform(content: string | TemplateRef<any>, defaultTemplate: TemplateRef<any>): TemplateRef<any> {

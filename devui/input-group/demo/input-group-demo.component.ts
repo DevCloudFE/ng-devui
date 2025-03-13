@@ -3,8 +3,9 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-input-group-demo',
-  templateUrl: './input-group-demo.component.html',
+    selector: 'd-input-group-demo',
+    templateUrl: './input-group-demo.component.html',
+    standalone: false
 })
 export class InputGroupDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

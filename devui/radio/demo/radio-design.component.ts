@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-radio-design',
-  templateUrl: './radio-design.component.html',
+    selector: 'd-radio-design',
+    templateUrl: './radio-design.component.html',
+    standalone: false
 })
 
 export class RadioDesignComponent implements OnInit {

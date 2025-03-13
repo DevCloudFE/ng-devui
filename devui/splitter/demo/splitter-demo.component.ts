@@ -3,8 +3,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-demo-splitter',
-  templateUrl: './splitter-demo.component.html',
+    selector: 'd-demo-splitter',
+    templateUrl: './splitter-demo.component.html',
+    standalone: false
 })
 export class SplitterDemoComponent implements OnInit, OnDestroy {
   SplitterBasicComponent = [

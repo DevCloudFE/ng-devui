@@ -2,8 +2,9 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { TreeComponent } from 'ng-devui/tree';
 
 @Component({
-  selector: 'd-merge-node',
-  templateUrl: './merge-node.component.html'
+    selector: 'd-merge-node',
+    templateUrl: './merge-node.component.html',
+    standalone: false
 })
 export class MergeNodeComponent implements AfterViewInit {
   @ViewChild('basicTree') basicTree: TreeComponent;

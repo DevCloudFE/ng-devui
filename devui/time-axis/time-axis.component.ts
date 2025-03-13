@@ -2,11 +2,12 @@ import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef
 import { TimeAxisItemComponent } from './time-axis-item/time-axis-item.component';
 import { TimeAxisMode } from './time-axis.type';
 @Component({
-  selector: 'd-time-axis',
-  templateUrl: './time-axis.component.html',
-  styleUrls: [`./time-axis.component.scss`],
-  exportAs: 'time-axis',
-  preserveWhitespaces: false,
+    selector: 'd-time-axis',
+    templateUrl: './time-axis.component.html',
+    styleUrls: [`./time-axis.component.scss`],
+    exportAs: 'time-axis',
+    preserveWhitespaces: false,
+    standalone: false
 })
 
 export class TimeAxisComponent implements AfterContentInit, AfterViewInit {

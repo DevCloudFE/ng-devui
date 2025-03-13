@@ -4,7 +4,8 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: '[dModalContentHost]',
+    selector: '[dModalContentHost]',
+    standalone: false
 })
 export class ModalContentDirective {
   constructor(public viewContainerRef: ViewContainerRef) {
@@ -12,7 +13,8 @@ export class ModalContentDirective {
 }
 
 @Directive({
-  selector: '[dModalContainerHost]',
+    selector: '[dModalContainerHost]',
+    standalone: false
 })
 export class ModalContainerDirective {
   constructor(public viewContainerRef: ViewContainerRef) {

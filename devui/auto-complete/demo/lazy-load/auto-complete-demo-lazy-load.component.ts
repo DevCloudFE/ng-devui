@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-auto-complete-demo-lazy-load',
-  templateUrl: './auto-complete-demo-lazy-load.component.html',
+    selector: 'd-auto-complete-demo-lazy-load',
+    templateUrl: './auto-complete-demo-lazy-load.component.html',
+    standalone: false
 })
 export class AutoDemoLazyLoadComponent {
   languages = ['C#', 'C', 'C++', 'CPython', 'Java', 'JavaScript', 'Go', 'Python', 'Ruby', 'F#', 'TypeScript', 'SQL',

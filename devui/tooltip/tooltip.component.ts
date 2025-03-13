@@ -8,13 +8,14 @@ import { fromEvent, Subscription } from 'rxjs';
 import { PositionType } from './tooltip.types';
 
 @Component({
-  selector: 'd-tooltip',
-  templateUrl: './tooltip.component.html',
-  styleUrls: ['./tooltip.component.scss'],
-  animations: [
-    directionFadeInOut
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-tooltip',
+    templateUrl: './tooltip.component.html',
+    styleUrls: ['./tooltip.component.scss'],
+    animations: [
+        directionFadeInOut
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class TooltipComponent implements AfterViewInit, OnDestroy {
   @Input() content: string;

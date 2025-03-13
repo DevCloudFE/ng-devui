@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-hide',
-  templateUrl: './hide.component.html'
+    selector: 'd-hide',
+    templateUrl: './hide.component.html',
+    standalone: false
 })
 export class HideComponent implements OnInit {
   tagList3: any = [

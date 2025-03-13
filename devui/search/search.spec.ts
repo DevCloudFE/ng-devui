@@ -6,7 +6,8 @@ import { DomHelper } from '../utils/testing/dom-helper';
 import { SearchModule } from './search.module';
 
 @Component({
-  template: ` <d-search [size]="size" [(ngModel)]="searchText" [maxLength]="maxLen" (searchFn)="onSearch($event)"></d-search> `,
+    template: ` <d-search [size]="size" [(ngModel)]="searchText" [maxLength]="maxLen" (searchFn)="onSearch($event)"></d-search> `,
+    standalone: false
 })
 class TestSearchComponent {
   size = '';

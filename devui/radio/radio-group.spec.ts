@@ -9,7 +9,7 @@ import { RadioComponent } from './radio.component';
 import { RadioModule } from './radio.module';
 
 @Component({
-  template: `
+    template: `
     <d-radio-group
       [name]="'season'"
       [values]="values"
@@ -21,6 +21,7 @@ import { RadioModule } from './radio.module';
     >
     </d-radio-group>
   `,
+    standalone: false
 })
 class TestRadioGroupComponent {
   values = ['Spring', 'Summer', 'Autumn', 'Winter'];
@@ -34,11 +35,12 @@ class TestRadioGroupComponent {
 }
 
 @Component({
-  template: `
+    template: `
   <d-radio-group [direction]="'row'" [(ngModel)]="choose2" (change)="mockChange($event)">
     <d-radio [name]="'customized-city'" *ngFor="let value of values2" [value]="value"> The Radio value is: {{ value }} </d-radio>
   </d-radio-group>
   `,
+    standalone: false
 })
 class TestRadioItemGroupComponent {
   values2 = ['Item1', 'Item2', 'Item3'];

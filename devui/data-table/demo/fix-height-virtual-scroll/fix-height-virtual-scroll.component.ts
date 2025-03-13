@@ -3,10 +3,10 @@ import { DataTableComponent } from 'ng-devui/data-table';
 import { originSource, SourceType } from '../mock-data';
 
 @Component({
-  selector: 'd-fix-header-virtual-scroll',
-  templateUrl: './fix-height-virtual-scroll.component.html',
-  styles: [
-    `
+    selector: 'd-fix-header-virtual-scroll',
+    templateUrl: './fix-height-virtual-scroll.component.html',
+    styles: [
+        `
     .splitter-wrapper{
       height: 600px;
       padding: 10px;
@@ -15,7 +15,8 @@ import { originSource, SourceType } from '../mock-data';
       padding: 5px 0;
     }
     `
-  ]
+    ],
+    standalone: false
 })
 export class FixHeightVirtualScrollComponent implements OnInit {
 

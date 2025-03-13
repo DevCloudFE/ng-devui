@@ -1,9 +1,10 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'd-demo-scroll-container',
-  templateUrl: './scroll-container.component.html',
-  styleUrls: ['./scroll-container.component.scss'],
+    selector: 'd-demo-scroll-container',
+    templateUrl: './scroll-container.component.html',
+    styleUrls: ['./scroll-container.component.scss'],
+    standalone: false
 })
 export class ScrollContainerComponent implements OnInit, AfterViewInit {
   @ViewChild('header', { static: true }) headerRef: ElementRef;

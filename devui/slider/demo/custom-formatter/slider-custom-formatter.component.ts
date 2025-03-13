@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-slider-custom',
-  templateUrl: './slider-custom-formatter.component.html',
-  styleUrls: ['./slider-custom-formatter.component.scss']
+    selector: 'd-slider-custom',
+    templateUrl: './slider-custom-formatter.component.html',
+    styleUrls: ['./slider-custom-formatter.component.scss'],
+    standalone: false
 })
 export class SliderCustomFormatterComponent {
   inputValue = 8;

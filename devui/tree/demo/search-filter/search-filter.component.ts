@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { OperableTreeComponent } from 'ng-devui/tree';
 @Component({
-  selector: 'd-search-filter',
-  templateUrl: './search-filter.component.html',
-  styleUrls: ['./search-filter.component.scss']
+    selector: 'd-search-filter',
+    templateUrl: './search-filter.component.html',
+    styleUrls: ['./search-filter.component.scss'],
+    standalone: false
 })
 export class SearchFilterComponent {
   @ViewChild('dOperableTreeComponent', { static: true }) dOperableTreeComponent: OperableTreeComponent;

@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-animation-design',
-  templateUrl: './animation-design.component.html',
+    selector: 'd-animation-design',
+    templateUrl: './animation-design.component.html',
+    standalone: false
 })
 
 export class AnimationDesignComponent implements OnInit {

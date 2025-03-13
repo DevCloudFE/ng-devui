@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ReadTipOptions } from 'ng-devui/read-tip';
 
 @Component({
-  selector: 'd-demo-multi',
-  templateUrl: './multi-readtip.component.html',
-  styleUrls: ['./multi-readtip.component.scss'],
+    selector: 'd-demo-multi',
+    templateUrl: './multi-readtip.component.html',
+    styleUrls: ['./multi-readtip.component.scss'],
+    standalone: false
 })
 export class MultiReadtipComponent implements OnInit {
   multiReadTip: ReadTipOptions = {

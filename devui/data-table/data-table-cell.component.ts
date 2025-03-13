@@ -26,9 +26,10 @@ import { EditorDirective } from './editor-host.directive';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
 @Component({
-  selector: 'd-data-table-cell,[dDataTableCell]',
-  templateUrl: './data-table-cell.component.html',
-  preserveWhitespaces: false,
+    selector: 'd-data-table-cell,[dDataTableCell]',
+    templateUrl: './data-table-cell.component.html',
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class DataTableCellComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild(EditorDirective) editorHost: EditorDirective;

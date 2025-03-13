@@ -3,9 +3,10 @@ import { CheckableRelation, DataTableComponent } from 'ng-devui/data-table';
 import { SourceType, treeDataSource } from '../mock-data';
 
 @Component({
-  selector: 'd-tree-table-old',
-  templateUrl: './tree-table-old.component.html',
-  styles: ['.demo-margin { margin: 5px 5px 0 0;}']
+    selector: 'd-tree-table-old',
+    templateUrl: './tree-table-old.component.html',
+    styles: ['.demo-margin { margin: 5px 5px 0 0;}'],
+    standalone: false
 })
 export class TreeTableOldComponent implements OnInit {
   extraOptions: any;

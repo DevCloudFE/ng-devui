@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-number-translator-design',
-  templateUrl: './number-translator-design.component.html',
+    selector: 'd-number-translator-design',
+    templateUrl: './number-translator-design.component.html',
+    standalone: false
 })
 
 export class NumberTranslatorDesignComponent implements OnInit {

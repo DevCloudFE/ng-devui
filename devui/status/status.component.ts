@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'd-status',
-  templateUrl: './status.component.html',
-  styleUrls: ['./status.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-status',
+    templateUrl: './status.component.html',
+    styleUrls: ['./status.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 
 export class StatusComponent {

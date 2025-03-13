@@ -6,10 +6,11 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'd-two-datepicker-format',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: `./two-datepicker-format.component.html`,
-  styleUrls: [`./two-datepicker-format.component.scss`]
+    selector: 'd-two-datepicker-format',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: `./two-datepicker-format.component.html`,
+    styleUrls: [`./two-datepicker-format.component.scss`],
+    standalone: false
 })
 export class TwoDatepickerFormatComponent implements OnInit {
   dateFormatOptions = ['y-MM-dd HH:mm:ss', 'yy.MM.dd HH:mm', 'MM/dd/y HH:mm:ss', 'MM/dd/yy HH:mm'];

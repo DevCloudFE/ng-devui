@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-style',
-  templateUrl: './style.component.html',
-  styleUrls: ['./style.component.scss'],
+    selector: 'd-style',
+    templateUrl: './style.component.html',
+    styleUrls: ['./style.component.scss'],
+    standalone: false
 })
 export class StyleComponent {
   msgs: Array<Object> = [];

@@ -3,11 +3,11 @@ import { DialogService } from 'ng-devui/modal';
 import { ModalOneComponent } from '../modal-one/modal-one.component';
 
 @Component({
-  selector: 'd-form-demo-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css'],
-  providers: [DialogService]
-
+    selector: 'd-form-demo-modal',
+    templateUrl: './modal.component.html',
+    styleUrls: ['./modal.component.css'],
+    providers: [DialogService],
+    standalone: false
 })
 export class ModalComponent implements OnInit {
 

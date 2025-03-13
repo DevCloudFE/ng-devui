@@ -26,7 +26,7 @@ class CommonFunctions {
 }
 
 @Component({
-  template: `
+    template: `
     <div class="devui-input-group devui-dropdown-origin">
       <input
         #inputEle
@@ -59,6 +59,7 @@ class CommonFunctions {
       <div class="test-template">test template</div>
     </ng-template>
   `,
+    standalone: false
 })
 class TestDatePickerDirectiveComponent {
   selectedDate1;
@@ -85,7 +86,7 @@ class TestDatePickerDirectiveComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <div class="devui-input-group devui-dropdown-origin">
       <input
         #inputEle
@@ -119,6 +120,7 @@ class TestDatePickerDirectiveComponent {
       <div class="test-template">test template</div>
     </ng-template>
   `,
+    standalone: false
 })
 class TestDatePickerAppendToBodyComponent {
   selectedDate1;
@@ -150,7 +152,7 @@ class TestDatePickerAppendToBodyComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <d-datepicker
       [dateConfig]="dateConfig"
       [minDate]="minDate"
@@ -165,6 +167,7 @@ class TestDatePickerAppendToBodyComponent {
       </div>
     </ng-template>
   `,
+    standalone: false
 })
 class TestDatePickerCmpComponent {
   dateConfig = null;

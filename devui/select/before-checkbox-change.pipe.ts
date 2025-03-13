@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'dBeforeCheckboxChangePipe',
+    name: 'dBeforeCheckboxChangePipe',
+    standalone: false
 })
 export class BeforeCheckboxChangePipe implements PipeTransform {
   transform(func: Function, option: any, index: number): any {

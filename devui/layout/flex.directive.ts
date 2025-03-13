@@ -6,7 +6,8 @@ import { DAlign, DAlignSelf, DBreakpoints, DJustify, DResponseParameter } from '
 import { DScreenMediaQueryService } from './screen-media-query.service';
 
 @Directive({
-  selector: `[dFlex], d-row, d-col`,
+    selector: `[dFlex], d-row, d-col`,
+    standalone: false
 })
 export class DFlexDirective implements OnChanges, OnDestroy, AfterViewInit {
   @HostBinding('class.dl-flex-row') get flexRow() {

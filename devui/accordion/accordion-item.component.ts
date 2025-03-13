@@ -4,10 +4,11 @@ import { ACCORDION } from './accordion-token';
 import { AccordionBaseItem } from './accordion.type';
 
 @Component({
-  selector: 'd-accordion-item',
-  templateUrl: './accordion-item.component.html',
-  encapsulation: ViewEncapsulation.None,
-  preserveWhitespaces: false,
+    selector: 'd-accordion-item',
+    templateUrl: './accordion-item.component.html',
+    encapsulation: ViewEncapsulation.None,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class AccordionItemComponent extends AccordionBaseItemComponent<AccordionBaseItem> {
   constructor(@Inject(ACCORDION) protected accordion: any) {

@@ -6,10 +6,11 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'd-custom-view-template',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './custom-view-template.component.html',
-  styleUrls: ['./custom-view-template.component.scss']
+    selector: 'd-custom-view-template',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './custom-view-template.component.html',
+    styleUrls: ['./custom-view-template.component.scss'],
+    standalone: false
 })
 export class CustomViewTemplateComponent implements OnInit {
   datePicker1: any;

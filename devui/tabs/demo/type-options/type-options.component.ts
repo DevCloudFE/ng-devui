@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 @Component({
-  selector: 'd-type-options',
-  templateUrl: './type-options.component.html',
+    selector: 'd-type-options',
+    templateUrl: './type-options.component.html',
+    standalone: false
 })
 export class TypeOptionsComponent implements OnInit {
   tabActiveId: string | number = 'tab1';

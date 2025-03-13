@@ -15,12 +15,13 @@ import { BehaviorSubject } from 'rxjs';
 import { MenuItemClickType } from './type';
 
 @Component({
-  selector: 'd-menu, [dMenu]',
-  template: '<ng-content />',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./menu.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  })
+    selector: 'd-menu, [dMenu]',
+    template: '<ng-content />',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./menu.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
+})
 export class MenuComponent implements OnInit, OnChanges, OnDestroy {
   @HostBinding('class.collapsed') @Input() collapsed = false;
   @HostBinding('class.devui-menu') menuClass = true;

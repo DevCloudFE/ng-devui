@@ -2,17 +2,18 @@ import { ChangeDetectorRef, Component, forwardRef, Input, OnInit, TemplateRef } 
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'd-rate',
-  templateUrl: './rate.component.html',
-  styleUrls: ['./rate.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => RateComponent),
-      multi: true,
-    },
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-rate',
+    templateUrl: './rate.component.html',
+    styleUrls: ['./rate.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => RateComponent),
+            multi: true,
+        },
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class RateComponent implements OnInit, ControlValueAccessor {
   /**

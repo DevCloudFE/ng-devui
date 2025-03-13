@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-font-design',
-  templateUrl: './font-design.component.html',
+    selector: 'd-font-design',
+    templateUrl: './font-design.component.html',
+    standalone: false
 })
 
 export class FontDesignComponent implements OnInit {

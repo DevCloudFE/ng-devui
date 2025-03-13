@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-common-design',
-  templateUrl: './common-design.component.html',
+    selector: 'd-common-design',
+    templateUrl: './common-design.component.html',
+    standalone: false
 })
 
 export class CommonDesignComponent implements OnInit {

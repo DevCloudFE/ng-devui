@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnI
 import { MenuItemType } from 'ng-devui/menu';
 
 @Component({
-  selector: 'd-loop-sub-menu',
-  template: `
+    selector: 'd-loop-sub-menu',
+    template: `
     <div
       dSubMenu
       [title]="menu.name"
@@ -18,8 +18,9 @@ import { MenuItemType } from 'ng-devui/menu';
         </ng-template>
       </ng-container>
     </div>`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  })
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
+})
 export class LoopSubMenuComponent {
   @Input() activeKey = '';
   @Input({ required: true }) menu: MenuItemType;

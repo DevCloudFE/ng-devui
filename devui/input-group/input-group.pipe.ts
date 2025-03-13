@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform, Renderer2, TemplateRef } from '@angular/core';
 
 @Pipe({
-  name: 'dInputGroupPipe',
+    name: 'dInputGroupPipe',
+    standalone: false
 })
 export class InputGroupPipe implements PipeTransform {
 

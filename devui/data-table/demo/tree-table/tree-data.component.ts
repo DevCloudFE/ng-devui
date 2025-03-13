@@ -14,9 +14,10 @@ import {
 } from '../mock-data';
 
 @Component({
-  selector: 'd-tree-data',
-  templateUrl: './tree-data.component.html',
-  styles: ['.demo-margin { margin: 5px 5px 0 0;}']
+    selector: 'd-tree-data',
+    templateUrl: './tree-data.component.html',
+    styles: ['.demo-margin { margin: 5px 5px 0 0;}'],
+    standalone: false
 })
 export class TreeDataComponent implements OnInit {
   iconParentOpen: string;

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-lite',
-  templateUrl: './lite.component.html',
-  styleUrls: ['./lite.component.scss']
+    selector: 'd-lite',
+    templateUrl: './lite.component.html',
+    styleUrls: ['./lite.component.scss'],
+    standalone: false
 })
 export class LiteComponent {
   pager1 = {

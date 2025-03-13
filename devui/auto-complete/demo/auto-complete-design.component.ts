@@ -3,8 +3,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 @Component({
-  selector: 'd-auto-complete-design',
-  templateUrl: './auto-complete-design.component.html',
+    selector: 'd-auto-complete-design',
+    templateUrl: './auto-complete-design.component.html',
+    standalone: false
 })
 
 export class AutoCompleteDesignComponent implements OnInit {

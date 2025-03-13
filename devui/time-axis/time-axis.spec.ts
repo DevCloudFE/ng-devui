@@ -5,7 +5,8 @@ import { TimeAxisComponent } from './time-axis.component';
 import { TimeAxisModule } from './time-axis.module';
 
 @Component({
-  template: `<d-time-axis [data]="time_axis_data" [mode]="'alternative'"></d-time-axis> `,
+    template: `<d-time-axis [data]="time_axis_data" [mode]="'alternative'"></d-time-axis> `,
+    standalone: false
 })
 class TestTimeAxisComponent {
   time_axis_data = {
@@ -88,7 +89,8 @@ describe('time-axis base', () => {
 });
 
 @Component({
-  template: `<d-time-axis [data]="time_axis_data_horizontal" [mode]="'alternative'"></d-time-axis> `,
+    template: `<d-time-axis [data]="time_axis_data_horizontal" [mode]="'alternative'"></d-time-axis> `,
+    standalone: false
 })
 class TestTimeAxisHorizontalComponent {
   time_axis_data_horizontal = {
@@ -158,7 +160,7 @@ describe('time-axis horizontal base', () => {
 });
 
 @Component({
-  template: `
+    template: `
     <d-time-axis direction="vertical" [mode]="'alternative'">
       <d-time-axis-item direction="vertical" text="Start" time="2021-3-13"></d-time-axis-item>
       <d-time-axis-item direction="vertical" text="Check" time="2021-4-14"></d-time-axis-item>
@@ -166,6 +168,7 @@ describe('time-axis horizontal base', () => {
       <d-time-axis-item direction="vertical" text="Display" time="2021-4-25"></d-time-axis-item>
     </d-time-axis>
   `,
+    standalone: false
 })
 class TestTimeAxisHTMLComponent {}
 

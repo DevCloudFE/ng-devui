@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'd-avatar',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './avatar.component.html',
-  styleUrls: ['./avatar.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-avatar',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './avatar.component.html',
+    styleUrls: ['./avatar.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class AvatarComponent implements OnChanges, OnInit {
   isNobody = true;

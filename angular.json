@@ -85,20 +85,20 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "devui:build"
+            "buildTarget": "devui:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "devui:build:production"
+              "buildTarget": "devui:build:production"
             },
             "development": { 
-              "browserTarget": "devui:build:development"
+              "buildTarget": "devui:build:development"
             },
             "es5": {
-              "browserTarget": "devui:build:es5"
+              "buildTarget": "devui:build:es5"
             },
             "separate": {
-              "browserTarget": "devui:build:separate"
+              "buildTarget": "devui:build:separate"
             }
           },
           "defaultConfiguration": "development" 

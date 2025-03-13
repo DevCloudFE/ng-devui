@@ -22,9 +22,10 @@ import { FilterConfig } from '../../../../data-table.model';
 import { TABLE_TH } from '../th.token';
 
 @Component({
-  selector: 'd-table-filter',
-  templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss'],
+    selector: 'd-table-filter',
+    templateUrl: './filter.component.html',
+    styleUrls: ['./filter.component.scss'],
+    standalone: false
 })
 export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   @Input() beforeFilter: (value) => boolean | Promise<boolean> | Observable<boolean>;

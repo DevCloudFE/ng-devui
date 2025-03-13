@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TreeComponent } from 'ng-devui/tree';
 
 @Component({
-  selector: 'd-tree-factory',
-  templateUrl: './tree-factory.component.html',
-  styleUrls: ['./tree-factory.component.css']
+    selector: 'd-tree-factory',
+    templateUrl: './tree-factory.component.html',
+    styleUrls: ['./tree-factory.component.css'],
+    standalone: false
 })
 export class OperationForAllNodesComponent implements OnInit {
   @ViewChild('operableTree', { static: true }) operableTree: TreeComponent;

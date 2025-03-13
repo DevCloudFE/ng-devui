@@ -4,9 +4,10 @@ import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 @Component({
-  selector: 'd-form-demo-validate-template-form',
-  templateUrl: './validate-template-form.component.html',
-  styleUrls: ['./validate-template-form.component.scss']
+    selector: 'd-form-demo-validate-template-form',
+    templateUrl: './validate-template-form.component.html',
+    styleUrls: ['./validate-template-form.component.scss'],
+    standalone: false
 })
 export class ValidateTemplateFormComponent {
   layoutDirection: FormLayout = FormLayout.Vertical;

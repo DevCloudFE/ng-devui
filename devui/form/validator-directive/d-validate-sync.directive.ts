@@ -3,11 +3,12 @@ import { NgControl } from '@angular/forms';
 import { DValidateSyncService } from '../services/d-validate-sync.service';
 
 @Directive({
-  selector: `[dValidateSyncKey][formControlName],[dValidateSyncKey][ngModel],[dValidateSyncKey][formControl],
+    selector: `[dValidateSyncKey][formControlName],[dValidateSyncKey][ngModel],[dValidateSyncKey][formControl],
     [dValidateSyncKey][formGroupName],[dValidateSyncKey][formArrayName],[dValidateSyncKey][ngModelGroup],
     [dValidateSyncKey][formGroup],[dValidateSyncKey]form:not([ngNoForm]),[dValidateSyncKey][ngForm]
   `,
-  exportAs: 'dValidateSync'
+    exportAs: 'dValidateSync',
+    standalone: false
 })
 
 export class DValidateSyncDirective implements OnChanges, OnDestroy {

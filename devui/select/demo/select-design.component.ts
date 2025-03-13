@@ -4,8 +4,9 @@ import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-select-design',
-  templateUrl: './select-design.component.html',
+    selector: 'd-select-design',
+    templateUrl: './select-design.component.html',
+    standalone: false
 })
 
 export class SelectDesignComponent implements OnInit {

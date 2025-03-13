@@ -3,8 +3,9 @@ import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 @Component({
-  selector: 'd-form-demo-custom-validator',
-  templateUrl: './custom-validator.component.html'
+    selector: 'd-form-demo-custom-validator',
+    templateUrl: './custom-validator.component.html',
+    standalone: false
 })
 export class CustomValidatorComponent {
   singleSelectData = null;

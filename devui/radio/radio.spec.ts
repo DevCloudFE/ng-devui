@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 import { RadioComponent } from './radio.component';
 import { RadioModule } from './radio.module';
 @Component({
-  template: `
+    template: `
     <section>
       <d-radio
         [name]="'independent-city'"
@@ -21,6 +21,7 @@ import { RadioModule } from './radio.module';
       </d-radio>
     </section>
   `,
+    standalone: false
 })
 class TestRadioComponent {
   values = ['Item1', 'Item2', 'Item3'];

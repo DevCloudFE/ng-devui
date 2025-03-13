@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-drawer-design',
-  templateUrl: './drawer-design.component.html',
+    selector: 'd-drawer-design',
+    templateUrl: './drawer-design.component.html',
+    standalone: false
 })
 
 export class DrawerDesignComponent implements OnInit {

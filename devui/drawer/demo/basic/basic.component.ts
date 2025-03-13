@@ -4,8 +4,9 @@ import { DialogService } from 'ng-devui/modal';
 import { DrawerContentComponent } from '../drawerContent/drawer-content.component';
 
 @Component({
-  selector: 'd-basic',
-  templateUrl: './basic.component.html',
+    selector: 'd-basic',
+    templateUrl: './basic.component.html',
+    standalone: false
 })
 export class BasicComponent {
   results: IDrawerOpenResult;

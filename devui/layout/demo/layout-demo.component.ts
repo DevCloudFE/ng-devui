@@ -3,9 +3,10 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-demo-input-number',
-  templateUrl: './layout-demo.component.html',
-  styleUrls: ['./layout-demo.component.scss'],
+    selector: 'd-demo-input-number',
+    templateUrl: './layout-demo.component.html',
+    styleUrls: ['./layout-demo.component.scss'],
+    standalone: false
 })
 export class LayoutDemoComponent implements OnInit, OnDestroy {
   GridBasic: Array<DevuiSourceData> = [

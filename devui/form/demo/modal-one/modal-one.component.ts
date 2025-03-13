@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormLayout } from 'ng-devui/form';
 
 @Component({
-  selector: 'd-form-demo-modal-one',
-  templateUrl: './modal-one.component.html'
+    selector: 'd-form-demo-modal-one',
+    templateUrl: './modal-one.component.html',
+    standalone: false
 })
 export class ModalOneComponent implements OnInit {
   layoutDirection: FormLayout = FormLayout.Vertical;

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ReadTipOptions } from 'ng-devui/read-tip';
 
 @Component({
-  selector: 'd-demo-template',
-  templateUrl: './readtip-template.component.html',
-  styleUrls: ['./readtip-template.component.scss'],
+    selector: 'd-demo-template',
+    templateUrl: './readtip-template.component.html',
+    styleUrls: ['./readtip-template.component.scss'],
+    standalone: false
 })
 export class ReadtipTemplateComponent implements OnInit {
   readTipOptions: ReadTipOptions = {

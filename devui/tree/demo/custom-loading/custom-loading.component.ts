@@ -117,8 +117,9 @@ export const originTreeData = [
   }
 ];
 @Component({
-  selector: 'd-custom-loading',
-  templateUrl: './custom-loading.component.html'
+    selector: 'd-custom-loading',
+    templateUrl: './custom-loading.component.html',
+    standalone: false
 })
 export class CustomLoadingComponent {
   @ViewChild('basicTree', { static: true }) basicTree: TreeComponent;

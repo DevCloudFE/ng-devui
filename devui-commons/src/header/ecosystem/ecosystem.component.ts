@@ -3,9 +3,10 @@ import { DevuiCommonsService } from '../../devui-commons.service';
 import { I18nUtil } from '../../i18n/i18n.util';
 
 @Component({
-  selector: 'd-ecosystem',
-  templateUrl: './ecosystem.component.html',
-  styleUrls: ['./ecosystem.component.scss']
+    selector: 'd-ecosystem',
+    templateUrl: './ecosystem.component.html',
+    styleUrls: ['./ecosystem.component.scss'],
+    standalone: false
 })
 export class EcosystemComponent implements OnInit {
   @Input() navs = [];

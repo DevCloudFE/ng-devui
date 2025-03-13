@@ -17,16 +17,17 @@ import { ForceUpdateReason } from './force-update-reason.model';
 import { DataTableColumnTmplComponent } from './tmpl/data-table-column-tmpl.component';
 
 @Component({
-  selector: 'd-data-table-row, [dDataTableRow]',
-  templateUrl: './data-table-row.component.html',
-  styleUrls: ['./data-table-row.component.scss'],
-  preserveWhitespaces: false,
-  providers: [
-    {
-      provide: DATA_TABLE_ROW,
-      useExisting: forwardRef(() => DataTableRowComponent),
-    },
-  ],
+    selector: 'd-data-table-row, [dDataTableRow]',
+    templateUrl: './data-table-row.component.html',
+    styleUrls: ['./data-table-row.component.scss'],
+    preserveWhitespaces: false,
+    providers: [
+        {
+            provide: DATA_TABLE_ROW,
+            useExisting: forwardRef(() => DataTableRowComponent),
+        },
+    ],
+    standalone: false
 })
 export class DataTableRowComponent implements OnInit {
   @Input() rowItem: any;

@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { ModalService } from 'ng-devui/modal';
 
 @Component({
-  selector: 'd-tree-select-modal',
-  template: `
+    selector: 'd-tree-select-modal',
+    template: `
     <div style="padding: 10px;">
       <d-tree-select placeholder="Standard Input" [treeData]="treeDta" [expandTree]="true"
                      [(ngModel)]="value" (ngModelChange)="showSelected($event)" appendTo="#modal-modal"></d-tree-select>
@@ -17,7 +17,8 @@ import { ModalService } from 'ng-devui/modal';
         </d-button>
       </div>
     </div>
-  `
+  `,
+    standalone: false
 })
 export class TreeSelectModalComponent {
   @Input() data: any;
@@ -103,9 +104,10 @@ export class TreeSelectModalComponent {
 }
 
 @Component({
-  selector: 'd-tree-select-append-to',
-  templateUrl: './tree-select-append-to.component.html',
-  providers: [ModalService]
+    selector: 'd-tree-select-append-to',
+    templateUrl: './tree-select-append-to.component.html',
+    providers: [ModalService],
+    standalone: false
 })
 export class TreeSelectAppendToComponent {
 

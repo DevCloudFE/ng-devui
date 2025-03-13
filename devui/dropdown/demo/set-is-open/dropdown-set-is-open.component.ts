@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-demo-dropdown-set-is-open',
-  templateUrl: './dropdown-set-is-open.component.html',
-  styleUrls: ['./dropdown-set-is-open.component.scss'],
+    selector: 'd-demo-dropdown-set-is-open',
+    templateUrl: './dropdown-set-is-open.component.html',
+    styleUrls: ['./dropdown-set-is-open.component.scss'],
+    standalone: false
 })
 export class DropdownSetIsOpenComponent implements OnInit {
   isOpen = false;

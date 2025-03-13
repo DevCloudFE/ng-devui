@@ -43,19 +43,20 @@ interface TimeObj {
 }
 
 @Component({
-  /* eslint-disable-next-line @angular-eslint/component-selector*/
-  selector: '[dTimePicker]',
-  providers: [
-    {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => TimePickerComponent),
-      multi: true,
-    },
-  ],
-  exportAs: 'timePicker',
-  templateUrl: 'time-picker.component.html',
-  animations: [fadeInOut],
-  styleUrls: ['./time-picker.component.scss'],
+    /* eslint-disable-next-line @angular-eslint/component-selector*/
+    selector: '[dTimePicker]',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TimePickerComponent),
+            multi: true,
+        },
+    ],
+    exportAs: 'timePicker',
+    templateUrl: 'time-picker.component.html',
+    animations: [fadeInOut],
+    styleUrls: ['./time-picker.component.scss'],
+    standalone: false
 })
 export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, ControlValueAccessor {
   @Input() appendToBodyDirections: Array<AppendToBodyDirection | ConnectedPosition> = ['rightDown', 'leftDown', 'rightUp', 'leftUp'];
@@ -397,7 +398,7 @@ export class TimePickerComponent implements OnChanges, OnInit, OnDestroy, Contro
     } else if (this.elementRef.nativeElement) {
       currentOrigin = formWithDropDown(this.elementRef) || this.elementRef.nativeElement;
     }
-    this.cdkConnectedOverlayOrigin = new CdkOverlayOrigin(currentOrigin);
+    this.cdkConnectedOverlayOrigin = currentOrigin;
   }
 
   toggle(clickShow?: boolean) {

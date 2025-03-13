@@ -2,10 +2,11 @@ import { Component, ContentChildren, HostBinding, QueryList } from '@angular/cor
 import { AsideComponent } from './elements/aside.component';
 
 @Component({
-  selector: 'd-layout',
-  template: '<ng-content></ng-content>',
-  styleUrls: ['./layout.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-layout',
+    template: '<ng-content></ng-content>',
+    styleUrls: ['./layout.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class LayoutComponent {
   @ContentChildren(AsideComponent) listOfSideBarComponent: QueryList<AsideComponent>;

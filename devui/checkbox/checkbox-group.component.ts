@@ -5,17 +5,18 @@ import { isArray } from 'lodash-es';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'd-checkbox-group',
-  templateUrl: './checkbox-group.component.html',
-  styleUrls: ['./checkbox-group.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CheckBoxGroupComponent),
-      multi: true,
-    },
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-checkbox-group',
+    templateUrl: './checkbox-group.component.html',
+    styleUrls: ['./checkbox-group.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => CheckBoxGroupComponent),
+            multi: true,
+        },
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class CheckBoxGroupComponent implements OnChanges, ControlValueAccessor {
   static ID_SEED = 0;

@@ -12,7 +12,7 @@ import { ITreeItem, TreeNode } from './tree-factory.class';
 import { TreeModule } from './tree.module';
 
 @Component({
-  template: `
+    template: `
     <d-operable-tree
       #operableTree
       [tree]="treeItems"
@@ -36,6 +36,7 @@ import { TreeModule } from './tree.module';
     >
     </d-operable-tree>
   `,
+    standalone: false
 })
 class TestOperableTreeComponent {
   @ViewChild('operableTree') operableTree: OperableTreeComponent;
@@ -91,10 +92,11 @@ class TestOperableTreeComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <d-operable-tree #operableTree [tree]="treeItems" [treeNodeIdKey]="'id'" [treeNodeChildrenKey]="'children'" [virtualScroll]="true">
     </d-operable-tree>
   `,
+    standalone: false
 })
 class TestVirtualScrollTreeComponent {
   @ViewChild('operableTree') operableTree: OperableTreeComponent;
@@ -128,7 +130,7 @@ class TestVirtualScrollTreeComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <d-operable-tree
       #comp
       [tree]="data"
@@ -143,6 +145,7 @@ class TestVirtualScrollTreeComponent {
     </d-operable-tree>
     <pre>transferData:{{ transferData }}</pre>
   `,
+    standalone: false
 })
 class TestDragDropTreeComponent {
   @ViewChild('comp') comp: OperableTreeComponent;

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-switch',
-  templateUrl: './switch.component.html',
-  styleUrls: ['./switch.component.scss'],
+    selector: 'd-switch',
+    templateUrl: './switch.component.html',
+    styleUrls: ['./switch.component.scss'],
+    standalone: false
 })
 export class SwitchComponent {
   list1 = [];

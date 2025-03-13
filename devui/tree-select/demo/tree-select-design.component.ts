@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-tree-select-design',
-  templateUrl: './tree-select-design.component.html',
+    selector: 'd-tree-select-design',
+    templateUrl: './tree-select-design.component.html',
+    standalone: false
 })
 
 export class TreeSelectDesignComponent implements OnInit {

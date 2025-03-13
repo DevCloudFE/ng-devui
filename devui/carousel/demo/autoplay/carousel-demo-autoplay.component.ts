@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { imageArray } from './image-mock';
 @Component({
-  selector: 'd-carousel-demo-autoplay',
-  templateUrl: './carousel-demo-autoplay.component.html',
-  styles: [
-    `
+    selector: 'd-carousel-demo-autoplay',
+    templateUrl: './carousel-demo-autoplay.component.html',
+    styles: [
+        `
     d-carousel-item {
       text-align: center;
     }
     `
-  ]
+    ],
+    standalone: false
 })
 export class CarouselDemoAutoPlayComponent {
   // imageUrl 数组

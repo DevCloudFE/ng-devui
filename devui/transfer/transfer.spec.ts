@@ -8,8 +8,8 @@ import { createDragEvent } from '../utils/testing/event-helper';
 import { TransferModule } from './transfer.module';
 
 @Component({
-  selector: 'd-transfer-demo-base',
-  template: `
+    selector: 'd-transfer-demo-base',
+    template: `
     <section>
       <div style="width:700px; ">
         <d-transfer
@@ -29,6 +29,7 @@ import { TransferModule } from './transfer.module';
       </div>
     </section>
   `,
+    standalone: false
 })
 class TransferDemoBaseComponent {
   disabled = false;

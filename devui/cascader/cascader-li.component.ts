@@ -5,9 +5,10 @@ import { CascaderService } from './cascader.service';
 import { CascaderItem } from './cascader.type';
 
 @Component({
-  selector: 'd-cascader-li',
-  templateUrl: './cascader-li.component.html',
-  styleUrls: ['./cascader-li.component.scss'],
+    selector: 'd-cascader-li',
+    templateUrl: './cascader-li.component.html',
+    styleUrls: ['./cascader-li.component.scss'],
+    standalone: false
 })
 export class CascaderLiComponent implements OnInit, OnDestroy {
   @Input() width = 200;

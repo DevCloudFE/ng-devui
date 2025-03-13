@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { DialogService } from 'ng-devui/modal';
 
 @Component({
-  selector: 'd-autofocus',
-  templateUrl: './autofocus.component.html',
+    selector: 'd-autofocus',
+    templateUrl: './autofocus.component.html',
+    standalone: false
 })
 export class AutofocusComponent {
   constructor(private dialogService: DialogService) {}

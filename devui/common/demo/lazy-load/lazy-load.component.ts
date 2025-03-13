@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-lazy-load',
-  templateUrl: './lazy-load.component.html',
-  styleUrls: ['./lazy-load.component.scss']
+    selector: 'd-lazy-load',
+    templateUrl: './lazy-load.component.html',
+    styleUrls: ['./lazy-load.component.scss'],
+    standalone: false
 })
 export class LazyLoadComponent implements OnInit {
   list = [];

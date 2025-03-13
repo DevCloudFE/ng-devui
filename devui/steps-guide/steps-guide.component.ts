@@ -8,9 +8,10 @@ import { StepsGuideService } from './steps-guide.service';
 import { ExtraConfig } from './steps-guide.types';
 
 @Component({
-  templateUrl: './steps-guide.component.html',
-  styleUrls: ['./steps-guide.component.scss'],
-  preserveWhitespaces: false,
+    templateUrl: './steps-guide.component.html',
+    styleUrls: ['./steps-guide.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class StepsGuideComponent implements OnInit, AfterViewInit, OnDestroy {
   @HostBinding('class')

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 @Component({
-  selector: 'd-custom',
-  templateUrl: './custom.component.html',
+    selector: 'd-custom',
+    templateUrl: './custom.component.html',
+    standalone: false
 })
 export class CustomComponent {
   tabActiveId: string | number = 'tab1';

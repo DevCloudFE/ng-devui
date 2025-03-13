@@ -3,8 +3,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-design-border-radius-demo',
-  templateUrl: './design-border-radius-demo.component.html'
+    selector: 'd-design-border-radius-demo',
+    templateUrl: './design-border-radius-demo.component.html',
+    standalone: false
 })
 export class DesignBorderRadiusDemoComponent implements OnInit, OnDestroy {
   navItems = [];

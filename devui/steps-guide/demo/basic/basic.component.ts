@@ -3,9 +3,10 @@ import { StepsGuideService } from 'ng-devui/steps-guide';
 import { basicData, positionData } from '../fakeData';
 
 @Component({
-  selector: 'd-basic',
-  templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.scss'],
+    selector: 'd-basic',
+    templateUrl: './basic.component.html',
+    styleUrls: ['./basic.component.scss'],
+    standalone: false
 })
 export class BasicComponent implements OnInit {
   currentStep: any;

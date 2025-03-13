@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 @Component({
-  selector: 'd-add-delete',
-  templateUrl: './add-delete.component.html',
+    selector: 'd-add-delete',
+    templateUrl: './add-delete.component.html',
+    standalone: false
 })
 export class AddDeleteComponent implements OnInit {
   tabActiveId: string | number = 'tab1';

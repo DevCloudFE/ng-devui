@@ -21,19 +21,20 @@ import { fromEvent, Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'd-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
-  exportAs: 'search',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  preserveWhitespaces: false,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SearchComponent),
-      multi: true,
-    },
-  ],
+    selector: 'd-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.scss'],
+    exportAs: 'search',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    preserveWhitespaces: false,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => SearchComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class SearchComponent implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit {
   /**

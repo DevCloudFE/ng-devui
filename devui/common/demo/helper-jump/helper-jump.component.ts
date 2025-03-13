@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { HelperUtils } from 'ng-devui/common';
 
 @Component({
-  selector: 'd-common-helper-jump',
-  templateUrl: './helper-jump.component.html',
+    selector: 'd-common-helper-jump',
+    templateUrl: './helper-jump.component.html',
+    standalone: false
 })
 export class HelperJumpDemoComponent {
   downError: string;

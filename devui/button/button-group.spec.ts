@@ -5,9 +5,10 @@ import { ButtonModule } from 'ng-devui/button';
 import { ButtonGroupComponent } from './button-group.component';
 
 @Component({
-  template: `
+    template: `
     <d-button-group [size]="size"></d-button-group>
-  `
+  `,
+    standalone: false
 })
 
 class TestButtonGroupComponent {

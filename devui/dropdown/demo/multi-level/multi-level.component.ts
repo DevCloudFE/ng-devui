@@ -2,9 +2,10 @@ import { ConnectedPosition } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-dropdown-demo-multi-level',
-  templateUrl: './multi-level.component.html',
-  styleUrls: ['./multi-level.component.scss'],
+    selector: 'd-dropdown-demo-multi-level',
+    templateUrl: './multi-level.component.html',
+    styleUrls: ['./multi-level.component.scss'],
+    standalone: false
 })
 export class DropDownDemoMultiLevelComponent {
   subMenuDirections: ConnectedPosition[] = [

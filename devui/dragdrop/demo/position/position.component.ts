@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-position',
-  templateUrl: './position.component.html',
-  styleUrls: ['./position.component.scss'],
+    selector: 'd-position',
+    templateUrl: './position.component.html',
+    styleUrls: ['./position.component.scss'],
+    standalone: false
 })
 export class PositionComponent {
   list1 = [{ name: 'Visual Studio Code' }];

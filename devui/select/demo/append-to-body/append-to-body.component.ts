@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-append-to-body',
-  templateUrl: './append-to-body.component.html',
+    selector: 'd-append-to-body',
+    templateUrl: './append-to-body.component.html',
+    standalone: false
 })
 export class AppendToBodyComponent {
   options = [

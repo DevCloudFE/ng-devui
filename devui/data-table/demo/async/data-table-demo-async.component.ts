@@ -3,8 +3,9 @@ import { timer } from 'rxjs';
 import { SourceType, originSource } from '../mock-data';
 
 @Component({
-  selector: 'd-datatable-demo-async',
-  templateUrl: './data-table-demo-async.component.html',
+    selector: 'd-datatable-demo-async',
+    templateUrl: './data-table-demo-async.component.html',
+    standalone: false
 })
 export class DatatableDemoAsyncComponent implements OnInit {
 

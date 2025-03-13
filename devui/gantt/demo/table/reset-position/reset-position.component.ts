@@ -2,9 +2,10 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GanttService } from 'ng-devui/gantt';
 
 @Component({
-  selector: 'd-reset-position',
-  templateUrl: './reset-position.component.html',
-  styleUrls: ['./reset-position.component.scss'],
+    selector: 'd-reset-position',
+    templateUrl: './reset-position.component.html',
+    styleUrls: ['./reset-position.component.scss'],
+    standalone: false
 })
 export class ResetPositionComponent implements OnChanges {
   @Input() datatableElementRef: any;

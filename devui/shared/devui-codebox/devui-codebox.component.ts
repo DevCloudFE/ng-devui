@@ -4,12 +4,13 @@ import { DevuiSourceData } from './devui-source-data';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
-  selector: 'd-codebox',
-  templateUrl: './devui-codebox.component.html',
-  styleUrls: ['./devui-codebox.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  preserveWhitespaces: false,
-  })
+    selector: 'd-codebox',
+    templateUrl: './devui-codebox.component.html',
+    styleUrls: ['./devui-codebox.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    preserveWhitespaces: false,
+    standalone: false
+})
 export class DevuiCodeboxComponent implements OnInit {
   _copied = false;
 

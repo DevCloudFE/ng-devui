@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { SplitterOrientation } from 'ng-devui/splitter';
 
 @Component({
-  selector: 'd-splitter-demo-basic',
-  templateUrl: './splitter-demo-basic.component.html',
-  styleUrls: ['../splitter-demo.component.scss']
+    selector: 'd-splitter-demo-basic',
+    templateUrl: './splitter-demo-basic.component.html',
+    styleUrls: ['../splitter-demo.component.scss'],
+    standalone: false
 })
 export class SplitterDemoBasicComponent {
   // splitter input

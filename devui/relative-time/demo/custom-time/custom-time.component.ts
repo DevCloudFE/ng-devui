@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { I18nFormat } from 'ng-devui/i18n';
 
 @Component({
-  selector: 'd-custom-time',
-  templateUrl: './custom-time.component.html'
+    selector: 'd-custom-time',
+    templateUrl: './custom-time.component.html',
+    standalone: false
 })
 export class CustomTimeComponent implements OnInit {
   limit = 3 * 12 * 30 * 24 * 60 * 60; // three years

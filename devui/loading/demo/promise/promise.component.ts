@@ -6,8 +6,9 @@ import {LoadingType} from 'ng-devui/loading';
 import { timer } from 'rxjs';
 
 @Component({
-  selector: 'd-promise',
-  templateUrl: './promise.component.html'
+    selector: 'd-promise',
+    templateUrl: './promise.component.html',
+    standalone: false
 })
 export class PromiseComponent implements OnInit {
   loading3: LoadingType;

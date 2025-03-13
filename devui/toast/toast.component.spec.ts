@@ -5,9 +5,10 @@ import { ToastComponent } from './toast.component';
 import { ToastModule } from './toast.module';
 
 @Component({
-  template: `
+    template: `
     <d-toast [sticky]="sticky" [life]="life" [value]="msgs" [style]="style" [styleClass]="styleClass" [lifeMode]="mode"></d-toast>
-  `
+  `,
+    standalone: false
 })
 class TestToastComponent {
   msgs = [];

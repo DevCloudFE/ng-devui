@@ -14,12 +14,13 @@ import { ModalService } from './modal.service';
 import { IDialogOptions, IModalOptions } from './modal.types';
 
 @Component({
-  template: `
+    template: `
     <d-button (btnClick)="openDialog()">click me!</d-button>
     <ng-template #testContentTemplate>
       <div class="iAmTemplate">I am Template</div>
     </ng-template>
   `,
+    standalone: false
 })
 class TestDialogComponent {
   @ViewChild('testContentTemplate') testContentTemplate: TemplateRef<any>;
@@ -319,10 +320,11 @@ describe('dialog', () => {
 });
 
 @Component({
-  template: `
+    template: `
     <h3 (click)="close($event)" class="closeModal">Modal Component</h3>
     <div (click)="btnClick($event)" class="btnModal">iAmBtn</div>
-  `
+  `,
+    standalone: false
 })
 class OpenModalComponent {
   constructor() {}
@@ -341,9 +343,10 @@ class OpenModalComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <d-button (btnClick)="openModal()">click me!</d-button>
   `,
+    standalone: false
 })
 class TestModalComponent {
 

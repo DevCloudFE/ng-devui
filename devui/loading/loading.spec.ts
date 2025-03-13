@@ -7,7 +7,7 @@ import { LoadingDirective } from './loading.directive';
 import { LoadingModule } from './loading.module';
 import { LoadingType } from './loading.types';
 @Component({
-  template: `
+    template: `
     <div
       dLoading
       [backdrop]="showBackDrop"
@@ -18,6 +18,7 @@ import { LoadingType } from './loading.types';
       style="height: 150px;"
     ></div>
   `,
+    standalone: false
 })
 class TestLoadingComponent {
   showLoading = true;
@@ -31,7 +32,7 @@ class TestLoadingComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <div dLoading [loadingTemplateRef]="loadingTemplateRef" [loading]="loading" [style.height.px]="150"></div>
     <ng-template #loadingTemplateRef>
       <div class="test-template-loading">
@@ -39,6 +40,7 @@ class TestLoadingComponent {
       </div>
     </ng-template>
   `,
+    standalone: false
 })
 class TestLoadingTemplateComponent implements OnInit {
   loading: LoadingType;

@@ -29,9 +29,10 @@ const DEFAULT_OPTIONS = {
 };
 
 @Component({
-  selector: 'd-nav-sprite',
-  templateUrl: './nav-sprite.component.html',
-  styleUrls: ['./nav-sprite.component.scss'],
+    selector: 'd-nav-sprite',
+    templateUrl: './nav-sprite.component.html',
+    styleUrls: ['./nav-sprite.component.scss'],
+    standalone: false
 })
 export class NavSpriteComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() target: HTMLElement; // 爬取目录的容器

@@ -12,9 +12,10 @@ import { filterData } from './resolve-routes-config.service';
 import { suggestScopeList } from './scope-list';
 
 @Component({
-  selector: 'd-components-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss'],
+    selector: 'd-components-overview',
+    templateUrl: './overview.component.html',
+    styleUrls: ['./overview.component.scss'],
+    standalone: false
 })
 export class ComponentsOverviewComponent implements OnInit, OnDestroy {
   srcPrefix = environment.deployPrefix + 'assets';

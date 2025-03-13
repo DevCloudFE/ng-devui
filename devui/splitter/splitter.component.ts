@@ -19,13 +19,14 @@ import { SplitterPaneComponent } from './splitter-pane.component';
 import { SplitterService } from './splitter.service';
 import { SplitterOrientation } from './splitter.types';
 @Component({
-  selector: 'd-splitter',
-  exportAs: 'dSplitter',
-  templateUrl: './splitter.component.html',
-  styleUrls: ['./splitter.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [SplitterService],
-  preserveWhitespaces: false,
+    selector: 'd-splitter',
+    exportAs: 'dSplitter',
+    templateUrl: './splitter.component.html',
+    styleUrls: ['./splitter.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [SplitterService],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class SplitterComponent implements OnChanges, AfterContentInit, OnDestroy {
   // 指定Splitter中窗格的方向，默认水平分割。

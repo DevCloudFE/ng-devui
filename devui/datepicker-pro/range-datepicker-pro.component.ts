@@ -23,18 +23,19 @@ import { DatepickerProService } from './datepicker-pro.service';
 import { DateConfig } from './lib/datepicker-pro.type';
 
 @Component({
-  selector: 'd-range-datepicker-pro',
-  templateUrl: './range-datepicker-pro.component.html',
-  styleUrls: ['./range-datepicker-pro.component.scss'],
-  providers: [
-    DatepickerProService,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => RangeDatepickerProComponent),
-      multi: true,
-    },
-  ],
-  preserveWhitespaces: false,
+    selector: 'd-range-datepicker-pro',
+    templateUrl: './range-datepicker-pro.component.html',
+    styleUrls: ['./range-datepicker-pro.component.scss'],
+    providers: [
+        DatepickerProService,
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => RangeDatepickerProComponent),
+            multi: true,
+        },
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class RangeDatepickerProComponent implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
   @Input() mode: 'year' | 'month' | 'date' | 'week' = 'date';

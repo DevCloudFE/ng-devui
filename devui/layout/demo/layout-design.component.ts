@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'd-layout-design',
-  templateUrl: './layout-design.component.html',
+    selector: 'd-layout-design',
+    templateUrl: './layout-design.component.html',
+    standalone: false
 })
 
 export class LayoutDesignComponent implements OnInit {

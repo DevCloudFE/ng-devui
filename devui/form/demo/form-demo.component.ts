@@ -4,9 +4,10 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-form-demo',
-  templateUrl: './form-demo.component.html',
-  styleUrls: ['./form-demo.component.scss'],
+    selector: 'd-form-demo',
+    templateUrl: './form-demo.component.html',
+    styleUrls: ['./form-demo.component.scss'],
+    standalone: false
 })
 export class FormDemoComponent implements OnInit, OnDestroy {
   BasicSource: Array<DevuiSourceData> = [

@@ -10,10 +10,11 @@ import { IButtonStyle } from 'ng-devui/button';
 import { ModalComponent } from './modal.component';
 import { ModalContentDirective } from './modal.directive';
 @Component({
-  selector: 'd-modal-container',
-  templateUrl: './modal-container.component.html',
-  styleUrls: ['./modal-container.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-modal-container',
+    templateUrl: './modal-container.component.html',
+    styleUrls: ['./modal-container.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class ModalContainerComponent implements OnInit {
   @Input() maxHeight: string;

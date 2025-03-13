@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'd-tree-select-labelization',
-  templateUrl: './labelization.component.html',
+    selector: 'd-tree-select-labelization',
+    templateUrl: './labelization.component.html',
+    standalone: false
 })
 export class LabelizationComponent {
 

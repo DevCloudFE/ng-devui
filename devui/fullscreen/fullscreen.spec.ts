@@ -6,13 +6,14 @@ import { DomHelper } from '../utils/testing/dom-helper';
 import { FullscreenComponent } from './fullscreen.component';
 import { FullscreenModule } from './fullscreen.module';
 @Component({
-  template: `
+    template: `
     <d-fullscreen #fullscreen [mode]="fullscreenMode" (fullscreenLaunch)="launchFullscreen($event)" [zIndex]="100">
       <div fullscreen-target>
         <d-button fullscreen-launch class="fullscreen-button" [icon]="btnIcon" bsStyle="text-dark"> </d-button>
       </div>
     </d-fullscreen>
   `,
+    standalone: false
 })
 class TestFullscreenComponent {
   @ViewChild('fullscreen') fullscreen: FullscreenComponent;

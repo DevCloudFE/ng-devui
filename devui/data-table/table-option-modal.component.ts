@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } 
 import { ColData } from './table-option-toggle.component';
 
 @Component({
-  selector: 'd-table-option-modal',
-  templateUrl: './table-option-modal.component.html',
-  styleUrls: ['./table-option-modal.component.scss', './table-option-toggle.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'd-table-option-modal',
+    templateUrl: './table-option-modal.component.html',
+    styleUrls: ['./table-option-modal.component.scss', './table-option-toggle.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TableOptionModalComponent implements OnInit {
   @Input() data: any;

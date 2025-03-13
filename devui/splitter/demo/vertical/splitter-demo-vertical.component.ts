@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-splitter-demo-vertical',
-  templateUrl: './splitter-demo-vertical.component.html',
-  styleUrls: ['../splitter-demo.component.scss']
+    selector: 'd-splitter-demo-vertical',
+    templateUrl: './splitter-demo-vertical.component.html',
+    styleUrls: ['../splitter-demo.component.scss'],
+    standalone: false
 })
 export class SplitterDemoVerticalComponent {
 

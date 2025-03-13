@@ -9,15 +9,16 @@ import { IFileOptions, IUploadOptions, UploadStatus } from './file-uploader.type
 import { SelectFiles } from './select-files.utils';
 import { UploadComponent } from './upload.class';
 @Directive({
-  selector: '[dUpload]',
-  exportAs: 'dUpload',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => UploadDirective),
-      multi: true
-    }
-  ],
+    selector: '[dUpload]',
+    exportAs: 'dUpload',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => UploadDirective),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class UploadDirective extends UploadComponent implements OnDestroy {
   @Input() uploadOptions: IUploadOptions;

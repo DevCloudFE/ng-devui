@@ -3,8 +3,9 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-datatable-demo',
-  templateUrl: './data-table-demo.component.html',
+    selector: 'd-datatable-demo',
+    templateUrl: './data-table-demo.component.html',
+    standalone: false
 })
 export class DataTableDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

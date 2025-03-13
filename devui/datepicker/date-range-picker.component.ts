@@ -21,18 +21,19 @@ import { DatePickerConfigService as DatePickerConfig } from './date-picker.confi
 import { SelectDateRangeChangeEventArgs, SelectDateRangeChangeReason } from './date-range-change-event-args.model';
 
 @Component({
-  selector: 'd-date-range-picker',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DateRangePickerComponent),
-      multi: true,
-    },
-  ],
-  exportAs: 'dateRangePicker',
-  templateUrl: './date-range-picker.component.html',
-  styleUrls: ['./date-range-picker.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-date-range-picker',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => DateRangePickerComponent),
+            multi: true,
+        },
+    ],
+    exportAs: 'dateRangePicker',
+    templateUrl: './date-range-picker.component.html',
+    styleUrls: ['./date-range-picker.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class DateRangePickerComponent implements OnChanges, OnInit, ControlValueAccessor, OnDestroy {
   @Input() locale: string;

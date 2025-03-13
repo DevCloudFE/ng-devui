@@ -10,9 +10,10 @@ import { BadgePositionType, BadgeStatusType } from './badge.types';
 
 
 @Component({
-  selector: 'd-badge',
-  templateUrl: './badge.component.html',
-  styleUrls: ['./badge.component.scss']
+    selector: 'd-badge',
+    templateUrl: './badge.component.html',
+    styleUrls: ['./badge.component.scss'],
+    standalone: false
 })
 export class BadgeComponent implements AfterViewInit {
   hasContent = true;

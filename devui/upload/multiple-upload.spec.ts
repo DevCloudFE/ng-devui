@@ -9,7 +9,7 @@ import { MultipleUploadComponent } from './multiple-upload.component';
 import { SliceUploadService } from './slice-upload.service';
 import { UploadModule } from './upload.module';
 @Component({
-  template: `
+    template: `
     <d-multiple-upload
       #multipleUpload
       [fileOptions]="fileOptions"
@@ -27,6 +27,7 @@ import { UploadModule } from './upload.module';
     >
     </d-multiple-upload>
   `,
+    standalone: false
 })
 class TestUploadComponent {
   @ViewChild('multipleUpload') multipleUpload: MultipleUploadComponent;

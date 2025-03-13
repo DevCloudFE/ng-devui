@@ -3,8 +3,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-design-font-demo',
-  templateUrl: './design-font-demo.component.html',
+    selector: 'd-design-font-demo',
+    templateUrl: './design-font-demo.component.html',
+    standalone: false
 })
 export class DesignFontDemoComponent implements OnInit, OnDestroy {
   navItems = [];

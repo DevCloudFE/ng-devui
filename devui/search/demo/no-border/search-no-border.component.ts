@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-demo-search-no-border',
-  templateUrl: './search-no-border.component.html',
-  styleUrls: ['./search-no-border.component.scss'],
+    selector: 'd-demo-search-no-border',
+    templateUrl: './search-no-border.component.html',
+    styleUrls: ['./search-no-border.component.scss'],
+    standalone: false
 })
 export class SearchNoBorderComponent implements OnInit {
   constructor() {}

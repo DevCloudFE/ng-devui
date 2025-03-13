@@ -3,8 +3,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 @Component({
-  selector: 'd-text-input-design',
-  templateUrl: './text-input-design.component.html',
+    selector: 'd-text-input-design',
+    templateUrl: './text-input-design.component.html',
+    standalone: false
 })
 
 export class TextInputDesignComponent implements OnInit {

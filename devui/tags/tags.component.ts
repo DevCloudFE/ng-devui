@@ -19,11 +19,12 @@ import { Observable } from 'rxjs';
 import { ITagMode, ITagSize } from './tag.component';
 
 @Component({
-  selector: 'd-tags',
-  templateUrl: './tags.component.html',
-  styleUrls: ['./tags.component.scss'],
-  exportAs: 'Tags',
-  preserveWhitespaces: false,
+    selector: 'd-tags',
+    templateUrl: './tags.component.html',
+    styleUrls: ['./tags.component.scss'],
+    exportAs: 'Tags',
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class TagsComponent implements OnInit, AfterViewInit, OnChanges {
   /**

@@ -8,8 +8,9 @@ import { filter } from 'rxjs/operators';
 import { DropDownDirective } from './dropdown.directive';
 
 @Directive({
-  selector: '[dDropDownMenu]',
-  exportAs: 'd-dropdown-menu',
+    selector: '[dDropDownMenu]',
+    exportAs: 'd-dropdown-menu',
+    standalone: false
 })
 export class DropDownMenuDirective implements OnInit, OnDestroy {
   player: AnimationPlayer;

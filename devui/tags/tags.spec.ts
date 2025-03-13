@@ -4,12 +4,13 @@ import { By } from '@angular/platform-browser';
 import { TagsModule } from './tags.module';
 
 @Component({
-  template: `
+    template: `
     <section>
       <d-tags [tags]="tagList" [displayProperty]="'name'" [mode]="'closeable'" [titleProperty]="'id'" (tagDelete)="deleteTag($event.index)">
       </d-tags>
     </section>
   `,
+    standalone: false
 })
 class TestTagsComponent {
   tagList: any = [

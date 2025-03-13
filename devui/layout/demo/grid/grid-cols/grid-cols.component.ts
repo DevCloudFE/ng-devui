@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'd-grid-cols',
-  templateUrl: './grid-cols.component.html',
+    selector: 'd-grid-cols',
+    templateUrl: './grid-cols.component.html',
+    standalone: false
 })
 export class GridColsComponent implements OnInit {
 

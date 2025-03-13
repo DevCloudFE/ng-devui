@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-input-number-placeholder-maxlength',
-  templateUrl: './input-number-placeholder-maxLength.component.html',
-  styleUrls: ['./input-number-placeholder-maxLength.component.css']
+    selector: 'd-input-number-placeholder-maxlength',
+    templateUrl: './input-number-placeholder-maxLength.component.html',
+    styleUrls: ['./input-number-placeholder-maxLength.component.css'],
+    standalone: false
 })
 export class InputNumberPlaceholderAndMaxLengthComponent {
   min = -100;

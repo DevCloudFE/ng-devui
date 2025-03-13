@@ -23,7 +23,8 @@ import { DragPlaceholderInsertionEvent, DragPlaceholderInsertionIndexEvent } fro
 
 export type DropIndexFlag = 'beforeAll' | 'afterAll';
 @Directive({
-  selector: '[dDroppable]'
+    selector: '[dDroppable]',
+    standalone: false
 })
 export class DroppableDirective implements OnInit, AfterViewInit, OnDestroy {
 

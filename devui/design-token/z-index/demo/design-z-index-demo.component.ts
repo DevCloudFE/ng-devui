@@ -3,13 +3,14 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-design-z-index-demo',
-  templateUrl: './design-z-index-demo.component.html',
-  styles: [`
+    selector: 'd-design-z-index-demo',
+    templateUrl: './design-z-index-demo.component.html',
+    styles: [`
     .devui-demo-title {
       margin-top: 20px
     }
-  `]
+  `],
+    standalone: false
 })
 export class DesignZIndexDemoComponent implements OnInit, OnDestroy {
   navItems = [];

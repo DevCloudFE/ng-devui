@@ -4,10 +4,10 @@ import { cloneDeep } from 'lodash-es';
 import { demoData } from '../demo-data';
 
 @Component({
-  selector: 'd-auto-scroll',
-  templateUrl: './auto-scroll.component.html',
-  styles: [
-    `
+    selector: 'd-auto-scroll',
+    templateUrl: './auto-scroll.component.html',
+    styles: [
+        `
       section {
         padding-top: 16px;
       }
@@ -16,7 +16,8 @@ import { demoData } from '../demo-data';
         margin-right: 8px;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class AutoScrollComponent {
   category = cloneDeep(demoData.slice(0, -2));

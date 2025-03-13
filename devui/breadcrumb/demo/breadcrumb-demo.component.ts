@@ -4,8 +4,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-demo-breadcrumb',
-  templateUrl: './breadcrumb-demo.component.html',
+    selector: 'd-demo-breadcrumb',
+    templateUrl: './breadcrumb-demo.component.html',
+    standalone: false
 })
 export class BreadCrumbDemoComponent implements OnInit, OnDestroy {
   BasicSource: Array<DevuiSourceData> = [

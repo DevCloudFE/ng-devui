@@ -3,8 +3,9 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-demo-button',
-  templateUrl: './button-demo.component.html',
+    selector: 'd-demo-button',
+    templateUrl: './button-demo.component.html',
+    standalone: false
 })
 export class ButtonDemoComponent implements OnInit, OnDestroy {
   commonSource: Array<DevuiSourceData> = [

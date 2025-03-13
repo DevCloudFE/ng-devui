@@ -10,10 +10,11 @@ import {
 import { I18nInterface, I18nService } from 'ng-devui/i18n';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-modal-header',
-  templateUrl: './modal-header.component.html',
-  styleUrls: ['./modal-header.component.scss'],
-  preserveWhitespaces: false,
+    selector: 'd-modal-header',
+    templateUrl: './modal-header.component.html',
+    styleUrls: ['./modal-header.component.scss'],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class ModalHeaderComponent implements OnInit, OnDestroy {
   @Input() title: string;

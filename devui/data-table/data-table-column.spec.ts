@@ -51,7 +51,7 @@ const dataTableOptions = {
 
 // column: basic & checkable
 @Component({
-  template: `
+    template: `
     <d-data-table
       #datatable
       [checkable]="checkable"
@@ -72,6 +72,7 @@ const dataTableOptions = {
       </d-column>
     </d-data-table>
   `,
+    standalone: false
 })
 class TestDataTableColumnBasicComponent {
   @ViewChild('datatable') datatable;
@@ -94,7 +95,7 @@ class TestDataTableColumnBasicComponent {
 
 // column: checkable, sortable, filterable
 @Component({
-  template: `
+    template: `
     <d-data-table
       [dataSource]="sortableDataSource"
       [onlyOneColumnSort]="onlyOneColumnSort"
@@ -172,6 +173,7 @@ class TestDataTableColumnBasicComponent {
       </div>
     </ng-template>
   `,
+    standalone: false
 })
 class TestDataTableAdvancedColumnComponent implements OnInit {
   constructor(private ref: ChangeDetectorRef) {}
@@ -315,7 +317,7 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
 
 // column: edit
 @Component({
-  template: `
+    template: `
     <d-data-table
       #dataTable
       [dataSource]="basicDataSource"
@@ -399,6 +401,7 @@ class TestDataTableAdvancedColumnComponent implements OnInit {
       </d-column>
     </d-data-table>
   `,
+    standalone: false
 })
 class TestDataTableColumnEditComponent {
   @ViewChild(DataTableComponent) dataTable: DataTableComponent;
@@ -414,7 +417,7 @@ class TestDataTableColumnEditComponent {
 
 // column: datatable with tree structure
 @Component({
-  template: `
+    template: `
     <d-data-table
       #dataTable
       [dataSource]="basicDataSource"
@@ -437,6 +440,7 @@ class TestDataTableColumnEditComponent {
       ></d-column>
     </d-data-table>
   `,
+    standalone: false
 })
 class TestDataTableColumnWithChildrenComponent {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(treeDataSource.slice(0, 6)));
@@ -444,7 +448,7 @@ class TestDataTableColumnWithChildrenComponent {
 
 // column: datatable multi header
 @Component({
-  template: `
+    template: `
     <d-data-table
       [type]="'striped'"
       [dataSource]="basicDataSource"
@@ -487,6 +491,7 @@ class TestDataTableColumnWithChildrenComponent {
       ></d-column>
     </d-data-table>
   `,
+    standalone: false
 })
 class TestDataTableColumnMultiHeaderComponent {
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
@@ -496,7 +501,7 @@ class TestDataTableColumnMultiHeaderComponent {
 
 // column: fix header
 @Component({
-  template: `
+    template: `
     <d-data-table
       #datatable1
       [dataSource]="maxHeightDataSource"
@@ -517,6 +522,7 @@ class TestDataTableColumnMultiHeaderComponent {
       </d-column>
     </d-data-table>
   `,
+    standalone: false
 })
 class TestDataTableColumnFixHeaderComponent {
   resizable = false;
@@ -526,7 +532,7 @@ class TestDataTableColumnFixHeaderComponent {
 
 // column: column drag
 @Component({
-  template: `
+    template: `
     <d-data-table
       #datatable
       [dataSource]="basicDataSource"
@@ -546,6 +552,7 @@ class TestDataTableColumnFixHeaderComponent {
       </d-column>
     </d-data-table>
   `,
+    standalone: false
 })
 class TestDataTableColumnDragComponent {
   isHeaderFixed = false;
@@ -555,7 +562,7 @@ class TestDataTableColumnDragComponent {
 
 // expand row
 @Component({
-  template: `
+    template: `
     <d-data-table
       #dataTable
       [dataSource]="basicDataSource"
@@ -580,6 +587,7 @@ class TestDataTableColumnDragComponent {
       </div>
     </ng-template>
   `,
+    standalone: false
 })
 class TestDataTableExpandComponent implements OnInit {
   @ViewChild('addSubRowContent', { static: true }) addSubRowContent: ElementRef;

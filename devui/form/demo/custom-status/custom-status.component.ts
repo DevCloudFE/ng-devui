@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DFormControlStatus, FormLayout } from 'ng-devui/form';
 
 @Component({
-  selector: 'd-form-custom-status',
-  templateUrl: './custom-status.component.html',
+    selector: 'd-form-custom-status',
+    templateUrl: './custom-status.component.html',
+    standalone: false
 })
 export class CustomStatusComponent implements OnInit {
   layoutDirection: FormLayout = FormLayout.Horizontal;

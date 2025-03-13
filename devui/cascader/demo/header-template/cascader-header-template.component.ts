@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'd-demo-cascader-header-template',
-  templateUrl: './cascader-header-template.component.html',
-  styleUrls: ['./cascader-header-template.component.scss'],
+    selector: 'd-demo-cascader-header-template',
+    templateUrl: './cascader-header-template.component.html',
+    styleUrls: ['./cascader-header-template.component.scss'],
+    standalone: false
 })
 export class CascaderHeaderTemplateComponent {
   options = [

@@ -4,9 +4,10 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-demo-rate',
-  templateUrl: './rate-demo.component.html',
-  styleUrls: ['./rate-demo.component.css'],
+    selector: 'd-demo-rate',
+    templateUrl: './rate-demo.component.html',
+    styleUrls: ['./rate-demo.component.css'],
+    standalone: false
 })
 export class RateDemoComponent implements OnInit, OnDestroy {
   basicSource: Array<DevuiSourceData> = [

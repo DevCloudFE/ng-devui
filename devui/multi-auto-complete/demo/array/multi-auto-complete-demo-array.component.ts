@@ -3,9 +3,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'd-multi-auto-complete-array',
-  templateUrl: './multi-auto-complete-demo-array.component.html',
-  styleUrls: ['./multi-auto-complete-demo-array.component.scss'],
+    selector: 'd-multi-auto-complete-array',
+    templateUrl: './multi-auto-complete-demo-array.component.html',
+    styleUrls: ['./multi-auto-complete-demo-array.component.scss'],
+    standalone: false
 })
 export class MultiAutoCompleteDemoArrayComponent implements OnInit {
   multiItems1: string[] = ['C#', 'C', 'C++', 'CPython', 'Java'];

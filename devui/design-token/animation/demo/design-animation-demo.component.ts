@@ -3,8 +3,9 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'd-design-animation-demo',
-  templateUrl: './design-animation-demo.component.html',
+    selector: 'd-design-animation-demo',
+    templateUrl: './design-animation-demo.component.html',
+    standalone: false
 })
 export class DesignAnimationDemoComponent implements OnInit, OnDestroy {
   navItems = [];

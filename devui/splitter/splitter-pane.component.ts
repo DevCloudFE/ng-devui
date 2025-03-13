@@ -5,11 +5,12 @@ import {
 import { SplitterService } from './splitter.service';
 import { CollapseDirection, SplitterOrientation } from './splitter.types';
 @Component({
-  selector: 'd-splitter-pane',
-  templateUrl: './splitter-pane.component.html',
-  styleUrls: ['./splitter-pane.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  preserveWhitespaces: false,
+    selector: 'd-splitter-pane',
+    templateUrl: './splitter-pane.component.html',
+    styleUrls: ['./splitter-pane.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    preserveWhitespaces: false,
+    standalone: false
 })
 
 export class SplitterPaneComponent implements OnChanges, AfterViewChecked {

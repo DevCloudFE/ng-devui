@@ -3,8 +3,9 @@ import { DevuiSourceData } from 'ng-devui/shared/devui-codebox/devui-source-data
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'd-menu-demo',
-  templateUrl: './menu-demo.component.html',
+    selector: 'd-menu-demo',
+    templateUrl: './menu-demo.component.html',
+    standalone: false
 })
 export class MenuDemoComponent implements OnInit {
   DemoBasic: Array<DevuiSourceData> = [
