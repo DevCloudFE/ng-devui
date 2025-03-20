@@ -7,9 +7,9 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  Output,
+  Output, Renderer2, SimpleChanges,
   TemplateRef,
-  ViewChild
+  ViewChild, OnChanges
 } from '@angular/core';
 import { AnimationNumberDuration } from 'ng-devui/utils';
 export type IButtonType = 'button' | 'submit' | 'reset';
@@ -21,14 +21,14 @@ export type IButtonPosition = 'left' | 'right' | 'default';
 export type IButtonSize = 'lg' | 'md' | 'sm' | 'xs';
 
 @Component({
-    selector: 'd-button',
-    templateUrl: './button.component.html',
-    styleUrls: ['./button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    preserveWhitespaces: false,
-    standalone: false
+  selector: 'd-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  preserveWhitespaces: false,
+  standalone: false
 })
-export class ButtonComponent implements AfterContentChecked {
+export class ButtonComponent implements AfterContentChecked, OnChanges {
   @Input() id: string;
   @Input() type: IButtonType = 'button';
   @Input() bsStyle: IButtonStyle = 'primary';
@@ -62,7 +62,35 @@ export class ButtonComponent implements AfterContentChecked {
   showWave = false;
   isMouseDown = false;
 
-  constructor(private cd: ChangeDetectorRef) {
+  constructor(
+    private cd: ChangeDetectorRef,
+    private renderer: Renderer2,
+    private el: ElementRef
+  ) {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes?.disabled?.currentValue) {
+      this.renderer.setStyle(
+        this.el.nativeElement,
+        'cursor',
+        'not-allowed'
+      );
+      this.renderer.setStyle(
+        this.el.nativeElement,
+        'pointer-events',
+        'none'
+      );
+    } else if (!changes?.disabled?.currentValue) {
+      this.renderer.removeStyle(
+        this.el.nativeElement,
+        'cursor'
+      );
+      this.renderer.removeStyle(
+        this.el.nativeElement,
+        'pointer-events'
+      );
+    }
   }
 
   // 新增click事件，解决直接在host上使用click，在disabled状态下还能触发事件
