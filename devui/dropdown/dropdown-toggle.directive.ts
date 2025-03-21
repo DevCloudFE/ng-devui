@@ -2,9 +2,9 @@ import { AfterViewInit, Directive, ElementRef, Host, HostBinding, HostListener, 
 import { DropDownDirective } from './dropdown.directive';
 
 @Directive({
-    selector: '[dDropDownToggle]',
-    exportAs: 'd-dropdown-toggle',
-    standalone: false
+  selector: '[dDropDownToggle]',
+  exportAs: 'd-dropdown-toggle',
+  standalone: false
 })
 export class DropDownToggleDirective implements OnInit, AfterViewInit {
   @HostBinding('attr.tabIndex') get tabIndex() {
@@ -38,6 +38,14 @@ export class DropDownToggleDirective implements OnInit, AfterViewInit {
   @HostListener('click', ['$event'])
   toggleDropdown(event: MouseEvent) {
     if (!this.disabled && this.dropdown.trigger !== 'manually') {
+      this.dropdown.toggle();
+    }
+    return false;
+  }
+  @HostListener('contextmenu', ['$event'])
+  toggleOnContextMenu(event: MouseEvent) {
+    if (!this.disabled && this.dropdown.trigger === 'right-click') {
+      event.preventDefault();
       this.dropdown.toggle();
     }
     return false;
