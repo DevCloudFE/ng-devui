@@ -40,6 +40,47 @@
   </div>
 </section>
 <section>
+  <h4>Right-Click</h4>
+  <div class="btn-group" dDropDown appendToBody [trigger]="'right-click'">
+    <a dDropDownToggle class="devui-dropdown-default devui-dropdown-origin">
+      More
+      <span class="icon icon-chevron-down-2"></span>
+    </a>
+    <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar">
+      <li dDropDown appendToBody [trigger]="'click'" [appendToBodyDirections]="subMenuDirections">
+        <a dDropDownMenuItem dDropDownToggle>Item 1 <span class="icon icon-chevron-right"></span></a>
+        <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar">
+          <li dDropDown appendToBody [trigger]="'click'" [appendToBodyDirections]="subMenuDirections">
+            <a dDropDownMenuItem dDropDownToggle>Item 1-1 <span class="icon icon-chevron-right"></span></a>
+            <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar">
+              <li>
+                <a dDropDownMenuItem>Item 1-1-1 </a>
+              </li>
+              <li>
+                <a dDropDownMenuItem>Item 1-1-2 </a>
+              </li>
+              <li>
+                <a dDropDownMenuItem>Item 1-1-3</a>
+              </li>
+            </ul>
+          </li>
+          <li dDropDown appendToBody [trigger]="'click'" [appendToBodyDirections]="subMenuDirections">
+            <a dDropDownMenuItem dDropDownToggle>Item 1-2 <span class="icon icon-chevron-right"></span></a>
+            <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar">
+              <li>
+                <a dDropDownMenuItem>Item 1-2-1</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a dDropDownMenuItem>Item 2</a>
+      </li>
+    </ul>
+  </div>
+</section>
+<section>
   <h4>Hover</h4>
   <div class="btn-group" dDropDown appendToBody [trigger]="'hover'">
     <a dDropDownToggle class="devui-dropdown-default devui-dropdown-origin">

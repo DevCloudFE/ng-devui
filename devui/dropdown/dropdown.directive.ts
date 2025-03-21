@@ -25,10 +25,10 @@ import { debounceTime, delay, filter, mapTo, tap } from 'rxjs/operators';
 import { DropDownService } from './dropdown.service';
 
 @Directive({
-    selector: '[dDropDown]',
-    exportAs: 'd-dropdown',
-    providers: [DropDownService],
-    standalone: false
+  selector: '[dDropDown]',
+  exportAs: 'd-dropdown',
+  providers: [DropDownService],
+  standalone: false
 })
 export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit {
   @ContentChildren(forwardRef(() => DropDownDirective), { descendants: true }) dropdownChildren: QueryList<DropDownDirective>;
@@ -72,7 +72,7 @@ export class DropDownDirective implements OnDestroy, OnChanges, AfterContentInit
   /**
    * dropdown触发方式
    */
-  @Input() trigger: 'click' | 'hover' | 'manually' = 'click';
+  @Input() trigger: 'click' | 'hover' | 'manually' | 'right-click' = 'click';
   /**
    * 关闭区域，默认点击菜单链接也会关闭，blank点击其他空白区域才关闭
    */
