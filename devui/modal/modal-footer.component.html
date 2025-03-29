@@ -1,4 +1,4 @@
-<div class="modal-footer">
+<div *ngIf="buttons?.length" class="modal-footer">
   <d-button
     *ngFor="let button of buttons"
     [bsSize]="'md'"
