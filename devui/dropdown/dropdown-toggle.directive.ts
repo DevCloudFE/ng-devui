@@ -37,7 +37,7 @@ export class DropDownToggleDirective implements OnInit, AfterViewInit {
 
   @HostListener('click', ['$event'])
   toggleDropdown(event: MouseEvent) {
-    if (!this.disabled && this.dropdown.trigger !== 'manually') {
+    if (!this.disabled && this.dropdown.trigger !== 'manually' && this.dropdown.trigger !== 'right-click') {
       this.dropdown.toggle();
     }
     return false;
