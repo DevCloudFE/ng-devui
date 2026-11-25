@@ -183,3 +183,25 @@ describe('slider', () => {
     }));
   });
 });
+
+describe('slider release bounds', () => {
+  it('should commit the current bounds when max changes during dragging', () => {
+    const slider = new SliderComponent({ markForCheck: () => undefined } as any);
+    slider.sliderTrack = { nativeElement: { style: {} } } as any;
+    slider.sliderHandle = { nativeElement: { style: {} } } as any;
+    const onChange = jasmine.createSpy('onChange');
+    const afterChange = jasmine.createSpy('afterChange');
+    slider.registerOnChange(onChange);
+    slider.afterChange.subscribe(afterChange);
+
+    slider['mouseStartMoving'](85);
+    slider.max = 60;
+    slider.ngOnChanges({ max: { previousValue: 100, currentValue: 60, firstChange: false, isFirstChange: () => false } });
+    onChange.calls.reset();
+    slider['mouseStopMoving']();
+
+    expect(slider.value).toBe(60);
+    expect(onChange).toHaveBeenCalledWith(60);
+    expect(afterChange).toHaveBeenCalledWith(60);
+  });
+});
