@@ -207,6 +207,10 @@ export class SliderComponent implements OnInit, OnChanges, ControlValueAccessor,
   }
 
   private mouseStopMoving(): void {
+    const value = this.ensureValueInRange(this.value);
+    if (value !== this.value) {
+      this.setValue(value);
+    }
     this.afterChange.emit(this.value);
     this.handleController(false);
     this.onTouchedCallback();
